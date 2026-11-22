@@ -5,7 +5,7 @@ from mlflow.genai.scorers import scorer
 def execution_contracts(inputs,outputs,expectations):
     from mlflow.entities import Feedback
     from deployed_grader import execution
-    return [Feedback(name=name,value=value,rationale='Deterministic contract check on a fresh .10 local MCP capture; not clinical validation.') for name,value in execution(inputs,outputs,expectations).items()]
+    return [Feedback(name=name,value=value,rationale='Deterministic contract check on a fresh .12 local MCP capture; not clinical validation.') for name,value in execution(inputs,outputs,expectations).items()]
 
 @scorer(name='mcp_template_local_diagnostic_v3_20261121')
 def diagnostic_contracts(inputs,outputs,expectations):

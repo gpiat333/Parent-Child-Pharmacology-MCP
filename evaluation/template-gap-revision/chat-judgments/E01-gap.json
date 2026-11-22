@@ -1,0 +1,126 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 18,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited RxNorm source supports exact ingredient matching to daridorexant.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/2591497/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "DailyMed supports the statements about unavailable human pregnancy data, rabbit maternal toxicity, animal findings, and label scope.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The cited PubMed pharmacokinetic search returned no records within the stated query scope.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The cited FAERS query supports the listed report terms and counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The cited openFDA material supports the caveats that spontaneous-report counts do not establish causation, incidence, or generalizability.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The cited broader PubMed search returned three records within the bounded search.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35802843/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630579/"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630580/"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "The FDA directory supports the registry listing, its ongoing status as listed, and the directory limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C11",
+        "status": "supported",
+        "reason": "The cited registry website is the contact website listed in the retrieved FDA directory information.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer visibly presents all three evidence axes, preserves empty rows, distinguishes human from animal evidence, reports the maternal pharmacokinetic gap within the retrieved scope, separates FDA registry information from evidence and recommendations, includes required label and directory citations, and provides no administered doses or medication decisions."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "9cb4f2b0a1fc12f9f0d29015d711cc1245ffaeb2191ca3b04356bc18cb7af0d7",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited RxNorm source supports exact ingredient matching to daridorexant.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"DailyMed supports the statements about unavailable human pregnancy data, rabbit maternal toxicity, animal findings, and label scope.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited PubMed pharmacokinetic search returned no records within the stated query scope.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited FAERS query supports the listed report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited openFDA material supports the caveats that spontaneous-report counts do not establish causation, incidence, or generalizability.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited broader PubMed search returned three records within the bounded search.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation corresponds to one of the retrieved PubMed records, whose abstract was not returned.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA directory supports the registry listing, its ongoing status as listed, and the directory limitations.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited registry website is the contact website listed in the retrieved FDA directory information.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer visibly presents all three evidence axes, preserves empty rows, distinguishes human from animal evidence, reports the maternal pharmacokinetic gap within the retrieved scope, separates FDA registry information from evidence and recommendations, includes required label and directory citations, and provides no administered doses or medication decisions.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 29907,
+        "completion_tokens": 948,
+        "total_tokens": 30855,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 29904,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 316,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 29907,
+    "completion_tokens": 948,
+    "total_tokens": 30855,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 29904,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 316,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

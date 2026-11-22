@@ -1,0 +1,91 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 6,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not contain this exact FDA recall-listing URL or a passage specifically validating it.",
+        "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The supplied evidence does not contain this exact FDA enforcement-report URL or a passage specifically validating it.",
+        "url": "https://www.accessdata.fda.gov/scripts/ires/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer abstains from reporting the available bounded FDA search result, including that NOTREAL-77 was not found and the returned naproxen recall records and statuses."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The supplied search returned candidate records with recall numbers and statuses, but the answer provides only a placeholder table and does not identify those records or statuses."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and appropriately preserves formulation, manufacturer, lot, and status distinctions in its verification guidance. Its bounded-search and safety caveats are consistent with the evidence. However, it incorrectly treats the requested lookup as unavailable and omits the returned FDA candidate records, their statuses, and the actual bounded-search result. The citations are relevant-looking official links but are not directly supported by the supplied evidence inventory."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "58d62837b72bbd13ca361f857e79d8616afc4198cbd0c7e1069701b4e9f94ace",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not contain this exact FDA recall-listing URL or a passage specifically validating it.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not contain this exact FDA enforcement-report URL or a passage specifically validating it.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstains from reporting the available bounded FDA search result, including that NOTREAL-77 was not found and the returned naproxen recall records and statuses.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied search returned candidate records with recall numbers and statuses, but the answer provides only a placeholder table and does not identify those records or statuses.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and appropriately preserves formulation, manufacturer, lot, and status distinctions in its verification guidance. Its bounded-search and safety caveats are consistent with the evidence. However, it incorrectly treats the requested lookup as unavailable and omits the returned FDA candidate records, their statuses, and the actual bounded-search result. The citations are relevant-looking official links but are not directly supported by the supplied evidence inventory.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24378,
+        "completion_tokens": 970,
+        "total_tokens": 25348,
+        "prompt_tokens_details": {
+          "cached_tokens": 24375,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 510,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24378,
+    "completion_tokens": 970,
+    "total_tokens": 25348,
+    "prompt_tokens_details": {
+      "cached_tokens": 24375,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 510,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

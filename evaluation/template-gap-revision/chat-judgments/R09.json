@@ -1,0 +1,127 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 5,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The linked FDA notice matches the returned notice title and URL.",
+        "url": "https://www.fda.gov/drugs/drug-safety-communications/fda-requires-boxed-warning-about-serious-mental-health-side-effects-asthma-and-allergy-drug"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The linked FDA index matches the reported search source and supports the stated index-coverage limitation.",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-safety-communications"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
+        "answer_quote": "The returned metadata did not establish a source population or age band for this notice.",
+        "reference_quote": null,
+        "explanation": "The answer adds population and age-band metadata rather than limiting the response to the returned notice title or excerpt and the explanation that the full notice text was not retrieved."
+      }
+    ],
+    "rationale": "The notice title, date, link, and limitations about full-text retrieval and current-index coverage are supported. The answer contains no contradicted or unverified medical claims and gives no personal treatment recommendation, but it includes an extra metadata statement outside the requested title-or-excerpt-only scope."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "9527902aa3c7b3edb269396ee0b4aa91e4405148039e782e63e142ee04e7fa66",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA notice matches the returned notice title and URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA index matches the reported search source and supports the stated index-coverage limitation.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.\",\n      \"answer_quote\": \"The returned metadata did not establish a source population or age band for this notice.\",\n      \"reference_quote\": \"population_context\",\n      \"explanation\": \"The answer adds metadata about population and age band rather than limiting the summary to the returned notice title or excerpt and the retrieval limitation.\"\n    }\n  ],\n  \"rationale\": \"The notice title, date, link, and incomplete-index/full-text limitations are supported by the retrieved evidence. The answer does not make unsupported medical claims or treatment recommendations, but it includes one extra metadata statement outside the requested title-or-excerpt-only scope.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 3236,
+        "completion_tokens": 716,
+        "total_tokens": 3952,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 3233,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 367,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA notice matches the returned notice title and URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA index matches the reported search source and supports the stated index-coverage limitation.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.\",\n      \"answer_quote\": \"The returned metadata did not establish a source population or age band for this notice.\",\n      \"reference_quote\": \"\\\"source_population\\\": \\\"not_established\\\"\",\n      \"explanation\": \"The answer adds population and age-band metadata rather than limiting the response to the returned notice title or excerpt and the explanation that the full notice text was not retrieved.\"\n    }\n  ],\n  \"rationale\": \"The notice title, date, link, and limitations about full-text retrieval and current-index coverage are supported. The answer contains no contradicted or unverified medical claims and gives no personal treatment recommendation, but it includes an extra metadata statement outside the requested title-or-excerpt-only scope.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 3655,
+        "completion_tokens": 472,
+        "total_tokens": 4127,
+        "prompt_tokens_details": {
+          "cached_tokens": 3233,
+          "cache_write_tokens": 419,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 105,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA notice matches the returned notice title and URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The linked FDA index matches the reported search source and supports the stated index-coverage limitation.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.\",\n      \"answer_quote\": \"The returned metadata did not establish a source population or age band for this notice.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer adds population and age-band metadata rather than limiting the response to the returned notice title or excerpt and the explanation that the full notice text was not retrieved.\"\n    }\n  ],\n  \"rationale\": \"The notice title, date, link, and limitations about full-text retrieval and current-index coverage are supported. The answer contains no contradicted or unverified medical claims and gives no personal treatment recommendation, but it includes an extra metadata statement outside the requested title-or-excerpt-only scope.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 4092,
+        "completion_tokens": 525,
+        "total_tokens": 4617,
+        "prompt_tokens_details": {
+          "cached_tokens": 3652,
+          "cache_write_tokens": 437,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 166,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 4092,
+    "completion_tokens": 525,
+    "total_tokens": 4617,
+    "prompt_tokens_details": {
+      "cached_tokens": 3652,
+      "cache_write_tokens": 437,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 166,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

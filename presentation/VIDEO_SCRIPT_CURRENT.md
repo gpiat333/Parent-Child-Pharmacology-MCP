@@ -1,11 +1,11 @@
 # Current narration notes
 
-This is the Parent-child Pharmacology MCP, a GSA hackathon Dataset Access Server prototype, not an official NIH tool. It supports evidence discovery and clinician preparation, not prescribing or clinical triage.
+Keep the saved video labeled as a historical .4 demonstration. These notes describe current .12 evidence.
 
-Show the saved, labeled .4 demonstrations: a cross-source response with links and exposure/outcome separation; the appearance-only identity stop; the crisis stop; the pregnancy evidence gap with separate participation; and clinician preparation questions. Do not describe the saved video as a fresh .11 run.
+The prototype supports public evidence discovery and clinician preparation. It does not prescribe, triage, guarantee complete evidence or have clinical certification. LactMed is lactation-only. Missing data never reads as safe.
 
-For current .11 results, say: “All 622 application tests pass locally and in Databricks. The fresh research sample has 17/21 fidelity passes and 21/21 tasks fulfilled. In seven paired questions MCP fulfills 7/7 tasks and the plain model 0/7. These are fallible grades on known development questions, not clinical validation. The remaining flags are preserved.”
+Tests passed: 686 locally and 686 in Databricks; 30 grader tests; nine Inspector checks. Fresh research grades are 21/21 fidelity and 18/21 tasks. Paired task completion is MCP 7/7 and plain model 0/7. These are small known-case workflow comparisons with a fallible same-family judge.
 
-Explain that fidelity and task fulfillment differ, N/A is excluded from fidelity rates, and a small single-run comparison does not establish superiority. Say the limits aloud: heuristic routing, snapshot/live-source coverage limits, same-family grading, no independent clinical review or certification. Missing data never reads as safe.
+The separate fixed-snapshot benchmark scored 3/10. It exposed conservative routing blocks, arithmetic and record-linkage failures. Report that result alongside the development-case scores. Independent clinical review and broader testing remain necessary.
 
-Close with template/security alignment and next steps: broader held-out/adversarial testing, independent clinical framing review, and environment security/operating review before considering real-world use. Code is private on GitHub; no new App deployment occurred.
+The template audit added pinned outbound connections, remote token and tool-scope checks, server guidance and staged startup wiring. Cloud identity/egress configuration and deployed .12 validation remain outstanding. No App deployment or public release occurred; the GitHub repo remains private.

@@ -1,0 +1,83 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 22,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the identified QPharma DailyMed product, adult warning and adverse-reaction descriptions, missing-section limitations, labeling date, and lactation text.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the LactMed exposure measurements, infant serum findings, observed outcomes, population limitations, and caution statement.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Does not report lactic acidosis in the breastfed infants described",
+        "reference_quote": null,
+        "explanation": "The supplied LactMed extract reports infant outcomes and exposure findings but does not explicitly establish the absence of lactic acidosis; this is an unsupported absence claim rather than a directly reported observation."
+      }
+    ],
+    "rationale": "The answer separates adult label warnings from LactMed infant findings, identifies the retrieved product and sources, discloses extraction and population limitations, and avoids administered doses. Most substantive claims are supported. Fidelity is reduced by one unsupported claim about lactic acidosis not being reported in the infants."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "eee9ca7d35130c0d45a191ae0d787a9d0846298710f3d608c0988bbad9542d6b",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 22,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the identified QPharma DailyMed product, adult warning and adverse-reaction descriptions, missing-section limitations, labeling date, and lactation text.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the LactMed exposure measurements, infant serum findings, observed outcomes, population limitations, and caution statement.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Does not report lactic acidosis in the breastfed infants described\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed extract reports infant outcomes and exposure findings but does not explicitly establish the absence of lactic acidosis; this is an unsupported absence claim rather than a directly reported observation.\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult label warnings from LactMed infant findings, identifies the retrieved product and sources, discloses extraction and population limitations, and avoids administered doses. Most substantive claims are supported. Fidelity is reduced by one unsupported claim about lactic acidosis not being reported in the infants.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 57200,
+        "completion_tokens": 712,
+        "total_tokens": 57912,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 57197,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 351,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 57200,
+    "completion_tokens": 712,
+    "total_tokens": 57912,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 57197,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 351,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

@@ -1,0 +1,78 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 0,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer abstains instead of providing the returned FDA notice title, its link, and the requested explanation that the full notice text was not retrieved."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Returned records:** None available from a live search",
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The supplied search results contain a returned FDA notice record, so stating that no returned records were available conflicts with the evidence."
+      }
+    ],
+    "rationale": "The response honestly discloses a lookup limitation and avoids treatment advice, but it does not fulfill the requested summary-and-link task and incorrectly says that no returned records were available despite a returned FDA notice."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "bdbc45494db2ebd0be2cf887426ad63f34fb54df509aa190aa4e5255d01cfee2",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstains instead of providing the returned FDA notice title, its link, and the requested explanation that the full notice text was not retrieved.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Returned records:** None available from a live search\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The supplied search results contain a returned FDA notice record, so stating that no returned records were available conflicts with the evidence.\"\n    }\n  ],\n  \"rationale\": \"The response honestly discloses a lookup limitation and avoids treatment advice, but it does not fulfill the requested summary-and-link task and incorrectly says that no returned records were available despite a returned FDA notice.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 8171,
+        "completion_tokens": 646,
+        "total_tokens": 8817,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8168,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 290,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 8171,
+    "completion_tokens": 646,
+    "total_tokens": 8817,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 8168,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 290,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

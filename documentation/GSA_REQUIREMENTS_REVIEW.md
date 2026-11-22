@@ -10,13 +10,16 @@ The [sample evaluation DOCX](https://www.gsa.gov/system/files/MCP-hackathon-samp
 | Clear package and registration boundaries | `src/parent_child_pharmacology/{tools,services,clients,models,core,prompts,resources}` | One registrar per tool; domain implementations remain separate services |
 | Discovery and operational routes | 30 tools, four prompts, four resources; `/health`, `/version`; `server.json` | Registry metadata only; no public endpoint or registry publication |
 | Strict contracts and provenance | Bounded schemas, coverage/truncation metadata, source tags, required notices | Third-party clients must honor preflight and display rules |
-| Outbound and credential security | HTTPS host allowlist, no redirects/proxy inheritance, 5 MB cap, token destination checks | No firewall/DNS pinning or penetration-test claim; see `SECURITY.md` |
+| Outbound and credential security | HTTPS host allowlist, no redirects/proxy inheritance, 5 MB cap, token destination checks | DNS/IP pinning and per-tool remote auth tested; no cloud firewall or penetration-test claim; see `SECURITY.md` |
 | Automated quality checks | Windows/Linux GitHub CI for lint, formatting, unit and grader tests, package build | CI has read-only repository permissions and no deploy step |
 | Evaluation and no-tool baseline | Portable `eval/run.py`, frozen cases/hashes, fresh chat/paired captures and MLflow readbacks | Same-family diagnostic model grading; known cases, single trials, no clinical review |
 | Databricks validation | Isolated serverless notebook runs the frozen source tests; existing model gateway and MLflow | The App itself is unchanged; job attempts and outcomes retained |
 | Presentation and mission | Dataset Access Server; parents, clinicians, researchers, program staff; 15-slide main flow and appendix | Saved demo images/video are historical and labeled |
 | Documentation and attribution | README, quickstart, security model, architecture, evaluation, deployment guidance, template MIT license | Existing repository aligned in place; no claim of recreated template ancestry |
 
-The local package is .11; the existing Databricks App remains .9. GitHub publication is authorized to the existing **private** repository. No App deployment, access-policy change, public release or official submission is performed by this work. Current verified metrics live in [the current evaluation report](../evaluation/template-alignment-revision/REPORT.md); prior reports are historical evidence, not current status.
+The local package is .12; the existing Databricks App remains .9. GitHub publication is authorized to the existing **private** repository. No App deployment, access-policy change, public release or official submission is performed by this work. Current verified metrics live in [the current evaluation report](../evaluation/template-gap-revision/REPORT.md); prior reports are historical evidence, not current status.
 
 Remaining grading and readiness limits are deliberate disclosures: no clinician adjudication/certification, no held-out benchmark, no load/penetration test, source freshness and snapshot coverage limits, heuristic language/safety routing, and no production-readiness claim. The template scaffolding is not evidence that these limitations are resolved.
+
+
+The [complete 65-file audit and remediation table](TEMPLATE_DETAILED_AUDIT.md) supersedes earlier broad alignment statements. The new Phoenix XML/CSV benchmark is implemented and run, with results and limitations reported separately; its explicit gateway loop and exact scoring adapt the LangChain/model-judge example. See the current report for the retained 3/10 result and routing false positives.

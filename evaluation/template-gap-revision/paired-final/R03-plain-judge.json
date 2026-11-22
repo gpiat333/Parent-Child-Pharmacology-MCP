@@ -1,0 +1,138 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 9,
+    "contradicted_claims": 0,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied URL has an empty setid and does not identify the retrieved DailyMed product label.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid="
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited NCBI LactMed record is the retrieved metformin lactation source and supports the general exposure and infant-outcome statements.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "vitamin B12 deficiency as potential adverse effects",
+        "reference_quote": null,
+        "explanation": "The supplied label evidence does not contain vitamin B12 deficiency among the retrieved warnings or adverse reactions."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "generally considered compatible with breastfeeding",
+        "reference_quote": null,
+        "explanation": "The supplied LactMed evidence reports low milk levels, observed infant findings, and caution for certain infants, but does not state this general compatibility conclusion."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "some experts recommend monitoring the infant for gastrointestinal effects",
+        "reference_quote": null,
+        "explanation": "The supplied LactMed extract does not provide this monitoring recommendation."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Infant specimen type and infant concentration data were not verified",
+        "reference_quote": "Serum levels were measured in 4 breastfed infants",
+        "explanation": "The retrieved LactMed text explicitly identifies infant serum measurements, so presenting infant concentration data as unverified misrepresents the available record."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations",
+        "answer_quote": null,
+        "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
+        "explanation": "The answer refers generally to a DailyMed label but does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.]."
+      }
+    ],
+    "rationale": "The answer separates adult label warnings from infant observations and avoids administered doses, but it omits the retrieved product identity and incorrectly adds or characterizes several claims, including vitamin B12 deficiency, breastfeeding compatibility, infant monitoring advice, and the availability of infant serum measurements. It also uses an invalid DailyMed citation URL."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "e4e14496e359866f9e3146b8039d2b0adb6b597fdefff7af8e66e047a1225f00",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 9,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied URL has an empty setid and does not identify the retrieved DailyMed product label.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited NCBI LactMed record is the retrieved metformin lactation source and supports the general exposure and infant-outcome statements.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"vitamin B12 deficiency as potential adverse effects\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label evidence does not contain vitamin B12 deficiency among the retrieved warnings or adverse reactions.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"generally considered compatible with breastfeeding\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed evidence reports low milk levels, observed infant findings, and caution for certain infants, but does not state this general compatibility conclusion.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"some experts recommend monitoring the infant for gastrointestinal effects\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed extract does not provide this monitoring recommendation.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Infant specimen type and infant concentration data were not verified\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The retrieved LactMed text explicitly identifies infant serum measurements, so presenting infant concentration data as unverified misrepresents the available record.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer refers generally to a DailyMed label but does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.].\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult label warnings from infant observations and avoids administered doses, but it omits the retrieved product identity and incorrectly adds or characterizes several claims, including vitamin B12 deficiency, breastfeeding compatibility, infant monitoring advice, and the availability of infant serum measurements. It also uses an invalid DailyMed citation URL.\"\n}",
+      "validation_errors": [
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 56631,
+        "completion_tokens": 1138,
+        "total_tokens": 57769,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 56628,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 447,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 9,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied URL has an empty setid and does not identify the retrieved DailyMed product label.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited NCBI LactMed record is the retrieved metformin lactation source and supports the general exposure and infant-outcome statements.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"vitamin B12 deficiency as potential adverse effects\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label evidence does not contain vitamin B12 deficiency among the retrieved warnings or adverse reactions.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"generally considered compatible with breastfeeding\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed evidence reports low milk levels, observed infant findings, and caution for certain infants, but does not state this general compatibility conclusion.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"some experts recommend monitoring the infant for gastrointestinal effects\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed extract does not provide this monitoring recommendation.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Infant specimen type and infant concentration data were not verified\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The retrieved LactMed text explicitly identifies infant serum measurements, so presenting infant concentration data as unverified misrepresents the available record.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer refers generally to a DailyMed label but does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.].\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult label warnings from infant observations and avoids administered doses, but it omits the retrieved product identity and incorrectly adds or characterizes several claims, including vitamin B12 deficiency, breastfeeding compatibility, infant monitoring advice, and the availability of infant serum measurements. It also uses an invalid DailyMed citation URL.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 57392,
+        "completion_tokens": 803,
+        "total_tokens": 58195,
+        "prompt_tokens_details": {
+          "cached_tokens": 56628,
+          "cache_write_tokens": 761,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 116,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 57392,
+    "completion_tokens": 803,
+    "total_tokens": 58195,
+    "prompt_tokens_details": {
+      "cached_tokens": 56628,
+      "cache_write_tokens": 761,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 116,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

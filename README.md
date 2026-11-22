@@ -15,12 +15,14 @@ The bundled companion supports user-guided evidence discovery and clinician prep
 | Submission material | Open it |
 |---|---|
 | Presentation | [PowerPoint: 15 main slides and 34 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) |
-| Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/template-alignment-revision/REPORT.md) · [rendered DOCX PDF](evaluation/template-alignment-revision/artifact-review/evaluation-rendered.pdf) |
+| Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/template-gap-revision/REPORT.md) · [rendered DOCX PDF](evaluation/template-gap-revision/artifact-review/evaluation-rendered.pdf) |
 | Demonstration | [3:10 narrated video](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm) · [captions](presentation/current-demo/narration.vtt) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
-| Evidence | [Raw metrics](evaluation/template-alignment-revision/summary.json) · [all grading flags](evaluation/template-alignment-revision/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/template-alignment-revision/) |
+| Evidence | [Raw metrics](evaluation/template-gap-revision/summary.json) · [all grading flags](evaluation/template-gap-revision/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/template-gap-revision/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
-**Version and access:** current source is **0.11.0**, policy **2026-11-21.11**. This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .11. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
+**Version and access:** current source is **0.12.0**, policy **2026-11-21.12**. This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .12. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
+
+The [complete 65-file template audit and remediation table](documentation/TEMPLATE_DETAILED_AUDIT.md) records implemented controls, deliberate adaptations, and deployment prerequisites still outstanding.
 
 ## For judges
 
@@ -28,8 +30,8 @@ The bundled companion supports user-guided evidence discovery and clinician prep
 |---|---|---|
 | Mission alignment | [Users and mission](#users-and-mission) · [architecture](documentation/ARCHITECTURE.md) | Evidence discovery for parents, clinicians, researchers and NICHD program staff; visible population and evidence gaps |
 | Technical quality: maintainability | [Package](src/parent_child_pharmacology/) · [tool registrars](src/parent_child_pharmacology/tools/) | Separate schemas, source clients and domain services; thin entry point; one registrar per tool |
-| Technical quality: performance and reliability | [Evaluation report](evaluation/template-alignment-revision/REPORT.md) · [local tests](evaluation/template-alignment-revision/unit-tests.xml) · [Databricks test receipt](evaluation/template-alignment-revision/databricks-job-attempt3-output.json) | Inputs, attempts, error handling, fresh captures and measured results; operational timings are observations, not a speed claim |
-| Technical quality: MCP design | [Tool catalog](src/parent_child_pharmacology/tools/__init__.py) · [models](src/parent_child_pharmacology/models/) · [Inspector results](evaluation/template-alignment-revision/inspector/summary.json) | Bounded inputs, goal-oriented tools, structured provenance and explicit absence-of-evidence contracts |
+| Technical quality: performance and reliability | [Evaluation report](evaluation/template-gap-revision/REPORT.md) · [local tests](evaluation/template-gap-revision/unit-tests.xml) · [Databricks test receipt](evaluation/template-gap-revision/databricks-job-output.json) | Inputs, attempts, error handling, fresh captures and measured results; operational timings are observations, not a speed claim |
+| Technical quality: MCP design | [Tool catalog](src/parent_child_pharmacology/tools/__init__.py) · [models](src/parent_child_pharmacology/models/) · [Inspector results](evaluation/template-gap-revision/inspector/summary.json) | Bounded inputs, goal-oriented tools, structured provenance and explicit absence-of-evidence contracts |
 | Innovation | [Workflow](#how-it-works) · [evidence-axis tests](tests/test_evidence_axes.py) | Separate maternal effects, transfer/exposure and infant outcomes, with clinician questions and a distinct participation tier |
 | Presentation | [Video](#demo-video) · [screenshots](#screenshots) · [deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) | Successful answer, identity stop, crisis route, empty result and clinician handoff; historical demos distinguished from fresh evaluation |
 
@@ -50,7 +52,7 @@ The intended mission contribution is to support pregnancy, lactation, child-heal
 
 [![Open the saved demonstration: exposure and outcomes remain separate](presentation/current-demo/cross-source.png)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
 
-**Historical demonstration:** this video replays selected saved local **.4** outputs with computer-generated narration. It is not live chat, a recording of the deployed App, or a fresh .11 evaluation. On-screen or spoken references to “current” describe the recording's version. Latest results are [below](#results-at-a-glance); the [updated speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) supplies current metrics. Download the WebM if GitHub does not offer playback.
+**Historical demonstration:** this video replays selected saved local **.4** outputs with computer-generated narration. It is not live chat, a recording of the deployed App, or a fresh .12 evaluation. On-screen or spoken references to “current” describe the recording's version. Latest results are [below](#results-at-a-glance); the [updated speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) supplies current metrics. Download the WebM if GitHub does not offer playback.
 
 | Time | Demonstration | What it makes visible |
 |---|---|---|
@@ -67,7 +69,7 @@ The intended mission contribution is to support pregnancy, lactation, child-heal
 
 ## Screenshots
 
-These are **rendered excerpts of saved .4 outputs**, not screenshots of a newly deployed .11 application. [Demo cards](presentation/current-demo/cards.json) retain the content and source references. Counts and source status shown here are historical snapshots.
+These are **rendered excerpts of saved .4 outputs**, not screenshots of a newly deployed .12 application. [Demo cards](presentation/current-demo/cards.json) retain the content and source references. Counts and source status shown here are historical snapshots.
 
 | Identity confirmation | Evidence, gaps and participation |
 |---|---|
@@ -123,31 +125,32 @@ Browse the [30-tool catalog](src/parent_child_pharmacology/tools/__init__.py), [
 
 ## Results at a glance
 
-**Latest evaluated version: .11.** These results describe the retained fresh run, not the historical demo. Counts measure different things and should not be added together.
+**Latest evaluated version: .12.** These results describe the retained fresh run, not the historical demo. Counts measure different things and should not be added together.
 
-| Measure | Verified result | What it does not establish |
+| Measure | Verified result | Interpretation |
 |---|---|---|
-| Application tests | **622/622 locally; 622/622 in Databricks**, no failures or skips | Clinical correctness, broad robustness or production readiness |
-| Grader checks | **30/30 unit tests; 10/10 synthetic controls** on both dimensions | Independent clinical review |
-| MCP Inspector | **9/9 checks**, 30 tools, four prompts, four resources | Every possible input or client behavior |
-| Fresh chat routing and tool selection | **28/28 expected routes; 28/28 tool checks** | Detection of every unsafe or ambiguous question |
-| Fixed stops | **7/7**, zero downstream evidence/model calls | General safety or triage performance |
-| Research answers | **17/21 fidelity passes; 21/21 tasks fulfilled** | Four fidelity flags remain; task completion is not correctness |
-| Paired task fulfillment | **MCP 7/7; plain model 0/7** | General superiority; seven known questions and unequal workflow capabilities |
-| Paired fidelity, pass / fail / N/A | **MCP 6 / 1 / 0; plain 1 / 4 / 2** | N/A is not a pass and is excluded from fidelity rates |
-| Citation and trace checks | **21/21 URL-membership checks; 42 unique MLflow rows verified** | That a link supports a claim or a score is medically valid |
+| Application tests | **686/686 locally; 686/686 in Databricks**, no failures or skips | Contract/regression tests, not clinical correctness |
+| Grader tests and controls | **30/30 unit tests; 10/10 synthetic fidelity controls** | Development checks, not independent adjudication |
+| MCP Inspector | **9/9 checks** | 30 tools, four prompts, four resources; bounded protocol checks |
+| Fresh chat routes and tools | **28/28 expected routes; 28/28 tool checks** | Known development questions |
+| Fixed stops | **7/7**, zero downstream calls | Heuristic boundaries, not triage validation |
+| Research answers | **21/21 fidelity passes; 18/21 tasks fulfilled** | Separate fallible model judgments |
+| Paired tasks | **MCP 7/7; plain model 0/7** | Seven known questions; unequal workflow capabilities |
+| Paired fidelity pass/fail/N/A | **MCP 6/1/0; plain 1/5/1** | N/A is excluded from fidelity rates |
+| Citation and trace checks | **21/21 URL membership; 42 unique MLflow rows verified** | Membership is not support for a claim |
+| New fixed-snapshot benchmark | **3/10 exact answers; 7/10 generated final answers** | Separate Phoenix benchmark; three conservative routing stops and other retrieval/reasoning gaps |
 
-[Full report](evaluation/template-alignment-revision/REPORT.md) · [raw metrics](evaluation/template-alignment-revision/summary.json) · [Windows/Linux CI for the evaluated implementation](https://github.com/gpiat333/Parent-Child-Pharmacology-MCP/actions/runs/44981280973) · [MLflow run](https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/c7692274f7784cfc8ec42460bf690dc5) · [Databricks notebook tests](https://dbc-aae0ba16-8727.cloud.databricks.com/?o=7474654188777746#job/822020545690582/run/681391949470158)
+[Full report](evaluation/template-gap-revision/REPORT.md) · [Raw metrics](evaluation/template-gap-revision/summary.json) · [CI](https://github.com/gpiat333/Parent-Child-Pharmacology-MCP/actions/runs/44984535771) · [MLflow](https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/591268c202e94d44bfadb2178a33bc8d) · [Databricks tests](https://dbc-aae0ba16-8727.cloud.databricks.com/?o=7474654188777746#job/365762992429541/run/722956547264765)
 
 ### What the grades mean
 
-**Fidelity** asks whether claims are supported by the captured, bounded reference pool. **Task fulfillment** asks whether requested requirements were met. They are separate, fallible model judgments. URL membership and quote checks do not establish medical truth, relevance or safety.
+Fidelity asks whether claims are supported by the captured, bounded evidence pool. Task fulfillment asks whether the requested requirements were met. They are separate, fallible same-family model judgments. Quote checks and URL membership do not establish relevance, medical truth or safety. All negative grades and raw rationales are retained; there were no manual score overrides or clinician adjudication.
 
-The four retained research flags concern an absence-of-literature statement overstated as absence of measurement (R02), extra caveats outside the reference pool (R12), ancillary wording about an unvalidated MCP-generated review (E01), and a lactation-only heading on mixed pregnancy/lactation research (S6-pregnancy). Paired E01 separately flags an unestablished FDA-approved label status. Flags vary in consequence; all raw rationales remain in the [technical review](evaluation/template-alignment-revision/TECHNICAL_REVIEW.md).
+The 28 development questions and seven paired questions retain grader v3 and the prior case definitions. There is one retained completed answer per case/arm; live sources, source caches, snapshots and generation variability affect results. Only MCP has retrieval, preflight and required notices. The companion also has a source-review pass absent from the paired runner. The shared reference pool can contain evidence an answer did not receive. No clinical-accuracy, speed or general-superiority claim follows.
 
-These are **known development questions, single retained trials and same-family model grading**. There was no clinician adjudication or manual score override. The shared reference pool may contain evidence an answer did not receive. MCP alone has retrieval, preflight and required notices; the main companion also has a source-review pass absent from the paired runner. Live sources and model variability affect results. No clinical-accuracy, speed or general-superiority claim follows.
+The separate ten-question Phoenix benchmark uses a fixed MPRINT snapshot, independently explored read-only questions, an XML/CSV registry and exact string comparison. Only the two MPRINT evidence tools are exposed after preflight. Three research questions were conservatively blocked (two language gates and one urgent gate); other failures include arithmetic, record linkage and UNKNOWN answers. This is a newly authored known benchmark, not a held-out or clinical validation set. Its 3/10 result must not be merged with or substituted for the seven-case paired score. Three questions are moderate difficulty, and some share cohorts.
 
-Previous .10 results—592 tests, research 21/21 fidelity and 21/21 tasks, paired tasks MCP 5/7 and plain 0/7—remain [historical evidence](evaluation/abstract-disclosure-revision/). Differences between fresh runs are not a causal estimate.
+All flags and retained failures are in the [technical review](evaluation/template-gap-revision/TECHNICAL_REVIEW.md). Previous .11 results—622 tests, research 17/21 fidelity and 21/21 tasks, paired tasks MCP 7/7 and plain 0/7—remain [historical evidence](evaluation/template-alignment-revision/).
 
 ## Safety and security
 
@@ -164,7 +167,7 @@ The intended use is **evidence discovery and clinician preparation**. This is no
 
 Network controls include an exact HTTPS host/port allowlist, rejected redirects, disabled proxy inheritance, bounded timeouts/retries and a 5 MB response cap. Credentials are attached only to explicitly configured remote MCP destinations; no Databricks token is sent to loopback. Logging is filtered and HTTP access logs are disabled. See [outbound-security tests](tests/test_outbound_security.py), [credential tests](tests/test_client_credentials.py) and [the security model](SECURITY.md).
 
-Use **public or synthetic questions only**. Local HTTP has no built-in authentication and must remain loopback. Future hosting requires authenticated access, egress and retention policies. Routing is heuristic; no penetration-test, clinical-certification or production-readiness claim is made. No real credentials were detected in the reviewed staged scan; two unchanged non-secret OAuth identifiers are documented in [the scan review](evaluation/template-alignment-revision/security-scan-review.json).
+Use **public or synthetic questions only**. Local HTTP defaults to loopback. Non-loopback HTTP now fails closed without operator-configured RS256 verification and individual tool permissions. Connection-time DNS/IP pinning is tested. Future hosting still requires issuer/key configuration, gateway access, cloud egress and retention policies. Routing is heuristic; no penetration-test, clinical-certification or production-readiness claim is made. The staged source scan found no credentials. The final capture/artifact scan is recorded in the current evidence directory.
 
 ## Run it yourself
 
@@ -206,10 +209,10 @@ Fresh chat/model comparisons need separately configured Databricks model access 
 | `.github/workflows/ci.yml` | Windows/Linux lint, format, application/grader tests and package builds |
 | `SECURITY.md`, `NOTICE.md`, `LICENSE-GSA-TEMPLATE` | Security boundaries and template attribution |
 
-The [GSA template](https://github.com/GSA-TTS/mcp-hackathon-template) supplies the engineering scaffold. This repository aligns its existing implementation in place; it does **not** claim a recreated template ancestry. This README adds a project-specific submission guide. [The requirements review](documentation/GSA_REQUIREMENTS_REVIEW.md) maps implementation to the template and official evaluation materials.
+The [GSA template](https://github.com/GSA-TTS/mcp-hackathon-template) supplies the engineering scaffold. The [complete 65-file audit and remediation table](documentation/TEMPLATE_DETAILED_AUDIT.md) distinguish implemented controls, adaptations and outstanding deployment prerequisites. This repository aligns its existing implementation in place; it does **not** claim a recreated template ancestry. This README adds a project-specific submission guide. [The requirements review](documentation/GSA_REQUIREMENTS_REVIEW.md) maps implementation to the template and official evaluation materials.
 
 ## Scope and next steps
 
-The prototype surfaces evidence gaps; it does not close them. Priorities before considering real-world use are independent clinical framing review, held-out and repeated evaluations, broader adversarial/language testing, source-coverage review and deployment security/operating review. The existing Databricks App remains on .9; publishing .11 source and running Databricks tests did not redeploy it.
+The prototype surfaces evidence gaps; it does not close them. Priorities before considering real-world use are independent clinical framing review, held-out and repeated evaluations, broader adversarial/language testing, source-coverage review and deployment security/operating review. The existing Databricks App remains on .9; publishing .12 source and running Databricks tests did not redeploy it.
 
 Built for the GSA hackathon as a prototype. **Not an official NIH MCP tool. No production readiness claim.**

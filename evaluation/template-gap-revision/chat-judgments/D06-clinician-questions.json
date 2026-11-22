@@ -1,0 +1,126 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 19,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports identification of sertraline as the queried ingredient and product-matching question.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the selected product label, lactation information, and statement that the record is one tablet product rather than all formulations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the LactMed exposure, infant-outcome, lactation, truncation, and evidence-limitation questions.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the cited study of 12 women and 11 mother-infant pairs, including detectable infant analytes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9286185/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed search, 129 matching records, and five displayed records.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Identifies one of the retrieved PubMed records and supports that an abstract was available for it.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12452737/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports that no abstract text was returned for PMID 32320387.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32320387/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports that no abstract text was returned for PMID 38133585.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38133585/"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "Identifies another retrieved PubMed record included in the bounded search.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38811474/"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "Supports the general sertraline spontaneous-report query and reported reaction counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C11",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous-report counts do not establish incidence, causation, or generalizability.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer prepares clinician questions rather than making a treatment recommendation, preserves the bounded and incomplete source coverage, distinguishes maternal/lactation effects from measured infant exposure and observed infant outcomes, addresses truncation and population gaps, and avoids administered doses or personal treatment decisions."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "3f68a7c65961907b6e155939e6a949a6b8ec464bc06dce6b33734c9215004e44",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 19,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports identification of sertraline as the queried ingredient and product-matching question.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected product label, lactation information, and statement that the record is one tablet product rather than all formulations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the LactMed exposure, infant-outcome, lactation, truncation, and evidence-limitation questions.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the cited study of 12 women and 11 mother-infant pairs, including detectable infant analytes.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed search, 129 matching records, and five displayed records.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Identifies one of the retrieved PubMed records and supports that an abstract was available for it.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports that no abstract text was returned for PMID 32320387.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports that no abstract text was returned for PMID 38133585.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"Identifies another retrieved PubMed record included in the bounded search.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the general sertraline spontaneous-report query and reported reaction counts.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report counts do not establish incidence, causation, or generalizability.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer prepares clinician questions rather than making a treatment recommendation, preserves the bounded and incomplete source coverage, distinguishes maternal/lactation effects from measured infant exposure and observed infant outcomes, addresses truncation and population gaps, and avoids administered doses or personal treatment decisions.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 141766,
+        "completion_tokens": 990,
+        "total_tokens": 142756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 141763,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 364,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 141766,
+    "completion_tokens": 990,
+    "total_tokens": 142756,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 141763,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 364,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

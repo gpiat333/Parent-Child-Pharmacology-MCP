@@ -1,0 +1,30 @@
+{
+  "scanner": "Gitleaks 8.30.1",
+  "scope": "Staged additions and changes, including new evaluation captures",
+  "raw_findings": 3,
+  "reviewed_non_secret_identifiers": [
+    {
+      "rule": "generic-api-key",
+      "file": "evaluation/template-gap-revision/app-current.json",
+      "line": 36,
+      "field": "oauth2_app_client_id",
+      "classification": "Public OAuth identifier unchanged from reviewed prior record"
+    },
+    {
+      "rule": "generic-api-key",
+      "file": "evaluation/template-gap-revision/app-current.json",
+      "line": 37,
+      "field": "oauth2_app_integration_id",
+      "classification": "Public OAuth identifier unchanged from reviewed prior record"
+    },
+    {
+      "rule": "generic-api-key",
+      "file": "evaluation/template-gap-revision/run-design.json",
+      "line": 36,
+      "field": "src/parent_child_pharmacology/core/auth.py",
+      "classification": "SHA-256 content digest of core/auth.py, not a credential"
+    }
+  ],
+  "actual_credentials_detected": 0,
+  "blanket_suppression_added": false
+}

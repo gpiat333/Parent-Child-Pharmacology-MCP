@@ -1,0 +1,81 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 16,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited API search supports the returned recruiting-study count, bounded literal-match search, and search limitations.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=pediatric+epilepsy+AND+%28child+OR+infant%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=Canada"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited study record supports the study title, recruiting status, observational design, ages, conditions, Canadian site, and contact details.",
+        "url": "https://clinicaltrials.gov/study/NCT05863910"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Eligibility must be confirmed by study team.",
+        "answer_quote": null,
+        "reference_quote": "Study team must confirm site recruitment and eligibility; registry status can be stale.",
+        "explanation": "The answer appropriately states that eligibility and current site availability were not confirmed, but it does not clearly tell the reader to confirm eligibility with the study team, as required."
+      }
+    ],
+    "rationale": "The answer accurately reports the single returned Canadian recruiting record, includes a direct study link and contact, preserves the indirect-match and bounded-search caveats, and does not substitute completed studies or make an exhaustive absence claim. Its only task omission is the lack of an explicit instruction that the study team must confirm eligibility."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "193bc2c6658690a459b3023ecd6828b4b6c127d7a4804456b309a8a0eded6ff7",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 16,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited API search supports the returned recruiting-study count, bounded literal-match search, and search limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited study record supports the study title, recruiting status, observational design, ages, conditions, Canadian site, and contact details.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Eligibility must be confirmed by study team.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Study team must confirm site recruitment and eligibility; registry status can be stale.\",\n      \"explanation\": \"The answer appropriately states that eligibility and current site availability were not confirmed, but it does not clearly tell the reader to confirm eligibility with the study team, as required.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the single returned Canadian recruiting record, includes a direct study link and contact, preserves the indirect-match and bounded-search caveats, and does not substitute completed studies or make an exhaustive absence claim. Its only task omission is the lack of an explicit instruction that the study team must confirm eligibility.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 5242,
+        "completion_tokens": 876,
+        "total_tokens": 6118,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 5239,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 5242,
+    "completion_tokens": 876,
+    "total_tokens": 6118,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5239,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

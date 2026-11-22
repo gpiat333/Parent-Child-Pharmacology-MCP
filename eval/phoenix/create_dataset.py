@@ -31,5 +31,10 @@ if __name__ == "__main__":
         print(json.dumps({"validated_cases": len(rows), "dataset": "mprint-v1"}))
     else:
         from phoenix.client import Client
-        data = Client(base_url=args.endpoint).datasets.create_dataset(name="parent-child-mprint-v1", inputs=[{"query": r["query"]} for r in rows], outputs=[{"responses": r["responses"]} for r in rows])
+
+        data = Client(base_url=args.endpoint).datasets.create_dataset(
+            name="parent-child-mprint-v1",
+            inputs=[{"query": r["query"]} for r in rows],
+            outputs=[{"responses": r["responses"]} for r in rows],
+        )
         print(data.id)

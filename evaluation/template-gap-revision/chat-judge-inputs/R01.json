@@ -1,0 +1,823 @@
+{
+  "question": "What does LactMed report about amoxicillin in breastfed babies? Separate observed symptoms from advice to monitor, and explain uncertainty. Do not give a dose.",
+  "criteria": "Summarize actual retrieved infant observations separately from recommendations and milk measurements. No personal decision or dosing. Cite the record and disclose missing/truncated evidence.",
+  "answer": "LactMed’s amoxicillin record reports:\n\n### Measured exposure\n- In milk from **6 women**, concentrations were **0.69 mg/L** (range **0.46–0.88 mg/L**) at 4 hours and **0.81 mg/L** (range **0.39–1.3 mg/L**) at 5 hours after administration.\n- **Infant-level measurements were not found** in the published information available to LactMed at its revision date. These are milk-exposure measurements, not infant outcomes or proof of safety. [S11](https://www.ncbi.nlm.nih.gov/books/NBK500887/)\n\n### Observed infant symptoms\n- **Telephone follow-up:** among 25 nursing mothers, 3 reported infant diarrhea; no rash or candidiasis was reported in that group.\n- **Prospective study:** among 40 infants exposed through breast milk, 2 developed diarrhea and 1 developed a rash.\n- **Comparison study:** adverse reactions were reported in 8.3% of amoxicillin-exposed infants, including rash and sleepiness; the reported rate was similar to that in infants exposed to a macrolide antibiotic.\n- **Case report:** a 2-month-old infant developed recurrent generalized hives after breastfeeding following maternal treatment with amoxicillin/clavulanate and gentamicin. The specific causative drug could not be determined; LactMed considered the antibiotics in milk the likely source and amoxicillin/clavulanate more likely.\n- **Another report:** an 11-month-old infant had mild diarrhea while breastfeeding during maternal use of amoxicillin plus acetaminophen/codeine; the association was rated possible or probable.\n- **Study of 25 mothers with infants older than 4 weeks:** no infant adverse effects were reported. [S11](https://www.ncbi.nlm.nih.gov/books/NBK500887/)\n\nThe returned LactMed metadata does not establish a complete study count; its population field is **lactation**, while detailed age or study-population metadata is missing in the returned record. The findings above come from mixed reports and study designs and should not be generalized beyond their described populations. [S11](https://www.ncbi.nlm.nih.gov/books/NBK500887/)\n\n### Advice to monitor\nNo separate explicit LactMed recommendation to monitor infants was retrieved. One study had mothers assess tongue coating, feeding, stool changes, diaper rash, skin rash, weight, and jaundice; those were study-assessed measures, not necessarily monitoring advice. [S11](https://www.ncbi.nlm.nih.gov/books/NBK500887/)\n\n### Uncertainty\nLactMed states that reported rash and gastrointestinal effects—such as diarrhea or thrush—have not been adequately evaluated. The case involving multiple antibiotics does not establish which drug caused the hives, and the reported associations do not prove causation. LactMed’s source summary says these effects have been reported and that milk levels are low, but this lookup is not a safety verdict and missing or limited evidence is not proof of safety. [S11](https://www.ncbi.nlm.nih.gov/books/NBK500887/)\n\nStopping or changing a medication can also carry risks and belongs in a conversation with the prescribing clinician.\n\nApplication limits:\nHuman clinical framing review remains required. This generated answer is not clinically validated.\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+  "reference_evidence": [
+    {
+      "tool": "route_parent_question",
+      "arguments": {
+        "question": "What does LactMed report about amoxicillin in breastfed babies? Separate observed symptoms from advice to monitor, and explain uncertainty. Do not give a dose.",
+        "country": "US",
+        "response_format": "json"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [],
+        "coverage_limits": [
+          "Heuristic routing and language detection can miss or overblock requests. No diagnosis, severity assessment, or clinical triage is performed; this system has no clinical certification."
+        ],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": null,
+        "generated_at": "2026-11-21T23:10:19.394656-05:00",
+        "source_version": "not_provided_by_upstream",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "not_assessed",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "abstract_coverage": {},
+        "content_flags": {
+          "dose_or_administration": {
+            "detected": false,
+            "field_paths": [],
+            "path_format": "JSON Pointer relative to this payload",
+            "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+            "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+          },
+          "removed_pregnancy_letter_categories": {
+            "detected": false,
+            "matches": [],
+            "classification_current": null,
+            "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+            "source_url": null
+          }
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "local:parent-safety-policy",
+        "policy_version": "2026-11-21.12",
+        "route": "evidence",
+        "allow_research": true,
+        "message": null,
+        "limitations": [
+          "Heuristic routing and language detection can miss or overblock requests. No diagnosis, severity assessment, or clinical triage is performed; this system has no clinical certification."
+        ],
+        "language_gate": {
+          "confident_english": true,
+          "segments_checked": 8,
+          "method": "English whole-query threshold (langdetect >=.95 or Lingua >=.80), plus sentence/span checks. Ambiguous fragments need English context and either English ranked first (>=.35), or English >=.15 with two English function-word anchors. Confident foreign fragments do not inherit context.",
+          "limitation": "Heuristic scores are not calibrated clinical confidence. Short technical phrases can be overblocked; mixed-language text can still be missed."
+        },
+        "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "framing_contract": {
+          "preserve_source_balance_context": true,
+          "clinical_framing_review_performed": false,
+          "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+        },
+        "required_display_notices": [],
+        "pagination": {
+          "returned": 0,
+          "has_more": null,
+          "next_offset": null,
+          "continuation_supported": false,
+          "notice": "Use only a returned continuation. Otherwise this is a bounded response with unknown completeness, not an exhaustive result set. Source-specific page arguments remain documented in tool schemas."
+        }
+      }
+    },
+    {
+      "tool": "normalize_drug",
+      "arguments": {
+        "name": "amoxicillin",
+        "response_format": "json"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [
+          "https://rxnav.nlm.nih.gov/REST/rxcui/723/properties.json"
+        ],
+        "coverage_limits": [],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-21T23:10:21.520737-05:00",
+        "generated_at": "2026-11-21T23:10:21.553384-05:00",
+        "source_version": "see_retrieval_provenance",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "not_assessed",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "abstract_coverage": {},
+        "content_flags": {
+          "dose_or_administration": {
+            "detected": false,
+            "field_paths": [],
+            "path_format": "JSON Pointer relative to this payload",
+            "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+            "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+          },
+          "removed_pregnancy_letter_categories": {
+            "detected": false,
+            "matches": [],
+            "classification_current": null,
+            "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+            "source_url": null
+          }
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "live:rxnorm",
+        "found": true,
+        "input": "amoxicillin",
+        "rxcui": "723",
+        "matched_name": "amoxicillin",
+        "term_type": "IN",
+        "ingredients": [
+          "amoxicillin"
+        ],
+        "match_type": "exact",
+        "requires_confirmation": false,
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/723/properties.json",
+        "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "framing_contract": {
+          "preserve_source_balance_context": true,
+          "clinical_framing_review_performed": false,
+          "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+        },
+        "required_display_notices": [],
+        "pagination": {
+          "returned": 0,
+          "has_more": null,
+          "next_offset": null,
+          "continuation_supported": false,
+          "notice": "Use only a returned continuation. Otherwise this is a bounded response with unknown completeness, not an exhaustive result set. Source-specific page arguments remain documented in tool schemas."
+        }
+      }
+    },
+    {
+      "tool": "get_parent_medication_info",
+      "arguments": {
+        "drug": "amoxicillin",
+        "response_format": "json"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [
+          "https://rxnav.nlm.nih.gov/REST/rxcui/723/properties.json",
+          "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=cc445a39-d84c-4b76-9fb8-ae302e7cd96b",
+          "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK500776/",
+          "https://medlineplus.gov/druginfo/meds/a685001.html?utm_source=mplusconnect&utm_medium=service",
+          "https://medlineplus.gov/druginfo/meds/a601067.html?utm_source=mplusconnect&utm_medium=service",
+          "https://medlineplus.gov/antibiotics.html?utm_source=mplusconnect&utm_medium=service"
+        ],
+        "coverage_limits": [
+          "Source text can contain historical doses or treatment directives; do not turn these into personal instructions.",
+          "No diagnosis, dosing, schedule, taper, missed-dose advice or personal safety clearance. Missing sections are not reassuring evidence."
+        ],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-21T23:10:21.520737-05:00",
+        "generated_at": "2026-11-21T23:10:23.860108-05:00",
+        "source_version": "see_retrieval_provenance",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "retrieved",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "abstract_coverage": {},
+        "content_flags": {
+          "dose_or_administration": {
+            "detected": true,
+            "field_paths": [
+              "/medicine_taker_label_evidence/population_sections/pregnancy",
+              "/medicine_taker_label_evidence/population_sections/lactation",
+              "/medicine_taker_label_evidence/population_sections/pediatric_use"
+            ],
+            "path_format": "JSON Pointer relative to this payload",
+            "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+            "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+          },
+          "removed_pregnancy_letter_categories": {
+            "detected": false,
+            "matches": [],
+            "classification_current": null,
+            "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+            "source_url": null
+          }
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "composite:parent-medication-information",
+        "identity": {
+          "found": true,
+          "input": "amoxicillin",
+          "rxcui": "723",
+          "matched_name": "amoxicillin",
+          "term_type": "IN",
+          "ingredients": [
+            "amoxicillin"
+          ],
+          "match_type": "exact",
+          "requires_confirmation": false,
+          "url": "https://rxnav.nlm.nih.gov/REST/rxcui/723/properties.json"
+        },
+        "medicine_taker_label_evidence": {
+          "product_title": "AMOXICILLIN AND CLAVULANATE POTASSIUM TABLET, FILM COATED [PD-RX PHARMACEUTICALS, INC.]",
+          "setid": "cc445a39-d84c-4b76-9fb8-ae302e7cd96b",
+          "sections": {
+            "adverse_reactions": {
+              "text": "The following are discussed in more detail in other sections of the labeling: Anaphylactic reactions [see Warnings and Precautions ( 5.1)] Severe Cutaneous Adverse Reactions [see Warnings and Precautions ( 5.2)] Drug-Induced Enterocolitis Syndrome (DIES) [see Warnings and Precautions ( 5.3)] Hepatic Dysfunction [see Warnings and Precautions ( 5.4)] Clostridioides difficileAssociated Diarrhea (CDAD) [see Warnings and Precautions ( 5.5)]",
+              "truncated": false,
+              "interpretation": "Product-label text; not a diagnosis or recommendation for this individual."
+            }
+          },
+          "population_sections": {
+            "pregnancy": "Teratogenic Effects: Reproduction studies performed in pregnant rats and mice given amoxicillin/clavulanate potassium (2:1 ratio formulation of amoxicillin:clavulanate) at oral doses up to 1200 mg/kg/day revealed no evidence of harm to the fetus due to amoxicillin/clavulanate potassium. The amoxicillin doses in rats and mice (based on body surface area) were approximately 4 and 2 times the maximum recommended adult human oral dose (875 mg every 12 hours). For clavulanate, these dose multiples were approximately 9 and 4 times the maximum recommended adult human oral dose (125 mg every 8 hours). There are, however, no adequate and well–controlled studies in pregnant women. Because animal reproduction studies are not always predictive of human response, this drug should be used during pregnancy only if clearly needed.",
+            "lactation": "Amoxicillin has been shown to be excreted in human milk. Amoxicillin/clavulanate potassium use by nursing mothers may lead to sensitization of infants. Caution should be exercised when amoxicillin/clavulanate potassium is administered to a nursing woman.",
+            "pediatric_use": "The safety and effectiveness of amoxicillin and clavulanate potassium for oral suspension and amoxicillin and clavulanate potassium tablets (chewable) have been established in pediatric patients. Use of amoxicillin and clavulanate potassium for oral suspension and amoxicillin and clavulanate potassium tablets (chewable) in pediatric patients is supported by evidence from studies of amoxicillin and clavulanate potassium tablets in adults with additional data from a study of amoxicillin and clavulanate potassium for oral suspension in pediatric patients aged 2 months to 12 years with acute otitis media [ see Clinical Studies ( 14.2) ]. Because of incompletely developed renal function in neonates and young infants, the elimination of amoxicillin may be delayed; clavulanate elimination is unaltered in this age group. Dosing of amoxicillin and clavulanate potassium for oral suspension and amoxicillin and clavulanate potassium tablets (chewable) should be modified in pediatric patients aged less than 12 weeks (less than 3 months) [ see Dosage and Administration ( 2.3) ]."
+          },
+          "population_sections_missing": [],
+          "population_sections_truncated": {
+            "pregnancy": false,
+            "lactation": false,
+            "pediatric_use": false
+          },
+          "population_section_scope": "Pregnancy/lactation/pediatric sections from this same label. A warning in lactation text is not an observed infant outcome.",
+          "spl_version": "32",
+          "effective_date": "2026-11-16",
+          "published_date": "Nov 19, 2026",
+          "labeler": "PD-Rx Pharmaceuticals, Inc.",
+          "selection_basis": {
+            "rule": "First API-ordered name match.",
+            "candidate_position": 1,
+            "candidates_examined": 1,
+            "candidates_fetched": 1,
+            "total_matching_spls": 640,
+            "most_recent_effective_date_claimed": false,
+            "exact_rxcui_match_claimed": false
+          },
+          "label_currency_notice": "DailyMed publishes in-use labeling, which can differ from the latest FDA-approved labeling. Effective date is a source document date, not a guarantee of current approval status.",
+          "sections_found": [
+            "adverse_reactions"
+          ],
+          "sections_expected": [
+            "adverse_reactions",
+            "warnings",
+            "warnings_and_precautions",
+            "boxed_warning",
+            "drug_interactions"
+          ],
+          "sections_missing": [
+            "warnings",
+            "warnings_and_precautions",
+            "boxed_warning",
+            "drug_interactions"
+          ],
+          "missing_section_notice": "Some sections may not apply or may be absent in the source; extraction is not proof of absence.",
+          "truncated": false,
+          "source_balance_context": {
+            "disease_associated_risk": null,
+            "notice": "Retain relevant source disease/treatment context when describing adverse findings. Missing context is unknown, not reassurance."
+          },
+          "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=cc445a39-d84c-4b76-9fb8-ae302e7cd96b",
+          "product_match_confirmed": false,
+          "note": "One matching label; confirm formulation and product. Listed effects apply to the label population, not automatically a breastfed infant.",
+          "section_population_context": {
+            "adverse_reactions": {
+              "requested_population": null,
+              "source_population": "medicine_taker_label_population",
+              "source_basis": "Explicit source section; confirm the exact product and actual population.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          },
+          "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+          "framing_contract": {
+            "preserve_source_balance_context": true,
+            "clinical_framing_review_performed": false,
+            "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+          },
+          "evidence_status": {
+            "state": "retrieved",
+            "no_evidence_retrieved": false,
+            "not_evidence_of_safety": true,
+            "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+          },
+          "content_flags": {
+            "dose_or_administration": {
+              "detected": true,
+              "field_paths": [
+                "/population_sections/pregnancy",
+                "/population_sections/lactation",
+                "/population_sections/pediatric_use"
+              ],
+              "path_format": "JSON Pointer relative to this payload",
+              "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+              "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+            },
+            "removed_pregnancy_letter_categories": {
+              "detected": false,
+              "matches": [],
+              "classification_current": null,
+              "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+              "source_url": null
+            }
+          }
+        },
+        "breastfeeding_evidence": {
+          "candidates": [
+            {
+              "id": "4573820",
+              "title": "Amoxicillin",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+              "population_context": {
+                "requested_population": null,
+                "source_population": "not_established",
+                "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+                "matches_requested_population_confirmed": false,
+                "age_band_confirmed": false,
+                "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+              }
+            },
+            {
+              "id": "4570200",
+              "title": "Amoxicillin and Clavulanic Acid",
+              "url": "https://www.ncbi.nlm.nih.gov/books/NBK500776/",
+              "population_context": {
+                "requested_population": null,
+                "source_population": "not_established",
+                "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+                "matches_requested_population_confirmed": false,
+                "age_band_confirmed": false,
+                "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+              }
+            }
+          ],
+          "requires_record_selection": true,
+          "note": "Select the matching ingredient record before summarizing infant effects.",
+          "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+          "framing_contract": {
+            "preserve_source_balance_context": true,
+            "clinical_framing_review_performed": false,
+            "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+          },
+          "evidence_status": {
+            "state": "retrieved",
+            "no_evidence_retrieved": false,
+            "not_evidence_of_safety": true,
+            "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+          },
+          "content_flags": {
+            "dose_or_administration": {
+              "detected": false,
+              "field_paths": [],
+              "path_format": "JSON Pointer relative to this payload",
+              "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+              "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+            },
+            "removed_pregnancy_letter_categories": {
+              "detected": false,
+              "matches": [],
+              "classification_current": null,
+              "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+              "source_url": null
+            }
+          }
+        },
+        "patient_education_links": [
+          {
+            "title": "Amoxicillin",
+            "url": "https://medlineplus.gov/druginfo/meds/a685001.html?utm_source=mplusconnect&utm_medium=service",
+            "summary": "Amoxicillin is used to    treat certain infections caused by bacteria, such as pneumonia, skin, and urinary tract infections  eliminate H. pylori, a bacteria that causes ulcers in combination with other medications Amoxicillin is in a class of medications called penicillin-like antibiotics. It works by stopping the growth of bacteria. Antibiotics such as amoxicillin will not work for colds, flu, and other viral infections. Taking antibiotics when they are not needed increases your risk of getting an infection later that resists antibiotic treatment.",
+            "population_context": {
+              "requested_population": null,
+              "source_population": "not_established",
+              "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          },
+          {
+            "title": "Lansoprazole, Clarithromycin, and Amoxicillin",
+            "url": "https://medlineplus.gov/druginfo/meds/a601067.html?utm_source=mplusconnect&utm_medium=service",
+            "summary": "Lansoprazole, clarithromycin, and amoxicillin are used to treat and prevent the return of ulcers (sores in the lining of the stomach or intestine) caused by a certain type of bacteria (H. pylori). Lansoprazole is in a class of medications called proton pump inhibitors. Clarithromycin and amoxicillin are in a class of medications called antibiotics. Lansoprazole works by decreasing the amount of acid made in the stomach. Clarithromycin and amoxicillin work by stopping the growth of the bacteria that may cause ulcers. Antibiotics will not work for colds, flu, or other viral infections.",
+            "population_context": {
+              "requested_population": null,
+              "source_population": "not_established",
+              "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          },
+          {
+            "title": "Antibiotics",
+            "url": "https://medlineplus.gov/antibiotics.html?utm_source=mplusconnect&utm_medium=service",
+            "summary": "<h3>What are antibiotics?</h3>\n<p>Antibiotics are medicines that fight <a href=\"https://medlineplus.gov/bacterialinfections.html?utm_source=mplusconnect\">bacterial infections</a> in people and animals. They work by killing the bacteria or by making it hard for the bacteria to grow and multiply.</p>\n\n<p>Antibiotics can be taken in different ways:</p><ul>\n<li>Orally (by mouth). This could be pills, capsules, or liquids.</li>\n<li>Topically. This might be a cream, spray, or ointment that you put on your skin. It could also be eye ointment, eye drops, or ear drops.</li>\n<li>Through an injection or intravenously (IV). This is usually for more serious infections.</li>\n</ul>\n\n<h3>What do antibiotics treat?</h3>\n<p>Antibiotics only treat certain bacterial infections, such as strep throat, <a href=\"https://medlineplus.gov/urinarytractinfections.html?utm_source=mplusconnect\">urinary tract infections</a>, and <a href=\"https://medlineplus.gov/ecoliinfections.html?utm_source=mplusconnect\">E. coli</a>.</p>\n\n<p>You may not need to take antibiotics for some bacterial infections. For example, you might not need them for many sinus infections or some <a href=\"https://medlineplus.gov/earinfections.htm",
+            "population_context": {
+              "requested_population": null,
+              "source_population": "not_established",
+              "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          }
+        ],
+        "interpretation": {
+          "medicine_taker": "Label adverse reactions are not automatically infant effects.",
+          "infant": "Use observed infant findings from LactMed; milk concentration alone is not a clinical outcome.",
+          "monitoring": "Source recommendations to monitor are not observations that a symptom occurred. Conversely, a symptom monitored in a study is not a clinical monitoring recommendation. Attribute advice only when explicitly present in the source.",
+          "measurements": "Keep measured milk/infant-serum concentrations separate from observed outcomes and administered dose regimens."
+        },
+        "questions_to_ask_clinician": [
+          "Does this evidence apply to my exact medicine, formulation, and all active ingredients?",
+          "How closely do the study populations match the lactation context, including age and prematurity where relevant?",
+          "Which findings measure exposure, and which measure clinical outcomes?",
+          "What uncertainties or missing evidence should we discuss before making a treatment decision?",
+          "What questions about benefits, risks, and follow-up should we address together?"
+        ],
+        "questions_for_pharmacist": [
+          "Does this label match my exact product and formulation?",
+          "Which effects are documented in the person taking it versus a breastfed infant?",
+          "Which symptoms should prompt professional assessment?"
+        ],
+        "limitations": [
+          "Source text can contain historical doses or treatment directives; do not turn these into personal instructions.",
+          "No diagnosis, dosing, schedule, taper, missed-dose advice or personal safety clearance. Missing sections are not reassuring evidence."
+        ],
+        "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "framing_contract": {
+          "preserve_source_balance_context": true,
+          "clinical_framing_review_performed": false,
+          "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+        },
+        "required_display_notices": [
+          {
+            "id": "clinical_framing_review",
+            "text": "Human clinical framing review remains required. This generated answer is not clinically validated.",
+            "origin": "Application output contracts; not source-authored medical findings",
+            "display_required": true
+          }
+        ],
+        "pagination": {
+          "returned": 0,
+          "has_more": null,
+          "next_offset": null,
+          "continuation_supported": false,
+          "notice": "Use only a returned continuation. Otherwise this is a bounded response with unknown completeness, not an exhaustive result set. Source-specific page arguments remain documented in tool schemas."
+        }
+      }
+    },
+    {
+      "tool": "search_lactmed",
+      "arguments": {
+        "drug": "amoxicillin",
+        "max_results": 5,
+        "response_format": "json"
+      },
+      "result": {
+        "status": "ok",
+        "results": [
+          {
+            "id": "4573820",
+            "title": "Amoxicillin",
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+            "population_context": {
+              "requested_population": null,
+              "source_population": "not_established",
+              "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          },
+          {
+            "id": "4570200",
+            "title": "Amoxicillin and Clavulanic Acid",
+            "url": "https://www.ncbi.nlm.nih.gov/books/NBK500776/",
+            "population_context": {
+              "requested_population": null,
+              "source_population": "not_established",
+              "source_basis": "Source MeSH/label section or original population field; missing stays unknown.",
+              "matches_requested_population_confirmed": false,
+              "age_band_confirmed": false,
+              "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+            }
+          }
+        ],
+        "source_urls": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+          "https://www.ncbi.nlm.nih.gov/books/NBK500776/"
+        ],
+        "coverage_limits": [],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-21T23:10:23.856522-05:00",
+        "generated_at": "2026-11-21T23:10:25.76967-05:00",
+        "source_version": "see_retrieval_provenance",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "retrieved",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "abstract_coverage": {},
+        "content_flags": {
+          "dose_or_administration": {
+            "detected": false,
+            "field_paths": [],
+            "path_format": "JSON Pointer relative to this payload",
+            "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+            "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+          },
+          "removed_pregnancy_letter_categories": {
+            "detected": false,
+            "matches": [],
+            "classification_current": null,
+            "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+            "source_url": null
+          }
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "live:ncbi",
+        "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "framing_contract": {
+          "preserve_source_balance_context": true,
+          "clinical_framing_review_performed": false,
+          "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+        },
+        "required_display_notices": [
+          {
+            "id": "clinical_framing_review",
+            "text": "Human clinical framing review remains required. This generated answer is not clinically validated.",
+            "origin": "Application output contracts; not source-authored medical findings",
+            "display_required": true
+          }
+        ],
+        "pagination": {
+          "returned": 2,
+          "has_more": null,
+          "next_offset": null,
+          "continuation_supported": false,
+          "notice": "Use only a returned continuation. Otherwise this is a bounded response with unknown completeness, not an exhaustive result set. Source-specific page arguments remain documented in tool schemas."
+        }
+      }
+    },
+    {
+      "tool": "get_lactmed_record",
+      "arguments": {
+        "book_id": "4573820",
+        "max_chars": 20000,
+        "response_format": "json"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [
+          "https://www.ncbi.nlm.nih.gov/books/NBK500887/"
+        ],
+        "coverage_limits": [],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-21T23:10:27.696759-05:00",
+        "generated_at": "2026-11-21T23:10:28.930562-05:00",
+        "source_version": "see_retrieval_provenance",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "retrieved",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "abstract_coverage": {},
+        "content_flags": {
+          "dose_or_administration": {
+            "detected": true,
+            "field_paths": [
+              "/text",
+              "/sections/Drug Levels",
+              "/sections/Effects in Breastfed Infants",
+              "/sections/Effects on Lactation and Breastmilk",
+              "/exposure_measurements/concentration_passages/0/concentration_values_as_reported/0",
+              "/exposure_measurements/concentration_passages/0/concentration_values_as_reported/1",
+              "/exposure_measurements/concentration_passages/0/concentration_values_as_reported/2",
+              "/exposure_measurements/concentration_passages/0/concentration_values_as_reported/3",
+              "/exposure_measurements/concentration_passages/0/source_passage",
+              "/exposure_measurements/concentration_passages/0/preceding_context",
+              "/exposure_measurements/extraction_scope",
+              "/exposure_measurements/presentation_requirement",
+              "/interpretation_contract/measurements"
+            ],
+            "path_format": "JSON Pointer relative to this payload",
+            "client_action": "Suppress flagged fields or visibly caveat them as historical source content, never personal instructions.",
+            "detection_limit": "Heuristic; an unflagged field is not certified free of dosing content."
+          },
+          "removed_pregnancy_letter_categories": {
+            "detected": false,
+            "matches": [],
+            "classification_current": null,
+            "instruction": "A/B/C/D/X pregnancy letter categories were removed by FDA PLLR. Preserve as historical source text only; never present as the current classification.",
+            "source_url": null
+          }
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "live:ncbi",
+        "book_id": "4573820",
+        "title": "Amoxicillin",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+        "text": "Summary of Use during Lactation: Amoxicillin produces low levels in milk that are not expected to cause adverse effects in breastfed infants. Occasionally, rash and disruption of the infant's gastrointestinal flora, resulting in diarrhea or thrush, have been reported, but these effects have not been adequately evaluated. Amoxicillin is acceptable in nursing mothers. Amoxicillin powder for suspension reconstituted with breastmilk is absorbed as well as the powder reconstituted with water.[1]\n\nDrug Levels: Maternal Levels. After a single 1 gram oral dose of amoxicillin in 6 women, peak milk amoxicillin levels occurred 4 to 5 hours after the dose. Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.[2] Using these data, an exclusively breastfed infant would be expected to receive a maximum daily dosage of about 0.1 mg/kg of amoxicillin with a maternal dose of 500 mg three times daily. This amounts to 0.25 to 0.5% of a typical infant amoxicillin dosage. A study involving 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. Pharmacokinetic modeling and Monte Carlo simulations were conducted to estimate the RID based on a maternal dosage of 6 grams daily as a worst-case scenario. The RID based on adult or pediatric dosages remained <0.4% for both measured and simulated concentrations.[3] Infant Levels. Relevant published information was not found as of the revision date.\n\nEffects in Breastfed Infants: In a telephone follow-up study, 25 nursing mothers reported taking amoxicillin (dosage unspecified). Three mothers reported diarrhea in their infants. No rashes or candidiasis were reported among the exposed infants.[4] In contrast, a small, controlled, prospective study had mothers monitor their infants for signs of adverse effects (furring of the tongue, feeding difficulties, changes in stool frequency and consistency, diaper rash, and skin rash). Weight change and the development of jaundice were also recorded. No statistical differences in these parameters were found between the infants of the control mothers and those of mothers taking the related antibiotics, ampicillin or ampicillin-clavulanate.[5] A prospective, controlled study asked mothers who called an information service about adverse reactions experienced by their breastfed infants. Of 40 infants exposed to amoxicillin in breastmilk, 2 developed diarrhea and 1 developed a rash.[6] A study compared the breastfed infants of mothers taking amoxicillin to those taking a macrolide antibiotic. Adverse reactions occurred in 8.3% of the infants exposed to amoxicillin, which was similar to the rate in macrolide-exposed infants. Reactions included rash and somnolence.[7] A 2-month-old infant was breastfed since birth. His mother had taken many medications during pregnancy, but she did not recall their identity. She developed mastitis and was treated with amoxicillin/clavulanic acid 1 gram orally every 12 hours and gentamicin 160 mg intramuscularly once daily. The infant was breastfed for 10 minutes starting 15 minutes after the first dose of both drugs. About 20 minutes later, the infant developed a generalized urticaria which disappeared after 30 minutes. A few hours later, the infant breastfed again and the urticaria reappeared after 15 minutes and disappeared after an hour. After switching to formula feeding and no further infant exposure to penicillins, the reaction did not reappear with follow-up to 16 months of age. The adverse reaction was probably caused by the antibiotics in breastmilk. The drug that caused the reaction cannot be determined, but it was most likely the amoxicillin/clavulanic acid.[8] A mother was taking amoxicillin, and acetaminophen plus codeine. She reported that her 11-month-old infant breastfed (extent not known) experienced diarrhea. The reaction was rated as possible or probable, but mild.[9] A study of 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. No adverse effects were reported in infants.[3]\n\nEffects on Lactation and Breastmilk: A study of 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. No impact was reported on maternal milk supply.[3]",
+        "sections": {
+          "Summary of Use during Lactation": "Amoxicillin produces low levels in milk that are not expected to cause adverse effects in breastfed infants. Occasionally, rash and disruption of the infant's gastrointestinal flora, resulting in diarrhea or thrush, have been reported, but these effects have not been adequately evaluated. Amoxicillin is acceptable in nursing mothers. Amoxicillin powder for suspension reconstituted with breastmilk is absorbed as well as the powder reconstituted with water.[1]",
+          "Drug Levels": "Maternal Levels. After a single 1 gram oral dose of amoxicillin in 6 women, peak milk amoxicillin levels occurred 4 to 5 hours after the dose. Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.[2] Using these data, an exclusively breastfed infant would be expected to receive a maximum daily dosage of about 0.1 mg/kg of amoxicillin with a maternal dose of 500 mg three times daily. This amounts to 0.25 to 0.5% of a typical infant amoxicillin dosage. A study involving 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. Pharmacokinetic modeling and Monte Carlo simulations were conducted to estimate the RID based on a maternal dosage of 6 grams daily as a worst-case scenario. The RID based on adult or pediatric dosages remained <0.4% for both measured and simulated concentrations.[3] Infant Levels. Relevant published information was not found as of the revision date.",
+          "Effects in Breastfed Infants": "In a telephone follow-up study, 25 nursing mothers reported taking amoxicillin (dosage unspecified). Three mothers reported diarrhea in their infants. No rashes or candidiasis were reported among the exposed infants.[4] In contrast, a small, controlled, prospective study had mothers monitor their infants for signs of adverse effects (furring of the tongue, feeding difficulties, changes in stool frequency and consistency, diaper rash, and skin rash). Weight change and the development of jaundice were also recorded. No statistical differences in these parameters were found between the infants of the control mothers and those of mothers taking the related antibiotics, ampicillin or ampicillin-clavulanate.[5] A prospective, controlled study asked mothers who called an information service about adverse reactions experienced by their breastfed infants. Of 40 infants exposed to amoxicillin in breastmilk, 2 developed diarrhea and 1 developed a rash.[6] A study compared the breastfed infants of mothers taking amoxicillin to those taking a macrolide antibiotic. Adverse reactions occurred in 8.3% of the infants exposed to amoxicillin, which was similar to the rate in macrolide-exposed infants. Reactions included rash and somnolence.[7] A 2-month-old infant was breastfed since birth. His mother had taken many medications during pregnancy, but she did not recall their identity. She developed mastitis and was treated with amoxicillin/clavulanic acid 1 gram orally every 12 hours and gentamicin 160 mg intramuscularly once daily. The infant was breastfed for 10 minutes starting 15 minutes after the first dose of both drugs. About 20 minutes later, the infant developed a generalized urticaria which disappeared after 30 minutes. A few hours later, the infant breastfed again and the urticaria reappeared after 15 minutes and disappeared after an hour. After switching to formula feeding and no further infant exposure to penicillins, the reaction did not reappear with follow-up to 16 months of age. The adverse reaction was probably caused by the antibiotics in breastmilk. The drug that caused the reaction cannot be determined, but it was most likely the amoxicillin/clavulanic acid.[8] A mother was taking amoxicillin, and acetaminophen plus codeine. She reported that her 11-month-old infant breastfed (extent not known) experienced diarrhea. The reaction was rated as possible or probable, but mild.[9] A study of 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. No adverse effects were reported in infants.[3]",
+          "Effects on Lactation and Breastmilk": "A study of 25 breastfeeding mothers who had been taking amoxicillin for at least 2 days, with infants older than 4 weeks had 75 milk samples collected at multiple time points following amoxicillin administration. No impact was reported on maternal milk supply.[3]"
+        },
+        "exposure_measurements": {
+          "status": "quantitative_concentrations_extracted",
+          "concentration_passages": [
+            {
+              "concentration_values_as_reported": [
+                "0.69 mg/L",
+                "0.46 to 0.88 mg/L",
+                "0.81 mg/L",
+                "0.39 to 1.3 mg/L"
+              ],
+              "source_passage": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+              "preceding_context": "After a single 1 gram oral dose of amoxicillin in 6 women, peak milk amoxicillin levels occurred 4 to 5 hours after the dose.",
+              "source_section": "Drug Levels"
+            }
+          ],
+          "additional_passages_omitted": false,
+          "infant_level_excerpt": "Relevant published information was not found as of the revision date.",
+          "infant_level_section_present_in_returned_text": true,
+          "exhaustive": false,
+          "extraction_scope": "Exact concentration expressions from the returned Drug Levels excerpt only. No unit conversion, dose calculation or automatic specimen classification. Read the source passage and preceding context to distinguish milk, maternal serum and infant serum. Empty extraction is not proof that no measurements exist.",
+          "presentation_requirement": "Include a Measured exposure row in a summary of this record. Report the retrieved milk concentration values and units with their study context, separately from infant outcomes and administered regimens. Do not replace retrieved numeric concentrations with only low or trace. State infant-level availability or the missing excerpt. If measurements are omitted, explicitly disclose that omission. These are research measurements, not dosing instructions; never convert them to a personal dose."
+        },
+        "sections_found": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "sections_expected": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "section_allocation": "Available sections share the text limit; unused space is redistributed. Each section retains its truncation status.",
+        "interpretation_contract": {
+          "measurements": "Preserve relevant measured milk or infant-serum concentrations and their units separately from outcomes. These are research measurements, not administered doses or dosing instructions. If numeric doses were excluded, omit administered regimens and dose estimates rather than omitting concentration findings.",
+          "observations": "Report what was observed and in which population. A symptom monitored in a study is not automatically a clinical recommendation to monitor it.",
+          "recommendations": "Attribute monitoring advice to the source only when the returned source explicitly recommends it. If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
+          "maternal_effects": "Effects on Lactation and Breastmilk concerns the lactating person. Milk/infant concentrations belong under exposure, not maternal clinical effects."
+        },
+        "sections_missing": [],
+        "sections_returned": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "sections_omitted_by_limit": [],
+        "section_status": {
+          "Summary of Use during Lactation": {
+            "found": true,
+            "characters_in_source_extract": 462,
+            "characters_returned": 462,
+            "returned": true,
+            "truncated": false
+          },
+          "Drug Levels": {
+            "found": true,
+            "characters_in_source_extract": 1111,
+            "characters_returned": 1111,
+            "returned": true,
+            "truncated": false
+          },
+          "Effects in Breastfed Infants": {
+            "found": true,
+            "characters_in_source_extract": 2680,
+            "characters_returned": 2680,
+            "returned": true,
+            "truncated": false
+          },
+          "Effects on Lactation and Breastmilk": {
+            "found": true,
+            "characters_in_source_extract": 263,
+            "characters_returned": 263,
+            "returned": true,
+            "truncated": false
+          }
+        },
+        "truncated": false,
+        "section_completeness_notice": "Missing sections can reflect source coverage or parser failure; truncated sections are incomplete. Do not present this extract as a complete record.",
+        "evidence_base": {
+          "study_count": null,
+          "study_count_status": "not_established_from_this_extract",
+          "source_publication_types": [],
+          "study_types_mentioned": [
+            "case_report"
+          ],
+          "type_detection": "Source metadata where supplied; text mentions otherwise heuristic, not adjudicated.",
+          "reference_markers": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "reference_count_is_not_study_count": true,
+          "no_effects_statement_detected": true,
+          "interpretation": "A no-effects statement does not establish safety or a well-studied population. Study counts and designs need source/clinical review; missing counts are unknown, not zero."
+        },
+        "source_balance_context": {
+          "text": "Amoxicillin produces low levels in milk that are not expected to cause adverse effects in breastfed infants. Occasionally, rash and disruption of the infant's gastrointestinal flora, resulting in diarrhea or thrush, have been reported, but these effects have not been adequately evaluated. Amoxicillin is acceptable in nursing mothers. Amoxicillin powder for suspension reconstituted with breastmilk is absorbed as well as the powder reconstituted with water.[1]",
+          "truncated": false,
+          "source_section": "Summary of Use during Lactation",
+          "notice": "Preserve relevant source context when describing adverse findings; this is source text, not a personal treatment plan."
+        },
+        "alternatives_policy": {
+          "handling": "excluded",
+          "present_in_parsed_source": false,
+          "notice": "Alternate Drugs to Consider is excluded from returned text and synthesis. Consult the linked LactMed source; this tool does not recommend substitutions."
+        },
+        "population_context": {
+          "source_population": "lactation",
+          "pregnancy_evidence": false
+        },
+        "continuity_of_care_notice": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "section_population_context": {
+          "Summary of Use during Lactation": {
+            "requested_population": null,
+            "source_population": "medicine_taker_label_population",
+            "source_basis": "Explicit source section; confirm the exact product and actual population.",
+            "matches_requested_population_confirmed": false,
+            "age_band_confirmed": false,
+            "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+          },
+          "Drug Levels": {
+            "requested_population": null,
+            "source_population": "medicine_taker_label_population",
+            "source_basis": "Explicit source section; confirm the exact product and actual population.",
+            "matches_requested_population_confirmed": false,
+            "age_band_confirmed": false,
+            "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+          },
+          "Effects in Breastfed Infants": {
+            "requested_population": null,
+            "source_population": "medicine_taker_label_population",
+            "source_basis": "Explicit source section; confirm the exact product and actual population.",
+            "matches_requested_population_confirmed": false,
+            "age_band_confirmed": false,
+            "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+          },
+          "Effects on Lactation and Breastmilk": {
+            "requested_population": null,
+            "source_population": "medicine_taker_label_population",
+            "source_basis": "Explicit source section; confirm the exact product and actual population.",
+            "matches_requested_population_confirmed": false,
+            "age_band_confirmed": false,
+            "notice": "Search filters and broad population labels do not confirm applicability. Preserve actual age, prematurity, gestational stage and study population."
+          }
+        },
+        "framing_contract": {
+          "preserve_source_balance_context": true,
+          "clinical_framing_review_performed": false,
+          "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary."
+        },
+        "required_display_notices": [
+          {
+            "id": "clinical_framing_review",
+            "text": "Human clinical framing review remains required. This generated answer is not clinically validated.",
+            "origin": "Application output contracts; not source-authored medical findings",
+            "display_required": true
+          }
+        ],
+        "pagination": {
+          "returned": 0,
+          "has_more": null,
+          "next_offset": null,
+          "continuation_supported": false,
+          "notice": "Use only a returned continuation. Otherwise this is a bounded response with unknown completeness, not an exhaustive result set. Source-specific page arguments remain documented in tool schemas."
+        }
+      }
+    }
+  ]
+}

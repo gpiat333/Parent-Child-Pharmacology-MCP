@@ -1,0 +1,132 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 34,
+    "contradicted_claims": 0,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the exact RxNorm identification of lamotrigine.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the selected DailyMed product label, disease-associated risks, pharmacokinetic context, registry findings, animal findings, and label limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the description of the bipolar-disorder pregnancy review and postpartum relapse context.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40593436/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the 60-mother mixed psychotropic study, breast-milk concentration-to-dose finding, and reported infant outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the EUROCAT registry description and its reported comparison and oral-cleft finding.",
+        "url": "https://clinicaltrials.gov/study/NCT01055327"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the queried FAERS report counts and query scope.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the interpretation that FAERS reports do not establish causation or incidence.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "unverified",
+        "reason": "The supplied evidence lists this FDA page as a basis URL but does not provide page content directly supporting the candidate's pregnancy-resource statement.",
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule"
+      },
+      {
+        "citation_id": "C9",
+        "status": "unverified",
+        "reason": "The supplied evidence identifies LactMed as lactation-focused but does not provide the cited page's contents; support is indirect.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "Supports the FDA pregnancy-exposure-registry directory context and its limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C11",
+        "status": "supported",
+        "reason": "Corresponds to the pregnancy registry website identified in the evidence.",
+        "url": "http://www.aedpregnancyregistry.org/"
+      },
+      {
+        "citation_id": "C12",
+        "status": "supported",
+        "reason": "Corresponds to the registry enrollment-information link identified in the evidence.",
+        "url": "https://www.aedpregnancyregistry.org/join-our-study/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer separates maternal effects, pharmacokinetic or exposure findings, fetal and infant outcomes, animal evidence, and report-only FAERS context. It preserves epilepsy and bipolar-disorder context, distinguishes study populations and designs, states limitations, avoids individualized treatment decisions, includes clinician questions, and retains the required warning that stopping or changing medication carries risks and should be discussed with the prescribing clinician. Human clinical framing review is also disclosed."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "df59de2b3fd63de6876e666dfe4668562c6cac3f306e801d115d903705e8e805",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 34,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the exact RxNorm identification of lamotrigine.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected DailyMed product label, disease-associated risks, pharmacokinetic context, registry findings, animal findings, and label limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the description of the bipolar-disorder pregnancy review and postpartum relapse context.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the 60-mother mixed psychotropic study, breast-milk concentration-to-dose finding, and reported infant outcomes.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the EUROCAT registry description and its reported comparison and oral-cleft finding.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the queried FAERS report counts and query scope.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that FAERS reports do not establish causation or incidence.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence lists this FDA page as a basis URL but does not provide page content directly supporting the candidate's pregnancy-resource statement.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies LactMed as lactation-focused but does not provide the cited page's contents; support is indirect.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA pregnancy-exposure-registry directory context and its limitations.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"supported\",\n      \"reason\": \"Corresponds to the pregnancy registry website identified in the evidence.\"\n    },\n    {\n      \"citation_id\": \"C12\",\n      \"status\": \"supported\",\n      \"reason\": \"Corresponds to the registry enrollment-information link identified in the evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer separates maternal effects, pharmacokinetic or exposure findings, fetal and infant outcomes, animal evidence, and report-only FAERS context. It preserves epilepsy and bipolar-disorder context, distinguishes study populations and designs, states limitations, avoids individualized treatment decisions, includes clinician questions, and retains the required warning that stopping or changing medication carries risks and should be discussed with the prescribing clinician. Human clinical framing review is also disclosed.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 64498,
+        "completion_tokens": 1294,
+        "total_tokens": 65792,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 64495,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 590,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 64498,
+    "completion_tokens": 1294,
+    "total_tokens": 65792,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 64495,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 590,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

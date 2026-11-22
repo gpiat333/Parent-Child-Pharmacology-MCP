@@ -1,0 +1,48 @@
+[11/21/26 23:33:20] INFO     StreamableHTTP      streamable_http_manager.py:164
+                             session manager                                   
+                             started                                           
+                    WARNING  Invalid Host header:      transport_security.py:71
+                             127.0.0.1                                         
+                    INFO     Terminating session: None   streamable_http.py:831
+                    INFO     StreamableHTTP      streamable_http_manager.py:168
+                             session manager                                   
+                             shutting down                                     
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\piatkowskigs\Desktop\.gsa-template-alignment\gap-auth-smoke.py", line 32, in <module>
+  |     asyncio.run(main())
+  |     ~~~~~~~~~~~^^^^^^^^
+  |   File "C:\Users\piatkowskigs\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 195, in run
+  |     return runner.run(main)
+  |            ~~~~~~~~~~^^^^^^
+  |   File "C:\Users\piatkowskigs\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  |   File "C:\Users\piatkowskigs\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 725, in run_until_complete
+  |     return future.result()
+  |            ~~~~~~~~~~~~~^^
+  |   File "C:\Users\piatkowskigs\Desktop\.gsa-template-alignment\gap-auth-smoke.py", line 18, in main
+  |     async with server.session_manager.run():
+  |                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "C:\Users\piatkowskigs\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "C:\Users\piatkowskigs\Desktop\.mother-child-github-publish\repository\.venv\Lib\site-packages\mcp\server\streamable_http_manager.py", line 161, in run
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "C:\Users\piatkowskigs\Desktop\.mother-child-github-publish\repository\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 871, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\piatkowskigs\Desktop\.mother-child-github-publish\repository\.venv\Lib\site-packages\mcp\server\streamable_http_manager.py", line 166, in run
+    |     yield  # Let the application run
+    |     ^^^^^
+    |   File "C:\Users\piatkowskigs\Desktop\.gsa-template-alignment\gap-auth-smoke.py", line 25, in main
+    |     allowed=await call('route_parent_question',{'question':'my little white pill'})
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\piatkowskigs\Desktop\.gsa-template-alignment\gap-auth-smoke.py", line 23, in call
+    |     assert response.status_code==200
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+    | AssertionError
+    +------------------------------------
