@@ -1,0 +1,119 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 18,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the label pregnancy-data gap, animal maternal findings, animal fetal findings, and registry phone number.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the listed FAERS report terms and counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous reports do not establish causation or incidence.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the existence and retrieval metadata of PMID 36630579, including absent abstract text.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630579/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the existence and retrieval metadata of PMID 35802843, including absent abstract text.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35802843/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the existence and retrieval metadata of PMID 36630580, including absent abstract text.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630580/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the listed registry website.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports the FDA directory listing, ongoing status, and directory limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA-approved labeling states",
+        "reference_quote": null,
+        "explanation": "The supplied evidence identifies DailyMed product labeling and a PLLR section, but does not explicitly establish the characterization as FDA-approved labeling. The underlying pregnancy-data claim is supported, but this label-status characterization is unverified."
+      }
+    ],
+    "rationale": "The answer fulfills the requested brief: all three evidence axes remain visible, animal and human evidence are distinguished, absent abstracts are disclosed, maternal PK retrieval is stated within scope, registry information is separated and not recommended, and no administered doses or medication decisions are provided. Fidelity is otherwise strong, with one unverified characterization of the label as FDA-approved and one source claim about the PK search that lacks a directly attached citation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "ae974737b625beb40fc6851d1ac88a447f07eb217de75d7adb96e66a51cee733",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label pregnancy-data gap, animal maternal findings, animal fetal findings, and registry phone number.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed FAERS report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous reports do not establish causation or incidence.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the existence and retrieval metadata of PMID 36630579, including absent abstract text.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the existence and retrieval metadata of PMID 35802843, including absent abstract text.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the existence and retrieval metadata of PMID 36630580, including absent abstract text.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed registry website.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing, ongoing status, and directory limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA-approved labeling states\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence identifies DailyMed product labeling and a PLLR section, but does not explicitly establish the characterization as FDA-approved labeling. The underlying pregnancy-data claim is supported, but this label-status characterization is unverified.\"\n    }\n  ],\n  \"rationale\": \"The answer fulfills the requested brief: all three evidence axes remain visible, animal and human evidence are distinguished, absent abstracts are disclosed, maternal PK retrieval is stated within scope, registry information is separated and not recommended, and no administered doses or medication decisions are provided. Fidelity is otherwise strong, with one unverified characterization of the label as FDA-approved and one source claim about the PK search that lacks a directly attached citation.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 106936,
+        "completion_tokens": 1113,
+        "total_tokens": 108049,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 106933,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 106936,
+    "completion_tokens": 1113,
+    "total_tokens": 108049,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 106933,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

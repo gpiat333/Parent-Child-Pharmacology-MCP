@@ -1,6 +1,6 @@
-> Current status: local policy .10, deployed .9 unchanged. Fresh chats and paired answers, unchanged grader v3. 592 server and 30 grader tests pass. No deployment or GitHub upload. See [current validation](DATABRICKS_VALIDATION.md). Earlier numbers and deployment statements below are historical.
+> Historical feature/design note. Current .11 status, metrics and runtime boundaries are in [CURRENT_IMPLEMENTATION.md](CURRENT_IMPLEMENTATION.md).
 
-> Historical record. Current local code has 508 tests, 30 tools, four prompts and four resources; see [current implementation](CURRENT_IMPLEMENTATION.md). Historical names and counts remain below.
+> Historical snapshot recorded 508 tests, 30 tools, four prompts and four resources; see [current implementation](CURRENT_IMPLEMENTATION.md). Historical names and counts remain below.
 
 > Historical notes retained for traceability. The current local revision is documented in CURRENT_IMPLEMENTATION.md, the evaluation DOCX and ../evaluation/results.json. No deployment was performed.
 

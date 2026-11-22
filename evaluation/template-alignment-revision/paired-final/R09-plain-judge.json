@@ -1,0 +1,117 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 2,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited FDA Drug Safety Communications page is the FDA index used in the returned search evidence.",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-safety-communications"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them",
+        "answer_quote": null,
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The answer did not report the returned FDA notice title or provide its specific notice link."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Look for FDA safety communications about montelukast.",
+        "answer_quote": "**Returned records:** None available to report from a current lookup.",
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "A returned montelukast safety-communication record was available, so reporting that no records were available fails the requested lookup result."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "**Returned records:** None available to report from a current lookup.",
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The statement that no returned records were available conflicts with the supplied search result containing one FDA notice."
+      }
+    ],
+    "rationale": "The answer appropriately avoids treatment recommendations and discloses that full notice text was not retrieved, but it fails to report the returned notice title and specific link and incorrectly states that no returned records were available."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "8e3b7435efb4b7f3cad74252376d146f76b863daff45bdf93b17e8f52679afab",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited FDA Drug Safety Communications page is the FDA index used in the returned search evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The answer did not report the returned FDA notice title or provide its specific notice link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Look for FDA safety communications about montelukast.\",\n      \"answer_quote\": \"Returned records: None available to report from a current lookup.\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"A returned montelukast safety-communication record was available, so reporting that no records were available fails the requested lookup result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Returned records: None available to report from a current lookup.\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The statement that no returned records were available conflicts with the supplied search result containing one FDA notice.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately avoids treatment recommendations and discloses that full notice text was not retrieved, but it fails to report the returned notice title and specific link and incorrectly states that no returned records were available.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[2] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 7970,
+        "completion_tokens": 940,
+        "total_tokens": 8910,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7967,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 407,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited FDA Drug Safety Communications page is the FDA index used in the returned search evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The answer did not report the returned FDA notice title or provide its specific notice link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Look for FDA safety communications about montelukast.\",\n      \"answer_quote\": \"**Returned records:** None available to report from a current lookup.\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"A returned montelukast safety-communication record was available, so reporting that no records were available fails the requested lookup result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"**Returned records:** None available to report from a current lookup.\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The statement that no returned records were available conflicts with the supplied search result containing one FDA notice.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately avoids treatment recommendations and discloses that full notice text was not retrieved, but it fails to report the returned notice title and specific link and incorrectly states that no returned records were available.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 8593,
+        "completion_tokens": 664,
+        "total_tokens": 9257,
+        "prompt_tokens_details": {
+          "cached_tokens": 7967,
+          "cache_write_tokens": 623,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 131,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 8593,
+    "completion_tokens": 664,
+    "total_tokens": 9257,
+    "prompt_tokens_details": {
+      "cached_tokens": 7967,
+      "cache_write_tokens": 623,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 131,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

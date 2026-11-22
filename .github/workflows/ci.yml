@@ -17,8 +17,8 @@ jobs:
           enable-cache: true
       - run: uv python install 3.13
       - run: uv sync --locked --group dev
-      - run: uv run --locked ruff check src tests main.py
-      - run: uv run --locked ruff format --check src tests main.py
+      - run: uv run --locked ruff check src tests main.py eval/run.py eval/databricks/submit-tests.py
+      - run: uv run --locked ruff format --check src tests main.py eval/run.py eval/databricks/submit-tests.py
       - run: uv run --locked pytest tests -q --junitxml=test-results.xml
       - run: uv run --locked pytest eval/harness/tests -q -o pythonpath=eval/harness
       - run: uv build

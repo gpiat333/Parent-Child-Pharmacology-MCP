@@ -1,0 +1,68 @@
+{
+  "error": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte\n[Trace ID: 00-e2686f2c773b496ea2e2078615f59d95-b2c15035ba0456fe-00]",
+  "error_trace": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mUnicodeDecodeError\u001b[0m                        Traceback (most recent call last)\nFile \u001b[0;32m\u003ccommand-5470342616350462\u003e, line 13\u001b[0m\n\u001b[1;32m     11\u001b[0m url\u001b[38;5;241m=\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mhttps://github.com/PowerShell/PowerShell/releases/download/v7.7.0/\u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[1;32m     12\u001b[0m filename\u001b[38;5;241m=\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mpowershell-7.7.0-linux-arm64.tar.gz\u001b[39m\u001b[38;5;124m'\u001b[39m\n\u001b[0;32m---\u003e 13\u001b[0m hashes\u001b[38;5;241m=\u001b[39murllib\u001b[38;5;241m.\u001b[39mrequest\u001b[38;5;241m.\u001b[39murlopen(url\u001b[38;5;241m+\u001b[39m\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mhashes.sha256\u001b[39m\u001b[38;5;124m'\u001b[39m,timeout\u001b[38;5;241m=\u001b[39m\u001b[38;5;241m120\u001b[39m)\u001b[38;5;241m.\u001b[39mread()\u001b[38;5;241m.\u001b[39mdecode()\n\u001b[1;32m     14\u001b[0m expected\u001b[38;5;241m=\u001b[39m\u001b[38;5;28mnext\u001b[39m(line\u001b[38;5;241m.\u001b[39msplit()[\u001b[38;5;241m0\u001b[39m]\u001b[38;5;241m.\u001b[39mlower() \u001b[38;5;28;01mfor\u001b[39;00m line \u001b[38;5;129;01min\u001b[39;00m hashes\u001b[38;5;241m.\u001b[39msplitlines() \u001b[38;5;28;01mif\u001b[39;00m filename \u001b[38;5;129;01min\u001b[39;00m line)\n\u001b[1;32m     15\u001b[0m download\u001b[38;5;241m=\u001b[39mwork\u001b[38;5;241m/\u001b[39mfilename\n\n\u001b[0;31mUnicodeDecodeError\u001b[0m: 'utf-8' codec can't decode byte 0xff in position 0: invalid start byte",
+  "metadata": {
+    "cleanup_duration": 0,
+    "creator_user_name": "gabriela.piatkowski@nih.gov",
+    "effective_performance_target": "PERFORMANCE_OPTIMIZED",
+    "end_time": 1795316148767,
+    "execution_duration": 16000,
+    "job_id": 614153241578066,
+    "job_run_id": 418669305872553,
+    "number_in_job": 561391309317362,
+    "run_id": 561391309317362,
+    "run_name": "frozen_source_tests",
+    "run_page_url": "https://dbc-aae0ba16-8727.cloud.databricks.com/?o=7474654188777746#job/614153241578066/run/561391309317362",
+    "run_type": "SUBMIT_RUN",
+    "setup_duration": 3000,
+    "start_time": 1795316128778,
+    "state": {
+      "life_cycle_state": "TERMINATED",
+      "result_state": "FAILED",
+      "state_message": "Workload failed, see run output for details",
+      "user_cancelled_or_timedout": false
+    },
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "RUN_EXECUTION_ERROR",
+        "message": "Workload failed, see run output for details",
+        "type": "CLIENT_ERROR"
+      }
+    },
+    "tasks": [
+      {
+        "attempt_number": 0,
+        "cleanup_duration": 0,
+        "effective_performance_target": "PERFORMANCE_OPTIMIZED",
+        "end_time": 1795316148767,
+        "environment_key": "tests",
+        "execution_duration": 16000,
+        "notebook_task": {
+          "notebook_path": "/Users/gabriela.piatkowski@nih.gov/gsa-template-validation-20261121-attempt2/validate",
+          "source": "WORKSPACE"
+        },
+        "run_id": 561391309317362,
+        "run_page_url": "https://dbc-aae0ba16-8727.cloud.databricks.com/?o=7474654188777746#job/614153241578066/run/561391309317362",
+        "setup_duration": 3000,
+        "start_time": 1795316128778,
+        "state": {
+          "life_cycle_state": "TERMINATED",
+          "result_state": "FAILED",
+          "state_message": "Workload failed, see run output for details",
+          "user_cancelled_or_timedout": false
+        },
+        "status": {
+          "state": "TERMINATED",
+          "termination_details": {
+            "code": "RUN_EXECUTION_ERROR",
+            "message": "Workload failed, see run output for details",
+            "type": "CLIENT_ERROR"
+          }
+        },
+        "task_key": "frozen_source_tests"
+      }
+    ]
+  },
+  "notebook_output": {}
+}

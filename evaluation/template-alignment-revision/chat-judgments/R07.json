@@ -1,0 +1,73 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 10,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Direct study link matches the returned ClinicalTrials.gov record for NCT05863910.",
+        "url": "https://clinicaltrials.gov/study/NCT05863910"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The API search link corresponds to the bounded Canada recruiting pediatric-epilepsy search and supports the reported search limitations and recruitment metadata.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=pediatric+epilepsy+AND+%28child+OR+infant%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=Canada"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer identifies the single returned Canadian recruiting record, provides a direct study link and contact information, avoids substituting completed studies, and clearly states that the match and individual eligibility require confirmation. It also avoids claiming that no other studies exist beyond the bounded search."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "ea15001cdeea1af4b42f214e8b69cdd8d899ab522810022f4fc1d4a67c2477a7",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 10,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Direct study link matches the returned ClinicalTrials.gov record for NCT05863910.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The API search link corresponds to the bounded Canada recruiting pediatric-epilepsy search and supports the reported search limitations and recruitment metadata.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer identifies the single returned Canadian recruiting record, provides a direct study link and contact information, avoids substituting completed studies, and clearly states that the match and individual eligibility require confirmation. It also avoids claiming that no other studies exist beyond the bounded search.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 5103,
+        "completion_tokens": 463,
+        "total_tokens": 5566,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 5100,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 215,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 5103,
+    "completion_tokens": 463,
+    "total_tokens": 5566,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5100,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 215,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

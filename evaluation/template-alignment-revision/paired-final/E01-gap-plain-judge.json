@@ -1,0 +1,113 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 6,
+    "contradicted_claims": 1,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence supports pregnancy-label findings from DailyMed, but does not provide or verify this specific 2022 accessdata FDA label URL.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The supplied evidence does not verify this National Pregnancy Registry webpage or its contact information as the daridorexant-specific FDA directory listing.",
+        "url": "https://womensmentalhealth.org/clinical-and-research-programs/pregnancyregistry/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "unverified",
+        "reason": "A generic FDA homepage citation does not substantiate the specific registry contacts or directory information presented.",
+        "url": "https://www.fda.gov/"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "these findings are species-specific and not human outcome data",
+        "reference_quote": "Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.",
+        "explanation": "The answer characterizes the animal findings as fetal effects, while the supplied label evidence reports no fetal toxicity or malformation in the cited animal studies. The answer does appropriately distinguish animal from human evidence, but its description of the animal result is inaccurate."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA label provides pharmacokinetic information from nonpregnant adult participants",
+        "reference_quote": null,
+        "explanation": "The supplied evidence confirms that no maternal pregnancy pharmacokinetic data were found in the retrieved Clinical Considerations and abstracts, but it does not verify this additional claim about nonpregnant adult pharmacokinetic information in the label."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": null,
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer presents contacts separately and avoids recommending participation, but it does not provide the retrieved FDA-directory Quviviq Pregnancy Registry contact information. Instead it gives a different psychiatric registry and generic FDA information."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": "FDA pregnancy-reporting information",
+        "reference_quote": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+        "explanation": "The answer cites a generic FDA page rather than the supplied FDA pregnancy-exposure-registry directory, so the requested directory citation is not fulfilled."
+      }
+    ],
+    "rationale": "The answer keeps the evidence rows visible, reports the retrieved maternal-PK gap, avoids administered doses and medication decisions, and separates registry information from the evidence table. However, it misstates the animal findings, adds an unsupported nonpregnant-PK claim, and fails to provide the retrieved FDA-directory Quviviq registry contact and directory citation. The listed citations are not verified by the supplied evidence pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "ae05d810e68b7913235695151a0b32de27e482ecca8d9a605308216b67338ce9",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence supports pregnancy-label findings from DailyMed, but does not provide or verify this specific 2022 accessdata FDA label URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not verify this National Pregnancy Registry webpage or its contact information as the daridorexant-specific FDA directory listing.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"A generic FDA homepage citation does not substantiate the specific registry contacts or directory information presented.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"these findings are species-specific and not human outcome data\",\n      \"reference_quote\": \"Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.\",\n      \"explanation\": \"The answer characterizes the animal findings as fetal effects, while the supplied label evidence reports no fetal toxicity or malformation in the cited animal studies. The answer does appropriately distinguish animal from human evidence, but its description of the animal result is inaccurate.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label provides pharmacokinetic information from nonpregnant adult participants\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence confirms that no maternal pregnancy pharmacokinetic data were found in the retrieved Clinical Considerations and abstracts, but it does not verify this additional claim about nonpregnant adult pharmacokinetic information in the label.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer presents contacts separately and avoids recommending participation, but it does not provide the retrieved FDA-directory Quviviq Pregnancy Registry contact information. Instead it gives a different psychiatric registry and generic FDA information.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": \"FDA pregnancy-reporting information\",\n      \"reference_quote\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"explanation\": \"The answer cites a generic FDA page rather than the supplied FDA pregnancy-exposure-registry directory, so the requested directory citation is not fulfilled.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps the evidence rows visible, reports the retrieved maternal-PK gap, avoids administered doses and medication decisions, and separates registry information from the evidence table. However, it misstates the animal findings, adds an unsupported nonpregnant-PK claim, and fails to provide the retrieved FDA-directory Quviviq registry contact and directory citation. The listed citations are not verified by the supplied evidence pool.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 106132,
+        "completion_tokens": 1176,
+        "total_tokens": 107308,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 106129,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 371,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 106132,
+    "completion_tokens": 1176,
+    "total_tokens": 107308,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 106129,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 371,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

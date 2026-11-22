@@ -11,12 +11,16 @@ if '--child' not in sys.argv:
         print('Readback exceeded the 180-second process deadline.');raise SystemExit(2)
 os.chdir(W)
 os.environ.update(MLFLOW_DISABLE_AGENT_HINT='1',MLFLOW_HTTP_REQUEST_TIMEOUT='10',MLFLOW_HTTP_REQUEST_MAX_RETRIES='0')
-from databricks_transport import HOST,CLI
+from databricks_transport import HOST,CLI,oauth_token
 import truststore;truststore.inject_into_ssl()
 os.environ.pop('DATABRICKS_TOKEN',None)
 os.environ.update(DATABRICKS_HOST=HOST,DATABRICKS_CONFIG_PROFILE=os.environ['DATABRICKS_CONFIG_PROFILE'],DATABRICKS_AUTH_TYPE='databricks-cli',DATABRICKS_CLI_PATH=CLI,MLFLOW_ENABLE_DB_SDK='true')
 import mlflow
-mlflow.set_tracking_uri('databricks://'+os.environ['DATABRICKS_CONFIG_PROFILE']);client=mlflow.MlflowClient()
+# Cache the CLI-issued bearer in process memory for readback; never persist it.
+os.environ['DATABRICKS_TOKEN']=oauth_token()
+os.environ['DATABRICKS_AUTH_TYPE']='pat'
+os.environ.pop('DATABRICKS_CONFIG_PROFILE',None)
+mlflow.set_tracking_uri('databricks');client=mlflow.MlflowClient()
 read=lambda p:json.loads(p.read_text(encoding='utf-8'))
 summary=read(R/'mlflow'/(phase+'-run.json'));rows=read(R/'mlflow'/(phase+'-eval_results.json'))
 run=client.get_run(summary['run_id']);assert run.info.status=='FINISHED',run.info.status

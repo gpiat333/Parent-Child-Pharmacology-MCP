@@ -1,15 +1,13 @@
 # Private GitHub publication
 
-Repository: https://github.com/gpiat333/Parent-Child-Pharmacology-MCP
+Repository: [gpiat333/Parent-Child-Pharmacology-MCP](https://github.com/gpiat333/Parent-Child-Pharmacology-MCP).
 
-Published from the verified Parent-child Pharmacology MCP submission on November 21, 2026. Initially private; no change to public visibility is authorized by this upload.
+Version **0.11.0**, policy **2026-11-21.11**. The existing Databricks App remains on policy **.9**, deployment `01f1e5f7f6fc162fb8c3cc875e7f8546`. The current package is published to the existing **private** GitHub repository. No App deployment, permission change, public release or official hackathon submission was performed. MCP and chat/paired drivers ran locally; models and MLflow used Databricks. A separate frozen-source notebook ran the complete unit suite in Databricks.
 
-This is a GSA hackathon prototype, not an official NIH MCP tool. No production-readiness claim.
+Application tests: **622/622 locally and 622/622 in a Databricks serverless notebook**, no failures or skips. Separate grader tests: **30/30**. Synthetic development controls: **10/10** on both dimensions. MCP Inspector: **9/9**, covering 30 tools, four prompts and four resources. Windows/Linux GitHub CI passes lint, formatting, application/grader tests and package builds.
 
-The application is the evaluated local policy .10: 592 server tests, 30 grader tests, 10 synthetic controls, and 9/9 MCP Inspector checks. MLflow contains 42 verified final evaluation records. Research: 21/21 fidelity and 21/21 task fulfillment. Paired tasks: MCP 5/7, plain model 0/7. These are fallible model-graded development evaluations, not clinical validation.
+Fresh chats: **28/28 completed**, **28/28 expected routes**, **28/28 tool checks**; **7/7 fixed stops** made zero downstream evidence/model calls. URL membership: **21/21** research answers. All **42 MLflow rows** were read back with their applicable scores and zero scorer execution errors.
 
-The upload includes current source, deck, evaluation DOCX, supporting evidence and historical results. Caches and local environment directories are excluded. The original submission folder was not modified. All 116 frozen application files and the evaluated presentation artifacts were hash-verified in this copy before publication.
+Research grades: **17/21 fidelity passes**, **21/21 tasks fulfilled**. Fresh paired task fulfillment: **MCP 7/7, plain model 0/7**. Paired fidelity pass/fail/N/A: **MCP 6/1/0**, **plain 1/4/2**. N/A is excluded from fidelity rates.
 
-The Databricks app remains on policy .9 with its existing deployment. GitHub publication does not deploy the application or constitute an official hackathon submission. Historical evaluation documents retain their original no-GitHub-upload statements; these refer to the evaluation run before this publication.
-
-The original submission README and checksum list are preserved in documentation/github-publication. Root SHA256SUMS.txt describes the published working files, excluding Git internals and the checksum file itself. Machine-specific reproduction helpers and private workspace links may require adaptation by another user.
+The source is aligned in place with the GSA template; ancestry is unchanged. Current source is in src/parent_child_pharmacology; current portable harness is eval/. Historical raw results retain their original no-upload statements. They describe those earlier runs. The root manifest excludes Git internals, environments, caches and build products. The deck and DOCX are also saved in the original submission folder.

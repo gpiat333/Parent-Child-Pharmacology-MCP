@@ -1,0 +1,112 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the selected QUVIVIQ label, the human pregnancy-data gap, and the animal reproductive-study context.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the pregnancy-focused maternal pharmacokinetic search and its zero-record result.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the reported FAERS terms and counts for the queried daridorexant pregnancy subset.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the FAERS interpretation that spontaneous-report data do not establish causation or incidence.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the listed QUVIVIQ Pregnancy Registry website.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the FDA directory listing, registry status, contact phone, and directory limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed pregnancy search, including the three returned records.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The MCP-generated review was not clinically validated.",
+        "reference_quote": null,
+        "explanation": "The supplied evidence supports that the generated answer was not clinically validated, but does not identify or substantiate an MCP-generated review. This is an unverified ancillary provenance claim."
+      }
+    ],
+    "rationale": "The answer fulfills the requested brief: all three evidence axes remain visible, animal and human evidence are separated, absent abstracts are disclosed, maternal PK is reported within the retrieved scope, FDA registry information is separate and non-recommendatory, and no administered doses or medication decisions are provided. Its substantive medical and retrieval claims are supported, but one unsupported provenance statement prevents a full fidelity pass."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "0d1de50284d4b5ea79f0926fbfd3dd2fb3eed84bfff3fc8d35932239d532d4e8",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 25,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected QUVIVIQ label, the human pregnancy-data gap, and the animal reproductive-study context.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the pregnancy-focused maternal pharmacokinetic search and its zero-record result.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS terms and counts for the queried daridorexant pregnancy subset.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FAERS interpretation that spontaneous-report data do not establish causation or incidence.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed QUVIVIQ Pregnancy Registry website.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing, registry status, contact phone, and directory limitations.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed pregnancy search, including the three returned records.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The MCP-generated review was not clinically validated.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence supports that the generated answer was not clinically validated, but does not identify or substantiate an MCP-generated review. This is an unverified ancillary provenance claim.\"\n    }\n  ],\n  \"rationale\": \"The answer fulfills the requested brief: all three evidence axes remain visible, animal and human evidence are separated, absent abstracts are disclosed, maternal PK is reported within the retrieved scope, FDA registry information is separate and non-recommendatory, and no administered doses or medication decisions are provided. Its substantive medical and retrieval claims are supported, but one unsupported provenance statement prevents a full fidelity pass.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 29347,
+        "completion_tokens": 921,
+        "total_tokens": 30268,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 29344,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 361,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 29347,
+    "completion_tokens": 921,
+    "total_tokens": 30268,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 29344,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 361,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

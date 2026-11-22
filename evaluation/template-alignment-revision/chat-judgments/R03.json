@@ -1,0 +1,85 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 24,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the exact RxNorm match for metformin.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/6809/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the selected DailyMed product, adult warnings, adverse reactions, drug interactions, lactation statement, truncation, and missing label sections.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports LactMed milk and infant-serum measurements, observed infant findings, study-population limitations, and cautionary source language.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the statement that the historical pregnancy letter designation is not a current FDA pregnancy classification.",
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer separates adult label warnings, label lactation precautions, measured exposure, and observed infant outcomes; identifies the product and LactMed source; discloses missing or truncated sections and product limitations; and does not provide administered doses or dosing instructions. Concentration measurements are presented as research exposure findings rather than doses."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "7560705176e5ef9b3637b94f22a8491b785a936f10eaa5ee4d1e167cb7760166",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the exact RxNorm match for metformin.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected DailyMed product, adult warnings, adverse reactions, drug interactions, lactation statement, truncation, and missing label sections.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports LactMed milk and infant-serum measurements, observed infant findings, study-population limitations, and cautionary source language.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the statement that the historical pregnancy letter designation is not a current FDA pregnancy classification.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer separates adult label warnings, label lactation precautions, measured exposure, and observed infant outcomes; identifies the product and LactMed source; discloses missing or truncated sections and product limitations; and does not provide administered doses or dosing instructions. Concentration measurements are presented as research exposure findings rather than doses.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 21771,
+        "completion_tokens": 540,
+        "total_tokens": 22311,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 21768,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 194,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 21771,
+    "completion_tokens": 540,
+    "total_tokens": 22311,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 21768,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 194,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

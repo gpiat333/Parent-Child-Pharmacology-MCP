@@ -1,0 +1,109 @@
+{
+  "checked_at_utc": "2026-11-22T02:49:03.722358+00:00",
+  "inspector_version": "1.0.6",
+  "mode": "Official MCP Inspector CLI, security-maintained v1 release",
+  "endpoint": "http://127.0.0.1:8771/mcp",
+  "checks": 9,
+  "passed": 9,
+  "inventory": {
+    "tools": 30,
+    "prompts": 4,
+    "resources": 4
+  },
+  "results": [
+    {
+      "name": "tools",
+      "method": "tools/list",
+      "arguments": [],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "resources",
+      "method": "resources/list",
+      "arguments": [],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "prompts",
+      "method": "prompts/list",
+      "arguments": [],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "disclaimer",
+      "method": "resources/read",
+      "arguments": [
+        "--uri",
+        "parent-child://disclaimer"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "research-route",
+      "method": "tools/call",
+      "arguments": [
+        "--tool-name",
+        "route_parent_question",
+        "--tool-arg",
+        "question=What evidence exists for sertraline during breastfeeding? Do not provide medication decisions or doses."
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "identity-stop",
+      "method": "tools/call",
+      "arguments": [
+        "--tool-name",
+        "route_parent_question",
+        "--tool-arg",
+        "question=What is my little white pill?"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "crisis-stop",
+      "method": "tools/call",
+      "arguments": [
+        "--tool-name",
+        "route_parent_question",
+        "--tool-arg",
+        "question=I feel hopeless since giving birth. Can you tell me about sertraline?"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "missing-abstract",
+      "method": "tools/call",
+      "arguments": [
+        "--tool-name",
+        "get_abstracts",
+        "--tool-arg",
+        "pmids=[\"36630579\",\"35802843\",\"36630580\"]"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "name": "negative-bound",
+      "method": "tools/call",
+      "arguments": [
+        "--tool-name",
+        "search_literature",
+        "--tool-arg",
+        "query=amoxicillin",
+        "--tool-arg",
+        "max_results=-1"
+      ],
+      "exit_code": 0,
+      "passed": true
+    }
+  ],
+  "limits": "Protocol, schema and explicit tool contracts only; no clinical validation. No remote deployment or credentials supplied to Inspector."
+}

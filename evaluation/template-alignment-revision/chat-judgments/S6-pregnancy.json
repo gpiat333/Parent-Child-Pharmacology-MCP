@@ -1,0 +1,130 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited RxNorm record identifies lamotrigine and supports the exact ingredient match.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The DailyMed label supports the disease-associated epilepsy risks, pharmacokinetic context, registry findings, malformation estimates, oral-cleft signal, and limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The cited bipolar-disorder review concerns pregnancy/postpartum treatment but does not provide lamotrigine-specific outcome estimates in the supplied abstract.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40593436/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The cited study supports the mixed 60-mother sample, breastmilk concentration-by-dose finding, and reported child outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The ClinicalTrials.gov record supports the EUROCAT registry description, lack of posted results, and oral-cleft study context.",
+        "url": "https://clinicaltrials.gov/study/NCT01055327"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The FDA adverse-event query supports the listed spontaneous-report terms and counts, with the stated reporting limitations.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The OpenFDA reference supports interpreting FAERS reports as noncausal reporting volumes without denominators.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The PubMed search record supports the 690-record bounded search and non-systematic-search limitation.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "The FDA registry directory supports that the North American Antiepileptic Drug in Pregnancy Registry is listed as ongoing.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "The registry website citation is relevant to verifying current enrollment and eligibility directly.",
+        "url": "https://www.aedpregnancyregistry.org/join-our-study/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lactation-only exposure evidence",
+        "reference_quote": "We investigated changes in concentrations of psychopharmacological medication during pregnancy and lactation in serum and breastmilk at different time points",
+        "explanation": "The cited study is mixed pregnancy-and-lactation research, not lactation-only. The surrounding clarification reduces the risk of misunderstanding, but the heading itself mischaracterizes the study population."
+      }
+    ],
+    "rationale": "The answer substantially fulfills the requested research summary: it separates maternal effects, exposure, and infant outcomes; preserves epilepsy and bipolar-disorder population distinctions; reports limitations and clinician questions; avoids treatment decisions; and includes the required continuity-of-care and clinical-review notes. Most substantive claims are supported, but the lactation-only characterization is imprecise because the cited study included both pregnancy and lactation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "8137a1576e36c113db29eafc975a088b0e41a304ecfddc619739157a8479935c",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 25,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited RxNorm record identifies lamotrigine and supports the exact ingredient match.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed label supports the disease-associated epilepsy risks, pharmacokinetic context, registry findings, malformation estimates, oral-cleft signal, and limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited bipolar-disorder review concerns pregnancy/postpartum treatment but does not provide lamotrigine-specific outcome estimates in the supplied abstract.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited study supports the mixed 60-mother sample, breastmilk concentration-by-dose finding, and reported child outcomes.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The ClinicalTrials.gov record supports the EUROCAT registry description, lack of posted results, and oral-cleft study context.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA adverse-event query supports the listed spontaneous-report terms and counts, with the stated reporting limitations.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The OpenFDA reference supports interpreting FAERS reports as noncausal reporting volumes without denominators.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The PubMed search record supports the 690-record bounded search and non-systematic-search limitation.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA registry directory supports that the North American Antiepileptic Drug in Pregnancy Registry is listed as ongoing.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"The registry website citation is relevant to verifying current enrollment and eligibility directly.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lactation-only exposure evidence\",\n      \"reference_quote\": \"We investigated changes in concentrations of psychopharmacological medication during pregnancy and lactation in serum and breastmilk at different time points\",\n      \"explanation\": \"The cited study is mixed pregnancy-and-lactation research, not lactation-only. The surrounding clarification reduces the risk of misunderstanding, but the heading itself mischaracterizes the study population.\"\n    }\n  ],\n  \"rationale\": \"The answer substantially fulfills the requested research summary: it separates maternal effects, exposure, and infant outcomes; preserves epilepsy and bipolar-disorder population distinctions; reports limitations and clinician questions; avoids treatment decisions; and includes the required continuity-of-care and clinical-review notes. Most substantive claims are supported, but the lactation-only characterization is imprecise because the cited study included both pregnancy and lactation.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 64164,
+        "completion_tokens": 1390,
+        "total_tokens": 65554,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 64161,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 618,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 64164,
+    "completion_tokens": 1390,
+    "total_tokens": 65554,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 64161,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 618,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

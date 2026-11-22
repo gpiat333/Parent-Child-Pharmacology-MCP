@@ -1,0 +1,76 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 15,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited LactMed record supports the reported milk concentrations, the absence of relevant published infant-level information, and the report of no adverse effects in three infants.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501255/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The infants’ drug levels were not measured",
+        "reference_quote": "Relevant published information was not found as of the revision date.",
+        "explanation": "The source says relevant published information on infant levels was not found; it does not establish that infant drug levels were never measured. The answer should describe this as unreported or unavailable in the retrieved literature rather than as a definitive absence of measurement."
+      }
+    ],
+    "rationale": "The answer correctly distinguishes milk concentration measurements from reported infant clinical observations, preserves the small and limited nature of the infant evidence, and avoids treating low exposure or missing data as proof of universal safety. One statement overstates what can be concluded about whether infant drug levels were measured."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "0d7d76f80bbb8b1be7b80be0c825c4890330b379253056c3b86882e0fc61dc56",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 15,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed record supports the reported milk concentrations, the absence of relevant published infant-level information, and the report of no adverse effects in three infants.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The infants’ drug levels were not measured\",\n      \"reference_quote\": \"Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The source says relevant published information on infant levels was not found; it does not establish that infant drug levels were never measured. The answer should describe this as unreported or unavailable in the retrieved literature rather than as a definitive absence of measurement.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly distinguishes milk concentration measurements from reported infant clinical observations, preserves the small and limited nature of the infant evidence, and avoids treating low exposure or missing data as proof of universal safety. One statement overstates what can be concluded about whether infant drug levels were measured.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 8152,
+        "completion_tokens": 842,
+        "total_tokens": 8994,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8149,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 8152,
+    "completion_tokens": 842,
+    "total_tokens": 8994,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 8149,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

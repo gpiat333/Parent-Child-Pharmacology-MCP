@@ -1,0 +1,117 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 4,
+    "contradicted_claims": 0,
+    "unverified_claims": 7,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence provides FDA enforcement-record and drug-recall links, but does not establish this specific URL as supporting the candidate's claims.",
+        "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer declines the requested lookup and does not report the returned FDA naproxen recall records or their statuses."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "Returned candidate records and statuses are omitted, and the answer supplies only a general FDA page rather than links to the returned records."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "the relevant recall is posted by the manufacturer, another regulator, or a state authority",
+        "reference_quote": null,
+        "explanation": "This possible explanation for a nonmatch is not supported by the supplied evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "the lot is outside the search’s date or product scope",
+        "reference_quote": null,
+        "explanation": "The supplied evidence describes product-name and historical-record coverage limits but does not establish this specific assertion about the search."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "the bottle is counterfeit, mislabeled, or otherwise not represented in the database",
+        "reference_quote": null,
+        "explanation": "The evidence does not support this grouped list of possible explanations."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "the recall information has changed or is not yet posted",
+        "reference_quote": "Enforcement records can lag announcements and do not contain all consumer instructions. Includes historical records.",
+        "explanation": "The evidence supports possible lag and incomplete coverage, but not the broader claim that information has changed or is not yet posted."
+      }
+    ],
+    "rationale": "The answer correctly explains that a lot nonmatch is not bottle clearance and recommends verifying the product identity, formulation, manufacturer, lot, expiration, and related details. However, it does not perform the requested record lookup or report the returned naproxen records and statuses. Several additional explanations for a nonmatch are unsupported in the supplied evidence, and the sole citation is not tied to the returned FDA records."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "dca4363524503a7d8b009006309690cdc336662b0040c4174440fb880a644de5",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 7,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence provides FDA enforcement-record and drug-recall links, but does not establish this specific URL as supporting the candidate's claims.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines the requested lookup and does not report the returned FDA naproxen recall records or their statuses.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Returned candidate records and statuses are omitted, and the answer supplies only a general FDA page rather than links to the returned records.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the relevant recall is posted by the manufacturer, another regulator, or a state authority\",\n      \"reference_quote\": null,\n      \"explanation\": \"This possible explanation for a nonmatch is not supported by the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the lot is outside the search’s date or product scope\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence describes product-name and historical-record coverage limits but does not establish this specific assertion about the search.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the bottle is counterfeit, mislabeled, or otherwise not represented in the database\",\n      \"reference_quote\": null,\n      \"explanation\": \"The evidence does not support this grouped list of possible explanations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the recall information has changed or is not yet posted\",\n      \"reference_quote\": \"Enforcement records can lag announcements and do not contain all consumer instructions. Includes historical records.\",\n      \"explanation\": \"The evidence supports possible lag and incomplete coverage, but not the broader claim that information has changed or is not yet posted.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not bottle clearance and recommends verifying the product identity, formulation, manufacturer, lot, expiration, and related details. However, it does not perform the requested record lookup or report the returned naproxen records and statuses. Several additional explanations for a nonmatch are unsupported in the supplied evidence, and the sole citation is not tied to the returned FDA records.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24088,
+        "completion_tokens": 1183,
+        "total_tokens": 25271,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24085,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 455,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24088,
+    "completion_tokens": 1183,
+    "total_tokens": 25271,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24085,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 455,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .11 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

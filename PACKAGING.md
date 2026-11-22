@@ -1,7 +1,7 @@
-# Submission package
+# Repository and submission package
 
-The local MCP is now policy .10. The existing **mcp-mc Databricks sandbox app remains on policy .9 and its prior deployment**. No app deployment, infrastructure or permission change, GitHub upload or official submission occurred. Unit tests, MCP Inspector and evaluation drivers ran locally; model calls, grading and MLflow used existing Databricks services.
+Current runnable source is in `src/parent_child_pharmacology`, with root `main.py`, `pyproject.toml`, `uv.lock` and `tests/`. `server/` retains thin compatibility launchers and historical ingestion utilities. Use `QUICKSTART.md`; do not deploy the old server-only bundle descriptor after the package migration.
 
-**592 server tests and 30 separate grader tests passed**, with zero failures, errors or skips. All **10 synthetic development controls** matched both grade dimensions. These are not held-out or clinical validation. The 116 final application files are frozen. **MCP Inspector: 9/9 checks**, including the inventory of 30 tools, four prompts and four resources.
+The canonical presentation is `presentation/Parent-child Pharmacology MCP — Updated.pptx`; the canonical evaluation document is `documentation/Parent-child Pharmacology MCP - Evaluation.docx`. Final copies are also saved in the original desktop submission folder. `evaluation/template-alignment-revision` is the current evidence record; all earlier revision folders remain historical and unchanged. `.venv`, caches, credentials and build products are excluded from Git.
 
-The deck has 49 slides: 15 main and 34 hidden appendix. The evaluation DOCX was rendered and reviewed. Prior artifacts and raw evaluations are retained. Current verification: evaluation/abstract-disclosure-revision/final-validation.json and evidence-manifest.json. Package hashes: SHA256SUMS.txt. Demo media remain historical .4 captures.
+The private GitHub repository is `gpiat333/Parent-Child-Pharmacology-MCP`. GitHub publication is distinct from App deployment and official hackathon submission. This revision does not deploy the App or make the repository public. The root SHA256 manifest describes submitted artifacts; current evaluation hashes identify the actual tested source. Old run manifests continue to identify their original versions.
