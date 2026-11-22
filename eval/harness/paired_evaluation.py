@@ -177,7 +177,7 @@ def main():
             print('All paired answers already complete; retained unchanged.',flush=True);return
         save(out/'design.json',{'frozen_at_utc':datetime.now(timezone.utc).isoformat(),'model':MODEL,
             'case_ids':CASE_IDS,'system_prompt':PROMPT,'judge_prompt':JUDGE_PROMPT,
-            'design':'Same model, shared updated application instructions in both arms, single retained completed trial per question/arm; MCP arm alone receives tools, enforces preflight workflow requirements and appends applicable fixed and retrieval-coverage application notices using the same policy as the companion. Plain has no retrieval tools or application notices. Fresh references and answers from local MCP .15; grader v3.1; prompt unchanged. This compares the MCP workflow, not raw model ability or clinical accuracy.',
+            'design':'Same model, shared updated application instructions in both arms, single retained completed trial per question/arm; MCP arm alone receives tools, enforces preflight workflow requirements and appends applicable fixed and retrieval-coverage application notices using the same policy as the companion. Plain has no retrieval tools or application notices. Fresh references and answers from local MCP .16; grader v3.1; prompt unchanged. This compares the MCP workflow, not raw model ability or clinical accuracy.',
             'case_file_sha256':hashlib.sha256((HERE/'cases.json').read_bytes()).hexdigest()})
         for case in cases:
             if not (out/(case['id']+'-reference.json')).exists():

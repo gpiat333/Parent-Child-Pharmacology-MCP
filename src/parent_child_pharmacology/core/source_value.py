@@ -34,10 +34,13 @@ def copy_source_value(calls, source_call_index, value_path, record_pmid):
         "find_mprint_records",
         "get_mprint_details",
         "calculate_aggregate_expression",
+        "select_snapshot_records",
     }:
         raise ValueError("Not a research-value source")
     if not isinstance(value_path, str) or not value_path.startswith("/") or len(value_path) > 512:
         raise ValueError("Use a bounded JSON pointer within the captured result")
+    if value_path.startswith("/result/"):
+        value_path = value_path[len("/result") :]  # Explicit reply-envelope prefix.
     node = call["result"]
     if not isinstance(node, dict) or node.get("error"):
         raise ValueError("Source result failed")

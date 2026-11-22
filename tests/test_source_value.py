@@ -58,3 +58,35 @@ def test_pointer_escaping_and_missing_record_identity():
 def test_unknown_or_untyped_call_index_is_rejected(index):
     with pytest.raises(ValueError):
         copy_source_value(records(), index, "/results/0/source_fields/DOI", "101")
+
+
+def test_reply_envelope_prefix_preserves_field_and_record_binding():
+    result = copy_source_value(records(), 0, "/result/results/0/source_fields/DOI", "101")
+    assert result["value"] == "10.example/first"
+    with pytest.raises(ValueError, match="PMID"):
+        copy_source_value(records(), 0, "/result/results/1/source_fields/DOI", "101")
+
+
+def test_filtered_count_can_be_copied_without_using_unfiltered_total():
+    from parent_child_pharmacology.core.snapshot_select import select_records
+
+    calls = [
+        {
+            "tool": "find_mprint_records",
+            "arguments": {"drug": "fixture"},
+            "result": {
+                "classification_legend": {"CT": "clinical trial", "PE": "pharmacoepidemiology"},
+                "offset": 0,
+                "has_more": False,
+                "matching_records": 2,
+                "results": [
+                    {"pmid": "101", "silver_classifications": [{"study_type": "CT"}]},
+                    {"pmid": "202", "silver_classifications": [{"study_type": "PE"}]},
+                ],
+            },
+        }
+    ]
+    filtered = select_records(calls, [0], ["CT"], ["PE"], None, True, "ascending", None)
+    calls.append({"tool": "select_snapshot_records", "result": filtered})
+    assert copy_source_value(calls, 1, "/distinct_count", None)["value"] == "1"
+    assert calls[0]["result"]["matching_records"] == 2

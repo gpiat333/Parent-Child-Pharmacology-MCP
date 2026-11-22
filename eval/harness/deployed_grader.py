@@ -1,5 +1,5 @@
 import os
-"""Grade fresh local .15 captures with unchanged grader v3."""
+"""Grade fresh local .16 captures with unchanged grader v3."""
 from pathlib import Path
 import sys,threading
 HERE=Path(__file__).parent;ROOT=Path(os.environ.get('MCP_REPO_ROOT', HERE.parents[1]))
@@ -37,7 +37,7 @@ def diagnostic(inputs,outputs,expectations):
             save(path,{'grader_error':str(error),'attempts':error.attempts,'score_assigned':False})
             raise
         if arm!='chat':result['arm_label_hidden']=True
-        result['evaluation_context']='Fresh local .15 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication.'
+        result['evaluation_context']='Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication.'
         save(path,result)
         return result
 

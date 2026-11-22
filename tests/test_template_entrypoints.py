@@ -48,7 +48,7 @@ def test_health_version_and_registered_inventory():
             health = await client.get("/health")
             version = await client.get("/version")
             assert health.status_code == 200 and health.json()["status"] == "healthy"
-            assert version.status_code == 200 and version.json()["version"] == "0.15.0"
-            assert version.json()["policy_version"] == "2026-11-22.15"
+            assert version.status_code == 200 and version.json()["version"] == "0.16.0"
+            assert version.json()["policy_version"] == "2026-11-22.16"
 
     asyncio.run(run())
