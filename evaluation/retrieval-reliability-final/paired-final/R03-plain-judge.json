@@ -1,0 +1,180 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 9,
+    "contradicted_claims": 1,
+    "unverified_claims": 8,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited FDA PDF is not among the supplied reference evidence, so the claims attributed to that specific label cannot be verified here.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020357s037,021202s021lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "contradicted",
+        "reason": "The supplied LactMed evidence reports infant serum measurements, including undetectable and measurable concentrations; the answer says the retrieved material did not establish infant blood or serum concentration.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Compare metformin label warnings for the adult taking it with findings in breastfed infants.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations.",
+        "answer_quote": null,
+        "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
+        "explanation": "The answer does not name the retrieved QPharma product or disclose the retrieved product and formulation limitation."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Source-linked explanation or honest missing evidence.",
+        "answer_quote": null,
+        "reference_quote": "Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.",
+        "explanation": "The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The U.S. label contains a boxed warning about metformin-associated lactic acidosis",
+        "reference_quote": "Missing sections do not establish safety or absence of information elsewhere in the label.",
+        "explanation": "The supplied retrieved label evidence does not establish that the selected product contains a boxed warning; the label extraction identifies limitations around missing sections. The claim is therefore unsupported for the retrieved product."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The label warns that metformin may decrease vitamin-B12 concentrations",
+        "reference_quote": null,
+        "explanation": "No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the evidence pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The label states that metformin generally does not cause hypoglycemia by itself",
+        "reference_quote": null,
+        "explanation": "That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The retrieved material did **not** establish a universal infant blood or serum concentration",
+        "reference_quote": "Serum levels were measured in 4 breastfed infants",
+        "explanation": "The evidence does not establish a universal concentration, but it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all."
+      }
+    ],
+    "rationale": "The answer correctly distinguishes adult label warnings from infant observations and avoids administered doses. However, it attributes some adult-label claims to a different FDA label, omits the retrieved QPharma product limitation and quantitative exposure findings, and inaccurately characterizes the availability of infant serum measurements."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "fac14ea7e3263fbb845c93a39ac361944fd197b0afed80d7230fed6b8a8795d5",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 9,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 8,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA PDF is not among the supplied reference evidence, so the claims attributed to that specific label cannot be verified here.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"contradicted\",\n      \"reason\": \"LactMed in the supplied evidence reports infant serum measurements, including undetectable and measured concentrations; the answer says the retrieved material did not establish infant blood or serum concentration.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations.\",\n      \"answer_quote\": \"U.S. Food and Drug Administration prescribing information for metformin.\",\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The retrieved label product was QPharma's METFORMIN HCL TABLET, but the answer names and links a different FDA label and does not disclose that the retrieved product/formulation was not confirmed as equivalent.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": \"LactMed reports that metformin was measurable in milk in the cited studies and provides milk-concentration results with study-specific sampling context.\",\n      \"reference_quote\": \"Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.\",\n      \"explanation\": \"The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label contains a boxed warning about metformin-associated lactic acidosis\",\n      \"reference_quote\": \"medicine_taker_sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The supplied retrieved label extraction does not contain a boxed warning and explicitly lists that section as missing. The claim may be true for another label, but it is not supported by this evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label warns that metformin may decrease vitamin-B12 concentrations\",\n      \"reference_quote\": null,\n      \"explanation\": \"No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label states that metformin generally does not cause hypoglycemia by itself\",\n      \"reference_quote\": null,\n      \"explanation\": \"That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The retrieved material did not establish a universal infant blood or serum concentration\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"Although the evidence does not establish a universal concentration, it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all.\"\n    }\n  ],\n  \"rationale\": \"The answer uses the correct high-level distinction between adult label warnings and infant observations and avoids administered doses. However, it attributes several adult-label claims to a different, uncited-in-the-pool FDA product, omits the retrieved quantitative milk and infant-serum findings, fails to identify the QPharma product limitation, and inaccurately implies that infant serum concentration information was unavailable.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[2] omission answer_quote must be null",
+        "failure_reasons[3] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[6] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 58238,
+        "completion_tokens": 1448,
+        "total_tokens": 59686,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 58235,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 423,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 9,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 8,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA PDF is not among the supplied reference evidence, so the claims attributed to that specific label cannot be verified here.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The supplied LactMed evidence reports infant serum measurements, including undetectable and measurable concentrations; the answer says the retrieved material did not establish infant blood or serum concentration.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not name the retrieved QPharma product or disclose the retrieved product and formulation limitation.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.\",\n      \"explanation\": \"The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label contains a boxed warning about metformin-associated lactic acidosis\",\n      \"reference_quote\": \"\\\"sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The supplied retrieved label extraction lists the boxed-warning section as missing, so this claim is not supported by the retrieved label evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label warns that metformin may decrease vitamin-B12 concentrations\",\n      \"reference_quote\": null,\n      \"explanation\": \"No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label states that metformin generally does not cause hypoglycemia by itself\",\n      \"reference_quote\": null,\n      \"explanation\": \"That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The retrieved material did **not** establish a universal infant blood or serum concentration\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The evidence does not establish a universal concentration, but it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly distinguishes adult label warnings from infant observations and avoids administered doses. However, it attributes some adult-label claims to a different FDA label, omits the retrieved QPharma product limitation and quantitative exposure findings, and inaccurately characterizes the availability of infant serum measurements.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 59380,
+        "completion_tokens": 1083,
+        "total_tokens": 60463,
+        "prompt_tokens_details": {
+          "cached_tokens": 58235,
+          "cache_write_tokens": 1142,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 154,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 9,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 8,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA PDF is not among the supplied reference evidence, so the claims attributed to that specific label cannot be verified here.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The supplied LactMed evidence reports infant serum measurements, including undetectable and measurable concentrations; the answer says the retrieved material did not establish infant blood or serum concentration.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not name the retrieved QPharma product or disclose the retrieved product and formulation limitation.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.\",\n      \"explanation\": \"The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label contains a boxed warning about metformin-associated lactic acidosis\",\n      \"reference_quote\": \"Missing sections do not establish safety or absence of information elsewhere in the label.\",\n      \"explanation\": \"The supplied retrieved label evidence does not establish that the selected product contains a boxed warning; the label extraction identifies limitations around missing sections. The claim is therefore unsupported for the retrieved product.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label warns that metformin may decrease vitamin-B12 concentrations\",\n      \"reference_quote\": null,\n      \"explanation\": \"No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label states that metformin generally does not cause hypoglycemia by itself\",\n      \"reference_quote\": null,\n      \"explanation\": \"That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The retrieved material did **not** establish a universal infant blood or serum concentration\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The evidence does not establish a universal concentration, but it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly distinguishes adult label warnings from infant observations and avoids administered doses. However, it attributes some adult-label claims to a different FDA label, omits the retrieved QPharma product limitation and quantitative exposure findings, and inaccurately characterizes the availability of infant serum measurements.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 60379,
+        "completion_tokens": 1078,
+        "total_tokens": 61457,
+        "prompt_tokens_details": {
+          "cached_tokens": 59377,
+          "cache_write_tokens": 999,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 138,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 60379,
+    "completion_tokens": 1078,
+    "total_tokens": 61457,
+    "prompt_tokens_details": {
+      "cached_tokens": 59377,
+      "cache_write_tokens": 999,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 138,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .14 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

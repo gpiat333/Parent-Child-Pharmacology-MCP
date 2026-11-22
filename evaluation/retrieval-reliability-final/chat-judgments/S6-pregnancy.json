@@ -1,0 +1,114 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 31,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed search, its record count, and retrieved-abstract scope.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the label-based disease-risk context, pharmacokinetic statements, registry findings, outcome limitations, and product-label limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the separate bipolar-disorder pregnancy review and its broad perinatal-management focus.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40593436/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the mixed-medication naturalistic study, milk concentration finding, and reported infant outcome observations.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the EUROCAT registry record, its reported oral-cleft finding, lack of posted results, and malformed-infant comparison context.",
+        "url": "https://clinicaltrials.gov/study/NCT01055327"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the listed FAERS report volumes and queried fetal-exposure report subset.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous-report counts do not establish causation, incidence, or generalizable risk.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports the FDA directory listing of the North American Antiepileptic Drug in Pregnancy Registry as ongoing.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "Supports the registry website as the enrollment-information destination and the need to verify eligibility and current enrollment.",
+        "url": "https://www.aedpregnancyregistry.org/join-our-study/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer separates maternal effects, pharmacokinetic exposure, fetal or infant exposure, observed outcomes, animal findings, and spontaneous reports. It preserves epilepsy-related disease risk, distinguishes epilepsy and bipolar populations, states limitations, avoids treatment decisions, includes clinician questions, and notes that stopping or changing medication requires clinician discussion and that clinical framing review remains required."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "46245e7a626c9266cabcde10bc874212487fbb75d0b955d572b0d42fd83c8f16",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 31,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed search, its record count, and retrieved-abstract scope.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label-based disease-risk context, pharmacokinetic statements, registry findings, outcome limitations, and product-label limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the separate bipolar-disorder pregnancy review and its broad perinatal-management focus.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the mixed-medication naturalistic study, milk concentration finding, and reported infant outcome observations.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the EUROCAT registry record, its reported oral-cleft finding, lack of posted results, and malformed-infant comparison context.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed FAERS report volumes and queried fetal-exposure report subset.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report counts do not establish causation, incidence, or generalizable risk.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing of the North American Antiepileptic Drug in Pregnancy Registry as ongoing.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the registry website as the enrollment-information destination and the need to verify eligibility and current enrollment.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer separates maternal effects, pharmacokinetic exposure, fetal or infant exposure, observed outcomes, animal findings, and spontaneous reports. It preserves epilepsy-related disease risk, distinguishes epilepsy and bipolar populations, states limitations, avoids treatment decisions, includes clinician questions, and notes that stopping or changing medication requires clinician discussion and that clinical framing review remains required.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 64448,
+        "completion_tokens": 995,
+        "total_tokens": 65443,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 64445,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 421,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 64448,
+    "completion_tokens": 995,
+    "total_tokens": 65443,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 64445,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 421,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

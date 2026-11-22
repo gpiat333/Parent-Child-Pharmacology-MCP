@@ -1,0 +1,120 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 12,
+    "contradicted_claims": 0,
+    "unverified_claims": 3,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The returned FDA query supports the stated age filter, reaction counts, and interpretation of the queried FAERS subset.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The citation matches the returned OpenFDA drug-event documentation URL.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Such reports can support **signal detection",
+        "reference_quote": null,
+        "explanation": "This interpretation is plausible but is not stated in the supplied retrieved evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "each event was clinically confirmed or provide its timing or severity",
+        "reference_quote": null,
+        "explanation": "The supplied evidence describes reaction-term counts and their limitations but does not expressly establish these specific claims about confirmation, timing, or severity."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "cannot estimate incidence, prevalence, relative risk, or individual risk",
+        "reference_quote": "Exposure denominators are absent; counts cannot estimate incidence or individual risk.",
+        "explanation": "The source supports inability to estimate incidence and individual risk, but does not explicitly support the added claims about prevalence and relative risk."
+      }
+    ],
+    "rationale": "The answer correctly reports the queried 0-to-12-month age scope, retrieved reaction counts, and the limits that spontaneous-report counts do not establish incidence, risk, causation, or generalizability. It fulfills the requested task and cites the returned query, but includes several additional claims not established by the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "98ba4111a81f2c67c87842d12bdbd57e8ea7bf54bd12410a53f1bf40be8bed64",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 12,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The returned FDA query supports the stated age filter, reaction counts, and interpretation of the queried FAERS subset.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation matches the returned OpenFDA drug-event documentation URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Such reports can support signal detection and hypothesis generation\",\n      \"reference_quote\": null,\n      \"explanation\": \"This interpretation is plausible but is not stated in the supplied retrieved evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"do not establish that each event was clinically confirmed or provide its timing or severity\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence describes reaction-term counts and their limitations but does not expressly establish these specific claims about confirmation, timing, or severity.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"cannot estimate incidence, prevalence, relative risk, or individual risk\",\n      \"reference_quote\": \"Exposure denominators are absent; counts cannot estimate incidence or individual risk.\",\n      \"explanation\": \"The source supports inability to estimate incidence and individual risk, but does not explicitly support the added claims about prevalence and relative risk.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly reports the queried 0-to-12-month age scope, retrieved reaction counts, and the limits that spontaneous-report counts do not establish incidence, risk, causation, or generalizability. It fulfills the requested task and cites the returned query, but includes several additional claims not established by the supplied evidence.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 9988,
+        "completion_tokens": 895,
+        "total_tokens": 10883,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 9985,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 386,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 12,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The returned FDA query supports the stated age filter, reaction counts, and interpretation of the queried FAERS subset.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation matches the returned OpenFDA drug-event documentation URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Such reports can support **signal detection\",\n      \"reference_quote\": null,\n      \"explanation\": \"This interpretation is plausible but is not stated in the supplied retrieved evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"each event was clinically confirmed or provide its timing or severity\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence describes reaction-term counts and their limitations but does not expressly establish these specific claims about confirmation, timing, or severity.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"cannot estimate incidence, prevalence, relative risk, or individual risk\",\n      \"reference_quote\": \"Exposure denominators are absent; counts cannot estimate incidence or individual risk.\",\n      \"explanation\": \"The source supports inability to estimate incidence and individual risk, but does not explicitly support the added claims about prevalence and relative risk.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly reports the queried 0-to-12-month age scope, retrieved reaction counts, and the limits that spontaneous-report counts do not establish incidence, risk, causation, or generalizability. It fulfills the requested task and cites the returned query, but includes several additional claims not established by the supplied evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 10568,
+        "completion_tokens": 635,
+        "total_tokens": 11203,
+        "prompt_tokens_details": {
+          "cached_tokens": 9985,
+          "cache_write_tokens": 580,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 132,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 10568,
+    "completion_tokens": 635,
+    "total_tokens": 11203,
+    "prompt_tokens_details": {
+      "cached_tokens": 9985,
+      "cache_write_tokens": 580,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 132,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

@@ -1,0 +1,109 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 2,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer declines to perform or report the FDA lookup even though records were returned in the supplied evidence."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": "D-0523-2026",
+        "explanation": "Returned candidate records and their statuses were not reported, and no official links were provided."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Do not use the product until its status is verified",
+        "reference_quote": null,
+        "explanation": "The supplied evidence does not support this specific product-use recommendation; it cautions against inferring safety and says not to infer medication changes."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not clearance and identifies several verification fields, but it does not fulfill the requested FDA-record lookup or report the returned candidates, statuses, and official links. Its explicit abstention is honest, but one product-use recommendation is unsupported in the evidence pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "f827c06e13a740116e23d8ad848e8b168bde630ba664b5cd977c965ff00ca38f",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines to perform or report the FDA lookup even though records were returned in the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": \"No verified candidate records can be reported here because live FDA records were not checked.\",\n      \"reference_quote\": \"D-0523-2026\",\n      \"explanation\": \"Returned candidate records and their statuses were not reported, and no official links were provided.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Do not use the product until its status is verified\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not support this specific product-use recommendation; it cautions against inferring safety and says not to infer medication changes.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not clearance and identifies several verification fields, but it does not fulfill the requested FDA-record lookup or report the returned candidates, statuses, and official links. Its explicit abstention is honest, but one product-use recommendation is unsupported in the evidence pool.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 24257,
+        "completion_tokens": 835,
+        "total_tokens": 25092,
+        "prompt_tokens_details": {
+          "cached_tokens": 24254,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 418,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines to perform or report the FDA lookup even though records were returned in the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"D-0523-2026\",\n      \"explanation\": \"Returned candidate records and their statuses were not reported, and no official links were provided.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Do not use the product until its status is verified\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not support this specific product-use recommendation; it cautions against inferring safety and says not to infer medication changes.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not clearance and identifies several verification fields, but it does not fulfill the requested FDA-record lookup or report the returned candidates, statuses, and official links. Its explicit abstention is honest, but one product-use recommendation is unsupported in the evidence pool.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24740,
+        "completion_tokens": 538,
+        "total_tokens": 25278,
+        "prompt_tokens_details": {
+          "cached_tokens": 24254,
+          "cache_write_tokens": 483,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 136,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 24740,
+    "completion_tokens": 538,
+    "total_tokens": 25278,
+    "prompt_tokens_details": {
+      "cached_tokens": 24254,
+      "cache_write_tokens": 483,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 136,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .14 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

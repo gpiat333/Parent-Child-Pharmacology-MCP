@@ -1,0 +1,147 @@
+[
+  {
+    "id": 44991898352,
+    "head_sha": "c30efd89b795b6d144ecaf141c1c6775e54b4d21",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/gpiat333/Parent-Child-Pharmacology-MCP/actions/runs/44991898352",
+    "jobs": [
+      {
+        "id": 137114554927,
+        "name": "test (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run astral-sh/setup-uv@v6",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv python install 3.13",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv sync --locked --group dev",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked ruff check src tests main.py eval/run.py eval/databricks/submit-tests.py eval/phoenix",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked ruff format --check src tests main.py eval/run.py eval/databricks/submit-tests.py eval/phoenix",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked pytest tests -q --junitxml=test-results.xml",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked pytest eval/harness/tests -q -o pythonpath=eval/harness",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked python eval/phoenix/create_dataset.py --dry-run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv build",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run astral-sh/setup-uv@v6",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 137114555137,
+        "name": "test (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run astral-sh/setup-uv@v6",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv python install 3.13",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv sync --locked --group dev",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked ruff check src tests main.py eval/run.py eval/databricks/submit-tests.py eval/phoenix",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked ruff format --check src tests main.py eval/run.py eval/databricks/submit-tests.py eval/phoenix",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked pytest tests -q --junitxml=test-results.xml",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked pytest eval/harness/tests -q -o pythonpath=eval/harness",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv run --locked python eval/phoenix/create_dataset.py --dry-run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run uv build",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run astral-sh/setup-uv@v6",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  }
+]

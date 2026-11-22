@@ -1,0 +1,75 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited URL matches the official FDA MedWatch page, and the supplied evidence identifies it as the official resource for reporting a suspected medicine problem and states that reporting does not establish causation.",
+        "url": "https://www.fda.gov/safety/medwatch-fda-safety-information-and-adverse-event-reporting-program"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "causation requires further evaluation",
+        "reference_quote": "a report does not establish causation and is not emergency care.",
+        "explanation": "The evidence supports that a report does not establish causation, but it does not expressly state that causation requires further evaluation."
+      }
+    ],
+    "rationale": "The answer provides the requested official FDA link, correctly explains that reporting alone does not establish causation, and states that no submission or identifying-data collection occurred. Its only source-fidelity issue is the additional unsupported wording about causation requiring further evaluation; the emergency-care characterization is source-supported but uncited."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "9074ac401544732cf6fecd88449e6cb40fbd55bc85438441878200cbd4a35dd5",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited URL matches the official FDA MedWatch page, and the supplied evidence identifies it as the official resource for reporting a suspected medicine problem and states that reporting does not establish causation.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"causation requires further evaluation\",\n      \"reference_quote\": \"a report does not establish causation and is not emergency care.\",\n      \"explanation\": \"The evidence supports that a report does not establish causation, but it does not expressly state that causation requires further evaluation.\"\n    }\n  ],\n  \"rationale\": \"The answer provides the requested official FDA link, correctly explains that reporting alone does not establish causation, and states that no submission or identifying-data collection occurred. Its only source-fidelity issue is the additional unsupported wording about causation requiring further evaluation; the emergency-care characterization is source-supported but uncited.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 3029,
+        "completion_tokens": 1035,
+        "total_tokens": 4064,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 3026,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 711,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 3029,
+    "completion_tokens": 1035,
+    "total_tokens": 4064,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 3026,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 711,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

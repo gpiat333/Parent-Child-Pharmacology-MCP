@@ -1,0 +1,75 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 15,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The PubMed link identifies the retrieved paper and supports the reported population, sampling procedures, exposure measures, and infant findings.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/34131926/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "an observational study of breastfeeding women with epilepsy",
+        "reference_quote": "Women with epilepsy treated with levetiracetam were recruited to this study and completed a questionnaire.",
+        "explanation": "The retrieved abstract describes recruitment, questionnaires, and measurements but does not explicitly characterize the study as observational. That design label is plausible but not actually stated in the supplied abstract."
+      }
+    ],
+    "rationale": "The answer correctly identifies the paper, states that the abstract was retrieved, distinguishes breast-milk and maternal exposure from infant outcomes, discloses unavailable infant age and prematurity information, and avoids claiming universal safety or causation. Its only source-fidelity issue is the unsupported characterization of the study as observational."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "635864413227cd74ccc7285b225ce481376c2a55372196b6ded0f830344f8599",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 15,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The PubMed link identifies the retrieved paper and supports the reported population, sampling procedures, exposure measures, and infant findings.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"an observational study of breastfeeding women with epilepsy\",\n      \"reference_quote\": \"Women with epilepsy treated with levetiracetam were recruited to this study and completed a questionnaire.\",\n      \"explanation\": \"The retrieved abstract describes recruitment, questionnaires, and measurements but does not explicitly characterize the study as observational. That design label is plausible but not actually stated in the supplied abstract.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly identifies the paper, states that the abstract was retrieved, distinguishes breast-milk and maternal exposure from infant outcomes, discloses unavailable infant age and prematurity information, and avoids claiming universal safety or causation. Its only source-fidelity issue is the unsupported characterization of the study as observational.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 7938,
+        "completion_tokens": 520,
+        "total_tokens": 8458,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7935,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 197,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 7938,
+    "completion_tokens": 520,
+    "total_tokens": 8458,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 7935,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 197,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

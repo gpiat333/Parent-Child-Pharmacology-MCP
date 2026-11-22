@@ -1,0 +1,110 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 21,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The DailyMed label supports the pregnancy evidence gaps, animal maternal findings, and animal fetal or developmental findings.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The candidate cites a PubMed query URL, but that exact URL is not present in the supplied reference URL inventory; the retrieved PubMed search itself supports the associated retrieval limitation.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=daridorexant+pregnancy"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The cited openFDA query matches the supplied spontaneous-report counts and terms.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The openFDA documentation supports the limitations concerning reporting volume, absent denominators, and lack of causal inference.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The supplied FDA directory result links to the Quviviq Pregnancy Study website.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The supplied evidence includes the FDA pregnancy-exposure-registry directory and its limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The supplied ClinicalTrials.gov record identifies NCT06498128 as terminated with no posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT06498128"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The supplied ClinicalTrials.gov record identifies NCT06393504 as active, not recruiting, with no posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT06393504"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer presents all three requested evidence axes with empty rows, preserves human versus animal context, reports the maternal pharmacokinetic retrieval gap within scope, separates spontaneous reports and registry information, avoids administered doses and medication decisions, and does not recommend participation. The PubMed citation URL is not verifiable against the supplied URL inventory, but the associated retrieval claims are supported by the reference evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "e8423f29cd40ab4bfb8d53769f079e65015fdf1e25f2493ab43576bded9d0d80",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 21,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed label supports the pregnancy evidence gaps, animal maternal findings, and animal fetal or developmental findings.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The candidate cites a PubMed query URL, but that exact URL is not present in the supplied reference URL inventory; the retrieved PubMed search itself supports the associated retrieval limitation.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited openFDA query matches the supplied spontaneous-report counts and terms.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The openFDA documentation supports the limitations concerning reporting volume, absent denominators, and lack of causal inference.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied FDA directory result links to the Quviviq Pregnancy Study website.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied evidence includes the FDA pregnancy-exposure-registry directory and its limitations.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied ClinicalTrials.gov record identifies NCT06498128 as terminated with no posted results.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied ClinicalTrials.gov record identifies NCT06393504 as active, not recruiting, with no posted results.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer presents all three requested evidence axes with empty rows, preserves human versus animal context, reports the maternal pharmacokinetic retrieval gap within scope, separates spontaneous reports and registry information, avoids administered doses and medication decisions, and does not recommend participation. The PubMed citation URL is not verifiable against the supplied URL inventory, but the associated retrieval claims are supported by the reference evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 107140,
+        "completion_tokens": 901,
+        "total_tokens": 108041,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 107137,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 355,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 107140,
+    "completion_tokens": 901,
+    "total_tokens": 108041,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 107137,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 355,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .14 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

@@ -1,0 +1,134 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 2,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "This URL is not among the supplied reference URLs, so its label contents cannot be verified in the evidence pool.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "This URL is not among the supplied reference URLs and does not substantiate the supplied FDA directory or daridorexant registry evidence.",
+        "url": "https://www.merckpregnancyregistries.com/"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": "BELSOMRA Pregnancy Registry",
+        "reference_quote": "QUVIVIQ Pregnancy Registry",
+        "explanation": "The answer presents a BELSOMRA registry rather than the daridorexant/QUVIVIQ registry retrieved for this request."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer cites prescribing information but does not cite the FDA pregnancy-exposure-registry directory required by the criteria."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "BELSOMRA Pregnancy Registry",
+        "reference_quote": "QUVIVIQ Pregnancy Registry",
+        "explanation": "The answer identifies the wrong product registry; the retrieved evidence identifies the QUVIVIQ Pregnancy Registry for daridorexant."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "1-866-961-2388",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The telephone number and website in the answer conflict with the daridorexant registry contact retrieved in the supplied evidence."
+      }
+    ],
+    "rationale": "The answer keeps all three evidence axes visible, reports the retrieved maternal PK gap, distinguishes animal findings from human outcomes, avoids administered doses, and separates registry information. However, it supplies the wrong pregnancy registry and contacts, omits the required FDA directory citation, and includes several label or pharmacokinetic assertions that are not verifiable from the supplied pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "f59e6c7293d8a761a1fcedc7c87f84e385a1e260a66dcdae432027635ca15e11",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not among the supplied reference URLs, so its label contents cannot be verified in the evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not among the supplied reference URLs and does not substantiate the supplied FDA directory or daridorexant registry evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"Registry: BELSOMRA Pregnancy Registry\",\n      \"reference_quote\": \"medicine\\\": \\\"Quviviq (daridorexant)\\\"\",\n      \"explanation\": \"The answer presents a registry for BELSOMRA rather than the daridorexant/QUVIVIQ registry retrieved for this request, so it does not provide the requested correct registry contacts.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": \"Source: [FDA prescribing information]\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites a prescribing-information URL but does not cite the FDA pregnancy-exposure-registry directory required by the criteria.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"BELSOMRA Pregnancy Registry\",\n      \"reference_quote\": \"registry\\\": \\\"QUVIVIQ Pregnancy Registry\\\"\",\n      \"explanation\": \"The answer identifies the wrong product registry; the retrieved evidence identifies the QUVIVIQ Pregnancy Registry for daridorexant.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"1-866-961-2388\",\n      \"reference_quote\": \"contact_text\\\": \\\"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\\\"\",\n      \"explanation\": \"The telephone number and associated website in the answer conflict with the daridorexant registry contact retrieved in the supplied evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps all three evidence axes visible, reports the retrieved maternal PK gap, distinguishes animal findings from human outcomes, avoids administered doses and separates registry information. However, it supplies the wrong pregnancy registry and contacts, omits the required FDA directory citation, and includes several label or pharmacokinetic assertions that are not verifiable from the supplied pool.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[3] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 106257,
+        "completion_tokens": 1183,
+        "total_tokens": 107440,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 106254,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not among the supplied reference URLs, so its label contents cannot be verified in the evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not among the supplied reference URLs and does not substantiate the supplied FDA directory or daridorexant registry evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"BELSOMRA Pregnancy Registry\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The answer presents a BELSOMRA registry rather than the daridorexant/QUVIVIQ registry retrieved for this request.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites prescribing information but does not cite the FDA pregnancy-exposure-registry directory required by the criteria.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"BELSOMRA Pregnancy Registry\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The answer identifies the wrong product registry; the retrieved evidence identifies the QUVIVIQ Pregnancy Registry for daridorexant.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"1-866-961-2388\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The telephone number and website in the answer conflict with the daridorexant registry contact retrieved in the supplied evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps all three evidence axes visible, reports the retrieved maternal PK gap, distinguishes animal findings from human outcomes, avoids administered doses, and separates registry information. However, it supplies the wrong pregnancy registry and contacts, omits the required FDA directory citation, and includes several label or pharmacokinetic assertions that are not verifiable from the supplied pool.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 107067,
+        "completion_tokens": 875,
+        "total_tokens": 107942,
+        "prompt_tokens_details": {
+          "cached_tokens": 106254,
+          "cache_write_tokens": 810,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 244,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 107067,
+    "completion_tokens": 875,
+    "total_tokens": 107942,
+    "prompt_tokens_details": {
+      "cached_tokens": 106254,
+      "cache_write_tokens": 810,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 244,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .13 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

@@ -1,0 +1,105 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 24,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The supplied coverage result reports 3 PubMed matches and describes them as search matches rather than verified studies or outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The supplied coverage result reports 4 ClinicalTrials.gov registration matches and gives the stated limitations on enrollment, results, outcomes, and applicability.",
+        "url": "https://clinicaltrials.gov/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The supplied coverage result reports 1 DailyMed name-matched product-label record and the stated limits on what that count establishes.",
+        "url": "https://dailymed.nlm.nih.gov/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The supplied evidence explicitly identifies LactMed as lactation-only and not a pregnancy evidence substitute.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The supplied coverage result reports zero MPRINT literal drug-name row matches, zero distinct PMIDs, the snapshot date, and the stated matching limitations.",
+        "url": "https://github.com/langli-lab/mprint-kp-data"
+      },
+      {
+        "citation_id": "C6",
+        "status": "unverified",
+        "reason": "The supplied evidence lists this FDA URL as a basis URL, but does not provide its page contents; the specific counterpart-resource statement is supported by the tool result rather than demonstrably by this citation.",
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "applicability of a particular formulation",
+        "reference_quote": "Name-matched product labels; count does not establish population-specific sections, current FDA approval or independent evidence.",
+        "explanation": "The answer adds a limitation concerning applicability of a particular formulation, which is not stated in the supplied evidence. The evidence supports limits concerning population-specific sections, current approval, and independent evidence, but not this formulation-specific assertion."
+      }
+    ],
+    "rationale": "The answer correctly reports all five source statuses and counts, preserves unknown versus zero, treats LactMed as not applicable, and explains that counts do not establish safety or evidence quality. One ancillary DailyMed limitation is not supported by the supplied evidence, so fidelity fails despite successful task completion."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "3ed5f16445bd91db92b537e72bd20765b17403b82ab9fdd0e932eb6af1f7166c",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied coverage result reports 3 PubMed matches and describes them as search matches rather than verified studies or outcomes.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied coverage result reports 4 ClinicalTrials.gov registration matches and gives the stated limitations on enrollment, results, outcomes, and applicability.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied coverage result reports 1 DailyMed name-matched product-label record and the stated limits on what that count establishes.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied evidence explicitly identifies LactMed as lactation-only and not a pregnancy evidence substitute.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied coverage result reports zero MPRINT literal drug-name row matches, zero distinct PMIDs, the snapshot date, and the stated matching limitations.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence lists this FDA URL as a basis URL, but does not provide its page contents; the specific counterpart-resource statement is supported by the tool result rather than demonstrably by this citation.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"applicability of a particular formulation\",\n      \"reference_quote\": \"Name-matched product labels; count does not establish population-specific sections, current FDA approval or independent evidence.\",\n      \"explanation\": \"The answer adds a limitation concerning applicability of a particular formulation, which is not stated in the supplied evidence. The evidence supports limits concerning population-specific sections, current approval, and independent evidence, but not this formulation-specific assertion.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly reports all five source statuses and counts, preserves unknown versus zero, treats LactMed as not applicable, and explains that counts do not establish safety or evidence quality. One ancillary DailyMed limitation is not supported by the supplied evidence, so fidelity fails despite successful task completion.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 4321,
+        "completion_tokens": 1195,
+        "total_tokens": 5516,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 4318,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 597,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 4321,
+    "completion_tokens": 1195,
+    "total_tokens": 5516,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 4318,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 597,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

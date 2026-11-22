@@ -27,3 +27,6 @@ Historical evidence directories and their original machine-specific helper copie
 
 
 The .12 revision also includes `eval/phoenix/` with a ten-question fixed-snapshot XML/CSV benchmark, dataset registry, versioned prompt and exact matching. Its results stay separate from the 28 development chats and seven paired questions. See that module for local Phoenix setup and its narrower two-tool scope. Source freezing now includes data/policy files, the root entry point and the frozen evaluation harness, not only Python application files.
+
+
+Current .14 uses grader v3.1: the original judge prompt plus mechanical rejection of negative findings grounded only in the exact mandatory footer. R08 accepts past-listed deadlines without asserting portal closure; other criteria and all questions are unchanged. Phoenix runner v2 exposes two MPRINT tools plus a bounded client arithmetic helper, with supported none reasoning. See evaluation/retrieval-reliability-final/REPORT.md for fresh results and retained limitations.

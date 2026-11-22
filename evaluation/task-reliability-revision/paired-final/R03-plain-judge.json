@@ -1,0 +1,192 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 2,
+    "unverified_claims": 10,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited DailyMed search URL is not the retrieved product-label URL, and a search page does not itself substantiate the stated label findings.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metformin"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited LactMed record supports the general descriptions of low milk concentrations, infant-level measurements, and reported infant follow-up.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 10,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "has a boxed warning for **metformin-associated lactic acidosis**",
+        "reference_quote": "boxed_warning",
+        "explanation": "The supplied retrieval identifies boxed_warning as a missing section, so it does not support asserting that the selected product label has a boxed warning."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Vitamin B12 deficiency",
+        "reference_quote": null,
+        "explanation": "The supplied label evidence does not contain the claimed vitamin B12 warning or monitoring recommendation, so this claim is unverified in the evidence pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "includes restrictions/contraindications related to reduced kidney function",
+        "reference_quote": "The risk of lactic acidosis increases with the degree of renal dysfunction",
+        "explanation": "The source supports renal-risk discussion and monitoring, but the supplied passage does not establish the broader claim about restrictions or contraindications."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The label reports that metformin may reduce vitamin B12 levels",
+        "reference_quote": null,
+        "explanation": "No corresponding vitamin B12 statement appears in the supplied label evidence."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "disclose missing sections",
+        "answer_quote": null,
+        "reference_quote": "Some sections may not apply or may be absent in the source; extraction is not proof of absence.",
+        "explanation": "The answer gives general limitations but does not specifically disclose the missing adult-label sections identified by the retrieval."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations",
+        "answer_quote": null,
+        "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
+        "explanation": "The answer does not name the retrieved product and instead gives only a generic label description."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Source-linked explanation or honest missing evidence.",
+        "answer_quote": null,
+        "reference_quote": "Report the retrieved milk concentration values and units with their study context",
+        "explanation": "The answer does not report the retrieved measured milk concentrations and units, although the evidence supplied those measurements and required their inclusion."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Compare metformin label warnings for the adult taking it with findings in breastfed infants.",
+        "answer_quote": "the available extract here does not provide enough detail to characterize every infant specimen",
+        "reference_quote": "Serum levels were measured in 4 breastfed infants",
+        "explanation": "The answer overstates the lack of available infant-level information: the retrieved extract does provide specific infant-serum findings, although it is not exhaustive."
+      }
+    ],
+    "rationale": "The answer appropriately separates adult-label warnings from infant observations and avoids administered doses, but it contains unsupported adult-label claims, incorrectly asserts a boxed warning despite that section being unavailable in the retrieval, omits the retrieved product identity and specific missing-section disclosure, and fails to report available measured milk and infant-serum concentrations. The LactMed citation is supported; the DailyMed citation is only a search URL rather than the retrieved product-label record."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "3601c1642a48799f281275aa258f4598aabddf69c93d63af2f41cd7517d4b3d8",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 10,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited DailyMed search URL is not the retrieved product-label URL, and a directory/search page does not itself substantiate the stated label findings.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"This is the retrieved LactMed Metformin record and supports the general descriptions of low milk levels, infant-level measurements, and reported infant follow-up.\"\n    }\n  ],\n  \"uncited_source_claims\": 10,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"has a boxed warning for **metformin-associated lactic acidosis**\",\n      \"reference_quote\": \"medicine_taker_sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The retrieved label extraction specifically identifies the boxed-warning section as missing; it does not support asserting that the selected product label has a boxed warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label evidence does not contain the claimed vitamin B12 warning or monitoring recommendation, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"includes restrictions/contraindications related to reduced kidney function\",\n      \"reference_quote\": \"The risk of lactic acidosis increases with the degree of renal dysfunction\",\n      \"explanation\": \"The source supports renal-risk discussion and monitoring, but the supplied passage does not establish the broader claim about restrictions or contraindications.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label reports that metformin may reduce vitamin B12 levels\",\n      \"reference_quote\": null,\n      \"explanation\": \"No corresponding vitamin B12 statement appears in the supplied label evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"medicine_taker_sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The answer gives general limitations but does not specifically disclose that the retrieved adult-label warnings_and_precautions and boxed_warning sections were missing.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": \"U.S. FDA/DailyMed metformin prescribing information\",\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\\\"\",\n      \"explanation\": \"The answer does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.], and instead gives only a generic label description.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": \"The retrieved LactMed material must be consulted directly\",\n      \"reference_quote\": \"Include a Measured exposure row in a summary of this record. Report the retrieved milk concentration values and units with their study context\",\n      \"explanation\": \"The answer abstains from reporting the retrieved measured concentrations even though they were available, and it does not provide the required measured-exposure summary.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": \"the available extract here does not provide enough detail to characterize every infant specimen\",\n      \"reference_quote\": \"infant_level_section_present_in_returned_text\\\": true\",\n      \"explanation\": \"Although the extract is not exhaustive, it does provide specific infant-serum findings and units. The answer overstates the inability to characterize the available infant-level evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately separates adult-label warnings from infant observations and avoids administered doses, but it contains unsupported adult-label claims, incorrectly asserts a boxed warning despite that section being missing, omits the retrieved product identity and specific missing sections, and fails to report the available measured milk and infant-serum concentrations. The LactMed citation is appropriate; the DailyMed citation is only a search URL rather than the retrieved product-label record.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[5] omission answer_quote must be null",
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[6] omission answer_quote must be null",
+        "failure_reasons[7] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 56879,
+        "completion_tokens": 1353,
+        "total_tokens": 58232,
+        "prompt_tokens_details": {
+          "cached_tokens": 56876,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 254,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 10,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited DailyMed search URL is not the retrieved product-label URL, and a search page does not itself substantiate the stated label findings.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed record supports the general descriptions of low milk concentrations, infant-level measurements, and reported infant follow-up.\"\n    }\n  ],\n  \"uncited_source_claims\": 10,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"has a boxed warning for **metformin-associated lactic acidosis**\",\n      \"reference_quote\": \"sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The retrieved label evidence identifies the boxed-warning section as missing, so it does not support asserting that the selected product label has a boxed warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label evidence does not contain the claimed vitamin B12 warning or monitoring recommendation, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"includes restrictions/contraindications related to reduced kidney function\",\n      \"reference_quote\": \"The risk of lactic acidosis increases with the degree of renal dysfunction\",\n      \"explanation\": \"The source supports renal-risk discussion and monitoring, but the supplied passage does not establish the broader claim about restrictions or contraindications.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label reports that metformin may reduce vitamin B12 levels\",\n      \"reference_quote\": null,\n      \"explanation\": \"No corresponding vitamin B12 statement appears in the supplied label evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"medicine_taker_sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The answer gives general limitations but does not specifically disclose that the retrieved adult-label warnings_and_precautions and boxed_warning sections were missing.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\\\"\",\n      \"explanation\": \"The answer does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.], and instead gives only a generic label description.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Include a Measured exposure row in a summary of this record. Report the retrieved milk concentration values and units with their study context\",\n      \"explanation\": \"The answer does not report the retrieved measured milk concentrations and units, although the evidence supplied those measurements and required their inclusion.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": \"the available extract here does not provide enough detail to characterize every infant specimen\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The answer overstates the lack of available infant-level information: the retrieved extract does provide specific infant-serum findings, although it is not exhaustive.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately separates adult-label warnings from infant observations and avoids administered doses, but it contains unsupported adult-label claims, incorrectly asserts a boxed warning despite that section being missing, omits the retrieved product identity and specific missing sections, and fails to report available measured milk and infant-serum concentrations. The LactMed citation is supported; the DailyMed citation is only a search URL rather than the retrieved product-label record.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 58130,
+        "completion_tokens": 1190,
+        "total_tokens": 59320,
+        "prompt_tokens_details": {
+          "cached_tokens": 56876,
+          "cache_write_tokens": 1251,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 128,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 10,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited DailyMed search URL is not the retrieved product-label URL, and a search page does not itself substantiate the stated label findings.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed record supports the general descriptions of low milk concentrations, infant-level measurements, and reported infant follow-up.\"\n    }\n  ],\n  \"uncited_source_claims\": 10,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"has a boxed warning for **metformin-associated lactic acidosis**\",\n      \"reference_quote\": \"boxed_warning\",\n      \"explanation\": \"The supplied retrieval identifies boxed_warning as a missing section, so it does not support asserting that the selected product label has a boxed warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label evidence does not contain the claimed vitamin B12 warning or monitoring recommendation, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"includes restrictions/contraindications related to reduced kidney function\",\n      \"reference_quote\": \"The risk of lactic acidosis increases with the degree of renal dysfunction\",\n      \"explanation\": \"The source supports renal-risk discussion and monitoring, but the supplied passage does not establish the broader claim about restrictions or contraindications.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label reports that metformin may reduce vitamin B12 levels\",\n      \"reference_quote\": null,\n      \"explanation\": \"No corresponding vitamin B12 statement appears in the supplied label evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Some sections may not apply or may be absent in the source; extraction is not proof of absence.\",\n      \"explanation\": \"The answer gives general limitations but does not specifically disclose the missing adult-label sections identified by the retrieval.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not name the retrieved product and instead gives only a generic label description.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Report the retrieved milk concentration values and units with their study context\",\n      \"explanation\": \"The answer does not report the retrieved measured milk concentrations and units, although the evidence supplied those measurements and required their inclusion.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": \"the available extract here does not provide enough detail to characterize every infant specimen\",\n      \"reference_quote\": \"Serum levels were measured in 4 breastfed infants\",\n      \"explanation\": \"The answer overstates the lack of available infant-level information: the retrieved extract does provide specific infant-serum findings, although it is not exhaustive.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately separates adult-label warnings from infant observations and avoids administered doses, but it contains unsupported adult-label claims, incorrectly asserts a boxed warning despite that section being unavailable in the retrieval, omits the retrieved product identity and specific missing-section disclosure, and fails to report available measured milk and infant-serum concentrations. The LactMed citation is supported; the DailyMed citation is only a search URL rather than the retrieved product-label record.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 59298,
+        "completion_tokens": 1250,
+        "total_tokens": 60548,
+        "prompt_tokens_details": {
+          "cached_tokens": 58127,
+          "cache_write_tokens": 1168,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 236,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 59298,
+    "completion_tokens": 1250,
+    "total_tokens": 60548,
+    "prompt_tokens_details": {
+      "cached_tokens": 58127,
+      "cache_write_tokens": 1168,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 236,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .13 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

@@ -1,0 +1,141 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 2,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The Drugs@FDA directory URL is not among the supplied reference sources and does not support the pregnancy evidence claims.",
+        "url": "https://www.accessdata.fda.gov/scripts/cder/daf/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "This FDA pregnancy-registries URL is not the supplied FDA directory URL and does not support the claim that no registry contact was verified.",
+        "url": "https://www.fda.gov/science-research/womens-health-research/pregnancy-registries"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": null,
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer does not display the retrieved registry website and telephone contact separately."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+        "explanation": "The answer does not cite the supplied DailyMed label or the supplied FDA pregnancy-exposure-registry directory."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Preserve animal versus human and absent abstracts.",
+        "answer_quote": null,
+        "reference_quote": "No abstract text was returned for PMID(s): 36630579, 35802843, 36630580.",
+        "explanation": "The answer omits the retrieved animal findings and does not disclose that the three retrieved PubMed records had no returned abstracts."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.",
+        "reference_quote": "QUVIVIQ Pregnancy Registry",
+        "explanation": "The supplied retrieval identified the QUVIVIQ Pregnancy Registry and supplied its contact information, so describing the contact as not verified is inconsistent with the evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "I could not verify live source records or retrieve current FDA labeling, registry pages, or published study abstracts in this session.",
+        "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+        "explanation": "The supplied evidence includes a retrieved DailyMed label URL, so the answer inaccurately presents the source retrieval as unavailable."
+      }
+    ],
+    "rationale": "The answer correctly keeps all three evidence rows visible, avoids dosing and medication decisions, and states a bounded maternal-PK gap. It nevertheless fails to provide the retrieved registry contacts, required label and directory citations, animal-versus-human distinction, and absent-abstract disclosure. It also incorrectly says the registry contact and source retrieval were not verified."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "0a32767b6015fd426f673c93d04dc2da7c8126d81b18a291c96589ff0a2cb829",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited Drugs@FDA directory URL is not among the supplied reference sources and does not support the pregnancy evidence claims.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA pregnancy-registries URL differs from the retrieved FDA directory URL and does not establish the stated absence of a verified registry contact.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer does not show the retrieved registry website and telephone contact, so it does not complete the required contact display.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": \"Direct authoritative sources requiring verification:\",\n      \"reference_quote\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"explanation\": \"The answer cites neither the supplied DailyMed label nor the supplied FDA pregnancy-exposure-registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": \"No pregnancy outcome study findings were retrieved.\",\n      \"reference_quote\": \"No abstract text was returned for PMID(s): 36630579, 35802843, 36630580.\",\n      \"explanation\": \"The answer omits the retrieved animal findings and does not disclose that all three retrieved PubMed records lacked returned abstracts.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The supplied retrieval identified a QUVIVIQ pregnancy registry and provided its website and telephone contact, so the answer's characterization of the contact as not verified is inconsistent with the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"I could not verify live source records or retrieve current FDA labeling, registry pages, or published study abstracts in this session.\",\n      \"reference_quote\": \"source: live:dailymed\",\n      \"explanation\": \"The evidence pool contains retrieved DailyMed, FDA registry-directory, and PubMed-search material; the answer presents the retrieval as unavailable and consequently omits available findings.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps all three rows visible, avoids dosing and treatment decisions, and correctly reports the retrieved maternal-PK gap within a bounded scope. However, it fails the requested brief by omitting the retrieved registry contacts, label and directory citations, animal findings, and absent-abstract disclosure, while incorrectly characterizing the registry and source retrieval as unverified or unavailable.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[2] omission answer_quote must be null",
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 106090,
+        "completion_tokens": 1299,
+        "total_tokens": 107389,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 106087,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 444,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The Drugs@FDA directory URL is not among the supplied reference sources and does not support the pregnancy evidence claims.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This FDA pregnancy-registries URL is not the supplied FDA directory URL and does not support the claim that no registry contact was verified.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer does not display the retrieved registry website and telephone contact separately.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"explanation\": \"The answer does not cite the supplied DailyMed label or the supplied FDA pregnancy-exposure-registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"No abstract text was returned for PMID(s): 36630579, 35802843, 36630580.\",\n      \"explanation\": \"The answer omits the retrieved animal findings and does not disclose that the three retrieved PubMed records had no returned abstracts.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The supplied retrieval identified the QUVIVIQ Pregnancy Registry and supplied its contact information, so describing the contact as not verified is inconsistent with the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"I could not verify live source records or retrieve current FDA labeling, registry pages, or published study abstracts in this session.\",\n      \"reference_quote\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"explanation\": \"The supplied evidence includes a retrieved DailyMed label URL, so the answer inaccurately presents the source retrieval as unavailable.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly keeps all three evidence rows visible, avoids dosing and medication decisions, and states a bounded maternal-PK gap. It nevertheless fails to provide the retrieved registry contacts, required label and directory citations, animal-versus-human distinction, and absent-abstract disclosure. It also incorrectly says the registry contact and source retrieval were not verified.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 107057,
+        "completion_tokens": 1075,
+        "total_tokens": 108132,
+        "prompt_tokens_details": {
+          "cached_tokens": 106087,
+          "cache_write_tokens": 967,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 246,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 107057,
+    "completion_tokens": 1075,
+    "total_tokens": 108132,
+    "prompt_tokens_details": {
+      "cached_tokens": 106087,
+      "cache_write_tokens": 967,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 246,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .14 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

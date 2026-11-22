@@ -1,0 +1,176 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 3,
+    "contradicted_claims": 0,
+    "unverified_claims": 18,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited FDA label URL is not present in the supplied reference evidence; the supplied DailyMed label supports concentration changes but does not verify this exact citation.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/020241s054,020764s047,022251s028lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated clearance and seizure-risk findings are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15824304/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated pregnancy/postpartum pharmacokinetic findings are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16283257/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated concentration findings are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15077046/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated placental-transfer findings are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17472473/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated malformation comparison are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19053106/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "unverified",
+        "reason": "This PubMed record and its stated systematic-review findings are not present in the supplied reference evidence.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25608468/"
+      }
+    ],
+    "uncited_source_claims": 12,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lamotrigine clearance commonly increases during pregnancy",
+        "reference_quote": null,
+        "explanation": "The supplied evidence supports reports of decreased lamotrigine concentrations during pregnancy and restoration after delivery, but not the stronger assertion that clearance commonly increases or the claimed breadth across several studies."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lamotrigine crosses the placenta.",
+        "reference_quote": null,
+        "explanation": "Placental transfer and cord-blood ratios are not reported in the supplied evidence pool, so this substantive exposure claim is unverified here."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Some analyses reported malformation rates near background rates",
+        "reference_quote": null,
+        "explanation": "The supplied label contains related registry findings, but the answer gives an unspecific summary attributed to unavailable sources and does not preserve the specific registry populations and designs in the evidence pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "other analyses explored possible associations with specific defects",
+        "reference_quote": null,
+        "explanation": "The answer does not identify the supplied registry context for the oral-cleft finding and instead relies on an unavailable label citation, leaving this substantive claim insufficiently source-faithful."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+        "answer_quote": "The literature includes prospective observational cohorts, therapeutic-drug-monitoring studies, and pharmacokinetic analyses",
+        "reference_quote": null,
+        "explanation": "The answer lists study designs and populations but links them to citations outside the supplied evidence pool; the retrieved literature in the pool was mainly abstracts and reviews, and no such primary PK records were supplied."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Keep gaps visible",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer does not clearly state that the Clinical Considerations passage is labeling context rather than a quantified maternal pharmacokinetic study, despite that being a material limitation of the retrieved evidence."
+      }
+    ],
+    "rationale": "The response is well organized, separates the three requested axes, avoids dose values and individualized medication advice, and includes clinician questions. However, many substantive PK, placental-transfer, and outcome claims rely on citations absent from the supplied evidence pool. It also overstates the retrieved Clinical Considerations content by converting concentration observations into a commonly increased-clearance claim and does not clearly preserve the supplied study-specific registry context. Therefore fidelity fails and the task is not fully fulfilled under the source-linking criterion."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "a733e8c7f6cba3f31b361d9300a865835eebf75149d2097b5b321ffb14e9d734",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 3,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 18,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label URL is not present in the supplied reference evidence; the supplied DailyMed label supports concentration changes but does not verify this exact citation.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated clearance and seizure-risk findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated pregnancy/postpartum pharmacokinetic findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated concentration findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated placental-transfer findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated malformation comparison are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated systematic-review findings are not present in the supplied reference evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 12,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine clearance commonly increases during pregnancy\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"The supplied label supports decreased concentrations and postpartum restoration, but not the stronger assertion that clearance commonly increases or the claimed breadth across several studies.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine crosses the placenta.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Placental transfer and cord-blood ratios are not reported in the supplied evidence pool, so this substantive exposure claim is unverified here.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Some analyses reported malformation rates near background rates\",\n      \"reference_quote\": \"Data from several international pregnancy registries have not detected an increased frequency of major congenital malformations or a consistent pattern of malformations among women exposed to lamotrigine compared with the general population.\",\n      \"explanation\": \"The general direction is compatible with the label, but the answer attributes the claim to unspecified analyses and does not preserve the specific registry populations and designs supplied in the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"other analyses explored possible associations with specific defects\",\n      \"reference_quote\": \"The NAAED Pregnancy Registry observed an increased risk of isolated oral clefts\",\n      \"explanation\": \"The answer gives an unspecific summary without the supplied registry context and cites an unavailable label source; the specific claim is not adequately source-faithful.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": \"The literature includes prospective observational cohorts, therapeutic-drug-monitoring studies, and pharmacokinetic analyses\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer lists study designs and populations but links them to citations outside the supplied evidence pool; the retrieved literature in the pool was mainly abstracts and reviews, and no such primary PK records were supplied.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Keep gaps visible\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Clinical Considerations is not synonymous with maternal pharmacokinetic evidence.\",\n      \"explanation\": \"The answer does not clearly state that the Clinical Considerations passage is labeling context rather than a quantified maternal pharmacokinetic study, despite that being an explicit limitation in the retrieved evidence.\"\n    }\n  ],\n  \"rationale\": \"The response is well organized, separates the three requested axes, avoids dose values and individualized medication advice, and includes clinician questions. However, many substantive PK, placental-transfer, and outcome claims rely on citations absent from the supplied evidence pool. It also overstates the retrieved Clinical Considerations content by converting concentration observations into a commonly increased-clearance claim and does not clearly preserve the supplied study-specific registry context. Therefore fidelity fails and the task is not fully fulfilled under the source-linking criterion.\"\n}",
+      "validation_errors": [
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 240979,
+        "completion_tokens": 1572,
+        "total_tokens": 242551,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 240976,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 405,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 3,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 18,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label URL is not present in the supplied reference evidence; the supplied DailyMed label supports concentration changes but does not verify this exact citation.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated clearance and seizure-risk findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated pregnancy/postpartum pharmacokinetic findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated concentration findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated placental-transfer findings are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated malformation comparison are not present in the supplied reference evidence.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record and its stated systematic-review findings are not present in the supplied reference evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 12,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine clearance commonly increases during pregnancy\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence supports reports of decreased lamotrigine concentrations during pregnancy and restoration after delivery, but not the stronger assertion that clearance commonly increases or the claimed breadth across several studies.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine crosses the placenta.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Placental transfer and cord-blood ratios are not reported in the supplied evidence pool, so this substantive exposure claim is unverified here.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Some analyses reported malformation rates near background rates\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied label contains related registry findings, but the answer gives an unspecific summary attributed to unavailable sources and does not preserve the specific registry populations and designs in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"other analyses explored possible associations with specific defects\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not identify the supplied registry context for the oral-cleft finding and instead relies on an unavailable label citation, leaving this substantive claim insufficiently source-faithful.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": \"The literature includes prospective observational cohorts, therapeutic-drug-monitoring studies, and pharmacokinetic analyses\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer lists study designs and populations but links them to citations outside the supplied evidence pool; the retrieved literature in the pool was mainly abstracts and reviews, and no such primary PK records were supplied.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Keep gaps visible\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not clearly state that the Clinical Considerations passage is labeling context rather than a quantified maternal pharmacokinetic study, despite that being a material limitation of the retrieved evidence.\"\n    }\n  ],\n  \"rationale\": \"The response is well organized, separates the three requested axes, avoids dose values and individualized medication advice, and includes clinician questions. However, many substantive PK, placental-transfer, and outcome claims rely on citations absent from the supplied evidence pool. It also overstates the retrieved Clinical Considerations content by converting concentration observations into a commonly increased-clearance claim and does not clearly preserve the supplied study-specific registry context. Therefore fidelity fails and the task is not fully fulfilled under the source-linking criterion.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 242216,
+        "completion_tokens": 1275,
+        "total_tokens": 243491,
+        "prompt_tokens_details": {
+          "cached_tokens": 240976,
+          "cache_write_tokens": 1237,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 180,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 242216,
+    "completion_tokens": 1275,
+    "total_tokens": 243491,
+    "prompt_tokens_details": {
+      "cached_tokens": 240976,
+      "cache_write_tokens": 1237,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 180,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .14 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

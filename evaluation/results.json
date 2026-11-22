@@ -1,16 +1,16 @@
 {
   "current_revision": {
-    "as_of_utc": "2026-11-22T05:01:25.380510+00:00",
-    "policy_version": "2026-11-21.12",
-    "package_version": "0.12.0",
+    "as_of_utc": "2026-11-22T06:20:19.141846+00:00",
+    "policy_version": "2026-11-22.14",
+    "package_version": "0.14.0",
     "local_tests": {
-      "tests": 686,
+      "tests": 709,
       "failures": 0,
       "errors": 0,
       "skipped": 0
     },
     "grader_tests": {
-      "tests": 30,
+      "tests": 33,
       "failures": 0,
       "errors": 0,
       "skipped": 0
@@ -22,10 +22,10 @@
       "interpretation": "Ten synthetic development controls include attribution, real doses, concentrations, omissions, wrong facts and ranking behavior. These are not held-out or clinical validation."
     },
     "inspector": {
-      "checked_at_utc": "2026-11-22T04:14:18.146835+00:00",
+      "checked_at_utc": "2026-11-22T05:59:26.899868+00:00",
       "inspector_version": "1.0.6",
       "mode": "Official MCP Inspector CLI, security-maintained v1 release",
-      "endpoint": "http://127.0.0.1:8772/mcp",
+      "endpoint": "http://127.0.0.1:8774/mcp",
       "checks": 9,
       "passed": 9,
       "inventory": {
@@ -130,7 +130,7 @@
       ],
       "limits": "Protocol, schema and explicit tool contracts only; no clinical validation. No remote deployment or credentials supplied to Inspector."
     },
-    "source_files": 153,
+    "source_files": 164,
     "chat": {
       "counts": {
         "completed": {
@@ -157,10 +157,10 @@
       "diagnostic_grading": {
         "research_answers": 21,
         "judged": 21,
-        "fidelity_pass": 21,
-        "fidelity_fail": 0,
+        "fidelity_pass": 17,
+        "fidelity_fail": 4,
         "fidelity_not_assessable": 0,
-        "task_fulfilled": 18
+        "task_fulfilled": 21
       },
       "calibration": {
         "controls": 10,
@@ -168,27 +168,22 @@
         "task_matches": 10,
         "interpretation": "Ten synthetic development controls include attribution, real doses, concentrations, omissions, wrong facts and ranking behavior. These are not held-out or clinical validation."
       },
-      "limits": "Same 28 known questions and criteria; fresh local .12 captures graded with unchanged v3. Model gateway and MLflow tracking in Databricks; local evaluation driver. New answer generation and source retrieval; existing app not deployed. Same-family grading; no clinician adjudication. URL membership is not claim support. Application notices are not proof of clinical review.",
-      "raw_metadata_correction": "See metadata-corrections.json; original chat-summary.json is retained unchanged."
+      "limits": "Same 28 known questions; R08 criterion clarified to accept elapsed deadlines without verified portal closure; all other criteria unchanged; fresh local .14 captures graded with v3.1 footer-grounding validation. Model gateway and MLflow tracking in Databricks; local evaluation driver. New answer generation and source retrieval; existing app not deployed. Same-family grading; no clinician adjudication. URL membership is not claim support. Application notices are not proof of clinical review."
     },
     "paired": {
       "mcp": {
         "completed": 7,
         "task_fulfilled": 7,
-        "fidelity_pass": 6,
-        "fidelity_fail": 1,
-        "fidelity_not_assessable": 0,
-        "median_elapsed_seconds": 19.98,
-        "total_reported_tokens": 530286
+        "fidelity_pass": 7,
+        "fidelity_fail": 0,
+        "fidelity_not_assessable": 0
       },
       "plain": {
         "completed": 7,
         "task_fulfilled": 0,
         "fidelity_pass": 1,
         "fidelity_fail": 5,
-        "fidelity_not_assessable": 1,
-        "median_elapsed_seconds": 8.41,
-        "total_reported_tokens": 10869
+        "fidelity_not_assessable": 1
       }
     },
     "grading_rows": [
@@ -197,7 +192,7 @@
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer visibly presents all three requested evidence axes, preserves empty human-evidence rows, separates animal findings and spontaneous reports, states the retrieved maternal PK gap, provides FDA registry contacts separately without recommending participation, cites the label and FDA directory, and provides no administered doses or medication decisions.",
+        "rationale": "The answer presents all three requested evidence axes with empty rows, preserves human versus animal context, reports the maternal pharmacokinetic retrieval gap within scope, separates spontaneous reports and registry information, avoids administered doses and medication decisions, and does not recommend participation. The PubMed citation URL is not verifiable against the supplied URL inventory, but the associated retrieval claims are supported by the reference evidence.",
         "failure_reasons": []
       },
       {
@@ -205,7 +200,7 @@
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer supplies all three requested axes, separates fetal exposure from outcomes, distinguishes label Clinical Considerations from individualized clinician decisions, describes the retrieved maternal pharmacokinetic evidence and study designs, preserves major evidence gaps, avoids administered dose values and personal medication advice, and includes clinician questions. Claims are appropriately caveated where evidence is limited or based on reviews, registries, animal studies, planned studies, or spontaneous reports.",
+        "rationale": "The brief fulfills the requested three-axis structure, distinguishes fetal exposure from outcomes, separates Clinical Considerations from individualized decisions, preserves study populations and design limitations, includes clinician questions, and avoids administered dose values or personal medication advice. The PK-focused retrieval count is stated but is linked to the broad PubMed search citation rather than the separate focused-search URL, accounting for one uncited source claim; this does not materially undermine the medical source fidelity of the brief.",
         "failure_reasons": []
       },
       {
@@ -213,32 +208,23 @@
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer accurately separates observed symptoms, study monitoring procedures, and milk measurements; avoids administered doses; explains confounding and causal uncertainty; cites the retrieved LactMed record; and discloses that infant-level information was not found. The retrieved sections were not truncated, so no truncation disclosure was required beyond noting limitations of the available extract.",
+        "rationale": "The answer separates observed infant symptoms, monitoring advice, and measured milk exposure; reports the retrieved numerical concentrations without presenting them as a dose; explains co-exposure and study-design uncertainty; cites the LactMed record; and discloses that the extract is bounded. It does not provide an administered dose or personal treatment recommendation.",
         "failure_reasons": []
       },
       {
         "case": "R03",
         "arm": "mcp",
-        "fidelity": "fail",
+        "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer separates adult label warnings from LactMed infant findings, identifies the retrieved product and sources, discloses extraction and population limitations, and avoids administered doses. Most substantive claims are supported. Fidelity is reduced by one unsupported claim about lactic acidosis not being reported in the infants.",
-        "failure_reasons": [
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Does not report lactic acidosis in the breastfed infants described",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed extract reports infant outcomes and exposure findings but does not explicitly establish the absence of lactic acidosis; this is an unsupported absence claim rather than a directly reported observation."
-          }
-        ]
+        "rationale": "The answer clearly separates medicine-taker label warnings, label lactation precautions, measured exposure, and observed infant outcomes. It identifies the retrieved QPharma DailyMed product and LactMed, discloses missing or truncated sections and bounded coverage, avoids conflating the label’s potential hypoglycemia warning with an observed infant event, and does not provide administered doses. The one minor unverified characterization is describing the adverse-reaction study population as adults, although the retrieved passage identifies patients with type 2 diabetes without explicitly stating adults in that passage.",
+        "failure_reasons": []
       },
       {
         "case": "R04",
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer correctly reports the bounded search and nonmatch, explicitly rejects treating the nonmatch as clearance or proof of safety, preserves formulation/manufacturer/lot/status distinctions, and explains the package and official-notice verification still needed. It provides official links and does not invent a bottle-clearance conclusion.",
+        "rationale": "The answer correctly reports the bounded search result, avoids treating a nonmatch as clearance or proof of safety, preserves product/manufacturer/formulation/lot/status distinctions, and explains verification against official notices and the bottle's identifying details.",
         "failure_reasons": []
       },
       {
@@ -246,7 +232,7 @@
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer supplies two relevant recruiting U.S. pediatric ADHD studies, exact study links, overall and site statuses, update dates, contacts, and qualification-limit summaries. It distinguishes registry information from eligibility decisions, notes that overall status does not establish every site’s availability, and does not decide whether any child qualifies.",
+        "rationale": "The answer supplies two relevant recruiting U.S. pediatric ADHD studies with exact links, overall and site statuses, update dates, contacts, age ranges, qualification-limit summaries, and appropriate cautions against inferring eligibility or site availability. It does not decide whether any child qualifies.",
         "failure_reasons": []
       },
       {
@@ -254,7 +240,7 @@
         "arm": "mcp",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer accurately reports the returned notice title, date, and link; clearly states that only title-level evidence was retrieved; discloses the search coverage limits; and provides no personal treatment recommendations or unsupported medical claims.",
+        "rationale": "The answer accurately reports the returned FDA notice title and date, links to the official notice, discloses that full text was not retrieved and that the search was limited, and provides no personal treatment recommendation.",
         "failure_reasons": []
       },
       {
@@ -262,39 +248,47 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer is an honest abstention and correctly keeps the three evidence axes visible, avoids dosing and medication decisions, and appropriately cautions that missing data do not establish safety. However, it fails the requested brief because it treats available retrieved evidence as unavailable, omits the animal findings, provides no FDA registry contacts, and includes no required label or directory citations.",
+        "rationale": "The answer correctly keeps all three evidence rows visible, avoids dosing and medication decisions, and states a bounded maternal-PK gap. It nevertheless fails to provide the retrieved registry contacts, required label and directory citations, animal-versus-human distinction, and absent-abstract disclosure. It also incorrectly says the registry contact and source retrieval were not verified.",
         "failure_reasons": [
           {
             "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
-            "answer_quote": "No FDA pregnancy-registry contact information was retrieved and verified in this session.",
-            "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
-            "explanation": "The supplied evidence contained FDA directory registry contact information, so the answer failed to provide the required contacts."
-          },
-          {
-            "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "Prepare a pregnancy evidence brief for daridorexant.",
+            "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
             "answer_quote": null,
-            "reference_quote": "In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation at doses up to 8 and 10 times the maximum recommended human dose (MRHD) of 50 mg, respectively, based on AUC.",
-            "explanation": "The answer explicitly left animal or nonhuman findings unsummarized, although the retrieved label contained relevant animal pregnancy findings that should have been preserved separately from human evidence."
+            "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+            "explanation": "The answer does not display the retrieved registry website and telephone contact separately."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Cite label and directory.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer supplied no citations, despite the criteria expressly requiring citation of the label and FDA directory."
+            "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+            "explanation": "The answer does not cite the supplied DailyMed label or the supplied FDA pregnancy-exposure-registry directory."
+          },
+          {
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Preserve animal versus human and absent abstracts.",
+            "answer_quote": null,
+            "reference_quote": "No abstract text was returned for PMID(s): 36630579, 35802843, 36630580.",
+            "explanation": "The answer omits the retrieved animal findings and does not disclose that the three retrieved PubMed records had no returned abstracts."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "No FDA pregnancy-registry contact information was retrieved and verified in this session.",
-            "reference_quote": "There will be a pregnancy exposure registry that monitors pregnancy outcomes in women exposed to QUVIVIQ during pregnancy. Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.",
-            "explanation": "This statement conflicts with the supplied retrieval, which included registry contact information and an FDA directory listing."
+            "answer_quote": "A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.",
+            "reference_quote": "QUVIVIQ Pregnancy Registry",
+            "explanation": "The supplied retrieval identified the QUVIVIQ Pregnancy Registry and supplied its contact information, so describing the contact as not verified is inconsistent with the evidence."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "I could not verify live source records or retrieve current FDA labeling, registry pages, or published study abstracts in this session.",
+            "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+            "explanation": "The supplied evidence includes a retrieved DailyMed label URL, so the answer inaccurately presents the source retrieval as unavailable."
           }
         ]
       },
@@ -303,71 +297,55 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer uses the requested three-axis structure, avoids dose values and personal medication advice, keeps several gaps visible, and includes clinician questions. It nevertheless fails because it misstates the retrieved literature coverage, does not accurately report the supplied DailyMed Clinical Considerations evidence, omits study populations and designs, and adds unsupported claims including umbilical-cord transfer and neonatal adaptation.",
+        "rationale": "The response is well organized, separates the three requested axes, avoids dose values and individualized medication advice, and includes clinician questions. However, many substantive PK, placental-transfer, and outcome claims rely on citations absent from the supplied evidence pool. It also overstates the retrieved Clinical Considerations content by converting concentration observations into a commonly increased-clearance claim and does not clearly preserve the supplied study-specific registry context. Therefore fidelity fails and the task is not fully fulfilled under the source-linking criterion.",
         "failure_reasons": [
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "PubMed abstract coverage was not completed",
-            "reference_quote": "Requested PubMed records only; not a complete literature review.",
-            "explanation": "The answer says abstract coverage was not completed, but the supplied retrieval reports abstracts for all eight requested records; the actual limitation was that the search was bounded and not a complete literature review."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "lamotrigine clearance commonly increases during pregnancy",
-            "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
-            "explanation": "The supplied evidence supports decreased concentrations and postpartum restoration, but does not establish the stronger claim that clearance commonly increases."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "particularly UGT-mediated metabolism",
+            "answer_quote": "Lamotrigine clearance commonly increases during pregnancy",
             "reference_quote": null,
-            "explanation": "The supplied pregnancy evidence does not support this specific mechanistic assertion."
+            "explanation": "The supplied evidence supports reports of decreased lamotrigine concentrations during pregnancy and restoration after delivery, but not the stronger assertion that clearance commonly increases or the claimed breadth across several studies."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "Lamotrigine has been measured in umbilical-cord blood",
+            "answer_quote": "Lamotrigine crosses the placenta.",
             "reference_quote": null,
-            "explanation": "No umbilical-cord-blood or placental-transfer study finding appears in the supplied evidence pool."
+            "explanation": "Placental transfer and cord-blood ratios are not reported in the supplied evidence pool, so this substantive exposure claim is unverified here."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "Neonatal adaptation or withdrawal-like effects have been described",
+            "answer_quote": "Some analyses reported malformation rates near background rates",
             "reference_quote": null,
-            "explanation": "The supplied evidence does not report lamotrigine-specific neonatal adaptation or withdrawal-like effects in pregnancy."
+            "explanation": "The supplied label contains related registry findings, but the answer gives an unspecific summary attributed to unavailable sources and does not preserve the specific registry populations and designs in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "other analyses explored possible associations with specific defects",
+            "reference_quote": null,
+            "explanation": "The answer does not identify the supplied registry context for the oral-cleft finding and instead relies on an unavailable label citation, leaving this substantive claim insufficiently source-faithful."
+          },
+          {
+            "dimension": "task",
+            "kind": "content",
+            "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+            "answer_quote": "The literature includes prospective observational cohorts, therapeutic-drug-monitoring studies, and pharmacokinetic analyses",
+            "reference_quote": null,
+            "explanation": "The answer lists study designs and populations but links them to citations outside the supplied evidence pool; the retrieved literature in the pool was mainly abstracts and reviews, and no such primary PK records were supplied."
           },
           {
             "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+            "requirement_quote": "Keep gaps visible",
             "answer_quote": null,
-            "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
-            "explanation": "The answer does not link its principal PK claims to the supplied DailyMed Clinical Considerations source or preserve the actual populations and designs of the retrieved literature."
-          },
-          {
-            "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature",
-            "answer_quote": "A verified lamotrigine-specific Clinical Considerations document was not available for direct citation here.",
-            "reference_quote": "As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect.",
-            "explanation": "The supplied evidence did include lamotrigine-specific DailyMed Clinical Considerations, so the answer incorrectly presents that retrieved source as unavailable and fails to describe it accurately."
-          },
-          {
-            "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Distinguish effects on the pregnant person, fetal exposure, and fetal outcomes.",
-            "answer_quote": "Neonatal adaptation or withdrawal-like effects have been described as a possible consideration",
             "reference_quote": null,
-            "explanation": "Although the answer uses three headings, this fetal-outcomes content is unsupported in the supplied evidence and does not clearly identify the actual retrieved evidence and its limits."
+            "explanation": "The answer does not clearly state that the Clinical Considerations passage is labeling context rather than a quantified maternal pharmacokinetic study, despite that being a material limitation of the retrieved evidence."
           }
         ]
       },
@@ -376,39 +354,31 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer appropriately avoids dosing and expresses some valid uncertainty, but it mainly abstains despite a retrieved, non-truncated record. It omits the specific infant observations, milk measurements, and explicit statement that no separate monitoring recommendation was retrieved. Its citation does not match the amoxicillin record.",
+        "rationale": "The answer cites the LactMed record, avoids administered doses, separates observations from a labeled advice section, and appropriately notes causal and evidentiary uncertainty. However, it incorrectly presents monitoring advice as a LactMed recommendation, omits the required numeric milk measurements, and does not disclose the bounded-record limitation.",
         "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "recommends monitoring the infant for possible effects",
+            "reference_quote": "If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
+            "explanation": "The retrieved record reports symptoms and lists symptoms monitored in studies, but does not provide an explicit monitoring recommendation. The answer converts observations into advice and attributes that advice to LactMed."
+          },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Summarize actual retrieved infant observations separately from recommendations and milk measurements.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer declines to provide the retrieved infant observations, monitoring-recommendation limitation, and milk concentration findings."
+            "reference_quote": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+            "explanation": "The answer says milk concentrations were low but omits the retrieved milk concentration values and units, which the criteria specifically require to be reported separately from infant outcomes."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Cite the record and disclose missing/truncated evidence.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer does not cite the retrieved amoxicillin record and does not disclose the actual evidence status: the record was retrieved, its expected sections were returned, and it was not truncated."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
-            "reference_quote": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
-            "explanation": "The supplied citation points to a different record than the retrieved LactMed amoxicillin entry."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Any LactMed recommendation to watch for diarrhea, rash, thrush, or other effects is guidance",
-            "reference_quote": "If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
-            "explanation": "The retrieved record reports observed effects and monitored study parameters but does not provide an explicit recommendation to monitor them; the answer presents a hypothetical LactMed recommendation without identifying that no such recommendation was retrieved."
+            "reference_quote": "This LactMed response is a bounded extract, not a complete record. Omitted sections or truncation can limit the summary; absence of retrieved findings is not evidence of safety.",
+            "explanation": "Although the answer discusses limited information and missing infant specimens, it does not disclose that the retrieved material is a bounded, non-exhaustive extract or explicitly address the record's completeness limitation."
           }
         ]
       },
@@ -417,56 +387,72 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer separates adult label warnings from infant observations and avoids administered doses, but it omits the retrieved product identity and incorrectly adds or characterizes several claims, including vitamin B12 deficiency, breastfeeding compatibility, infant monitoring advice, and the availability of infant serum measurements. It also uses an invalid DailyMed citation URL.",
+        "rationale": "The answer correctly distinguishes adult label warnings from infant observations and avoids administered doses. However, it attributes some adult-label claims to a different FDA label, omits the retrieved QPharma product limitation and quantitative exposure findings, and inaccurately characterizes the availability of infant serum measurements.",
         "failure_reasons": [
           {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "vitamin B12 deficiency as potential adverse effects",
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Compare metformin label warnings for the adult taking it with findings in breastfed infants.",
+            "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The supplied label evidence does not contain vitamin B12 deficiency among the retrieved warnings or adverse reactions."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "generally considered compatible with breastfeeding",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed evidence reports low milk levels, observed infant findings, and caution for certain infants, but does not state this general compatibility conclusion."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "some experts recommend monitoring the infant for gastrointestinal effects",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed extract does not provide this monitoring recommendation."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Infant specimen type and infant concentration data were not verified",
-            "reference_quote": "Serum levels were measured in 4 breastfed infants",
-            "explanation": "The retrieved LactMed text explicitly identifies infant serum measurements, so presenting infant concentration data as unverified misrepresents the available record."
+            "explanation": "The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail."
           },
           {
             "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "name retrieved products and source limitations",
+            "requirement_quote": "name retrieved products and source limitations.",
             "answer_quote": null,
             "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
-            "explanation": "The answer refers generally to a DailyMed label but does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.]."
+            "explanation": "The answer does not name the retrieved QPharma product or disclose the retrieved product and formulation limitation."
+          },
+          {
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Source-linked explanation or honest missing evidence.",
+            "answer_quote": null,
+            "reference_quote": "Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.",
+            "explanation": "The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The U.S. label contains a boxed warning about metformin-associated lactic acidosis",
+            "reference_quote": "Missing sections do not establish safety or absence of information elsewhere in the label.",
+            "explanation": "The supplied retrieved label evidence does not establish that the selected product contains a boxed warning; the label extraction identifies limitations around missing sections. The claim is therefore unsupported for the retrieved product."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The label warns that metformin may decrease vitamin-B12 concentrations",
+            "reference_quote": null,
+            "explanation": "No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The label states that metformin generally does not cause hypoglycemia by itself",
+            "reference_quote": null,
+            "explanation": "That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The retrieved material did **not** establish a universal infant blood or serum concentration",
+            "reference_quote": "Serum levels were measured in 4 breastfed infants",
+            "explanation": "The evidence does not establish a universal concentration, but it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all."
           }
         ]
       },
       {
         "case": "R04",
         "arm": "plain",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and appropriately preserves formulation, manufacturer, lot, and status distinctions in its verification guidance. Its bounded-search and safety caveats are consistent with the evidence. However, it incorrectly treats the requested lookup as unavailable and omits the returned FDA candidate records, their statuses, and the actual bounded-search result. The citations are relevant-looking official links but are not directly supported by the supplied evidence inventory.",
+        "rationale": "The answer correctly explains that a nonmatch is not clearance and identifies several verification fields, but it does not fulfill the requested FDA-record lookup or report the returned candidates, statuses, and official links. Its explicit abstention is honest, but one product-use recommendation is unsupported in the evidence pool.",
         "failure_reasons": [
           {
             "dimension": "task",
@@ -474,15 +460,23 @@
             "requirement_quote": "Search FDA recall records for naproxen.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer abstains from reporting the available bounded FDA search result, including that NOTREAL-77 was not found and the returned naproxen recall records and statuses."
+            "explanation": "The answer declines to perform or report the FDA lookup even though records were returned in the supplied evidence."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Candidate records and status only if returned; official links.",
             "answer_quote": null,
+            "reference_quote": "D-0523-2026",
+            "explanation": "Returned candidate records and their statuses were not reported, and no official links were provided."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "Do not use the product until its status is verified",
             "reference_quote": null,
-            "explanation": "The supplied search returned candidate records with recall numbers and statuses, but the answer provides only a placeholder table and does not identify those records or statuses."
+            "explanation": "The supplied evidence does not support this specific product-use recommendation; it cautions against inferring safety and says not to infer medication changes."
           }
         ]
       },
@@ -491,7 +485,7 @@
         "arm": "plain",
         "fidelity": "not_assessable",
         "task_fulfilled": false,
-        "rationale": "The response is an honest abstention and makes no substantive study-specific medical or registry claims to assess for source fidelity. However, it does not complete the requested lookup, although the supplied evidence includes two relevant recruiting studies.",
+        "rationale": "The response is an explicit and honest abstention, so it contains no assessable medical or study claims for source-fidelity comparison. It does not fulfill the requested recruiting-study lookup.",
         "failure_reasons": [
           {
             "dimension": "task",
@@ -499,7 +493,7 @@
             "requirement_quote": "Find up to two recruiting ADHD studies involving children in the United States.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer declines to identify any studies, despite the supplied evidence containing two recruiting U.S. pediatric ADHD studies."
+            "explanation": "The answer honestly declines the lookup and supplies no study results."
           },
           {
             "dimension": "task",
@@ -507,32 +501,24 @@
             "requirement_quote": "Include exact study links, overall and site status if present, update dates, contacts and qualification limits.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer provides only a general search link and a checklist of information to look for; it does not provide the requested study-specific links, statuses, dates, contacts, or qualification limits."
+            "explanation": "The answer provides none of the requested study links, statuses, dates, contacts, or qualification limits."
           }
         ]
       },
       {
         "case": "R09",
         "arm": "plain",
-        "fidelity": "fail",
+        "fidelity": "pass",
         "task_fulfilled": false,
-        "rationale": "The response honestly discloses a lookup limitation and avoids treatment advice, but it does not fulfill the requested summary-and-link task and incorrectly says that no returned records were available despite a returned FDA notice.",
+        "rationale": "The abstention is honest and its statement that full notice text was not retrieved is consistent with the title-only search evidence. However, the response did not provide the returned notice title or link, so it did not fulfill the lookup-and-summary request.",
         "failure_reasons": [
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer abstains instead of providing the returned FDA notice title, its link, and the requested explanation that the full notice text was not retrieved."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Returned records:** None available from a live search",
             "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
-            "explanation": "The supplied search results contain a returned FDA notice record, so stating that no returned records were available conflicts with the evidence."
+            "explanation": "The answer honestly disclosed that full notice text was not retrieved, but it omitted the returned FDA notice title and its direct link."
           }
         ]
       },
@@ -541,7 +527,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer separates measured milk exposure from observed infant outcomes, accurately summarizes the retrieved LactMed and product-label evidence, discloses truncation and product-matching limitations, provides links and clinician questions, and avoids dosing or personal treatment decisions.",
+        "rationale": "The answer summarizes both requested sources, clearly separates measured milk exposure from observed infant outcomes, includes source links and clinician questions, discloses truncation and product-matching limitations, and avoids dosing instructions or personal medication decisions. One ancillary continuity-of-care statement is attributed to the lookup without a direct source citation, but this does not undermine overall task fulfillment or source fidelity.",
         "failure_reasons": []
       },
       {
@@ -549,7 +535,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer provides a lactation-focused evidence brief with all three evidence axes, source links, clinician questions, visible retrieval and population limitations, and explicit avoidance of personal treatment decisions and dosing instructions. Its substantive source-derived claims are consistent with the supplied evidence. One general statement about differences across study populations is uncited, but this does not materially impair task completion or source fidelity.",
+        "rationale": "The answer provides a lactation-focused evidence brief with distinct maternal-effects, measured-exposure, and infant-outcomes sections; clinician questions; source links; retrieval and evidence limitations; and required disclaimers. It avoids medication decisions and administered doses, while appropriately distinguishing research concentrations from dosing instructions and spontaneous reports from clinical outcomes.",
         "failure_reasons": []
       },
       {
@@ -557,7 +543,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer prepares clinician questions rather than making a treatment recommendation, preserves the bounded and incomplete source coverage, distinguishes maternal/lactation effects from measured infant exposure and observed infant outcomes, addresses truncation and population gaps, and avoids administered doses or personal treatment decisions.",
+        "rationale": "The answer provides clinician-preparation questions rather than treatment advice, preserves source provenance and retrieval limitations, addresses maternal effects, infant exposure, and infant outcomes, and explicitly avoids dosing or personal treatment decisions. Its substantive source claims are supported by the supplied evidence.",
         "failure_reasons": []
       },
       {
@@ -565,7 +551,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer visibly presents all three evidence axes, preserves empty rows, distinguishes human from animal evidence, reports the maternal pharmacokinetic gap within the retrieved scope, separates FDA registry information from evidence and recommendations, includes required label and directory citations, and provides no administered doses or medication decisions.",
+        "rationale": "The answer presents all three requested evidence axes with empty rows, separates animal context and FAERS report-only information from human findings, states the maternal PK gap within the retrieved scope, preserves absent abstract coverage, provides label and FDA directory citations, and presents registry information separately without ranking or recommending participation. It does not provide administered doses or medication decisions. One specific assertion about the absence of cord-blood and placental measurements is not directly stated in the supplied evidence, but no material contradiction is present.",
         "failure_reasons": []
       },
       {
@@ -573,7 +559,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer fulfills the requested three-axis brief, distinguishes maternal effects, fetal exposure, and fetal outcomes, separates Clinical Considerations from individualized decisions, preserves study populations and designs, states important gaps, includes clinician questions, and avoids administered dose values or personal medication advice. Nearly all substantive claims are supported by the supplied evidence; one citation-linked characterization of the older valproate review is not fully established by the returned record.",
+        "rationale": "The answer provides the three requested axes, keeps disease-associated risks separate from medication effects, describes Clinical Considerations separately from clinician decisions, preserves study population and design limitations, includes maternal PK evidence and explicit gaps, avoids administered dose values and personal medication advice, and supplies clinician questions. Source-derived claims are appropriately cited and the FAERS material is clearly separated as unconfirmed report-only context.",
         "failure_reasons": []
       },
       {
@@ -581,7 +567,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer groups the results by fiscal year and administering IC, separates award amounts from direct costs, reports counts and activity-code counts, states the exact search criteria, identifies the 20-record cap and incomplete coverage, stays within the project-record limit, and includes the required caveat that activity codes do not establish research success. The aggregate claims are supported by the supplied evidence, although the homepage citation does not substantiate them directly.",
+        "rationale": "The answer groups results by fiscal year and administering IC, provides retrieved and aggregate counts, separates award amounts from direct costs, states the exact search filters, explains that the result is capped, stays within the 20-record limit, and includes the required caveat that activity codes do not establish research success. The project-detail citations support the displayed records; the homepage citation is not evidentiary for the aggregate claims, but the claims themselves are supported by the supplied reference evidence.",
         "failure_reasons": []
       },
       {
@@ -589,7 +575,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer reports the supplied counts accurately, preserves LactMed as not applicable and unknown rather than zero, and explains that counts and zero matches do not establish evidence quality, outcomes or safety. It also identifies the count-only and bounded-snapshot limitations and avoids treating the results as clinical evidence.",
+        "rationale": "The answer accurately reports the count-only results, preserves LactMed as not applicable and MPRINT zero as distinct from unknown, and explains that counts do not establish study findings, evidence quality, or safety. It also includes the relevant query, indexing, snapshot, and population limitations and does not reverse the requested pregnancy-versus-lactation distinction.",
         "failure_reasons": []
       },
       {
@@ -597,7 +583,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer separates milk measurements, observed infant findings, and study-assessed measures from explicit monitoring advice. It reports uncertainty, preserves limitations of mixed study designs and causation, discloses missing infant-level data and incomplete metadata, provides no dose, and cites the retrieved LactMed record.",
+        "rationale": "The answer accurately separates measured milk exposure, observed infant symptoms, and study monitoring items; explains uncertainty and missing infant-level evidence; cites the retrieved LactMed record; and gives no dose or dosing instruction.",
         "failure_reasons": []
       },
       {
@@ -605,7 +591,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer directly distinguishes measured milk concentrations, infant drug-level evidence, and reported infant outcomes. It accurately preserves the limited nature of the infant observation and does not treat low exposure or absent adverse reports as proof of universal safety. It provides no personal medication advice.",
+        "rationale": "The answer clearly separates measured milk exposure from reported infant outcomes, accurately describes the absence of published infant concentration data, preserves uncertainty, and avoids treating limited findings as proof of universal safety or giving personal medication advice.",
         "failure_reasons": []
       },
       {
@@ -613,7 +599,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer separates adult label warnings from breastfed-infant observations, identifies the retrieved product and LactMed source, distinguishes exposure measurements from outcomes, discloses missing and truncated sections, avoids dosing instructions, and appropriately qualifies the evidence. All substantive source-linked claims have supporting citations.",
+        "rationale": "The answer separates adult medicine-taker label warnings from breastfed-infant observations, identifies the retrieved product and LactMed source, discloses missing and truncated sections, avoids conflating precautions with observed infant outcomes, and gives no administered doses or dosing instructions.",
         "failure_reasons": []
       },
       {
@@ -621,7 +607,7 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer reports the bounded search result without treating the missing fictional lot as clearance, preserves product, formulation, manufacturer, lot, and status distinctions, lists the returned candidate records with official links, and explains the additional verification required.",
+        "rationale": "The answer accurately reports the bounded nonmatch without treating it as clearance, preserves distinctions among product, formulation, manufacturer, lot, and recall status, lists the returned records with official links, and explains the additional bottle verification required. No substantive source claim is contradicted or left unsupported in the supplied evidence.",
         "failure_reasons": []
       },
       {
@@ -629,98 +615,123 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer accurately reports the returned FDA-listed registry, its contact and enrollment link, and ongoing status. It clearly distinguishes a directory listing from individual eligibility and correctly states that FDA does not operate or endorse the registries and that the directory is not comprehensive.",
+        "rationale": "The answer accurately reports the returned FDA listing, registry name, ongoing status, contact, enrollment link, and FDA directory link. It correctly distinguishes directory listing from individual eligibility and notes that the registry team must confirm eligibility and current availability. It also preserves the directory limitation that the list is not comprehensive.",
         "failure_reasons": []
       },
       {
         "case": "R06",
         "arm": "chat",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": true,
-        "rationale": "The answer supplies two relevant recruiting U.S. child ADHD studies with direct links, overall and site statuses where available, update dates, contacts, qualification limits, and appropriate caveats. It does not determine whether any child qualifies or infer site availability from overall recruitment.",
-        "failure_reasons": []
+        "rationale": "The answer supplies two relevant recruiting studies with direct links, overall and site statuses where available, update dates, contacts, qualification limits, and appropriate cautions that it does not determine eligibility or site availability. It does not decide whether a child qualifies. Fidelity fails because it makes one unsupported-overstated claim about NCT05608434 involving established ADHD.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The registry indicates this is an intervention for an established ADHD condition.",
+            "reference_quote": "A condition keyword may describe an outcome or prevention topic rather than treatment of established disease. Review the summary and eligibility; do not imply the study is specifically for the requested condition from a keyword alone.",
+            "explanation": "The answer overstates the registry evidence by characterizing the NCT05608434 study as an intervention for established ADHD. Its eligibility also permits a specified impairing inattention presentation that does not meet a full ADHD diagnosis, and the source expressly cautions against this inference."
+          }
+        ]
       },
       {
         "case": "R07",
         "arm": "chat",
         "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The answer accurately reports the single returned Canadian recruiting record, includes a direct study link and contact, preserves the indirect-match and bounded-search caveats, and does not substitute completed studies or make an exhaustive absence claim. Its only task omission is the lack of an explicit instruction that the study team must confirm eligibility.",
-        "failure_reasons": [
-          {
-            "dimension": "task",
-            "kind": "omission",
-            "requirement_quote": "Eligibility must be confirmed by study team.",
-            "answer_quote": null,
-            "reference_quote": "Study team must confirm site recruitment and eligibility; registry status can be stale.",
-            "explanation": "The answer appropriately states that eligibility and current site availability were not confirmed, but it does not clearly tell the reader to confirm eligibility with the study team, as required."
-          }
-        ]
+        "task_fulfilled": true,
+        "rationale": "The answer presents the single returned Canadian recruiting record with a direct study link and contact, accurately explains its indirect and unconfirmed relevance, avoids substituting a completed study, and states that the bounded search does not establish exhaustive absence. It also preserves the requirement that the study team confirm eligibility and site availability.",
+        "failure_reasons": []
       },
       {
         "case": "R08",
         "arm": "chat",
         "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The notices, dates, relevance labels, uncertainty caveats, links, bounded-search disclosure, and no-submission statement are well supported by the evidence. The main task defect is labeling the dated past notices as past listed deadlines rather than clearly separating a closed-deadlines category as requested.",
-        "failure_reasons": [
-          {
-            "dimension": "task",
-            "kind": "omission",
-            "requirement_quote": "Separate verified future deadlines, closed deadlines and unknown deadlines",
-            "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer separates future, past listed, and unknown deadlines, but does not provide the requested explicitly labeled closed-deadlines category. It appropriately cautions that past dates do not independently verify portal closure, but the requested category is still not clearly supplied."
-          }
-        ]
+        "task_fulfilled": true,
+        "rationale": "The answer identifies FDA Federal Register candidates, explicitly labels broader or indirect notices, separates future, past-listed, and unknown deadlines, preserves the distinction between a past listed deadline and verified portal closure, provides source links, and states that no submission was made. Its substantive claims are supported by the supplied evidence.",
+        "failure_reasons": []
       },
       {
         "case": "R09",
         "arm": "chat",
         "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The notice title, date, link, and limitations about full-text retrieval and current-index coverage are supported. The answer contains no contradicted or unverified medical claims and gives no personal treatment recommendation, but it includes an extra metadata statement outside the requested title-or-excerpt-only scope.",
-        "failure_reasons": [
-          {
-            "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
-            "answer_quote": "The returned metadata did not establish a source population or age band for this notice.",
-            "reference_quote": null,
-            "explanation": "The answer adds population and age-band metadata rather than limiting the response to the returned notice title or excerpt and the explanation that the full notice text was not retrieved."
-          }
-        ]
+        "task_fulfilled": true,
+        "rationale": "The answer accurately reports the single returned FDA notice title and date, provides direct links, discloses that only title-level evidence was retrieved and that the search was not exhaustive, and does not provide personal treatment recommendations.",
+        "failure_reasons": []
       },
       {
         "case": "R10",
         "arm": "chat",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": true,
-        "rationale": "The answer provides the official FDA MedWatch page, correctly explains that a report alone does not establish causation, states that no report was filed, and does not request identifying information. The additional Poison Help link is relevant to suspected poisoning and does not introduce unrelated medical advice.",
-        "failure_reasons": []
+        "rationale": "The answer provides the requested official FDA link, correctly explains that reporting alone does not establish causation, and states that no submission or identifying-data collection occurred. Its only source-fidelity issue is the additional unsupported wording about causation requiring further evaluation; the emergency-care characterization is source-supported but uncited.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "causation requires further evaluation",
+            "reference_quote": "a report does not establish causation and is not emergency care.",
+            "explanation": "The evidence supports that a report does not establish causation, but it does not expressly state that causation requires further evaluation."
+          }
+        ]
       },
       {
         "case": "R11",
         "arm": "chat",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": true,
-        "rationale": "The answer retrieves and links the PubMed paper, summarizes the available design and population, distinguishes measured drug exposure from infant outcomes, discloses missing demographic details, avoids presenting exposure measurements as dosing advice, and does not overstate safety or causation. The search-count statement and medication-change caution are supported by the supplied material but are not specifically supported by the cited article link.",
-        "failure_reasons": []
+        "rationale": "The answer correctly identifies the paper, states that the abstract was retrieved, distinguishes breast-milk and maternal exposure from infant outcomes, discloses unavailable infant age and prematurity information, and avoids claiming universal safety or causation. Its only source-fidelity issue is the unsupported characterization of the study as observational.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "an observational study of breastfeeding women with epilepsy",
+            "reference_quote": "Women with epilepsy treated with levetiracetam were recruited to this study and completed a questionnaire.",
+            "explanation": "The retrieved abstract describes recruitment, questionnaires, and measurements but does not explicitly characterize the study as observational. That design label is plausible but not actually stated in the supplied abstract."
+          }
+        ]
       },
       {
         "case": "R12",
         "arm": "chat",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": true,
-        "rationale": "The answer accurately reports retrieved event terms and counts, states the queried cohort as ages 0 through 12 months coded in months, and correctly explains that spontaneous-report counts cannot establish incidence, risk, causation, or generalization to all infants. It cites the returned query and does not invent results.",
-        "failure_reasons": []
+        "rationale": "The answer correctly reports the queried 0-to-12-month age scope, retrieved reaction counts, and the limits that spontaneous-report counts do not establish incidence, risk, causation, or generalizability. It fulfills the requested task and cites the returned query, but includes several additional claims not established by the supplied evidence.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "Such reports can support **signal detection",
+            "reference_quote": null,
+            "explanation": "This interpretation is plausible but is not stated in the supplied retrieved evidence."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "each event was clinically confirmed or provide its timing or severity",
+            "reference_quote": null,
+            "explanation": "The supplied evidence describes reaction-term counts and their limitations but does not expressly establish these specific claims about confirmation, timing, or severity."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "cannot estimate incidence, prevalence, relative risk, or individual risk",
+            "reference_quote": "Exposure denominators are absent; counts cannot estimate incidence or individual risk.",
+            "explanation": "The source supports inability to estimate incidence and individual risk, but does not explicitly support the added claims about prevalence and relative risk."
+          }
+        ]
       },
       {
         "case": "S6-lactation",
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer provides a balanced lactation-focused research summary, preserves adverse findings and counterbalancing no-effect findings, separates milk measurements from infant outcomes, describes small samples and truncated evidence, avoids treatment instructions, includes clinician questions, and explicitly states that stopping or changing medication carries risks and requires clinician discussion. It also notes that no-effects reports do not establish safety, keeps the study count unknown, and includes the required human-review framing.",
+        "rationale": "The answer provides a balanced lactation-focused research summary, preserves adverse and counterbalancing findings together with study context, clearly separates exposure measurements from infant outcomes, describes design and completeness limitations, prepares clinician questions, avoids treatment decisions, and notes that stopping or changing medication carries risks requiring clinician discussion.",
         "failure_reasons": []
       },
       {
@@ -728,66 +739,57 @@
         "arm": "chat",
         "fidelity": "pass",
         "task_fulfilled": true,
-        "rationale": "The answer separates maternal effects, pharmacokinetic or exposure findings, fetal and infant outcomes, animal evidence, and report-only FAERS context. It preserves epilepsy and bipolar-disorder context, distinguishes study populations and designs, states limitations, avoids individualized treatment decisions, includes clinician questions, and retains the required warning that stopping or changing medication carries risks and should be discussed with the prescribing clinician. Human clinical framing review is also disclosed.",
+        "rationale": "The answer separates maternal effects, pharmacokinetic exposure, fetal or infant exposure, observed outcomes, animal findings, and spontaneous reports. It preserves epilepsy-related disease risk, distinguishes epilepsy and bipolar populations, states limitations, avoids treatment decisions, includes clinician questions, and notes that stopping or changing medication requires clinician discussion and that clinical framing review remains required.",
         "failure_reasons": []
       }
     ],
     "remaining_negative_grades": [
       {
-        "case": "R03",
-        "arm": "mcp",
-        "fidelity": "fail",
-        "task_fulfilled": true,
-        "rationale": "The answer separates adult label warnings from LactMed infant findings, identifies the retrieved product and sources, discloses extraction and population limitations, and avoids administered doses. Most substantive claims are supported. Fidelity is reduced by one unsupported claim about lactic acidosis not being reported in the infants.",
-        "failure_reasons": [
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Does not report lactic acidosis in the breastfed infants described",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed extract reports infant outcomes and exposure findings but does not explicitly establish the absence of lactic acidosis; this is an unsupported absence claim rather than a directly reported observation."
-          }
-        ]
-      },
-      {
         "case": "E01-gap",
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer is an honest abstention and correctly keeps the three evidence axes visible, avoids dosing and medication decisions, and appropriately cautions that missing data do not establish safety. However, it fails the requested brief because it treats available retrieved evidence as unavailable, omits the animal findings, provides no FDA registry contacts, and includes no required label or directory citations.",
+        "rationale": "The answer correctly keeps all three evidence rows visible, avoids dosing and medication decisions, and states a bounded maternal-PK gap. It nevertheless fails to provide the retrieved registry contacts, required label and directory citations, animal-versus-human distinction, and absent-abstract disclosure. It also incorrectly says the registry contact and source retrieval were not verified.",
         "failure_reasons": [
           {
             "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
-            "answer_quote": "No FDA pregnancy-registry contact information was retrieved and verified in this session.",
-            "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
-            "explanation": "The supplied evidence contained FDA directory registry contact information, so the answer failed to provide the required contacts."
-          },
-          {
-            "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "Prepare a pregnancy evidence brief for daridorexant.",
+            "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
             "answer_quote": null,
-            "reference_quote": "In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation at doses up to 8 and 10 times the maximum recommended human dose (MRHD) of 50 mg, respectively, based on AUC.",
-            "explanation": "The answer explicitly left animal or nonhuman findings unsummarized, although the retrieved label contained relevant animal pregnancy findings that should have been preserved separately from human evidence."
+            "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+            "explanation": "The answer does not display the retrieved registry website and telephone contact separately."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Cite label and directory.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer supplied no citations, despite the criteria expressly requiring citation of the label and FDA directory."
+            "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+            "explanation": "The answer does not cite the supplied DailyMed label or the supplied FDA pregnancy-exposure-registry directory."
+          },
+          {
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Preserve animal versus human and absent abstracts.",
+            "answer_quote": null,
+            "reference_quote": "No abstract text was returned for PMID(s): 36630579, 35802843, 36630580.",
+            "explanation": "The answer omits the retrieved animal findings and does not disclose that the three retrieved PubMed records had no returned abstracts."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "No FDA pregnancy-registry contact information was retrieved and verified in this session.",
-            "reference_quote": "There will be a pregnancy exposure registry that monitors pregnancy outcomes in women exposed to QUVIVIQ during pregnancy. Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.",
-            "explanation": "This statement conflicts with the supplied retrieval, which included registry contact information and an FDA directory listing."
+            "answer_quote": "A current FDA pregnancy-exposure registry contact for daridorexant was **not verified in the available retrieval**.",
+            "reference_quote": "QUVIVIQ Pregnancy Registry",
+            "explanation": "The supplied retrieval identified the QUVIVIQ Pregnancy Registry and supplied its contact information, so describing the contact as not verified is inconsistent with the evidence."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "I could not verify live source records or retrieve current FDA labeling, registry pages, or published study abstracts in this session.",
+            "reference_quote": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+            "explanation": "The supplied evidence includes a retrieved DailyMed label URL, so the answer inaccurately presents the source retrieval as unavailable."
           }
         ]
       },
@@ -796,71 +798,55 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer uses the requested three-axis structure, avoids dose values and personal medication advice, keeps several gaps visible, and includes clinician questions. It nevertheless fails because it misstates the retrieved literature coverage, does not accurately report the supplied DailyMed Clinical Considerations evidence, omits study populations and designs, and adds unsupported claims including umbilical-cord transfer and neonatal adaptation.",
+        "rationale": "The response is well organized, separates the three requested axes, avoids dose values and individualized medication advice, and includes clinician questions. However, many substantive PK, placental-transfer, and outcome claims rely on citations absent from the supplied evidence pool. It also overstates the retrieved Clinical Considerations content by converting concentration observations into a commonly increased-clearance claim and does not clearly preserve the supplied study-specific registry context. Therefore fidelity fails and the task is not fully fulfilled under the source-linking criterion.",
         "failure_reasons": [
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "PubMed abstract coverage was not completed",
-            "reference_quote": "Requested PubMed records only; not a complete literature review.",
-            "explanation": "The answer says abstract coverage was not completed, but the supplied retrieval reports abstracts for all eight requested records; the actual limitation was that the search was bounded and not a complete literature review."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "lamotrigine clearance commonly increases during pregnancy",
-            "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
-            "explanation": "The supplied evidence supports decreased concentrations and postpartum restoration, but does not establish the stronger claim that clearance commonly increases."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "particularly UGT-mediated metabolism",
+            "answer_quote": "Lamotrigine clearance commonly increases during pregnancy",
             "reference_quote": null,
-            "explanation": "The supplied pregnancy evidence does not support this specific mechanistic assertion."
+            "explanation": "The supplied evidence supports reports of decreased lamotrigine concentrations during pregnancy and restoration after delivery, but not the stronger assertion that clearance commonly increases or the claimed breadth across several studies."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "Lamotrigine has been measured in umbilical-cord blood",
+            "answer_quote": "Lamotrigine crosses the placenta.",
             "reference_quote": null,
-            "explanation": "No umbilical-cord-blood or placental-transfer study finding appears in the supplied evidence pool."
+            "explanation": "Placental transfer and cord-blood ratios are not reported in the supplied evidence pool, so this substantive exposure claim is unverified here."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "Neonatal adaptation or withdrawal-like effects have been described",
+            "answer_quote": "Some analyses reported malformation rates near background rates",
             "reference_quote": null,
-            "explanation": "The supplied evidence does not report lamotrigine-specific neonatal adaptation or withdrawal-like effects in pregnancy."
+            "explanation": "The supplied label contains related registry findings, but the answer gives an unspecific summary attributed to unavailable sources and does not preserve the specific registry populations and designs in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "other analyses explored possible associations with specific defects",
+            "reference_quote": null,
+            "explanation": "The answer does not identify the supplied registry context for the oral-cleft finding and instead relies on an unavailable label citation, leaving this substantive claim insufficiently source-faithful."
+          },
+          {
+            "dimension": "task",
+            "kind": "content",
+            "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+            "answer_quote": "The literature includes prospective observational cohorts, therapeutic-drug-monitoring studies, and pharmacokinetic analyses",
+            "reference_quote": null,
+            "explanation": "The answer lists study designs and populations but links them to citations outside the supplied evidence pool; the retrieved literature in the pool was mainly abstracts and reviews, and no such primary PK records were supplied."
           },
           {
             "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+            "requirement_quote": "Keep gaps visible",
             "answer_quote": null,
-            "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
-            "explanation": "The answer does not link its principal PK claims to the supplied DailyMed Clinical Considerations source or preserve the actual populations and designs of the retrieved literature."
-          },
-          {
-            "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature",
-            "answer_quote": "A verified lamotrigine-specific Clinical Considerations document was not available for direct citation here.",
-            "reference_quote": "As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect.",
-            "explanation": "The supplied evidence did include lamotrigine-specific DailyMed Clinical Considerations, so the answer incorrectly presents that retrieved source as unavailable and fails to describe it accurately."
-          },
-          {
-            "dimension": "task",
-            "kind": "content",
-            "requirement_quote": "Distinguish effects on the pregnant person, fetal exposure, and fetal outcomes.",
-            "answer_quote": "Neonatal adaptation or withdrawal-like effects have been described as a possible consideration",
             "reference_quote": null,
-            "explanation": "Although the answer uses three headings, this fetal-outcomes content is unsupported in the supplied evidence and does not clearly identify the actual retrieved evidence and its limits."
+            "explanation": "The answer does not clearly state that the Clinical Considerations passage is labeling context rather than a quantified maternal pharmacokinetic study, despite that being a material limitation of the retrieved evidence."
           }
         ]
       },
@@ -869,39 +855,31 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer appropriately avoids dosing and expresses some valid uncertainty, but it mainly abstains despite a retrieved, non-truncated record. It omits the specific infant observations, milk measurements, and explicit statement that no separate monitoring recommendation was retrieved. Its citation does not match the amoxicillin record.",
+        "rationale": "The answer cites the LactMed record, avoids administered doses, separates observations from a labeled advice section, and appropriately notes causal and evidentiary uncertainty. However, it incorrectly presents monitoring advice as a LactMed recommendation, omits the required numeric milk measurements, and does not disclose the bounded-record limitation.",
         "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "recommends monitoring the infant for possible effects",
+            "reference_quote": "If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
+            "explanation": "The retrieved record reports symptoms and lists symptoms monitored in studies, but does not provide an explicit monitoring recommendation. The answer converts observations into advice and attributes that advice to LactMed."
+          },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Summarize actual retrieved infant observations separately from recommendations and milk measurements.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer declines to provide the retrieved infant observations, monitoring-recommendation limitation, and milk concentration findings."
+            "reference_quote": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+            "explanation": "The answer says milk concentrations were low but omits the retrieved milk concentration values and units, which the criteria specifically require to be reported separately from infant outcomes."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Cite the record and disclose missing/truncated evidence.",
             "answer_quote": null,
-            "reference_quote": null,
-            "explanation": "The answer does not cite the retrieved amoxicillin record and does not disclose the actual evidence status: the record was retrieved, its expected sections were returned, and it was not truncated."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
-            "reference_quote": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
-            "explanation": "The supplied citation points to a different record than the retrieved LactMed amoxicillin entry."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Any LactMed recommendation to watch for diarrhea, rash, thrush, or other effects is guidance",
-            "reference_quote": "If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
-            "explanation": "The retrieved record reports observed effects and monitored study parameters but does not provide an explicit recommendation to monitor them; the answer presents a hypothetical LactMed recommendation without identifying that no such recommendation was retrieved."
+            "reference_quote": "This LactMed response is a bounded extract, not a complete record. Omitted sections or truncation can limit the summary; absence of retrieved findings is not evidence of safety.",
+            "explanation": "Although the answer discusses limited information and missing infant specimens, it does not disclose that the retrieved material is a bounded, non-exhaustive extract or explicitly address the record's completeness limitation."
           }
         ]
       },
@@ -910,56 +888,72 @@
         "arm": "plain",
         "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer separates adult label warnings from infant observations and avoids administered doses, but it omits the retrieved product identity and incorrectly adds or characterizes several claims, including vitamin B12 deficiency, breastfeeding compatibility, infant monitoring advice, and the availability of infant serum measurements. It also uses an invalid DailyMed citation URL.",
+        "rationale": "The answer correctly distinguishes adult label warnings from infant observations and avoids administered doses. However, it attributes some adult-label claims to a different FDA label, omits the retrieved QPharma product limitation and quantitative exposure findings, and inaccurately characterizes the availability of infant serum measurements.",
         "failure_reasons": [
           {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "vitamin B12 deficiency as potential adverse effects",
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Compare metformin label warnings for the adult taking it with findings in breastfed infants.",
+            "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The supplied label evidence does not contain vitamin B12 deficiency among the retrieved warnings or adverse reactions."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "generally considered compatible with breastfeeding",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed evidence reports low milk levels, observed infant findings, and caution for certain infants, but does not state this general compatibility conclusion."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "some experts recommend monitoring the infant for gastrointestinal effects",
-            "reference_quote": null,
-            "explanation": "The supplied LactMed extract does not provide this monitoring recommendation."
-          },
-          {
-            "dimension": "fidelity",
-            "kind": "content",
-            "requirement_quote": null,
-            "answer_quote": "Infant specimen type and infant concentration data were not verified",
-            "reference_quote": "Serum levels were measured in 4 breastfed infants",
-            "explanation": "The retrieved LactMed text explicitly identifies infant serum measurements, so presenting infant concentration data as unverified misrepresents the available record."
+            "explanation": "The answer generally separates adult warnings from infant findings but does not report the retrieved infant serum findings or the specific observed infant outcomes in sufficient detail."
           },
           {
             "dimension": "task",
             "kind": "omission",
-            "requirement_quote": "name retrieved products and source limitations",
+            "requirement_quote": "name retrieved products and source limitations.",
             "answer_quote": null,
             "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
-            "explanation": "The answer refers generally to a DailyMed label but does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.]."
+            "explanation": "The answer does not name the retrieved QPharma product or disclose the retrieved product and formulation limitation."
+          },
+          {
+            "dimension": "task",
+            "kind": "omission",
+            "requirement_quote": "Source-linked explanation or honest missing evidence.",
+            "answer_quote": null,
+            "reference_quote": "Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.",
+            "explanation": "The answer acknowledges measurements but omits the retrieved concentration values and their study context, leaving the requested findings materially incomplete."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The U.S. label contains a boxed warning about metformin-associated lactic acidosis",
+            "reference_quote": "Missing sections do not establish safety or absence of information elsewhere in the label.",
+            "explanation": "The supplied retrieved label evidence does not establish that the selected product contains a boxed warning; the label extraction identifies limitations around missing sections. The claim is therefore unsupported for the retrieved product."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The label warns that metformin may decrease vitamin-B12 concentrations",
+            "reference_quote": null,
+            "explanation": "No vitamin-B12 warning appears in the supplied retrieved label evidence, so this substantive label claim is unverified in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The label states that metformin generally does not cause hypoglycemia by itself",
+            "reference_quote": null,
+            "explanation": "That statement is not present in the supplied label excerpts and is therefore unverified in the evidence pool."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The retrieved material did **not** establish a universal infant blood or serum concentration",
+            "reference_quote": "Serum levels were measured in 4 breastfed infants",
+            "explanation": "The evidence does not establish a universal concentration, but it does establish that infant serum concentrations were measured. The answer's wording incorrectly suggests that infant blood or serum concentration information was not established at all."
           }
         ]
       },
       {
         "case": "R04",
         "arm": "plain",
-        "fidelity": "pass",
+        "fidelity": "fail",
         "task_fulfilled": false,
-        "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and appropriately preserves formulation, manufacturer, lot, and status distinctions in its verification guidance. Its bounded-search and safety caveats are consistent with the evidence. However, it incorrectly treats the requested lookup as unavailable and omits the returned FDA candidate records, their statuses, and the actual bounded-search result. The citations are relevant-looking official links but are not directly supported by the supplied evidence inventory.",
+        "rationale": "The answer correctly explains that a nonmatch is not clearance and identifies several verification fields, but it does not fulfill the requested FDA-record lookup or report the returned candidates, statuses, and official links. Its explicit abstention is honest, but one product-use recommendation is unsupported in the evidence pool.",
         "failure_reasons": [
           {
             "dimension": "task",
@@ -967,15 +961,23 @@
             "requirement_quote": "Search FDA recall records for naproxen.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer abstains from reporting the available bounded FDA search result, including that NOTREAL-77 was not found and the returned naproxen recall records and statuses."
+            "explanation": "The answer declines to perform or report the FDA lookup even though records were returned in the supplied evidence."
           },
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Candidate records and status only if returned; official links.",
             "answer_quote": null,
+            "reference_quote": "D-0523-2026",
+            "explanation": "Returned candidate records and their statuses were not reported, and no official links were provided."
+          },
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "Do not use the product until its status is verified",
             "reference_quote": null,
-            "explanation": "The supplied search returned candidate records with recall numbers and statuses, but the answer provides only a placeholder table and does not identify those records or statuses."
+            "explanation": "The supplied evidence does not support this specific product-use recommendation; it cautions against inferring safety and says not to infer medication changes."
           }
         ]
       },
@@ -984,7 +986,7 @@
         "arm": "plain",
         "fidelity": "not_assessable",
         "task_fulfilled": false,
-        "rationale": "The response is an honest abstention and makes no substantive study-specific medical or registry claims to assess for source fidelity. However, it does not complete the requested lookup, although the supplied evidence includes two relevant recruiting studies.",
+        "rationale": "The response is an explicit and honest abstention, so it contains no assessable medical or study claims for source-fidelity comparison. It does not fulfill the requested recruiting-study lookup.",
         "failure_reasons": [
           {
             "dimension": "task",
@@ -992,7 +994,7 @@
             "requirement_quote": "Find up to two recruiting ADHD studies involving children in the United States.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer declines to identify any studies, despite the supplied evidence containing two recruiting U.S. pediatric ADHD studies."
+            "explanation": "The answer honestly declines the lookup and supplies no study results."
           },
           {
             "dimension": "task",
@@ -1000,114 +1002,139 @@
             "requirement_quote": "Include exact study links, overall and site status if present, update dates, contacts and qualification limits.",
             "answer_quote": null,
             "reference_quote": null,
-            "explanation": "The answer provides only a general search link and a checklist of information to look for; it does not provide the requested study-specific links, statuses, dates, contacts, or qualification limits."
+            "explanation": "The answer provides none of the requested study links, statuses, dates, contacts, or qualification limits."
           }
         ]
       },
       {
         "case": "R09",
         "arm": "plain",
-        "fidelity": "fail",
+        "fidelity": "pass",
         "task_fulfilled": false,
-        "rationale": "The response honestly discloses a lookup limitation and avoids treatment advice, but it does not fulfill the requested summary-and-link task and incorrectly says that no returned records were available despite a returned FDA notice.",
+        "rationale": "The abstention is honest and its statement that full notice text was not retrieved is consistent with the title-only search evidence. However, the response did not provide the returned notice title or link, so it did not fulfill the lookup-and-summary request.",
         "failure_reasons": [
           {
             "dimension": "task",
             "kind": "omission",
             "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
             "answer_quote": null,
+            "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+            "explanation": "The answer honestly disclosed that full notice text was not retrieved, but it omitted the returned FDA notice title and its direct link."
+          }
+        ]
+      },
+      {
+        "case": "R06",
+        "arm": "chat",
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "rationale": "The answer supplies two relevant recruiting studies with direct links, overall and site statuses where available, update dates, contacts, qualification limits, and appropriate cautions that it does not determine eligibility or site availability. It does not decide whether a child qualifies. Fidelity fails because it makes one unsupported-overstated claim about NCT05608434 involving established ADHD.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "The registry indicates this is an intervention for an established ADHD condition.",
+            "reference_quote": "A condition keyword may describe an outcome or prevention topic rather than treatment of established disease. Review the summary and eligibility; do not imply the study is specifically for the requested condition from a keyword alone.",
+            "explanation": "The answer overstates the registry evidence by characterizing the NCT05608434 study as an intervention for established ADHD. Its eligibility also permits a specified impairing inattention presentation that does not meet a full ADHD diagnosis, and the source expressly cautions against this inference."
+          }
+        ]
+      },
+      {
+        "case": "R10",
+        "arm": "chat",
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "rationale": "The answer provides the requested official FDA link, correctly explains that reporting alone does not establish causation, and states that no submission or identifying-data collection occurred. Its only source-fidelity issue is the additional unsupported wording about causation requiring further evaluation; the emergency-care characterization is source-supported but uncited.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "causation requires further evaluation",
+            "reference_quote": "a report does not establish causation and is not emergency care.",
+            "explanation": "The evidence supports that a report does not establish causation, but it does not expressly state that causation requires further evaluation."
+          }
+        ]
+      },
+      {
+        "case": "R11",
+        "arm": "chat",
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "rationale": "The answer correctly identifies the paper, states that the abstract was retrieved, distinguishes breast-milk and maternal exposure from infant outcomes, discloses unavailable infant age and prematurity information, and avoids claiming universal safety or causation. Its only source-fidelity issue is the unsupported characterization of the study as observational.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "an observational study of breastfeeding women with epilepsy",
+            "reference_quote": "Women with epilepsy treated with levetiracetam were recruited to this study and completed a questionnaire.",
+            "explanation": "The retrieved abstract describes recruitment, questionnaires, and measurements but does not explicitly characterize the study as observational. That design label is plausible but not actually stated in the supplied abstract."
+          }
+        ]
+      },
+      {
+        "case": "R12",
+        "arm": "chat",
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "rationale": "The answer correctly reports the queried 0-to-12-month age scope, retrieved reaction counts, and the limits that spontaneous-report counts do not establish incidence, risk, causation, or generalizability. It fulfills the requested task and cites the returned query, but includes several additional claims not established by the supplied evidence.",
+        "failure_reasons": [
+          {
+            "dimension": "fidelity",
+            "kind": "content",
+            "requirement_quote": null,
+            "answer_quote": "Such reports can support **signal detection",
             "reference_quote": null,
-            "explanation": "The answer abstains instead of providing the returned FDA notice title, its link, and the requested explanation that the full notice text was not retrieved."
+            "explanation": "This interpretation is plausible but is not stated in the supplied retrieved evidence."
           },
           {
             "dimension": "fidelity",
             "kind": "content",
             "requirement_quote": null,
-            "answer_quote": "Returned records:** None available from a live search",
-            "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
-            "explanation": "The supplied search results contain a returned FDA notice record, so stating that no returned records were available conflicts with the evidence."
-          }
-        ]
-      },
-      {
-        "case": "R07",
-        "arm": "chat",
-        "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The answer accurately reports the single returned Canadian recruiting record, includes a direct study link and contact, preserves the indirect-match and bounded-search caveats, and does not substitute completed studies or make an exhaustive absence claim. Its only task omission is the lack of an explicit instruction that the study team must confirm eligibility.",
-        "failure_reasons": [
-          {
-            "dimension": "task",
-            "kind": "omission",
-            "requirement_quote": "Eligibility must be confirmed by study team.",
-            "answer_quote": null,
-            "reference_quote": "Study team must confirm site recruitment and eligibility; registry status can be stale.",
-            "explanation": "The answer appropriately states that eligibility and current site availability were not confirmed, but it does not clearly tell the reader to confirm eligibility with the study team, as required."
-          }
-        ]
-      },
-      {
-        "case": "R08",
-        "arm": "chat",
-        "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The notices, dates, relevance labels, uncertainty caveats, links, bounded-search disclosure, and no-submission statement are well supported by the evidence. The main task defect is labeling the dated past notices as past listed deadlines rather than clearly separating a closed-deadlines category as requested.",
-        "failure_reasons": [
-          {
-            "dimension": "task",
-            "kind": "omission",
-            "requirement_quote": "Separate verified future deadlines, closed deadlines and unknown deadlines",
-            "answer_quote": null,
+            "answer_quote": "each event was clinically confirmed or provide its timing or severity",
             "reference_quote": null,
-            "explanation": "The answer separates future, past listed, and unknown deadlines, but does not provide the requested explicitly labeled closed-deadlines category. It appropriately cautions that past dates do not independently verify portal closure, but the requested category is still not clearly supplied."
-          }
-        ]
-      },
-      {
-        "case": "R09",
-        "arm": "chat",
-        "fidelity": "pass",
-        "task_fulfilled": false,
-        "rationale": "The notice title, date, link, and limitations about full-text retrieval and current-index coverage are supported. The answer contains no contradicted or unverified medical claims and gives no personal treatment recommendation, but it includes an extra metadata statement outside the requested title-or-excerpt-only scope.",
-        "failure_reasons": [
+            "explanation": "The supplied evidence describes reaction-term counts and their limitations but does not expressly establish these specific claims about confirmation, timing, or severity."
+          },
           {
-            "dimension": "task",
+            "dimension": "fidelity",
             "kind": "content",
-            "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
-            "answer_quote": "The returned metadata did not establish a source population or age band for this notice.",
-            "reference_quote": null,
-            "explanation": "The answer adds population and age-band metadata rather than limiting the response to the returned notice title or excerpt and the explanation that the full notice text was not retrieved."
+            "requirement_quote": null,
+            "answer_quote": "cannot estimate incidence, prevalence, relative risk, or individual risk",
+            "reference_quote": "Exposure denominators are absent; counts cannot estimate incidence or individual risk.",
+            "explanation": "The source supports inability to estimate incidence and individual risk, but does not explicitly support the added claims about prevalence and relative risk."
           }
         ]
       }
     ],
     "databricks_notebook": {
-      "run_id": 722956547264765,
-      "task_run_id": 691059144990335,
-      "archive_sha256": "b4bf39ad67d4000f4bac14bc26c67136dc044cc54f803fd3d66b729c5815ee71",
+      "run_id": 72360106331552,
+      "task_run_id": 204236002829022,
+      "archive_sha256": "161acd30c58597733045b81fdf14dafc112982d7e68d8d246af753c1431ab8c5",
       "runtime": "Databricks serverless notebook; isolated Python 3.13 uv environment",
       "returncode": 0,
       "counts": {
-        "tests": 686,
+        "tests": 709,
         "failures": 0,
         "errors": 0,
         "skipped": 0
       },
-      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 31%]\n........................................................................ [ 41%]\n........................................................................ [ 52%]\n........................................................................ [ 62%]\n........................................................................ [ 73%]\n........................................................................ [ 83%]\n........................................................................ [ 94%]\n......................................                                   [100%]\n686 passed in 27.13s\n",
+      "stdout": "........................................................................ [ 10%]\n........................................................................ [ 20%]\n........................................................................ [ 30%]\n........................................................................ [ 40%]\n........................................................................ [ 50%]\n........................................................................ [ 60%]\n........................................................................ [ 71%]\n........................................................................ [ 81%]\n........................................................................ [ 91%]\n.............................................................            [100%]\n709 passed in 28.48s\n",
       "stderr": ""
     },
     "mlflow": {
       "parent": {
-        "run_id": "591268c202e94d44bfadb2178a33bc8d",
+        "run_id": "a6b8c5b2f9394469af76172510a5b4d6",
         "experiment_id": "1096079759942705",
-        "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/591268c202e94d44bfadb2178a33bc8d",
-        "started_at_utc": "2026-11-22T04:27:30.012696+00:00"
+        "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/a6b8c5b2f9394469af76172510a5b4d6",
+        "started_at_utc": "2026-11-22T06:16:15.636053+00:00"
       },
       "runs": {
         "research": {
-          "run_id": "f6e70bc23a4c44ca8f72e7036bc5ad76",
+          "run_id": "991260db68604ff2a2f73b8d4c6d3072",
           "experiment_id": "1096079759942705",
-          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/f6e70bc23a4c44ca8f72e7036bc5ad76",
+          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/991260db68604ff2a2f73b8d4c6d3072",
           "rows": 21,
           "phase": "research",
           "metrics": {
@@ -1117,19 +1144,19 @@
             "url_membership/mean": 1.0,
             "required_notice_text/mean": 1.0,
             "grade_attribution_valid/mean": 1.0,
-            "diagnostic_task_fulfilled/mean": 0.8571428571428571,
+            "diagnostic_task_fulfilled/mean": 1.0,
             "fidelity_assessable/mean": 1.0,
-            "diagnostic_fidelity_pass/mean": 1.0,
+            "diagnostic_fidelity_pass/mean": 0.8095238095238095,
             "required_brief_first/mean": 1.0
           },
           "table_names": [
             "eval_results"
           ],
-          "elapsed_seconds": 835.7,
+          "elapsed_seconds": 83.46,
           "persisted_metrics": {
             "completed/mean": 1.0,
-            "diagnostic_fidelity_pass/mean": 1.0,
-            "diagnostic_task_fulfilled/mean": 0.8571428571428571,
+            "diagnostic_fidelity_pass/mean": 0.8095238095238095,
+            "diagnostic_task_fulfilled/mean": 1.0,
             "expected_route/mean": 1.0,
             "fidelity_assessable/mean": 1.0,
             "grade_attribution_valid/mean": 1.0,
@@ -1143,9 +1170,9 @@
           "answer_generation_repeated": true
         },
         "stops": {
-          "run_id": "519528821a8d4a99a167fb0b33df9415",
+          "run_id": "bf8d8b911052423bbf0a064bd83f61df",
           "experiment_id": "1096079759942705",
-          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/519528821a8d4a99a167fb0b33df9415",
+          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/bf8d8b911052423bbf0a064bd83f61df",
           "rows": 7,
           "phase": "stops",
           "metrics": {
@@ -1157,7 +1184,7 @@
           "table_names": [
             "eval_results"
           ],
-          "elapsed_seconds": 169.05,
+          "elapsed_seconds": 15.08,
           "persisted_metrics": {
             "completed/mean": 1.0,
             "expected_route/mean": 1.0,
@@ -1169,23 +1196,23 @@
           "answer_generation_repeated": true
         },
         "paired": {
-          "run_id": "26b5995feb12429f808e9e36969b3c58",
+          "run_id": "13211d1b8b8a4231a0cf712ed98796cc",
           "experiment_id": "1096079759942705",
-          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/26b5995feb12429f808e9e36969b3c58",
+          "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/13211d1b8b8a4231a0cf712ed98796cc",
           "rows": 14,
           "phase": "paired",
           "metrics": {
             "grade_attribution_valid/mean": 1.0,
             "diagnostic_task_fulfilled/mean": 0.5,
             "fidelity_assessable/mean": 0.9285714285714286,
-            "diagnostic_fidelity_pass/mean": 0.5384615384615384
+            "diagnostic_fidelity_pass/mean": 0.6153846153846154
           },
           "table_names": [
             "eval_results"
           ],
-          "elapsed_seconds": 600.89,
+          "elapsed_seconds": 32.7,
           "persisted_metrics": {
-            "diagnostic_fidelity_pass/mean": 0.5384615384615384,
+            "diagnostic_fidelity_pass/mean": 0.6153846153846154,
             "diagnostic_task_fulfilled/mean": 0.5,
             "fidelity_assessable/mean": 0.9285714285714286,
             "grade_attribution_valid/mean": 1.0
@@ -1197,23 +1224,20 @@
       },
       "unique_verified_rows": 42
     },
-    "cases_unchanged": true,
+    "questions_unchanged": true,
+    "criterion_amendment": "R08 accepts past-listed deadlines without claiming verified portal closure; all other criteria unchanged.",
     "grader_prompt_unchanged": true,
+    "grader_version": "3.1",
+    "grader_change": "Reject negative findings grounded only in the exact mandatory footer; bounded model reassessment, no automatic passes",
     "manual_score_overrides": false,
     "answer_generation_repeated": true,
-    "reference_retrieval_repeated": true,
     "deployment_performed_this_revision": false,
-    "github_push": "authorized private repository; see publication receipt",
     "deployment_id": "01f1e5f7f6fc162fb8c3cc875e7f8546",
-    "operational": {
-      "chat_median_elapsed_seconds": 17.86,
-      "chat_total_reported_tokens": 5979719
-    },
     "benchmark": {
       "cases": 10,
-      "exact_match_passes": 3,
-      "completed": 7,
-      "dataset_id": "RGF0YXNldDox",
+      "exact_match_passes": 9,
+      "completed": 10,
+      "dataset_id": "RGF0YXNldDoy",
       "experiment_id": "RXhwZXJpbWVudDoz",
       "phoenix_readback": true,
       "results": [
@@ -1221,9 +1245,9 @@
           "id": "B01",
           "completed": true,
           "expected": "23.44",
-          "actual": "23.96",
-          "exact_match": false,
-          "tool_calls": 3
+          "actual": "23.44",
+          "exact_match": true,
+          "tool_calls": 6
         },
         {
           "id": "B02",
@@ -1239,15 +1263,15 @@
           "expected": "10.1007/s00737-018-0905-3",
           "actual": "10.1007/s00737-018-0905-3",
           "exact_match": true,
-          "tool_calls": 6
+          "tool_calls": 3
         },
         {
           "id": "B04",
           "completed": true,
           "expected": "2",
-          "actual": "1",
-          "exact_match": false,
-          "tool_calls": 10
+          "actual": "2",
+          "exact_match": true,
+          "tool_calls": 8
         },
         {
           "id": "B05",
@@ -1255,75 +1279,79 @@
           "expected": "376",
           "actual": "376",
           "exact_match": true,
-          "tool_calls": 6
+          "tool_calls": 7
         },
         {
           "id": "B06",
-          "completed": false,
+          "completed": true,
           "expected": "Estradiol",
-          "actual": "UNKNOWN",
-          "exact_match": false,
-          "tool_calls": 1
+          "actual": "Estradiol",
+          "exact_match": true,
+          "tool_calls": 7
         },
         {
           "id": "B07",
           "completed": true,
           "expected": "89.1",
-          "actual": "UNKNOWN",
-          "exact_match": false,
-          "tool_calls": 4
+          "actual": "89.1",
+          "exact_match": true,
+          "tool_calls": 5
         },
         {
           "id": "B08",
           "completed": true,
           "expected": "60",
-          "actual": "UNKNOWN",
-          "exact_match": false,
-          "tool_calls": 4
+          "actual": "60",
+          "exact_match": true,
+          "tool_calls": 9
         },
         {
           "id": "B09",
-          "completed": false,
+          "completed": true,
           "expected": "10.1016/j.ejogrb.2008.02.003",
-          "actual": "UNKNOWN",
+          "actual": "10.1055/s-0032-1323590",
           "exact_match": false,
-          "tool_calls": 1
+          "tool_calls": 3
         },
         {
           "id": "B10",
-          "completed": false,
+          "completed": true,
           "expected": "65.9",
-          "actual": "UNKNOWN",
-          "exact_match": false,
-          "tool_calls": 1
+          "actual": "65.9",
+          "exact_match": true,
+          "tool_calls": 4
         }
       ],
       "method_sha256": {
-        "eval\\phoenix\\agent.py": "72a91ea13508c510de460225b955e825b384f095b89e6a5181ecc756292f97f5",
-        "eval\\phoenix\\create_dataset.py": "cb1a268df2807b1217fae83530babb6371e4e44a540ed2e737b9abec21c1a867",
-        "eval\\phoenix\\run_experiment.py": "401ba993e5ef998aa2fc5feec813d0cfd8b0e401640c31d3c51e803a6686cd32",
+        "eval\\phoenix\\agent.py": "dcba836ebe0e6eb9ac8174fda93cde4b16f0d34d8b3a9f6d79d104d4f7ad031f",
+        "eval\\phoenix\\create_dataset.py": "852afcc67e95391c57e6778e5b0b9c5aec4acd41d4ac4b1b7527b8da072c41b3",
+        "eval\\phoenix\\run_experiment.py": "3822a4beec6c7523c93b79cdee836e43569b32a72bcf1a4d6f06b4eefa3e9dbc",
         "eval\\phoenix\\prompts\\system_prompt_v1.txt": "ac5473d6e319eaa3bb516a2295d971accdb70762515ff97650446621d411f0bd",
+        "eval\\phoenix\\prompts\\system_prompt_v2.txt": "9d6f78669c93cb356dab9897b4c6ca9fdd60a7e785cbf3c745255c1f1d7beffd",
         "eval\\benchmark\\datasets\\mprint-v1\\dataset.csv": "d71e24df2d254e9a2e72aaef6abd0349c037b9eece618c5a91e42fee00e9fa0f",
         "eval\\benchmark\\datasets\\mprint-v1\\evaluation.xml": "fc68874102c6ef98178e0dfc1e03c31bf10b3853fb041d82f46b5f4eed0098e1",
         "eval\\benchmark\\datasets\\mprint-v1\\README.md": "5ad3cb544a5691c6f6d52458b80055b6a83d171d372ee41d81cab12a87fe3169",
         "eval\\benchmark\\datasets\\mprint-v1\\verification.json": "0109984240cb679723c01d83e403f27beebf43618aa3d2ed07843fb86999dc27"
       },
-      "limitations": "Known fixed-snapshot benchmark, small sample, exact format, two evidence tools; not clinical validation, not a whole-toolset or plain-model comparison. Existing development chat grades remain separate.",
-      "scoring_mode": "saved captures; no answer regeneration",
+      "limitations": "Known fixed-snapshot benchmark, small sample, exact format, two evidence tools plus a client arithmetic helper. Runner v2 changes instructions, candidate metadata and arithmetic, so improvement cannot be attributed to one change. Not clinical validation, a whole-toolset or plain-model comparison. Existing development chat grades remain separate.",
+      "scoring_mode": "fresh generation",
       "capture_sha256": {
-        "B01.json": "1ba2a14dd85ed5e99c72ee4df8c9430a441595ef899df7f48c3038e6f35cd388",
-        "B02.json": "d3bcd16628329c2ebb51be04829060a6c7c2e078791dc5f1944d64d03e07e1c4",
-        "B03.json": "249292b57ed81f0d0ccd457603ea8e563b3ea01dc93322bb2686838d68252086",
-        "B04.json": "9dfc3570354494ac1e8beecf86bd2351ea8bcf56d0020eb7014d762b1cacee8d",
-        "B05.json": "a4c23d8532e805f8f55ed03adda655e742ca765467bfc665f2802b194270e535",
-        "B06.json": "be603fb1935e0189eaed362b820ec08cec6cc2fcb161e70a62af50ed48b8dd28",
-        "B07.json": "98e9d0e7f4801dade3014cd5d3332ec9da4ed7d2f2ecfa20688d06f21f0d30cb",
-        "B08.json": "e59c4801b9814ec5f30257f9af532802fe6496ed506e3fe3eee79bd465debc43",
-        "B09.json": "7a9b31b3bf66ca58e9e15a252289d3913de64e040ed39f2370947e765bc23a85",
-        "B10.json": "da725505dce632d7ade7f15622b0a672d33b8e47c216ac2f2f45f297138ad8cf"
+        "B01.json": "022b523ea6ae66ad537d221cec89dcf580220a3c202e64c1aa6584afa723e83a",
+        "B02.json": "9dc1ed5531fb825a0bd03b4dc62e56abfdb441be67f217f772733a3fde6e3dc8",
+        "B03.json": "5a4db76adacb92063aeb47242314af9e597eda2104bd157ca3b7201d4c20e66f",
+        "B04.json": "58989c5e2fb6b61c9f572912ac2e4e05d78e416a32676b7b96e0d9b47ee2378f",
+        "B05.json": "5a553e394bdc1accfcb2cb6240b1622b8add2224307a4392a99d0516a45c1bbe",
+        "B06.json": "76eacfcc43464f4838dbe071c201d90e639b35a6c19f10c65c2fb1c5bf2ecb53",
+        "B07.json": "3f824eb566e3e205350bf9292f15d1e813df658d5eb248794f673a8bc945f768",
+        "B08.json": "eb90ac69ab2c7e4cb96df796746a16749d0d70ae57533d1ca4a7a4992696e15c",
+        "B09.json": "d7c563914ffbc16af0c4119751691deaf69ce083a118d88404756ce5c817ec8d",
+        "B10.json": "07c84b5ee4713cfbd687bbe7c4960a53481343c9b34204c0cce297d3ff2328f1"
       },
       "phoenix_task_errors": 0
+    },
+    "operational": {
+      "chat_median_elapsed_seconds": 17.93
     }
   },
-  "historical_evidence": "Prior revision directories are immutable."
+  "historical_evidence": "Prior revision directories retain their original evidence."
 }

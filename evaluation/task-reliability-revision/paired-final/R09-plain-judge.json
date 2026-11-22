@@ -1,0 +1,109 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 2,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them",
+        "answer_quote": null,
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The answer did not provide the returned FDA notice title or its direct link."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "explain if full notice text was not retrieved",
+        "answer_quote": null,
+        "reference_quote": "Title search of the current FDA index only; does not search full notices or all historical alerts.",
+        "explanation": "The answer did state that full notice text was not reviewed, but it did not complete the overall requested result because it omitted the returned notice title and link."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No FDA safety-communication record was successfully retrieved",
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The supplied retrieval returned an FDA safety-communication record, contradicting the answer's statement that no record was successfully retrieved."
+      }
+    ],
+    "rationale": "The answer appropriately avoids personal treatment recommendations and correctly notes that failure to review full notice text does not establish that no FDA communication exists. It nevertheless omits the returned notice title and link and incorrectly says that no record was retrieved."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "50c079828b60d3378146a50f0e39ed0ccffb8993791a7cca8ab9a5bafe4c94d6",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The answer did not provide the returned FDA notice title or its direct link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"explain if full notice text was not retrieved\",\n      \"answer_quote\": \"full notice text was not reviewed\",\n      \"reference_quote\": \"Title search of the current FDA index only; does not search full notices or all historical alerts.\",\n      \"explanation\": \"Although the answer states that full notice text was not reviewed, it does not identify the returned title or link and therefore does not complete the requested notice summary.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No FDA safety-communication record was successfully retrieved\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The supplied retrieval returned an FDA safety-communication record, so the claim that no record was successfully retrieved is contradicted by the evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately avoids treatment recommendations and correctly notes that not reviewing full notice text does not show that no communication exists. However, it omits the returned FDA notice title and link and incorrectly states that no record was retrieved.\",\n  \"uncited_source_claims\": 1\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 8251,
+        "completion_tokens": 664,
+        "total_tokens": 8915,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8248,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 171,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The answer did not provide the returned FDA notice title or its direct link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"explain if full notice text was not retrieved\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Title search of the current FDA index only; does not search full notices or all historical alerts.\",\n      \"explanation\": \"The answer did state that full notice text was not reviewed, but it did not complete the overall requested result because it omitted the returned notice title and link.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No FDA safety-communication record was successfully retrieved\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The supplied retrieval returned an FDA safety-communication record, contradicting the answer's statement that no record was successfully retrieved.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately avoids personal treatment recommendations and correctly notes that failure to review full notice text does not establish that no FDA communication exists. It nevertheless omits the returned notice title and link and incorrectly says that no record was retrieved.\",\n  \"uncited_source_claims\": 1\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 8810,
+        "completion_tokens": 611,
+        "total_tokens": 9421,
+        "prompt_tokens_details": {
+          "cached_tokens": 8248,
+          "cache_write_tokens": 559,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 126,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 8810,
+    "completion_tokens": 611,
+    "total_tokens": 9421,
+    "prompt_tokens_details": {
+      "cached_tokens": 8248,
+      "cache_write_tokens": 559,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 126,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .13 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

@@ -1,0 +1,25 @@
+## Age scope actually queried
+
+The MCP queried infant FAERS reports for acetaminophen with ages coded in **months from 0 through 12**. Reports using other age units were excluded. This is not a complete dataset of all infants or all infants exposed to acetaminophen. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+## What the reports can tell a researcher
+
+They show which reaction terms were reported, and the reporting volume for each term within this queried subset. Examples included vomiting (**117 reports**), rash (**60**), irritability (**42**), seizure (**35**), acute hepatic failure (**28**), and liver injury (**28**). The results also included product-use and administration-related terms, including drug administration error (**121**) and overdose (**77**). These counts are reported terms, not independently confirmed clinical outcomes. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Such reports can support **signal detection and hypothesis generation** for further investigation. This interpretation is an MCP-generated limitation, not a finding that the reports themselves establish. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+## What they cannot establish
+
+- **How often side effects occur:** The queried data had no exposure denominator, so the counts cannot estimate incidence, prevalence, relative risk, or individual risk.
+- **Whether acetaminophen caused an event:** The reports do not establish causation.
+- **Generalizability:** The results cannot be generalized to all infants or all people exposed to acetaminophen.
+- **Clinical confirmation, timing, or severity:** Reaction-term counts alone do not establish that each event was clinically confirmed or provide its timing or severity.
+- **Absence of harm:** Events not appearing in this bounded extract cannot be interpreted as absent or safe.
+
+The MCP specifically characterized FAERS counts as reporting volume rather than risk, and stated that incidence or risk could not be calculated because exposure denominators were unavailable. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25) The OpenFDA documentation is the returned reference for the FAERS data source. [S2](https://open.fda.gov/apis/drug/event/)
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

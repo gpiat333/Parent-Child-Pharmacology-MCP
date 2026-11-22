@@ -1,0 +1,87 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 24,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited ClinicalTrials.gov API link supports the bounded search, returned studies, and search limitations described.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=ADHD+AND+%28child%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=United+States"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited study page supports the title, status, update date, site, contacts, age range, and qualification-limit summary for NCT05608434.",
+        "url": "https://clinicaltrials.gov/study/NCT05608434"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The cited study page supports the title, status, update date, site-status summary, contacts, age range, and qualification-limit summary for NCT04781140.",
+        "url": "https://clinicaltrials.gov/study/NCT04781140"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The registry indicates this is an intervention for an established ADHD condition.",
+        "reference_quote": "A condition keyword may describe an outcome or prevention topic rather than treatment of established disease. Review the summary and eligibility; do not imply the study is specifically for the requested condition from a keyword alone.",
+        "explanation": "The answer overstates the registry evidence by characterizing the NCT05608434 study as an intervention for established ADHD. Its eligibility also permits a specified impairing inattention presentation that does not meet a full ADHD diagnosis, and the source expressly cautions against this inference."
+      }
+    ],
+    "rationale": "The answer supplies two relevant recruiting studies with direct links, overall and site statuses where available, update dates, contacts, qualification limits, and appropriate cautions that it does not determine eligibility or site availability. It does not decide whether a child qualifies. Fidelity fails because it makes one unsupported-overstated claim about NCT05608434 involving established ADHD."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "f7ce0aa1bbcfc63d488a741ce7dd319e01f6e22a14e1c8b9cc9121beb068e560",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited ClinicalTrials.gov API link supports the bounded search, returned studies, and search limitations described.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited study page supports the title, status, update date, site, contacts, age range, and qualification-limit summary for NCT05608434.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited study page supports the title, status, update date, site-status summary, contacts, age range, and qualification-limit summary for NCT04781140.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The registry indicates this is an intervention for an established ADHD condition.\",\n      \"reference_quote\": \"A condition keyword may describe an outcome or prevention topic rather than treatment of established disease. Review the summary and eligibility; do not imply the study is specifically for the requested condition from a keyword alone.\",\n      \"explanation\": \"The answer overstates the registry evidence by characterizing the NCT05608434 study as an intervention for established ADHD. Its eligibility also permits a specified impairing inattention presentation that does not meet a full ADHD diagnosis, and the source expressly cautions against this inference.\"\n    }\n  ],\n  \"rationale\": \"The answer supplies two relevant recruiting studies with direct links, overall and site statuses where available, update dates, contacts, qualification limits, and appropriate cautions that it does not determine eligibility or site availability. It does not decide whether a child qualifies. Fidelity fails because it makes one unsupported-overstated claim about NCT05608434 involving established ADHD.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 14664,
+        "completion_tokens": 870,
+        "total_tokens": 15534,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 14661,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 384,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 14664,
+    "completion_tokens": 870,
+    "total_tokens": 15534,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 14661,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 384,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}
