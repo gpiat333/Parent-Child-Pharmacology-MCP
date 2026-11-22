@@ -1,5 +1,7 @@
 # Fixed-answer Phoenix evaluation
 
+Runner v2 keeps all ten v1 questions and reference answers unchanged. It adds joined Silver classifications and exported-row counts to candidate searches, explicit pagination and cohort inspection instructions, supported `none` reasoning, and a bounded client arithmetic helper. The helper accepts numbers and basic arithmetic only and is not an additional MCP tool. Because several implementation and runner instructions changed together, this is a revised-workflow result, not an isolated causal experiment. Prior v1 captures and scores remain immutable.
+
 This adapts the GSA Phoenix module to the already-authorized Databricks model gateway. It uses a small explicit MCP tool loop instead of LangChain, and exact answer comparison instead of another LLM judge. Existing MLflow development-chat grades remain separate. Expected answers never enter the model prompt. The benchmark exposes only the two MPRINT evidence tools after preflight, with live name resolution disabled, and uses the versioned public snapshot. These are limitations as well as reproducibility controls.
 
 Install `uv sync --locked --group dev --group eval --group phoenix`. Start the frozen loopback MCP as described in QUICKSTART. Configure the same environment as `eval/README.md`. Launch Phoenix locally with `PHOENIX_HOST=127.0.0.1`, `PHOENIX_PORT=6062`, and a private local `PHOENIX_WORKING_DIR`, then `arize-phoenix serve`. This does not deploy an App.

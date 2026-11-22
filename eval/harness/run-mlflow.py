@@ -4,9 +4,11 @@ import sys,os,json,argparse,hashlib,time
 W=Path(__file__).parent;R=W;P=Path(os.environ['MCP_REPO_ROOT'])
 os.environ['MLFLOW_DISABLE_AGENT_HINT']='1';os.environ['MLFLOW_GENAI_EVAL_MAX_WORKERS']='1';os.environ['MLFLOW_HTTP_REQUEST_TIMEOUT']='60'
 import truststore;truststore.inject_into_ssl()
-from databricks_transport import HOST,CLI
+from databricks_transport import HOST,CLI,oauth_token
 os.environ.pop('DATABRICKS_TOKEN',None)
-os.environ.update(DATABRICKS_HOST=HOST,DATABRICKS_CONFIG_PROFILE=os.environ['DATABRICKS_CONFIG_PROFILE'],DATABRICKS_AUTH_TYPE='databricks-cli',DATABRICKS_CLI_PATH=CLI,MLFLOW_ENABLE_DB_SDK='true')
+os.environ['MCP_GATEWAY_PROFILE']=os.environ.get('DATABRICKS_CONFIG_PROFILE','gsa-mcp-hackathon')
+os.environ.update(DATABRICKS_HOST=HOST,DATABRICKS_TOKEN=oauth_token(),DATABRICKS_AUTH_TYPE='pat',DATABRICKS_CLI_PATH=CLI,MLFLOW_ENABLE_DB_SDK='false')
+os.environ.pop('DATABRICKS_CONFIG_PROFILE',None)  # Cached bearer stays in this process only.
 import mlflow
 from mlflow.genai.scorers import list_scorers,get_scorer
 from mlflow.entities.trace_location import MlflowExperimentLocation
@@ -17,14 +19,14 @@ EXPERIMENT=os.environ['MLFLOW_EXPERIMENT_ID']
 parser=argparse.ArgumentParser();parser.add_argument('--phase',choices=['pilot','research','stops','paired'],required=True);parser.add_argument('--attempt',default='');args=parser.parse_args()
 if args.phase=='stops':os.environ['MLFLOW_GENAI_EVAL_MAX_WORKERS']='4'  # No model calls in fixed-stop checks.
 label=args.phase+('-'+args.attempt if args.attempt else '')
-mlflow.set_tracking_uri('databricks://'+os.environ['DATABRICKS_CONFIG_PROFILE']);mlflow.set_experiment(experiment_id=EXPERIMENT)
+mlflow.set_tracking_uri('databricks');mlflow.set_experiment(experiment_id=EXPERIMENT)
 mlflow.tracing.set_destination(MlflowExperimentLocation(experiment_id=EXPERIMENT))
 client=mlflow.MlflowClient();out=R/'mlflow';out.mkdir(exist_ok=True)
 deployment='unchanged; see Databricks app receipt'
 parent_path=out/'parent-run.json'
 if parent_path.exists():parent=read(parent_path)
 else:
- run=client.create_run(EXPERIMENT,tags={'mlflow.runName':'mcp-mc-local-template-gap-remediation-2026-11-21','deployment_id':deployment,'evaluation_driver':'local .12 MCP and evaluation driver; model and MLflow in Databricks; deployed .9 app unchanged','policy_version':'2026-11-21.12','grader_version':'3.0','clinical_validation':'false','github_push':'authorized-private-only'})
+ run=client.create_run(EXPERIMENT,tags={'mlflow.runName':'mcp-mc-local-task-reliability-2026-11-22','deployment_id':deployment,'evaluation_driver':'local .13 MCP and evaluation driver; model and MLflow in Databricks; deployed .9 app unchanged','policy_version':'2026-11-22.13','grader_version':'3.0','clinical_validation':'false','github_push':'authorized-private-only'})
  parent={'run_id':run.info.run_id,'experiment_id':EXPERIMENT,'url':HOST+'/ml/experiments/'+EXPERIMENT+'/runs/'+run.info.run_id,'started_at_utc':datetime.now(timezone.utc).isoformat()};save(parent_path,parent)
 registered={s.name:s for s in list_scorers(experiment_id=EXPERIMENT)}
 for scorer in [execution_contracts,diagnostic_contracts]:
@@ -50,9 +52,9 @@ else:
   data.append({'inputs':{'case_id':case['id'],'arm':'chat','question':case['question']},'outputs':{'answer':d['answer'],'completed':d['completed'],'capture_artifact':'chats/'+case['id']+'-results.json'},'expectations':{'case':case,'criteria':case.get('criteria','Fixed stop contract'),'reference_artifact':'chats/'+case['id']+'-results.json'}})
 summary_path=out/(label+'-run.json')
 assert not summary_path.exists(),'Completed MLflow run already recorded; inspect rather than overwrite'
-with mlflow.start_run(run_name='fresh-local-'+label+'-v3-2026-11-21',tags={'mlflow.parentRunId':parent['run_id'],'deployment_id':deployment,'phase':args.phase,'input_mode':'fresh local .12 captures; offline evaluation of saved answers','grader':'v3-grounded-attribution','clinical_validation':'false','evidence_storage':'Full evidence in artifacts; compact references in expectations.'}) as run:
+with mlflow.start_run(run_name='fresh-local-'+label+'-v3-2026-11-22',tags={'mlflow.parentRunId':parent['run_id'],'deployment_id':deployment,'phase':args.phase,'input_mode':'fresh local .13 captures; offline evaluation of saved answers','grader':'v3-grounded-attribution','clinical_validation':'false','evidence_storage':'Full evidence in artifacts; compact references in expectations.'}) as run:
  started=time.time();save(out/(label+'-started.json'),{'run_id':run.info.run_id,'rows':len(data),'started_at_utc':datetime.now(timezone.utc).isoformat()})
- mlflow.log_params({'cases':len(data),'model':'system.ai.gpt-5-6-luna','deployment_id':deployment,'driver':'local','mcp_runtime':'Local loopback submission .12; not deployed','model_runtime':'Databricks AI Gateway'})
+ mlflow.log_params({'cases':len(data),'model':'system.ai.gpt-5-6-luna','deployment_id':deployment,'driver':'local','mcp_runtime':'Local loopback submission .13; not deployed','model_runtime':'Databricks AI Gateway'})
  result=mlflow.genai.evaluate(data=data,scorers=suite)
  for name,table in result.tables.items():
   table.to_json(out/(label+'-'+name+'.json'),orient='records',indent=2,default_handler=str)

@@ -32,6 +32,6 @@ def tier(payload=None, *, suppressed=False, reason=None):
         "recommended": False,
         "eligibility_determined": False,
         "contact_or_submission_performed": False,
-        "non_recommendation_statement": "Directory information only. Listings are not ranked or recommended and do not establish eligibility, safety or benefit. Contact the listed team to verify current details.",
+        "non_recommendation_statement": "Directory information only. Listings are not ranked or recommended and do not establish eligibility, safety or benefit. The study team must confirm eligibility and current site availability; this lookup cannot determine either.",
         "required_preflight": "Suppress this entire tier during urgent, crisis, language, privacy, treatment-decision and unconfirmed-identity routes.",
     }

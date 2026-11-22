@@ -14,7 +14,7 @@ os.environ.update(MLFLOW_DISABLE_AGENT_HINT='1',MLFLOW_HTTP_REQUEST_TIMEOUT='10'
 from databricks_transport import HOST,CLI,oauth_token
 import truststore;truststore.inject_into_ssl()
 os.environ.pop('DATABRICKS_TOKEN',None)
-os.environ.update(DATABRICKS_HOST=HOST,DATABRICKS_CONFIG_PROFILE=os.environ['DATABRICKS_CONFIG_PROFILE'],DATABRICKS_AUTH_TYPE='databricks-cli',DATABRICKS_CLI_PATH=CLI,MLFLOW_ENABLE_DB_SDK='true')
+os.environ.update(DATABRICKS_HOST=HOST,DATABRICKS_CONFIG_PROFILE=os.environ['DATABRICKS_CONFIG_PROFILE'],DATABRICKS_AUTH_TYPE='databricks-cli',DATABRICKS_CLI_PATH=CLI,MLFLOW_ENABLE_DB_SDK='false')
 import mlflow
 # Cache the CLI-issued bearer in process memory for readback; never persist it.
 os.environ['DATABRICKS_TOKEN']=oauth_token()

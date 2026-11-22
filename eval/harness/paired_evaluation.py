@@ -47,9 +47,10 @@ def save(path, value):
 def read(path):
     return json.loads(path.read_text(encoding='utf-8-sig'))
 
-def _single_model_call(messages, tools=None, judge=False, tool_choice='auto'):
+def _single_model_call(messages, tools=None, judge=False, tool_choice='auto', reasoning_effort=None):
     payload = {'model': JUDGE_MODEL if judge else MODEL, 'messages': messages, 'max_tokens': 6000 if judge else 3000,
-               'reasoning_effort': 'low' if judge else 'none'}
+               'reasoning_effort': 'low' if judge else (reasoning_effort or 'none')}
+    if reasoning_effort and not judge: payload['max_tokens']=6000
     if tools: payload.update(tools=tools, tool_choice=tool_choice)
     if judge: payload['response_format'] = {'type': 'json_object'}
     # Capture UTF-8 JSON in a private temporary file, avoiding console encoding or
@@ -68,9 +69,9 @@ def _single_model_call(messages, tools=None, judge=False, tool_choice='auto'):
         raise RuntimeError('Gateway call failed: '+str(response.get('http_status')))
     return response
 
-def model_call(messages, tools=None, judge=False, tool_choice='auto'):
+def model_call(messages, tools=None, judge=False, tool_choice='auto', reasoning_effort=None):
     for attempt in range(4):
-        try:return _single_model_call(messages,tools,judge,tool_choice)
+        try:return _single_model_call(messages,tools,judge,tool_choice,reasoning_effort)
         except RuntimeError as error:
             if '429' not in str(error) or attempt==3:raise
             with (HERE/'gateway-retries.jsonl').open('a',encoding='utf-8') as log:
@@ -176,7 +177,7 @@ def main():
             print('All paired answers already complete; retained unchanged.',flush=True);return
         save(out/'design.json',{'frozen_at_utc':datetime.now(timezone.utc).isoformat(),'model':MODEL,
             'case_ids':CASE_IDS,'system_prompt':PROMPT,'judge_prompt':JUDGE_PROMPT,
-            'design':'Same model, shared updated application instructions in both arms, single retained completed trial per question/arm; MCP arm alone receives tools, enforces preflight workflow requirements and appends applicable fixed and retrieval-coverage application notices using the same policy as the companion. Plain has no retrieval tools or application notices. Fresh references and answers from local MCP .12; grader v3 unchanged. This compares the MCP workflow, not raw model ability or clinical accuracy.',
+            'design':'Same model, shared updated application instructions in both arms, single retained completed trial per question/arm; MCP arm alone receives tools, enforces preflight workflow requirements and appends applicable fixed and retrieval-coverage application notices using the same policy as the companion. Plain has no retrieval tools or application notices. Fresh references and answers from local MCP .13; grader v3 unchanged. This compares the MCP workflow, not raw model ability or clinical accuracy.',
             'case_file_sha256':hashlib.sha256((HERE/'cases.json').read_bytes()).hexdigest()})
         for case in cases:
             if not (out/(case['id']+'-reference.json')).exists():

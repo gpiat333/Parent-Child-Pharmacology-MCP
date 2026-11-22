@@ -73,7 +73,20 @@ def route(question, country="US", *, language_required=True):
             )
         return result
     symptom_text = re.sub(POLICY["patterns"]["patterns_1"], "", q)
-    urgent = re.search(POLICY["patterns"]["patterns_2"], symptom_text)
+    # A named aggregate outcome is not itself a report of an active symptom.
+    # Never use a "research" declaration to bypass a personal/acute concern,
+    # and leave any separate symptom clause intact for the urgent matcher.
+    clauses = re.split(r"([.!?;\n])", symptom_text)
+    for i, clause in enumerate(clauses):
+        if not re.search(
+            r"\b(?:i|my|our|your|we|now|currently|today|tonight|help|emergency)\b", clause
+        ):
+            clauses[i] = re.sub(
+                r"\b(?:control of seizures|seizure(?:s)? (?:control|frequency|outcomes))\b",
+                "aggregate outcome",
+                clause,
+            )
+    urgent = re.search(POLICY["patterns"]["patterns_2"], "".join(clauses))
     poison = re.search(POLICY["patterns"]["patterns_3"], q)
     # Negative educational statements must not suppress a second actual symptom.
     if urgent or poison:

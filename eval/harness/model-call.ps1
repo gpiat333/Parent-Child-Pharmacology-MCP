@@ -1,6 +1,7 @@
 # Gateway bridge uses the OS HTTPS trust store. Credentials stay in this process.
 param([string]$Profile=$env:DATABRICKS_CONFIG_PROFILE,[string]$ResponsePath)
 $ErrorActionPreference='Stop'
+if (-not $Profile) { $Profile=$env:MCP_GATEWAY_PROFILE }
 $cli=if($env:DATABRICKS_CLI_PATH){$env:DATABRICKS_CLI_PATH}else{'databricks'}
 try {
     $workspace=$env:DATABRICKS_HOST

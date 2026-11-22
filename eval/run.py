@@ -43,6 +43,12 @@ if args.phase == "prepare":
         *ROOT.joinpath("chat-client").glob("*"),
         *(
             p
+            for p in ROOT.joinpath("eval/phoenix").rglob("*")
+            if "__pycache__" not in p.parts and p.suffix in {".py", ".txt", ".yaml"}
+        ),
+        *ROOT.joinpath("eval/benchmark/datasets/mprint-v1").glob("*"),
+        *(
+            p
             for p in ROOT.joinpath("eval/harness").rglob("*")
             if "__pycache__" not in p.parts and p.suffix != ".pyc"
         ),
@@ -58,13 +64,13 @@ if args.phase == "prepare":
     }
     design = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "version": "0.12.0",
-        "policy": "2026-11-21.12",
+        "version": "0.13.0",
+        "policy": "2026-11-22.13",
         "source_sha256": hashes,
         "model": os.environ["AGENT_MODEL"],
         "judge_model": os.getenv("JUDGE_MODEL", os.environ["AGENT_MODEL"]),
         "endpoint": os.environ["MCP_EVAL_ENDPOINT"],
-        "method": "Fresh single captures on 28 known cases and seven paired cases. Unchanged v3 grader. Same-family diagnostic judgments, no clinician review. Local MCP; Databricks models and tracking. No deployment. Failed attempts retained; no answer selection by score.",
+        "method": "Fresh single captures on 28 known cases and seven paired cases. Unchanged v3 grader prompt; R08 criterion clarified to accept elapsed/past-listed deadlines without claiming verified portal closure. All questions and other criteria unchanged. Same-family diagnostic judgments, no clinician review. Fixed MPRINT benchmark questions/answers unchanged; v2 runner uses supported none reasoning, joined candidate metadata and bounded arithmetic. Local MCP; Databricks models/tracking. No deployment. Failed attempts retained; no answer selection by score.",
     }
     (out / "run-design.json").write_text(json.dumps(design, indent=2), encoding="utf-8")
     print(out)

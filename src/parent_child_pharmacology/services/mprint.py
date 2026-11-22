@@ -21,17 +21,23 @@ async def find_mprint_records(
     study_type: Literal["any", "PK", "PE", "CT", "PD", "PG", "RCT"] = "any",
     max_results: Limit20 = 10,
     resolve_names: bool = True,
+    offset: Offset = 0,
+    include_classifications: bool = False,
 ) -> EvidenceResponse:
     """Find curated Gold study metadata by drug or exact PMID; one selector is required.
     If both supplied, both must match. Follow with get_mprint_details for outcomes.
     Snapshot inclusion is not proof of safety, quality, or MPRINT funding.
+    Follow next_offset for complete cohorts. include_classifications joins automated Silver
+    labels and exported outcome counts for all returned PMIDs; these are not clinical findings.
     Age-band requests preserve the requested band; broad source labels are not age-band confirmation."""
     if not drug and not pmid:
         return {"source": "validation", "error": "selector_required"}
     broad = (
         "pediatric" if population in {"neonate", "infant", "child", "adolescent"} else population
     )
-    out = await mprint_data.search_gold(drug, max_results, broad, study_type, resolve_names, pmid)
+    out = await mprint_data.search_gold(
+        drug, max_results, broad, study_type, resolve_names, pmid, offset, include_classifications
+    )
     return preserve_population(out, population)
 
 

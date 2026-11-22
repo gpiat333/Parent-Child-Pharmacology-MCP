@@ -11,9 +11,11 @@ import sys
 import time
 from pathlib import Path
 
+from parent_child_pharmacology.core.research_arithmetic import SCHEMA, calculate
+
 
 class ParentChildPharmacologyAgent:
-    def __init__(self, evidence_directory, prompt_version="v1", replay_only=False):
+    def __init__(self, evidence_directory, prompt_version="v2", replay_only=False):
         self.root = Path(evidence_directory).resolve()
         self.replay_only = replay_only
         sys.path.insert(0, str(self.root))
@@ -64,8 +66,9 @@ class ParentChildPharmacologyAgent:
                 for t in client.rpc("tools/list", {})["tools"]
                 if t["name"] in names
             ]
-            for _ in range(16):
-                reply = self.gateway.model_call(messages, tools)
+            tools.append(SCHEMA)
+            for _ in range(24):
+                reply = self.gateway.model_call(messages, tools, reasoning_effort="none")
                 usage.append(reply.get("usage", {}))
                 message = reply["choices"][0]["message"]
                 messages.append(message)
@@ -75,12 +78,25 @@ class ParentChildPharmacologyAgent:
                     break
                 for call in message["tool_calls"]:
                     name = call["function"]["name"]
-                    if name not in names:
+                    if name not in names | {"calculate_aggregate_expression"}:
                         raise ValueError("Unexpected benchmark tool")
                     arguments = json.loads(call["function"]["arguments"])
                     if name == "find_mprint_records":
                         arguments["resolve_names"] = False
-                    result = client.call(name, arguments)
+                        arguments["include_classifications"] = True
+                    if name == "calculate_aggregate_expression":
+                        try:
+                            value = calculate(**arguments)
+                        except (ValueError, TypeError, SyntaxError) as exc:
+                            value = {"error": type(exc).__name__, "message": str(exc)}
+                        result = {
+                            "tool": name,
+                            "arguments": arguments,
+                            "result": value,
+                            "execution": "local bounded arithmetic; not an MCP retrieval",
+                        }
+                    else:
+                        result = client.call(name, arguments)
                     calls.append(result)
                     messages.append(
                         {
@@ -104,6 +120,8 @@ class ParentChildPharmacologyAgent:
             "calls": calls,
             "usage": usage,
             "model": os.environ["AGENT_MODEL"],
+            "reasoning_effort": "none",
+            "prompt_version": "v2",
             "elapsed_seconds": round(time.monotonic() - started, 2),
         }
         destination.write_text(json.dumps(capture, indent=2, ensure_ascii=False), encoding="utf-8")

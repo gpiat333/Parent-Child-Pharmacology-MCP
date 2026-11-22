@@ -266,6 +266,11 @@ class FindMprintRecordsInput(StrictInput):
     study_type: Literal["any", "PK", "PE", "CT", "PD", "PG", "RCT"] = "any"
     max_results: Limit20 = 10
     resolve_names: bool = True
+    offset: Offset = 0
+    include_classifications: bool = Field(
+        False,
+        description="Join automated Silver labels and exported outcome counts for each returned PMID. Not clinical findings.",
+    )
 
     @model_validator(mode="after")
     def require_selector(self):

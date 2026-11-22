@@ -63,6 +63,33 @@ SELECTOR_WORDS.update(
     {"serum", "cord", "blood", "placental", "placenta", "concentration", "concentrations"}
 )
 
+# International mathematical terms can look like Latin to language detectors.
+# Admit only complete, bounded English task clauses in an English question;
+# this is not an exemption for arbitrary text labeled "research" or "audit".
+TASK_GRAMMAR = set(
+    "for each which has have the a an and or of from to with without all both every only not in as by its their that these those".split()
+)
+TASK_VOCABULARY = set(
+    "check compare compute calculate return select find inspect count review add subtract multiply divide sum difference maximum minimum mean median range spread numeric number numbers value values label labels gold silver exposure exposures outcome outcomes row rows record records zero one two three four five six seven eight nine ten largest smallest greater greatest less least exact integer decimal places".split()
+)
+TASK_ACTIONS = set(
+    "check compare compute calculate return select find inspect count review add subtract multiply divide maximum minimum".split()
+)
+TASK_VOCABULARY.update({"plus", "minus"})
+TASK_VOCABULARY.update({"public", "study", "studies", "dataset", "data"})
+
+
+def technical_english_clause(text, whole):
+    words = re.findall(r"[a-z]+", text.lower())
+    tokens = set(words)
+    return bool(
+        whole["english"]
+        and 3 <= len(words) <= 16
+        and len(tokens & TASK_GRAMMAR) >= 2
+        and tokens & TASK_ACTIONS
+        and tokens <= TASK_GRAMMAR | TASK_VOCABULARY
+    )
+
 
 def contextual_english(text, score, whole):
     anchors = set(re.findall(r"[a-z]+", text.lower())) & ENGLISH_FUNCTION_WORDS
@@ -139,15 +166,19 @@ def english_confidence(text):
         if len(words) > 8:
             parts += [" ".join(words[i : i + 8]) for i in range(0, len(words) - 7, 4)]
         whole = detector()(text)
+        whole["english"] = whole["english"] or technical_english_clause(text, {"english": True})
         scores = [detector()(p) for p in parts]
         # D05's "Do not provide medication decisions or doses" is ranked English
         # by Lingua but below the standalone threshold. Context may resolve an
         # ambiguous English-leading fragment, never a confidently foreign clause.
-        passes = [s["english"] or contextual_english(p, s, whole) for p, s in zip(parts, scores)]
+        passes = [
+            s["english"] or contextual_english(p, s, whole) or technical_english_clause(p, whole)
+            for p, s in zip(parts, scores)
+        ]
         return {
             "confident_english": whole["english"] and all(passes),
             "segments_checked": len(passes),
-            "method": "English whole-query threshold (langdetect >=.95 or Lingua >=.80), plus sentence/span checks. Ambiguous fragments need English context and either English ranked first (>=.35), or English >=.15 with two English function-word anchors. Confident foreign fragments do not inherit context.",
+            "method": "English whole-query threshold (langdetect >=.95 or Lingua >=.80), plus sentence/span checks. Ambiguous fragments need English context and either English ranked first (>=.35), or English >=.15 with two English function-word anchors. Other confident foreign fragments do not inherit context. Complete bounded English arithmetic clauses use an explicit grammar/vocabulary check to resolve technical-term detector errors.",
             "limitation": "Heuristic scores are not calibrated clinical confidence. Short technical phrases can be overblocked; mixed-language text can still be missed.",
         }
     except Exception:

@@ -78,7 +78,16 @@ def _base(tier):
     }
 
 
-def _gold(drug, limit, population="any", study_type="any", search_names=None, pmid=None):
+def _gold(
+    drug,
+    limit,
+    population="any",
+    study_type="any",
+    search_names=None,
+    pmid=None,
+    offset=0,
+    include_classifications=False,
+):
     if pmid is not None and not re.fullmatch(r"[1-9][0-9]{0,9}", pmid):
         return {
             "source": "validation",
@@ -150,11 +159,37 @@ def _gold(drug, limit, population="any", study_type="any", search_names=None, pm
     finally:
         con.close()
     limit = max(1, min(limit, 20))
+    page = matches[offset : offset + limit]
+    if include_classifications:
+        for item in page:
+            record = _silver([item["pmid"]])["results"][0]
+            item["silver_classifications"] = record["classifications"]
+            item["silver_distinct_label_count"] = len(
+                {r["study_type"] for r in record["classifications"]}
+            )
+            counts = {}
+            shard = OUTCOMES_DATABASE.with_name(
+                f"{OUTCOMES_DATABASE.stem}-{int(item['pmid']) % 2}.sqlite"
+            )
+            with sqlite3.connect(shard.resolve().as_uri() + "?mode=ro", uri=True) as outcomes:
+                counts.update(
+                    outcomes.execute(
+                        "SELECT kind, count(*) FROM outcomes WHERE pmid=? GROUP BY kind",
+                        (item["pmid"],),
+                    ).fetchall()
+                )
+            item["exported_outcome_rows"] = {k: counts.get(k, 0) for k in ["PK_summary", "PE_CT"]}
+            item["classification_join_notice"] = (
+                "Automated Silver annotations joined by PMID, not curated clinical findings. Outcome counts describe exported rows including unmatched workbook copies, not independent studies or absence in the original paper. Fetch detail rows and preserve study_context_matched."
+            )
     out.update(
-        results=matches[:limit],
+        results=page,
         matching_records=len(matches),
-        returned_records=min(limit, len(matches)),
-        results_truncated=len(matches) > limit,
+        returned_records=len(page),
+        offset=offset,
+        next_offset=offset + len(page) if offset + len(page) < len(matches) else None,
+        has_more=offset + len(page) < len(matches),
+        results_truncated=offset > 0 or offset + len(page) < len(matches),
         applied_filters={"population": population, "study_type": study_type, "pmid": pmid},
         searched_names=names,
         filter_scope="Conservative matches on source population text; generic maternal does not imply pregnancy or lactation. Original mixed population labels are preserved, not exclusive cohorts.",
@@ -164,7 +199,14 @@ def _gold(drug, limit, population="any", study_type="any", search_names=None, pm
 
 
 async def search_gold(
-    drug="", max_results=10, population="any", study_type="any", resolve_names=False, pmid=None
+    drug="",
+    max_results=10,
+    population="any",
+    study_type="any",
+    resolve_names=False,
+    pmid=None,
+    offset=0,
+    include_classifications=False,
 ):
     if pmid is not None and not re.fullmatch(r"[1-9][0-9]{0,9}", pmid):
         return {
@@ -209,7 +251,17 @@ async def search_gold(
                 "error_type": type(exc).__name__,
                 "note": "Only the literal input name was searched.",
             }
-    out = await asyncio.to_thread(_gold, drug, max_results, population, study_type, names, pmid)
+    out = await asyncio.to_thread(
+        _gold,
+        drug,
+        max_results,
+        population,
+        study_type,
+        names,
+        pmid,
+        offset,
+        include_classifications,
+    )
     out["resolution"] = resolution
     return out
 
@@ -343,6 +395,7 @@ def _outcomes(pmid, kind, limit, offset):
         returned_rows=len(results),
         offset=offset,
         next_offset=offset + len(results) if offset + len(results) < count else None,
+        has_more=offset + len(results) < count,
         results_truncated=offset > 0 or offset + len(results) < count,
         guidance_origin="MCP implementation guidance, not a quotation or conclusion from the MPRINT dataset authors or original paper.",
         linkage="This MCP links PMID plus original curation workbook and folder; not an individual cohort/arm or drug-effect join. Do not attribute every row to every drug in study_context.",

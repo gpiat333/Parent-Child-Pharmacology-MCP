@@ -28,7 +28,7 @@ ROOT = Path(__file__).parents[1]
             ["portfolio_interpretation", "clinical_framing_review"],
         ),
         (["route_parent_question", "normalize_drug"], []),
-        (["find_recruiting_studies", "get_reporting_resources"], []),
+        (["find_recruiting_studies", "get_reporting_resources"], ["study_team_confirmation"]),
     ],
 )
 def test_notices_follow_tool_scope(tools, expected):
