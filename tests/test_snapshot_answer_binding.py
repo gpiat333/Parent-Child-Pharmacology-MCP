@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
+
 
 def agent(tmp_path, monkeypatch, replies):
     root = Path(__file__).resolve().parents[1]
@@ -110,3 +112,75 @@ def test_unbound_free_form_answer_is_not_accepted(tmp_path, monkeypatch):
         ],
     )
     assert obj.run("fixture", "Find the identifier") == "UNKNOWN"
+
+
+@pytest.mark.parametrize("raw", ['{"expression":', "[]", "null"])
+def test_invalid_tool_json_is_recoverable_without_executing_it(tmp_path, monkeypatch, raw):
+    bad = call("calculate_aggregate_expression", {})
+    bad["tool_calls"][0]["function"]["arguments"] = raw
+    obj = agent(
+        tmp_path,
+        monkeypatch,
+        [
+            bad,
+            call("calculate_aggregate_expression", {"expression": "2+3", "decimal_places": 0}),
+            call(
+                "return_source_value",
+                {"source_call_index": 2, "value_path": "/result", "record_pmid": None},
+            ),
+        ],
+    )
+    assert obj.run("fixture", "Return an integer only.") == "5"
+    capture = json.loads((tmp_path / "fixture.json").read_text())
+    assert capture["calls"][1]["result"]["error"] == "InvalidToolArguments"
+    assert capture["calls"][1]["execution"] == "local argument validation; no MCP call"
+
+
+@pytest.mark.parametrize(
+    "question,expected",
+    [
+        ("Compare values. Return the exact category label only.", True),
+        ("Return the stored DOI without a URL prefix.", True),
+        ("Return the exact source string, even if it contains digits.", True),
+        ("Return the number of distinct names.", False),
+        ("Identify a site and explain the finding.", False),
+    ],
+)
+def test_explicit_return_format_guard_is_narrow(tmp_path, monkeypatch, question, expected):
+    obj = agent(tmp_path, monkeypatch, [])
+    fn = obj.run.__globals__["expects_source_label"]
+    assert fn(question) is expected
+
+
+def test_calculator_value_cannot_finish_a_source_label_request(tmp_path, monkeypatch):
+    obj = agent(
+        tmp_path,
+        monkeypatch,
+        [
+            call("find_mprint_records", {"drug": "example"}),
+            call(
+                "select_snapshot_records",
+                {
+                    "source_call_indices": [1],
+                    "required_labels": [],
+                    "excluded_labels": [],
+                    "zero_outcome_table": None,
+                    "require_complete": True,
+                    "sort_pmid": "ascending",
+                    "limit": 1,
+                },
+            ),
+            call("calculate_aggregate_expression", {"expression": "2+3", "decimal_places": 0}),
+            call(
+                "return_source_value",
+                {"source_call_index": 3, "value_path": "/result", "record_pmid": None},
+            ),
+            call(
+                "return_source_value",
+                {"source_call_index": 2, "value_path": "/results/0/doi", "record_pmid": "101"},
+            ),
+        ],
+    )
+    assert obj.run("fixture", "Compare quantities. Return the selected DOI.") == "10.test/right"
+    capture = json.loads((tmp_path / "fixture.json").read_text())
+    assert "intermediate" in capture["calls"][4]["result"]["message"]

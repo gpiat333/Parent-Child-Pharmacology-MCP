@@ -19,16 +19,22 @@ ROOT = Path(__file__).parents[1]
     [
         (["summarize_research_portfolio"], ["portfolio_interpretation"]),
         (["search_funded_research"], ["portfolio_interpretation"]),
-        (["get_label_sections"], ["clinical_framing_review"]),
+        (["get_label_sections"], ["clinical_framing_review", "continuity_of_care"]),
         (
             ["get_lactmed_record", "get_label_sections"],
-            ["lactmed_bounded_extract", "clinical_framing_review"],
+            ["lactmed_bounded_extract", "clinical_framing_review", "continuity_of_care"],
         ),
-        (["medication_evidence_brief"], ["faers_population_scope", "clinical_framing_review"]),
-        (["get_adverse_event_signals"], ["faers_population_scope", "clinical_framing_review"]),
+        (
+            ["medication_evidence_brief"],
+            ["faers_population_scope", "clinical_framing_review", "continuity_of_care"],
+        ),
+        (
+            ["get_adverse_event_signals"],
+            ["faers_population_scope", "clinical_framing_review", "continuity_of_care"],
+        ),
         (
             ["summarize_research_portfolio", "get_abstracts"],
-            ["portfolio_interpretation", "clinical_framing_review"],
+            ["portfolio_interpretation", "clinical_framing_review", "continuity_of_care"],
         ),
         (["route_parent_question", "normalize_drug"], []),
         (["find_recruiting_studies", "get_reporting_resources"], ["study_team_confirmation"]),
@@ -55,7 +61,8 @@ def test_caveats_added_once_without_altering_source_text():
 def test_quoted_notice_is_not_mistaken_for_a_standing_notice():
     notice = required_notices(["get_label_sections"])[0]["text"]
     answer, _ = format_required_notices('Do not say "' + notice + '".', ["get_label_sections"])
-    assert answer.endswith("\n" + notice)
+    assert notice in answer.splitlines()
+    assert answer.count(notice) == 2
 
 
 def test_stop_response_is_unchanged_even_after_prior_retrieval():

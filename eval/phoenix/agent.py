@@ -7,6 +7,7 @@ No LangChain or additional model-provider credential is required.
 import importlib.util
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -18,8 +19,21 @@ from parent_child_pharmacology.core.source_value import SCHEMA as VALUE_SCHEMA
 from parent_child_pharmacology.core.source_value import copy_source_value
 
 
+def expects_source_label(question):
+    """Recognize an explicit label-return clause; ambiguous formats stay unrestricted."""
+    clauses = re.findall(r"\breturn\b([^.!?]*)", question, flags=re.I)
+    if any(
+        re.search(
+            r"\b(number|numeric|integer|decimal|count|sum|difference|rate|proportion)\b", c, re.I
+        )
+        for c in clauses
+    ):
+        return False
+    return any(re.search(r"\b(label|string|doi|name)\b", c, re.I) for c in clauses)
+
+
 class ParentChildPharmacologyAgent:
-    def __init__(self, evidence_directory, prompt_version="v5", replay_only=False):
+    def __init__(self, evidence_directory, prompt_version="v6", replay_only=False):
         self.root = Path(evidence_directory).resolve()
         self.replay_only = replay_only
         self.prompt_version = prompt_version
@@ -98,12 +112,40 @@ class ParentChildPharmacologyAgent:
                         "select_snapshot_records",
                     }:
                         raise ValueError("Unexpected benchmark tool")
-                    arguments = json.loads(call["function"]["arguments"])
-                    if name == "find_mprint_records":
+                    raw_arguments = call["function"]["arguments"]
+                    argument_error = False
+                    try:
+                        arguments = json.loads(raw_arguments)
+                        if not isinstance(arguments, dict):
+                            raise ValueError("Tool arguments must be an object")
+                    except (ValueError, TypeError):
+                        argument_error = True
+                        arguments = {"invalid_arguments": str(raw_arguments)[:3000]}
+                    if name == "find_mprint_records" and not argument_error:
                         arguments["resolve_names"] = False
                         arguments["include_classifications"] = True
-                    if name == "return_source_value":
+                    if argument_error:
+                        result = {
+                            "tool": name,
+                            "arguments": arguments,
+                            "result": {
+                                "error": "InvalidToolArguments",
+                                "message": "No operation executed. Retry with one valid JSON object matching this tool's schema.",
+                            },
+                            "execution": "local argument validation; no MCP call",
+                        }
+                    elif name == "return_source_value":
                         try:
+                            index = arguments.get("source_call_index")
+                            if (
+                                expects_source_label(question)
+                                and type(index) is int
+                                and 0 <= index < len(calls)
+                                and calls[index].get("tool") == "calculate_aggregate_expression"
+                            ):
+                                raise ValueError(
+                                    "The question explicitly requests a source label, string, DOI or name. A calculator value is intermediate; return the requested source field instead."
+                                )
                             value = copy_source_value(
                                 calls, **arguments, require_metadata_selection=True
                             )

@@ -12,6 +12,7 @@ def required_notices(tool_names, blocked=False, tool_calls=()):
     names = set(tool_names)
     from .abstract_coverage import disclosure_notices
     from .axis_display import axis_notices
+    from .portfolio_display import portfolio_notices
 
     return (
         [
@@ -21,6 +22,7 @@ def required_notices(tool_names, blocked=False, tool_calls=()):
         ]
         + disclosure_notices(tool_calls, POLICY["abstract_coverage"])
         + axis_notices(tool_calls)
+        + portfolio_notices(tool_calls, POLICY["portfolio_filters"])
     )
 
 

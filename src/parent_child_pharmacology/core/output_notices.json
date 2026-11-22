@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-22.17",
+  "version": "2026-11-22.18",
   "origin": "Application output contracts; not source-authored medical findings",
   "notices": [
     {
@@ -50,6 +50,20 @@
         "medication_evidence_brief"
       ],
       "text": "Human clinical framing review remains required. This generated answer is not clinically validated."
+    },
+    {
+      "id": "continuity_of_care",
+      "tools": [
+        "search_lactmed",
+        "get_lactmed_record",
+        "search_literature",
+        "get_abstracts",
+        "get_label_sections",
+        "get_adverse_event_signals",
+        "get_parent_medication_info",
+        "medication_evidence_brief"
+      ],
+      "text": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment."
     }
   ],
   "abstract_coverage": {
@@ -60,5 +74,11 @@
     "no_records": "No PubMed records were retrieved in this bounded search, so no abstracts were evaluated.",
     "search_failed": "A PubMed literature search failed; additional abstract coverage could not be verified.",
     "limit": "Missing abstract text is a retrieval limitation, not evidence that a study or research does not exist. Titles alone are not outcome evidence."
+  },
+  "portfolio_filters": {
+    "title": "Executed NIH RePORTER filters (source query criteria):",
+    "missing": "Executed filters were not supplied in this response; query scope is unknown.",
+    "oversized": "The executed-filter payload exceeds the display limit. Full filters are not displayed; inspect the saved tool record.",
+    "max_chars": 8192
   }
 }
