@@ -1,8 +1,7 @@
-PYTHON ?= python
 .PHONY: test run install
 install:
-	$(PYTHON) -m pip install -r requirements.lock
+	cd .. && uv sync --locked --group dev
 test:
-	$(PYTHON) -m pytest tests -q
+	cd .. && uv run --locked pytest tests -q
 run:
-	$(PYTHON) server.py
+	cd .. && uv run --locked python main.py

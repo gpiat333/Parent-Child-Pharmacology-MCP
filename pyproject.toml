@@ -1,0 +1,90 @@
+[project]
+name = "parent-child-pharmacology-mcp"
+version = "0.11.0"
+description = "GSA hackathon prototype for public maternal and pediatric evidence discovery"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "annotated-types==0.8.0",
+    "anyio==4.16.0",
+    "attrs==26.1.0",
+    "certifi==2026.11.20",
+    "cffi==2.1.1",
+    "charset-normalizer==3.5.2",
+    "click==8.5.1",
+    "colorama==0.4.6; sys_platform == \"win32\"",
+    "cryptography==50.0.2",
+    "databricks-sdk==0.167.0",
+    "et_xmlfile==2.0.0",
+    "google-auth==2.63.0",
+    "h11==0.16.0",
+    "httpcore==1.0.9",
+    "httpx-sse==0.4.3",
+    "httpx==0.28.1",
+    "idna==3.20",
+    "jsonschema-specifications==2025.9.1",
+    "jsonschema==4.26.0",
+    "mcp==1.30.0",
+    "openpyxl==3.1.5",
+    "packaging==26.3",
+    "protobuf==7.36.2",
+    "pyasn1==0.6.5",
+    "pyasn1_modules==0.4.2",
+    "pycparser==3.12",
+    "pydantic-settings==2.16.3",
+    "pydantic==2.14.3",
+    "pydantic_core==2.50.4",
+    "Pygments==2.21.0",
+    "PyJWT==2.15.1",
+    "python-dotenv==1.2.4",
+    "python-multipart==0.0.34",
+    "pywin32==312; sys_platform == \"win32\"",
+    "referencing==0.37.0",
+    "requests==2.34.2",
+    "rpds-py==2026.9.1",
+    "sse-starlette==3.7.0",
+    "starlette==1.10.0",
+    "typing-inspection==0.4.5",
+    "typing_extensions==4.16.0",
+    "urllib3==2.8.0",
+    "uvicorn==0.54.0",
+    "langdetect==1.0.9",
+    "six==1.17.0",
+    "lingua-language-detector==2.1.1",
+]
+[project.scripts]
+parent-child-mcp = "parent_child_pharmacology.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/parent_child_pharmacology"]
+
+[dependency-groups]
+dev = [
+    "iniconfig==2.3.1",
+    "pluggy==1.7.0",
+    "pytest==9.2.0",
+    "ruff==0.17.6",
+]
+eval = [
+    "mlflow==3.18.0",
+    "truststore==0.10.5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["evaluation", "presentation", ".venv", ".agents"]
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+[tool.ruff.lint.per-file-ignores]
+"src/parent_child_pharmacology/app.py" = ["F401"]
+"src/parent_child_pharmacology/clients/__init__.py" = ["F401"]
+"tests/*" = ["F401", "F811"]

@@ -1,4 +1,4 @@
-$script:AnswerNoticePolicy = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'server/core/output_notices.json') | ConvertFrom-Json
+$script:AnswerNoticePolicy = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'src/parent_child_pharmacology/core/output_notices.json') | ConvertFrom-Json
 
 function Get-AbstractCoverageNotice([object[]]$ToolCalls) {
     $states = [ordered]@{}

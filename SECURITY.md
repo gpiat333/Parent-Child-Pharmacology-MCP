@@ -1,0 +1,25 @@
+# Security model and limitations
+
+## Intended data and deployment boundary
+
+This private hackathon prototype retrieves public federal evidence and bundled dated public snapshots. It is not an official NIH MCP, clinical service, certified medical device, or production deployment. Do not enter patient identifiers, protected health information, confidential personnel information or proprietary research. A user question can itself contain sensitive information even when every retrieved source is public. Heuristic routing is not a data-loss-prevention guarantee.
+
+Default stdio inherits the local user's OS boundary. Optional HTTP binds to loopback by default and has no built-in user authentication. Databricks App OAuth, sharing permissions and TLS are platform responsibilities. Binding publicly without an authenticated gateway is unsupported. Host/DNS-rebinding validation remains enabled; hosted names are explicit operator configuration. `/health` and `/version` contain no credentials or data. No infrastructure, app deployment or permissions were changed during this revision.
+
+## Network and credential controls
+
+The shared source client permits exact, reviewed HTTPS federal-source hostnames and port 443 only. Credentials in URLs, fragments, control characters, backslashes, off-list hosts and alternate ports are rejected before network access. Redirects are rejected, environment proxies are ignored, requests have timeouts and bounded retry counts, and declared/streamed/decompressed responses are capped at 5 MB. Tests include redirect-to-private-address and compressed oversized-response cases. Source calls are read-only except public search POST requests. No arbitrary URL fetch tool is registered.
+
+This is an application allowlist, not an egress firewall or a connection-time DNS/IP pinning system. Operator DNS and trusted federal endpoints remain dependencies. Enforce network egress policies separately for any future hosted deployment. A source changing its canonical URL may require a reviewed code change; the client will fail closed on redirects.
+
+Model and remote MCP credentials come from the operator's Databricks CLI profile and remain in process memory. The companion and evaluation transport verify the exact configured remote MCP endpoint before attaching the token, reject userinfo/query/fragment destinations, disable redirects, and send no Databricks token to loopback MCP. Model calls use the configured HTTPS workspace. `.env` is ignored; exported variables override it. Configure only a workspace/profile you administer. Never copy tokens into notebooks, screenshots, logs or source control.
+
+## Logging, traces and retention
+
+Library logging is filtered and HTTP access logs are disabled so request URLs, queries and upstream exception bodies are not emitted by the application. Structured tool audit records use bounded, non-content fields. This does not sanitize arbitrary third-party client logs. Evaluation captures intentionally contain questions, answers, public evidence, tool arguments and model usage; run them only with the committed synthetic/public cases. Raw traces are stored as restricted MLflow artifacts, and the submitted evidence is in this initially private repository. Workspace/repository access controls, retention and deletion are owner responsibilities; no automatic retention policy is claimed or changed by this code.
+
+Before publication, review artifacts and run a secret scan. The earlier scan review identifies public OAuth application IDs and SHA256 hashes as non-secret false positives; do not globally ignore arbitrary credential patterns. Revoke any real exposed credential through its issuer and remove it from history before further sharing. Contact the repository owner privately for security issues; do not post tokens or patient data in an issue.
+
+## Clinical and model failure boundaries
+
+Mandatory preflight stops urgent/crisis, unconfirmed-identity and unsupported-language routes before downstream retrieval/model answering in the bundled client. This is heuristic routing, not clinical triage. Tool payloads preserve absence-of-evidence, population, source coverage, truncation, dosing flags, snapshot dates and FAERS denominator/causation caveats. Retrieved text is untrusted data, not instructions. Both companion clients enforce required notices; external clients must implement that contract. These controls do not guarantee detection, completeness, clinical truth or a safe interpretation. Independent clinical review, broader language/adversarial evaluation, environment security review and an operating policy remain prerequisites to any real-world use.

@@ -1,0 +1,9 @@
+# Staged at repository root in a separately reviewed deployment package.
+command: ["python", "main.py"]
+env:
+  - name: USE_LAKEHOUSE
+    value: "false"
+  - name: MCP_TRANSPORT
+    value: "streamable-http"
+# Set MCP_ALLOWED_HOSTS to the assigned App hostname if DATABRICKS_APP_URL
+# is not supplied by the platform. Keep gateway OAuth and restricted sharing.
