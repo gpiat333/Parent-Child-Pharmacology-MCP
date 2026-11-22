@@ -1,0 +1,215 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fresh evaluation addendum</title><style>body{font:17px/1.6 system-ui,sans-serif;margin:40px auto;max-width:1250px;padding:0 24px;color:#182a42}a{color:#155b97}.note{background:#fff2d8;padding:20px;border-left:5px solid #ca780a}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.6 system-ui,sans-serif}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}article{background:#f4f7fa;padding:20px;min-width:0}summary{cursor:pointer;font-weight:650;padding:18px}details{border:1px solid #ccd5df;margin:18px 0}@media(max-width:800px){.pair{grid-template-columns:1fr}}</style><h1>Fresh local evaluation results</h1><p>November 20, 2026 · Parent-child Pharmacology MCP · No deployment or GitHub push</p><div class="note"><strong>Evaluations unblocked; original shared key not renewed.</strong><br>The existing managed model route completed 16 chat cases and 10 comparison responses. 301 local tests passed. Automated grading still has known errors; these results do not establish clinical accuracy or general superiority.</div><p><a href="REPORT.md">Full report and limitations</a> · <a href="chat-summary.json">16-case chat scores</a> · <a href="paired-summary.json">Paired comparison summary</a> · <a href="diagnosis.json">Credential diagnosis</a></p><h2>Compare the five paired answers</h2><p>These are unchanged saved responses. Source URLs are shown as response text, not independently validated medical guidance. Open each question to compare both arms.</p><details><summary>R01: What does LactMed report about amoxicillin in breastfed babies? Separate observed symptoms from advice to monitor, and explain uncertainty. Do not give a dose.</summary><div class="pair"><article><h3>With MCP</h3><p>17.17 seconds; 3 tool calls</p><pre>LactMed’s amoxicillin record reports:
+
+**Observed symptoms in breastfed infants**
+- In one telephone follow-up of 25 mothers, **3 reported infant diarrhea**; no rash or candidiasis was reported.
+- In another study of 40 exposed infants, **2 developed diarrhea and 1 developed a rash**.
+- A comparative study reported adverse reactions in **8.3%** of amoxicillin-exposed infants, similar to the comparison group; reported reactions included **rash and sleepiness**.
+- One infant developed **recurrent generalized hives** shortly after breastfeeding. However, the mother was taking amoxicillin/clavulanate and gentamicin, so the responsible drug could not be determined.
+- In a study involving 25 mothers, **no infant adverse effects were reported**.
+
+**Advice to monitor—not evidence that symptoms occurred**
+LactMed says that, because occasional reports have involved **rash, diarrhea, or thrush**, clinicians or parents may watch for those effects. That monitoring advice should not be interpreted as evidence that a particular infant experienced them.
+
+**Uncertainty**
+LactMed states that amoxicillin produces low milk levels and is not expected to cause adverse effects, but the reported infant effects have **not been adequately evaluated**. The studies were small, some relied on parental reports, and symptoms such as diarrhea or rash can have causes unrelated to amoxicillin. Published infant blood-level data were not available in the record. Thus, the evidence suggests generally low exposure, but it does not prove that adverse effects cannot occur.  
+Source: [LactMed—Amoxicillin, NCBI Bookshelf](https://www.ncbi.nlm.nih.gov/books/NBK500887/)
+
+Informational only; not medical advice.</pre><a href="paired-final/R01-mcp.json">Full saved trace</a></article><article><h3>Plain model</h3><p>6.11 seconds; 0 tool calls</p><pre>**LactMed’s report on amoxicillin**
+
+**Observed in breastfed babies**
+- Amoxicillin passes into milk in **small amounts**. In the reports summarized by LactMed, breastfed infants generally had **no documented adverse effects**.
+- A small number of infants were reported to have possible symptoms such as **diarrhea, rash, or thrush (candida)**, but these reports do not establish that amoxicillin caused the symptoms.  
+Source: [LactMed—Amoxicillin](https://www.ncbi.nlm.nih.gov/books/NBK500887/)
+
+**Advice to monitor**
+- LactMed states that, although amoxicillin is generally considered acceptable during breastfeeding, the infant should be observed for possible **changes in the gastrointestinal tract, rash, or thrush**.
+- This is monitoring advice—not a statement that these effects are expected or that they will occur.  
+Source: [LactMed—Amoxicillin](https://www.ncbi.nlm.nih.gov/books/NBK500887/)
+
+**Uncertainty**
+- Available evidence is limited: studies involve relatively few mother–infant pairs, and reported infant outcomes are not always systematically assessed.
+- Some symptoms commonly occur in infants for unrelated reasons, making causation difficult to determine.
+- Thus, the evidence supports **low infant exposure and generally reassuring reported experience**, but it does not prove that adverse effects cannot occur. LactMed also notes that amoxicillin is not expected to cause harmful effects in most breastfed infants.  
+Source: [LactMed—Amoxicillin](https://www.ncbi.nlm.nih.gov/books/NBK500887/)
+
+Informational only; not medical advice.</pre><a href="paired-final/R01-plain.json">Full saved trace</a></article></div></details><details><summary>R03: Compare metformin label warnings for the adult taking it with findings in breastfed infants. Identify which source says what, and disclose missing sections. Don&#x27;t give any doses.</summary><div class="pair"><article><h3>With MCP</h3><p>22.20 seconds; 4 tool calls</p><pre>## Metformin: label warnings vs. breastfed-infant findings
+
+### 1) Product label: warnings for the adult taking metformin
+The DailyMed label retrieved was for **“METFORMIN HCL TABLET [QPHARMA, INC.]”**—one specific product, not every metformin formulation.
+
+Its relevant warnings/precautions include:
+
+- **Lactic acidosis:** The label’s boxed warning identifies lactic acidosis as a rare but serious risk associated with metformin.
+- **Contraindications/precautions:** The label discusses risks related to kidney function, hypoxic states, excessive alcohol use, hepatic impairment, and certain procedures or imaging involving iodinated contrast.
+- **Common adult adverse reactions:** Gastrointestinal symptoms, including diarrhea, nausea/vomiting, flatulence, abdominal discomfort, indigestion, headache, and weakness, are listed in the adverse-reactions information.
+- **Low blood glucose:** The label notes that hypoglycemia can occur, particularly in certain treatment combinations or circumstances; metformin alone generally has limited hypoglycemic effect.
+
+Source: [DailyMed metformin hydrochloride tablet label](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551)
+
+### 2) Product label: lactation warning
+The same label states that animal studies found metformin in milk at levels comparable with plasma, while comparable studies had **not been conducted in nursing mothers**. It says a potential for hypoglycemia in nursing infants may exist and presents breastfeeding-versus-treatment as a decision requiring consideration of the drug’s importance to the mother.
+
+This is a **label warning based partly on animal data and theoretical concern**, not a report that hypoglycemia occurred in breastfed infants.
+
+Source: [DailyMed lactation section](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551)
+
+### 3) LactMed: measured exposure and observed infant findings
+The NIH/NLM LactMed record reports:
+
+- **Milk exposure:** Studies found low milk concentrations; LactMed summarizes estimated infant exposure as generally below 0.5% of the mother’s weight-adjusted amount.
+- **Infant blood levels:** Metformin was sometimes detectable at low concentrations in infant serum, while it was undetectable in some tested infants.
+- **Observed outcomes:** Reported infants were generally described as healthy, with expected growth and development. In a prospective study, no differences were found in several growth, developmental, or illness outcomes between predominantly breastfed and formula-fed groups.
+- **Hypoglycemia findings:** In one report involving three newborns, none had low blood glucose; mothers reported no adverse reactions.
+- **Limitations:** Some reports did not specify the extent of breastfeeding, infant ages, exposure duration, or other details. LactMed advises caution for newborn or premature infants and infants with renal impairment; that is a source recommendation, not evidence that harm occurred.
+
+Source: [NIH LactMed: Metformin](https://www.ncbi.nlm.nih.gov/books/NBK501020/)
+
+## Direct comparison
+
+| Issue | Product label says | LactMed reports |
+|---|---|---|
+| Milk transfer | Animal studies showed excretion into milk; nursing-mother studies were described as unavailable in that label | Human studies measured low milk concentrations |
+| Infant hypoglycemia | Warns that a potential risk may exist | Reported newborns did not have low blood glucose in one small report |
+| Infant adverse effects | Does not provide human breastfed-infant outcome data in the quoted lactation warning | Available reports describe no detectable adverse effects or expected growth/development |
+| Infant drug levels | No human infant-level data in the label section quoted | Low infant serum levels were sometimes detectable; other tested levels were undetectable |
+| Special populations | No specific infant subgroup evidence in the label warning | Caution is advised for newborn, premature, or renally impaired infants |
+
+## Missing sections and limitations
+
+- The retrieved label is for **one metformin tablet product**, so warnings may differ by manufacturer, formulation, or current label revision.
+- The label’s lactation section does **not** provide robust human nursing-mother or breastfed-infant study data.
+- LactMed contains observational reports and small studies, not definitive evidence for every infant or clinical situation.
+- Some LactMed reports have incomplete timing, breastfeeding extent, exposure duration, or infant clinical-detail information.
+- Absence of reported harm is not proof of safety, especially for premature, newborn, or medically vulnerable infants.
+
+Informational only; not medical advice.</pre><a href="paired-final/R03-mcp.json">Full saved trace</a></article><article><h3>Plain model</h3><p>10.41 seconds; 0 tool calls</p><pre>## Metformin labeling versus reported findings in breastfed infants
+
+| Topic | What the adult product labeling says | What reports/studies found in breastfed infants |
+|---|---|---|
+| **Presence in milk** | The U.S. prescribing information states that metformin is present in human milk. It notes that published lactation studies report infant exposure, but that available data are insufficient to fully characterize risk. | LactMed summarizes measured milk concentrations as low and reports that infant exposure is generally a small fraction of the mother’s weight-adjusted exposure. |
+| **Infant blood levels** | The U.S. label states that, in a study of breastfeeding women, metformin was undetectable in the serum of breastfed infants. It does not establish that all infants will have undetectable levels. | LactMed reports that metformin was undetectable in several studied breastfed infants and that other studies found very low or undetectable infant serum concentrations. |
+| **Reported infant effects** | The U.S. label says that published studies have not reported adverse effects in breastfed infants, but emphasizes that the evidence is limited. | LactMed reports no adverse effects in the published infants studied, including reports involving infant growth, development, or general health. It also describes observational data in which no difference in early growth or development was identified between exposed and unexposed children. |
+| **Evidence limitations** | The label says that the available studies cannot definitively establish safety and that longer-term effects are unknown. | LactMed notes small sample sizes, observational designs, limited follow-up, and incomplete information about outcomes such as long-term metabolic or neurodevelopmental effects. |
+| **Regulatory recommendation** | The U.S. label advises weighing the developmental and health benefits of breastfeeding against the mother’s clinical need for metformin and potential adverse effects in the breastfed child. This is a risk–benefit statement, not a finding that harm has been demonstrated. | LactMed’s summary is that metformin appears compatible with breastfeeding based on available evidence, while acknowledging that the evidence base is limited. This is a source summary, not an individualized recommendation. |
+
+### Which source says what
+
+- **U.S. FDA prescribing information for metformin products:** describes metformin as present in human milk, reports undetectable infant serum concentrations in the cited study, notes no reported adverse effects in published reports, and emphasizes limited data and unknown long-term effects.  
+  Source: FDA/DailyMed metformin labeling: https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metformin
+
+- **LactMed, U.S. National Library of Medicine:** synthesizes measured milk and infant-serum concentrations and published infant outcomes, generally finding low exposure and no reported short-term adverse effects, while identifying limitations in sample size and follow-up.  
+  Source: LactMed metformin record: https://www.ncbi.nlm.nih.gov/books/NBK501020/
+
+### Missing or insufficiently reported sections
+
+The available labeling and studies do **not** provide robust evidence for:
+
+- long-term effects beyond the follow-up periods studied;
+- rare adverse effects;
+- effects in premature, medically fragile, or exclusively breastfed infants;
+- consistent data across all formulations and maternal clinical circumstances;
+- definitive conclusions about neurodevelopment, later metabolic health, or effects during prolonged exposure;
+- adequate evidence to prove safety—absence of reported harm is not proof of no risk.
+
+Informational only; not medical advice.</pre><a href="paired-final/R03-plain.json">Full saved trace</a></article></div></details><details><summary>R04: Search FDA recall records for naproxen. The fictional bottle lot is NOTREAL-77. If the lot is not found, can the lookup establish that the bottle was unaffected? Explain what still needs verification.</summary><div class="pair"><article><h3>With MCP</h3><p>15.51 seconds; 2 tool calls</p><pre>### FDA recall lookup
+
+The FDA enforcement search returned naproxen-related records, but **none listed the fictional lot `NOTREAL-77`**. Examples include recalls involving specific naproxen formulations and lots such as `23F02`, `25A37`, `17231956`, and others.  
+Source: [FDA openFDA enforcement search](https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22naproxen%22&amp;sort=report_date%3Adesc&amp;limit=20)
+
+### Does the missing lot establish the bottle was unaffected?
+
+**No.** A lot not appearing in this lookup does **not** clear the bottle or prove it was unaffected. FDA records may be incomplete or lag announcements, and some recalls cover ranges, distribution periods, or “all lots.” The search is a recall-record lookup, not bottle-level verification.  
+Source: [FDA recall-record limitations and official recall page](https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls)
+
+### What still needs verification
+
+Verify the bottle against the **specific official recall notice or the manufacturer/pharmacist**, including:
+
+- exact product name and formulation—naproxen versus naproxen sodium, tablet versus suspension;
+- strength, package size, NDC, manufacturer, distributor, and repackager;
+- lot number exactly as printed, including possible prefixes, suffixes, or formatting differences;
+- expiration date and distribution dates;
+- whether the notice covers a lot range, all lots, or a broader production/distribution period;
+- whether the FDA record is current and whether a newer manufacturer notice exists.
+
+The FDA records themselves advise that a different or missing lot is **not clearance** and that formulation, manufacturer, lot, and expiration must be checked against the official notice. If the product’s identity or recall status remains uncertain, the appropriate verification source is the dispensing pharmacist or manufacturer—not the absence of a database match.
+
+Informational only; not medical advice.</pre><a href="paired-final/R04-mcp.json">Full saved trace</a></article><article><h3>Plain model</h3><p>7.33 seconds; 0 tool calls</p><pre>I cannot perform a live FDA recall-database search here, so I cannot verify whether **NOTREAL-77** appears in current records. Also, because the lot is fictional, it should not be treated as a real FDA-record result.
+
+Even if a search finds no entry for **NOTREAL-77**, that **does not establish that the bottle was unaffected**. A no-match may reflect:
+
+- A recall not reported in the searched database or not yet posted
+- A manufacturer, distributor, or pharmacy-level withdrawal rather than an FDA-posted recall
+- A different product name, manufacturer, National Drug Code (NDC), lot-number format, or spelling
+- An incomplete, illegible, or misread lot number
+- A counterfeit, diverted, or otherwise untraceable product
+
+**Verification still needed:**
+
+1. Identify the exact product and manufacturer, including strength, dosage form, package size, and NDC if present.
+2. Confirm the lot number and expiration date directly from the bottle and packaging.
+3. Check the FDA’s **[Recalls, Market Withdrawals, &amp; Safety Alerts](https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts)** and the manufacturer’s recall notices.
+4. Contact the manufacturer using contact information from its official website or product labeling and ask whether that exact product–lot combination was distributed or recalled.
+5. Ask the dispensing pharmacy or supplier to verify its purchase and recall records.
+6. If authenticity or labeling is questionable, do not rely on a database no-match; obtain verification from the pharmacist, manufacturer, or FDA.
+
+FDA’s **[Drug Recalls](https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls)** page explains that recall information is tied to specific products and lots, so product identity matters. A database lookup is therefore a screening step, not proof that a particular bottle is unaffected.
+
+Informational only; not medical advice.</pre><a href="paired-final/R04-plain.json">Full saved trace</a></article></div></details><details><summary>R06: Find up to two recruiting ADHD studies involving children in the United States. Include exact study links, overall and site status if present, update dates, contacts and qualification limits. Do not decide whether a child qualifies.</summary><div class="pair"><article><h3>With MCP</h3><p>18.72 seconds; 2 tool calls</p><pre>I found two potential matches in the U.S. ClinicalTrials.gov search retrieved **November 21, 2026**. Registry status can change, and site-level recruitment must be confirmed with the study team.
+
+### 1. Virtual-reality interventions for ADHD — NCT05608434
+- **Exact study link:** https://clinicaltrials.gov/study/NCT05608434
+- **Overall status:** Recruiting
+- **Last posted update:** November 12, 2026
+- **U.S. site status:** Recruiting — NIH Clinical Center, Bethesda, Maryland
+- **Age range listed:** 8–16 years; the pilot phase lists a 10–16-year minimum
+- **Selected qualification limits:** ADHD diagnosis or specified impairing inattention; assent/parental consent; ability to travel to NIH; cognitive and medical exclusions; certain psychiatric, neurological, visual, medication, and prior cognitive-training restrictions. The registry also lists phase-specific requirements.
+- **Contacts:**  
+  - Saadia A. Choudhury — (301) 437-0489 — saadia.choudhury@nih.gov  
+  - Daniel S. Pine, M.D. — (301) 594-1318 — daniel.pine@nih.gov  
+  - NIH Office of Patient Recruitment — 800-411-1222; TTY 711 — ccopr@nih.gov  
+- **Source:** ClinicalTrials.gov record above.
+
+### 2. SPN-812 (viloxazine extended-release) in preschool-age children with ADHD — NCT04781140
+- **Exact study link:** https://clinicaltrials.gov/study/NCT04781140
+- **Overall status:** Recruiting
+- **Last posted update:** October 5, 2026
+- **U.S. site statuses:** Multiple sites listed as Recruiting, including sites in Alabama, Arkansas, California, Colorado, and Florida. Some listed locations are Withdrawn or Terminated, so site status matters.
+- **Age range listed:** 48–69 months (4 years through 5 years 9 months)
+- **Selected qualification limits:** ADHD diagnosis confirmed by the specified assessment; symptom-severity thresholds; medical-health and weight/BMI limits; structured group activity; restrictions involving behavioral treatment, medications, investigational drugs, neurological or psychiatric conditions, cardiovascular findings, allergies, and suicidality. The study team makes the final determination.
+- **Central contact:** Olivia Elbaum — 301-838-2500 — clinicaltrials@supernus.com
+- **Examples of recruiting-site contacts:**  
+  - Saraland, Alabama: 251-341-7021 — info@thecenterforclinicaltrials.com  
+  - Little Rock, Arkansas: 501-553-9987 — info@preferredresearchpartners.com  
+  - Anaheim, California: 714-999-6688 — contact@arctrials.com  
+  - Imperial, California: 760-545-0123 — svrcinfo@sunvalleyb.com  
+- **Source:** ClinicalTrials.gov record above.
+
+These are registry-based potential matches, not eligibility decisions or enrollment confirmations. ClinicalTrials.gov states that the study team must confirm current site recruitment and individual eligibility. The search was bounded and may miss other studies. Informational only; not medical advice.</pre><a href="paired-final/R06-mcp.json">Full saved trace</a></article><article><h3>Plain model</h3><p>4.70 seconds; 0 tool calls</p><pre>I’m unable to verify live ClinicalTrials.gov records in this environment, so I can’t reliably provide current recruiting status, site status, update dates, contacts, or eligibility limits without risking inaccurate information.
+
+For authoritative, current results, use this ClinicalTrials.gov search for recruiting U.S. ADHD studies involving children:
+
+https://clinicaltrials.gov/search?cond=Attention%20Deficit%20Hyperactivity%20Disorder&amp;aggFilters=ages:child,status:rec&amp;locStr=United%20States
+
+ClinicalTrials.gov records provide, where available:
+
+- **Overall study status**
+- **Individual site status**
+- **Last update posted**
+- **Central and site-specific contacts**
+- **Eligibility criteria and age limits**
+
+These details can change, and the registry’s “recruiting” label does not establish that a particular child qualifies or that a site has immediate capacity.
+
+Informational only; not medical advice.</pre><a href="paired-final/R06-plain.json">Full saved trace</a></article></div></details><details><summary>R09: Look for FDA safety communications about montelukast. Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved. No personal treatment recommendations.</summary><div class="pair"><article><h3>With MCP</h3><p>13.82 seconds; 2 tool calls</p><pre>FDA’s current Drug Safety Communications index returned one montelukast notice:
+
+- **“FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis”** — dated **March 4, 2020**.  
+  [FDA notice](https://www.fda.gov/drugs/drug-safety-communications/fda-requires-boxed-warning-about-serious-mental-health-side-effects-asthma-and-allergy-drug)
+
+**Retrieval limitation:** The search returned the notice title and link only. The full notice text was **not retrieved**, so no additional excerpts or details are summarized here. The search covered the current FDA index and does not establish that no other historical communications exist.
+
+Informational only; not medical advice.</pre><a href="paired-final/R09-mcp.json">Full saved trace</a></article><article><h3>Plain model</h3><p>3.88 seconds; 0 tool calls</p><pre>I can’t perform a live FDA lookup in this session, so I cannot verify which FDA safety communications were returned or retrieve their current full text. I therefore won’t invent notice titles, excerpts, dates, or links.
+
+**Lookup limitation:** No FDA notice content was retrieved; consequently, I cannot summarize returned FDA notices or determine whether any particular notice’s full text was unavailable.
+
+Informational only; not medical advice.</pre><a href="paired-final/R09-plain.json">Full saved trace</a></article></div></details></html>

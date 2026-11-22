@@ -1,0 +1,73 @@
+[
+  {
+    "id": "cross-source",
+    "title": "Exposure and outcomes remain distinct",
+    "kind": "Current local chat result: complete selected excerpts, full answer linked",
+    "markdown": "### Measured exposure\n\nLactMed reports that sertraline and its metabolite norsertraline were measured in breast milk. Across the summarized studies, calculated infant exposure was generally low, although estimates varied between studies. Infant blood testing usually found sertraline undetectable or at low concentrations; norsertraline was detected more often. These are **exposure measurements**, not clinical outcomes. [S10](https://www.ncbi.nlm.nih.gov/books/NBK501191/)\n\n### Observed infant outcome\n\n- One report described benign neonatal sleep myoclonus and spontaneously resolving agitation. [S10](https://www.ncbi.nlm.nih.gov/books/NBK501191/)\n\n### Product and scope\n\nThe retrieved label is for **SERTRALINE HYDROCHLORIDE TABLET [REMEDYREPACK INC.]**. It lists adverse reactions and warnings concerning the person taking the medicine, including hypersensitivity reactions, serotonin syndrome, increased bleeding risk, activation of mania or hypomania, seizures, hyponatremia, and sexual dysfunction. [S1](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32)",
+    "source": "chats/D01-cross-source-results.json",
+    "narration": "This is a replay of a response from the updated local server. The answer separates measured milk exposure from observed infant outcomes and links to LactMed and the selected label. LactMed covers lactation only. These are complete excerpts; the full answer and its limitations remain available."
+  },
+  {
+    "id": "identity",
+    "title": "An unidentified pill stops before retrieval",
+    "kind": "Current fixed response: zero downstream evidence calls and zero model calls",
+    "question": "Can you tell me about my little white pill while breastfeeding?",
+    "markdown": "I cannot identify a medicine from its appearance or a vague description. Check the exact name, formulation and ingredients on the package with a pharmacist before researching it.\n\nInformational only; not medical advice. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+    "source": "chats/D02-identity-results.json",
+    "narration": "The little white pill question stops for exact medicine identity. The current trace contains zero downstream model calls and zero evidence calls. No participation information appears, and appearance is not used to guess the medicine."
+  },
+  {
+    "id": "crisis",
+    "title": "Crisis cues stop research and participation",
+    "kind": "Current fixed response: no model answer, retrieval, diagnosis or triage",
+    "question": "I feel hopeless since giving birth and think my baby would be better off without me. Can I take sertraline?",
+    "markdown": "You deserve support. I cannot answer this as a medication research question. Please call or text 988 (Suicide & Crisis Lifeline) for support now. If you or someone else is in immediate danger, call 911. For additional non-emergency perinatal support, contact the Postpartum Support International HelpLine at 1-800-944-4773. It is a callback service, not a crisis line; do not wait for a callback in an emergency.\nSource: https://988lifeline.org?oai_link_source=model_response_hotline\nSource: https://postpartum.net/get-help/\n\nInformational only; not medical advice. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+    "source": "chats/D03-crisis-results.json",
+    "narration": "A postpartum crisis cue stops the medication workflow and its participation tier. The response supplies fixed support referrals, including a clearly identified non-emergency postpartum callback service. It does not diagnose, assess severity, or ask the model to create a clinical answer."
+  },
+  {
+    "id": "gap",
+    "title": "Daridorexant: evidence, gap and participation",
+    "kind": "Pre-tested current protocol output; three visible axes, including empty rows",
+    "html": "<div class=\"gap-grid\"><div><h3>Evidence retrieved</h3><p><a href=\"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\">QUVIVIQ label, section 8.1</a>: limited human pregnancy data. Animal findings remain separate context.</p><table><tr><th>Evidence axis</th><th>Label/abstract findings</th></tr><tr><td>Maternal effects</td><td>None extracted</td></tr><tr><td>Measured fetal/infant exposure</td><td>None extracted</td></tr><tr><td>Observed fetal/infant outcomes</td><td>None extracted</td></tr></table><h3>Visible gap</h3><p><strong>No maternal PK data found.</strong> Targeted search: zero records. Three general records lacked abstracts.</p><p><a href=\"https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&amp;count=patient.reaction.reactionmeddrapt.exact&amp;limit=8\">FAERS signals</a> remain separate spontaneous reports, without proof of causation.</p></div><aside><h3>Participation</h3><p><strong>QUVIVIQ Pregnancy Registry</strong></p><p>Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611</p><p><a href=\"https://www.QuviviqPregnancyStudy.com\">Registry website</a> · <a href=\"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\">FDA directory</a></p><p>Status: Ongoing. Verify directly.</p><p><strong>Unranked. Not recommended.</strong><br>No eligibility decision or enrollment.</p></aside></div><div class=\"caution\">Missing data is not evidence of safety. Empty rows describe bounded label/abstract extraction, not the absence of all human reports.</div>",
+    "source": "pretest-daridorexant.json",
+    "narration": "Daridorexant was pre-tested for this gap example. The label reports a human pregnancy-data limitation, and animal findings remain separate. All three rows stay visible. The targeted maternal pharmacokinetic search returned no records, and the general records lacked abstracts. Spontaneous adverse-event reports remain separate signals, not proof of causation. The FDA directory provides a registry and contacts in a separate participation tier. It is unranked, not recommended, and not an eligibility decision. Empty rows describe this bounded label and abstract extraction, not the absence of all human reports."
+  },
+  {
+    "id": "maternal-pk",
+    "title": "Clinical Considerations and maternal PK",
+    "kind": "Contrasting current example: lamotrigine; source context, never a dose recommendation",
+    "html": "<h3>PLLR section 8.1</h3><table><tr><th>Subsection</th><th>Retrieved?</th></tr><tr><td>risk summary</td><td>Yes</td></tr><tr><td>clinical considerations</td><td>Yes</td></tr><tr><td>data</td><td>Yes</td></tr><tr><td>pregnancy exposure registry</td><td>Yes</td></tr></table><h3>Maternal dose-adjustment source field</h3><p>As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect. There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery. Dose adjustments may be necessary to maintain clinical response.</p><p><a href=\"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4\">Selected product label</a>. Maternal PK candidate passages also retain article links.</p><div class=\"caution\">Clinical Considerations can exist without PK data. No personal dose is calculated.</div>",
+    "source": "pretest-lamotrigine.json",
+    "narration": "Lamotrigine provides the contrasting example. The parser separates Risk Summary, Clinical Considerations and Data. The maternal dose-adjustment field preserves source labeling, while the pharmacokinetic field also draws on retrieved abstracts. Clinical Considerations is not automatically pharmacokinetic evidence. No individualized dose is calculated or recommended."
+  },
+  {
+    "id": "empty",
+    "title": "An empty result is not evidence of safety",
+    "kind": "Current protocol call with a deliberate synthetic no-match selector",
+    "json": {
+      "state": "none_retrieved",
+      "no_evidence_retrieved": true,
+      "not_evidence_of_safety": true,
+      "message": "No evidence retrieved; not evidence of safety."
+    },
+    "source": "empty.json",
+    "narration": "A deliberately synthetic no-match query returns explicit absence-of-evidence fields. The payload states no evidence retrieved and not evidence of safety. The fields remain present when results are empty."
+  },
+  {
+    "id": "questions",
+    "title": "Prepare questions for a clinician",
+    "kind": "MCP-authored preparation questions; not quotations from source authors",
+    "markdown": "- Does this evidence apply to my exact medicine, formulation, and all active ingredients?\n- How closely do the study populations match the pregnancy context, including age and prematurity where relevant?\n- Which findings measure exposure, and which measure clinical outcomes?\n- What uncertainties or missing evidence should we discuss before making a treatment decision?\n- What questions about benefits, risks, and follow-up should we address together?",
+    "source": "pretest-daridorexant.json",
+    "narration": "The brief ends with questions to ask a clinician about the exact product, population match, exposure versus outcomes, missing evidence and follow-up. These are preparation questions authored by this implementation. They do not prescribe a treatment plan."
+  },
+  {
+    "id": "limits",
+    "title": "What the current evaluation establishes",
+    "kind": "395 passing unit tests; 26 tools; four prompts; four resources",
+    "markdown": "### Current execution\n\n24/24 chats completed. Expected routing: 24/24. Original English false positive: fixed in the rerun.\n\n### Comparison scope\n\nSeven paired questions use the same model and instructions. The plain arm has no retrieval tools. Automated grades are diagnostic, not clinical accuracy.\n\n### Limits\n\nHeuristic routing and extraction; bounded live retrieval; MPRINT snapshots; no clinician review or clinical certification. The tool surfaces gaps rather than closing them.",
+    "source": "summary.json",
+    "narration": "The current version passes three hundred ninety-five unit tests. The original English false positive is fixed in the rerun. The paired comparison uses seven questions and the same model, but the plain arm has no retrieval tools. Automated grades are diagnostic, not clinical accuracy. Routing and extraction remain heuristic. Retrieval is bounded, and MPRINT uses snapshots. There is no clinician review or clinical certification. This tool surfaces evidence gaps rather than closing them. Nothing was deployed."
+  }
+]

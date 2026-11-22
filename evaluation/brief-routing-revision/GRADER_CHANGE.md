@@ -1,0 +1,3 @@
+Current brief-routing rerun: the same 28 questions, execution criteria and grader v2 prompt as the prior 445-test run. The note below describes the earlier v2 changes relative to older grading, not a new rubric change for this rerun.
+
+Diagnostic grader v2, fixed before this run: retained content_flags in chat references; clarified mandatory footer and access-abstention treatment. Four synthetic controls are rerun. Prior raw grades remain unchanged in evidence-revision. No clinician review or validated grading benchmark. The expanded case set and changed rubric prevent a direct score improvement claim.

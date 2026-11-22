@@ -1,0 +1,78 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 35,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json",
+        "status": "supported",
+        "reason": "The reference evidence confirms lamotrigine as the exact matched ingredient and provides the same RxCUI."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4",
+        "status": "supported",
+        "reason": "The supplied label evidence supports the product scope, missing adult medicine-taker sections, epilepsy-associated risks, qualitative pregnancy pharmacokinetic statements, registry outcomes, oral-cleft findings, meta-analysis limitations, and animal-versus-human distinctions."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The reference evidence reports the bounded PubMed search and its count of 690 records, while noting that it is not a systematic review."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The reference evidence reports the bounded pharmacokinetic PubMed search and its count of 109 records."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/",
+        "status": "supported",
+        "reason": "The supplied abstract supports the pregnancy epilepsy review, physiological effects on antiseizure-medication levels, and the need to preserve seizure-control context; the answer appropriately characterizes it as a review without a lamotrigine-specific quantitative result in the retrieved abstract."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33573557/",
+        "status": "supported",
+        "reason": "The title and abstract support the review's inclusion of lamotrigine, pregnancy, breastfeeding, pharmacokinetics, and monotherapy/polytherapy context; the answer correctly notes that quantitative lamotrigine results were not present in the retrieved abstract."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/",
+        "status": "supported",
+        "reason": "The abstract supports the naturalistic sample of 60 mothers, repeated serum and breastmilk measurements, first-year child follow-up, high lamotrigine milk concentration-to-dose ratio, mixed psychotropic population, and non-significant reported birth and developmental differences."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The reference evidence supplies the reported FAERS terms and counts and explicitly supports the answer's characterization as spontaneous-reporting volume rather than incidence, confirmed outcomes, or causation."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The reference evidence supports the general FAERS limitations cited in the answer, including absent exposure denominators and inability to establish incidence or causation."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer fulfills the requested brief with three distinct axes: effects on the pregnant person, fetal exposure, and fetal or infant outcomes. It clearly separates the label's Clinical Considerations from individualized clinician decisions, preserves study population and design limitations, keeps quantitative PK gaps visible, includes clinician questions, and does not provide medication dose values or personal medication advice. The cited factual claims are supported by the supplied label, PubMed abstracts, search metadata, and FAERS evidence. No substantive contradiction or unsupported source claim was identified."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 59066,
+    "completion_tokens": 1898,
+    "total_tokens": 60964,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 59063,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

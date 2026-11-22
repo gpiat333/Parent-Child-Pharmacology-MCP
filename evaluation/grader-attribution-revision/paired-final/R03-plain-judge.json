@@ -1,0 +1,166 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 2,
+    "unverified_claims": 6,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited FDA label-database directory is not the retrieved product label and does not support the answer's specific adult-warning claims.",
+        "url": "https://www.accessdata.fda.gov/scripts/cder/daf/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The LactMed record supports the general claims about low milk concentrations, reported infant outcomes, limited evidence, and separating exposure from outcomes.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 3,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The label states that metformin is present in human milk and that published reports have not identified adverse effects in breastfed infants",
+        "reference_quote": "Similar studies have not been conducted in nursing mothers.",
+        "explanation": "The retrieved label does not establish the answer's claim about published human infant outcomes; it states that comparable studies have not been conducted in nursing mothers."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "it also addresses vitamin B12 deficiency",
+        "reference_quote": null,
+        "explanation": "Vitamin B12 deficiency is not supported by the supplied retrieved label excerpts, so this substantive adult-label claim is unverified in the evidence pool."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer does not name the retrieved product or disclose that the selected DailyMed label may not match every formulation and that the product match was not confirmed."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Source-linked explanation or honest missing evidence.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer says it cannot verify the numeric values even though the supplied LactMed record contains retrieved milk-concentration findings. It should report those research measurements or accurately explain that they were omitted."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Identify which source says what",
+        "answer_quote": "FDA/US prescribing information",
+        "reference_quote": null,
+        "explanation": "The answer identifies a generic FDA source and a Drugs@FDA directory rather than identifying the retrieved DailyMed product and its specific source limitations."
+      }
+    ],
+    "rationale": "The answer separates adult-label warnings from LactMed infant findings and avoids administered doses. It nevertheless misattributes human infant-outcome information to the label, includes an unsupported vitamin B12 claim, fails to name the retrieved product, and incorrectly treats retrieved quantitative exposure findings as unverifiable."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "7f481481fe14776574c4e5f55883b8f57f7aa333f56a08f58b5f276bae6a3711",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 6,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label-database directory is not the retrieved product label or a source passage establishing the answer's specific adult-warning claims.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the general statements about low milk concentrations, reported infant outcomes, limited evidence, and the distinction between exposure and outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the label states that metformin is present in human milk\",\n      \"reference_quote\": \"Studies in lactatingrats show that metformin is excreted into milk and reaches levels comparable tothose in plasma. Similar studies have not been conducted in nursing mothers.\",\n      \"explanation\": \"The retrieved label reports animal lactation findings and states that comparable studies have not been conducted in nursing mothers; it does not establish the answer's claim about metformin being present in human milk.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"published reports have not identified adverse effects in breastfed infants\",\n      \"reference_quote\": \"Because the potential for hypoglycemia in nursing infants may exist, a decisionshould be made whether to discontinue nursing or to discontinue the drug\",\n      \"explanation\": \"The answer attributes an infant-outcome statement to the product label, but the retrieved label gives a potential-risk warning and does not report published human infant outcomes. The no-adverse-effects findings come from LactMed, not the label.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"it also addresses vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not supported by the supplied retrieved label excerpts, so this substantive adult-label claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.], or disclose that the selected DailyMed label may not match every formulation and that the product match was not confirmed.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": \"I cannot verify the exact numeric values\",\n      \"reference_quote\": \"Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.\",\n      \"explanation\": \"The answer presents the measurements as unavailable even though the supplied LactMed record contains retrieved milk and infant-serum concentration findings. It should either report them as source measurements or accurately disclose that they were intentionally omitted.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"FDA/US prescribing information: supplies the adult medication warnings\",\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer identifies a generic FDA source and an unrelated Drugs@FDA directory rather than identifying the retrieved DailyMed product and its specific label limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly separates adult-label warnings from LactMed infant findings and avoids administered doses. However, it misattributes human-milk and no-adverse-effect statements to the label, adds an unsupported vitamin B12 claim, fails to name the retrieved product, and withholds retrieved quantitative exposure findings while claiming they cannot be verified.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[3] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[4] omission answer_quote must be null",
+        "failure_reasons[5] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 57596,
+        "completion_tokens": 1263,
+        "total_tokens": 58859,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 57593,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 296,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 6,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label-database directory is not the retrieved product label and does not support the answer's specific adult-warning claims.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the general claims about low milk concentrations, reported infant outcomes, limited evidence, and separating exposure from outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label states that metformin is present in human milk and that published reports have not identified adverse effects in breastfed infants\",\n      \"reference_quote\": \"Similar studies have not been conducted in nursing mothers.\",\n      \"explanation\": \"The retrieved label does not establish the answer's claim about published human infant outcomes; it states that comparable studies have not been conducted in nursing mothers.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"it also addresses vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not supported by the supplied retrieved label excerpts, so this substantive adult-label claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not name the retrieved product or disclose that the selected DailyMed label may not match every formulation and that the product match was not confirmed.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Six women had milk levels that varied little over 24 hours and averaged 270 mcg/L.\",\n      \"explanation\": \"The answer says it cannot verify the numeric values even though the supplied LactMed record contains retrieved milk-concentration findings. It should report those research measurements or accurately explain that they were omitted.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"FDA/US prescribing information: supplies the adult medication warnings\",\n      \"reference_quote\": \"product_title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer identifies a generic FDA source and a Drugs@FDA directory rather than identifying the retrieved DailyMed product and its specific source limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult-label warnings from LactMed infant findings and avoids administered doses. It nevertheless misattributes human infant-outcome information to the label, includes an unsupported vitamin B12 claim, fails to name the retrieved product, and incorrectly treats retrieved quantitative exposure findings as unverifiable.\"\n}",
+      "validation_errors": [
+        "failure_reasons[4] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 58703,
+        "completion_tokens": 939,
+        "total_tokens": 59642,
+        "prompt_tokens_details": {
+          "cached_tokens": 57593,
+          "cache_write_tokens": 1107,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 169,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 6,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label-database directory is not the retrieved product label and does not support the answer's specific adult-warning claims.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the general claims about low milk concentrations, reported infant outcomes, limited evidence, and separating exposure from outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label states that metformin is present in human milk and that published reports have not identified adverse effects in breastfed infants\",\n      \"reference_quote\": \"Similar studies have not been conducted in nursing mothers.\",\n      \"explanation\": \"The retrieved label does not establish the answer's claim about published human infant outcomes; it states that comparable studies have not been conducted in nursing mothers.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"it also addresses vitamin B12 deficiency\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not supported by the supplied retrieved label excerpts, so this substantive adult-label claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not name the retrieved product or disclose that the selected DailyMed label may not match every formulation and that the product match was not confirmed.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Source-linked explanation or honest missing evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer says it cannot verify the numeric values even though the supplied LactMed record contains retrieved milk-concentration findings. It should report those research measurements or accurately explain that they were omitted.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"FDA/US prescribing information\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer identifies a generic FDA source and a Drugs@FDA directory rather than identifying the retrieved DailyMed product and its specific source limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult-label warnings from LactMed infant findings and avoids administered doses. It nevertheless misattributes human infant-outcome information to the label, includes an unsupported vitamin B12 claim, fails to name the retrieved product, and incorrectly treats retrieved quantitative exposure findings as unverifiable.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 59562,
+        "completion_tokens": 886,
+        "total_tokens": 60448,
+        "prompt_tokens_details": {
+          "cached_tokens": 58700,
+          "cache_write_tokens": 859,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 175,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 59562,
+    "completion_tokens": 886,
+    "total_tokens": 60448,
+    "prompt_tokens_details": {
+      "cached_tokens": 58700,
+      "cache_write_tokens": 859,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 175,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

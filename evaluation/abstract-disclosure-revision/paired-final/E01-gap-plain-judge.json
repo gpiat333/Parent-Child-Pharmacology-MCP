@@ -1,0 +1,155 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 3,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited 2022 FDA label URL is not among the supplied reference sources, so it cannot be verified against the retrieved evidence pool.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The cited registry webpage is not among the supplied reference sources, and the supplied FDA directory identifies a different daridorexant-specific registry contact.",
+        "url": "https://womensmentalhealth.org/research/pregnancyregistry/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Animal studies found adverse developmental effects at exposures above those expected at the recommended human dose",
+        "reference_quote": "In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation",
+        "explanation": "The answer attributes adverse developmental effects to the animal studies, whereas the supplied label evidence reports no fetal toxicity or malformation in those studies. The answer also introduces an exposure comparison not established in the supplied pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA label reports placental transfer in animals",
+        "reference_quote": null,
+        "explanation": "No animal placental-transfer finding appears in the supplied evidence. The retrieved exposure axis is empty and does not report measured fetal or infant concentrations."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Animal developmental findings included reduced fetal body weight and delayed ossification at maternally toxic exposures",
+        "reference_quote": "Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.",
+        "explanation": "The supplied evidence does not report reduced fetal body weight or delayed ossification and instead reports no embryofetal toxicity in the cited animal data."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "National Pregnancy Registry for Psychiatric Medications",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The retrieved FDA directory identifies the QUVIVIQ Pregnancy Registry and its contact information; the answer substitutes a psychiatric-medications registry and different contacts."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": "1-866-961-2388",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer supplies the wrong registry contact for the daridorexant-specific FDA-listed registry."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer does not cite the supplied FDA pregnancy-exposure-registry directory; it cites an unverified label URL and a registry webpage instead."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "no unsupported human outcomes or dosing.",
+        "answer_quote": "The FDA clinical pharmacology information describes pharmacokinetics in nonpregnant adults, not pregnant people.",
+        "reference_quote": null,
+        "explanation": "The supplied retrieval states that no maternal pharmacokinetic data were found in the checked pregnancy Clinical Considerations and retrieved abstracts, but it does not establish the asserted section 12.3 nonpregnant-adult comparison."
+      }
+    ],
+    "rationale": "The answer presents all three axes, states a pregnancy PK gap, keeps registry information separate, and avoids individualized dosing. However, it misstates animal findings, asserts unsupported animal transfer and developmental outcomes, and gives the wrong registry and contacts. Its citations are not verifiable within the supplied reference pool and it omits the required FDA directory citation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "53e1fd091568a88445958257287927046458ccdd269ffdbe00dbc6110b0caafa",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 3,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited 2022 FDA label URL is not among the supplied reference sources, so it cannot be verified against the retrieved evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited registry webpage is not among the supplied reference sources, and the supplied FDA directory identifies a different daridorexant-specific registry contact.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Animal studies found adverse developmental effects at exposures above those expected at the recommended human dose\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"The answer attributes adverse developmental effects to the animal studies, whereas the supplied label evidence reports no fetal toxicity or malformation in those studies. The answer also introduces an exposure comparison not established in the supplied pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label reports placental transfer in animals\",\n      \"reference_quote\": null,\n      \"explanation\": \"No animal placental-transfer finding appears in the supplied evidence. The retrieved exposure axis is empty and does not report measured fetal or infant concentrations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Animal developmental findings included reduced fetal body weight and delayed ossification at maternally toxic exposures\",\n      \"reference_quote\": \"Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.\",\n      \"explanation\": \"The supplied evidence does not report reduced fetal body weight or delayed ossification and instead reports no embryofetal toxicity in the cited animal data.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label identifies the National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The retrieved FDA directory identifies the QUVIVIQ Pregnancy Registry and its contact information; the answer substitutes a psychiatric-medications registry and different contacts.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"Telephone: 1-866-961-2388\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer supplies the wrong registry contact for the daridorexant-specific FDA-listed registry.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not cite the supplied FDA pregnancy-exposure-registry directory; it cites an unverified label URL and a registry webpage instead.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"no unsupported human outcomes or dosing.\",\n      \"answer_quote\": \"The FDA clinical pharmacology information describes pharmacokinetics in nonpregnant adults, not pregnant people.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied retrieval states that no maternal pharmacokinetic data were found in the checked pregnancy Clinical Considerations and retrieved abstracts, but it does not establish the asserted section 12.3 nonpregnant-adult comparison.\"\n    }\n  ],\n  \"rationale\": \"The answer presents all three axes, states a pregnancy PK gap, keeps registry information separate, and avoids individualized dosing. However, it misstates animal findings, asserts unsupported animal transfer and developmental outcomes, and gives the wrong registry and contacts. Its citations are not verifiable within the supplied reference pool and it omits the required FDA directory citation.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[4] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 105945,
+        "completion_tokens": 1496,
+        "total_tokens": 107441,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 105942,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 462,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 3,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited 2022 FDA label URL is not among the supplied reference sources, so it cannot be verified against the retrieved evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited registry webpage is not among the supplied reference sources, and the supplied FDA directory identifies a different daridorexant-specific registry contact.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Animal studies found adverse developmental effects at exposures above those expected at the recommended human dose\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"The answer attributes adverse developmental effects to the animal studies, whereas the supplied label evidence reports no fetal toxicity or malformation in those studies. The answer also introduces an exposure comparison not established in the supplied pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label reports placental transfer in animals\",\n      \"reference_quote\": null,\n      \"explanation\": \"No animal placental-transfer finding appears in the supplied evidence. The retrieved exposure axis is empty and does not report measured fetal or infant concentrations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Animal developmental findings included reduced fetal body weight and delayed ossification at maternally toxic exposures\",\n      \"reference_quote\": \"Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.\",\n      \"explanation\": \"The supplied evidence does not report reduced fetal body weight or delayed ossification and instead reports no embryofetal toxicity in the cited animal data.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The retrieved FDA directory identifies the QUVIVIQ Pregnancy Registry and its contact information; the answer substitutes a psychiatric-medications registry and different contacts.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"1-866-961-2388\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer supplies the wrong registry contact for the daridorexant-specific FDA-listed registry.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not cite the supplied FDA pregnancy-exposure-registry directory; it cites an unverified label URL and a registry webpage instead.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"no unsupported human outcomes or dosing.\",\n      \"answer_quote\": \"The FDA clinical pharmacology information describes pharmacokinetics in nonpregnant adults, not pregnant people.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied retrieval states that no maternal pharmacokinetic data were found in the checked pregnancy Clinical Considerations and retrieved abstracts, but it does not establish the asserted section 12.3 nonpregnant-adult comparison.\"\n    }\n  ],\n  \"rationale\": \"The answer presents all three axes, states a pregnancy PK gap, keeps registry information separate, and avoids individualized dosing. However, it misstates animal findings, asserts unsupported animal transfer and developmental outcomes, and gives the wrong registry and contacts. Its citations are not verifiable within the supplied reference pool and it omits the required FDA directory citation.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 107069,
+        "completion_tokens": 1148,
+        "total_tokens": 108217,
+        "prompt_tokens_details": {
+          "cached_tokens": 105942,
+          "cache_write_tokens": 1124,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 121,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 107069,
+    "completion_tokens": 1148,
+    "total_tokens": 108217,
+    "prompt_tokens_details": {
+      "cached_tokens": 105942,
+      "cache_write_tokens": 1124,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 121,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

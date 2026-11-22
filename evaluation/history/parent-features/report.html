@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>Parent feature acceptance</title><style>body{font:16px system-ui;max-width:1050px;margin:36px auto}table{border-collapse:collapse;width:100%}td,th{padding:8px;border:1px solid #ccd}pre{white-space:pre-wrap}</style><h1>Parent-facing MCP features</h1><p>27 tools on the existing Databricks app. No new compute or resource changes. Existing signatures retained.</p><h2>Validation</h2><pre>{
+  &quot;deployment_id&quot;: &quot;01f1e459a1841bd884aad91383ed0819&quot;,
+  &quot;tool_count&quot;: 27,
+  &quot;unit_tests_passed&quot;: 170,
+  &quot;client_policy_checks_passed&quot;: 12,
+  &quot;citation_regressions_passed&quot;: 7,
+  &quot;deployed_checks&quot;: {
+    &quot;passed&quot;: 18,
+    &quot;total&quot;: 18,
+    &quot;expected&quot;: 18
+  },
+  &quot;chat_checks&quot;: {
+    &quot;passed&quot;: 10,
+    &quot;total&quot;: 10,
+    &quot;expected&quot;: 10
+  },
+  &quot;targeted_followups&quot;: [
+    {
+      &quot;id&quot;: &quot;final-recall&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;final-voice&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;attribution-recall&quot;,
+      &quot;passed&quot;: true
+    }
+  ],
+  &quot;clinical_validation&quot;: false,
+  &quot;new_mlflow_benchmark&quot;: false,
+  &quot;client_sha256&quot;: &quot;a987dfba7a844b898930f015760a06060544c3a24652f435ba90cf266351055d&quot;
+}</pre><h2>Deployed tool checks</h2><table><tr><th>Case</th><th>Passed</th></tr><tr><td>tool_count</td><td>True</td></tr><tr><td>urgent</td><td>True</td></tr><tr><td>poison</td><td>True</td></tr><tr><td>no_guess_local_number</td><td>True</td></tr><tr><td>personal_change</td><td>True</td></tr><tr><td>vague_identity</td><td>True</td></tr><tr><td>privacy_route</td><td>True</td></tr><tr><td>privacy_external_block</td><td>True</td></tr><tr><td>recalls_wrong_lot</td><td>True</td></tr><tr><td>recalls_parent_wording</td><td>True</td></tr><tr><td>alerts</td><td>True</td></tr><tr><td>recruiting</td><td>True</td></tr><tr><td>trial_compatibility</td><td>True</td></tr><tr><td>registries</td><td>True</td></tr><tr><td>public_input</td><td>True</td></tr><tr><td>reporting_links</td><td>True</td></tr><tr><td>parent_evidence</td><td>True</td></tr><tr><td>parent_identity_gate</td><td>True</td></tr></table><h2>Initial synthetic chat acceptance</h2><table><tr><th>Case</th><th>Passed</th></tr><tr><td>urgent</td><td>True</td></tr><tr><td>vague</td><td>True</td></tr><tr><td>frequency</td><td>True</td></tr><tr><td>recall</td><td>True</td></tr><tr><td>trials</td><td>True</td></tr><tr><td>personal</td><td>True</td></tr><tr><td>poison</td><td>True</td></tr><tr><td>effects</td><td>True</td></tr><tr><td>registry</td><td>True</td></tr><tr><td>voice</td><td>True</td></tr></table><h2>Targeted follow-ups after manual findings</h2><table><tr><th>Case</th><th>Passed</th></tr><tr><td>final-recall</td><td>True</td></tr><tr><td>final-voice</td><td>True</td></tr><tr><td>attribution-recall</td><td>True</td></tr></table><h2>Manual review and corrections</h2><p>The initial ten acceptance checks passed but manual reading found two retrieval weaknesses: possessive product wording produced a false-empty recall query, and a complex Federal Register query produced false-empty notice results. Product words are now searched separately and public notices use plain subject search plus candidate filtering and detail retrieval. Final deployed checks require positive results for both known examples. Original outputs are retained. A further client instruction distinguishes MCP-authored caveats from statements made by FDA/NIH. Targeted follow-ups are separate from the initial batch.</p><h2>Limits</h2><p>Acceptance checks test routing, source fields and expected client behavior, not clinical correctness. The English rule-based router and output filters are incomplete and unvalidated. Third-party clients do not automatically inherit companion enforcement. Recall candidates never clear a bottle; registry/trial records never determine eligibility. Notice search is incomplete and unknown deadlines remain unknown. The script does not write ordinary transcripts; synthetic capture requires SaveTrace. Provider retention and shell history are separate. No new MLflow score or clinician certification.</p>

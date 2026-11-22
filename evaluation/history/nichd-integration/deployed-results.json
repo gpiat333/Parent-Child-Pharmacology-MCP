@@ -1,0 +1,1360 @@
+{
+  "resources": [
+    {
+      "name": "data_sources",
+      "uri": "mother-child://sources",
+      "description": "",
+      "mimeType": "text/plain"
+    }
+  ],
+  "endpoint": "https://mcp-mc-7474654188777746.aws.databricksapps.com/mcp",
+  "tested_at_utc": "2026-11-17T23:52:07.6730159Z",
+  "certificate_verification": "Windows default HTTPS verification; no bypass",
+  "prompts": [
+    {
+      "name": "breastfeeding_medication_check",
+      "description": "",
+      "arguments": [
+        {
+          "name": "drug",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "pregnancy_medication_check",
+      "description": "",
+      "arguments": [
+        {
+          "name": "drug",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "clinician_literature_scan",
+      "description": "",
+      "arguments": [
+        {
+          "name": "topic",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "initialization": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {
+      "experimental": {},
+      "prompts": {
+        "listChanged": false
+      },
+      "resources": {
+        "subscribe": false,
+        "listChanged": false
+      },
+      "tools": {
+        "listChanged": false
+      }
+    },
+    "serverInfo": {
+      "name": "mother-child-health",
+      "version": "1.30.0"
+    }
+  },
+  "tools": [
+    {
+      "name": "normalize_drug",
+      "description": "Resolve a brand name, misspelling or combination product to standard generic\n    ingredient(s) and an RxNorm ID (RxNorm, NLM). Call this first when unsure of the drug name.\n    found=false means unverified. requires_confirmation=true means a tentative match:\n    ask for confirmation; never silently substitute its ingredient as the intended drug.",
+      "inputSchema": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "normalize_drugArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_lactmed",
+      "description": "Find LactMed (Drugs and Lactation Database, NLM) records by drug name.\n    Returns IDs to pass to get_lactmed_record.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "search_lactmedArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_lactmed_record",
+      "description": "Get LactMed text for one record: use during lactation, drug levels, effects on\n    breastfed infants and on lactation, alternatives. First call search_lactmed and pass\n    its numeric id as book_id. Never pass a drug name or invent a record ID.\n    Separate measured exposure, observed infant outcomes, and source recommendations.\n    A recommendation to monitor a symptom is NOT evidence that the symptom occurred.\n    Preserve separate case-report events and timing: do not merge exposure changes\n    with outcome observations, infer unstated timing, or imply proven causation.\n    Include only relevant supported details; explicitly identify unspecified timing.\n    For partial chronology, group only explicitly linked events rather than a fully\n    ordered sequence; name the specific ordering that remains unknown.\n    If outcome text is truncated, retrieve more with max_chars (up to 20000) or\n    state the limitation; do not infer outcomes from monitoring advice.",
+      "inputSchema": {
+        "properties": {
+          "book_id": {
+            "title": "Book Id",
+            "type": "string"
+          },
+          "max_chars": {
+            "default": 6000,
+            "title": "Max Chars",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "book_id"
+        ],
+        "title": "get_lactmed_recordArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "semantic_search_lactmed",
+      "description": "Natural-language search over LactMed (e.g. 'antidepressants safe for a newborn').\n    Requires the Vector Search index; otherwise explains how to fall back.",
+      "inputSchema": {
+        "properties": {
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "semantic_search_lactmedArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_literature",
+      "description": "Search PubMed literature. 'keyword' hits live PubMed (MeSH-filtered by population);\n    'semantic' uses the lakehouse vector index of maternal/child abstracts; 'auto' prefers semantic.\n    Use a concise query (drug plus one concept), not a whole question. If empty, simplify\n    without dropping the drug. Check relevance and call get_abstracts before describing\n    study findings. Empty results do not establish absence of evidence.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "population": {
+            "default": "any",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "any"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "mode": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "semantic",
+              "keyword"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_literatureArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_abstracts",
+      "description": "Get abstracts and canonical PubMed source URLs for up to 10 PubMed IDs.\n    Cite each article's returned URL. No returned article is a retrieval limitation,\n    not evidence that a paper or research does not exist.",
+      "inputSchema": {
+        "properties": {
+          "pmids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pmids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "pmids"
+        ],
+        "title": "get_abstractsArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_label_sections",
+      "description": "FDA label (via DailyMed, NLM) pregnancy, lactation and pediatric-use sections.\n    OTC labels may return pregnancy_lactation as one combined warning.\n    Identify the returned product title; do not generalize across formulations.\n    Report returned source warnings and missing_standalone_sections. A combined\n    warning does not provide pediatric-use evidence. Missing sections are retrieval limitations;\n    do not fill them with uncited medical claims or infer safety.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "get_label_sectionsArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_pediatric_labeling_changes",
+      "description": "Search FDA historical pediatric labeling changes by generic or trade name.\n    Returns dates, product/indication scope, BPCA/PREA category and FDA summaries.\n    BPCA/PREA filters include rows listing both. Match names, not full questions;\n    try generic or brand separately if no match. Preserve age, indication and\n    formulation limits in source text. A labeling change is not automatically an\n    approval or proof of safety. BPCA designation does not imply NIH funding.\n    Cite the FDA source and workbook row; do not turn historical dose text into\n    dosing advice. Use get_label_sections separately for current product labeling.\n    Empty results do not establish absence of pediatric evidence.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "legislation": {
+            "default": "any",
+            "enum": [
+              "any",
+              "BPCA",
+              "PREA"
+            ],
+            "title": "Legislation",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "search_pediatric_labeling_changesArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_trials",
+      "description": "Search ClinicalTrials.gov (NLM) for studies in pregnant, lactating or pediatric populations.\n    Use returned conditions, interventions and summaries to assess relevance. Omit\n    indirect matches from the main answer; registration/status is not evidence of benefit.\n    When asked to omit dose numbers, use intervention name_without_strength.\n    It is display formatting, not normalized ingredient identity; original name is retained.\n    Link EVERY listed study using its returned study URL and state its exact status.\n    For current/ongoing studies, separate RECRUITING, ENROLLING_BY_INVITATION and\n    ACTIVE_NOT_RECRUITING from NOT_YET_RECRUITING, historical/closed and UNKNOWN.\n    ACTIVE_NOT_RECRUITING does not mean open enrollment. Never place completed or\n    unknown-status studies in the ongoing list. State when no relevant ongoing study\n    was returned; do not imply the search was exhaustive.",
+      "inputSchema": {
+        "properties": {
+          "condition_or_drug": {
+            "title": "Condition Or Drug",
+            "type": "string"
+          },
+          "population": {
+            "default": "pregnancy",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "any"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "condition_or_drug"
+        ],
+        "title": "search_trialsArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_funded_research",
+      "description": "Search NIH RePORTER for funded projects (newest first) on a maternal/child topic.\n    Use title and abstract to assess relevance; omit indirect matches from the main\n    answer. A funded project is not a completed finding or proof of MPRINT membership.",
+      "inputSchema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "search_funded_researchArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_mprint_gold",
+      "description": "Search a versioned snapshot of MPRINT Gold expert-curated study metadata by\n    drug name or exact PMID. For a Gold record by PMID, pass pmid and omit drug.\n    If both are supplied, both must match. Never substitute automated Silver\n    classifications when Gold is requested. Returns PMID links, population,\n    study type and source row provenance.\n    This is actual published MPRINT Gold data, not MPRINT keyword matching.\n    Optional filters conservatively match source population and study-type labels.\n    Resolve verified brand names to ingredient names via RxNorm; ambiguous matches\n    require confirmation. Do not equate RxCUIs with MPRINT UMLS CUIs.\n    This search returns study metadata; use get_mprint_gold_outcomes for aggregate\n    curated outcomes by PMID. Report the snapshot date and any result limits.\n    Inclusion does not prove safety, efficacy, quality or MPRINT funding. Retrieve\n    abstracts/full papers before summarizing outcomes. Empty matches may reflect\n    limited snapshot coverage or a synonym; never infer an evidence gap from absence.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "default": "",
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "population": {
+            "default": "any",
+            "enum": [
+              "any",
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "postpartum",
+              "maternal"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "study_type": {
+            "default": "any",
+            "enum": [
+              "any",
+              "PK",
+              "PE",
+              "CT",
+              "PD",
+              "PG",
+              "RCT"
+            ],
+            "title": "Study Type",
+            "type": "string"
+          },
+          "resolve_names": {
+            "default": true,
+            "title": "Resolve Names",
+            "type": "boolean"
+          },
+          "pmid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pmid"
+          }
+        },
+        "title": "search_mprint_goldArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_mprint_gold_outcomes",
+      "description": "Retrieve curated aggregate MPRINT Gold outcome rows for one PubMed ID.\n    Preserves source values, units, statistics, uncertainty and notes. PE/CT and\n    PK-summary tables only; individual-patient rows and PK parameters excluded.\n    Context links use PMID AND curation workbook/folder, not cohort/arm matching.\n    These linkage rules are MCP implementation guidance, not dataset-author claims.\n    Never attribute every outcome to every drug in the paper. Null means missing\n    in the exported data, not zero or proof the original paper did not report it.\n    Say \"missing in the exported data\" for null fields.\n    Check source exposure/population, denominators and intervals before\n    interpreting. Use next_offset to page; disclose limits and snapshot age.\n    Cite the paper and dataset row; consult the original paper for missing context.\n    Do not turn historical doses or observed associations into treatment advice.",
+      "inputSchema": {
+        "properties": {
+          "pmid": {
+            "title": "Pmid",
+            "type": "string"
+          },
+          "kind": {
+            "default": "any",
+            "enum": [
+              "any",
+              "PE_CT",
+              "PK_summary"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pmid"
+        ],
+        "title": "get_mprint_gold_outcomesArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_mprint_silver_classifications",
+      "description": "Look up up to 20 PubMed IDs in the published MPRINT Silver study-type snapshot.\n    Returns automated PK/PE/CT labels and source rows, not clinical conclusions.\n    Use PMIDs from PubMed or Gold; do not invent identifiers. Silver drug/population\n    mappings are NOT loaded. Distinguish automated Silver labels from curated Gold.\n    No match does not mean the paper is irrelevant or that no research exists.",
+      "inputSchema": {
+        "properties": {
+          "pmids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pmids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "pmids"
+        ],
+        "title": "get_mprint_silver_classificationsArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_mprint",
+      "description": "Maternal and Pediatric Precision in Therapeutics (MPRINT) Hub (NICHD) related work.\n    No public MPRINT API is confirmed; this searches NIH RePORTER and PubMed for MPRINT-related\n    records. For direct published Gold metadata use search_mprint_gold; for Silver\n    study-type labels by PMID use get_mprint_silver_classifications.",
+      "inputSchema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "search_mprintArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_adverse_event_signals",
+      "description": "Most frequently reported reactions in FDA FAERS (openFDA) for a drug, optionally for\n    pregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "cohort": {
+            "default": "any",
+            "enum": [
+              "any",
+              "pregnancy",
+              "infant"
+            ],
+            "title": "Cohort",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "get_adverse_event_signalsArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_patient_education",
+      "description": "Plain-language information from MedlinePlus (NLM) for a health topic or, with an RxNorm ID, a drug.",
+      "inputSchema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "rxcui": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Rxcui"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "get_patient_educationArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_bpca_evidence",
+      "description": "Discover NICHD BPCA/PTN study-summary links by drug/title words. Returns index titles and links, NOT PDF contents or clinical conclusions. Empty query lists summaries.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "title": "Query",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "title": "search_bpca_evidenceArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_nichd_studies",
+      "description": "Search public NICHD DASH study descriptions and publications, optionally MFMU or Neonatal Research Network. Zero-based pages. Controlled underlying datasets are NOT retrieved; access process is required.",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "title": "Query",
+            "type": "string"
+          },
+          "network": {
+            "default": "any",
+            "enum": [
+              "any",
+              "mfmu",
+              "neonatal"
+            ],
+            "title": "Network",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "page": {
+            "default": 0,
+            "title": "Page",
+            "type": "integer"
+          }
+        },
+        "title": "search_nichd_studiesArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "medication_safety_brief",
+      "description": "One-call evidence brief for a medication in pregnancy, lactation or pediatrics:\n    resolves the name (RxNorm), then gathers LactMed, FDA label sections, recent literature,\n    adverse-event signals, active trials and plain-language MedlinePlus info, with citations.",
+      "inputSchema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "population": {
+            "default": "lactation",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric"
+            ],
+            "title": "Population",
+            "type": "string"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "medication_safety_briefArguments",
+        "type": "object"
+      }
+    }
+  ],
+  "results": [
+    {
+      "tool": "search_bpca_evidence",
+      "arguments": {
+        "query": "acyclovir"
+      },
+      "passed": true,
+      "latency_ms": 1305,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-bpca-index",
+        "url": "https://www.nichd.nih.gov/research/supported/bpca/study-summaries",
+        "queried_at_utc": "2026-11-17T18:52:02.809318-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "title": "Acyclovir",
+            "url": "https://www.nichd.nih.gov/sites/default/files/inline-files/BPCAStudySummaryAcyclovir.pdf",
+            "evidence_type": "linked study summary or research news",
+            "content_retrieved": "index title and link only; summary document not retrieved"
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "index_records": 10,
+        "matching_records": 1,
+        "results_truncated": false,
+        "search_scope": "Titles linked on the NICHD BPCA study summaries page, including featured PTN summaries. Not full-text PDF search or all PTN studies.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_bpca_evidence",
+      "arguments": {
+        "query": "levetiracetam"
+      },
+      "passed": true,
+      "latency_ms": 356,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-bpca-index",
+        "url": "https://www.nichd.nih.gov/research/supported/bpca/study-summaries",
+        "queried_at_utc": "2026-11-17T18:52:03.218323-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "title": "BPCA-funded Research Leads to Pediatric Labeling Updates for Levetiracetam in Children with Obesity",
+            "url": "https://pediatrictrials.org/wp-content/uploads/2024/09/PTN_levetiracetam_laysummary_06sep2024_508.pdf",
+            "evidence_type": "linked study summary or research news",
+            "content_retrieved": "index title and link only; summary document not retrieved"
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "index_records": 10,
+        "matching_records": 1,
+        "results_truncated": false,
+        "search_scope": "Titles linked on the NICHD BPCA study summaries page, including featured PTN summaries. Not full-text PDF search or all PTN studies.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_bpca_evidence",
+      "arguments": {
+        "query": "oxycodone"
+      },
+      "passed": true,
+      "latency_ms": 973,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-bpca-index",
+        "url": "https://www.nichd.nih.gov/research/supported/bpca/study-summaries",
+        "queried_at_utc": "2026-11-17T18:52:04.208974-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "title": "BPCA-funded Research Results in Updated Label for Oxycodone during Lactation",
+            "url": "https://pediatrictrials.org/wp-content/uploads/2024/06/PTN_Oxycodone_laysummary_508c.pdf",
+            "evidence_type": "linked study summary or research news",
+            "content_retrieved": "index title and link only; summary document not retrieved"
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "index_records": 10,
+        "matching_records": 1,
+        "results_truncated": false,
+        "search_scope": "Titles linked on the NICHD BPCA study summaries page, including featured PTN summaries. Not full-text PDF search or all PTN studies.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_bpca_evidence",
+      "arguments": {
+        "query": "zzzznotadrug"
+      },
+      "passed": true,
+      "latency_ms": 395,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-bpca-index",
+        "url": "https://www.nichd.nih.gov/research/supported/bpca/study-summaries",
+        "queried_at_utc": "2026-11-17T18:52:04.606543-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "index_records": 10,
+        "matching_records": 0,
+        "results_truncated": false,
+        "search_scope": "Titles linked on the NICHD BPCA study summaries page, including featured PTN summaries. Not full-text PDF search or all PTN studies.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_nichd_studies",
+      "arguments": {
+        "max_results": 25,
+        "network": "mfmu"
+      },
+      "passed": true,
+      "latency_ms": 1176,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-dash",
+        "url": "https://dash.nichd.nih.gov/explore/study?search=&page=0&per_page=100&network%5BMaternal-Fetal+Medicine+Units+%28MFMU%29+Network%5D=Maternal-Fetal+Medicine+Units+%28MFMU%29+Network",
+        "queried_at_utc": "2026-11-17T18:52:05.708059-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "study_id": "426429",
+            "title": "A Randomized Trial of 17 α-Hydroxyprogesterone Caproate for Prevention of Preterm Birth in High Risk Women (PROGESTERONE)",
+            "url": "https://dash.nichd.nih.gov/study/426429",
+            "description": "The primary objective of the Progesterone randomized trial was to determine whether 17 alpha-hydroxyprogesterone caproate (17P) reduced the risk of preterm birth in people who had a previous early spontaneous preterm birth. Participants were enrolled at 16 to 20 weeks of gestation and randomly assigned in a 2:1 ratio to receive either weekly injections of 250 mg of 17P or weekly injections of a placebo. Treatment with 17P significantly reduced the risk of delivery at less than 37 weeks of gestation. Infants of people treated with 17P had lower rates of necrotizing enterocolitis, intraventricular hemorrhage, and need for supplemental oxygen. A follow-up study of the children from the trial was conducted to determine whether there were differences in achievement of developmental milestones between treatment groups. No significant differences were seen in health status or physical examination. Scores for Preschool Activities Inventory were within the normal range and similar between groups.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/n6rh-je89",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Birth Defects, Preterm Labor and Birth, Maternal Mortality, Intellectual and Developmental Disabilities (IDDs), High-Risk Pregnancy, Labor and Delivery",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/12802023/",
+              "https://pubmed.ncbi.nlm.nih.gov/16135587/",
+              "https://pubmed.ncbi.nlm.nih.gov/16157134/",
+              "https://pubmed.ncbi.nlm.nih.gov/16157124/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "426327",
+            "title": "A Randomized Trial of Induction Versus Expectant Management (ARRIVE)",
+            "url": "https://dash.nichd.nih.gov/study/426327",
+            "description": "This study was a randomized trial of 6106 pregnant participants randomized at 38 weeks gestation to either elective induction of labor at 39 weeks gestation or expectant management. The primary research question was does elective induction of labor in nulliparous women at 39 weeks improve perinatal outcome compared with expectant management? Women in the induction group were assigned to undergo induction of labor at 39 weeks 0 days to 39 weeks 4 days. Women in the expectant management group were asked to forego elective delivery before 40 weeks 5 days and to have delivery initiated no later than 42 weeks 2 days. The primary outcome was a composite of perinatal death or severe neonatal complications. There was not a statistically significant difference in the frequency of the primary outcome between groups. There was a significantly lower frequency of cesarean delivery, the principal secondary outcome, in the induction group than in the expectant management group.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/yxf2-1243",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pregnancy, Labor and Delivery, Childbirth, Infant Mortality",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/30089070/",
+              "https://pubmed.ncbi.nlm.nih.gov/32925629/",
+              "https://pubmed.ncbi.nlm.nih.gov/33416294/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "426514",
+            "title": "A Randomized Trial of Omega-3 Fatty Acid Supplementation to Prevent Preterm Birth in Pregnancies at High Risk (OMEGA-3)",
+            "url": "https://dash.nichd.nih.gov/study/426514",
+            "description": "This study is a randomized placebo-control trial to test the hypothesis that among patients with at least one prior spontaneous preterm delivery, receiving weekly 17-hydroxyprogesterone caproate with the addition of an omega-3 supplement would further reduce the rate of recurrent preterm birth. Patients were assigned to either a daily 1200mg omega-3 supplement or matching placebo from 16–22 through 36 weeks of gestation. All participants received 250mg weekly intramuscular 17-hydroxyprogesterone caproate. A total of 434 patients were randomly assigned to the omega-3 supplement arm and 418 patients to the placebo arm. Daily supplementation with 1,200 mg of EPA and 800 mg of DHA did not reduce the rate of repeat preterm birth before 37 weeks, before 35 weeks, or before 32 weeks among high-risk patients receiving 17-hydroxyprogesterone caproate.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/vn81-6740",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Childbirth, Preterm Labor and Birth, Labor and Delivery, High-Risk Pregnancy",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/20093894/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "425020",
+            "title": "A Randomized Trial of Thyroxine Therapy for Subclinical Hypothyroidism or Hypothyroxinemia Diagnosed During Pregnancy (TSH)",
+            "url": "https://dash.nichd.nih.gov/study/425020",
+            "description": "The purpose of this study was to determine whether levothyroxine treatment of women who are identified as having subclinical hypothyroidism or hypothyroxinemia during pregnancy improves cognitive function in their children. Women with a singleton pregnancy before 20 weeks’ gestation were screened for subclinical hypothyroidism, defined as a thyrotropin level of 4.0 mU/L or more and normal free T4 (0.86-1.9 ng/dL), and for hypothyroxinemia, defined by normal thyrotropin level (0.08–3.99 mU/L) but low free T4 (<0.86dL). In separate trials for the two conditions, women were randomly assigned to levothyroxine or placebo. Thyroid function was assessed monthly and levothyroxine dose adjusted to attain a normal thyrotropin or free T4, respectively, with sham adjustments for placebo. Children underwent annual developmental and behavioral testing for five years. The primary outcome was death or IQ score at age 5 (3 if the 5-year examination was missing).",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/ccfh-ns90",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pregnancy",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/28249134/",
+              "https://pubmed.ncbi.nlm.nih.gov/30185931/",
+              "https://pubmed.ncbi.nlm.nih.gov/30399108/"
+            ],
+            "data_access_note": "Data is not available."
+          },
+          {
+            "study_id": "424637",
+            "title": "An Observational Study of Cesarean Section and Vaginal Birth after Cesarean Section (CSEC)",
+            "url": "https://dash.nichd.nih.gov/study/424637",
+            "description": "This study, also known as the Cesarean Registry, was a prospective four-year observational study of all women with a singleton gestation and a prior cesarean delivery at 19 academic medical centers. Maternal and perinatal outcomes were compared between women who underwent a trial of labor and women who had an elective repeated cesarean delivery without labor. The primary objective was to determine the efficacy and safety of trial of labor in this population. The primary analysis concluded that a trial of labor by women with a history of cesarean delivery is associated with an increased risk of adverse perinatal outcomes and a higher rate of maternal adverse events, as compared with elective repeated cesarean delivery. The magnitude of these risks is small; however, this information is important for women and health care providers who are making choices about the type of delivery. The data released in DASH contains 70,411 women and 73,257 infants. Eight centers participated throughout the four years while eleven participated for two years. Demographic data, details of the obstetrical history, and information about intrapartum and postpartum events were recorded. Neonatal data were collected up to 120 days after delivery or at the time of hospital discharge, including the clinical course for infants admitted to the NICU. Separate data-collection forms were completed for maternal or infant complications.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/10vw-w449",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Birth Defects, Child Health, Endometriosis, Gestational Diabetes, HELLP Syndrome, High-Risk Pregnancy, Infant Mortality, Infant Care and Infant Health, Labor and Delivery, Maternal Mortality, Newborn Screening, Preeclampsia and Eclampsia, Pregnancy, Pregnancy Loss, Preterm Labor and Birth, Stillbirth",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/15598960/",
+              "https://pubmed.ncbi.nlm.nih.gov/15295368/",
+              "https://pubmed.ncbi.nlm.nih.gov/16055576/",
+              "https://pubmed.ncbi.nlm.nih.gov/16021071/",
+              "https://pubmed.ncbi.nlm.nih.gov/16157111/",
+              "https://pubmed.ncbi.nlm.nih.gov/16157104/",
+              "https://pubmed.ncbi.nlm.nih.gov/16816049/",
+              "https://pubmed.ncbi.nlm.nih.gov/16816066/",
+              "https://pubmed.ncbi.nlm.nih.gov/16738145/",
+              "https://pubmed.ncbi.nlm.nih.gov/16816050/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "228563",
+            "title": "Antenatal Late Preterm Steroids: A Randomized Placebo Controlled Trial (MFMU ALPS)",
+            "url": "https://dash.nichd.nih.gov/study/228563",
+            "description": "The Antenatal Late Preterm Steroids Trial (ALPS) was a randomized, multicenter, double-blind trial to determine whether antenatal corticosteroids given to women at high risk for late preterm birth (34 weeks to 36 weeks) reduces stillbirth or the need for neonatal respiratory support of preterm birth or neonatal death in the first 72 hours. Women with a singleton pregnancy at 34-36 weeks who were at high risk for preterm delivery were randomized to 2 injections of betamethasone or matching placebo 24 hours apart. There were 2831 women randomized; 4 were lost to follow-up. The primary outcome occurred in 165 infants (11.6%) in the betamethasone group and 202 (14.4%) in the placebo group (RR 0.80; 95% CI, 0.66-0.97; p=0.02). Severe respiratory complications, transient tachypnea of the newborn, surfactant use, and bronchopulmonary dysplasia also occurred significantly less frequently in the betamethasone group. Neonatal hypoglycemia was more common in the betamethasone group (p<0.001).",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/e8bm-m516",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Preterm Labor and Birth, Pregnancy, Obstetrics, High-Risk Pregnancy, Child Health",
+            "publication_urls": [
+              "https://www.nejm.org/doi/pdf/10.1056/NEJMoa1516783"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "424640",
+            "title": "APEX Registry: Assessment of Perinatal Excellence (APEX)",
+            "url": "https://dash.nichd.nih.gov/study/424640",
+            "description": "The Assessment of Perinatal EXcellence (APEX) study is an observational study designed to assist in the development of quality measures for intrapartum care. The specific aim was to assess whether and to what extent hospital differences in the frequency of adverse obstetric outcomes are related to patient and hospital characteristics and to types of care provided. Data were collected on eligible patients if they delivered during the 24-hour period of selected days during a 3-year period. Days were chosen via computer-generated random selection and stratified by weekdays, weekends, and holidays. On selected days, the labor and delivery logbook at each center was screened to identify eligible women. The medical records of all eligible women and their newborns were abstracted by trained research personnel at the hospital and entered into a web-based data entry system. Maternal data were collected until discharge and neonatal data were collected until discharge or 120 days of age, whichever came first.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": null,
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Pregnancy, Early Labor and Birth, Childbirth, High-Risk Pregnancy, Birth Defects, Gestational Diabetes, Preeclampsia and Eclampsia, Preconception Care and Prenatal Care, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/23891630/",
+              "https://pubmed.ncbi.nlm.nih.gov/24631441/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4116103/"
+            ],
+            "data_access_note": "Hospital level data is not available for release."
+          },
+          {
+            "study_id": "7",
+            "title": "Clinical Trial of Low-Dose Aspirin (60 mg) as a Preventive of Preeclampsia (MFMU LRA)",
+            "url": "https://dash.nichd.nih.gov/study/7",
+            "description": "A randomized, double-blind, placebo-controlled trial to evaluate the effectiveness of daily low-dose aspirin in preventing preeclampsia in nulliparous women who begin treatment at 13 to 25 weeks gestation",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/52w7-1t05",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pregnancy, Preeclampsia and Eclampsia, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "4",
+            "title": "Clinical Trial of Low-Dose Aspirin to Prevent Preeclampsia in High Risk Women (MFMU HRA)",
+            "url": "https://dash.nichd.nih.gov/study/4",
+            "description": "A randomized, double-blind, placebo-controlled trial to examine whether daily administration of 60 mg of aspirin beginning at 13 to 26 weeks gestation will decrease the incidence of preeclampsia in pregnant women at high risk for developing the disease. High risk women enrolled were those with chronic hypertension, insulin-dependent diabetes, past history of preeclampsia, or multifetal pregnancy.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/76e6-fj68",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pregnancy, Preeclampsia and Eclampsia, High-Risk Pregnancy, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "426511",
+            "title": "Maternal Morbidity and Mortality During the COVID-19 Pandemic (GRAVID)",
+            "url": "https://dash.nichd.nih.gov/study/426511",
+            "description": "This was a cohort study of people who delivered on randomly selected days between March 1 and December 31, 2019 and March 1 and December 31, 2020 to evaluate the effect of a major public health crisis (COVID-19 pandemic) on maternal morbidity and mortality among pregnant and immediately postpartum patients. This time period allowed for calendar months in 2020 representing the key time period of the pandemic - after testing became available and changes were implemented in healthcare. Inclusion of the same months from 2019 represent the time period prior to the pandemic. In addition to the cohort of women, all pregnant and immediately postpartum (within 6 weeks of delivery) patients with confirmed COVID-19 infection were included. The objectives were to describe COVID-19 disease severity in a large, diverse cohort of pregnant patients and o compare perinatal outcomes based on disease severity. Patients with confirmed COVID-19 infection between March 1, 2020 and December 31, 2020 were followed for maternal and neonatal outcomes through 6 weeks after delivery or surgical removal of the pregnancy. Compared with pregnant COVID-19 patients without symptoms, those with severe/critical COVID-19, but not those with mild/moderate COVID-19, were at increased risk of perinatal complications.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/q1g5-pm40",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Labor and Delivery, Childbirth, Infant Mortality, Preterm Labor and Birth, Preeclampsia and Eclampsia, High-Risk Pregnancy",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/33560778/",
+              "https://pubmed.ncbi.nlm.nih.gov/35129581/",
+              "https://pubmed.ncbi.nlm.nih.gov/35970201/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "1",
+            "title": "Mid-Trimester Endovaginal Sonography in Women at High Risk for Spontaneous Preterm Delivery (MFMU CRVUS)",
+            "url": "https://dash.nichd.nih.gov/study/1",
+            "description": "Examined whether endovaginal sonography can identify a group of high risk women whose mid-trimester cervical characteristics define them as candidates for a future clinical trial of cerclage or other intervention strategies. Cervical length was the primary variable of interest.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/tfwx-t025",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Pregnancy, Preterm Labor and Birth, High-Risk Pregnancy, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "9",
+            "title": "Obstetrical Determinants of Neonatal Survival (MFMU ODNS)",
+            "url": "https://dash.nichd.nih.gov/study/9",
+            "description": "A pilot observational study to examine the effectiveness of using selected obstetrical factors to predict the survival of extremely low birth weight infants. Attitudes of physicians, estimated gestational age, estimated fetal weight, and ultrasound data were among the factors examined.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/hsg2-4h49",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Infant Mortality, Pregnancy, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "10",
+            "title": "Screening for Risk Factors for Spontaneous Preterm Delivery (MFMU PREDS)",
+            "url": "https://dash.nichd.nih.gov/study/10",
+            "description": "A prospective, observational study of women with singleton pregnancies to identify and evaluate tests which could define a group of patients with at least a twofold increase in risk of spontaneous preterm delivery. Primary outcome was delivery from 23 to 34 weeks gestation following spontaneous preterm labor or premature rupture of membranes.",
+            "network": "Maternal-Fetal Medicine Units (MFMU) Network",
+            "doi": "10.57982/r6ft-bj84",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Pregnancy, Preterm Labor and Birth, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "access_url": "https://dash.nichd.nih.gov/resource/FAQs",
+        "access_note": "Public metadata only. Underlying data require DASH or the source repository's access process; no participant data were accessed.",
+        "network_filter": "mfmu",
+        "page": 0,
+        "upstream_total_results": 13,
+        "upstream_page_records": 13,
+        "matching_records_on_page": 13,
+        "results_truncated": false,
+        "next_page": null,
+        "search_scope": "DASH public search results on this page; network filter uses explicit network metadata, not inferred membership. Results are study descriptions, not a systematic review or a current recruiting-trial list.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_nichd_studies",
+      "arguments": {
+        "max_results": 25,
+        "network": "neonatal"
+      },
+      "passed": true,
+      "latency_ms": 724,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-dash",
+        "url": "https://dash.nichd.nih.gov/explore/study?search=&page=0&per_page=100&network%5BNeonatal+Research+Network%5D=Neonatal+Research+Network",
+        "queried_at_utc": "2026-11-17T18:52:06.438667-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "study_id": "417171",
+            "title": "A Multi-center Randomized Trial of Laparotomy vs. Drainage as the Initial Surgical Therapy for ELBW Infants with Necrotizing Enterocolitis (NEC) or Isolated Intestinal Perforation (IP): Outcomes at 18-22 months Adjusted Age (NEST)",
+            "url": "https://dash.nichd.nih.gov/study/417171",
+            "description": "This was a multicenter, randomized clinical trial to determine which initial surgical treatment resulted in the lowest rate of death or neurodevelopmental impairment (NDI) in premature infants with necrotizing enterocolitis (NEC) or isolated intestinal perforation (IP). The randomized cohort included 308 infants aged ≤ 8 0/7 weeks of age and ≤ 1,000 g birthweight that were born at centers with the ability to perform both laparotomy and drainage for which a decision was made by the attending pediatric surgeon to perform surgery for suspected NEC or IP. Death or NDI occurred in 69% of infants in the laparotomy group versus 70% with drainage. There was no overall difference in death or NDI rates at 18 to 22 months corrected age between initial laparotomy versus drainage. However, the preoperative diagnosis of NEC or IP modified the impact of initial treatment.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/n04g-am29",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Infant Mortality, Preterm Labor and Birth, Cerebral Palsy",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/34506326/",
+              "https://pubmed.ncbi.nlm.nih.gov/16549503/"
+            ],
+            "data_access_note": "Data for the observational cohort is not available for use by other investigators."
+          },
+          {
+            "study_id": "417405",
+            "title": "A Randomized Controlled Trial of Benchmarking to Reduce Bronchopulmonary Dysplasia (Benchmarking Protocol)",
+            "url": "https://dash.nichd.nih.gov/study/417405",
+            "description": "This study tested whether Neonatal Intensive Care Unit (NICU) teams trained in benchmarking - comparing care practices between different NICUs to see which practices prevent bronchopulmonary dysplasia (BPD) - and quality improvement would change practices and improve rates of survival without BPD in inborn neonates with birth weights of <1250 grams. Benchmarking is a method involving detailed comparisons of processes between similar organizations. For this study, three NRN centers with the lowest rates of BPD were identified as Benchmark centers. During a 6-month pre-intervention period, details of care practices and management style at these centers were carefully assessed. Based on practices at these Benchmarking sites, a quality improvement program was developed. A total of 14 other NRN sites were randomized to either implement the benchmarking intervention (intervention sites) or continue with their usual care practices (control sites). After the 1-year intervention period, changes in the rate of survival without BPD at 36 weeks corrected age were compared between the intervention and control sites. Intervention centers implemented potentially better practices successfully; changes included reduced oxygen saturation targets and reduced exposure to mechanical ventilation. Lower oxygen saturation targets reduced oxygen levels in the first week of life. Despite these changes, rates of survival free of BPD were all similar between intervention and control groups and remained significantly less than the rate achieved in the best-performing centers (73.3%).",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/g27w-aq15",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health, Infant Mortality, Child Health",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/17473087/",
+              "https://pubmed.ncbi.nlm.nih.gov/16199694/",
+              "https://pubmed.ncbi.nlm.nih.gov/16598294/",
+              "https://pubmed.ncbi.nlm.nih.gov/17015558/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2846831/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2924622/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "424623",
+            "title": "A Randomized Controlled Trial of the Effect of Hydrocortisone on Survival Without Bronchopulmonary Dysplasia and on Neurodevelopmental Outcomes at 22-26 Months of Age in Intubated Infants <30 Weeks Gestation Age (Hydrocortisone for BPD)",
+            "url": "https://dash.nichd.nih.gov/study/424623",
+            "description": "The Hydrocortisone and Extubation study tested the safety and efficacy of a 10-day course of hydrocortisone for infants who were less than 30 weeks estimated gestational age and who were intubated at 14-28 days of life. Infants were randomized to receive hydrocortisone or placebo. The study determined that hydrocortisone treatment starting on postnatal day 14 to 28 did not result in substantially higher survival without moderate or severe bronchopulmonary dysplasia than placebo. Survival without moderate or severe neurodevelopmental impairment did not differ substantially between the two groups.",
+            "network": "Neonatal Research Network",
+            "doi": null,
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Cerebral Palsy, Infant Care and Infant Health, Infant Mortality, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/35320643/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "229026",
+            "title": "Advancing Clinical Trials in Neonatal Opioid Withdrawal Syndrome (ACT NOW) Current Experience: Infant Exposure and Treatment (ACT NOW CE)",
+            "url": "https://dash.nichd.nih.gov/study/229026",
+            "description": "Despite prevalence of infants exposed to opioids prenatally and who develop NOWS, little evidence exists on the best approaches to identify, monitor, and treat these infants. As a result, there is considerable practice variation across and even within centers. This study systematically collected existing patient-level data, using retrospective chart review, to determine current practices in the care of infants with NOWS at sites associated with ISPCTN and NRN. Data was abstracted from the infants’ records as well as the mothers’ records when her records were available at the site. As a result of the analysis, we have a better understanding of the current practices, and practice variation that exists between these sites. These findings determined the priorities for, and informed the design of, two new clinical trials to improve the care and outcomes for infants with NOWS.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/ye7z-n835",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Infant Care and Infant Health, Child Health, Newborn Screening",
+            "publication_urls": [
+              "https://doi.org/10.1542/hpeds.2019-0089"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "415875",
+            "title": "Early Blood Pressure Management in Extremely Preterm Infants Feasibility Pilot Study (ELGAN BP)",
+            "url": "https://dash.nichd.nih.gov/study/415875",
+            "description": "This was a time-limited prospective observational study of all infants born at a NRN center between 23 and 26 weeks gestational age. All clinical decisions made for these babies were at the discretion of the attending neonatologist/infant care team according to standard practice at each institution. Data were collected on blood pressure management in the first 24 postnatal hours for each infant.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/dqeq-xm59",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Child Health, Early Labor and Birth, Infant Care and Infant Health, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3357442/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3666108/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4849123"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "415876",
+            "title": "Early-Onset Sepsis an NICHD/CDC Surveillance Study (EOS)",
+            "url": "https://dash.nichd.nih.gov/study/415876",
+            "description": "This observational study was a surveillance of all infants born at NRN centers to identify all newborns who are diagnosed with early-onset sepsis (EOS) and/or meningitis. The purpose of the study was to establish current hospital-based rates of EOS among term and preterm infants in the era of intrapartum antibiotic prophylaxis; monitor the organisms associated with EOS and meningitis; compare asymptomatic and symptomatic infants by gestational age and pathogen; and monitor sepsis-associated mortality rates by pathogen group.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/gnnr-qv11",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Child Health, Childbirth, Early Labor and Birth, Infant Care and Infant Health, Infant Mortality, Preterm Labor and Birth, Labor and Delivery",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3081183/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3193564/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4702021/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "415995",
+            "title": "Early-Onset Sepsis an NICHD/CDC Surveillance Study II (EOS II)",
+            "url": "https://dash.nichd.nih.gov/study/415995",
+            "description": "The primary purpose of this study was to determine rates of early-onset neonatal infection in term and preterm infants in the era of maternal intrapartum antibiotic prophylaxis to prevent vertical transmission of group B streptococcal disease. Early-onset infection comprises early-onset sepsis (EOS) and/or early-onset meningitis (EOM) and is defined as isolation of a pathogen from blood or cerebrospinal fluid (CSF) obtained within 72 hours of birth and provision of appropriate antibiotic treatment for 5 or more days (or <5 days if death occurs while receiving antibiotic therapy). The antimicrobial susceptibility patterns of organisms associated with EOS and EOM were evaluated. Case controls were also identified.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/gmyg-nz51",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Child Health, Childbirth, Early Labor and Birth, Infant Care and Infant Health, Infant Mortality, Labor and Delivery, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://pubmed.ncbi.nlm.nih.gov/32364598/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "415808",
+            "title": "Evaluation of Systemic Hypothermia Initiated After 6 Hours of Age in Infants ≥ 36 Weeks Gestation with Hypoxic-Ischemic Encephalopathy: A Bayesian Evaluation (Late Hypothermia)",
+            "url": "https://dash.nichd.nih.gov/study/415808",
+            "description": "This study was a randomized, controlled, clinical trial to evaluate whether induced whole-body hypothermia initiated between 6-24 hours of age and continued for 96 hours in infants ≥ 36 weeks gestational age with hypoxic-ischemic encephalopathy will reduce the incidence of death or disability at 18-22 months of age.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/hs6z-4j46",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health, Infant Mortality, Cerebral Palsy, Child Health, Labor and Delivery",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5783566/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "416333",
+            "title": "Hydrocortisone Treatment of Hypotension in Term and Late Preterm Infants: An Observational Study (Term Hypotension)",
+            "url": "https://dash.nichd.nih.gov/study/416333",
+            "description": "This observational study collected information on the incidence and management of hypotension in babies born at term or late preterm that were admitted to Neonatal Intensive Care Units (NICUs) within the Neonatal Research Network (NRN). Participants included all newborn infants born at 34 0/7 weeks gestation or greater who were admitted to NICU Network centers and intubated and mechanically ventilated at less than 72 hours of age. The information gathered provided a framework for the design of a potential randomized controlled trial for the treatment of hypotension in neonates. This observational study was for a time-limited enrollment period; NRN centers enrolled until at least 50 patients were enrolled per center (for 800-1,000 subjects total). More than half of the infants (N=419) met at least one definition of cardiovascular insufficiency (CVI). However, almost half of the treated infants met none of the definitions. Inotropic therapy was associated with increased mortality.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/1wag-yb67",
+            "source_repository": "DASH",
+            "study_type": "Other Types of Clinical Research",
+            "topics": "Infant Care and Infant Health, Preterm Labor and Birth, Infant Mortality, Child Health",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4127379/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4689139/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "416737",
+            "title": "Inhaled Nitric Oxide for Preterm Infants With Severe Respiratory Failure (Preemie iNO)",
+            "url": "https://dash.nichd.nih.gov/study/416737",
+            "description": "This was a multicenter, randomized, blinded, controlled trial to determine whether inhaled nitric oxide (iNO) reduced the rate of death or bronchopulmonary dysplasia (BPD) in infants. The study included 420 neonates, born at less than 34 weeks of gestation, with a birth weight of 401-1500 grams, and with respiratory failure more than 4 hours after treatment with surfactant to receive placebo (simulated flow) or iNO (5 to 10 ppm). Infants with a response (an increase in the partial pressure of arterial oxygen of more than 10 mm Hg) were weaned. The rate of death or BPD was 80% in the iNO group, as compared with 82% in the placebo group, and the rate of BPD was 60% versus 68%. In conclusion, use of iNO in critically ill premature infants weighing less than 1500 grams does not decrease the rates of death or BPD. Outcomes of surviving infants were assessed at 18 to 22 months corrected age; iNO did not reduce death or neurodevelopmental impairment or improve neurodevelopmental outcomes.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/arn4-va15",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Cerebral Palsy, Infant Care and Infant Health, Infant Mortality, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://www.nature.com/articles/7211690",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2757063/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2770191/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2776028/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2676224/",
+              "https://www.nejm.org/doi/10.1056/NEJMoa043927"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "226510",
+            "title": "INS-3: A Phase 3, Randomized, Double-Masked, Placebo-Controlled Study of the Efficacy and Safety of myo-Inositol 5% Injection to Increase Survival without Severe Retinopathy of Prematurity (Reduce-ROP) in Extremely Premature Infants (INS3 Trial)",
+            "url": "https://dash.nichd.nih.gov/study/226510",
+            "description": "The objective of this study was to determine the efficacy and safety of myo-Inositol 5% Injection compared to placebo for increasing the probability of survival without severe Retinopathy of Prematurity in premature infants <28 weeks’ gestation followed through the determination of final/acute ROP status or 55 weeks PMA. The trial was stopped early based on a statistically significant increase in all-cause deaths through 55 weeks’ PMA in the myo-inositol group.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/2frt-6j77",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Mortality, Infant Care and Infant Health, Child Health",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pubmed/30357297"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "425038",
+            "title": "Neurodevelopmental Effects of Donor Human Milk vs. Preterm Formula in ELBW infants (MILK)",
+            "url": "https://dash.nichd.nih.gov/study/425038",
+            "description": "The MILK Trial was a multicenter randomized trial of fortified donor human milk versus preterm formula for extremely low gestational age newborns receiving no or minimal maternal milk to compare neurodevelopmental outcomes at age 22-26 months of age. The trial enrolled 483 infants aged ≤ 29 0/7 weeks of age who were less than or equal to 72 hours of life at the time of admission to the neonatal intensive care unit and survived for at least 12 hours. The Bayley Scales of Infant and Toddler Development (BSID) served as the primary outcome measure, and no significant difference in neurodevelopmental outcomes were noted between the two study arms. Secondary outcomes studied included BSID language and motor scores, in-hospital growth, occurrence of necrotizing enterocolitis, and death.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/d6jr-tg40",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health, Infant Mortality, Necrotizing Enterocolitis (NEC), Preterm Labor and Birth, Cerebral Palsy",
+            "publication_urls": [
+              "https://jamanetwork.com/journals/jama/fullarticle/2814657"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "228264",
+            "title": "Optimizing Cooling Strategies at <6 Hours of Age for Neonatal Hypoxic-Ischemic Encephalopathy (Optimizing Cooling)",
+            "url": "https://dash.nichd.nih.gov/study/228264",
+            "description": "The Optimizing Cooling trial compared four whole-body cooling treatments for infants born at 36 weeks gestational age or later with hypoxic-ischemic encephalopathy: (1) cooling for 72 hours to 33.5°C; (2) cooling for 120 hours to 33.5°C; (3) cooling for 72 hours to 32.0°C; and (4) cooling for 120 hours to 32.0°C. The objective of this study was to evaluate whether whole-body cooling initiated at less than 6 hours of age and continued for 120 hours and/or a depth at 32.0°C would reduce death and disability at 18-22 months corrected age. This trial was terminated early for emerging safety profiles and futility reasons. Longer duration of cooling was associated with more arrhythmia and anuria and longer hospital days, whereas deeper cooling was associated with higher use of inhaled nitric oxide therapy, ECMO, more days of oxygen, and higher incidence of bradycardia.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/yjay-3487",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Labor and Delivery, Infant Mortality, Infant Care and Infant Health, Cerebral Palsy, Child Health",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5793705/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4957277/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4335311/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "17162",
+            "title": "Randomized Controlled Trial of Induced Hypothermia for Hypoxic-Ischemic Encephalopathy in Term Infants (Hypothermia)",
+            "url": "https://dash.nichd.nih.gov/study/17162",
+            "description": "This large multicenter trial tested whether cerebral cooling initiated within 6 hours of birth and continued for 72 hours would reduce the risk of death and moderate to severe neurodevelopmental injury at 18-22 months corrected age. Infants at least 36 weeks gestation with an abnormal blood gas within 1 hour of birth, or a history of an acute perinatal event and a 10-min Apgar score <5, or continued need for ventilation were screened. Following a neurological exam, those with moderate to severe encephalopathy were randomized to a 72-hour period of total body cooling (cooling blanket, followed by slow re-warming).",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/57hn-3043",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health, Cerebral Palsy, Child Health",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pubmed/16221780?dopt=Abstract "
+            ],
+            "data_access_note": "These data are not available for secondary research."
+          },
+          {
+            "study_id": "416067",
+            "title": "The Surfactant Positive Airway Pressure and Pulse Oximetry Trial in Extremely Low Birth Weight Infants (SUPPORT)",
+            "url": "https://dash.nichd.nih.gov/study/416067",
+            "description": "This 2x2 factorial designed randomized clinical trial compared the use of continuous positive airway pressure initiated at birth to the administration of surfactant within 1 hour of birth for premature infants born at 24 to 27 weeks gestation. In addition, these infants within 2 hours of birth, had a special pulse oximeter placed to continuously monitor their oxygen saturation in two different target ranges (85-89% or 91-95%). This study helped determine whether or not these two management strategies affect survival without bronchopulmonary dysplasia (also called chronic lung disease) and survival without severe retinopathy of prematurity (an eye disorder that can lead to blindness).",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/4jjc-1s13",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Infant Care and Infant Health, Infant Mortality, Preterm Labor and Birth",
+            "publication_urls": [
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2891970/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3071534/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3057215/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3730286/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3289530/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4336211/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5327617/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4111960/",
+              "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4140695/"
+            ],
+            "data_access_note": null
+          },
+          {
+            "study_id": "427104",
+            "title": "Trial to Shorten Pharmacologic Treatment of Newborns With Neonatal Opioid Withdrawal Syndrome (NOWS) (ACT NOW Weaning Trial)",
+            "url": "https://dash.nichd.nih.gov/study/427104",
+            "description": "ACT NOW Weaning Trial was a pragmatic, randomized, blinded trial conducted to compare a rapid-wean intervention (15% decrements from the stabilization dose) with a slow-wean intervention (10% decrements from the stabilization dose) to determine whether rapid weaning reduces the number of treatment days among infants receiving morphine or methadone orally as the primary treatment for Neonatal Opioid Withdrawal Syndrome (NOWS). Hospitals could change use of these opioids during trial period. Randomization was stratified by hospital. Study protocol commenced after NOWS signs were controlled with an opioid (stabilization) and weaning of pharmacologic treatment was to be started. At or before each 24-hour interval, clinical team members evaluated and scored infants, per hospital practice, for signs of NOWS to determine if infant would tolerate weaning of study drug. After study drug cessation, clinical team observed infants for at least 48 hours prior to discharge. A trained examiner administered the NeoNatal Neurobehavioral Scale, 2nd edition (NNNS-II) to assess neurobehavioral profiles after ceasing study drug prior to discharge.",
+            "network": "Neonatal Research Network",
+            "doi": "10.57982/cn8s-t371",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health",
+            "publication_urls": [],
+            "data_access_note": "Additional study data will be submitted to DASH."
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "access_url": "https://dash.nichd.nih.gov/resource/FAQs",
+        "access_note": "Public metadata only. Underlying data require DASH or the source repository's access process; no participant data were accessed.",
+        "network_filter": "neonatal",
+        "page": 0,
+        "upstream_total_results": 16,
+        "upstream_page_records": 16,
+        "matching_records_on_page": 16,
+        "results_truncated": false,
+        "next_page": null,
+        "search_scope": "DASH public search results on this page; network filter uses explicit network metadata, not inferred membership. Results are study descriptions, not a systematic review or a current recruiting-trial list.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_nichd_studies",
+      "arguments": {
+        "query": "ampicillin"
+      },
+      "passed": true,
+      "latency_ms": 626,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-dash",
+        "url": "https://dash.nichd.nih.gov/explore/study?search=ampicillin&page=0&per_page=100",
+        "queried_at_utc": "2026-11-17T18:52:07.14337-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [
+          {
+            "study_id": "20222",
+            "title": "Ampicillin Pharmacokinetics and Safety in Infants (BPCA AMP01)",
+            "url": "https://dash.nichd.nih.gov/study/20222",
+            "description": "Aim: NICHD-2012-AMP01 study was designed to characterize the pharmacokinetics (PK) and safety of ampicillin administered to infants per standard of care to address gap in pediatric labeling. Methods: The PK analysis include ampicillin data from NICHD-2011-POP01 study. The safety analysis includes ampicillin data from 1) NICHD-2011-POP01 study 2) Pediatric Pharmacology Research Unit (PPRU) study and 3) Pediatrix Medical Group Database. Results: No AEs or SAEs related to study procedures were reported. No serious, unexpected, suspected, adverse reactions to Ampicillin were reported. From the Pediatrix database Adverse events during ampicillin exposure were uncommon. Shorter dosing intervals were associated with more frequent hematologic AEs for infants of all age groups.",
+            "network": "Best Pharmaceuticals for Children Act (BPCA)",
+            "doi": "10.57982/84p7-c722",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pharmacology, Child Health",
+            "publication_urls": [],
+            "data_access_note": "Contact Duke Clinical Research Institute / Pediatric Trials Network for Pediatrix data sets."
+          },
+          {
+            "study_id": "424635",
+            "title": "Antibiotic Safety in Infants with Complicated Intra-Abdominal Infections - Metronidazole (BPCA ABS01-Metronidazole)",
+            "url": "https://dash.nichd.nih.gov/study/424635",
+            "description": "NICHD-2013-ABS01 was a prospective, open-label, partially randomized, multicenter trial. The primary objective of this study was to evaluate the safety of drug regimens consisting of ampicillin, metronidazole, clindamycin, piperacillin-tazobactam, and gentamycin in assigned or standard of care groups of infants with complicated intra-abdominal infections. Secondary objectives included evaluations of efficacy and population pharmacokinetics (PK). Results demonstrate that metronidazole therapy at the protocol-specified doses was safe for premature infants with complicated intra-abdominal infections (Group 1) and late preterm/term infants (Group 4). Therapeutic success was achieved in 81% and 96% of participants in Groups 1 and 4, respectively. Only one AE in each group was attributable to study drug. None of the outcomes of special interest were attributable to metronidazole. Collected PK data validated the protocol-specified dosing regimen.",
+            "network": "Best Pharmaceuticals for Children Act (BPCA)",
+            "doi": null,
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Child Health, Infant Care and Infant Health, Infant Mortality, Pharmacology",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "412574",
+            "title": "Antibiotic Safety in Infants with Complicated Intra-Abdominal Infections – Clindamycin (BPCA ABS01-Clindamycin)",
+            "url": "https://dash.nichd.nih.gov/study/412574",
+            "description": "NICHD-2013-ABS01 was a prospective, open-label, partially randomized, multicenter trial. The primary objective of this study was to evaluate the safety of drug regimens consisting of ampicillin, metronidazole, clindamycin, piperacillin-tazobactam, and gentamycin in assigned or standard of care groups of infants with complicated intra-abdominal infections. Secondary objectives included evaluations of efficacy and population pharmacokinetics (PK). Results demonstrate that clindamycin therapy at the protocol-specified doses was safe for premature infants with complicated intra-abdominal infections. Only one adverse event was attributed to the study drug, and mortality within 30 days post-treatment was 7% in the cohort receiving the ampicillin, gentamycin, and clindamycin drug regimen (Group 2). None of the outcomes of special interest were attributable to clindamycin. Therapeutic success was achieved in 87% of participants. Collected PK data validated the protocol-specified dosing regimen.",
+            "network": "Best Pharmaceuticals for Children Act (BPCA)",
+            "doi": "10.57982/m14h-jc69",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Infant Care and Infant Health, Pharmacology, Infant Mortality, Child Health",
+            "publication_urls": [],
+            "data_access_note": null
+          },
+          {
+            "study_id": "20028",
+            "title": "Pharmacokinetics of Understudied Drugs Administered to Children per Standard of Care - Ampicillin (BPCA POP01-Ampicillin)",
+            "url": "https://dash.nichd.nih.gov/study/20028",
+            "description": "Aim: Characterize the pharmacokinetics (PK) of ampicillin administered to children per standard of care to address gap in pediatric labeling. Methods: The PK and safety analyses include ampicillin data from NICHD-2011-POP01 (“Pharmacokinetics of Understudied Drugs Administered to Children per Standard of Care”), a multicenter, prospective opportunistic PK study of understudied drugs in children less than 21 years of age who receive drugs per standard of care, as prescribed by a treating caregiver. The NICHD-2011-POP01 study enrolls participants under multiple drugs of interest (DOI) including ampicillin, and continues to enroll participants under other DOIs. Data from NICHD-2011-POP01 (Ampicillin) was analyzed as part of NICHD-2012-AMP01 study. Results: No AEs or SAEs related to study procedures were reported. No serious, unexpected, suspected, adverse reactions to Ampicillin were reported.",
+            "network": "Best Pharmaceuticals for Children Act (BPCA)",
+            "doi": "10.57982/8fwg-qa50",
+            "source_repository": "DASH",
+            "study_type": "Clinical Trial - NIH defined",
+            "topics": "Pharmacology, Child Health",
+            "publication_urls": [],
+            "data_access_note": "NICHD-2011-POP01 study is a master protocol which enrolls participants in over 50 drugs of interests. All data relevant to Ampicillin has been submitted here."
+          }
+        ],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "access_url": "https://dash.nichd.nih.gov/resource/FAQs",
+        "access_note": "Public metadata only. Underlying data require DASH or the source repository's access process; no participant data were accessed.",
+        "network_filter": "any",
+        "page": 0,
+        "upstream_total_results": 4,
+        "upstream_page_records": 4,
+        "matching_records_on_page": 4,
+        "results_truncated": false,
+        "next_page": null,
+        "search_scope": "DASH public search results on this page; network filter uses explicit network metadata, not inferred membership. Results are study descriptions, not a systematic review or a current recruiting-trial list.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    },
+    {
+      "tool": "search_nichd_studies",
+      "arguments": {
+        "query": "zzzznotastudyzzzz"
+      },
+      "passed": true,
+      "latency_ms": 532,
+      "isError": false,
+      "nested_error_sections": [],
+      "response": {
+        "source": "live:nichd-dash",
+        "url": "https://dash.nichd.nih.gov/explore/study?search=zzzznotastudyzzzz&page=0&per_page=100",
+        "queried_at_utc": "2026-11-17T18:52:07.687132-05:00",
+        "cache_note": "Public HTML may be cached for up to one hour.",
+        "results": [],
+        "caveat": "Discovery results are not clinical recommendations. No match does not establish absence of evidence or safety.",
+        "access_url": "https://dash.nichd.nih.gov/resource/FAQs",
+        "access_note": "Public metadata only. Underlying data require DASH or the source repository's access process; no participant data were accessed.",
+        "network_filter": "any",
+        "page": 0,
+        "upstream_total_results": 0,
+        "upstream_page_records": 0,
+        "matching_records_on_page": 0,
+        "results_truncated": false,
+        "next_page": null,
+        "search_scope": "DASH public search results on this page; network filter uses explicit network metadata, not inferred membership. Results are study descriptions, not a systematic review or a current recruiting-trial list.",
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+      }
+    }
+  ]
+}

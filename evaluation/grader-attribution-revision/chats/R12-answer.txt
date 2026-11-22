@@ -1,0 +1,22 @@
+**Age scope queried:** infants with age coded in **months from 0 through 12**; records using other age units were excluded. The returned metadata says the source population and confirmed age band were not established for the individual reaction terms. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+### What the reports can tell researchers
+
+They show which events were reported in this queried acetaminophen subset and the corresponding reporting volume. Examples included vomiting (117 reports), rash (60), irritability (42), seizure (35), and liver injury (28). Some frequent terms described use or administration issues rather than symptoms. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Within this lookup, such patterns can be used for **signal generation and prioritizing follow-up research**. That is an interpretation supplied by this MCP implementation, not proof that the reported events were caused by acetaminophen. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)[S2](https://open.fda.gov/apis/drug/event/)
+
+### What they cannot establish
+
+- **How often side effects occur:** The reports lack an exposure denominator, so these counts cannot estimate incidence, frequency, or individual risk. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)[S2](https://open.fda.gov/apis/drug/event/)
+- **Whether acetaminophen caused an event:** A spontaneous report records a temporal safety report, not confirmed causation. Other medicines, illnesses, exposure circumstances, and administration problems may be relevant, but the returned extract does not adjudicate them. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)[S2](https://open.fda.gov/apis/drug/event/)
+- **That the findings apply to all infants:** The query covers only the specified report subset and cannot be generalized to all infants or all people exposed to acetaminophen. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+- **That every listed term is a confirmed adverse outcome:** Report terms are not necessarily adjudicated clinical outcomes; some are medication-use or administration categories. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Thus, these are **reporting-volume data, not rates, confirmed outcomes, or proof of causality**. No safety conclusion can be drawn from the absence or presence of a particular term in this bounded query. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)[S2](https://open.fda.gov/apis/drug/event/)
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

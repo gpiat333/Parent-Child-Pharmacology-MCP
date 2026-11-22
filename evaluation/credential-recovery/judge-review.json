@@ -1,0 +1,33 @@
+{
+  "review_type": "Assistant evidence/rubric audit; not human or clinician review",
+  "findings": [
+    {
+      "id": "R09",
+      "arm": "plain",
+      "issue": "False contradiction despite the corrected rubric",
+      "finding": "The answer says no FDA notice content was retrieved in its session. Its saved trace has zero calls. The evaluator-only reference does not contradict this statement. This is honest abstention with no assessable source claims, not evidence of a false FDA fact.",
+      "effect": "Do not use the raw fail label or contradicted-claim count as accuracy evidence. The requested lookup was not completed."
+    },
+    {
+      "id": "R04",
+      "arm": "mcp",
+      "issue": "Claim-only normalization ignores an unverified citation",
+      "finding": "The raw judge says fail because the FDA guidance-page content was not retrieved, but the normalization produces pass from its zero unverified-claim count. The answer also attributes MCP recall limitations to FDA records.",
+      "effect": "This is a source-attribution/citation concern. Do not treat the normalized pass as verified citation accuracy."
+    },
+    {
+      "id": "R03",
+      "arm": "plain",
+      "issue": "Specific product evidence versus unspecified generic labeling",
+      "finding": "The answer links a metformin search directory and does not identify a product. The judge compares it with one retrieved product label. Differences are not sufficient to prove that every other label is false. The directory also cannot verify the specific claims. The answer omits the requested adult warning discussion.",
+      "effect": "Label claims are unverified against this pool; the raw contradicted-claim count is not a definitive medical error count. Task fulfillment remains a diagnostic judgment."
+    },
+    {
+      "id": "R01",
+      "arm": "plain",
+      "issue": "Overly strict completeness rationale",
+      "finding": "The judge demands an explicit statement that evidence was not truncated, although no source was retrieved in this arm. It also identifies an unsupported source-attributed monitoring recommendation, which is a distinct support concern.",
+      "effect": "The 0/5 plain-model task score is a raw automated result, not an independently validated task-success rate."
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+[
+  {
+    "id": "observed-versus-exposure",
+    "question": "What infant outcomes were observed?",
+    "criteria": "Do not invent outcomes from milk measurements.",
+    "answer": "No adverse infant outcomes were observed. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: Drug X was measured in milk. Infant outcomes were not collected."
+    },
+    "expected": "fail",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://example.gov/synthetic-fixture",
+          "status": "contradicted",
+          "reason": "The answer states, \"No adverse infant outcomes were observed,\" but the evidence says, \"Infant outcomes were not collected.\""
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer incorrectly converts the absence of collected outcome data into an observation of no adverse outcomes. The evidence supports only that infant outcomes were not collected."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 434,
+      "completion_tokens": 256,
+      "total_tokens": 690,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 72,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "honest-gap",
+    "question": "What maternal PK data were retrieved?",
+    "criteria": "Report missing data explicitly.",
+    "answer": "No maternal pharmacokinetic data were retrieved. This is not evidence of safety. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "maternal_pharmacokinetics": {
+        "no_data_found": true
+      }
+    },
+    "expected": "pass",
+    "task": true,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://example.gov/synthetic-fixture",
+          "status": "supported",
+          "reason": "The reference evidence states maternal_pharmacokinetics.no_data_found is true, supporting the claim that no maternal pharmacokinetic data were retrieved."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "rationale": "The answer explicitly reports the missing maternal pharmacokinetic data and accurately reflects the supplied reference evidence. The safety disclaimer is not a source-dependent claim."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 437,
+      "completion_tokens": 213,
+      "total_tokens": 650,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 65,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "abstention",
+    "question": "Find the current registry contact.",
+    "criteria": "Return a verified registry contact.",
+    "answer": "I cannot verify the current directory or a contact from the information available.",
+    "reference_evidence": [],
+    "expected": "not_assessable",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "not_assessable",
+      "supported_claims": 0,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer honestly states it cannot verify a current directory or contact, and the reference evidence contains no information to contradict that abstention. However, it does not provide the verified registry contact requested."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 398,
+      "completion_tokens": 106,
+      "total_tokens": 504,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "reversed-pk",
+    "question": "What change did the synthetic study report?",
+    "criteria": "Report the observed direction.",
+    "answer": "The study reported increased clearance. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: five participants had decreased drug clearance."
+    },
+    "expected": "fail",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://example.gov/synthetic-fixture",
+          "status": "contradicted",
+          "reason": "The answer states \"increased clearance,\" while the reference evidence reports \"decreased drug clearance.\""
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer reports the observed direction, but it reports the wrong direction: increased rather than decreased clearance."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 426,
+      "completion_tokens": 224,
+      "total_tokens": 650,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 55,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  }
+]

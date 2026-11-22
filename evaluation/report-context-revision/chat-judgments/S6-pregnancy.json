@@ -1,0 +1,78 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 31,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json",
+        "status": "supported",
+        "reason": "The supplied evidence identifies the ingredient as lamotrigine with an exact RxNorm match."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4",
+        "status": "supported",
+        "reason": "The label evidence supports the epilepsy-associated risk context, concentration changes, registry populations and estimates, oral-cleft findings, animal findings, meta-analysis limitations, and product/extract limitations."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40593436/",
+        "status": "supported",
+        "reason": "The supplied abstract identifies this as a 2025 narrative review of bipolar disorder in pregnancy and postpartum and does not provide a lamotrigine-specific comparative estimate."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/",
+        "status": "supported",
+        "reason": "The abstract supports the naturalistic 60-mother mixed psychotropic sample, breastmilk concentration-by-dose finding for lamotrigine, and the reported birth/developmental outcomes; the answer appropriately notes that the findings are not lamotrigine-specific."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The evidence supplies the listed FAERS reporting volumes for the stated query."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The evidence supports interpreting FAERS entries as spontaneous-report volumes without incidence denominators or causal inference."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The supplied search metadata reports 690 records and characterizes the search as bounded rather than systematic."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT05450978",
+        "status": "supported",
+        "reason": "The study record supports the adult-women-with-epilepsy observational study description and the absence of posted results."
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=lamotrigine+AND+%28pregnancy%29&filter.overallStatus=RECRUITING&pageSize=20&format=json",
+        "status": "supported",
+        "reason": "The evidence supports the recruiting-study search and its limitation that registration is not outcome evidence."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer fulfills the requested research-discussion summary. It keeps underlying epilepsy risk distinct from medication-associated findings, separates maternal effects, exposure, and fetal/infant outcomes, preserves study populations and designs, labels animal and FAERS evidence appropriately, displays limitations, asks clinician-facing questions, avoids individualized treatment decisions, and states that stopping or changing medication carries risks and requires clinician discussion. The cited substantive claims are supported by the supplied reference evidence, with no material contradictions identified."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 59417,
+    "completion_tokens": 1647,
+    "total_tokens": 61064,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 59414,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 625,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

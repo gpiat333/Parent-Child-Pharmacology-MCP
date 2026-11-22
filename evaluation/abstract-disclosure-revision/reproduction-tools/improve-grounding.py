@@ -1,0 +1,16 @@
+from pathlib import Path
+P=Path(r'C:/Users/piatkowskigs/Desktop/Parent-child Pharmacology MCP - Submission - 2026-11-20')
+p=P/'chat-client/exposure-presentation-instructions.txt';s=p.read_text(encoding='utf-8')
+s=s.replace('State whether infant blood-level information was retrieved.','State whether infant-level information was retrieved, using the source\'s own specimen terminology; do not narrow unspecified infant levels to blood or serum.')
+s+='''
+For recall lookups, preserve returned candidate records as a compact table of product/formulation, manufacturer, lot text, date, exact status and official link. Candidates are not confirmed matches to the user's bottle. Even when no supplied lot matches, show returned candidates and their statuses instead of reporting only the total. Clearly label bounded or truncated lists. Keep lot-match uncertainty and verification requirements visible; a nonmatch is not clearance.
+
+Keep separate studies separate: attribute each outcome, exposure, comparator and co-exposure to its own source passage. Name the actual comparator when stated. Do not replace a specific comparator with an inferred drug class or merge a different study's medicines into it. Preserve unspecified specimens, timing and populations as unspecified.
+
+For report-count summaries, state the returned counts, query scope and supplied causation/denominator limitations. Avoid adding uncited methodological explanations, speculative alternative causes, or suggestions for research prioritization that are absent from the retrieved material. Calling an assertion an implementation interpretation does not supply evidence for it. Add further factual context only if separately retrieved and cited.
+'''
+p.write_text(s,encoding='utf-8')
+p=P/'server/tools/lactation.py';s=p.read_text(encoding='utf-8').replace('Preserve separate case-report events and timing:', 'Keep each study\'s exact comparator, co-exposures and specimen terminology separate.\n    Do not narrow unspecified infant levels to blood or serum.\n    Preserve separate case-report events and timing:');p.write_text(s,encoding='utf-8')
+p=P/'server/tools/parent_resources.py';s=p.read_text(encoding='utf-8').replace('manufacturer, product/formulation text, lots, dates, status and reason. A literal','each returned candidate with manufacturer, product/formulation text, lots, dates,\n    exact status, reason and official link, including when the supplied lot does not match.\n    A total count alone omits returned candidate details. A literal');p.write_text(s,encoding='utf-8')
+p=P/'server/tools/labels_safety.py';s=p.read_text(encoding='utf-8').replace('pregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation.','pregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation.\n    Preserve the returned query scope and denominator limitations. Do not add uncited\n    alternative causes or research-prioritization claims absent from retrieved material.');p.write_text(s,encoding='utf-8')
+print('General recall completeness, study attribution and source-grounding instructions updated; no case-specific answers or grading changes.')

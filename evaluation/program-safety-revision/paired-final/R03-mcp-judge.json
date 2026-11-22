@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 16,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551",
+        "status": "supported",
+        "reason": "The supplied evidence supports the identified QPharma product, animal milk-transfer finding, absence of nursing-mother studies in that label, potential infant hypoglycemia warning, product-selection limitation, pregnancy-section parsing limitation, and the distinction between label warnings and observed infant outcomes. However, one associated answer claim about adult adverse effects is contradicted by the retrieved adverse-reactions section."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+        "status": "supported",
+        "reason": "The supplied LactMed evidence supports the low milk concentrations, occasional low infant-serum detection, reported infant health and developmental findings, absence of hypoglycemia in the small newborn group, prospective observational comparison, population cautions, and unspecified study details."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer appropriately separates the DailyMed label's potential-risk warning from LactMed's observed infant findings, identifies the QPharma product, discloses product and parsing limitations, avoids giving doses, and accurately notes that no observed infant harm is not proof of universal safety. However, the clause \"The retrieved label section was specifically the lactation section; it did not provide a standalone, extracted summary of adverse effects experienced by the adult. Therefore, adult-specific adverse-effect findings are not established from this retrieval\" conflicts with the supplied evidence: the retrieval included a non-truncated DailyMed adverse_reactions section listing adult-label adverse reactions. Because the question specifically asks for label warnings for the adult taking metformin, omitting those retrieved adult warnings and asserting that they were not established means the comparison is incomplete."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 34418,
+    "completion_tokens": 946,
+    "total_tokens": 35364,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 34415,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "arm_label_hidden": true,
+  "independent_clinician_review": false
+}

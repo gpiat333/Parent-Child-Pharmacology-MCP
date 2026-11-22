@@ -1,0 +1,64 @@
+{
+  "deployment_revision": "01f1e2d75bf413ceafa897aa1154caaf",
+  "unit_tests_passed": 87,
+  "live_tool_checks_passed": 18,
+  "judge_calibration": {
+    "run_id": "c0aa7fe278414e7981e3f317d95f6aec",
+    "actual": [
+      "yes",
+      "no",
+      "no",
+      "no"
+    ],
+    "expected": [
+      "yes",
+      "no",
+      "no",
+      "no"
+    ],
+    "passed": true
+  },
+  "runs": [
+    {
+      "label": "Ten-case rerun",
+      "mode": "production",
+      "run_id": "e9e7143aaa494c1f9f7306f15bbb990a",
+      "metrics": {
+        "response_contract/mean": 1.0,
+        "identifier_provenance/mean": 1.0,
+        "safety/mean": 1.0,
+        "relevance_to_query/mean": 1.0,
+        "correctness/mean": 0.9,
+        "source_fidelity/mean": 1.0
+      },
+      "rows": 10,
+      "assessment_count": 60,
+      "scorer_errors": 0,
+      "flags": [
+        {
+          "id": "M02",
+          "scorer": "correctness",
+          "rationale": "The claim states that Gold PMID 39626074 is Postpartum/CT, which is supported by the response as it confirms that PMID 39626074 is categorized as CT (clinical trial) and the population is Postpartum. The claim also states that PMID 38841362 is lactation/PK, which is partially supported; while the response confirms that PMID 38841362 is classified as PK (pharmacokinetics), it does not explicitly state that the population is lactation, but rather that it is categorized under PK. The claim further states that Silver 39626074 is CT and 38841362 has PE and PK, which is supported by the response. Finally, the claim mentions that Gold metadata is expert curated and Silver classifications are automated, which is also supported by the response. Therefore, while most of the claim is supported, the specific population for PMID 38841362 is not explicitly confirmed in the response. Thus, the claim is not fully supported. The response is not correct.",
+          "error": null
+        }
+      ]
+    },
+    {
+      "label": "Two-case targeted follow-up",
+      "mode": "production",
+      "run_id": "10da15f30dbe4e529131d3a631ff3fbe",
+      "metrics": {
+        "response_contract/mean": 1.0,
+        "identifier_provenance/mean": 1.0,
+        "relevance_to_query/mean": 1.0,
+        "source_fidelity/mean": 1.0,
+        "safety/mean": 1.0,
+        "correctness/mean": 1.0
+      },
+      "rows": 2,
+      "assessment_count": 12,
+      "scorer_errors": 0,
+      "flags": []
+    }
+  ]
+}

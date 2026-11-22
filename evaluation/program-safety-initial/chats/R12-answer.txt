@@ -1,0 +1,26 @@
+**Age scope queried:** infants with age coded in months from **0 through 12 months**; records using other age units were excluded. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What the reports can tell a researcher
+
+They can describe **reported event terms and reporting volume** in this narrowly queried FAERS cohort and help generate hypotheses for further investigation. The returned top terms included:
+
+- Vomiting: **117 reports**
+- Fever (pyrexia): **98 reports**
+- Rash: **60 reports**
+
+The query also returned terms involving medication use, administration, overdose, toxicity, and effectiveness. These should not automatically be treated as adverse effects. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What they cannot establish
+
+- **Frequency or incidence:** The reports have no exposure denominator, so the counts cannot estimate how often an event occurs, its probability, or individual risk.
+- **Causation:** A report involving acetaminophen does not establish that acetaminophen caused the event.
+- **Comparative risk:** Larger reporting counts do not necessarily indicate a higher rate or risk.
+- **Safety from non-reporting:** An event not appearing in this result does not establish that it does not occur.
+
+The MCP specifically characterizes FAERS counts as **reporting volume, not risk**, and states that spontaneous reports do not establish causation and lack exposure denominators. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10) The openFDA documentation describes the drug-event data source and its use; it does not turn these reports into incidence estimates. [S2](https://open.fda.gov/apis/drug/event/)
+
+The returned metadata also states that the source population and confirmed age band for individual reaction terms are **not established in the metadata**; the infant scope comes from the query filter, not confirmation that every report has independently verified infant applicability. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+Stopping or changing a medication can also carry risks; such changes belong in a discussion with the prescribing clinician.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

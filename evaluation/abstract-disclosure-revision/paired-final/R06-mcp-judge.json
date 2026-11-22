@@ -1,0 +1,136 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 18,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Directly links to and supports the first study's title, status, update date, age range, site, contacts, and qualification summary.",
+        "url": "https://clinicaltrials.gov/study/NCT05608434"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Directly links to and supports the second study's title, status, update date, age range, site statuses, contacts, and qualification summary.",
+        "url": "https://clinicaltrials.gov/study/NCT04781140"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the bounded-search method, search limitations, and ClinicalTrials.gov API provenance.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=ADHD+AND+%28child+OR+infant%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=United+States"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Include exact study links, overall and site status if present, update dates, contacts and qualification limits.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer includes the APG site's main phone number but omits the supplied phone extensions. The contact information is therefore incomplete where extensions were provided."
+      }
+    ],
+    "rationale": "The answer accurately reports the two retrieved recruiting studies, direct links, overall and site statuses, update dates, age limits, contacts, qualification-limit summaries, and the non-determination of eligibility. It does not fully satisfy the contact-information requirement because it omits supplied contact extensions for the APG site."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "3855da8b4f5df1b03cdfd22225db48accc67d340bab724ba7d3b3cbd7eb4cd18",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the first study's title, status, dates, age range, site, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the second study's title, status, dates, age range, site statuses, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded-search method, search limitations, and ClinicalTrials.gov API provenance.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Include exact study links, overall and site status if present, update dates, contacts and qualification limits.\",\n      \"answer_quote\": \"APG Research, Orlando, Florida — **RECRUITING**\",\n      \"reference_quote\": \"407-423-7149\\\", \\\"phoneExt\\\": \\\"166\\\"\",\n      \"explanation\": \"The answer lists the APG site and main phone but omits the supplied extensions 166 and 165. It therefore does not fully include all supplied contact details.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the two retrieved recruiting studies, direct links, overall and site statuses, update dates, age limits, contacts, qualification-limit summaries, and the non-determination of eligibility. Its only material task omission is incomplete transcription of one supplied site's contact extensions.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 40850,
+        "completion_tokens": 795,
+        "total_tokens": 41645,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 40847,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 362,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the first study's title, status, update date, age range, site, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the second study's title, status, update date, age range, site statuses, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded-search method, search limitations, and ClinicalTrials.gov API provenance.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Include exact study links, overall and site status if present, update dates, contacts and qualification limits.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"\\\"phoneExt\\\": \\\"166\\\"\",\n      \"explanation\": \"The answer includes the APG site's main phone number but omits the supplied extension 166; the other supplied extension 165 is also omitted. Thus the contact information is incomplete where extensions were provided.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the two retrieved recruiting studies, direct links, overall and site statuses, update dates, age limits, most supplied contacts, qualification-limit summaries, and the non-determination of eligibility. It does not fully satisfy the contact-information requirement because it omits the APG site's supplied phone extensions.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 41367,
+        "completion_tokens": 494,
+        "total_tokens": 41861,
+        "prompt_tokens_details": {
+          "cached_tokens": 40847,
+          "cache_write_tokens": 517,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 66,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the first study's title, status, update date, age range, site, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Directly links to and supports the second study's title, status, update date, age range, site statuses, contacts, and qualification summary.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded-search method, search limitations, and ClinicalTrials.gov API provenance.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Include exact study links, overall and site status if present, update dates, contacts and qualification limits.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer includes the APG site's main phone number but omits the supplied phone extensions. The contact information is therefore incomplete where extensions were provided.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the two retrieved recruiting studies, direct links, overall and site statuses, update dates, age limits, contacts, qualification-limit summaries, and the non-determination of eligibility. It does not fully satisfy the contact-information requirement because it omits supplied contact extensions for the APG site.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 41865,
+        "completion_tokens": 493,
+        "total_tokens": 42358,
+        "prompt_tokens_details": {
+          "cached_tokens": 41364,
+          "cache_write_tokens": 498,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 83,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 41865,
+    "completion_tokens": 493,
+    "total_tokens": 42358,
+    "prompt_tokens_details": {
+      "cached_tokens": 41364,
+      "cache_write_tokens": 498,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 83,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

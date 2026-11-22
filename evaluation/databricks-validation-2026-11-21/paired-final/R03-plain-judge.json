@@ -1,0 +1,44 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 0,
+    "unverified_claims": 3,
+    "citations": [
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6b2e0f3c-5c7f-4e73-a4e9-7a8f2b5d4e21",
+        "status": "unverified",
+        "reason": "This URL is not present in the reference pool. The retrieved DailyMed product was QPharma, Inc., setid 06ade2e1-5981-4e3d-b7e9-7ff083eb4551. Therefore the associated claims, including that the cited product has a boxed warning, cannot be verified from the supplied evidence."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+        "status": "supported",
+        "reason": "The retrieved LactMed record supports low milk concentrations, occasional low or undetectable infant serum levels, limited observational infant findings, no reported adverse effects in the described infants, and limited evidence on growth and development."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer appropriately separates adult label information from infant observations, avoids dosing, and accurately summarizes most LactMed findings and limitations. However, it identifies and cites a DailyMed product not present in the evidence pool, while the retrieved product was METFORMIN HCL TABLET from QPharma, Inc. The claim that the U.S. prescribing information carries a boxed warning for lactic acidosis is not verifiable from the supplied record: the retrieved label extraction explicitly lists the boxed-warning section as missing, which is not proof that no warning exists but does not support the claim. The statement that the label warns about vitamin B12 deficiency is also not present in the supplied label extract. The answer additionally omits the retrieved label's lactation section, which states that potential infant hypoglycemia may exist and that human nursing studies had not been conducted. Because the requested source identification is materially inaccurate and the label comparison is incomplete, task fulfillment is false."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 34306,
+    "completion_tokens": 1133,
+    "total_tokens": 35439,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 34303,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 613,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

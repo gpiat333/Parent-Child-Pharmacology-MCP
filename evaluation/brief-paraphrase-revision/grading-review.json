@@ -1,0 +1,517 @@
+{
+  "raw_scores_changed": false,
+  "clinical_adjudication": false,
+  "findings": [
+    {
+      "case": "R12",
+      "arm": "chat",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "pass",
+      "supported_claims": 15,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25",
+          "status": "supported",
+          "reason": "The retrieved MCP evidence gives this exact query, confirms the cohort as ages coded in months 0 through 12 with other age units excluded, and supports the cited reaction counts and limitations regarding incidence, exposure denominators, causation, and population confirmation."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer accurately reports the queried age scope, retrieved reaction counts, and the limits of spontaneous-report data. However, the criteria explicitly require stating that a subset of reports cannot be generalized to all infants. The answer implies limited applicability through its discussion of unconfirmed infant-specific findings and the queried cohort, but it does not directly state the required non-generalizability conclusion."
+    },
+    {
+      "case": "D05-brief",
+      "arm": "chat",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "pass",
+      "supported_claims": 25,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json",
+          "status": "supported",
+          "reason": "The reference evidence identifies sertraline as the matched ingredient with RxCUI 36437."
+        },
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
+          "status": "supported",
+          "reason": "The evidence confirms the selected product label, SPL version, effective date, low milk levels, and absence of milk-production data."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38811474/",
+          "status": "supported",
+          "reason": "The evidence identifies this as a postpartum-depression review and shows pregnancy, rather than confirmed lactation, in its metadata."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9286185/",
+          "status": "supported",
+          "reason": "The abstract supports the reported sample sizes, milk and infant-serum measurements, detection findings, and absence of observed adverse effects."
+        },
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/",
+          "status": "supported",
+          "reason": "The supplied LactMed extract supports the exposure findings, infant observations, truncation and omitted-section limitations, and unknown study-count statement."
+        },
+        {
+          "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+          "status": "supported",
+          "reason": "The evidence reports 129 records and explicitly characterizes the search as bounded and non-systematic, supporting the stated coverage limitation."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12452737/",
+          "status": "supported",
+          "reason": "The evidence includes this record and its mixed pregnancy/lactation metadata; it is listed in the answer's source links, although no specific claim is attributed to it."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38133585/",
+          "status": "unverified",
+          "reason": "The reference pool lists the record, but the answer does not make a substantive claim specifically attributable to it."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32320387/",
+          "status": "unverified",
+          "reason": "The reference pool lists the record, but the answer does not make a substantive claim specifically attributable to it."
+        },
+        {
+          "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+          "status": "supported",
+          "reason": "The evidence confirms this is a non-lactation-specific FAERS query and that reporting volume does not establish incidence, risk, or causation."
+        },
+        {
+          "url": "https://open.fda.gov/apis/drug/event/",
+          "status": "supported",
+          "reason": "The evidence supports the interpretation that spontaneous-report counts lack exposure denominators and cannot establish incidence or causation."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT03511118",
+          "status": "supported",
+          "reason": "The evidence identifies the study as recruiting, including sertraline and lactating women/breastfed infants, with no posted results and unconfirmed individual eligibility or site recruitment."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT01385709",
+          "status": "unverified",
+          "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT01796132",
+          "status": "supported",
+          "reason": "The evidence identifies this record as UNKNOWN status and supports the statement that its current status is unverified."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT06384209",
+          "status": "unverified",
+          "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT02565316",
+          "status": "unverified",
+          "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+        },
+        {
+          "url": "https://medlineplus.gov/pregnancyandmedicines.html",
+          "status": "unverified",
+          "reason": "The answer's source list includes this record, but no substantive pregnancy-specific claim is attributed to it."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer is substantively faithful to the supplied evidence and presents the requested three evidence axes, source links, limitations, and clinician questions without making a personal treatment decision. However, it does not fully satisfy the explicit instruction not to provide doses: it reproduces numerous dose values in the evidence summaries, including the clause “In a study of 12 lactating women...” followed by dose-related source details and multiple dose values throughout the LactMed-linked claims. These are historical source data rather than individualized dosing advice, but they still violate the requested no-doses constraint. The maternal-effects section also largely reports milk/infant exposure rather than effects on the lactating person, though the three-axis structure is present."
+    },
+    {
+      "case": "P01-portfolio",
+      "arm": "chat",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "pass",
+      "supported_claims": 20,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://reporter.nih.gov/",
+          "status": "unverified",
+          "reason": "The supplied evidence identifies this as the RePORTER source URL, but a homepage URL alone does not establish the associated FY2025 totals, capped-result status, or query metadata."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11146604",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/10912541",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11168898",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11170529",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11169028",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11020649",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11074527",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11042185",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11097227",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        },
+        {
+          "url": "https://reporter.nih.gov/project-details/11170645",
+          "status": "supported",
+          "reason": "The evidence contains the matching project title, fiscal year, administering IC, organization, award amount, and direct cost."
+        }
+      ],
+      "uncited_source_claims": 4,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer faithfully reports the supplied evidence: the FY2025 group, 20 retrieved records, 19 distinct core projects, separate award and direct-cost totals, the exact query filters, the 20-of-96 capped result, and the activity-code limitation are all supported. However, the criteria require grouped counts, and FY2024 does not provide an explicit numeric count; it only says that no group was returned. The homepage citation is also insufficient by itself to support the associated totals and cap claims, although those claims are supported by the supplied structured evidence."
+    },
+    {
+      "case": "R01",
+      "arm": "mcp",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 15,
+      "contradicted_claims": 0,
+      "unverified_claims": 5,
+      "citations": [
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+          "status": "supported",
+          "reason": "The LactMed record supports the reported infant observations, comparison-study findings, low milk-level summary, inadequate evaluation statement, absence of published infant blood-level information, and uncertainty about causation in the multi-drug urticaria case."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "Most of the observed-symptom and uncertainty summary is faithful to the retrieved LactMed record, and no dose was given. However, the answer presents diarrhea/stool changes, rash/diaper rash, thrush, feeding difficulty, and unusual sleepiness as LactMed 'monitoring targets.' The record reports some of these as observed effects or as findings monitored in a study, but it does not provide the stated general monitoring advice, so those five advice claims are unverified. The answer also omits the requested milk measurements (including the reported maternal milk concentrations and modeled relative infant dose), despite mentioning only that milk levels were low. It therefore does not fully satisfy the criterion to separate and summarize milk measurements, observations, and recommendations."
+    },
+    {
+      "case": "R03",
+      "arm": "mcp",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 18,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551",
+          "status": "contradicted",
+          "reason": "The supplied evidence shows that the label's adverse_reactions section was retrieved and contains adult adverse reactions, including gastrointestinal effects and other listed reactions. This conflicts with the answer's clause: \"The retrieved label’s adult adverse-reaction section was not returned as a separate section\" and its resulting claim that the adult warning profile is incomplete for that reason. The label's lactation claims and product identity are otherwise supported."
+        },
+        {
+          "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule",
+          "status": "supported",
+          "reason": "The reference evidence states that FDA removed the historical pregnancy letter categories under the Pregnancy and Lactation Labeling Rule, supporting the answer's related limitation."
+        },
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+          "status": "supported",
+          "reason": "The evidence supports the reported low milk levels, occasional low infant serum levels, infant outcome observations, absence of reported low blood glucose in the specifically assessed infants, prospective follow-up findings, caution for newborn or premature infants and infants with renal impairment, and the disclosed study-population limitations."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer generally separates adult label information from breastfed-infant observations, identifies the retrieved QPharma product and LactMed, distinguishes theoretical warning from observed infant outcomes, discloses several limitations, and avoids giving medication doses. However, it makes a material false retrieval claim: \"The retrieved label’s adult adverse-reaction section was not returned as a separate section.\" The supplied evidence explicitly includes that section, so the answer omits relevant adult label findings and incorrectly presents the adult comparison as incomplete. This is not an honest abstention because the evidence shows the section was retrieved."
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "mcp",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 24,
+      "contradicted_claims": 0,
+      "unverified_claims": 1,
+      "citations": [
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4",
+          "status": "supported",
+          "reason": "Supports the disease-associated maternal risks, Clinical Considerations PK statements, registry outcome estimates, oral-cleft signal and limitations, animal findings, and label-currency caveat."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/",
+          "status": "supported",
+          "reason": "Supports review-level statements about pregnancy-related antiseizure-medication concentration changes, seizure-control context and monitoring."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/",
+          "status": "supported",
+          "reason": "Supports the naturalistic mixed-medication study of 60 mothers, repeated pregnancy/lactation measurements, lack of lamotrigine-specific quantitative clearance data in the retrieved abstract, breast-milk findings and cautious interpretation of infant outcomes."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33573557/",
+          "status": "supported",
+          "reason": "Supports that the 2021 review discusses lamotrigine pregnancy pharmacokinetics, while the supplied evidence only includes its abstract."
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38748979/",
+          "status": "supported",
+          "reason": "Supports the guideline-level context about antiseizure medicines, seizure control and individualized clinician decisions."
+        },
+        {
+          "url": "https://clinicaltrials.gov/study/NCT05450978",
+          "status": "supported",
+          "reason": "Supports that a recruiting observational study evaluates antiseizure-medication clearance, maternal concentrations and unborn-child/nursing-infant exposure in pregnant adults with epilepsy; registration does not establish results."
+        },
+        {
+          "url": "https://open.fda.gov/apis/drug/event/",
+          "status": "supported",
+          "reason": "Supports the caveat that spontaneous-report counts lack denominators and cannot establish incidence or causation."
+        },
+        {
+          "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+          "status": "supported",
+          "reason": "Supports the registry-directory statement and the caveat that FDA lists but does not operate or endorse the registry."
+        }
+      ],
+      "uncited_source_claims": 2,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "rationale": "The answer fulfills the requested three-axis brief, distinguishes Clinical Considerations from individualized clinician decisions, preserves study context and gaps, avoids dose values and personal medication advice, and includes clinician questions. However, the clause \"The retrieved sources support that fetal exposure occurs after maternal use\" is not established by the supplied evidence: the cited trial is recruiting and is evaluating fetal exposure, with no fetal-concentration results provided, while the literature evidence concerns breast milk rather than measured fetal exposure. The answer appropriately states that quantitative human fetal-concentration estimates were not retrieved, but the stronger assertion that fetal exposure is supported should have been framed as expected or under investigation rather than as a demonstrated retrieved finding. The search-record counts and bounded-search description also lack direct inline citations."
+    },
+    {
+      "case": "R01",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 9,
+      "contradicted_claims": 0,
+      "unverified_claims": 4,
+      "citations": [
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/",
+          "status": "unverified",
+          "reason": "The cited LactMed record supports low milk levels, reported diarrhea/rash/thrush, no adverse effects in one 25-mother study, acceptability during breastfeeding, and uncertainty about causation. However, it does not state that monitoring is 'not routinely required' or prescribe monitoring beyond observation. The source also reports several distinct studies and cases rather than only the generalized monitoring advice presented."
+        }
+      ],
+      "uncited_source_claims": 4,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer appropriately separates observed symptoms from a monitoring section, avoids dosing, and accurately conveys several LactMed findings. The source supports reports of infant diarrhea, rash, thrush, and studies in which no adverse effects were reported, as well as low milk levels and uncertainty about causation. However, the exact clause 'monitoring is not routinely required beyond observing the infant for possible gastrointestinal effects or rash' is not present in the retrieved LactMed record and is therefore an unsupported recommendation. The statements that diarrhea and rash are common in infants and that LactMed does not establish safety for every medication combination are also not stated in the supplied evidence. Most importantly, the answer omits the requested milk measurements: reported maternal milk concentrations and the record's statement that published infant-level information was not found. It therefore does not fully satisfy the criterion to summarize milk measurements and disclose the available record context."
+    },
+    {
+      "case": "R03",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 10,
+      "contradicted_claims": 1,
+      "unverified_claims": 2,
+      "citations": [
+        {
+          "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metformin",
+          "status": "unverified",
+          "reason": "The supplied evidence supports label claims using a specific DailyMed lookup URL for the QPharma product, not this search-directory URL. The cited directory alone does not establish the associated claims."
+        },
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+          "status": "supported",
+          "reason": "The LactMed extract supports low milk concentrations, low estimated infant exposure, reported absence of adverse effects, growth and development observations, and limited study populations."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer appropriately separates adult label warnings from infant exposure and outcome findings, avoids dosing, and accurately reports most LactMed findings and limitations. However, the clause \"The U.S. prescribing information has a boxed warning for lactic acidosis\" is not established by the supplied retrieved evidence: the selected label extract lists \"boxed_warning\" among missing sections and warns that missing sections do not prove absence or presence. More importantly, the retrieved DailyMed label explicitly contains a lactation section warning that hypoglycemia in nursing infants may exist; the answer omits this infant-specific label warning and states broadly that the label does not provide an infant-specific warning equivalent to the adult boxed warning. That omission prevents a complete source comparison. The answer also fails to name the retrieved product precisely as \"METFORMIN HCL TABLET [QPHARMA, INC.]\" and does not disclose the label-extraction limitation that the warnings section was truncated and that the product/formulation was not confirmed. The B12 assertion is also not supported by the supplied extracted label evidence."
+    },
+    {
+      "case": "R04",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "pass",
+      "supported_claims": 4,
+      "contradicted_claims": 0,
+      "unverified_claims": 5,
+      "citations": [
+        {
+          "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts",
+          "status": "unverified",
+          "reason": "The URL is not present in the supplied reference pool, so its content and relevance cannot be verified from the evidence."
+        },
+        {
+          "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls",
+          "status": "supported",
+          "reason": "The evidence supplies this URL as the official recall-guidance URL and supports checking official recall notices and affected product identifiers."
+        },
+        {
+          "url": "https://www.accessdata.fda.gov/scripts/cder/ndc/",
+          "status": "unverified",
+          "reason": "The URL is not present in the supplied reference pool, so its specific content and relevance cannot be verified from the evidence."
+        }
+      ],
+      "uncited_source_claims": 5,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer correctly states that a nonmatching lot does not establish that a bottle was unaffected, preserves the distinction among product identity, manufacturer, formulation, lot, and recall status, and explains that verification should compare the bottle with the official notice and confirm details independently. These points are consistent with the evidence that the search returns candidate product-name matches only, that no match is not clearance, that formulation/manufacturer/lot/expiration must be checked, and that records may lag announcements. The answer did not actually report the retrieved naproxen candidates or their statuses, and its statement that it could not query the live database means the requested lookup was not fulfilled. Several additional explanations—such as manufacturer, pharmacy, wholesaler, or state actions and counterfeit products—are plausible but not verifiable in the supplied reference pool."
+    },
+    {
+      "case": "R06",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "not_assessable",
+      "supported_claims": 0,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer honestly abstains, stating: “I’m unable to verify live ClinicalTrials.gov records in this environment.” This is an access statement rather than a claim about what the records contain, so it is not assessable as supported or contradicted from the reference evidence. However, the requested lookup was not performed: no studies, direct links, recruitment statuses, update dates, contacts, or qualification limits were provided."
+    },
+    {
+      "case": "R09",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 1,
+      "citations": [
+        {
+          "url": "https://www.fda.gov/drugs/postmarket-drug-safety-information-patients-and-providers/montelukast-singulair-akkolate-zafirlukast-and-zafirlukast",
+          "status": "unverified",
+          "reason": "This URL does not appear in the supplied reference evidence, so its relevance as the FDA topic page cannot be verified from the reference pool."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer honestly states that it could not access or retrieve the notice text and avoids inventing titles, excerpts, mechanisms, or treatment instructions. Its statement that the full notice text was not retrieved is consistent with the evidence, which contains only title/index results. However, it fails the requested lookup because it does not report the returned notice title or link to the returned notice; instead, it provides an unverified topic-page URL. The access limitation is an honest abstention rather than a claim that no FDA safety notice exists."
+    },
+    {
+      "case": "E01-gap",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 8,
+      "contradicted_claims": 2,
+      "unverified_claims": 9,
+      "citations": [
+        {
+          "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s003lbl.pdf",
+          "status": "unverified",
+          "reason": "This URL is not present in the supplied reference pool, so the associated label claims cannot be directly verified from the provided evidence."
+        },
+        {
+          "url": "https://womensmentalhealth.org/research/pregnancyregistry/",
+          "status": "unverified",
+          "reason": "The supplied evidence includes the National Pregnancy Registry study record and contact information, but not this exact URL as an assessed source."
+        },
+        {
+          "url": "https://www.fda.gov/medwatch",
+          "status": "unverified",
+          "reason": "This URL is not present in the supplied reference pool."
+        }
+      ],
+      "uncited_source_claims": 8,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer presents all requested evidence axes, keeps empty rows visible, states that no pregnancy-specific maternal pharmacokinetic data were retrieved, separates registry information, avoids medication decisions, and provides no dosing instructions. However, it fails source fidelity and task fulfillment in important respects. The animal row says that “developmental findings were reported at maternal exposures above or near clinical exposure,” whereas the supplied label evidence reports no fetal toxicity, malformation, or maternal/developmental toxicity at the tested rat and rabbit exposures; it reports maternal toxicity in rabbits only at the highest tested exposure. The answer also supplies registry/contact information that conflicts with the retrieved FDA directory and label: the evidence gives the QUVIVIQ registry phone as 1-833-400-9611, while the answer gives 1-833-995-2735 and additionally asserts FDA-label direction to the National Pregnancy Registry for Psychiatric Medications, which is not supported by the supplied label evidence. Several claims about absence of measured fetal or infant concentrations, placental transfer, cord blood studies, lactation data, CYP3A4 metabolism, and MedWatch are not directly supported by the reference pool or are missing citations. The cited 2022 FDA PDF is also absent from the reference pool, so its support is unverified."
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "plain",
+      "type": "diagnostic_model_finding",
+      "fidelity_status": "fail",
+      "supported_claims": 14,
+      "contradicted_claims": 0,
+      "unverified_claims": 14,
+      "citations": [
+        {
+          "url": "https://www.neurology.org/doi/10.1212/01.WNL.0000268250.40474.70",
+          "status": "unverified",
+          "reason": "This URL and its study findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://doi.org/10.1016/j.eplepsyres.2013.05.007",
+          "status": "unverified",
+          "reason": "This URL and its study findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://www.neurology.org/doi/10.1212/WNL.0000000000208399",
+          "status": "unverified",
+          "reason": "The reference pool contains the corresponding guideline at PubMed PMID 38748979, but not this URL; the supplied evidence supports general guideline statements, not every associated claim."
+        },
+        {
+          "url": "https://doi.org/10.1046/j.1528-1157.2000.00023.x",
+          "status": "unverified",
+          "reason": "This URL and the cord-blood transfer findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://www.neurology.org/doi/10.1212/01.WNL.0000306522.00434.31",
+          "status": "unverified",
+          "reason": "This URL and the cited placental-transfer or malformation findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK501268/",
+          "status": "unverified",
+          "reason": "The pool states that LactMed is lactation-only, but does not supply or verify this specific LactMed URL."
+        },
+        {
+          "url": "https://doi.org/10.1056/NEJMoa1812329",
+          "status": "unverified",
+          "reason": "This EURAP URL and its study-specific findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://doi.org/10.1111/j.1471-0528.2011.03075.x",
+          "status": "unverified",
+          "reason": "This EUROCAT URL and its study-specific findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://doi.org/10.1212/WNL.0b013e31824b04c2",
+          "status": "unverified",
+          "reason": "This Meador URL and its neurodevelopmental findings are not present in the supplied reference pool."
+        },
+        {
+          "url": "https://www.aedpregnancyregistry.org/",
+          "status": "supported",
+          "reason": "The reference pool identifies the North American Antiepileptic Drug Pregnancy Registry and supplies the registry website, including its ongoing listing."
+        },
+        {
+          "url": "https://www.neurology.org/doi/10.1212/WNL.0000000000208399",
+          "status": "supported",
+          "reason": "The supplied PubMed record for PMID 38748979 supports the general claim that the AAN/AES/SMFM guideline considers lamotrigine among options to minimize major congenital malformation risk when clinically appropriate."
+        },
+        {
+          "url": "https://www.neurology.org/doi/10.1212/01.WNL.0000306522.00434.31",
+          "status": "unverified",
+          "reason": "The supplied pool does not contain this URL or its specific evidence review text."
+        }
+      ],
+      "uncited_source_claims": 12,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer has the requested three-axis structure, visible gaps, clinician questions, and avoids numeric medication doses and individualized dosing advice. It also honestly states that a live retrieval from Clinical Considerations could not be verified. However, task fulfillment fails because the requested maternal pharmacokinetic evidence is presented as if established from specific literature while the key cited Pennell and Clark sources are absent from the reference pool, and the answer does not preserve their study populations or designs. Several additional substantive claims—placental transfer, cord-blood similarity, EURAP and EUROCAT findings, and neurodevelopmental conclusions—are supported only by URLs not present in the evidence pool. The supplied evidence does support general claims about pregnancy-related concentration changes, postpartum restoration, seizure-control context, limited observational evidence, guideline framing, and the registry, but not the answer's full source-specific brief."
+    }
+  ],
+  "technical_review_file": "TECHNICAL_REVIEW.md",
+  "important_distinction": "Unsupported in the supplied reference pool does not necessarily mean false. URL membership does not establish claim support."
+}

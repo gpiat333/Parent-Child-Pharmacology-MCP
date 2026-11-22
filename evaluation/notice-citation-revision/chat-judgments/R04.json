@@ -1,0 +1,42 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 8,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22naproxen%22&sort=report_date%3Adesc&limit=20",
+        "status": "supported",
+        "reason": "The supplied evidence shows a naproxen product-name search with no returned lot matching NOTREAL-77 and expressly states that this is not bottle-level clearance, that no match does not prove safety, and that formulation, manufacturer, lot, expiration, lot ranges, and all-lot language require verification."
+      },
+      {
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls",
+        "status": "supported",
+        "reason": "The evidence identifies this FDA page as the official recall-guidance URL to consult for the returned enforcement records."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer correctly distinguishes a bounded no-match result from a finding that the bottle was unaffected or safe. It preserves the distinction among product, formulation, manufacturer, lot, and recall status, and it explains the additional verification needed, including exact labeling details, expiration, official notice language, distribution information, and confirmation with responsible parties. It also accurately notes that enforcement records may lag announcements and may omit consumer instructions, consistent with the supplied coverage limitations."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 7568,
+    "completion_tokens": 717,
+    "total_tokens": 8285,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 7565,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 349,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

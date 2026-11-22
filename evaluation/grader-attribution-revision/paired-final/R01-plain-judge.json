@@ -1,0 +1,124 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 1,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited LactMed record supports the reported infant diarrhea and rash findings, limited evidence, uncertain causality, and the caution that low milk transfer does not establish safety.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize actual retrieved infant observations separately from recommendations and milk measurements.",
+        "answer_quote": null,
+        "reference_quote": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+        "explanation": "The answer does not report the retrieved milk concentration measurements or state that infant-level published information was not found."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite the record and disclose missing/truncated evidence.",
+        "answer_quote": null,
+        "reference_quote": "Relevant published information was not found as of the revision date.",
+        "explanation": "The answer gives a general limitation but does not disclose the specific missing infant-level information or the record's completeness status."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "LactMed recommends observing the infant for possible effects such as:",
+        "reference_quote": "If no recommendation is retrieved, state that limitation instead of turning observations into advice.",
+        "explanation": "The retrieved LactMed text lists reported symptoms and symptoms monitored in a study, but does not provide an explicit recommendation to monitor them. The answer converts observations into attributed monitoring advice."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Other signs of an allergic reaction",
+        "reference_quote": null,
+        "explanation": "The retrieved record describes rash and a urticaria case, but does not state a general recommendation to monitor for other allergic-reaction signs."
+      }
+    ],
+    "rationale": "The answer accurately conveys several reported diarrhea and rash observations and appropriately notes uncertain causality and limited evidence. However, it omits the required milk measurements and specific missing infant-level information, and it incorrectly presents symptom observations as LactMed monitoring recommendations."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "8c96982f3d28647ece3b2e65aceba378938e56ba20eb2a108ea81330d5f875c8",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the reported infant diarrhea and rash findings, limited evidence, uncertain causality, and the caution that low milk transfer does not establish safety.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The answer does not report the retrieved milk concentration measurements or state that infant-level published information was not found.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite the record and disclose missing/truncated evidence.\",\n      \"answer_quote\": \"The available evidence is limited, with relatively few reported infant outcomes.\",\n      \"reference_quote\": \"Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The answer gives a general limitation but does not disclose the specific missing infant-level information or the record's completeness status.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed recommends observing the infant for possible effects such as:\",\n      \"reference_quote\": \"If no recommendation is retrieved, state that limitation instead of turning observations into advice.\",\n      \"explanation\": \"The retrieved LactMed text lists reported symptoms and symptoms monitored in a study, but does not provide an explicit recommendation to monitor them. The answer converts observations into attributed monitoring advice.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Other signs of an allergic reaction\",\n      \"reference_quote\": null,\n      \"explanation\": \"The retrieved record describes rash and a urticaria case, but does not state a general recommendation to monitor for other allergic-reaction signs.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately conveys several reported diarrhea and rash observations and appropriately notes uncertain causality and limited evidence. However, it omits the required milk measurements and specific missing infant-level information, and it incorrectly presents symptom observations as LactMed monitoring recommendations.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 27094,
+        "completion_tokens": 951,
+        "total_tokens": 28045,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 27091,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 310,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed record supports the reported infant diarrhea and rash findings, limited evidence, uncertain causality, and the caution that low milk transfer does not establish safety.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The answer does not report the retrieved milk concentration measurements or state that infant-level published information was not found.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite the record and disclose missing/truncated evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The answer gives a general limitation but does not disclose the specific missing infant-level information or the record's completeness status.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed recommends observing the infant for possible effects such as:\",\n      \"reference_quote\": \"If no recommendation is retrieved, state that limitation instead of turning observations into advice.\",\n      \"explanation\": \"The retrieved LactMed text lists reported symptoms and symptoms monitored in a study, but does not provide an explicit recommendation to monitor them. The answer converts observations into attributed monitoring advice.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Other signs of an allergic reaction\",\n      \"reference_quote\": null,\n      \"explanation\": \"The retrieved record describes rash and a urticaria case, but does not state a general recommendation to monitor for other allergic-reaction signs.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately conveys several reported diarrhea and rash observations and appropriately notes uncertain causality and limited evidence. However, it omits the required milk measurements and specific missing infant-level information, and it incorrectly presents symptom observations as LactMed monitoring recommendations.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 27801,
+        "completion_tokens": 715,
+        "total_tokens": 28516,
+        "prompt_tokens_details": {
+          "cached_tokens": 27091,
+          "cache_write_tokens": 707,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 85,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 27801,
+    "completion_tokens": 715,
+    "total_tokens": 28516,
+    "prompt_tokens_details": {
+      "cached_tokens": 27091,
+      "cache_write_tokens": 707,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 85,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

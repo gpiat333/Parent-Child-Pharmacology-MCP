@@ -1,0 +1,32 @@
+{
+  "version": "2026-11-20.3",
+  "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
+  "patterns": {
+    "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
+    "patterns_2": "not breathing|can(?:not|'t) breathe|trouble breathing|difficulty breathing|can(?:not|'t) (?:wake|awaken)|(?:is |has |having |had )?(?:unconscious|unresponsive|a seizure|seizures)|(?:has |just )collapsed",
+    "patterns_3": "(?:(?:accidentally|just) (?:swallowed|drank|took)|(?:baby|child|toddler) (?:swallowed|drank)|(?:took|gave) (?:(?:an?|the) )?(?:extra|double|wrong) (?:dose|medicine)|possible poisoning|may have been poisoned|overdose)|\\b(?:infant|baby|child|toddler)\\b.{0,35}\\b(?:swallowed|ate|drank|ingested)\\b.{0,35}\\b(?:pills|tablets|medicine|medication|cleaner)\\b",
+    "patterns_4": "\\b(?:do not|don't)\\s+(?:provide|give|include)\\s+(?:(?:a|any|the)\\s+)?(?:dosing(?: advice)?|doses?|dosages?|taper(?: plans?| schedules?)?|individualized medication decisions?)(?:\\s+or individualized medication decisions?)?\\b|\\b(?:do not|don't)\\s+(?:provide|give|include)\\s+(?:individualized\\s+)?medication decisions?\\s+(?:or|and)\\s+doses?\\b",
+    "patterns_5": "(?:should|can|may|could)\\s+(?:i|we|my (?:baby|child))\\s+(?:take|give|stop|start|continue|switch|change|increase|decrease)|how often\\b.{0,50}\\b(?:take|give)|(?:what|which|how much)\\b[^?]{0,60}\\b(?:dose|dosage|taper)|\\b(?:give|tell|make|provide)\\b[^?]{0,45}\\b(?:dose|dosage|taper|schedule)|\\b(?:missed|forgot|skip(?:ped)?)\\b.{0,30}\\b(?:dose|medicine)|\\b(?:sedat\\w*|sleep through the night)\\b.{0,60}\\b(?:baby|infant)|\\b(?:baby|infant)\\b.{0,60}\\b(?:sedat\\w*|sleep through the night)",
+    "patterns_6": "\\b(?:little|small|round|white|blue|pink)\\s+(?:\\w+\\s+)?(?:pill|tablet)\\b|\\b(?:my|the) (?:(?:blood )?pressure|heart|sleep|anxiety) (?:pill|medicine)\\b",
+    "patterns_7": "\\b[\\w.+-]+@[\\w.-]+\\.[A-Za-z]{2,}\\b|\\b\\d{3}-\\d{2}-\\d{4}\\b|\\b(?:DOB|date of birth|medical record number|MRN|phone|address)\\s*[:=]|\\bmy name is\\b|\\b(?:child's|baby's) name is\\b|\\bi live at\\b",
+    "crisis": "\\b(?:suicid\\w*|self[ -]?harm|hopeless\\w*|(?:kill|harm|hurt|end|shake|smother|drown)\\s+(?:myself|my\\s+life|my\\s+(?:baby|infant|child)|the\\s+(?:baby|infant|child))|(?:want|wish|need|plan|planning|going|intend)\\s+to\\s+(?:die|overdose|end\\s+it)|(?:better\\s+off|better)\\s+(?:without\\s+me|dead)|(?:can't|cannot|can not|don't want to)\\s+(?:go\\s+on|keep\\s+going|live|be\\s+here)|(?:never|not)\\s+wake\\s+up|(?:intentional|deliberate)\\s+overdose|overdos\\w*\\s+(?:on\\s+purpose|intentionally)|(?:postpartum|post[ -]natal|perinatal)\\s+(?:depress\\w*|psychos\\w*)|hear\\w*\\s+voices|voices\\s+(?:tell|telling)|(?:baby|infant)\\s+(?:is|has\\s+been)\\s+(?:evil|possessed|a\\s+demon)|(?:afraid|scared)\\s+(?:I\\s+(?:might|will)|of)\\s+(?:hurt\\w*|harm\\w*)|(?:take|swallow)\\s+(?:all|the\\s+whole\\s+bottle)\\s+(?:of\\s+)?(?:my\\s+)?(?:pills|tablets)|quiero\\s+morir|hacerme\\s+da\u00c3\u00b1o|matar\\s+a\\s+mi\\s+beb[e\u00c3\u00a9])\\b",
+    "perinatal": "\\b(?:pregnan\\w*|postpartum|post[ -]?natal|perinatal|baby|infant|newborn|breastfeed\\w*|gave\\s+birth)\\b"
+  },
+  "messages": {
+    "messages_1": "Public evidence and resource navigation; not individual treatment or eligibility decisions.",
+    "messages_2": "Heuristic routing and language detection can miss or overblock requests. No diagnosis, severity assessment, or clinical triage is performed; this system has no clinical certification.",
+    "messages_3": "For collapse, seizure, breathing difficulty, or inability to awaken, contact your local emergency service immediately. For possible poisoning or medication exposure, contact your local poison centre urgently. This tool has not verified a telephone number for your location.",
+    "messages_4": "Do not provide doses, missed-dose plans, schedules, tapers or personal start/stop/change decisions.",
+    "messages_5": "Separate source findings, monitoring recommendations, exposure measurements and causal claims.",
+    "messages_6": "Call route_parent_question before parent-facing chat; urgent concerns take precedence over retrieval.",
+    "messages_7": "Do not collect identifiable histories or submit reports, comments or enrollment applications.",
+    "messages_8": "For a possible poisoning or medication exposure in the United States, call Poison Help at 1-800-222-1222 now. Do not wait for this research assistant.",
+    "messages_9": "Please remove names, contact details, birth dates and record numbers. Use only the medicine name and a general research question; do not share an identifiable medical history.",
+    "messages_10": "I cannot provide an individualized medication decision, dose, missed-dose instruction, schedule, or taper plan. Please contact your prescribing clinician or pharmacist for an individualized plan.",
+    "messages_11": "I cannot identify a medicine from its appearance or a vague description. Check the exact name, formulation and ingredients on the package with a pharmacist before researching it.",
+    "messages_12": "If someone has collapsed, is having a seizure, has trouble breathing, or cannot be awakened, call 911 immediately. ",
+    "crisis_us": "You deserve support. I cannot answer this as a medication research question. Please call or text 988 (Suicide & Crisis Lifeline) for support now. If you or someone else is in immediate danger, call 911.",
+    "perinatal_support": "For additional non-emergency perinatal support, contact the Postpartum Support International HelpLine at 1-800-944-4773. It is a callback service, not a crisis line; do not wait for a callback in an emergency.",
+    "language_support": "This prototype cannot confidently apply its English safety rules to this question. No evidence search or AI answer will be generated. Please ask in English or seek help from a clinician or pharmacist with an interpreter. No puedo evaluar esta pregunta de forma fiable; consulte a un profesional con un int\u00c3\u00a9rprete. Spanish MedlinePlus drug education is available separately using a confirmed RxNorm ID."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "manual_score_overrides": false,
+  "clinical_adjudication": false,
+  "findings": [
+    {
+      "case": "R01",
+      "arm": "mcp",
+      "grade_retained": "task fail, fidelity pass",
+      "observed": {
+        "sections_found": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "sections_missing": [],
+        "sections_omitted_by_limit": [],
+        "truncated": false,
+        "generic_notice": "Missing sections can reflect source coverage or parser failure; truncated sections are incomplete. Do not present this extract as a complete record."
+      },
+      "interpretation": "The grader demands a generic whole-record completeness notice even though all four expected sections were returned without truncation. The answer discloses missing infant-level information. This is a strict disclosure judgment; it is not evidence that the retrieved outcome section was missing or that the answer invented outcomes."
+    },
+    {
+      "case": "R06",
+      "arm": "mcp",
+      "grade_retained": "task fail, fidelity pass",
+      "observed": {
+        "APG_phone_present_in_answer": false,
+        "central_study_contact_present": true,
+        "site_contact_subset_explicitly_labeled": true
+      },
+      "interpretation": "The grader incorrectly says the answer contains the APG main phone but omits its extensions. The answer instead lists central contacts and an explicitly selected subset of site contacts; the APG phone is absent entirely. Whether every site contact is required by the broad contacts criterion is a scope judgment. The score is retained unchanged, and the rationale is flagged for human review."
+    },
+    {
+      "case": "R03",
+      "arm": "mcp",
+      "grade_retained": "fidelity fail, task pass",
+      "interpretation": "The grader flags combining procedural precautions with explicit risk-factor statements in one sentence. The exact sentence appears in the answer; clinical significance and the broader label interpretation have not been independently adjudicated."
+    }
+  ]
+}

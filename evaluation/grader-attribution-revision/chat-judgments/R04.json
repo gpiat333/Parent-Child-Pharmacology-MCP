@@ -1,0 +1,105 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The FDA enforcement search supports the reported 12 records, the absence of NOTREAL-77 from the listed lots, and the stated search limitations.",
+        "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22naproxen%22&sort=report_date%3Adesc&limit=20"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The citation links to the official FDA drug recalls page identified in the evidence.",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The search returned candidate recall records, but the answer did not identify any of those records or their statuses. It reported only the total count and general limitations."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatching lot lookup is not bottle clearance, preserves the manufacturer, formulation, lot, and status distinctions, describes bounded-search limitations, and states what still needs verification. Its substantive claims are supported, but it omits the returned candidate records and statuses required when records are found."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "e2a2a8bb615a6215c08f17107d6984e6002c554cabb1578c1769fc593e251307",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 14,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA enforcement search supports the 12 returned naproxen records, the absence of NOTREAL-77 from the listed lots, and the stated search limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The URL is the official FDA drug recalls page identified in the returned evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"results\\\": [{\\\"recall_number\\\": \\\"D-0523-2026\\\"\",\n      \"explanation\": \"Because the search returned candidate recall records, the answer should have identified the returned records and their statuses, rather than only reporting the count and general limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatching lot lookup is not bottle clearance, preserves the relevant identity distinctions, describes bounded-search limitations, and states what still needs verification. Its substantive claims are supported, but it omits the returned candidate records and statuses required when records are found.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 8992,
+        "completion_tokens": 757,
+        "total_tokens": 9749,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8989,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 395,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 14,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA enforcement search supports the reported 12 records, the absence of NOTREAL-77 from the listed lots, and the stated search limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation links to the official FDA drug recalls page identified in the evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The search returned candidate recall records, but the answer did not identify any of those records or their statuses. It reported only the total count and general limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatching lot lookup is not bottle clearance, preserves the manufacturer, formulation, lot, and status distinctions, describes bounded-search limitations, and states what still needs verification. Its substantive claims are supported, but it omits the returned candidate records and statuses required when records are found.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 9424,
+        "completion_tokens": 506,
+        "total_tokens": 9930,
+        "prompt_tokens_details": {
+          "cached_tokens": 8989,
+          "cache_write_tokens": 432,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 157,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 9424,
+    "completion_tokens": 506,
+    "total_tokens": 9930,
+    "prompt_tokens_details": {
+      "cached_tokens": 8989,
+      "cache_write_tokens": 432,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 157,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

@@ -1,0 +1,98 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 12,
+    "contradicted_claims": 0,
+    "unverified_claims": 3,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The returned FDA query supports the stated age filter, event names, report counts, and limitations concerning incidence, causation, and generalizability.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited openFDA API reference is the returned source for the general FAERS reporting limitations, although it does not independently provide the listed counts.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "such patterns can be used for **signal generation and prioritizing follow-up research**",
+        "reference_quote": null,
+        "explanation": "The supplied evidence reports queried reaction counts and limitations but does not state that the patterns can be used for signal generation or research prioritization."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Other medicines, illnesses, exposure circumstances, and administration problems may be relevant",
+        "reference_quote": null,
+        "explanation": "The evidence establishes that reports do not establish causation, but it does not specifically identify these listed alternative explanations."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Report terms are not necessarily adjudicated clinical outcomes",
+        "reference_quote": null,
+        "explanation": "The returned evidence warns that source populations and age-band applicability were not established, but it does not expressly characterize the reaction terms as non-adjudicated clinical outcomes."
+      }
+    ],
+    "rationale": "The answer correctly reports the queried 0-to-12-month coded age scope, selected event counts, and the key limits that spontaneous report counts are not incidence estimates, do not establish causation, and cannot be generalized to all infants. However, several ancillary methodological assertions are not supported by the supplied evidence, so fidelity fails even though the requested task is fulfilled."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "30983d9911ed67836f8348a2f5d6d6738c1f2282a337d01a118838b8afa72f8d",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 12,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The returned FDA query supports the stated age filter, event names, report counts, and limitations concerning incidence, causation, and generalizability.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited openFDA API reference is the returned source for the general FAERS reporting limitations, although it does not independently provide the listed counts.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"such patterns can be used for **signal generation and prioritizing follow-up research**\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence reports queried reaction counts and limitations but does not state that the patterns can be used for signal generation or research prioritization.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Other medicines, illnesses, exposure circumstances, and administration problems may be relevant\",\n      \"reference_quote\": null,\n      \"explanation\": \"The evidence establishes that reports do not establish causation, but it does not specifically identify these listed alternative explanations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Report terms are not necessarily adjudicated clinical outcomes\",\n      \"reference_quote\": null,\n      \"explanation\": \"The returned evidence warns that source populations and age-band applicability were not established, but it does not expressly characterize the reaction terms as non-adjudicated clinical outcomes.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly reports the queried 0-to-12-month coded age scope, selected event counts, and the key limits that spontaneous report counts are not incidence estimates, do not establish causation, and cannot be generalized to all infants. However, several ancillary methodological assertions are not supported by the supplied evidence, so fidelity fails even though the requested task is fulfilled.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 10115,
+        "completion_tokens": 856,
+        "total_tokens": 10971,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 10112,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 310,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 10115,
+    "completion_tokens": 856,
+    "total_tokens": 10971,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 10112,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 310,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

@@ -1,0 +1,64 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 17,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+        "status": "supported",
+        "reason": "The supplied label evidence supports the statements about unavailable human pregnancy data, rabbit maternal effects, and the animal fetal findings."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The evidence reports zero results for the bounded pregnancy/pharmacokinetic PubMed query, supporting the stated retrieved-scope PK gap."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The supplied openFDA evidence contains the listed reporting counts and identifies them as spontaneous-report volumes rather than confirmed outcomes."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The supplied methodology evidence supports the caveats about absent denominators and inability to establish incidence or causation."
+      },
+      {
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+        "status": "supported",
+        "reason": "The supplied FDA directory evidence lists the QUVIVIQ Pregnancy Registry, website, phone number, and directory limitations."
+      },
+      {
+        "url": "https://www.QuviviqPregnancyStudy.com",
+        "status": "supported",
+        "reason": "The supplied FDA directory evidence identifies this as the registry website."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer preserves all three requested evidence axes, distinguishes animal from human evidence, keeps empty rows visible, states the retrieved maternal PK gap within scope, separates spontaneous reports from observed outcomes, and presents FDA registry information without recommending participation. However, it violates the explicit no-doses requirement by including animal dose levels and the MRHD in clauses such as \"at the highest tested exposure,\" \"up to 8 and 10 times the maximum recommended human dose (MRHD) of 50 mg,\" and the animal findings listing mg/kg/day values. The claim that no measured fetal or infant exposure was retrieved is supported by the supplied evidence but is not directly cited in that table row."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 104803,
+    "completion_tokens": 1419,
+    "total_tokens": 106222,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 104800,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 451,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

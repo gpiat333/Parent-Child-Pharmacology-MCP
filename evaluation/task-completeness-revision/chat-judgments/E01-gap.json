@@ -1,0 +1,103 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/2591497/properties.json",
+        "status": "supported",
+        "reason": "The evidence identifies daridorexant and the exact RxCUI match."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+        "status": "supported",
+        "reason": "The supplied label evidence supports the pregnancy-data gap, animal findings, registry phone number, and missing Clinical Considerations/maternal PK data."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29%2BAND%2B%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The retrieved PK query has zero results, supporting the bounded maternal-PK gap."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630579/",
+        "status": "supported",
+        "reason": "The evidence identifies the record, empty abstract, and unestablished pregnancy source population."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35802843/",
+        "status": "supported",
+        "reason": "The evidence identifies the record, empty abstract, and unestablished pregnancy source population."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630580/",
+        "status": "supported",
+        "reason": "The evidence identifies the record, empty abstract, and unestablished pregnancy source population."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The supplied FAERS results support the listed reporting counts and reactions."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The evidence supports the caveat that spontaneous-report counts do not establish incidence or causation."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT01246765",
+        "status": "supported",
+        "reason": "The supplied record supports the registry description, recruiting status, adult eligibility, and lack of a specific daridorexant intervention."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT06498128",
+        "status": "supported",
+        "reason": "The supplied record supports the QUVIVIQ pregnancy-registry description, terminated status, population metadata, and absence of posted results."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT06393504",
+        "status": "supported",
+        "reason": "The supplied record supports the claims-database study description, active-not-recruiting status, population metadata, and absence of posted results."
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=daridorexant+AND+%28pregnancy%29&filter.overallStatus=RECRUITING&pageSize=20&format=json",
+        "status": "supported",
+        "reason": "The supplied filtered query returned no directly matching recruiting study and explicitly cautions that this does not rule out other studies."
+      },
+      {
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+        "status": "supported",
+        "reason": "The evidence supports the QUVIVIQ registry listing, condition, website, phone number, ongoing status, and FDA non-endorsement/non-comprehensiveness caveats."
+      },
+      {
+        "url": "https://www.QuviviqPregnancyStudy.com",
+        "status": "unverified",
+        "reason": "The supplied evidence verifies this URL as the website listed in the FDA directory, but does not provide independently retrieved website content."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer preserves all three evidence axes, distinguishes human, animal, registry, and spontaneous-report evidence, states the bounded maternal-PK gap, and separates FDA registry information without ranking or recommending participation. However, it fails the explicit instruction not to provide doses: the animal-evidence section reports dose-related information, including \"doses up to 8 and 10 times the maximum recommended human dose (MRHD) of 50 mg\" and related dose values. It also includes the uncited source claim, \"The MCP lookup notes that stopping or changing a medicine can also carry risks,\" which is not represented in the supplied reference pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 26596,
+    "completion_tokens": 1976,
+    "total_tokens": 28572,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 26593,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

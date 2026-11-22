@@ -1,0 +1,78 @@
+{
+  "grader_error": "Grader did not produce a valid grounded assessment within three attempts",
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 16,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"url\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the absence of human pregnancy data and the reported animal maternal and fetal findings.\"\n    },\n    {\n      \"url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded maternal pharmacokinetic search returning no records.\"\n    },\n    {\n      \"url\": \"https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"url\": \"https://open.fda.gov/apis/drug/event/\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FAERS methodological caveats about reporting volume, absent denominators, and lack of causation.\"\n    },\n    {\n      \"url\": \"https://www.QuviviqPregnancyStudy.com\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the registry website contact listed in the FDA directory.\"\n    },\n    {\n      \"url\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA-listed registry, phone number, and directory limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer presents all three requested evidence axes with empty rows, preserves animal-versus-human distinctions, reports the retrieved maternal PK gap within scope, separates FAERS report-only context, cites the label and FDA directory, provides registry contacts without recommending participation, and avoids administered doses or medication decisions. One exposure-axis absence claim is not directly cited, but citation of every individual claim was not required.\"\n}",
+      "validation_errors": [
+        "citations[1] URL is absent from CANDIDATE_ANSWER",
+        "citations must enumerate the candidate URLs, not reference-only URLs"
+      ],
+      "usage": {
+        "prompt_tokens": 105192,
+        "completion_tokens": 1273,
+        "total_tokens": 106465,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 105189,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 406,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 16,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"url\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the absence of human pregnancy data and the reported animal maternal and fetal findings.\"\n    },\n    {\n      \"url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json\",\n      \"status\": \"unverified\",\n      \"reason\": \"The candidate cites a malformed or transformed query URL; the supplied evidence contains a different valid E-utilities query URL.\"\n    },\n    {\n      \"url\": \"https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"url\": \"https://open.fda.gov/apis/drug/event/\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FAERS methodological caveats about reporting volume, absent denominators, and lack of causation.\"\n    },\n    {\n      \"url\": \"https://www.QuviviqPregnancyStudy.com\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the registry website contact listed in the FDA directory.\"\n    },\n    {\n      \"url\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA-listed registry, phone number, and directory limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer presents all three requested evidence axes with empty rows, preserves animal-versus-human distinctions, reports the retrieved maternal PK gap within scope, separates FAERS report-only context, cites the label and FDA directory, provides registry contacts without recommending participation, and avoids administered doses or medication decisions. The candidate’s PK-search URL is enumerated exactly as written; it is treated as unverified because it does not match the valid supplied E-utilities URL.\"\n}",
+      "validation_errors": [
+        "citations[1] URL is absent from CANDIDATE_ANSWER",
+        "citations must enumerate the candidate URLs, not reference-only URLs"
+      ],
+      "usage": {
+        "prompt_tokens": 106142,
+        "completion_tokens": 1075,
+        "total_tokens": 107217,
+        "prompt_tokens_details": {
+          "cached_tokens": 105189,
+          "cache_write_tokens": 950,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 184,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 16,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"url\": \"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the absence of human pregnancy data and the reported animal maternal and fetal findings.\"\n    },\n    {\n      \"url\": \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json\",\n      \"status\": \"unverified\",\n      \"reason\": \"The candidate cites a malformed query URL; the supplied evidence supports the no-record result from the correctly formed maternal pharmacokinetic search, but not this exact URL.\"\n    },\n    {\n      \"url\": \"https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"url\": \"https://open.fda.gov/apis/drug/event/\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FAERS methodological caveats about reporting volume, absent denominators, and lack of causation.\"\n    },\n    {\n      \"url\": \"https://www.QuviviqPregnancyStudy.com\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the registry website contact listed in the FDA directory.\"\n    },\n    {\n      \"url\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA-listed registry, phone number, and directory limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer fulfills the requested brief: all three evidence axes remain visible, animal and human evidence are distinguished, maternal PK retrieval is stated within scope, FDA registry information is separated without recommending participation, and no administered doses or medication decisions are provided. The citation list contains only URLs present in the candidate answer, including its malformed PubMed search URL.\"\n}",
+      "validation_errors": [
+        "citations[1] URL is absent from CANDIDATE_ANSWER",
+        "citations must enumerate the candidate URLs, not reference-only URLs"
+      ],
+      "usage": {
+        "prompt_tokens": 107116,
+        "completion_tokens": 1140,
+        "total_tokens": 108256,
+        "prompt_tokens_details": {
+          "cached_tokens": 106139,
+          "cache_write_tokens": 974,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 261,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "score_assigned": false
+}

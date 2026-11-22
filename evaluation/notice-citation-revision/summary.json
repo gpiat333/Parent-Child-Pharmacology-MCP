@@ -1,0 +1,258 @@
+{
+  "revision": "required-notices-and-citation-boundaries",
+  "policy_version": "2026-11-21.4",
+  "generated_at_utc": "2026-11-21T17:07:44.365280+00:00",
+  "date": "2026-11-21 America/New_York",
+  "local_tests": {
+    "tests": 508,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_files": 112,
+  "inventory": {
+    "tools": 30,
+    "prompts": 4,
+    "resources": 4
+  },
+  "chat": {
+    "counts": {
+      "completed": {
+        "passed": 28,
+        "total": 28
+      },
+      "boundary_behavior": {
+        "passed": 28,
+        "total": 28
+      },
+      "tool_selection": {
+        "passed": 28,
+        "total": 28
+      },
+      "citation_provenance": {
+        "passed": 21,
+        "total": 21
+      },
+      "fixed_stops": {
+        "passed": 7,
+        "total": 7
+      }
+    },
+    "diagnostic_grading": {
+      "research_answers": 21,
+      "judged": 21,
+      "fidelity_pass": 20,
+      "fidelity_fail": 1,
+      "fidelity_not_assessable": 0,
+      "task_fulfilled": 17
+    },
+    "calibration": {
+      "controls": 4,
+      "fidelity_matches": 4,
+      "task_matches": 4,
+      "interpretation": "Four synthetic controls only. Matching these controls does not validate the judge or establish clinical accuracy."
+    },
+    "limits": "Same 28 known cases and grader v2 as the preceding 473-test run. Only URL extraction changed in deterministic checks. MCP clients now append applicable fixed application notices; before-notice text is retained. One retained completed sample per case, live-source variation, same-family judging, bounded references and no independent clinician review limit interpretation. URL membership is not claim support."
+  },
+  "paired": {
+    "mcp": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 5,
+      "fidelity_pass": 6,
+      "fidelity_fail": 1,
+      "fidelity_not_assessable": 0,
+      "median_seconds": 17.43
+    },
+    "plain": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 0,
+      "fidelity_pass": 2,
+      "fidelity_fail": 4,
+      "fidelity_not_assessable": 1,
+      "median_seconds": 6.43
+    }
+  },
+  "paired_rows": [
+    {
+      "case": "R01",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "elapsed_ms": 22545,
+      "required_notice_ids": [
+        "clinical_framing_review"
+      ]
+    },
+    {
+      "case": "R03",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 24717,
+      "required_notice_ids": [
+        "clinical_framing_review"
+      ]
+    },
+    {
+      "case": "R04",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 13593,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R06",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 17430,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R09",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 10471,
+      "required_notice_ids": []
+    },
+    {
+      "case": "E01-gap",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 15373,
+      "required_notice_ids": [
+        "clinical_framing_review"
+      ]
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 26477,
+      "required_notice_ids": [
+        "clinical_framing_review"
+      ]
+    },
+    {
+      "case": "R01",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 5374,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R03",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 8729,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R04",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "elapsed_ms": 6432,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R06",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "not_assessable",
+      "task_fulfilled": false,
+      "elapsed_ms": 2783,
+      "required_notice_ids": []
+    },
+    {
+      "case": "R09",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "elapsed_ms": 2903,
+      "required_notice_ids": []
+    },
+    {
+      "case": "E01-gap",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 9227,
+      "required_notice_ids": []
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 18989,
+      "required_notice_ids": []
+    }
+  ],
+  "protocol_probes": 20,
+  "workflow_requirements": [
+    {
+      "case": "D05-brief",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief",
+      "satisfied": true
+    },
+    {
+      "case": "D06-clinician-questions",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief",
+      "satisfied": true
+    },
+    {
+      "case": "E01-gap",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief",
+      "satisfied": true
+    },
+    {
+      "case": "E02-maternal-pk",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief",
+      "satisfied": true
+    }
+  ],
+  "required_notice_records": 13,
+  "required_notices_preserved": true,
+  "targeted_fixes": {
+    "P01_portfolio_notice": true,
+    "S6_pregnancy_review_notice": true,
+    "historical_R12_adjacent_links": true,
+    "current_R12_url_check": true
+  },
+  "source_freeze_sha256": "1bfc99b0d76dfd48df1501f419114a015294971aa7353b0f0804275c3cd71ce7",
+  "model": "system.ai.gpt-5-6-luna",
+  "clinical_review": "Not performed",
+  "deployed": false,
+  "cases_unchanged": true,
+  "grader_prompt_unchanged": true,
+  "paired_system_prompt_unchanged": true,
+  "url_checker_changed": true,
+  "infrastructure_retries": [],
+  "interpretation": "Deterministic application notices and URL boundary correction, not clinical validation or improved raw-model reasoning. Same known cases and same-family grader. The MCP arm alone has retrieval, workflow enforcement and required notices."
+}

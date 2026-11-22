@@ -1,0 +1,73 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 15,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the bounded Canadian recruiting search, the returned-record count, omitted indirect matches, search limitations, and stale-status caveats.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=pediatric+epilepsy+AND+%28child+OR+infant%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=Canada"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the study title, NCT number, observational design, Canadian location, recruiting status, pediatric age range, contact information, update date, and absence of posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT05863910"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer identifies the single returned Canadian recruiting record, provides a direct study link and contact, preserves the study's indirect and unconfirmed relevance, avoids completed-study substitution, and clearly states the bounded nature of the search."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "eefb75e56d6d7ff06e57d22b13c840e62bd253a98eb2b5637c487a27c65e2754",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 15,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded Canadian recruiting search, the returned-record count, omitted indirect matches, search limitations, and stale-status caveats.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the study title, NCT number, observational design, Canadian location, recruiting status, pediatric age range, contact information, update date, and absence of posted results.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer identifies the single returned Canadian recruiting record, provides a direct study link and contact, preserves the study's indirect and unconfirmed relevance, avoids completed-study substitution, and clearly states the bounded nature of the search.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 5166,
+        "completion_tokens": 445,
+        "total_tokens": 5611,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 5163,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 189,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 5166,
+    "completion_tokens": 445,
+    "total_tokens": 5611,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5163,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 189,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

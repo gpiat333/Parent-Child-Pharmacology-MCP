@@ -1,0 +1,90 @@
+{
+  "raw_scores_changed": false,
+  "review_type": "Diagnostic observations, not clinician adjudication",
+  "findings": [
+    {
+      "case": "R01",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer accurately separates reported infant symptoms from symptoms mothers were asked to monitor, explains uncertainty, avoids dosing and personal treatment advice, and cites the retrieved LactMed record. However, the criteria also require summarizing milk measurements separately. The answer mentions that published infant blood-level information was not found but omits LactMed's retrieved maternal milk measurements and related milk-exposure findings, so the task is not fully fulfilled."
+    },
+    {
+      "case": "D05-brief",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer is generally faithful to the supplied evidence, preserves the three distinct axes, includes clinician questions and visible evidence limitations, and does not make a medication decision. However, it does not fully honor the explicit instruction not to provide doses: it reproduces numerous dose values in source summaries, including clauses such as \"12 lactating women and 11 mother–infant pairs\" followed by dose-related source details, and the broader quoted study findings containing maternal doses. These are historical evidence details rather than individualized instructions, but they still constitute dose information. The claims that the MCP generated continuity-of-care guidance are not directly linked to a cited URL, producing one uncited source claim. Two claims are only partially verifiable as phrased: the categorical statement that the evidence contains no randomized evidence specifically evaluating lactation outcomes, and the characterization of the retrieved data as including pooled analyses and modeling rather than randomized evidence; the reference pool supports the study types mentioned but does not establish an exhaustive absence of randomized evidence."
+    },
+    {
+      "case": "E01-gap",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer preserves the three visible evidence sections, separates animal from human evidence, reports the retrieved maternal-PK gap within scope, cites the label and FDA directory, and presents registry information without recommending participation or giving doses. However, it states: \"Observed human fetal or infant outcomes: Empty—no pregnancy-specific human fetal or infant outcome findings were retrieved.\" The reference evidence includes retrieved openFDA reports associated with daridorexant, including reports labeled fetal exposure during pregnancy, premature baby, neonatal hypotonia, neonatal behavioral syndrome, neonatal respiratory distress, and other infant outcomes. Those spontaneous reports do not establish causation, incidence, or a confirmed source population, but they are retrieved reports and should have been shown as such rather than declaring that no findings were retrieved. The openFDA source was not cited, producing one uncited source claim and leaving the observed-outcomes axis incomplete."
+    },
+    {
+      "case": "P01-portfolio",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer accurately reports the supplied FY2025 aggregate, 19 distinct core projects, separate award and direct-cost totals, ten supported project-detail records, exact search criteria, the 20-record cap, 96 total matching records, and the activity-code limitation. It does not explicitly provide a grouped FY2024 count; it only says that no FY2024 group was returned. Because the criteria require grouped counts, this is a minor task-fulfillment omission. The activity-code caveat is also presented without a directly attached citation, producing one uncited source claim."
+    },
+    {
+      "case": "paired R01 mcp",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer accurately separates observed infant reports from monitoring outcomes, discusses causality and study limitations, avoids giving a dose, and cites the retrieved LactMed record. However, the criteria specifically require milk measurements to be summarized separately, while the answer only states that milk levels were low and does not report the available maternal milk measurements or relative infant dose estimates. The statement that infant blood-level information was not found is supported and is not an abstention from the requested lookup."
+    },
+    {
+      "case": "paired E01-gap mcp",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer presents all three evidence axes, keeps empty rows visible, separates animal from human evidence, states the bounded maternal PK retrieval result, and lists FDA registry contacts separately without recommending participation. However, it fails the explicit no-dose requirement by including animal dose amounts and MRHD comparisons, including the clauses \"at the highest tested exposure,\" \"up to 8 and 10 times the maximum recommended human dose,\" and detailed animal dose information. It also misaligns the FAERS counts with the named reactions: the answer gives \"11, 10, 9, 9, 9, and 7 respectively,\" while the supplied evidence reports 11 for fetal exposure, 10 for premature baby, 9 for neonatal hypotonia, 9 for moaning, 9 for neonatal behavioural syndrome, 9 for neonatal respiratory distress, and 7 for cardiac disorder/cardiomegaly. The FAERS result counts themselves lack a direct citation to the API result URL; only the general openFDA limitations page is cited."
+    },
+    {
+      "case": "paired R01 plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer appropriately separates reported symptoms from uncertainty and avoids dosing. Its statements that low milk exposure is generally not expected to cause adverse effects, and that diarrhea and rash were reported without clear causality, are supported. However, the claim that LactMed advises monitoring for diarrhea, candidiasis, or rash is not explicitly supported by the supplied record, which reports these effects but does not state that infants should be monitored. The claim about an amoxicillin-clavulanate study is also not verifiable from the supplied evidence. The answer further fails the criterion to summarize milk measurements: it says only that milk levels are low and omits the retrieved measurements and the absence of published infant-level data. The statement that some outcomes occurred in comparison groups is broadly supported for the related-antibiotic comparison, but the cited amoxicillin record does not establish the specific amoxicillin-clavulanate comparison described."
+    },
+    {
+      "case": "paired R03 plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer appropriately separates adult label warnings from infant exposure and outcome findings, avoids conflating adult lactic-acidosis warnings with infant observations, discloses important evidence limitations, and provides no dosing information. The LactMed-linked claims are generally supported. However, the adult-label citation is an unverified FDA URL rather than the retrieved DailyMed product, and the answer does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.], or clearly disclose that the supplied label extraction was truncated and had missing warnings/precautions and boxed-warning sections. The clause \"Other warnings/precautions include vitamin B12 deficiency\" is not supported by the supplied label evidence. The clause \"The U.S. prescribing information has a boxed warning\" is also not verifiable from the supplied pool: the retrieved DailyMed evidence lists the boxed-warning section as missing, without establishing what the FDA URL contains. The clause that LactMed says metformin is \"generally considered compatible with breastfeeding by several expert sources\" is not stated in the supplied LactMed extract and is therefore unverified. Because identifying the retrieved product and source limitations was an explicit criterion, the response does not fully fulfill the task."
+    },
+    {
+      "case": "paired R04 plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer correctly states that a no-match does not establish that a bottle was unaffected and correctly preserves the need to verify the manufacturer, formulation, lot, expiration, and other product-identifying details. Those points are supported by the reference limitations, which state that candidate product-name matches are not bottle-level clearance and that no match does not prove safety. However, the answer does not report the retrieved naproxen candidate records or their statuses, despite the supplied search evidence returning 12 records, including ongoing and terminated recalls. It therefore does not fulfill the requested lookup. The additional explanations that recalls may be unreported, differently entered, outside database coverage, or involve counterfeit or diverted products are not established by the supplied reference evidence."
+    },
+    {
+      "case": "paired R06 plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer honestly abstains, stating that it cannot check the live ClinicalTrials.gov registry and therefore will not identify or verify studies. This contains no assessable claim about what the registry does or does not contain, so it is not contradicted by the supplied evidence. However, it does not fulfill the requested lookup: the evidence supplied two recruiting U.S. pediatric ADHD studies with direct links, statuses, update dates, contacts, and qualification limits."
+    },
+    {
+      "case": "paired R09 plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer honestly abstains from reporting specific FDA results and correctly states that full notice text was not retrieved, consistent with the evidence showing a title-only search that did not retrieve full notices. It makes no contradicted or unsupported substantive source claims. However, it does not fulfill the requested lookup summary: the evidence contained a returned notice title and URL, which the answer should have reported, along with the limitation that only title-level index evidence was retrieved."
+    },
+    {
+      "case": "paired E01-gap plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The answer presents all three evidence axes, keeps them visible in a table, states that no pregnancy-specific maternal PK data were retrieved, separates registry information, avoids medication decisions, and generally preserves the distinction between human and animal evidence. However, it does not cite the supplied FDA registry directory, and its registry contact information is inconsistent with the reference evidence: the supplied directory lists the QUVIVIQ Pregnancy Registry at https://www.QuviviqPregnancyStudy.com with phone 1-833-400-9611, whereas the answer gives the National Pregnancy Registry for Psychiatric Medications and 1-866-961-2388. The answer also states that animal developmental toxicity included lower fetal body weights in rats at maternally toxic exposure, but the supplied label evidence states that rat studies did not cause maternal or developmental toxicity. The claims that daridorexant is highly protein bound and crosses the placenta in animals are not supported by the supplied evidence pool. Additional claims about nonpregnant pharmacokinetics and specific absence of human exposure measurements are not directly supported by the cited URLs as presented. Because of the incorrect animal finding, unsupported exposure/pharmacology claims, and incorrect/unmatched FDA registry contact, the response fails the criteria despite otherwise covering the requested structure."
+    },
+    {
+      "case": "paired E02-maternal-pk plain",
+      "type": "diagnostic_model_finding",
+      "finding": "The response has the requested three-axis structure, visible gaps, clinician questions, no numerical doses, and it generally distinguishes label Clinical Considerations from individualized decisions. Claims supported by the supplied evidence include the label's directionally decreased lamotrigine concentrations during pregnancy with restoration after delivery, observational limitations, overall malformation findings, the oral-cleft uncertainty, and the need to distinguish disease and treatment risks. However, the central maternal pharmacokinetic literature is attributed to sources absent from the reference pool, and the fetal-exposure claim about placental and cord-blood transfer is likewise unsupported by the supplied evidence. The answer also cites several absent registry, MotherToBaby, and neurodevelopment URLs, and the DailyMed URL is incomplete. It does not preserve verifiable study population and design details for the cited PK studies. Additional claims such as specific maternal rash/adverse-effect assertions and placental-transfer findings lack support in the reference pool. Therefore source fidelity fails and the lookup/evidence-brief task is not fully fulfilled, despite the answer's appropriate structure and cautious framing."
+    }
+  ],
+  "technical_review_notes": [
+    {
+      "case": "D05-brief",
+      "observation": "The raw grader alleges dose disclosure but quotes participant counts (12 lactating women and 11 mother-infant pairs). Inspection of the saved final answer found study sizes, exposure percentages and gestational age, but no medication-dose values. This appears to be a grader error; the raw task-failure label is retained. Its other comments about overbroad study-design claims still require review."
+    },
+    {
+      "case": "P01-portfolio",
+      "observation": "The original activity-code caveat is present and acknowledged by the grader. The new task failure concerns the absence of an explicit FY2024 grouped count from a capped retrieval. A missing group does not establish zero funded research. The grader also treats the application caveat as an uncited source claim; application policy text is not a retrieved finding."
+    },
+    {
+      "case": "E01-gap",
+      "observation": "The answer preserves empty evidence axes but omits returned FAERS signals. The grader disputes its broad no-findings language. Spontaneous reports should remain distinct from confirmed pregnancy-population outcomes; the population/signal interpretation needs review. The raw fidelity/task failures are retained."
+    },
+    {
+      "case": "paired E01-gap mcp",
+      "observation": "The raw grader flags dose-bearing animal details and FAERS reaction-count alignment. These remain unresolved output-quality findings; the required notice does not correct them."
+    }
+  ],
+  "historical_review": "../brief-routing-revision/grading-review.json"
+}

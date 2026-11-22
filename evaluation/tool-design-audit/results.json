@@ -1,0 +1,973 @@
+{
+  "date": "2026-11-20",
+  "scope": "Local registered FastMCP validation path; capture callback replaces retrieval. No deployed or clinical validation.",
+  "versions": {
+    "mcp": "1.30.0",
+    "pydantic": "2.14.3"
+  },
+  "tools": [
+    {
+      "name": "route_parent_question",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "country": {
+            "default": "US",
+            "title": "Country",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "route_parent_questionArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Call FIRST for parent-facing requests, before evidence retrieval. Returns fixed\nreferral/urgent/identity/privacy guidance and allow_research. If false, show the\nmessage with source URLs and stop research. Rule-based prototype, NOT validated\nclinical triage. Country is explicit; never invent a local emergency number.\nDo not include names, contact details, birth dates or medical record numbers."
+    },
+    {
+      "name": "get_parent_medication_info",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "get_parent_medication_infoArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Parent-facing evidence bundle after confirming drug identity. Separates label\nadverse effects in the medicine taker, LactMed infant evidence, and MedlinePlus\neducation links. Monitoring recommendations are not observed infant effects.\nFollow source limitations; never diagnose symptoms or give personal medication\ndecisions, doses, schedules, missed-dose or taper instructions."
+    },
+    {
+      "name": "search_medication_recalls",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "manufacturer": {
+            "default": "",
+            "title": "Manufacturer",
+            "type": "string"
+          },
+          "lot": {
+            "default": "",
+            "title": "Lot",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "search_medication_recallsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "FDA drug enforcement recall candidates, including historical records. Show\nmanufacturer, product/formulation text, lots, dates, status and reason. A literal\nlot mention is NOT confirmation; ranges and all-lot notices need verification.\nNever clear a bottle from absent/different lot results. Consumer instructions\nmay be missing: refer to official notice/pharmacist, never invent them."
+    },
+    {
+      "name": "search_drug_safety_alerts",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "default": "",
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "title": "search_drug_safety_alertsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search titles on the current FDA Drug Safety Communications index. Returns\ndates and official notice links, not full notices, personal advice or all archives.\nNo match does not establish safety; use exact brand/generic words separately."
+    },
+    {
+      "name": "find_recruiting_studies",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "population": {
+            "default": "any",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "any"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "location": {
+            "default": "",
+            "title": "Location",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "find_recruiting_studiesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Discover potentially relevant RECRUITING studies and public eligibility,\ncontacts, site status, locations and update dates. Location is city/state/country,\nnot home address. Not an eligibility decision or enrollment. Overall recruitment\ndoes not mean every site recruits; study team must confirm current availability.\nUse population='pediatric' for children: only records with pediatric age metadata\nare listed; adult-only and unverified-age records are withheld. If none remain,\nlead with no verified pediatric match in this bounded search, not broader studies."
+    },
+    {
+      "name": "search_pregnancy_registries",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "default": "",
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "title": "search_pregnancy_registriesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "FDA-listed pregnancy exposure registries: medicine/condition, registry, public\ncontacts, source status and links. FDA does not run or endorse them; list is not\ncomprehensive. Verify enrollment with registry. No eligibility or safety claim."
+    },
+    {
+      "name": "search_parent_input_opportunities",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "agency": {
+            "default": "NIH",
+            "enum": [
+              "NIH",
+              "FDA"
+            ],
+            "title": "Agency",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "search_parent_input_opportunitiesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Discover NIH/FDA Federal Register notices plus public-engagement directories.\nUse a concise subject such as 'clinical research' or 'pregnancy', not a whole\nquestion or extra words such as 'parent public input'. If empty, simplify the\nsubject while preserving the research topic; do not invent opportunities.\nCandidates may be RFIs, comment requests or meetings; verify title/text, audience,\nofficial deadline and submission instructions. Use comment_deadline.date and\nrelation_to_as_of to group dates, separately from submission_status and relevance.\nA known future date is not an unknown date even if submission acceptance is\nunverified. Meeting dates never establish comment deadlines or closure.\nUnknown comment deadline is neither verified open nor verified closed.\nCoverage is incomplete. Never submit comments or collect personal histories."
+    },
+    {
+      "name": "get_reporting_resources",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {},
+        "title": "get_reporting_resourcesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Official navigation links for FDA MedWatch and NIH/FDA public involvement.\nNo report/comment submitted. Reporting does not prove causation or replace urgent\ncare. Do not collect identifiable medical details in this MCP."
+    },
+    {
+      "name": "normalize_drug",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "normalize_drugArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Resolve a brand name, misspelling or combination product to standard generic\ningredient(s) and an RxNorm ID (RxNorm, NLM). Call this first when unsure of the drug name.\nfound=false means unverified. requires_confirmation=true means a tentative match:\nask for confirmation; never silently substitute its ingredient as the intended drug."
+    },
+    {
+      "name": "search_lactmed",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "search_lactmedArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Find LactMed (Drugs and Lactation Database, NLM) records by drug name.\nReturns IDs to pass to get_lactmed_record."
+    },
+    {
+      "name": "get_lactmed_record",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "book_id": {
+            "title": "Book Id",
+            "type": "string"
+          },
+          "max_chars": {
+            "default": 6000,
+            "title": "Max Chars",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "book_id"
+        ],
+        "title": "get_lactmed_recordArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Get LactMed text for one record: use during lactation, drug levels, effects on\nbreastfed infants and on lactation, alternatives. First call search_lactmed and pass\nits numeric id as book_id. Never pass a drug name or invent a record ID.\nSeparate measured exposure, observed infant outcomes, and source recommendations.\nA recommendation to monitor a symptom is NOT evidence that the symptom occurred.\nPreserve separate case-report events and timing: do not merge exposure changes\nwith outcome observations, infer unstated timing, or imply proven causation.\nInclude only relevant supported details; explicitly identify unspecified timing.\nFor partial chronology, group only explicitly linked events rather than a fully\nordered sequence; name the specific ordering that remains unknown.\nIf outcome text is truncated, retrieve more with max_chars (up to 20000) or\nstate the limitation; do not infer outcomes from monitoring advice."
+    },
+    {
+      "name": "semantic_search_lactmed",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "semantic_search_lactmedArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Natural-language search over LactMed (e.g. 'antidepressants safe for a newborn').\nRequires the Vector Search index; otherwise explains how to fall back."
+    },
+    {
+      "name": "search_literature",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "population": {
+            "default": "any",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "any"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "mode": {
+            "default": "auto",
+            "enum": [
+              "auto",
+              "semantic",
+              "keyword"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_literatureArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search PubMed literature. 'keyword' hits live PubMed (MeSH-filtered by population);\n'semantic' uses the lakehouse vector index of maternal/child abstracts; 'auto' prefers semantic.\nUse a concise query (drug plus one concept), not a whole question. If empty, simplify\nwithout dropping the drug. Check relevance and call get_abstracts before describing\nstudy findings. Empty results do not establish absence of evidence."
+    },
+    {
+      "name": "get_abstracts",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "pmids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pmids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "pmids"
+        ],
+        "title": "get_abstractsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Get abstracts and canonical PubMed source URLs for up to 10 PubMed IDs.\nCite each article's returned URL. No returned article is a retrieval limitation,\nnot evidence that a paper or research does not exist."
+    },
+    {
+      "name": "get_label_sections",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "get_label_sectionsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "FDA label (via DailyMed, NLM) pregnancy, lactation and pediatric-use sections.\nOTC labels may return pregnancy_lactation as one combined warning.\nIdentify the returned product title; do not generalize across formulations.\nReport returned source warnings and missing_standalone_sections. A combined\nwarning does not provide pediatric-use evidence. Missing sections are retrieval limitations;\ndo not fill them with uncited medical claims or infer safety."
+    },
+    {
+      "name": "search_pediatric_labeling_changes",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "legislation": {
+            "default": "any",
+            "enum": [
+              "any",
+              "BPCA",
+              "PREA"
+            ],
+            "title": "Legislation",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "search_pediatric_labeling_changesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search FDA historical pediatric labeling changes by generic or trade name.\nReturns dates, product/indication scope, BPCA/PREA category and FDA summaries.\nBPCA/PREA filters include rows listing both. Match names, not full questions;\ntry generic or brand separately if no match. Preserve age, indication and\nformulation limits in source text. A labeling change is not automatically an\napproval or proof of safety. BPCA designation does not imply NIH funding.\nCite the FDA source and workbook row; do not turn historical dose text into\ndosing advice. Use get_label_sections separately for current product labeling.\nEmpty results do not establish absence of pediatric evidence."
+    },
+    {
+      "name": "search_trials",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "condition_or_drug": {
+            "title": "Condition Or Drug",
+            "type": "string"
+          },
+          "population": {
+            "default": "pregnancy",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "any"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "condition_or_drug"
+        ],
+        "title": "search_trialsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search ClinicalTrials.gov (NLM) for studies in pregnant, lactating or pediatric populations.\nUse returned conditions, interventions and summaries to assess relevance. Omit\nindirect matches from the main answer; registration/status is not evidence of benefit.\nWhen asked to omit dose numbers, use intervention name_without_strength.\nIt is display formatting, not normalized ingredient identity; original name is retained.\nLink EVERY listed study using its returned study URL and state its exact status.\nFor current/ongoing studies, separate RECRUITING, ENROLLING_BY_INVITATION and\nACTIVE_NOT_RECRUITING from NOT_YET_RECRUITING, historical/closed and UNKNOWN.\nACTIVE_NOT_RECRUITING does not mean open enrollment. Never place completed or\nunknown-status studies in the ongoing list. State when no relevant ongoing study\nwas returned; do not imply the search was exhaustive."
+    },
+    {
+      "name": "search_funded_research",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "search_funded_researchArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search NIH RePORTER for funded projects (newest first) on a maternal/child topic.\nUse title and abstract to assess relevance; omit indirect matches from the main\nanswer. A funded project is not a completed finding or proof of MPRINT membership."
+    },
+    {
+      "name": "search_mprint_gold",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "default": "",
+            "title": "Drug",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "population": {
+            "default": "any",
+            "enum": [
+              "any",
+              "pregnancy",
+              "lactation",
+              "pediatric",
+              "postpartum",
+              "maternal"
+            ],
+            "title": "Population",
+            "type": "string"
+          },
+          "study_type": {
+            "default": "any",
+            "enum": [
+              "any",
+              "PK",
+              "PE",
+              "CT",
+              "PD",
+              "PG",
+              "RCT"
+            ],
+            "title": "Study Type",
+            "type": "string"
+          },
+          "resolve_names": {
+            "default": true,
+            "title": "Resolve Names",
+            "type": "boolean"
+          },
+          "pmid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pmid"
+          }
+        },
+        "title": "search_mprint_goldArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search a versioned snapshot of MPRINT Gold expert-curated study metadata by\ndrug name or exact PMID. For a Gold record by PMID, pass pmid and omit drug.\nIf both are supplied, both must match. Never substitute automated Silver\nclassifications when Gold is requested. Returns PMID links, population,\nstudy type and source row provenance.\nThis is actual published MPRINT Gold data, not MPRINT keyword matching.\nOptional filters conservatively match source population and study-type labels.\nResolve verified brand names to ingredient names via RxNorm; ambiguous matches\nrequire confirmation. Do not equate RxCUIs with MPRINT UMLS CUIs.\nThis search returns study metadata; use get_mprint_gold_outcomes for aggregate\ncurated outcomes by PMID. Report the snapshot date and any result limits.\nInclusion does not prove safety, efficacy, quality or MPRINT funding. Retrieve\nabstracts/full papers before summarizing outcomes. Empty matches may reflect\nlimited snapshot coverage or a synonym; never infer an evidence gap from absence."
+    },
+    {
+      "name": "get_mprint_gold_outcomes",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "pmid": {
+            "title": "Pmid",
+            "type": "string"
+          },
+          "kind": {
+            "default": "any",
+            "enum": [
+              "any",
+              "PE_CT",
+              "PK_summary"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 5,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pmid"
+        ],
+        "title": "get_mprint_gold_outcomesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Retrieve curated aggregate MPRINT Gold outcome rows for one PubMed ID.\nPreserves source values, units, statistics, uncertainty and notes. PE/CT and\nPK-summary tables only; individual-patient rows and PK parameters excluded.\nContext links use PMID AND curation workbook/folder, not cohort/arm matching.\nThese linkage rules are MCP implementation guidance, not dataset-author claims.\nNever attribute every outcome to every drug in the paper. Null means missing\nin the exported data, not zero or proof the original paper did not report it.\nSay \"missing in the exported data\" for null fields.\nCheck source exposure/population, denominators and intervals before\ninterpreting. Use next_offset to page; disclose limits and snapshot age.\nCite the paper and dataset row; consult the original paper for missing context.\nDo not turn historical doses or observed associations into treatment advice."
+    },
+    {
+      "name": "get_mprint_silver_classifications",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "pmids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pmids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "pmids"
+        ],
+        "title": "get_mprint_silver_classificationsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Look up up to 20 PubMed IDs in the published MPRINT Silver study-type snapshot.\nReturns automated PK/PE/CT labels and source rows, not clinical conclusions.\nUse PMIDs from PubMed or Gold; do not invent identifiers. Silver drug/population\nmappings are NOT loaded. Distinguish automated Silver labels from curated Gold.\nNo match does not mean the paper is irrelevant or that no research exists."
+    },
+    {
+      "name": "search_mprint",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "search_mprintArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Maternal and Pediatric Precision in Therapeutics (MPRINT) Hub (NICHD) related work.\nNo public MPRINT API is confirmed; this searches NIH RePORTER and PubMed for MPRINT-related\nrecords. For direct published Gold metadata use search_mprint_gold; for Silver\nstudy-type labels by PMID use get_mprint_silver_classifications."
+    },
+    {
+      "name": "get_adverse_event_signals",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "cohort": {
+            "default": "any",
+            "enum": [
+              "any",
+              "pregnancy",
+              "infant"
+            ],
+            "title": "Cohort",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "get_adverse_event_signalsArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Most frequently reported reactions in FDA FAERS (openFDA) for a drug, optionally for\npregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation."
+    },
+    {
+      "name": "get_patient_education",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "rxcui": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Rxcui"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "get_patient_educationArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Plain-language information from MedlinePlus (NLM) for a health topic or, with an RxNorm ID, a drug."
+    },
+    {
+      "name": "search_bpca_evidence",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "title": "Query",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "title": "search_bpca_evidenceArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Discover NICHD BPCA/PTN study-summary links by drug/title words. Returns index titles and links, NOT PDF contents or clinical conclusions. Empty query lists summaries."
+    },
+    {
+      "name": "search_nichd_studies",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "query": {
+            "default": "",
+            "title": "Query",
+            "type": "string"
+          },
+          "network": {
+            "default": "any",
+            "enum": [
+              "any",
+              "mfmu",
+              "neonatal"
+            ],
+            "title": "Network",
+            "type": "string"
+          },
+          "max_results": {
+            "default": 10,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "page": {
+            "default": 0,
+            "title": "Page",
+            "type": "integer"
+          }
+        },
+        "title": "search_nichd_studiesArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "Search public NICHD DASH study descriptions and publications, optionally MFMU or Neonatal Research Network. Zero-based pages. Controlled underlying datasets are NOT retrieved; access process is required."
+    },
+    {
+      "name": "medication_safety_brief",
+      "pydantic_model": true,
+      "input_schema": {
+        "properties": {
+          "drug": {
+            "title": "Drug",
+            "type": "string"
+          },
+          "population": {
+            "default": "lactation",
+            "enum": [
+              "pregnancy",
+              "lactation",
+              "pediatric"
+            ],
+            "title": "Population",
+            "type": "string"
+          }
+        },
+        "required": [
+          "drug"
+        ],
+        "title": "medication_safety_briefArguments",
+        "type": "object"
+      },
+      "output_schema": null,
+      "description": "One-call evidence brief for a medication in pregnancy, lactation or pediatrics:\nresolves the name (RxNorm), then gathers LactMed, FDA label sections, recent literature,\nadverse-event signals, active trials and plain-language MedlinePlus info, with citations."
+    }
+  ],
+  "probes": [
+    {
+      "case": "valid population",
+      "tool": "search_literature",
+      "input": {
+        "query": "sertraline",
+        "population": "lactation"
+      },
+      "schema_accepted": true,
+      "validated": {
+        "query": "sertraline",
+        "population": "lactation",
+        "max_results": 10,
+        "mode": "auto"
+      }
+    },
+    {
+      "case": "invalid population",
+      "tool": "search_literature",
+      "input": {
+        "query": "sertraline",
+        "population": "adult"
+      },
+      "schema_accepted": false,
+      "errors": [
+        "literal_error"
+      ]
+    },
+    {
+      "case": "invalid network",
+      "tool": "search_nichd_studies",
+      "input": {
+        "network": "other"
+      },
+      "schema_accepted": false,
+      "errors": [
+        "literal_error"
+      ]
+    },
+    {
+      "case": "invalid agency",
+      "tool": "search_parent_input_opportunities",
+      "input": {
+        "topic": "research",
+        "agency": "CDC"
+      },
+      "schema_accepted": false,
+      "errors": [
+        "literal_error"
+      ]
+    },
+    {
+      "case": "missing drug",
+      "tool": "search_lactmed",
+      "input": {},
+      "schema_accepted": false,
+      "errors": [
+        "missing"
+      ]
+    },
+    {
+      "case": "wrong drug type",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": 123
+      },
+      "schema_accepted": false,
+      "errors": [
+        "string_type"
+      ]
+    },
+    {
+      "case": "wrong list item type",
+      "tool": "get_abstracts",
+      "input": {
+        "pmids": [
+          123
+        ]
+      },
+      "schema_accepted": false,
+      "errors": [
+        "string_type"
+      ]
+    },
+    {
+      "case": "noninteger limit",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": "sertraline",
+        "max_results": "many"
+      },
+      "schema_accepted": false,
+      "errors": [
+        "int_parsing"
+      ]
+    },
+    {
+      "case": "negative limit",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": "sertraline",
+        "max_results": -1
+      },
+      "schema_accepted": true,
+      "validated": {
+        "drug": "sertraline",
+        "max_results": -1
+      }
+    },
+    {
+      "case": "oversized limit",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": "sertraline",
+        "max_results": 9999
+      },
+      "schema_accepted": true,
+      "validated": {
+        "drug": "sertraline",
+        "max_results": 9999
+      }
+    },
+    {
+      "case": "empty drug",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": ""
+      },
+      "schema_accepted": true,
+      "validated": {
+        "drug": "",
+        "max_results": 5
+      }
+    },
+    {
+      "case": "extra field",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": "sertraline",
+        "unexpected": true
+      },
+      "schema_accepted": true,
+      "validated": {
+        "drug": "sertraline",
+        "max_results": 5
+      }
+    },
+    {
+      "case": "numeric string coercion",
+      "tool": "search_lactmed",
+      "input": {
+        "drug": "sertraline",
+        "max_results": "5"
+      },
+      "schema_accepted": true,
+      "validated": {
+        "drug": "sertraline",
+        "max_results": 5
+      }
+    },
+    {
+      "case": "nonnumeric record ID",
+      "tool": "get_lactmed_record",
+      "input": {
+        "book_id": "sertraline"
+      },
+      "schema_accepted": true,
+      "validated": {
+        "book_id": "sertraline",
+        "max_chars": 6000
+      }
+    },
+    {
+      "case": "empty ID list",
+      "tool": "get_abstracts",
+      "input": {
+        "pmids": []
+      },
+      "schema_accepted": true,
+      "validated": {
+        "pmids": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "status": "supported",
+        "reason": "The retrieved evidence gives the same query, confirms the 0-through-12-month age scope with other age units excluded, and reports the listed reaction counts: vomiting 117, pyrexia 98, and rash 60. It also states that FAERS counts reflect reporting volume, lack exposure denominators, and do not establish causation."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The retrieved MCP evidence associates this source with the interpretation that spontaneous-report counts lack exposure denominators, cannot calculate incidence or risk, and do not establish causation."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately reports the retrieved counts and exact queried cohort scope, and correctly distinguishes report volume from incidence, risk, and causation. It also states that the queried subset cannot be generalized to all infants or all acetaminophen-related events, consistent with the query limitations. No material claim conflicts with the supplied MCP evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 2968,
+    "completion_tokens": 912,
+    "total_tokens": 3880,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 2965,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

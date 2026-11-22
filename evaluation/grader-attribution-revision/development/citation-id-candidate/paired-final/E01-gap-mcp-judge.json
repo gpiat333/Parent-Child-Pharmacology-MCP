@@ -1,0 +1,162 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 18,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the label statements about unavailable human pregnancy data, animal findings, and the pregnancy section.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the bounded pregnancy and maternal pharmacokinetic PubMed searches and their retrieved-record counts.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the listed spontaneous-report terms and counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the methodology caveats about spontaneous reports, causation, and exposure denominators.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Matches the registry website listed in the FDA directory.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the FDA directory listing and its registry-contact information.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Preserve animal versus human and absent abstracts.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer distinguishes animal from human evidence but does not explicitly state the abstract-availability status of the retrieved PubMed records."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Participation separate, unranked, not a recommendation;",
+        "answer_quote": null,
+        "reference_quote": "Listings are not ranked or recommended and do not establish eligibility, safety or benefit.",
+        "explanation": "The registry information is presented separately and without a recommendation, but the answer does not explicitly state that the listings are unranked."
+      }
+    ],
+    "rationale": "The answer accurately preserves the three visible evidence axes, separates human and animal evidence, reports the retrieved maternal PK gap, presents FAERS terms as unconfirmed reports, includes label and FDA-directory citations, avoids administered doses and medication decisions, and provides registry contacts without recommending participation. It does not explicitly preserve the absent-abstract status or state that participation listings are unranked."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "a1400940b21a71e31588925841fe01e2fc42a893ca8988358709f38bb62b82ef",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label statements about unavailable human pregnancy data, animal findings, and the pregnancy section.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded pregnancy and maternal pharmacokinetic PubMed searches and their retrieved-record counts.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the methodology caveats about spontaneous reports, causation, and exposure denominators.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Matches the registry website listed in the FDA directory.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing and its registry-contact information.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"abstract\\\": \\\"\\\"\",\n      \"explanation\": \"The answer distinguishes animal from human evidence but does not explicitly state that the retrieved PubMed records had absent abstracts.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Participation separate, unranked, not a recommendation;\",\n      \"answer_quote\": \"No participation recommendation or eligibility determination is made.\",\n      \"reference_quote\": \"Listings are not ranked or recommended and do not establish eligibility, safety or benefit.\",\n      \"explanation\": \"The registry information is presented separately and without a recommendation, but the answer does not explicitly state that listings are unranked.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately preserves the three visible evidence axes, separates human and animal evidence, reports the retrieved maternal PK gap, presents FAERS terms as unconfirmed reports, includes label and FDA-directory citations, avoids administered doses and medication decisions, and provides registry contacts without recommending participation. It falls short only because it does not explicitly preserve the absent-abstract status or state that participation listings are unranked. One exposure-absence statement is not directly cited in its table row.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 105784,
+        "completion_tokens": 1063,
+        "total_tokens": 106847,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 105781,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 445,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label statements about unavailable human pregnancy data, animal findings, and the pregnancy section.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded pregnancy and maternal pharmacokinetic PubMed searches and their retrieved-record counts.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the methodology caveats about spontaneous reports, causation, and exposure denominators.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Matches the registry website listed in the FDA directory.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing and its registry-contact information.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"\\\"abstract\\\": \\\"\\\"\",\n      \"explanation\": \"The answer distinguishes animal from human evidence but does not explicitly state that the retrieved PubMed records had absent abstracts.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Participation separate, unranked, not a recommendation;\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Listings are not ranked or recommended and do not establish eligibility, safety or benefit.\",\n      \"explanation\": \"The registry information is presented separately and without a recommendation, but the answer does not explicitly state that the listings are unranked.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately preserves the three visible evidence axes, separates human and animal evidence, reports the retrieved maternal PK gap, presents FAERS terms as unconfirmed reports, includes label and FDA-directory citations, avoids administered doses and medication decisions, and provides registry contacts without recommending participation. It does not explicitly preserve the absent-abstract status or state that participation listings are unranked.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 106486,
+        "completion_tokens": 711,
+        "total_tokens": 107197,
+        "prompt_tokens_details": {
+          "cached_tokens": 105781,
+          "cache_write_tokens": 702,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 119,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label statements about unavailable human pregnancy data, animal findings, and the pregnancy section.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded pregnancy and maternal pharmacokinetic PubMed searches and their retrieved-record counts.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the methodology caveats about spontaneous reports, causation, and exposure denominators.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Matches the registry website listed in the FDA directory.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing and its registry-contact information.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer distinguishes animal from human evidence but does not explicitly state the abstract-availability status of the retrieved PubMed records.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Participation separate, unranked, not a recommendation;\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Listings are not ranked or recommended and do not establish eligibility, safety or benefit.\",\n      \"explanation\": \"The registry information is presented separately and without a recommendation, but the answer does not explicitly state that the listings are unranked.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately preserves the three visible evidence axes, separates human and animal evidence, reports the retrieved maternal PK gap, presents FAERS terms as unconfirmed reports, includes label and FDA-directory citations, avoids administered doses and medication decisions, and provides registry contacts without recommending participation. It does not explicitly preserve the absent-abstract status or state that participation listings are unranked.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 107148,
+        "completion_tokens": 650,
+        "total_tokens": 107798,
+        "prompt_tokens_details": {
+          "cached_tokens": 106483,
+          "cache_write_tokens": 662,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 60,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 107148,
+    "completion_tokens": 650,
+    "total_tokens": 107798,
+    "prompt_tokens_details": {
+      "cached_tokens": 106483,
+      "cache_write_tokens": 662,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 60,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

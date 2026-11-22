@@ -1,0 +1,220 @@
+{
+  "project": "Parent-child Pharmacology MCP",
+  "current_revision": {
+    "revision": "three-axis-evidence-and-language-fix",
+    "date": "2026-11-20 America/New_York",
+    "generated_at_utc": "2026-11-21T04:43:29.216421+00:00",
+    "local_tests": {
+      "tests": 395,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "tools": 26,
+      "prompts": 4,
+      "resources": 4
+    },
+    "original_false_positive_fixed": true,
+    "chat": {
+      "counts": {
+        "completed": {
+          "passed": 24,
+          "total": 24
+        },
+        "boundary_behavior": {
+          "passed": 24,
+          "total": 24
+        },
+        "tool_selection": {
+          "passed": 24,
+          "total": 24
+        },
+        "citation_provenance": {
+          "passed": 17,
+          "total": 17
+        },
+        "fixed_stops": {
+          "passed": 7,
+          "total": 7
+        }
+      },
+      "diagnostic_grading": {
+        "research_answers": 17,
+        "judged": 17,
+        "fidelity_pass": 15,
+        "fidelity_fail": 2,
+        "fidelity_not_assessable": 0,
+        "task_fulfilled": 16
+      },
+      "calibration": {
+        "controls": 4,
+        "fidelity_matches": 4,
+        "task_matches": 4,
+        "interpretation": "Four synthetic controls only. Matching these controls does not validate the judge or establish clinical accuracy."
+      },
+      "limits": "One run of known cases plus two added cases. Diagnostic same-family grader, no clinician review. URL membership does not validate a claim. Failure/abstention and missing evidence remain visible. No deployment."
+    },
+    "paired": {
+      "mcp": {
+        "completed": 7,
+        "total": 7,
+        "task_fulfilled": 6,
+        "fidelity_pass": 6,
+        "fidelity_fail": 1,
+        "fidelity_not_assessable": 0,
+        "median_seconds": 17.48
+      },
+      "plain": {
+        "completed": 7,
+        "total": 7,
+        "task_fulfilled": 0,
+        "fidelity_pass": 0,
+        "fidelity_fail": 6,
+        "fidelity_not_assessable": 1,
+        "median_seconds": 6.81
+      }
+    },
+    "paired_rows": [
+      {
+        "case": "R01",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 21056,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "R03",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 17485,
+        "fidelity": "pass",
+        "task_fulfilled": false,
+        "honest_abstention": false
+      },
+      {
+        "case": "R04",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 13203,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "R06",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 17384,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "R09",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 10911,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "E01-gap",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 25844,
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "E02-maternal-pk",
+        "arm": "mcp",
+        "completed": true,
+        "elapsed_ms": 49791,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "honest_abstention": false
+      },
+      {
+        "case": "R01",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 6284,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": false
+      },
+      {
+        "case": "R03",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 13016,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": false
+      },
+      {
+        "case": "R04",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 6808,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": true
+      },
+      {
+        "case": "R06",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 4484,
+        "fidelity": "not_assessable",
+        "task_fulfilled": false,
+        "honest_abstention": true
+      },
+      {
+        "case": "R09",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 3199,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": true
+      },
+      {
+        "case": "E01-gap",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 8716,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": false
+      },
+      {
+        "case": "E02-maternal-pk",
+        "arm": "plain",
+        "completed": true,
+        "elapsed_ms": 22274,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "honest_abstention": false
+      }
+    ],
+    "protocol_probes": 7,
+    "source_freeze_sha256": "83dde52d67aa31b9e90b246d7ea0f5d9af31b2d10d9a386e05580d1926197b18",
+    "model": "system.ai.gpt-5-6-luna",
+    "clinical_review": "Not performed",
+    "deployed": false,
+    "interpretation": "Execution results and raw diagnostic grades. No validated accuracy or speed superiority. Paired plain arm has no retrieval tools. Grading limitations and reference-preparation omissions are documented, not silently corrected."
+  },
+  "current_report": "evaluation/evidence-revision/REPORT.md",
+  "historical_evidence": {
+    "safety_revision": "evaluation/safety-revision/summary.json",
+    "credential_recovery": "evaluation/credential-recovery/REPORT.md",
+    "remote_checks": "evaluation/tool-design-audit/README.md"
+  },
+  "scope": "Historical results retain their original numbers and do not validate the current revision."
+}

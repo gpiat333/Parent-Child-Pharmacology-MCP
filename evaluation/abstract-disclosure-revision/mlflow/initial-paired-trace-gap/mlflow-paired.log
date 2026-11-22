@@ -1,0 +1,40 @@
+[1;38;5;208mIf you are using MLflow Tracing, you can migrate your traces to Unity Catalog for unlimited storage, fine-grained access controls, and queryability from notebooks, SQL, and dashboards. [94mLearn more: https://docs.databricks.com/aws/en/mlflow3/genai/tracing/migrate-traces-to-uc[0m
+Evaluating:   0%|          | 0/14 [Elapsed: 00:00, Remaining: ?]Evaluating:   7%|▋         | 1/14 [Elapsed: 00:55, Remaining: 11:59]Evaluating:  21%|██▏       | 3/14 [Elapsed: 00:56, Remaining: 03:25]Evaluating:  21%|██▏       | 3/14 [Elapsed: 01:10, Remaining: 04:16]Evaluating:  29%|██▊       | 4/14 [Elapsed: 01:16, Remaining: 03:12]Evaluating:  36%|███▌      | 5/14 [Elapsed: 01:23, Remaining: 02:30]Evaluating:  43%|████▎     | 6/14 [Elapsed: 01:27, Remaining: 01:56]2026/11/21 20:21:16 WARNING mlflow.utils.databricks_utils: Failed to create databricks SDK workspace client, error: ValueError('default auth: cannot configure default credentials, please check https://docs.databricks.com/en/dev-tools/auth.html#databricks-client-unified-authentication to configure credentials for your preferred authentication method. Config: host=https://dbc-aae0ba16-8727.cloud.databricks.com, account_id=c7a239d1-3c56-4d52-a0db-53583a997405, workspace_id=7474654188777746, discovery_url=https://dbc-aae0ba16-8727.cloud.databricks.com/oidc/.well-known/oauth-authorization-server, token_audience=https://dbc-aae0ba16-8727.cloud.databricks.com/oidc/v1/token, profile=gsa-mcp-hackathon, databricks_cli_path=C:/Users/piatkowskigs/Downloads/databricks_cli_1.26.0_windows_amd64/databricks.exe, auth_type=databricks-cli. Env: DATABRICKS_HOST, DATABRICKS_CONFIG_PROFILE, DATABRICKS_CLI_PATH, DATABRICKS_AUTH_TYPE'). Falling back to legacy authentication.
+Evaluating:  50%|█████     | 7/14 [Elapsed: 01:42, Remaining: 01:42]2026/11/21 20:21:20 WARNING mlflow.tracing.fluent: Failed to get trace from the tracking store: 401: Credential was not sent or was of an unsupported type for this API. [ReqId: e827db13-a100-4cf6-a050-c1f31dd42ab4]. If using async trace logging, pass flush=True to wait for pending writes. If this trace is stored in Unity Catalog, pass the fully-qualified trace ID in the form `trace:/<catalog>.<schema>.<table>/<trace_id>`, or set an active experiment linked to the UC location. For full traceback, set logging level to debug.
+Evaluating:  57%|█████▋    | 8/14 [Elapsed: 01:48, Remaining: 01:21]Evaluating:  64%|██████▍   | 9/14 [Elapsed: 01:53, Remaining: 01:02]Evaluating:  71%|███████▏  | 10/14 [Elapsed: 01:54, Remaining: 00:45]Evaluating:  79%|███████▊  | 11/14 [Elapsed: 02:09, Remaining: 00:35]2026/11/21 20:21:46 WARNING mlflow.genai.evaluation.harness: Skipping logging tags and assessments to MLflow because no trace is available.
+Evaluating:  86%|████████▌ | 12/14 [Elapsed: 02:12, Remaining: 00:22]Evaluating:  93%|█████████▎| 13/14 [Elapsed: 02:21, Remaining: 00:10]Evaluating: 100%|██████████| 14/14 [Elapsed: 02:30, Remaining: 00:00]Evaluating: 100%|██████████| 14/14 [Elapsed: 02:30, Remaining: 00:00] [predict_fn: 0%, scorers: 100%]Evaluating: 100%|██████████| 14/14 [Elapsed: 02:30, Remaining: 00:00] [predict_fn: 0%, scorers: 100%]
+WARNING:databricks.sdk.mixins.files:Unexpected status resolving file endpoints (403, request ID 8ceb018e-2275-47c0-b3f1-a6e94b567ad6), using the default endpoints.
+
+✨ Evaluation completed.
+
+Metrics and evaluation results are logged to the MLflow run:
+  Run name: [94mfresh-local-paired-v3-2026-11-21[0m
+  Run ID: [94m243b0275eb604999bcbf2b92a9cb56be[0m
+View the evaluation results at [93mhttps://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/evaluation-runs?selectedRunUuid=243b0275eb604999bcbf2b92a9cb56be[0m
+
+{
+  "run_id": "243b0275eb604999bcbf2b92a9cb56be",
+  "experiment_id": "1096079759942705",
+  "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/243b0275eb604999bcbf2b92a9cb56be",
+  "rows": 14,
+  "phase": "paired",
+  "metrics": {
+    "grade_attribution_valid/mean": 1.0,
+    "diagnostic_task_fulfilled/mean": 0.35714285714285715,
+    "fidelity_assessable/mean": 1.0,
+    "diagnostic_fidelity_pass/mean": 0.5
+  },
+  "table_names": [
+    "eval_results"
+  ],
+  "elapsed_seconds": 215.48,
+  "persisted_metrics": {
+    "diagnostic_fidelity_pass/mean": 0.5,
+    "diagnostic_task_fulfilled/mean": 0.35714285714285715,
+    "fidelity_assessable/mean": 1.0,
+    "grade_attribution_valid/mean": 1.0
+  },
+  "deployment_id": "01f1e5f7f6fc162fb8c3cc875e7f8546",
+  "pilot_rows_reused_in_full_run": false,
+  "answer_generation_repeated": true
+}

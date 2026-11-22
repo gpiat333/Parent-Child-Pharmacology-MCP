@@ -1,0 +1,83 @@
+Calling MCP tool: route_parent_question
+Calling MCP tool: normalize_drug
+Calling MCP tool: medication_evidence_brief
+Completed with 3 MCP tool calls.
+## Lamotrigine pregnancy evidence
+
+Lamotrigine identity was matched exactly as the ingredient **lamotrigine**. [S24](https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json)
+
+### Maternal effects and underlying disease
+
+- The selected DailyMed label states that most lamotrigine pregnancy data come from women with **epilepsy**. It describes epilepsy, with or without antiseizure-medication exposure, as associated with obstetric and fetal risks including preeclampsia, preterm labor, hemorrhage, placental abruption, poor fetal growth, prematurity, fetal death, and maternal mortality. These are presented as **underlying-disease context**, not as findings caused by lamotrigine. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+- A 2025 narrative review concerns **adult women with bipolar disorder during pregnancy and postpartum**; its abstract discusses perinatal treatment and possible child outcomes but does not provide a lamotrigine-specific comparative estimate. The retrieved record is a review, not a primary outcome study; reported study size is not supplied in the returned abstract. [S23](https://pubmed.ncbi.nlm.nih.gov/40593436/)
+- The selected label’s adult medicine-taker sections for adverse reactions, warnings, warnings and precautions, boxed warning, and drug interactions were missing in the returned extract. This lookup therefore does not provide a complete maternal adverse-effect profile for that product.
+
+### Fetal or infant exposure
+
+- No numeric fetal lamotrigine concentrations were retrieved.
+- A naturalistic observational study of **60 mothers** included mixed source populations—pregnancy, lactation, neonates, and children—and measured serum and breastmilk concentrations while observing child development through 12 months. The abstract reports a high breastmilk concentration-by-dose ratio for lamotrigine, but supplies no lamotrigine-specific numeric milk concentration or infant blood concentration. This is lactation exposure evidence, not fetal-exposure evidence. [S21](https://pubmed.ncbi.nlm.nih.gov/36103361/)
+- The label’s statement that pregnancy-related physiological changes can affect lamotrigine concentrations is source clinical-consideration text, not a complete maternal pharmacokinetic study dataset. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+
+### Observed fetal or infant outcomes
+
+The selected label reports registry findings for **first-trimester lamotrigine monotherapy exposures**, with the following source populations and study types:
+
+- **International Lamotrigine Pregnancy Registry:** pregnancy-exposure registry; 1,558 exposed infants; major congenital malformations reported in 2.2% (95% CI 1.6%–3.1%).
+- **NAAED Pregnancy Registry:** pregnancy-exposure registry; 1,562 exposed infants; major congenital malformations reported in 2.0%.
+- **EURAP:** international pregnancy registry; 2,514 first-trimester exposures; major birth defects reported in 2.9% (95% CI 2.3%–3.7%).
+
+These are registry findings summarized in the label, not randomized-trial results. The label states that overall malformation frequencies were similar to general-population estimates. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+
+The same label reports a conflicting oral-cleft signal:
+
+- The NAAED registry reported isolated oral clefts in 3.2 per 1,000 among 2,200 early-pregnancy exposures, described in the label as higher than in unexposed healthy controls.
+- The label states that this finding was not observed in other large international registries.
+- A European case-control study using 21 congenital-anomaly registries, covering more than 10 million births, reported an adjusted odds ratio of 1.45 (95% CI 0.8–2.63).
+
+These findings should remain separate because the registries and comparator groups differed. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+
+The label also states that meta-analyses evaluated fetal death, stillbirth, preterm birth, small-for-gestational-age birth, and neurodevelopmental delay, but that differences in outcome definitions, ascertainment, and comparator groups limit conclusions. The returned label does not provide complete study counts for those analyses. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+
+A separate **naturalistic observational study of 60 mothers** included mixed populations—pregnancy, lactation, neonates, and children—and reported no significant differences in birth outcomes between in-utero-exposed and nonexposed newborns and no significant differences in development during the first 12 months. Because the abstract does not isolate a lamotrigine-only sample, these findings should not be generalized as lamotrigine-specific. [S21](https://pubmed.ncbi.nlm.nih.gov/36103361/)
+
+Animal findings in the label—developmental toxicity, neurobehavioral findings, offspring mortality in rat studies, and reduced fetal folate concentrations—are animal data and should not be treated as human pregnancy outcomes. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+
+### FAERS report-only context
+
+For the retrieved query of lamotrigine reports containing the reaction term “foetal exposure during pregnancy,” FAERS returned reporting volumes including:
+
+- Foetal exposure during pregnancy: 3,527
+- Atrial septal defect: 357
+- Congenital anomaly: 327
+- Premature baby: 257
+- Ventricular septal defect: 205
+- Patent ductus arteriosus: 153
+- Spina bifida: 143
+- Hypospadias: 135
+
+These are spontaneous-report volumes, not incidence rates, confirmed clinical outcomes, or evidence of causation. The source population was not established, exposure denominators were unavailable, and this query cannot be generalized to all exposed pregnancies or infants. [S2](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8) [S13](https://open.fda.gov/apis/drug/event/)
+
+### Main limitations
+
+- This was a bounded PubMed search, not a systematic review; the broad query returned 690 records, while only a small relevance-bounded set and abstracts were retrieved. [S11](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json)
+- The selected DailyMed product was one lamotrigine formulation, not all formulations. The pregnancy section was truncated in the broader label extract, although the structured pregnancy fields supplied the principal registry findings. [S10](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4)
+- Study populations should not be merged: epilepsy-pregnancy registries, bipolar-disorder reviews, lactation studies, and mixed psychotropic-medication studies address different populations and questions.
+- A registry entry or planned study is not posted outcome evidence. For example, the recruiting observational study NCT05450978 concerns medication exposure during pregnancy and breastfeeding in **adult women with epilepsy**; it has no posted results in the returned record. [S9](https://clinicaltrials.gov/study/NCT05450978) [S3](https://clinicaltrials.gov/api/v2/studies?query.term=lamotrigine+AND+%28pregnancy%29&filter.overallStatus=RECRUITING&pageSize=20&format=json)
+
+### Questions for the clinician
+
+1. Which findings apply to the relevant indication—epilepsy, bipolar disorder, or another condition—and to the specific gestational stage?
+2. How should underlying-disease risks be separated from medication-associated findings?
+3. How should the differing oral-cleft findings and comparator groups be interpreted?
+4. Which evidence is exposure measurement, and which is an observed fetal or infant outcome?
+5. What product-specific label sections or interaction information were not captured in this lookup?
+6. What uncertainties in the available evidence are most relevant to the clinical discussion?
+
+The returned MCP material notes that treatment changes can also carry risks and belong in a prescribing-clinician discussion. This summary is not clinical validation and does not determine an individual treatment plan.
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.
+

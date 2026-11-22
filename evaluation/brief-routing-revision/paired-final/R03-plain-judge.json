@@ -1,0 +1,48 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 0,
+    "unverified_claims": 5,
+    "citations": [
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=",
+        "status": "unverified",
+        "reason": "The supplied evidence identifies a specific retrieved DailyMed record at https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551, not this incomplete directory URL. The evidence supports lactic-acidosis warnings and adult-label context, but does not establish the answer's claims about a boxed warning, vitamin B12 deficiency, or all listed contraindications."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+        "status": "supported",
+        "reason": "The LactMed evidence supports low milk concentrations, generally small infant exposure, occasional detectable infant serum concentrations, reported absence of observed adverse effects, normal growth/development findings, and limited evidence in newborn or premature infants."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=",
+        "status": "unverified",
+        "reason": "The answer cites the same incomplete DailyMed URL for the claim that the label contains lactation information and that label warnings concern the medicine taker. The population distinction is consistent with the evidence, but the cited URL itself does not identify the retrieved QPharma product."
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer correctly separates adult-label warnings from LactMed infant exposure and outcome findings, avoids giving dosing instructions, and discloses several evidence limitations. However, it does not satisfy the requirement to name the retrieved product: the reference evidence identifies \"METFORMIN HCL TABLET [QPHARMA, INC.]\" with a specific set ID, while the answer uses an incomplete URL and says it could not verify a specific product. Several adult-label assertions are not supported by the supplied extract, especially the clause \"has a boxed warning\" and the claims about \"vitamin B12 deficiency\" and \"specific contraindications.\" The retrieved label explicitly has missing or unconfirmed sections, including \"boxed_warning\" and \"warnings_and_precautions,\" so those claims should have been presented as unverified rather than stated as established. The answer's statement that no reliable source reviewed provides a definitive long-term assessment is also broader than the evidence directly establishes."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 20454,
+    "completion_tokens": 1227,
+    "total_tokens": 21681,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 20451,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 618,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "arm_label_hidden": true,
+  "independent_clinician_review": false
+}

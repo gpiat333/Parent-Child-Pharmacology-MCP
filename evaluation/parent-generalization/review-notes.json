@@ -1,0 +1,22 @@
+{
+ "review_type":"Assistant review of saved outputs and retrieved evidence; not independent clinical adjudication",
+ "raw_verdicts_replaced":false,
+ "findings":[
+  {"id":"R07","status":"relevance weakness","finding":"The pediatric Canada query returned an epilepsy electrode study with missing age limits and a pregnancy-focused epilepsy study. The answer disclosed that neither had pediatric eligibility confirmed, but should lead with no verified pediatric match rather than foreground two broader recruiting studies. The tool's child/infant query terms do not enforce pediatric eligibility."},
+  {"id":"R08","status":"confirmed explanation issue","finding":"A returned ibogaine notice had comments_close_on 2026-11-20 and explicit deadline text. The answer placed it under unknown deadlines because participation_status said deadline_not_passed_verify_notice. Known date and unverified open/applicability status are different fields. The notice is also indirect to pregnancy research and should stay labeled indirect."},
+  {"id":"R08","status":"confirmed unsupported inference","finding":"The preterm-birth notice had no comment deadline; only 2024 meeting dates were returned. The answer concluded 'this is not an open opportunity' from past meeting dates. That does not establish the current comment deadline/status; preserve unknown rather than infer closure."},
+  {"id":"R06","status":"useful behavior","finding":"The ADHD answer separated one youth-focused study from a returned pregnant-adult study and explicitly declined to count the latter as a child study."},
+  {"id":"R05","status":"verified detail","finding":"Topiramate registry phone 1-888-233-2334, registry link, product names and listed status were present in the retrieved FDA row."},
+  {"id":"R12","status":"useful behavior","finding":"The adverse-event answer stated the actual month-coded age 0–12 query and distinguished reporting volume from incidence or causation. It did not claim all infant reports were covered."}
+ ],
+ "disputed_judge_flags":[
+  {"id":"R01","finding":"Judge claimed no specific citation and omitted truncation disclosure. The first paragraph and each reported finding cite S2, and the returned LactMed record explicitly has truncated=false. The answer also discloses absence of infant drug-level information. Do not require a false truncation statement."},
+  {"id":"R06","finding":"Task judge demanded two studies despite the question saying up to two. Returning one child-focused study and explicitly excluding the adult record is appropriate; do not invent a second match."},
+  {"id":"R07","finding":"Pediatric relevance is a real weakness, but parts of the rationale incorrectly demand confirmed individual eligibility and claim no study-team caveat. The answer explicitly says eligibility is not established and should be confirmed with the team."},
+  {"id":"R08","finding":"Task judge claims no-submission disclosure is missing; the answer explicitly says 'No submission was made.' Its rationale misses the actual known-date/unknown-status and past-meeting inference issues documented above."},
+  {"id":"R09","finding":"Judge claims current-index limits and absence of other returned notices are not explicit; the answer states both. This is a disputed omission flag."},
+  {"id":"R11","finding":"Judge adds a requirement to state that an abstract was the only field retrieved. The request expressly asked for an abstract-based summary, and the answer repeatedly attributes findings to the abstract. No specific unsupported factual claim is identified."}
+ ],
+ "calibration_note":"The same four synthetic controls were rerun. Evidence fidelity matched all four. Task fulfillment again rejected the correct unknown-deadline statement and matched three of four; keep task scores diagnostic-only. Passing four controls does not rule out the evidence judge's R01 misreading in this batch.",
+ "next_steps":"Separate deadline_date, deadline_known, deadline_passed and applicability in explanation requirements. Strengthen pediatric eligibility screening and lead with no verified pediatric matches when ages/population cannot establish fit. Preserve these failures for a separate fix and follow-up; no mid-batch server/client change."
+}

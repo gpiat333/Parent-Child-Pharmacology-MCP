@@ -1,0 +1,200 @@
+{
+  "generated_at_utc": "2026-11-21T03:22:37.119522+00:00",
+  "model": "system.ai.gpt-5-6-luna",
+  "case_ids": [
+    "R01",
+    "R03",
+    "R04",
+    "R06",
+    "R09"
+  ],
+  "arms": {
+    "mcp": {
+      "completed": 5,
+      "total": 5,
+      "tool_retrieval_observed": 5,
+      "automated_task_fulfillment": 5,
+      "raw_source_fidelity_labels_not_validated": {
+        "fail": 1,
+        "pass": 4
+      },
+      "median_elapsed_seconds": 17.17
+    },
+    "plain": {
+      "completed": 5,
+      "total": 5,
+      "tool_retrieval_observed": 0,
+      "automated_task_fulfillment": 0,
+      "raw_source_fidelity_labels_not_validated": {
+        "fail": 5
+      },
+      "median_elapsed_seconds": 6.11
+    }
+  },
+  "cases": [
+    {
+      "id": "R01",
+      "arm": "mcp",
+      "completed": true,
+      "task_fulfilled_model_judged": true,
+      "raw_fidelity_label": "fail",
+      "tool_names": [
+        "route_parent_question",
+        "search_lactmed",
+        "get_lactmed_record"
+      ],
+      "source": "paired-final/R01-mcp.json",
+      "judge_source": "paired-final/R01-mcp-judge-v2.json"
+    },
+    {
+      "id": "R03",
+      "arm": "mcp",
+      "completed": true,
+      "task_fulfilled_model_judged": true,
+      "raw_fidelity_label": "pass",
+      "tool_names": [
+        "route_parent_question",
+        "get_label_sections",
+        "search_lactmed",
+        "get_lactmed_record"
+      ],
+      "source": "paired-final/R03-mcp.json",
+      "judge_source": "paired-final/R03-mcp-judge-v2.json"
+    },
+    {
+      "id": "R04",
+      "arm": "mcp",
+      "completed": true,
+      "task_fulfilled_model_judged": true,
+      "raw_fidelity_label": "pass",
+      "tool_names": [
+        "route_parent_question",
+        "search_medication_recalls"
+      ],
+      "source": "paired-final/R04-mcp.json",
+      "judge_source": "paired-final/R04-mcp-judge-v2.json"
+    },
+    {
+      "id": "R06",
+      "arm": "mcp",
+      "completed": true,
+      "task_fulfilled_model_judged": true,
+      "raw_fidelity_label": "pass",
+      "tool_names": [
+        "route_parent_question",
+        "find_recruiting_studies"
+      ],
+      "source": "paired-final/R06-mcp.json",
+      "judge_source": "paired-final/R06-mcp-judge-v2.json"
+    },
+    {
+      "id": "R09",
+      "arm": "mcp",
+      "completed": true,
+      "task_fulfilled_model_judged": true,
+      "raw_fidelity_label": "pass",
+      "tool_names": [
+        "route_parent_question",
+        "search_drug_safety_alerts"
+      ],
+      "source": "paired-final/R09-mcp.json",
+      "judge_source": "paired-final/R09-mcp-judge-v2.json"
+    },
+    {
+      "id": "R01",
+      "arm": "plain",
+      "completed": true,
+      "task_fulfilled_model_judged": false,
+      "raw_fidelity_label": "fail",
+      "tool_names": [],
+      "source": "paired-final/R01-plain.json",
+      "judge_source": "paired-final/R01-plain-judge-v2.json"
+    },
+    {
+      "id": "R03",
+      "arm": "plain",
+      "completed": true,
+      "task_fulfilled_model_judged": false,
+      "raw_fidelity_label": "fail",
+      "tool_names": [],
+      "source": "paired-final/R03-plain.json",
+      "judge_source": "paired-final/R03-plain-judge-v2.json"
+    },
+    {
+      "id": "R04",
+      "arm": "plain",
+      "completed": true,
+      "task_fulfilled_model_judged": false,
+      "raw_fidelity_label": "fail",
+      "tool_names": [],
+      "source": "paired-final/R04-plain.json",
+      "judge_source": "paired-final/R04-plain-judge-v2.json"
+    },
+    {
+      "id": "R06",
+      "arm": "plain",
+      "completed": true,
+      "task_fulfilled_model_judged": false,
+      "raw_fidelity_label": "fail",
+      "tool_names": [],
+      "source": "paired-final/R06-plain.json",
+      "judge_source": "paired-final/R06-plain-judge-v2.json"
+    },
+    {
+      "id": "R09",
+      "arm": "plain",
+      "completed": true,
+      "task_fulfilled_model_judged": false,
+      "raw_fidelity_label": "fail",
+      "tool_names": [],
+      "source": "paired-final/R09-plain.json",
+      "judge_source": "paired-final/R09-plain-judge-v2.json"
+    }
+  ],
+  "method": "Same model route, shared prompt and user questions; one response per arm per question. Only the MCP arm receives local retrieval tools. Both graders receive the same reference pool per question. Production chat review/safety passes are not part of this minimal paired harness.",
+  "calibration_v2": {
+    "matched_controls": 4,
+    "total_controls": 4
+  },
+  "grading_quality_gate": "NOT PASSED for a validated source-fidelity comparison: real-case rubric violations remain despite 4/4 synthetic controls. Raw judgments retained; no further resampling.",
+  "source_accuracy_comparison": null,
+  "review_findings": [
+    {
+      "id": "R09",
+      "arm": "plain",
+      "issue": "False contradiction despite the corrected rubric",
+      "finding": "The answer says no FDA notice content was retrieved in its session. Its saved trace has zero calls. The evaluator-only reference does not contradict this statement. This is honest abstention with no assessable source claims, not evidence of a false FDA fact.",
+      "effect": "Do not use the raw fail label or contradicted-claim count as accuracy evidence. The requested lookup was not completed."
+    },
+    {
+      "id": "R04",
+      "arm": "mcp",
+      "issue": "Claim-only normalization ignores an unverified citation",
+      "finding": "The raw judge says fail because the FDA guidance-page content was not retrieved, but the normalization produces pass from its zero unverified-claim count. The answer also attributes MCP recall limitations to FDA records.",
+      "effect": "This is a source-attribution/citation concern. Do not treat the normalized pass as verified citation accuracy."
+    },
+    {
+      "id": "R03",
+      "arm": "plain",
+      "issue": "Specific product evidence versus unspecified generic labeling",
+      "finding": "The answer links a metformin search directory and does not identify a product. The judge compares it with one retrieved product label. Differences are not sufficient to prove that every other label is false. The directory also cannot verify the specific claims. The answer omits the requested adult warning discussion.",
+      "effect": "Label claims are unverified against this pool; the raw contradicted-claim count is not a definitive medical error count. Task fulfillment remains a diagnostic judgment."
+    },
+    {
+      "id": "R01",
+      "arm": "plain",
+      "issue": "Overly strict completeness rationale",
+      "finding": "The judge demands an explicit statement that evidence was not truncated, although no source was retrieved in this arm. It also identifies an unsupported source-attributed monitoring recommendation, which is a distinct support concern.",
+      "effect": "The 0/5 plain-model task score is a raw automated result, not an independently validated task-success rate."
+    }
+  ],
+  "limits": [
+    "Five selected, previously seen questions; one trial per arm.",
+    "Same-family model judge, not independent clinical review.",
+    "Reference pool comes from this MCP implementation and may be incomplete.",
+    "Honest abstention does not complete a lookup and is not itself a false claim.",
+    "Parallel local timing samples are descriptive only; no speed or general superiority claim.",
+    "Managed route name matches the older model suffix; equivalence of underlying model revisions was not established.",
+    "No new MLflow run, deployment, or GitHub push."
+  ]
+}

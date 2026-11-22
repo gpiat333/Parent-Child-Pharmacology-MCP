@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>MCP-MC evaluation results</title><style>body{font:16px/1.6 system-ui;max-width:1100px;margin:35px auto;padding:20px}td,th{padding:12px;border-bottom:1px solid #ddd;text-align:left}pre{white-space:pre-wrap;font:inherit}</style><h1>MCP-MC evaluation results</h1><p>November 17, 2026. Two prompt variants, ten development questions each. MLflow judges score captured answers; they do not independently certify clinical accuracy.</p><h2>Method</h2><p>The same deployed MCP server and model endpoint answered a fixed source-backed question set using minimal or production system instructions. Exact first-line answers were checked against predeclared accepted values. Databricks MLflow then scored full responses for expected-fact correctness, safety, relevance and conciseness. This is answer-sheet evaluation; detailed MCP tool traces are retained separately. The dataset, prompts, source snapshots, deployment ID and installed package versions are saved with the local evaluation files.</p><h2>MLflow runs</h2><table><tr><th>Prompt</th><th>Run</th><th>Metrics</th></tr><tr><td>minimal</td><td><a href="https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/fc4537f04b3d4e54be4e7133a09d9c87?o=7474654188777746">fc4537f04b3d4e54be4e7133a09d9c87</a></td><td><pre>{
+  &quot;gold_first_line/mean&quot;: 1.0,
+  &quot;correctness/mean&quot;: 0.9,
+  &quot;relevance_to_query/mean&quot;: 1.0,
+  &quot;conciseness/mean&quot;: 0.6,
+  &quot;safety/mean&quot;: 1.0
+}</pre></td></tr><tr><td>production</td><td><a href="https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/8af307d169004a1c9c4c801381b84d9b?o=7474654188777746">8af307d169004a1c9c4c801381b84d9b</a></td><td><pre>{
+  &quot;gold_first_line/mean&quot;: 1.0,
+  &quot;safety/mean&quot;: 1.0,
+  &quot;correctness/mean&quot;: 0.8,
+  &quot;relevance_to_query/mean&quot;: 1.0,
+  &quot;conciseness/mean&quot;: 0.3
+}</pre></td></tr></table><h2>Negative, missing or errored assessments</h2><pre>[
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;row&quot;: 2,
+    &quot;scorer&quot;: &quot;correctness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response states that all four breastfed infants had undetectable serum budesonide concentrations after maternal inhalation of Pulmicort. This supports the first part of the expectation that the infant serum concentrations were undetectable. However, the second part of the expectation states that this finding is not a guarantee of safety, which is not addressed in the response. Therefore, while the first part of the expectation is supported, the second part is not explicitly supported by the response. The response does not provide any information regarding safety guarantees. Thus, the expectation is partially supported but not fully. The response is not correct in its entirety as it does not confirm the safety aspect mentioned in the expectation.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;row&quot;: 3,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response correctly states the requested value &#x27;7&#x27; first, which is the number of women who participated in the study. It then provides a brief justification by identifying Singulair as montelukast and citing the source from LactMed. However, the response includes two disclaimers, which is unnecessary and could be seen as excessive. The guideline does not specify that multiple disclaimers are acceptable. Therefore, while the main components of the guideline are satisfied, the inclusion of two disclaimers does not align with the guideline&#x27;s intent for conciseness. Thus, the response does not fully comply with the guideline due to the redundancy in disclaimers.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;row&quot;: 4,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response correctly states the requested value of &#x27;6%&#x27; first, which complies with the guideline. It then provides a brief justification referencing LactMed and includes a source link, which is also in line with the guideline. However, the response includes two disclaimers instead of one, which is unnecessary and does not align with the guideline&#x27;s expectation of a single informational-only disclaimer. Therefore, while most of the guideline is satisfied, the inclusion of two disclaimers is a deviation from the guideline. This leads to the conclusion that the response does not fully comply with the provided guidelines.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;row&quot;: 5,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response correctly states the requested value &#x27;No&#x27; first, which complies with the guideline. It provides a brief relevant justification explaining that the monitoring list does not establish that all symptoms were observed in infants, and it distinguishes between the monitoring list and actual case reports. Additionally, it includes a source citation linking to the LactMed record. However, the response contains two disclaimers, which is unnecessary and could be seen as excessive. The guideline does not specify that multiple disclaimers are acceptable. Therefore, while most of the guideline is satisfied, the presence of two disclaimers does not fully comply with the guideline&#x27;s intent. Thus, the result is &#x27;no&#x27;.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;row&quot;: 6,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response begins with the requested value &#x27;gentamicin&#x27; on the first line, which complies with the guideline. It then provides a brief justification by explaining the context of the antibiotic Cleocin (clindamycin) and its association with bloody stools in the infant, along with a source citation from LactMed. However, the response includes two disclaimers, which is unnecessary and does not align with the guideline that suggests including a standard informational-only disclaimer. Therefore, while the main components of the guideline are met, the inclusion of two disclaimers is a deviation from the guideline&#x27;s intent. Thus, the response does not fully comply with the guideline. The result is &#x27;no&#x27;.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 2,
+    &quot;scorer&quot;: &quot;correctness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response states that all four breastfed infants had undetectable serum budesonide concentrations after maternal Pulmicort use, which supports the first part of the expectation that the serum concentrations were undetectable. However, the second part of the expectation states that this finding is &#x27;not a guarantee of safety,&#x27; which is not addressed in the response. Therefore, while the first part of the expectation is supported, the second part is not confirmed by the response. The response is not correct.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 2,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response states the requested value &#x27;Undetectable&#x27; first, which complies with the guideline. It then provides a brief relevant justification by stating that all four breastfed infants had undetectable serum budesonide concentrations after maternal Pulmicort use, along with a source citation. However, the response includes the informational-only disclaimer twice, which is unnecessary and could be seen as excessive. The guideline does not specify that the disclaimer should be repeated. Therefore, while the main components of the guideline are satisfied, the redundancy in the disclaimer does not fully comply with the guideline&#x27;s intent for conciseness. Thus, the overall assessment is that the response does not fully comply with the guideline due to the repeated disclaimer. The result is &#x27;no&#x27;.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 3,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response correctly states the requested value &#x27;7&#x27; first, which is in compliance with the guideline. It then provides a brief justification by explaining that Singulair is montelukast and cites a source link to the LactMed report. However, the response includes two disclaimers, which is unnecessary and does not align with the guideline that suggests including a standard informational-only disclaimer. Therefore, while the main components of the guideline are satisfied, the inclusion of two disclaimers is a deviation from the guideline&#x27;s intent. Thus, the response does not fully comply with the guideline.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 4,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response correctly states the requested percentage of 6% on the first line, which complies with the guideline. It then provides a brief justification explaining that this percentage is based on average peak and trough milk levels and cites the LactMed source link, which is also in line with the guideline. However, the response includes the disclaimer twice, which is unnecessary and could be seen as not fully adhering to the guideline&#x27;s intent of clarity and conciseness. Therefore, while the main components of the guideline are satisfied, the redundancy in the disclaimer detracts from full compliance. Thus, the result is &#x27;no&#x27;.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 5,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response does state the requested value &#x27;No&#x27; first, which complies with the guideline. It provides a brief relevant justification explaining that the symptoms listed are recommendations and not evidence of observation in infants, which is also in line with the guideline. Additionally, it includes a source citation from LactMed, fulfilling that part of the guideline. However, the response includes the informational-only disclaimer twice, which is unnecessary and could be seen as excessive. The guideline does not specify that the disclaimer should be repeated. Therefore, while the response is mostly compliant, the redundancy in the disclaimer does not align with the guideline&#x27;s intent for conciseness. Thus, the overall compliance is not fully met due to this issue. Therefore, the result is &#x27;no&#x27;.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 6,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response does provide the requested value, &#x27;Gentamicin&#x27;, on the first line, which is in compliance with the guideline. It also includes a brief relevant justification regarding the historical case and cites a source link to LactMed. However, the response includes two disclaimers, which is unnecessary and does not align with the guideline that suggests including a standard informational-only disclaimer. Therefore, while the main components are present, the inclusion of two disclaimers violates the guideline&#x27;s intent for a single disclaimer. Thus, the response does not fully comply with the guideline.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 7,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response states the requested value first, which is **1.26**. It then provides a brief relevant justification by mentioning the adjusted relative risk reported in the abstract and includes a source citation with a link to PubMed. However, the response includes two disclaimers, which is unnecessary and does not align with the guideline that suggests including a standard informational-only disclaimer. Therefore, while the main components of the guideline are satisfied, the inclusion of two disclaimers is excessive and does not comply with the guideline&#x27;s intent. Thus, the response does not fully comply with the guideline.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 9,
+    &quot;scorer&quot;: &quot;correctness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response states that the named comparator in the study NCT03976063 is placebo, which directly supports the first part of the expectation. The second part of the expectation states that registration does not prove benefit, which is not addressed in the response. Therefore, while the first part of the expectation is supported, the second part is not. The response is not correct.&quot;
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;row&quot;: 10,
+    &quot;scorer&quot;: &quot;conciseness&quot;,
+    &quot;value&quot;: &quot;no&quot;,
+    &quot;error&quot;: null,
+    &quot;rationale&quot;: &quot;The response does state the requested value, &#x27;Clavulanate&#x27;, first, which is in compliance with the guideline. It also provides a brief justification with relevant source citations from RxNorm and LactMed, which is also in line with the guideline. However, the response includes two disclaimers, which is unnecessary and does not align with the guideline that suggests including a standard informational-only disclaimer. Therefore, while the main components of the guideline are satisfied, the inclusion of two disclaimers is a deviation from the guideline&#x27;s intent. Thus, the response does not fully comply with the guideline. \n\nThe specific part of the guideline not satisfied is the requirement to include only one standard informational-only disclaimer. \n\nOverall, the response does not fully comply with the provided guidelines due to the redundancy in disclaimers.&quot;
+  }
+]</pre><h2>Review of judge findings</h2><pre>All 100 scorer entries returned assessments; there were no scorer errors in the two full runs. There were 14 negative assessments: three correctness and eleven conciseness.
+Correctness: both variants were marked down on G02 because the answer did not explicitly say undetectable concentrations are not a safety guarantee. Production was also marked down on G09 for not explicitly saying trial registration is not proof of benefit. The requested short answers were correct. Those caveats were in the expected-facts rubric but not explicit requests in the questions; align question and rubric in a new version before treating omissions as substantive answer failures.
+Judge consistency: minimal G09 was accepted despite the same omitted registration caveat. Repeated disclaimers were accepted in some responses and rejected in others. Preserve these rationales and manually adjudicate; do not infer clinical accuracy or prompt superiority from the aggregate scores.
+Independent source review still flagged G06 production&#x27;s compressed case-report timeline; the correctness judge accepted its expected ingredient fact. This demonstrates why checking expected facts alone can miss extra unsupported detail. No answer key or judge rule was changed in response to these scores.</pre><h2>Interpretation and limits</h2><p>Both variants obtained 10/10 deterministic short-answer matches. Correct first-line values do not guarantee every extra explanation is correct. G06 production compresses a source timeline and remains flagged for human/source review regardless of judge verdict. G09 required only one tool call; nine questions were multi-tool. Strengthen this task in the next version, and create a separate held-out set. This set draws on sources examined during development, has one execution per question per arm, and is neither a blind clinical evaluation nor statistically conclusive evidence that one prompt is better. A managed judge can miss errors; inspect its rationale rather than treating a score as certification.</p><h2>Security and performance scope</h2><p>Tests use synthetic questions and public sources. Credentials stayed in memory or existing CLI authentication; none were embedded in the notebook. No service principal or new compute was created. Earlier tests covered selected input validation, exception/log redaction and source-failure handling, not a complete security audit. Per-case timings and model usage are in the captured traces; concurrent traffic and caching limit performance comparisons.</p><h2>Submission work still needed</h2><p>Have a subject-matter reviewer check the answer key and flagged explanations; strengthen and freeze a held-out set; rerun after any final change; consolidate this report with prior regression results; and prepare the final evaluation document, repository instructions and demonstration slides. No clinical certification is claimed or required by the reviewed hackathon materials.</p><p><a href="gold-benchmark.html">Ten questions and captured answers</a> · <a href="databricks-evaluation-guide.html">Databricks setup and rerun instructions</a> · <a href="judge-assessments-summary.json">All judge assessments</a></p></html>

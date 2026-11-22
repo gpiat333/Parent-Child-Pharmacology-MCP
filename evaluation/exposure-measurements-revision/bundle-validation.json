@@ -1,0 +1,113 @@
+{
+  "bundle": {
+    "deployment": {
+      "lock": {
+        "enabled": false
+      }
+    },
+    "environment": "dev",
+    "git": {
+      "bundle_root_path": "."
+    },
+    "mode": "development",
+    "name": "mcp-mc",
+    "target": "dev"
+  },
+  "presets": {
+    "jobs_max_concurrent_runs": 4,
+    "name_prefix": "[dev gabriela_piatkowski] ",
+    "pipelines_development": true,
+    "tags": {
+      "dev": "gabriela_piatkowski"
+    },
+    "trigger_pause_status": "PAUSED"
+  },
+  "resources": {
+    "apps": {
+      "mcp_mc": {
+        "compute_size": "MEDIUM",
+        "description": "MCP service",
+        "name": "mcp-mc",
+        "source_code_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev/files"
+      }
+    }
+  },
+  "sync": {
+    "exclude": [
+      ".venv/**",
+      ".deployment-backup/**",
+      ".pytest_cache/**",
+      "**/__pycache__/**",
+      "*.pyc",
+      ".env",
+      ".env.*",
+      "AGENTS.md",
+      "README.md",
+      "deploy.md",
+      "tests/**",
+      "smoke_test.py",
+      "ingest_mother_child.py",
+      "02_build_vector_index.py"
+    ],
+    "paths": [
+      "."
+    ]
+  },
+  "workspace": {
+    "artifact_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev/artifacts",
+    "current_user": {
+      "active": true,
+      "displayName": "Gabriela Piatkowski",
+      "domain_friendly_name": "gabriela-piatkowski",
+      "emails": [
+        {
+          "primary": true,
+          "type": "work",
+          "value": "gabriela.piatkowski@nih.gov"
+        }
+      ],
+      "entitlements": [
+        {
+          "value": "workspace-access"
+        },
+        {
+          "value": "databricks-sql-access"
+        },
+        {
+          "value": "workspace-consume"
+        }
+      ],
+      "groups": [
+        {
+          "$ref": "Groups/79678707423737",
+          "display": "account users",
+          "type": "direct",
+          "value": "79678707423737"
+        },
+        {
+          "$ref": "Groups/80594002971540",
+          "display": "users",
+          "type": "direct",
+          "value": "80594002971540"
+        }
+      ],
+      "id": "78235346378947",
+      "name": {
+        "familyName": "Piatkowski",
+        "givenName": "Gabriela"
+      },
+      "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User",
+        "urn:ietf:params:scim:schemas:extension:workspace:2.0:User"
+      ],
+      "short_name": "gabriela_piatkowski",
+      "userName": "gabriela.piatkowski@nih.gov"
+    },
+    "file_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev/files",
+    "host": "https://dbc-aae0ba16-8727.cloud.databricks.com",
+    "profile": "gsa-mcp-hackathon",
+    "resource_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev/resources",
+    "root_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev",
+    "state_path": "/Workspace/Users/gabriela.piatkowski@nih.gov/.bundle/mcp-mc/dev/state"
+  }
+}

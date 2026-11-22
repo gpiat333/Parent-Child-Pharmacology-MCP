@@ -1,0 +1,174 @@
+[
+  {
+    "inputs": {
+      "request": "For the nonsedating antihistamine sold as Allegra, follow the drug identity to LactMed. The historical milk-concentration study used its precursor rather than directly administering the current drug. Which precursor drug was administered? Return its generic name. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "Terfenadine\n\nLactMed identifies fexofenadine as an active metabolite of terfenadine and reports that the historical milk-level study administered the parent compound, **terfenadine**, rather than fexofenadine directly: https://www.ncbi.nlm.nih.gov/books/NBK500677/\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The historical indirect milk-level evidence concerns maternal terfenadine, not direct maternal fexofenadine exposure.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "terfenadine"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "For the inhaled corticosteroid sold as Pulmicort, find the LactMed study that sampled four breastfed infants after maternal inhalation. What was the reported qualitative finding for infant serum concentrations? Return detectable or undetectable. In the explanation, explicitly state whether undetectable concentrations guarantee safety. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "undetectable\n\nLactMed reports that serum budesonide concentrations were undetectable in all four breastfed infants studied (below assay detection limits) after maternal Pulmicort Turbihaler use: [LactMed\u2014Budesonide](https://www.ncbi.nlm.nih.gov/books/NBK501215/).\n\nUndetectable concentrations in this small study do **not** guarantee safety; they indicate only that the drug was below the study assay\u2019s detection limits in those samples.\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The four sampled infant serum concentrations were undetectable; that finding is not a guarantee of safety.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "undetectable"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Identify the medicine sold as Singulair and locate its LactMed milk-transfer study involving a single maternal exposure. How many women participated in that historical study? Return an integer. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "7\n\nSingulair is **montelukast**. The LactMed record describes a historical milk-transfer study in which **seven women** provided milk samples after a single maternal exposure. [LactMed\u2014Montelukast](https://www.ncbi.nlm.nih.gov/books/NBK501488/)\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The historical montelukast milk-transfer study included seven women.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "7"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "In the LactMed record for doxycycline, distinguish measured milk levels from infant outcomes. In the historical study using average peak and trough milk levels, what percentage of the maternal weight-adjusted dosage was estimated for an exclusively breastfed infant? Return the percentage. Explain whether the percentage is an exposure estimate or an adverse-event probability. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "**6%**\n\nIn the historical study, 6% was the estimated average intake for an exclusively breastfed infant, expressed as a maternal weight-adjusted dosage. It is an **exposure estimate**, not a probability of adverse events. LactMed separately reports that relevant published information on breastfed-infant outcomes was not found as of its revision date. Source: [LactMed\u2014Doxycycline](https://www.ncbi.nlm.nih.gov/books/NBK500561/).\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The reported estimate is approximately 6%; it is an exposure estimate, not an adverse-event probability.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "6%"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Identify Lexapro and inspect its LactMed record. Does the list of symptoms that the source recommends monitoring, by itself, establish that all those symptoms were observed in infants? Return Yes or No; distinguish that list from actual case reports. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "No.\n\nThe listed symptoms\u2014\u201cexcess drowsiness, restlessness, agitation, poor feeding and poor weight gain\u201d\u2014are LactMed\u2019s **recommendation to monitor**, not evidence that all were observed in infants. The record separately describes individual case reports with specific observed outcomes, including irritability/crying, vomiting, poor weight gain and elevated liver enzymes; it does **not** report every monitoring symptom as having occurred. The retrieved record is truncated, so later outcome details may be missing.\n\nSource: [LactMed\u2014Escitalopram](https://www.ncbi.nlm.nih.gov/books/NBK501275/)\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "No: a monitoring recommendation is not itself an observed-outcome report. Actual infant findings are reported separately.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "no"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Identify the antibiotic sold as Cleocin and inspect its LactMed infant-effects section. In the historical case involving bloody stools in a five-day-old infant, which other antibiotic was the mother receiving concurrently? Return its generic name. Briefly preserve the reported sequence of feeding interruption, stool testing, antibiotic discontinuation and resumed feeding; do not infer an unreported time. Explain whether this case proves causation. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "**Gentamicin**\n\nCleocin is **clindamycin**. In the LactMed case, the mother was concurrently receiving **gentamicin**. The reported sequence was: the five-day-old breastfed infant developed bloody stools; breastfeeding was interrupted; stool testing showed normal flora and became guaiac-negative 24 hours after breastfeeding stopped; maternal antibiotics were discontinued; and breastfeeding resumed on day 6 without further difficulties. The source does not report an unambiguous timing between every event.\n\nThis case does **not prove causation**: LactMed describes the stools as \u201cpossibly caused\u201d by maternal clindamycin and gentamicin, based on a single temporal case report without definitive causal testing.\n\nSource: [LactMed\u2014Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/)\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The mother received gentamicin with clindamycin; the case does not isolate clindamycin as a proven cause.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions.",
+        "Stools became guaiac negative 24 hours after breastfeeding was discontinued. Breastfeeding resumed on day 6 after maternal antibiotics were discontinued, with no further difficulties. The report does not specify antibiotic discontinuation timing relative to the negative stool test; do not assert both interventions preceded that test."
+      ],
+      "accepted_answers": [
+        "gentamicin"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Find the PubMed paper in American Journal of Obstetrics and Gynecology titled Hydroxychloroquine early in pregnancy and risk of birth defects. Read its abstract. What was the overall adjusted relative risk for major congenital malformations, rather than the unadjusted risk or a dose subgroup? Return the decimal number. State whether this observational association proves causation. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "**1.26; no, this observational association does not prove causation.**\n\nThe abstract reports an overall adjusted relative risk of **1.26** (95% CI, 1.04\u20131.54), distinct from the unadjusted RR of 1.51 and the dose-subgroup estimates. Because this was a population-based observational cohort study, the association cannot by itself establish that hydroxychloroquine caused the malformations. [PubMed: https://pubmed.ncbi.nlm.nih.gov/32961123/]\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The adjusted relative risk was 1.26, an observational association rather than proof of causation.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "1.26"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Find the 2018 Der Nervenarzt review that compared breastfeeding evidence for antiepileptic drugs with product information. Read its abstract. What compatibility category did the authors assign levetiracetam? Return the two-word category, not an individualized medication recommendation. Identify this as the review authors historical classification, not an individualized decision. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "Probably compatible\n\nThe 2018 *Der Nervenarzt* review classified levetiracetam as \u201cprobably compatible\u201d with breastfeeding. This is the review authors\u2019 historical classification, not an individualized medication decision. [PubMed abstract](https://pubmed.ncbi.nlm.nih.gov/29487964/)\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The review classified levetiracetam as probably compatible; this is the authors historical classification, not a personalized decision.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "probably compatible"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Find the ClinicalTrials.gov study of 48-hour nifedipine tocolysis after preterm premature rupture of membranes at 22 to 33 completed gestational weeks. Inspect its interventions rather than its changing recruitment status. What comparator is named? Return placebo or active drug. Explicitly state whether trial registration establishes treatment benefit. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "Placebo\n\nClinicalTrials.gov lists nifedipine and \u201cPlacebo of Nifedipine\u201d as the interventions for the 48-hour PPROM tocolysis study (NCT03976063): https://clinicaltrials.gov/study/NCT03976063. Its status is **ACTIVE_NOT_RECRUITING**; registration describes the study design and does **not** establish treatment benefit.\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "The comparator in NCT03976063 is placebo of nifedipine. Registration does not prove benefit.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "placebo"
+      ]
+    }
+  },
+  {
+    "inputs": {
+      "request": "Resolve Augmentin through RxNorm and verify the combination in LactMed. Besides amoxicillin, which active ingredient belongs to this combination? Return its generic name. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation."
+    },
+    "outputs": {
+      "response": "Clavulanate\n\nRxNorm resolves Augmentin to the ingredients **amoxicillin and clavulanate**: [RxNorm record](https://rxnav.nlm.nih.gov/REST/rxcui/151392/properties.json). LactMed verifies the combination as **amoxicillin-clavulanic acid**: [LactMed](https://www.ncbi.nlm.nih.gov/books/NBK500776/).\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    },
+    "expectations": {
+      "expected_facts": [
+        "Augmentin combines amoxicillin and clavulanate (clavulanic acid); it is not amoxicillin alone.",
+        "Answer cites the relevant retrieved source and does not give individualized treatment instructions."
+      ],
+      "accepted_answers": [
+        "clavulanate",
+        "clavulanic acid"
+      ]
+    }
+  }
+]

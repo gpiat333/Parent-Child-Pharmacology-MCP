@@ -1,0 +1,323 @@
+{
+  "scope": "Historical parent-generalization traces; not rerun after refactor. Router preflight is harness-enforced and excluded from model-selection metrics.",
+  "definition": "Case passes if a required alternative is selected and every selected tool is allowed; blocked cases require no evidence calls. Precision is allowed selections / all selections for each tool, not clinical correctness.",
+  "passed": 16,
+  "total": 16,
+  "research_passed": 12,
+  "research_total": 12,
+  "per_tool": {
+    "search_lactmed": {
+      "selected": 2,
+      "allowed_selections": 2,
+      "precision": 1.0
+    },
+    "get_lactmed_record": {
+      "selected": 2,
+      "allowed_selections": 2,
+      "precision": 1.0
+    },
+    "normalize_drug": {
+      "selected": 2,
+      "allowed_selections": 2,
+      "precision": 1.0
+    },
+    "get_parent_medication_info": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "search_medication_recalls": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "search_pregnancy_registries": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "find_recruiting_studies": {
+      "selected": 2,
+      "allowed_selections": 2,
+      "precision": 1.0
+    },
+    "search_parent_input_opportunities": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "search_drug_safety_alerts": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "get_reporting_resources": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "search_literature": {
+      "selected": 2,
+      "allowed_selections": 2,
+      "precision": 1.0
+    },
+    "get_abstracts": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    },
+    "get_adverse_event_signals": {
+      "selected": 1,
+      "allowed_selections": 1,
+      "precision": 1.0
+    }
+  },
+  "cases": [
+    {
+      "id": "R01",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_lactmed",
+        "get_lactmed_record"
+      ],
+      "expected_any": [
+        "get_lactmed_record",
+        "get_parent_medication_info"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_lactmed",
+        "get_lactmed_record",
+        "get_parent_medication_info"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R02",
+      "blocked_case": false,
+      "observed_tools": [
+        "normalize_drug",
+        "search_lactmed",
+        "get_lactmed_record"
+      ],
+      "expected_any": [
+        "get_lactmed_record",
+        "get_parent_medication_info"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_lactmed",
+        "get_lactmed_record",
+        "get_parent_medication_info"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R03",
+      "blocked_case": false,
+      "observed_tools": [
+        "get_parent_medication_info"
+      ],
+      "expected_any": [
+        "get_parent_medication_info",
+        "get_label_sections",
+        "get_lactmed_record"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "get_parent_medication_info",
+        "get_label_sections",
+        "search_lactmed",
+        "get_lactmed_record",
+        "get_patient_education"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R04",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_medication_recalls"
+      ],
+      "expected_any": [
+        "search_medication_recalls"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_medication_recalls",
+        "search_drug_safety_alerts"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R05",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_pregnancy_registries"
+      ],
+      "expected_any": [
+        "search_pregnancy_registries"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_pregnancy_registries"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R06",
+      "blocked_case": false,
+      "observed_tools": [
+        "find_recruiting_studies"
+      ],
+      "expected_any": [
+        "find_recruiting_studies",
+        "search_trials"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "find_recruiting_studies",
+        "search_trials"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R07",
+      "blocked_case": false,
+      "observed_tools": [
+        "find_recruiting_studies"
+      ],
+      "expected_any": [
+        "find_recruiting_studies",
+        "search_trials"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "find_recruiting_studies",
+        "search_trials"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R08",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_parent_input_opportunities"
+      ],
+      "expected_any": [
+        "search_parent_input_opportunities"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "search_parent_input_opportunities",
+        "get_reporting_resources"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R09",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_drug_safety_alerts"
+      ],
+      "expected_any": [
+        "search_drug_safety_alerts"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_drug_safety_alerts",
+        "get_label_sections"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R10",
+      "blocked_case": false,
+      "observed_tools": [
+        "get_reporting_resources"
+      ],
+      "expected_any": [
+        "get_reporting_resources"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "get_reporting_resources"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R11",
+      "blocked_case": false,
+      "observed_tools": [
+        "search_literature",
+        "search_literature",
+        "get_abstracts"
+      ],
+      "expected_any": [
+        "get_abstracts"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "search_literature",
+        "get_abstracts"
+      ],
+      "passed": true
+    },
+    {
+      "id": "R12",
+      "blocked_case": false,
+      "observed_tools": [
+        "normalize_drug",
+        "get_adverse_event_signals"
+      ],
+      "expected_any": [
+        "get_adverse_event_signals"
+      ],
+      "allowed": [
+        "route_parent_question",
+        "normalize_drug",
+        "get_adverse_event_signals"
+      ],
+      "passed": true
+    },
+    {
+      "id": "B01",
+      "blocked_case": true,
+      "observed_tools": [],
+      "expected_any": [],
+      "allowed": [],
+      "passed": true
+    },
+    {
+      "id": "B02",
+      "blocked_case": true,
+      "observed_tools": [],
+      "expected_any": [],
+      "allowed": [],
+      "passed": true
+    },
+    {
+      "id": "B03",
+      "blocked_case": true,
+      "observed_tools": [],
+      "expected_any": [],
+      "allowed": [],
+      "passed": true
+    },
+    {
+      "id": "B04",
+      "blocked_case": true,
+      "observed_tools": [],
+      "expected_any": [],
+      "allowed": [],
+      "passed": true
+    }
+  ]
+}

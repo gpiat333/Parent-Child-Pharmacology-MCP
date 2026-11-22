@@ -1,0 +1,92 @@
+{
+  "review_type": "Diagnostic grading observations, not clinician adjudication",
+  "raw_scores_changed": false,
+  "findings": [
+    {
+      "case": "S6-lactation",
+      "type": "source_arithmetic_inconsistency",
+      "finding": "The answer repeats a LactMed passage describing 30 nursing mothers, 5 affected infants and 13%. Those numbers do not reconcile (5/30 is approximately 16.7%). The retrieved source itself contains this discrepancy. This illustrates why source fidelity alone cannot validate an answer. No raw answer or grade was changed."
+    },
+    {
+      "case": "E01-gap",
+      "type": "citation_parser_limit",
+      "finding": "The original broad URL regex joined adjacent Markdown citations, causing the sole URL-provenance failure. Post-run parsing found all 16 actual Markdown destinations in the returned source pool. The original 20/21 score is retained. See citation-parser-review.json. This is a parser limitation, not evidence of invented URLs."
+    },
+    {
+      "case": "R08",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer generally fulfills the requested FDA/topic filtering, explicitly labels broader or indirect candidates, separates future, past-listed, and unknown dates, uses record dates, provides links, and states that nothing was submitted. However, it falsely calls the two notices cited as S9 and S11 a \"duplicate search result\" and says they are \"the same\" topic. The evidence contains two distinct Federal Register records with different document numbers, publication dates, and meeting dates: 2020-04990 and 2020-28069. The exact contradicted clause is: \"Scientific and Ethical Considerations for the Inclusion of Pregnant Women in Clinical Trials — a duplicate search result with the same pregnancy-research topic.\""
+    },
+    {
+      "case": "R12",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer accurately reports retrieved counts and the exact queried age scope, and correctly explains that FAERS reports indicate reporting volume rather than incidence, risk, or causation. However, it does not explicitly state the required limitation that a subset of queried reports cannot be generalized to all infants. It also presents an openFDA-documentation claim that is not verifiable from the supplied evidence."
+    },
+    {
+      "case": "P01-portfolio",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer accurately reports the supplied search criteria, capped status, retrieved and total counts, 2025 administering-IC aggregation, separate award and direct-cost fields, and the ten detailed project records. It appropriately cautions that the absent 2024 group is not evidence that no matching projects exist. However, the criteria expressly required stating that activity codes alone do not establish research success, completed findings, or grant performance. That required caveat is missing, so task fulfillment is false despite otherwise supported content."
+    },
+    {
+      "case": "paired R01 mcp",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer accurately separates reported infant observations from monitoring outcomes and explains confounding and uncertainty. However, it does not fully satisfy the criterion to summarize milk measurements: it says only that milk levels were low and omits the record's actual maternal milk concentrations and relative-infant-dose estimates. The answer appropriately gives no dosing advice and does not contradict the supplied evidence."
+    },
+    {
+      "case": "paired R03 mcp",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer accurately separates the adult medicine-taker label from LactMed infant observations, avoids conflating a label warning with an observed infant outcome, omits dosing, identifies the retrieved QPharma product and LactMed record, and discloses relevant extraction and coverage limitations. However, it does not fully address the requested adult label warnings: it mainly discusses the label's lactation section and explicitly says that general adult adverse effects are not listed there, while the retrieved label evidence included substantive adult warnings such as lactic acidosis and risk factors. Thus the source fidelity passes, but task fulfillment is incomplete."
+    },
+    {
+      "case": "paired E01-gap mcp",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer preserves all requested evidence axes, distinguishes human from animal evidence, states the retrieved maternal PK gap, keeps empty rows visible, and separates FDA registry contacts without recommending participation. Its substantive source claims are supported by the supplied evidence. However, it does not fulfill the explicit instruction not to provide doses: the animal-evidence table includes phrases such as \"at the highest tested animal exposure,\" and the label context includes dose-related comparisons and animal dose information. It also presents registry-study claims and the renal-impairment PK-study exclusion without direct inline citations, although the supplied reference pool supports them."
+    },
+    {
+      "case": "paired E02-maternal-pk mcp",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer honestly abstains, but it does not prepare the requested pregnancy evidence brief or address any of the three axes, pharmacokinetic evidence, gaps, or clinician questions. Its statement that “No evidence search or AI answer will be generated” is contradicted by the reference evidence, which documents extensive label, literature, trial, and registry searches. Its statement that it cannot apply the English safety rules is also contradicted by the routing evidence, which marks the query as confidently English and allows research. The claim that Spanish MedlinePlus drug education is available separately using a confirmed RxNorm ID is only partially supported: the RxNorm identifier is confirmed, but Spanish MedlinePlus availability is not established in the reference pool."
+    },
+    {
+      "case": "paired R01 plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer appropriately separates observations, monitoring advice, and uncertainty, gives no dose, and accurately reports low milk concentrations and LactMed's monitoring language. But it misstates key observations: the record does not describe a single amoxicillin report of diarrhea and rash that resolved after stopping breastfeeding, and the no-difference study was of infants exposed to related antibiotics rather than amoxicillin. It also omits several actual reported observations, including three cases of infant diarrhea in a 25-mother follow-up, two cases of diarrhea and one rash among 40 exposed infants, and a study reporting rash and somnolence."
+    },
+    {
+      "case": "paired R03 plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer correctly separates adult-label risks from lactation findings and avoids dosing. LactMed claims are supported, including low exposure, occasional detectable infant serum levels, generally reassuring observed outcomes, and limited evidence. However, it identifies the retrieved label as FDA Glucophage while the supplied retrieval identified only METFORMIN HCL TABLET [QPHARMA, INC.] and cautioned that product matching was unconfirmed. The adult-label statements about a boxed warning and vitamin B12 deficiency are not verifiable from the supplied evidence because the relevant sections are absent or truncated. The statement that the label says metformin is present in human milk and frames breastfeeding benefits, maternal need, and potential infant effects is contradicted by the supplied QPharma label, which instead reports animal milk excretion, no comparable nursing-mother studies, and a possible risk of infant hypoglycemia. The answer also fails the requirement to name the actually retrieved product and its product-specific limitation."
+    },
+    {
+      "case": "paired R04 plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer correctly preserves the key distinction that a lot-number nonmatch cannot establish bottle clearance and appropriately identifies verification of product identity, manufacturer, formulation, NDC, lot, and expiration. Its explanations about incomplete searches, mismatches, formatting differences, and database lag are consistent with the reference evidence's stated coverage limits. The claim that a recall may be announced by a manufacturer, pharmacy, or another regulator without appearing in FDA results is not established by the supplied reference evidence. No FDA candidate records, recall statuses, or official links were reported, so the requested lookup was not fulfilled. The inability statement is treated as an honest abstention rather than contradicted."
+    },
+    {
+      "case": "paired R06 plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer honestly abstains from reporting study records because it says it cannot verify current ClinicalTrials.gov data. Its general cautions that overall recruiting status does not establish site-level recruitment and that eligibility should be confirmed by the study team are supported by the reference evidence. However, it does not provide the requested two study links, statuses, update dates, contacts, or qualification limits, so the task is not fulfilled. The supplied search URL itself is not verifiable from the reference pool."
+    },
+    {
+      "case": "paired R09 plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer honestly states that it could not perform a live lookup and that full FDA notice text was not retrieved; the evidence supports that only an index/title search was performed. However, the returned evidence included a montelukast notice title and a direct notice URL, which the answer omitted. Therefore it did not fulfill the request to summarize the returned title or excerpt and link to it. The access limitation is not a false source claim."
+    },
+    {
+      "case": "paired E01-gap plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The answer presents all three requested evidence axes, keeps empty rows visible, states that no pregnancy-specific maternal pharmacokinetic data were retrieved, avoids medication decisions, and separates registry information. However, it fails source fidelity and the citation criterion. The clause \"animal studies ... were associated with developmental toxicity ... including reduced fetal body weight and delays in skeletal ossification\" conflicts with the supplied label evidence, which states no maternal, embryofetal, fetal, or developmental toxicity in the described rat and rabbit studies. The clause \"Daridorexant and its metabolites are present in animal milk\" is not supported by the reference pool. The registry clause giving \"www.mothertobaby.org\" and \"1-877-311-8972\" is not supported by the retrieved evidence; the supplied label and FDA directory instead identify Idorsia/QUVIVIQ registry contact information, including 1-833-400-9611 and www.QuviviqPregnancyStudy.com. Additional claims about nonpregnant-trial maternal adverse effects, extensive CYP3A4 metabolism, and human lactation/animal milk findings are not verifiable in the reference pool. The stated inability to perform a live lookup is honest, but the requested brief was not fully fulfilled because the cited label and directory requirements were not met accurately and the registry contacts were misstated."
+    },
+    {
+      "case": "paired E02-maternal-pk plain",
+      "type": "raw_diagnostic_failure",
+      "finding": "The response successfully separates maternal effects, fetal/infant exposure and fetal outcomes, keeps major gaps visible, avoids dose numbers and gives clinician questions. However, it presents several source-dependent claims that are not supported by the reference pool, especially: \"Lamotrigine crosses the placenta; concentrations have been measured in cord blood,\" \"Cord concentrations are generally comparable to maternal concentrations,\" and the detailed maternal PK summary that attributes early pregnancy changes, increased glucuronidation and substantial variability to retrieved literature. The supplied evidence does not contain cord-blood or placental-transfer data, does not verify glucuronidation or early-trimester timing for the cited sources, and does not retrieve the cited Clark et al. PMID. The answer also fails the criterion to preserve the PK study population and design: it says only that Clark et al. reported trimester-related changes and that modeling should be considered, without stating the actual population/design. These are source-fidelity and task-fulfillment failures rather than contradictions."
+    }
+  ],
+  "remaining_limits": [
+    "Known development cases, one run; plain arm lacks retrieval tools.",
+    "Same-family grader; bounded source pool and no independent clinical adjudication.",
+    "Grader v2 differs from historical rubric. Raw previous labels are unchanged.",
+    "S2 and S6 remain partially controlled; no clinician has assessed reassurance or alarm."
+  ]
+}

@@ -1,0 +1,23 @@
+The MCP queried **acetaminophen** (exact ingredient match) in infant FAERS reports. The requested age scope was **ages coded in months from 0 through 12 inclusive**; records using other age units were excluded. [S3](https://rxnav.nlm.nih.gov/REST/rxcui/161/properties.json) [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What these reports can tell researchers
+
+They can show which events or report terms appear most often in this specific, filtered set and help generate signals for further investigation. The returned terms included:
+
+- Vomiting: **117 reports**
+- Pyrexia: **98**
+- Rash: **60**
+- Toxicity to various agents: **58**
+
+The query also returned use- or administration-related terms, which should not automatically be interpreted as adverse effects. The MCP reported the source population and confirmed age band as **not established in the returned metadata** for these reaction entries. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What they cannot establish
+
+- **How often side effects occur:** FAERS counts are reporting volume, not incidence or risk. The query has no exposure denominator—the number of infants who received acetaminophen—so these counts cannot calculate the frequency of side effects or individual risk. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10) [S2](https://open.fda.gov/apis/drug/event/)
+- **Whether acetaminophen caused an event:** A spontaneous report records a reported association, not proven causation. The MCP states that these reports do not establish causation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+- **That unlisted events do not occur or that listed events were caused by the medicine:** The results are signals for investigation, not proof of safety, frequency, or causal effect. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+Application limits:
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

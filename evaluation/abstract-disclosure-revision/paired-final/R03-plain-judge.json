@@ -1,0 +1,177 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 2,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "contradicted",
+        "reason": "The URL is incomplete because its setid parameter is empty, so it does not identify the retrieved DailyMed product.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid="
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The LactMed record supports low milk exposure, detectable infant serum levels in some measurements, reported absence of observed adverse effects in described infants, and limitations of the evidence.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The U.S. prescribing information carries a boxed warning for **lactic acidosis**",
+        "reference_quote": null,
+        "explanation": "The supplied evidence does not establish that the selected product carries a boxed warning; the answer presents that specific label characterization without support in the retrieved record."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Vitamin-B12 deficiency is also addressed in the warnings/precautions.",
+        "reference_quote": null,
+        "explanation": "Vitamin B12 deficiency is not present in the supplied retrieved label evidence, so this claim is unverified in the evidence pool."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants",
+        "reference_quote": "Similar studies have not been conducted in nursing mothers.Because the potential for hypoglycemia in nursing infants may exist",
+        "explanation": "The retrieved label states that similar studies had not been conducted in nursing mothers and raises potential infant hypoglycemia; the answer instead attributes LactMed-style reported infant findings to the U.S. label."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "monitoring may be considered",
+        "reference_quote": null,
+        "explanation": "The supplied LactMed summary states that metformin should be used with caution while nursing newborn and premature infants and those with renal impairment, but it does not state that monitoring may be considered."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer does not identify the retrieved product as METFORMIN HCL TABLET from QPharma, Inc., and its DailyMed citation has an empty setid."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "disclose missing sections",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer discusses general evidence limitations but does not disclose the retrieved label's specifically missing warnings_and_precautions and boxed_warning sections."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Identify which source says what",
+        "answer_quote": "The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants",
+        "reference_quote": "Data from well-conducted studies indicate that metformin levels in milk are low",
+        "explanation": "The answer attributes LactMed-style infant findings to the label, so it does not reliably identify which source says what."
+      }
+    ],
+    "rationale": "The answer generally separates adult adverse effects from infant observations and avoids administered doses, but it misattributes LactMed findings to the label, includes unsupported label assertions, fails to name the retrieved QPharma product, and does not disclose the specifically missing label sections. Its DailyMed citation is incomplete."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "30c63449f8d2f09d4218df7f1303849efb1b8965c4790c76139e03c38e6a9f6b",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 3,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited DailyMed URL has an empty setid and does not support the answer's assertion that this retrieved label carries a boxed warning or the stated breastfeeding language.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports low milk exposure, detectable infant serum levels in some measurements, reported absence of observed adverse effects in described infants, and limitations of the evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. prescribing information carries a boxed warning for **lactic acidosis**\",\n      \"reference_quote\": \"sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The retrieved label extraction identified the warnings_and_precautions and boxed_warning sections as missing; it did not establish that the selected product carries a boxed warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin-B12 deficiency is also addressed in the warnings/precautions.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not present in the supplied retrieved label evidence, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Similar studies have not been conducted in nursing mothers.Because the potential for hypoglycemia in nursing infants may exist\",\n      \"explanation\": \"The retrieved label instead states that comparable nursing-mother studies had not been conducted and raises potential infant hypoglycemia; it does not report the LactMed infant findings attributed by the answer.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"monitoring may be considered\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed summary advises caution for newborn, premature, or renally impaired infants but does not state the answer's monitoring recommendation.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not identify the retrieved product as METFORMIN HCL TABLET from QPharma, Inc., and it uses an incomplete DailyMed URL.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer discusses general evidence limitations but does not disclose the retrieved label's specifically missing warnings_and_precautions and boxed_warning sections.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Data from well-conducted studies indicate that metformin levels in milk are low\",\n      \"explanation\": \"The answer attributes LactMed-style infant findings to the U.S. label, failing the requested source separation.\"\n    }\n  ],\n  \"rationale\": \"The answer generally separates adult adverse effects from infant observations and avoids administered doses, but it misattributes LactMed findings to the label, asserts an unsupported boxed warning and B12 warning, fails to name the retrieved QPharma product, and does not disclose the specifically missing label sections. Its DailyMed citation is also incomplete.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 57864,
+        "completion_tokens": 1344,
+        "total_tokens": 59208,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 57861,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 376,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 3,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited DailyMed URL has an empty setid and does not support the answer's assertion that this retrieved label carries a boxed warning or the stated breastfeeding language.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports low milk exposure, detectable infant serum levels in some measurements, reported absence of observed adverse effects in described infants, and limitations of the evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. prescribing information carries a boxed warning for **lactic acidosis**\",\n      \"reference_quote\": \"sections_missing\\\": [\\\"warnings_and_precautions\\\", \\\"boxed_warning\\\"]\",\n      \"explanation\": \"The retrieved label extraction identified the warnings_and_precautions and boxed_warning sections as missing; it did not establish that the selected product carries a boxed warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin-B12 deficiency is also addressed in the warnings/precautions.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not present in the supplied retrieved label evidence, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Similar studies have not been conducted in nursing mothers.Because the potential for hypoglycemia in nursing infants may exist\",\n      \"explanation\": \"The retrieved label instead states that comparable nursing-mother studies had not been conducted and raises potential infant hypoglycemia; it does not report the LactMed infant findings attributed by the answer.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"monitoring may be considered\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed summary advises caution for newborn, premature, or renally impaired infants but does not state the answer's monitoring recommendation.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not identify the retrieved product as METFORMIN HCL TABLET from QPharma, Inc., and it uses an incomplete DailyMed URL.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer discusses general evidence limitations but does not disclose the retrieved label's specifically missing warnings_and_precautions and boxed_warning sections.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Data from well-conducted studies indicate that metformin levels in milk are low\",\n      \"explanation\": \"The answer attributes LactMed-style infant findings to the U.S. label, failing the requested source separation.\"\n    }\n  ],\n  \"rationale\": \"The answer generally separates adult adverse effects from infant observations and avoids administered doses, but it misattributes LactMed findings to the label, asserts an unsupported boxed warning and B12 warning, fails to name the retrieved QPharma product, and does not disclose the specifically missing label sections. Its DailyMed citation is also incomplete.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 58902,
+        "completion_tokens": 1044,
+        "total_tokens": 59946,
+        "prompt_tokens_details": {
+          "cached_tokens": 57861,
+          "cache_write_tokens": 1038,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 76,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The URL is incomplete because its setid parameter is empty, so it does not identify the retrieved DailyMed product.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports low milk exposure, detectable infant serum levels in some measurements, reported absence of observed adverse effects in described infants, and limitations of the evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. prescribing information carries a boxed warning for **lactic acidosis**\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not establish that the selected product carries a boxed warning; the answer presents that specific label characterization without support in the retrieved record.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Vitamin-B12 deficiency is also addressed in the warnings/precautions.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Vitamin B12 deficiency is not present in the supplied retrieved label evidence, so this claim is unverified in the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Similar studies have not been conducted in nursing mothers.Because the potential for hypoglycemia in nursing infants may exist\",\n      \"explanation\": \"The retrieved label states that similar studies had not been conducted in nursing mothers and raises potential infant hypoglycemia; the answer instead attributes LactMed-style reported infant findings to the U.S. label.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"monitoring may be considered\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied LactMed summary states that metformin should be used with caution while nursing newborn and premature infants and those with renal impairment, but it does not state that monitoring may be considered.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not identify the retrieved product as METFORMIN HCL TABLET from QPharma, Inc., and its DailyMed citation has an empty setid.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"disclose missing sections\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer discusses general evidence limitations but does not disclose the retrieved label's specifically missing warnings_and_precautions and boxed_warning sections.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Identify which source says what\",\n      \"answer_quote\": \"The U.S. label states that metformin is present in human milk and that published reports have not described adverse effects in breastfed infants\",\n      \"reference_quote\": \"Data from well-conducted studies indicate that metformin levels in milk are low\",\n      \"explanation\": \"The answer attributes LactMed-style infant findings to the label, so it does not reliably identify which source says what.\"\n    }\n  ],\n  \"rationale\": \"The answer generally separates adult adverse effects from infant observations and avoids administered doses, but it misattributes LactMed findings to the label, includes unsupported label assertions, fails to name the retrieved QPharma product, and does not disclose the specifically missing label sections. Its DailyMed citation is incomplete.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 59940,
+        "completion_tokens": 1155,
+        "total_tokens": 61095,
+        "prompt_tokens_details": {
+          "cached_tokens": 58899,
+          "cache_write_tokens": 1038,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 201,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 59940,
+    "completion_tokens": 1155,
+    "total_tokens": 61095,
+    "prompt_tokens_details": {
+      "cached_tokens": 58899,
+      "cache_write_tokens": 1038,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 201,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

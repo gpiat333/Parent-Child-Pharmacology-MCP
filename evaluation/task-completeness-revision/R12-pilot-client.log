@@ -1,0 +1,23 @@
+Calling MCP tool: route_parent_question
+Calling MCP tool: normalize_drug
+Calling MCP tool: get_adverse_event_signals
+Completed with 3 MCP tool calls.
+**Age scope queried:** FAERS reports coded as **0–12 months**, with age recorded in **months**. Other age-unit encodings were excluded. This is only the queried report subset—not all infants. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What these reports can tell a researcher
+They can describe reporting patterns and generate signals for further investigation. In this query, reported terms included vomiting (117 reports), pyrexia (98), rash (60), and toxicity to various agents (58). The query also returned use- or administration-related terms, including off-label use (135), drug administration error (121), and overdose (77); these are report categories, not necessarily adverse effects. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What they cannot establish
+- **How often side effects occur:** FAERS reports lack an exposure denominator, so these counts cannot estimate incidence, prevalence, or individual risk. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)[S2](https://open.fda.gov/apis/drug/event/)
+- **Whether acetaminophen caused an event:** The reports do not establish causation. A reported event may have other explanations, but this lookup does not provide enough information to determine which explanation applies. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+- **Risk for all infants or all exposed infants:** The results cannot be generalized beyond the queried report subset. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+- **That a larger count means a higher risk:** Reporting volume is not the same as event frequency or causal risk. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)[S2](https://open.fda.gov/apis/drug/event/)
+
+No evidence of safety should be inferred from missing reports or from this limited extract. Stopping or changing a medication can also carry risks and belongs in a prescribing-clinician conversation. This generated answer is not clinically validated.
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.
+

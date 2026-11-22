@@ -1,0 +1,54 @@
+## Evidence brief: sertraline during lactation
+
+**Identity:** The lookup resolved the ingredient as sertraline. [S16](https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json)
+
+**Overall evidence status:** Evidence was retrieved, but it is not a safety verdict; missing evidence is not evidence of safety.
+
+### 1. Effects on the lactating person
+
+- The selected DailyMed record is **SERTRALINE HYDROCHLORIDE TABLET [REMEDYREPACK INC.]**, effective date **2026-11-05**, SPL version 13. Its lactation section reports low levels of sertraline and metabolites in human milk and states that data on effects on milk production are unavailable. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32)
+- This is one product label, not all sertraline formulations. DailyMed notes that in-use labeling may differ from the latest FDA-approved labeling. The returned warning is titled “8.2 Lactation,” but the associated code is flagged by the lookup as a title/code mismatch; verify the linked label. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32)
+- LactMed’s returned summary includes a statement that SSRI use during pregnancy and postpartum may be associated with more difficulty breastfeeding, while also noting that the underlying illness may contribute. This is source context, not proof of causation in an individual. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+
+### 2. Measured breastmilk and infant exposure
+
+- Human studies found sertraline and/or its metabolite norsertraline in breastmilk; detection varied with sampling time, milk fraction, maternal serum concentration, and other study factors. [S15](https://pubmed.ncbi.nlm.nih.gov/9286185/) [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- One returned study included **12 lactating women and 11 mother–infant pairs**; sertraline was detected in all breastmilk samples, in three infants’ serum, and norsertraline in six infants’ serum. These are measured exposure findings, not evidence by themselves of harm or benefit. [S15](https://pubmed.ncbi.nlm.nih.gov/9286185/)
+- The DailyMed label cites a pooled analysis of **53 mother–infant pairs** in which exclusively human-milk-fed infants had an average of 2% of maternal sertraline serum concentrations, with a reported range of 0%–15%. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32)
+- LactMed also includes modeled exposure estimates. The MCP implementation labels modeled passages separately from measured human exposure; modeled estimates should not be treated as measured infant exposure. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+
+### 3. Observed infant outcomes
+
+- The returned LactMed extract describes small observational groups and case reports. Reported observations include one case of benign neonatal sleep myoclonus and spontaneously resolving agitation, while several small groups reported no acute adverse reactions. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- One follow-up group reported normal six-month weight gain and no abnormal infant effects according to maternal reports. These observations came from the reported study population and should not be generalized beyond it. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- A separate study of infants exposed to SSRIs prenatally and/or through breastmilk reported blunted pain responses compared with a control group. The returned source stated that the absence of a depressed, untreated comparison group meant an effect of maternal depression or behavior could not be excluded; only four of the 30 infants were exposed to sertraline. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- A case involving a **preterm infant born at 33 weeks** included symptoms described as similar to neonatal abstinence and measured infant serum concentrations. The returned LactMed text is truncated after the beginning of the case description, so the complete outcome data and chronology are missing in the exported extract. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+
+### Missing-evidence limitations
+
+- The LactMed extract is truncated:
+  - “Effects in Breastfed Infants” is incomplete.
+  - “Effects on Lactation and Breastmilk” was omitted by the retrieval limit.
+  - Therefore, this is not a complete LactMed record. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- A study count was not established by this extract; reference-marker counts are not study counts. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- The PubMed search returned a bounded top-five relevance set from a non-systematic search strategy; it is not an exhaustive literature review. [S8](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json)
+- Returned literature included mixed or unestablished population fields. For example, the 2002 pharmacokinetic review had a mixed source population of **pregnancy, lactation, and child**, while the 2024 postpartum-depression review’s returned source population was **pregnancy** rather than confirmed lactation. Findings should not be generalized beyond those returned population labels. [S11](https://pubmed.ncbi.nlm.nih.gov/12452737/) [S14](https://pubmed.ncbi.nlm.nih.gov/38811474/)
+- The evidence includes observational studies, case reports, reviews, pooled analyses, and modeling rather than randomized evidence specifically evaluating lactation outcomes. The MCP implementation labels passages as candidate or source passages requiring study-design review; those labels are not clinical validation. [S8](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json) [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- The returned LactMed section on effects on milk production was missing, so this lookup does not establish the presence or absence of an effect on milk production. [S19](https://www.ncbi.nlm.nih.gov/books/NBK501191/)
+- FAERS results are reporting volume, not incidence, individual risk, or proof of causation; the returned cohort was not limited to lactating people or infants. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8) [S10](https://open.fda.gov/apis/drug/event/)
+
+### Questions to ask your clinician or pharmacist
+
+1. Does this evidence apply to my exact sertraline product and formulation?
+2. How closely do these study populations match my infant’s age, feeding pattern, and prematurity status?
+3. Which findings represent measured exposure, and which represent observed clinical outcomes?
+4. Are other medicines, supplements, or infant health conditions relevant to interpreting this evidence?
+5. What uncertainties or missing evidence should we discuss before making a treatment decision?
+6. What follow-up questions should we address for both my health and the infant’s health?
+
+The MCP-generated continuity-of-care guidance is that stopping or changing a medication can also carry risks and belongs in a prescribing-clinician conversation.
+
+Application limits:
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

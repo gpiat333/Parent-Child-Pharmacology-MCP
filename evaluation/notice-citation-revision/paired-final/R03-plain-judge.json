@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 12,
+    "contradicted_claims": 0,
+    "unverified_claims": 3,
+    "citations": [
+      {
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/020357s037,021202s021lbl.pdf",
+        "status": "unverified",
+        "reason": "This URL is absent from the supplied reference pool. The supplied evidence supports several adult-label details through a different DailyMed product, but does not verify this specific FDA label or its asserted boxed-warning presentation."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+        "status": "supported",
+        "reason": "The supplied LactMed evidence supports low milk concentrations, sometimes low or undetectable infant serum levels, reported absence of infant adverse effects, growth observations, caution for newborn or premature infants and infants with renal impairment, and limitations of the observational evidence."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer appropriately separates adult label warnings from infant exposure and outcome findings, avoids conflating adult lactic-acidosis warnings with infant observations, discloses important evidence limitations, and provides no dosing information. The LactMed-linked claims are generally supported. However, the adult-label citation is an unverified FDA URL rather than the retrieved DailyMed product, and the answer does not name the retrieved product, METFORMIN HCL TABLET [QPHARMA, INC.], or clearly disclose that the supplied label extraction was truncated and had missing warnings/precautions and boxed-warning sections. The clause \"Other warnings/precautions include vitamin B12 deficiency\" is not supported by the supplied label evidence. The clause \"The U.S. prescribing information has a boxed warning\" is also not verifiable from the supplied pool: the retrieved DailyMed evidence lists the boxed-warning section as missing, without establishing what the FDA URL contains. The clause that LactMed says metformin is \"generally considered compatible with breastfeeding by several expert sources\" is not stated in the supplied LactMed extract and is therefore unverified. Because identifying the retrieved product and source limitations was an explicit criterion, the response does not fully fulfill the task."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 34323,
+    "completion_tokens": 984,
+    "total_tokens": 35307,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 34320,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 465,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "arm_label_hidden": true,
+  "independent_clinician_review": false
+}

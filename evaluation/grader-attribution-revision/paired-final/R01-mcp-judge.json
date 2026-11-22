@@ -1,0 +1,108 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 21,
+    "contradicted_claims": 1,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The LactMed record supports the reported infant observations, milk concentrations, uncertainty statements, and distinction between study monitoring procedures and clinical advice.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The comparison study assessed related antibiotics rather than amoxicillin alone in its control group.",
+        "reference_quote": "A study compared the breastfed infants of mothers taking amoxicillin to those taking a macrolide antibiotic.",
+        "explanation": "The answer incorrectly attributes the macrolide comparison study to related antibiotics. The record describes a separate study involving ampicillin or ampicillin-clavulanate, while the comparison study used a macrolide antibiotic."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "LactMed states that relevant published infant blood-level information was not found as of its revision date.",
+        "reference_quote": "Infant Levels. Relevant published information was not found as of the revision date.",
+        "explanation": "The record says relevant published infant-level information was not found, but does not specifically identify the missing information as blood-level information."
+      }
+    ],
+    "rationale": "The answer substantially fulfills the request by separating observed symptoms, study monitoring methods, milk measurements, and uncertainty; avoiding dosing; citing LactMed; and disclosing unavailable infant-level information. Fidelity fails because it conflates two comparator studies and narrows a general statement about missing infant-level information into a claim specifically about blood levels."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "6321e2b0c8737266e3dbebd27e09e194a5da3b3fd2970d4a22ee5863df3bf73d",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 21,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the infant observations, milk concentrations, uncertainty statements, and distinction between study monitoring procedures and clinical advice.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"the comparison study assessed related antibiotics rather than amoxicillin alone in its control group\",\n      \"reference_quote\": \"A study compared the breastfed infants of mothers taking amoxicillin to those taking a macrolide antibiotic.\",\n      \"explanation\": \"The cited comparison study used a macrolide antibiotic comparator, not the related antibiotics ampicillin or ampicillin-clavulanate described in a separate study. The answer conflates these studies.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"relevant published infant blood-level information was not found\",\n      \"reference_quote\": \"Infant Levels. Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The retrieved record states that relevant infant-level information was not found, but it does not specifically characterize the missing information as blood-level information.\"\n    }\n  ],\n  \"rationale\": \"The answer substantially fulfills the request: it separates observed symptoms, study monitoring methods, milk measurements, and uncertainty; avoids giving a dose; cites LactMed; and reports that infant-level information was unavailable. Fidelity is not fully passing because it conflates two comparator studies and adds an unsupported blood-level characterization.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 27408,
+        "completion_tokens": 882,
+        "total_tokens": 28290,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 27405,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 443,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 21,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the reported infant observations, milk concentrations, uncertainty statements, and distinction between study monitoring procedures and clinical advice.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The comparison study assessed related antibiotics rather than amoxicillin alone in its control group.\",\n      \"reference_quote\": \"A study compared the breastfed infants of mothers taking amoxicillin to those taking a macrolide antibiotic.\",\n      \"explanation\": \"The answer incorrectly attributes the macrolide comparison study to related antibiotics. The record describes a separate study involving ampicillin or ampicillin-clavulanate, while the comparison study used a macrolide antibiotic.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed states that relevant published infant blood-level information was not found as of its revision date.\",\n      \"reference_quote\": \"Infant Levels. Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The record says relevant published infant-level information was not found, but does not specifically identify the missing information as blood-level information.\"\n    }\n  ],\n  \"rationale\": \"The answer substantially fulfills the request by separating observed symptoms, study monitoring methods, milk measurements, and uncertainty; avoiding dosing; citing LactMed; and disclosing unavailable infant-level information. Fidelity fails because it conflates two comparator studies and narrows a general statement about missing infant-level information into a claim specifically about blood levels.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 27918,
+        "completion_tokens": 544,
+        "total_tokens": 28462,
+        "prompt_tokens_details": {
+          "cached_tokens": 27405,
+          "cache_write_tokens": 510,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 89,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 27918,
+    "completion_tokens": 544,
+    "total_tokens": 28462,
+    "prompt_tokens_details": {
+      "cached_tokens": 27405,
+      "cache_write_tokens": 510,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 89,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

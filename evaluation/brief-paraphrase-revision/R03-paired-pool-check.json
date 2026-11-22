@@ -1,0 +1,23 @@
+{
+  "case": "R03",
+  "arm": "mcp",
+  "actual_tool": "get_label_sections",
+  "actual_arguments": {
+    "drug": "metformin"
+  },
+  "actual_sections_found": [
+    "pregnancy",
+    "lactation",
+    "pediatric_use"
+  ],
+  "actual_top_level_sections": [
+    "pregnancy",
+    "lactation",
+    "pediatric_use"
+  ],
+  "independent_reference_tool": "get_parent_medication_info",
+  "independent_reference_has_adult_adverse_reactions": true,
+  "interpretation": "The answer correctly reports that its own label lookup did not return the adult adverse-reaction section. The grader treats a section in the separate reference-collector result as if the answer had retrieved it. The requested adult comparison nevertheless remains incomplete, so the raw task failure is preserved.",
+  "raw_scores_changed": false,
+  "clinical_adjudication": false
+}

@@ -1,0 +1,298 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Ten-question gold benchmark</title><style>body{font:16px/1.6 system-ui;max-width:1150px;margin:30px auto;padding:20px}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}pre{white-space:pre-wrap;font:inherit}details{padding:12px;border:1px solid #ddd;margin:10px 0}</style><h1>Ten-question gold benchmark</h1><p>Development benchmark, November 17, 2026. Source-checked by Codex; independent subject-matter review pending. The sources/topics informed earlier debugging, so this is not a held-out or blind test.</p><p>Each reference answer is a fixed historical finding or a defined evidence distinction. Live sources can change: source snapshots are preserved. First-line scoring allows predeclared synonyms and ignores Markdown styling; full responses retain citations and the required disclaimer. This is an explicit adaptation of the template's single-answer comparison to this health-evidence server.</p><p>Both arms use the same model, tool descriptions and deterministic disclaimer. Minimal retains basic research/safety instructions but omits tool-specific hints. Production uses the existing detailed prompt. These runs vary only system instructions, not code. One run per question per arm is insufficient to establish statistical significance.</p><h2>Questions and answer key</h2><table><tr><th>ID</th><th>Question</th><th>Reference answer</th><th>Evidence</th></tr><tr><td>G01</td><td>For the nonsedating antihistamine sold as Allegra, follow the drug identity to LactMed. The historical milk-concentration study used its precursor rather than directly administering the current drug. Which precursor drug was administered? Return its generic name. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>terfenadine</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK500677/">Source</a></td></tr><tr><td>G02</td><td>For the inhaled corticosteroid sold as Pulmicort, find the LactMed study that sampled four breastfed infants after maternal inhalation. What was the reported qualitative finding for infant serum concentrations? Return detectable or undetectable. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>undetectable</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK501215/">Source</a></td></tr><tr><td>G03</td><td>Identify the medicine sold as Singulair and locate its LactMed milk-transfer study involving a single maternal exposure. How many women participated in that historical study? Return an integer. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>7</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK501488/">Source</a></td></tr><tr><td>G04</td><td>In the LactMed record for doxycycline, distinguish measured milk levels from infant outcomes. In the historical study using average peak and trough milk levels, what percentage of the maternal weight-adjusted dosage was estimated for an exclusively breastfed infant? Return the percentage. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>6%</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK500561/">Source</a></td></tr><tr><td>G05</td><td>Identify Lexapro and inspect its LactMed record. Does the list of symptoms that the source recommends monitoring, by itself, establish that all those symptoms were observed in infants? Return Yes or No; distinguish that list from actual case reports. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>No</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK501275/">Source</a></td></tr><tr><td>G06</td><td>Identify the antibiotic sold as Cleocin and inspect its LactMed infant-effects section. In the historical case involving bloody stools in a five-day-old infant, which other antibiotic was the mother receiving concurrently? Return its generic name. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>gentamicin</td><td><a href="https://www.ncbi.nlm.nih.gov/books/NBK501208/">Source</a></td></tr><tr><td>G07</td><td>Find the PubMed paper in American Journal of Obstetrics and Gynecology titled Hydroxychloroquine early in pregnancy and risk of birth defects. Read its abstract. What was the overall adjusted relative risk for major congenital malformations, rather than the unadjusted risk or a dose subgroup? Return the decimal number. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>1.26</td><td><a href="https://pubmed.ncbi.nlm.nih.gov/32961123/">Source</a></td></tr><tr><td>G08</td><td>Find the 2018 Der Nervenarzt review that compared breastfeeding evidence for antiepileptic drugs with product information. Read its abstract. What compatibility category did the authors assign levetiracetam? Return the two-word category, not an individualized medication recommendation. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>probably compatible</td><td><a href="https://pubmed.ncbi.nlm.nih.gov/29487964/">Source</a></td></tr><tr><td>G09</td><td>Find the ClinicalTrials.gov study of 48-hour nifedipine tocolysis after preterm premature rupture of membranes at 22 to 33 completed gestational weeks. Inspect its interventions rather than its changing recruitment status. What comparator is named? Return placebo or active drug. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>placebo</td><td><a href="https://clinicaltrials.gov/study/NCT03976063">Source</a></td></tr><tr><td>G10</td><td>Resolve Augmentin through RxNorm and verify the combination in LactMed. Besides amoxicillin, which active ingredient belongs to this combination? Return its generic name. Put the single requested answer on the first line. Then briefly justify it with a retrieved source link and retain the informational-only disclaimer. This is a research evidence question, not a treatment recommendation.</td><td>clavulanate</td><td><a href="https://rxnav.nlm.nih.gov/REST/rxcui/151392/properties.json">Source</a></td></tr></table><h2>Deterministic results</h2><pre>[
+  {
+    &quot;mode&quot;: &quot;minimal&quot;,
+    &quot;rows&quot;: 10,
+    &quot;completed&quot;: 10,
+    &quot;first_line_matches&quot;: 10,
+    &quot;checks&quot;: [
+      {
+        &quot;id&quot;: &quot;G01&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;terfenadine&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 12.516
+      },
+      {
+        &quot;id&quot;: &quot;G02&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;undetectable&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 10.434
+      },
+      {
+        &quot;id&quot;: &quot;G03&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;7&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 10.997
+      },
+      {
+        &quot;id&quot;: &quot;G04&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;6%&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 7.192
+      },
+      {
+        &quot;id&quot;: &quot;G05&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;no&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 8.545
+      },
+      {
+        &quot;id&quot;: &quot;G06&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;gentamicin&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 10.98
+      },
+      {
+        &quot;id&quot;: &quot;G07&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;1.26&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 6.817
+      },
+      {
+        &quot;id&quot;: &quot;G08&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;probably compatible&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 6.814
+      },
+      {
+        &quot;id&quot;: &quot;G09&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;placebo&quot;,
+        &quot;tool_calls&quot;: 1,
+        &quot;seconds&quot;: 4.752
+      },
+      {
+        &quot;id&quot;: &quot;G10&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;clavulanate&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 10.832
+      }
+    ]
+  },
+  {
+    &quot;mode&quot;: &quot;production&quot;,
+    &quot;rows&quot;: 10,
+    &quot;completed&quot;: 10,
+    &quot;first_line_matches&quot;: 10,
+    &quot;checks&quot;: [
+      {
+        &quot;id&quot;: &quot;G01&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;terfenadine&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 11.201
+      },
+      {
+        &quot;id&quot;: &quot;G02&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;undetectable&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 11.709
+      },
+      {
+        &quot;id&quot;: &quot;G03&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;7&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 9.856
+      },
+      {
+        &quot;id&quot;: &quot;G04&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;6%&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 7.511
+      },
+      {
+        &quot;id&quot;: &quot;G05&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;no&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 9.254
+      },
+      {
+        &quot;id&quot;: &quot;G06&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;gentamicin&quot;,
+        &quot;tool_calls&quot;: 3,
+        &quot;seconds&quot;: 9.817
+      },
+      {
+        &quot;id&quot;: &quot;G07&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;1.26&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 7.601
+      },
+      {
+        &quot;id&quot;: &quot;G08&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;probably compatible&quot;,
+        &quot;tool_calls&quot;: 2,
+        &quot;seconds&quot;: 7.168
+      },
+      {
+        &quot;id&quot;: &quot;G09&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;placebo&quot;,
+        &quot;tool_calls&quot;: 1,
+        &quot;seconds&quot;: 4.73
+      },
+      {
+        &quot;id&quot;: &quot;G10&quot;,
+        &quot;completed&quot;: true,
+        &quot;first_line_match&quot;: true,
+        &quot;first_line&quot;: &quot;clavulanate&quot;,
+        &quot;tool_calls&quot;: 4,
+        &quot;seconds&quot;: 12.642
+      }
+    ]
+  }
+]</pre><p>First-line correctness is not whole-answer correctness or clinical validation. MLflow judge results must be considered separately; inspect rationales and errors, and have a person review disagreements.</p><h2>Captured answers</h2><details><summary>minimal G01 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G01-results.json">Full captured trace</a><pre>terfenadine
+
+LactMed identifies Allegra’s active ingredient as fexofenadine and states that its historical milk-level study administered the parent/precursor drug **terfenadine**, which is metabolized to fexofenadine: [LactMed—Fexofenadine](https://www.ncbi.nlm.nih.gov/books/NBK500677/).
+
+Informational only—not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G02 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G02-results.json">Full captured trace</a><pre>Undetectable
+
+LactMed reports that all four breastfed infants had undetectable serum budesonide concentrations (&lt;8.6–17.2 ng/L) after maternal Pulmicort Turbihaler inhalation: [LactMed—Budesonide](https://www.ncbi.nlm.nih.gov/books/NBK501215/).
+
+Informational only; this is research evidence, not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G03 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G03-results.json">Full captured trace</a><pre>7
+
+Singulair is **montelukast**. LactMed reports that the single-dose milk-transfer study included **seven women** given a 10 mg dose: [NCBI LactMed—Montelukast](https://www.ncbi.nlm.nih.gov/books/NBK501488/).
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G04 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G04-results.json">Full captured trace</a><pre>6%
+
+LactMed estimates that, using average peak and trough milk levels, an exclusively breastfed infant would receive about **6% of the maternal weight-adjusted dosage**. The record reports measured milk concentrations but states that relevant published information on infant levels and breastfed-infant outcomes was not found. [LactMed—Doxycycline](https://www.ncbi.nlm.nih.gov/books/NBK500561/)
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G05 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G05-results.json">Full captured trace</a><pre>No
+
+Lexapro is **escitalopram**. LactMed’s monitoring list—“excess drowsiness, restlessness, agitation, poor feeding and poor weight gain”—is precautionary guidance and, by itself, does **not** establish that all those symptoms were observed in infants. The record separately describes actual case reports and studies, including irritability, vomiting, poor weight gain, hyperirritability/crying, sleepiness, and other reported outcomes; these should not be conflated with the monitoring list. [LactMed: Escitalopram](https://www.ncbi.nlm.nih.gov/books/NBK501275/)
+
+Informational only; not medical advice. Public evidence may be incomplete or out of date.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G06 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G06-results.json">Full captured trace</a><pre>gentamicin
+
+Cleocin is the brand name for **clindamycin**. LactMed reports that bloody stools in a five-day-old breastfed infant were possibly associated with maternal intravenous clindamycin given concurrently with **gentamicin**: [LactMed—Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/).
+
+Informational only—not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G07 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G07-results.json">Full captured trace</a><pre>1.26
+
+The paper’s abstract reports an **overall adjusted relative risk of 1.26** for major congenital malformations (95% CI, 1.04–1.54), distinct from the unadjusted RR of 1.51 and dose-specific estimates. [PubMed PMID 32961123](https://pubmed.ncbi.nlm.nih.gov/32961123/)
+
+Informational only; this is not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G08 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G08-results.json">Full captured trace</a><pre>Probably compatible
+
+The 2018 *Der Nervenarzt* abstract assigns levetiracetam to the category “probably compatible” with breastfeeding: [PubMed PMID 29487964](https://pubmed.ncbi.nlm.nih.gov/29487964/).
+
+Informational only—not a personalized medication recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G09 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G09-results.json">Full captured trace</a><pre>placebo
+
+ClinicalTrials.gov study NCT03976063 lists the interventions as **nifedipine** and **“Placebo of Nifedipine,”** so the named comparator is placebo: https://clinicaltrials.gov/study/NCT03976063
+
+Informational only—not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>minimal G10 — first-line match: True</summary><a href="../presentation-evidence/gold-minimal-G10-results.json">Full captured trace</a><pre>Clavulanate
+
+RxNorm resolves Augmentin (RxCUI 151392) as containing amoxicillin and clavulanate. LactMed verifies the combination as “amoxicillin-clavulanic acid”: [LactMed record](https://www.ncbi.nlm.nih.gov/books/NBK500776/).
+
+Informational only—not medical advice or a treatment recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G01 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G01-results.json">Full captured trace</a><pre>Terfenadine
+
+LactMed identifies terfenadine as fexofenadine’s parent/precursor drug and reports that the historical milk-concentration study administered terfenadine, measuring fexofenadine levels in milk: https://www.ncbi.nlm.nih.gov/books/NBK500677/
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G02 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G02-results.json">Full captured trace</a><pre>Undetectable
+
+LactMed reports that all four breastfed infants had undetectable serum budesonide concentrations (below assay limits) after maternal Pulmicort Turbihaler use. Source: [LactMed—Budesonide](https://www.ncbi.nlm.nih.gov/books/NBK501215/).
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G03 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G03-results.json">Full captured trace</a><pre>7
+
+Singulair is montelukast. LactMed reports a milk-transfer study in which seven women received a single maternal exposure and provided serial milk samples: https://www.ncbi.nlm.nih.gov/books/NBK501488/
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G04 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G04-results.json">Full captured trace</a><pre>6%
+
+The LactMed record reports that, using average peak and trough milk levels, the estimated intake for an exclusively breastfed infant was about **6% of the maternal weight-adjusted dosage**. This is a measured milk-exposure estimate; LactMed reports that relevant published infant-outcome information was not found. Source: [LactMed—Doxycycline](https://www.ncbi.nlm.nih.gov/books/NBK500561/).
+
+**Informational only; not medical advice.**
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G05 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G05-results.json">Full captured trace</a><pre>No.
+
+LactMed’s monitoring list—“excess drowsiness, restlessness, agitation, poor feeding and poor weight gain”—is a **source recommendation**, not evidence that all those symptoms were observed in infants. The record separately describes actual reports, including infant irritability/prolonged crying, vomiting, poor weight gain, sleepiness, and other case findings; it does not report every monitoring symptom as having occurred in every infant. Source: [LactMed—Escitalopram](https://www.ncbi.nlm.nih.gov/books/NBK501275/).
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G06 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G06-results.json">Full captured trace</a><pre>Gentamicin
+
+Cleocin is the brand name for **clindamycin**. LactMed describes a five-day-old breastfed infant with bloody stools during concurrent maternal treatment with clindamycin and **gentamicin**; the stools became guaiac-negative after breastfeeding and maternal antibiotics were stopped. Source: [LactMed—Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/).
+
+Informational only; not medical advice. This summary is based on public NIH/NLM/FDA data, which may be incomplete or out of date.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G07 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G07-results.json">Full captured trace</a><pre>**1.26**
+
+The abstract reports an adjusted relative risk of **1.26** (95% CI, 1.04–1.54) for major congenital malformations overall—not the unadjusted estimate or dose-specific subgroup. [PubMed](https://pubmed.ncbi.nlm.nih.gov/32961123/)
+
+Informational only; not medical advice.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G08 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G08-results.json">Full captured trace</a><pre>Probably compatible
+
+The 2018 *Der Nervenarzt* abstract assigns levetiracetam to the category “probably compatible” with breastfeeding: [PubMed PMID 29487964](https://pubmed.ncbi.nlm.nih.gov/29487964/).
+
+Informational only; not medical advice or an individualized medication recommendation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G09 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G09-results.json">Full captured trace</a><pre>placebo
+
+ClinicalTrials.gov lists the interventions as **nifedipine** and **“placebo of nifedipine,”** so the named comparator is placebo: https://clinicaltrials.gov/study/NCT03976063
+
+Informational only; not medical advice. Public study information may be incomplete or out of date.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details><details><summary>production G10 — first-line match: True</summary><a href="../presentation-evidence/gold-production-G10-results.json">Full captured trace</a><pre>Clavulanate
+
+RxNorm identifies Augmentin as a combination of **amoxicillin and clavulanate** ([RxNorm](https://rxnav.nlm.nih.gov/REST/rxcui/151392/properties.json)). LactMed also has a record titled “Amoxicillin and Clavulanic Acid,” verifying the combination ([LactMed](https://www.ncbi.nlm.nih.gov/books/NBK500776/)).
+
+*Informational only; not medical advice.*
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre></details></html>

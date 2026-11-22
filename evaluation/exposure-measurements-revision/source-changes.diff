@@ -1,0 +1,136 @@
+--- before/server/clients/lactmed.py
++++ after/server/clients/lactmed.py
+@@ -13,6 +13,33 @@
+     "Effects on Lactation and Breastmilk", "Alternate Drugs to Consider", "References",
+ ]
+ EXPECTED_CLINICAL_SECTIONS=LACTMED_HEADINGS[:4]
++
++CONCENTRATION = re.compile(
++    r'(?<![\w./])(?:[<>\u2264\u2265]\s*)?\d+(?:\.\d+)?'
++    r'(?:\s*(?:[-\u2013\u2014]|to)\s*\d+(?:\.\d+)?)?\s*'
++    r'(?:ng|mcg|[\u00b5\u03bc]g|ug|mg|nmol|pmol|mmol|micromol|nanograms?|micrograms?|milligrams?)'
++    r'\s*(?:/|per\s+)\s*(?:mL|L|milliliters?|liters?)\b', re.I)
++
++def exposure_measurements(drug_levels):
++    """Surface exact concentration expressions, without conversion or specimen inference."""
++    sentences = re.split(r'(?<=[.!?])(?:\[[\d,\s-]+\])*\s+(?=[A-Z])', drug_levels)
++    passages = []
++    for index, sentence in enumerate(sentences):
++        values = [m.group(0) for m in CONCENTRATION.finditer(sentence)]
++        if values:
++            passages.append({'concentration_values_as_reported': values,
++                'source_passage': sentence,
++                'preceding_context': sentences[index-1] if index else None,
++                'source_section': 'Drug Levels'})
++    infant = re.search(r'\bInfant Levels[.:]\s*(.*)', drug_levels, re.S)
++    excerpt = infant.group(1).strip() if infant else None
++    return {'status': 'quantitative_concentrations_extracted' if passages else 'no_quantitative_concentrations_extracted',
++        'concentration_passages': passages[:12], 'additional_passages_omitted': len(passages)>12,
++        'infant_level_excerpt': excerpt,
++        'infant_level_section_present_in_returned_text': infant is not None,
++        'exhaustive': False,
++        'extraction_scope': 'Exact concentration expressions from the returned Drug Levels excerpt only. No unit conversion, dose calculation or automatic specimen classification. Read the source passage and preceding context to distinguish milk, maternal serum and infant serum. Empty extraction is not proof that no measurements exist.',
++        'presentation_requirement': 'Include a Measured exposure row in a summary of this record. Report the retrieved milk concentration values and units with their study context, separately from infant outcomes and administered regimens. Do not replace retrieved numeric concentrations with only low or trace. State infant-level availability or the missing excerpt. If measurements are omitted, explicitly disclose that omission. These are research measurements, not dosing instructions; never convert them to a personal dose.'}
+ 
+ def lactmed_payload(sections,max_chars=6000):
+     from core.source_context import evidence_base,CONTINUITY_NOTICE
+@@ -37,7 +64,9 @@
+         status[heading]={'found':True,'characters_in_source_extract':len(content),'characters_returned':len(piece),
+             'returned':bool(piece),'truncated':len(piece)<len(content)}
+     missing=[h for h in EXPECTED_CLINICAL_SECTIONS if h not in clinical]
+-    out={'text':text,'sections':returned,'sections_found':list(clinical),'sections_expected':EXPECTED_CLINICAL_SECTIONS,
++    out={'text':text,'sections':returned,
++        'exposure_measurements':exposure_measurements(returned.get('Drug Levels','')),
++        'sections_found':list(clinical),'sections_expected':EXPECTED_CLINICAL_SECTIONS,
+         'section_allocation':'Available sections share the text limit; unused space is redistributed. Each section retains its truncation status.',
+         'interpretation_contract':{
+             'measurements':'Preserve relevant measured milk or infant-serum concentrations and their units separately from outcomes. These are research measurements, not administered doses or dosing instructions. If numeric doses were excluded, omit administered regimens and dose estimates rather than omitting concentration findings.',
+--- before/server/core/output_notices.json
++++ after/server/core/output_notices.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.6",
++  "version": "2026-11-21.7",
+   "origin": "Application output contracts; not source-authored medical findings",
+   "notices": [
+     {
+--- before/server/core/policy.json
++++ after/server/core/policy.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.6",
++  "version": "2026-11-21.7",
+   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
+   "patterns": {
+     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
+--- before/server/tests/test_task_completeness.py
++++ after/server/tests/test_task_completeness.py
+@@ -108,3 +108,53 @@
+     answer,ids=format_required_notices('Captured report counts.',['get_adverse_event_signals'])
+     assert 'faers_population_scope' in ids and 'cannot be generalized to all infants' in answer
+     assert format_required_notices('Fixed stop.',['get_adverse_event_signals'],blocked=True)==('Fixed stop.',[])
++
++
++@pytest.mark.parametrize('value',['0.69 mg/L','0.4\u20132.3 mcg/L','<2.5 \u00b5g/mL'])
++def test_exposure_values_preserve_exact_concentration_units_and_ranges(value):
++    source='Maternal Levels. Milk concentration was '+value+'.'
++    out=lactmed.exposure_measurements(source)
++    assert out['concentration_passages'][0]['concentration_values_as_reported']==[value]
++    assert out['concentration_passages'][0]['source_passage'] in source
++    assert not out['exhaustive']
++
++
++def test_exposure_extractor_does_not_convert_regimens_or_relative_doses_to_concentrations():
++    out=lactmed.exposure_measurements('Mothers took 500 mg twice daily. Estimated infant dose was 0.1 mg/kg/day, or 2% of maternal dose.')
++    assert out['concentration_passages']==[]
++    assert out['status']=='no_quantitative_concentrations_extracted'
++    assert not out['infant_level_section_present_in_returned_text']
++
++
++def test_absent_published_infant_levels_remain_explicit_source_text_not_zero():
++    out=lactmed.exposure_measurements('Maternal Levels. Milk concentration was 0.69 mg/L. Infant Levels. Relevant published information was not found as of the revision date.')
++    assert out['infant_level_section_present_in_returned_text']
++    assert out['infant_level_excerpt']=='Relevant published information was not found as of the revision date.'
++
++
++def test_concentration_context_does_not_invent_a_milk_or_infant_specimen():
++    out=lactmed.exposure_measurements('Maternal plasma was sampled. The concentration was 4 ng/mL. Milk samples were not collected.')
++    passage=out['concentration_passages'][0]
++    assert passage['preceding_context']=='Maternal plasma was sampled.'
++    assert 'specimen' not in passage
++    assert passage['concentration_values_as_reported']==['4 ng/mL']
++
++
++def test_measurement_extraction_does_not_recover_hidden_text_beyond_returned_budget():
++    out=lactmed.lactmed_payload({'Drug Levels':('Earlier source context. '*200)+'Milk concentration was 9 mg/L.'},500)
++    assert out['truncated'] and '9 mg/L' not in out['text']
++    assert not out['exposure_measurements']['concentration_passages']
++
++
++def test_concentration_passage_limit_discloses_additional_material():
++    out=lactmed.exposure_measurements(' '.join(f'Milk concentration was {i} ng/mL.' for i in range(1,14)))
++    assert len(out['concentration_passages'])==12
++    assert out['additional_passages_omitted']
++
++
++def test_reference_marker_does_not_merge_a_concentration_with_the_next_dose_sentence():
++    out=lactmed.exposure_measurements('Milk concentration was 0.69 mg/L.[2] Estimated infant dosage was 0.1 mg/kg daily.')
++    passage=out['concentration_passages'][0]
++    assert passage['concentration_values_as_reported']==['0.69 mg/L']
++    assert passage['source_passage']=='Milk concentration was 0.69 mg/L.'
++    assert 'dosage' not in passage['source_passage']
+--- before/server/tools/lactation.py
++++ after/server/tools/lactation.py
+@@ -35,7 +35,11 @@
+     Separate measured exposure, observed infant outcomes, and source recommendations.
+     A recommendation to monitor a symptom is NOT evidence that the symptom occurred.
+     Conversely, a symptom monitored in a study is NOT a recommendation to monitor it.
+-    Preserve relevant measured milk/infant-serum concentrations, units and missing infant-level data.
++    In every record summary, include a Measured exposure row using exposure_measurements:
++    give retrieved milk concentration values AND units with source context, plus infant-level
++    availability. A qualitative low/trace summary alone is incomplete when numerical measurements
++    were returned. If omitting measurements, explicitly disclose the omission. Read compartment
++    context; never label maternal-serum measurements as milk or infant serum.
+     Concentrations are research findings, not administered doses. Omit administered regimens
+     when doses are excluded, while retaining the requested exposure findings.
+     Preserve separate case-report events and timing: do not merge exposure changes

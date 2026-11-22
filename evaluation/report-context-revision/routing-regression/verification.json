@@ -1,0 +1,15 @@
+{
+  "question": "Give me a pregnancy evidence brief for lamotrigine.",
+  "completed": true,
+  "first_evidence_tool": "medication_evidence_brief",
+  "required_workflow": {
+    "name": "medication_evidence_brief",
+    "required_tool": "medication_evidence_brief",
+    "basis": "explicit_user_request_for_evidence_brief",
+    "enforcement": "Call this tool before any optional retrieval or final answer. After its response, additional tools are allowed if needed. Stop on any identity or policy refusal.",
+    "scope": "Narrow English request matching, not a clinical decision or a guarantee of answer quality.",
+    "client_enforcement_required": true
+  },
+  "excluded_from_28_case_benchmark": true,
+  "not_clinical_validation": true
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "case": "tool_count",
+    "passed": true,
+    "count": 27
+  },
+  {
+    "case": "wrong_medicine_article",
+    "passed": true,
+    "elapsed_ms": 75,
+    "result": {
+      "source": "local:parent-safety-policy",
+      "policy_version": "2026-11-19.1",
+      "route": "poison_help",
+      "allow_research": false,
+      "message": "For a possible poisoning or medication exposure in the United States, call Poison Help at 1-800-222-1222 now. Do not wait for this research assistant.",
+      "source_urls": [
+        "https://www.poison.org/need-immediate-assistance",
+        "https://poisonhelp.hrsa.gov/what-you-can-do"
+      ],
+      "limitations": [
+        "Rule-based routing is incomplete and is not diagnosis, clinical triage, or proof that a situation is safe."
+      ],
+      "safety": {
+        "policy_version": "2026-11-19.1",
+        "scope": "Public evidence and resource navigation; not individual treatment or eligibility decisions.",
+        "requires_identity_confirmation": false,
+        "evidence_unavailable": false,
+        "rules": [
+          "Do not infer safety, drug identity, or absence of evidence from missing or empty results.",
+          "Do not provide doses, missed-dose plans, schedules, tapers or personal start/stop/change decisions.",
+          "Separate source findings, monitoring recommendations, exposure measurements and causal claims.",
+          "Call route_parent_question before parent-facing chat; urgent concerns take precedence over retrieval.",
+          "Do not collect identifiable histories or submit reports, comments or enrollment applications."
+        ],
+        "retrieved_at_utc": "2026-11-19T21:04:04.299330+00:00",
+        "client_enforcement_required": true
+      },
+      "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    }
+  },
+  {
+    "case": "blood_pressure_identity",
+    "passed": true,
+    "elapsed_ms": 95,
+    "result": {
+      "source": "local:parent-safety-policy",
+      "policy_version": "2026-11-19.1",
+      "route": "confirm_identity",
+      "allow_research": false,
+      "message": "I cannot identify a medicine from its appearance or a vague description. Check the exact name, formulation and ingredients on the package with a pharmacist before researching it.",
+      "source_urls": [],
+      "limitations": [
+        "Rule-based routing is incomplete and is not diagnosis, clinical triage, or proof that a situation is safe."
+      ],
+      "safety": {
+        "policy_version": "2026-11-19.1",
+        "scope": "Public evidence and resource navigation; not individual treatment or eligibility decisions.",
+        "requires_identity_confirmation": false,
+        "evidence_unavailable": false,
+        "rules": [
+          "Do not infer safety, drug identity, or absence of evidence from missing or empty results.",
+          "Do not provide doses, missed-dose plans, schedules, tapers or personal start/stop/change decisions.",
+          "Separate source findings, monitoring recommendations, exposure measurements and causal claims.",
+          "Call route_parent_question before parent-facing chat; urgent concerns take precedence over retrieval.",
+          "Do not collect identifiable histories or submit reports, comments or enrollment applications."
+        ],
+        "retrieved_at_utc": "2026-11-19T21:04:04.376208+00:00",
+        "client_enforcement_required": true
+      },
+      "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication."
+    }
+  }
+]

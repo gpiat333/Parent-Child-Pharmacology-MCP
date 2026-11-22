@@ -1,0 +1,168 @@
+[
+  {
+    "tool": "search_lactmed",
+    "arguments": {
+      "drug": "sertraline",
+      "max_results": -1
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool search_lactmed: 1 validation error for SearchLactmedInput\nmax_results\n  Input should be greater than or equal to 1 [type=greater_than_equal, input_value=-1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than_equal"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "search_lactmed",
+    "arguments": {
+      "drug": "sertraline",
+      "max_results": 0
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool search_lactmed: 1 validation error for SearchLactmedInput\nmax_results\n  Input should be greater than or equal to 1 [type=greater_than_equal, input_value=0, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than_equal"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "search_lactmed",
+    "arguments": {
+      "drug": ""
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool search_lactmed: 1 validation error for SearchLactmedInput\ndrug\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_too_short"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "get_lactmed_record",
+    "arguments": {
+      "book_id": ""
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_lactmed_record: 1 validation error for GetLactmedRecordInput\nbook_id\n  String should match pattern '^[0-9]+$' [type=string_pattern_mismatch, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_pattern_mismatch"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "get_abstracts",
+    "arguments": {
+      "pmids": [
+        ""
+      ]
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_abstracts: 1 validation error for GetAbstractsInput\npmids.0\n  String should match pattern '^[1-9][0-9]{0,9}$' [type=string_pattern_mismatch, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_pattern_mismatch"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "get_mprint_details",
+    "arguments": {
+      "pmid": "12345",
+      "table": "unknown"
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_mprint_details: 1 validation error for GetMprintDetailsInput\ntable\n  Input should be 'gold_outcomes', 'gold_PE_CT', 'gold_PK_summary' or 'silver_classifications' [type=literal_error, input_value='unknown', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "find_pregnancy_exposure_registries",
+    "arguments": {
+      "drug": "   "
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 8,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool find_pregnancy_exposure_registries: 1 validation error for FindPregnancyExposureRegistriesInput\ndrug\n  String should have at least 1 character [type=string_too_short, input_value='   ', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_too_short"
+          }
+        ],
+        "isError": true
+      }
+    }
+  },
+  {
+    "tool": "medication_evidence_brief",
+    "arguments": {
+      "drug": "sertraline",
+      "population": "unsupported_age"
+    },
+    "rejected": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 9,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool medication_evidence_brief: 1 validation error for MedicationEvidenceBriefInput\npopulation\n  Input should be 'pregnancy', 'lactation', 'neonate', 'infant', 'child', 'adolescent' or 'pediatric' [type=literal_error, input_value='unsupported_age', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error"
+          }
+        ],
+        "isError": true
+      }
+    }
+  }
+]

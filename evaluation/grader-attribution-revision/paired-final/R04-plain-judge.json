@@ -1,0 +1,107 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 7,
+    "contradicted_claims": 0,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not verify the content or applicability of this specific FDA page.",
+        "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The reference evidence supplies this FDA Drug Recalls page as an official recall-guidance URL.",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls"
+      }
+    ],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": "Candidate product-name matches only, not bottle-level clearance.",
+        "explanation": "The search returned FDA naproxen recall records, including recall numbers and statuses, but the answer did not report those returned records and instead stated that it could not verify the lookup."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": "I can’t access FDA’s live recall database from this chat",
+        "reference_quote": "Search filters and broad population labels do not confirm applicability.",
+        "explanation": "The answer abstains from the requested search even though the supplied search tool returned results."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The bottle is counterfeit, relabeled, or otherwise not traceable",
+        "reference_quote": null,
+        "explanation": "This is a substantive possibility asserted by the answer but is not supported or contradicted by the supplied reference evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "FDA explains that recall notices identify",
+        "reference_quote": null,
+        "explanation": "The supplied evidence contains recall records and coverage limitations, but does not establish that FDA explains the asserted proposition in the cited manner."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and gives several appropriate identity and verification checks. However, it fails the lookup task by omitting the returned FDA records and statuses, and it includes several unsupported ancillary assertions. Its statement of inability is an honest abstention, but that does not complete the requested search."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "b21becb72193cb6787fbacb0282e1c4f4a732d54d3cafc6c81e36711d6d4c25c",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not verify the content or applicability of this specific FDA page.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference evidence supplies this FDA Drug Recalls page as an official recall-guidance URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Candidate product-name matches only, not bottle-level clearance.\",\n      \"explanation\": \"The search returned FDA naproxen recall records, including recall numbers and statuses, but the answer did not report those returned records and instead stated that it could not verify the lookup.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": \"I can’t access FDA’s live recall database from this chat\",\n      \"reference_quote\": \"Search filters and broad population labels do not confirm applicability.\",\n      \"explanation\": \"The answer abstains from the requested search even though the supplied search tool returned results.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The bottle is counterfeit, relabeled, or otherwise not traceable\",\n      \"reference_quote\": null,\n      \"explanation\": \"This is a substantive possibility asserted by the answer but is not supported or contradicted by the supplied reference evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"FDA explains that recall notices identify\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence contains recall records and coverage limitations, but does not establish that FDA explains the asserted proposition in the cited manner.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and gives several appropriate identity and verification checks. However, it fails the lookup task by omitting the returned FDA records and statuses, and it includes several unsupported ancillary assertions. Its statement of inability is an honest abstention, but that does not complete the requested search.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24151,
+        "completion_tokens": 1050,
+        "total_tokens": 25201,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24148,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 438,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24151,
+    "completion_tokens": 1050,
+    "total_tokens": 25201,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24148,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 438,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

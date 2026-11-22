@@ -1,0 +1,115 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 30,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited RxNorm record supports exact matching of lamotrigine as the ingredient.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The DailyMed label supports the disease-risk context, registry findings, oral-cleft signal, animal findings, pharmacokinetic caveats, and label-extraction limitations described.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The cited bipolar-disorder review is identified as a 2025 narrative review involving pregnancy and postpartum care, without a lamotrigine-specific comparative estimate in the supplied abstract.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40593436/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The cited naturalistic study supports the mixed population, 60 mothers, serum and breastmilk measurements, breastmilk concentration-by-dose finding, and reported child outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The FDA adverse-event query supports the listed spontaneous-report volumes and queried reaction term.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The OpenFDA documentation supports interpreting FAERS counts as reporting volume without exposure denominators, incidence estimates, or causal attribution.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The PubMed search record supports the bounded, non-systematic search description and reported record count.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The ClinicalTrials.gov record supports the description of NCT05450978 as an adult observational pregnancy-exposure study with no posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT05450978"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "The ClinicalTrials.gov API record supports the recruiting-study search context and its limitations.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=lamotrigine+AND+%28pregnancy%29&filter.overallStatus=RECRUITING&pageSize=20&format=json"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer fulfills the requested research-discussion format. It separates maternal disease context, exposure, and fetal or infant outcomes; preserves registry and study-population distinctions; labels FAERS data as unconfirmed reporting volume; states limitations; avoids treatment decisions; includes clinician questions and a stopping-or-changing-medication clinician-discussion notice; and includes the required clinical-framing disclaimer."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "dc25e5fb2ca65ca24f2e02083858e3266b9a473470fb01cec61abe1051152b60",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 30,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited RxNorm record supports exact matching of lamotrigine as the ingredient.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed label supports the disease-risk context, registry findings, oral-cleft signal, animal findings, pharmacokinetic caveats, and label-extraction limitations described.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited bipolar-disorder review is identified as a 2025 narrative review involving pregnancy and postpartum care, without a lamotrigine-specific comparative estimate in the supplied abstract.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited naturalistic study supports the mixed population, 60 mothers, serum and breastmilk measurements, breastmilk concentration-by-dose finding, and reported child outcomes.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The FDA adverse-event query supports the listed spontaneous-report volumes and queried reaction term.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The OpenFDA documentation supports interpreting FAERS counts as reporting volume without exposure denominators, incidence estimates, or causal attribution.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The PubMed search record supports the bounded, non-systematic search description and reported record count.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The ClinicalTrials.gov record supports the description of NCT05450978 as an adult observational pregnancy-exposure study with no posted results.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"The ClinicalTrials.gov API record supports the recruiting-study search context and its limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer fulfills the requested research-discussion format. It separates maternal disease context, exposure, and fetal or infant outcomes; preserves registry and study-population distinctions; labels FAERS data as unconfirmed reporting volume; states limitations; avoids treatment decisions; includes clinician questions and a stopping-or-changing-medication clinician-discussion notice; and includes the required clinical-framing disclaimer.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 60534,
+        "completion_tokens": 933,
+        "total_tokens": 61467,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 60531,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 311,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 60534,
+    "completion_tokens": 933,
+    "total_tokens": 61467,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 60531,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 311,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

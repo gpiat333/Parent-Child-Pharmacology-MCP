@@ -1,0 +1,565 @@
+--- before/chat-client/answer-notices.ps1
++++ after/chat-client/answer-notices.ps1
+@@ -1,12 +1,69 @@
+ $script:AnswerNoticePolicy = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'server/core/output_notices.json') | ConvertFrom-Json
+ 
+-function Get-RequiredAnswerNotices([string[]]$ToolNames, [switch]$Blocked) {
++function Get-AbstractCoverageNotice([object[]]$ToolCalls) {
++    $states = [ordered]@{}
++    $searchFailed = $false
++    $seen = $false
++    $fields = @('with_abstract_pmids','without_abstract_pmids','unreturned_pmids','failed_pmids')
++    foreach ($call in $ToolCalls) {
++        if ($call.tool -cnotin @('get_abstracts','medication_evidence_brief')) { continue }
++        $result = $call.result
++        if ($result.structuredContent) { $result = $result.structuredContent }
++        elseif ($result.content) {
++            foreach ($item in $result.content) {
++                if ($item.type -ceq 'text') {
++                    try { $parsed = $item.text | ConvertFrom-Json -ErrorAction Stop } catch { continue }
++                    if ($parsed -is [pscustomobject]) { $result = $parsed; break }
++                }
++            }
++        }
++        if ($result.allow_research -ceq $false -or $result.requires_confirmation) { continue }
++        $block = $result.abstract_coverage
++        if (-not $block) { continue }
++        if ($block.schema_version -ne 1) { throw 'Unsupported abstract coverage schema' }
++        if ($block.requested_pmids -isnot [array]) { throw 'Invalid abstract coverage PMIDs' }
++        $requested = @($block.requested_pmids)
++        foreach ($pmid in $requested) {
++            if ($pmid -isnot [string] -or $pmid -cnotmatch '^[1-9][0-9]{0,9}$') { throw 'Invalid abstract coverage PMIDs' }
++        }
++        $flattened = @()
++        foreach ($field in $fields) {
++            if ($block.$field -isnot [array]) { throw 'Invalid abstract coverage group' }
++            foreach ($pmid in $block.$field) {
++                if ($pmid -cnotin $requested -or $pmid -cin $flattened) { throw 'Invalid abstract coverage group' }
++                $flattened += $pmid
++                $states[$pmid] = $field
++            }
++        }
++        if (@($requested | Select-Object -Unique).Count -ne $flattened.Count) { throw 'Abstract coverage groups must partition requested PMIDs' }
++        $searchFailed = $searchFailed -or $block.search_failed -ceq $true
++        $seen = $true
++    }
++    if (-not $seen) { return }
++    $groups = @{}
++    foreach ($field in $fields) { $groups[$field] = @($states.Keys | Where-Object { $states[$_] -ceq $field }) }
++    if ($states.Count -gt 0 -and $groups.with_abstract_pmids.Count -eq $states.Count -and -not $searchFailed) { return }
++    $templates = $script:AnswerNoticePolicy.abstract_coverage
++    $parts = @()
++    if ($states.Count) {
++        $parts += $templates.counts.Replace('{found}',[string]$groups.with_abstract_pmids.Count).Replace('{requested}',[string]$states.Count)
++        foreach ($field in $fields[1..3]) {
++            if ($groups[$field].Count) { $parts += $templates.$field.Replace('{ids}',($groups[$field] -join ', ')) }
++        }
++    } elseif (-not $searchFailed) { $parts += $templates.no_records }
++    if ($searchFailed) { $parts += $templates.search_failed }
++    $parts += $templates.limit
++    [pscustomobject]@{id='pubmed_abstract_coverage';text=($parts -join ' ');origin='Application retrieval-coverage contract; not a source finding';display_required=$true}
++}
++
++function Get-RequiredAnswerNotices([string[]]$ToolNames, [switch]$Blocked, [object[]]$ToolCalls=@()) {
+     if ($Blocked) { return @() }
+     foreach ($notice in $script:AnswerNoticePolicy.notices) {
+         if (@($ToolNames | Where-Object { $_ -cin $notice.tools }).Count) {
+             [pscustomobject]@{id=$notice.id;text=$notice.text;origin=$script:AnswerNoticePolicy.origin;display_required=$true}
+         }
+     }
++    Get-AbstractCoverageNotice $ToolCalls
+ }
+ 
+ function Add-RequiredAnswerNotices([string]$Answer, $Notices) {
+--- before/chat-client/exposure-presentation-instructions.txt
++++ after/chat-client/exposure-presentation-instructions.txt
+@@ -1,9 +1,17 @@
+ Measured exposure and medication doses are different. The instruction not to give doses prohibits administered amounts, schedules, tapers and dose estimates. It does not prohibit quoting verified concentration measurements, such as mass per volume, as research findings.
+ 
+-When summarizing a retrieved LactMed record, include a short Measured exposure section with the available numeric milk concentration values, units and study context or sampling times. A qualitative word such as low is not a substitute for measurements that were retrieved. State whether infant blood-level information was retrieved. Keep these measurements separate from observed infant symptoms and source recommendations. Use only values supported by retrieved evidence; if measurements cannot be verified, say so rather than supplying numbers from memory.
++When summarizing a retrieved LactMed record, include a short Measured exposure section with the available numeric milk concentration values, units and study context or sampling times. A qualitative word such as low is not a substitute for measurements that were retrieved. State whether infant-level information was retrieved, using the source's own specimen terminology; do not narrow unspecified infant levels to blood or serum. Keep these measurements separate from observed infant symptoms and source recommendations. Use only values supported by retrieved evidence; if measurements cannot be verified, say so rather than supplying numbers from memory.
+ 
+ Do not reproduce administered dose regimens that appear alongside those measurements, calculate an infant dose, convert concentrations into treatment advice, or infer a specimen or population not established by the source context. Concentration measurements do not prove safety.
+ 
+ If a retrieved evidence brief includes FAERS report_only_context, display it in a separate cited report-context paragraph or row, even when observed-outcome findings are empty. Summarize the returned report terms and counts, query scope and population uncertainty. Counts are reporting volume, not rates, confirmed clinical outcomes or proof of causation. Distinguish an absence of retrieved outcome-study findings from an absence of all human reports; do not say no human reports were retrieved when report-only context is present. Preserve the empty clinical-outcome row without promoting spontaneous reports into established clinical findings. Never invent report counts when sources cannot be checked.
+ 
+ Use neutral, source-attributed descriptions of findings. Do not add an overall reassuring or alarm-inducing verdict, including calling evidence generally reassuring, safe, or dangerous as your own conclusion. State what the source measured or observed and its limitations; retain relevant underlying-disease and treatment-change context without inventing balancing facts. If evaluative language is quoted from a source, attribute it explicitly and retain its limits. A research summary cannot determine an individual's benefit-risk balance.
++
++Preserve the PubMed abstract_coverage contract: explicitly disclose records with no abstract text, unreturned records, and failed abstract lookups. These are retrieval limitations, not evidence that research does not exist. Never describe study outcomes from a title alone. If a later lookup supplies the abstract, use the updated coverage; do not invent missing abstracts when no lookup was performed.
++
++For recall lookups, preserve returned candidate records as a compact table of product/formulation, manufacturer, lot text, date, exact status and official link. Candidates are not confirmed matches to the user's bottle. Even when no supplied lot matches, show returned candidates and their statuses instead of reporting only the total. Clearly label bounded or truncated lists. Keep lot-match uncertainty and verification requirements visible; a nonmatch is not clearance.
++
++Keep separate studies separate: attribute each outcome, exposure, comparator and co-exposure to its own source passage. Name the actual comparator when stated. Do not replace a specific comparator with an inferred drug class or merge a different study's medicines into it. Preserve unspecified specimens, timing and populations as unspecified.
++
++For report-count summaries, state the returned counts, query scope and supplied causation/denominator limitations. Avoid adding uncited methodological explanations, speculative alternative causes, or suggestions for research prioritization that are absent from the retrieved material. Calling an assertion an implementation interpretation does not supply evidence for it. Add further factual context only if separately retrieved and cited.
+--- before/chat-client/test-mcp-chat.ps1
++++ after/chat-client/test-mcp-chat.ps1
+@@ -147,7 +147,7 @@
+         $policyBlocked=$true
+     }
+     $answerBeforeRequiredNotices = $finalAnswer
+-    $requiredAnswerNotices = @(Get-RequiredAnswerNotices @($trace.ToArray().tool) -Blocked:$policyBlocked)
++    $requiredAnswerNotices = @(Get-RequiredAnswerNotices @($trace.ToArray().tool) -Blocked:$policyBlocked -ToolCalls $trace.ToArray())
+     $finalAnswer = Add-RequiredAnswerNotices $finalAnswer $requiredAnswerNotices
+     $finalAnswer = Format-EvidenceAnswer $finalAnswer -NoEvidence:($trace.Count -eq 0 -or $policyBlocked)
+     Write-Host ('Completed with ' + $trace.Count + ' MCP tool calls.')
+--- before/server/core/abstract_coverage.py
++++ after/server/core/abstract_coverage.py
+@@ -0,0 +1,102 @@
++"""PubMed retrieval coverage; a missing abstract is not a finding about a study."""
++import json
++import re
++
++FIELDS = ('with_abstract_pmids', 'without_abstract_pmids', 'unreturned_pmids', 'failed_pmids')
++TOOLS = {'get_abstracts', 'medication_evidence_brief'}
++
++
++def coverage(pmids, articles, request_failed=False, search_failed=False):
++    requested = list(dict.fromkeys(pmids))
++    groups = {key: [] for key in FIELDS}
++    for pmid in requested:
++        rows = [a for a in articles if a.get('pmid') == pmid]
++        if request_failed:
++            key = 'failed_pmids'
++        elif any(isinstance(a.get('abstract'), str) and a['abstract'].strip() for a in rows):
++            key = 'with_abstract_pmids'
++        elif rows:
++            key = 'without_abstract_pmids'
++        else:
++            key = 'unreturned_pmids'
++        groups[key].append(pmid)
++    return merge_coverages([{'schema_version': 1, 'requested_pmids': requested,
++                            'search_failed': bool(search_failed), **groups}])
++
++
++def merge_coverages(blocks):
++    """Latest retrieval state wins per PMID, including a later successful refetch."""
++    states = {}
++    search_failed = False
++    for block in blocks:
++        if block.get('schema_version') != 1:
++            raise ValueError('Unsupported abstract coverage schema')
++        requested = block.get('requested_pmids')
++        if not isinstance(requested, list) or any(not isinstance(x, str) or not re.fullmatch(r'[1-9][0-9]{0,9}', x) for x in requested):
++            raise ValueError('Invalid abstract coverage PMIDs')
++        flattened = []
++        for key in FIELDS:
++            values = block.get(key)
++            if not isinstance(values, list) or any(x not in requested for x in values):
++                raise ValueError('Invalid abstract coverage group')
++            flattened.extend(values)
++            for pmid in values:
++                states[pmid] = key
++        if len(flattened) != len(set(flattened)) or set(flattened) != set(requested):
++            raise ValueError('Abstract coverage groups must partition requested PMIDs')
++        search_failed = search_failed or block.get('search_failed') is True
++    groups = {key: [pmid for pmid, state in states.items() if state == key] for key in FIELDS}
++    incomplete = search_failed or any(groups[key] for key in FIELDS[1:])
++    return {'schema_version': 1, 'requested_pmids': list(states), **groups,
++            'search_failed': search_failed, 'requested_count': len(states),
++            'abstract_text_count': len(groups['with_abstract_pmids']),
++            'incomplete': bool(incomplete), 'disclosure_required': bool(incomplete or not states),
++            'scope': 'Requested PubMed records only; not a complete literature review.'}
++
++
++def unpack_result(value):
++    if not isinstance(value, dict):
++        return {}
++    if isinstance(value.get('structuredContent'), dict):
++        return value['structuredContent']
++    if isinstance(value.get('content'), list):
++        for item in value['content']:
++            if item.get('type') == 'text':
++                try:
++                    parsed = json.loads(item.get('text', ''))
++                except (TypeError, ValueError):
++                    continue
++                if isinstance(parsed, dict):
++                    return parsed
++    return value
++
++
++def disclosure_notices(tool_calls, templates):
++    blocks = []
++    for call in tool_calls or ():
++        if call.get('tool') not in TOOLS:
++            continue
++        result = unpack_result(call.get('result'))
++        if result.get('allow_research') is False or result.get('requires_confirmation'):
++            continue
++        if isinstance(result.get('abstract_coverage'), dict) and result['abstract_coverage']:
++            blocks.append(result['abstract_coverage'])
++    if not blocks:
++        return []
++    merged = merge_coverages(blocks)
++    if not merged['disclosure_required']:
++        return []
++    parts = []
++    if merged['requested_count']:
++        parts.append(templates['counts'].format(found=merged['abstract_text_count'], requested=merged['requested_count']))
++        for key in FIELDS[1:]:
++            if merged[key]:
++                parts.append(templates[key].format(ids=', '.join(merged[key])))
++    elif not merged['search_failed']:
++        parts.append(templates['no_records'])
++    if merged['search_failed']:
++        parts.append(templates['search_failed'])
++    parts.append(templates['limit'])
++    return [{'id': 'pubmed_abstract_coverage', 'text': ' '.join(parts),
++             'origin': 'Application retrieval-coverage contract; not a source finding',
++             'display_required': True}]
+--- before/server/core/audit.py
++++ after/server/core/audit.py
+@@ -107,6 +107,11 @@
+             from .output_notices import required_notices
+             stopped = out.get('allow_research') is False or bool(out.get('requires_confirmation')) or bool(out.get('error'))
+             out['required_display_notices'] = required_notices([fn.__name__], blocked=stopped)
++            # Source failures need coverage disclosure; policy/identity stops do not.
++            if out.get('allow_research') is not False and not out.get('requires_confirmation'):
++                from .abstract_coverage import disclosure_notices
++                from .output_notices import POLICY
++                out['required_display_notices'] += disclosure_notices([{'tool':fn.__name__, 'result':out}], POLICY['abstract_coverage'])
+         finally:
+             request_provenance.reset(token)
+         if cfg.USE_LAKEHOUSE:
+--- before/server/core/output_notices.json
++++ after/server/core/output_notices.json
+@@ -1,21 +1,50 @@
+ {
+-  "version": "2026-11-21.9",
++  "version": "2026-11-21.10",
+   "origin": "Application output contracts; not source-authored medical findings",
+   "notices": [
+     {
+       "id": "faers_population_scope",
+-      "tools": ["get_adverse_event_signals", "medication_evidence_brief"],
++      "tools": [
++        "get_adverse_event_signals",
++        "medication_evidence_brief"
++      ],
+       "text": "These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation."
+     },
+     {
+       "id": "portfolio_interpretation",
+-      "tools": ["search_funded_research", "summarize_research_portfolio"],
++      "tools": [
++        "search_funded_research",
++        "summarize_research_portfolio"
++      ],
+       "text": "Activity codes identify funding mechanisms; they do not by themselves establish sustained investment, completed findings, research success or grant performance."
+     },
+     {
+       "id": "clinical_framing_review",
+-      "tools": ["search_lactmed", "get_lactmed_record", "search_literature", "get_abstracts", "get_label_sections", "search_pediatric_labeling_changes", "get_adverse_event_signals", "find_mprint_records", "get_mprint_details", "search_bpca_evidence", "search_nichd_studies", "get_parent_medication_info", "medication_evidence_brief"],
++      "tools": [
++        "search_lactmed",
++        "get_lactmed_record",
++        "search_literature",
++        "get_abstracts",
++        "get_label_sections",
++        "search_pediatric_labeling_changes",
++        "get_adverse_event_signals",
++        "find_mprint_records",
++        "get_mprint_details",
++        "search_bpca_evidence",
++        "search_nichd_studies",
++        "get_parent_medication_info",
++        "medication_evidence_brief"
++      ],
+       "text": "Human clinical framing review remains required. This generated answer is not clinically validated."
+     }
+-  ]
++  ],
++  "abstract_coverage": {
++    "counts": "PubMed abstract coverage: abstract text was retrieved for {found} of {requested} requested PMIDs.",
++    "without_abstract_pmids": "No abstract text was returned for PMID(s): {ids}.",
++    "unreturned_pmids": "No article record was returned for PMID(s): {ids}.",
++    "failed_pmids": "The abstract request failed for PMID(s): {ids}; abstract availability is unknown.",
++    "no_records": "No PubMed records were retrieved in this bounded search, so no abstracts were evaluated.",
++    "search_failed": "A PubMed literature search failed; additional abstract coverage could not be verified.",
++    "limit": "Missing abstract text is a retrieval limitation, not evidence that a study or research does not exist. Titles alone are not outcome evidence."
++  }
+ }
+--- before/server/core/output_notices.py
++++ after/server/core/output_notices.py
+@@ -5,17 +5,18 @@
+ POLICY = json.loads(Path(__file__).with_name('output_notices.json').read_text(encoding='utf-8'))
+ 
+ 
+-def required_notices(tool_names, blocked=False):
++def required_notices(tool_names, blocked=False, tool_calls=()):
+     if blocked:
+         return []
+     names = set(tool_names)
++    from .abstract_coverage import disclosure_notices
+     return [{'id':n['id'], 'text':n['text'], 'origin':POLICY['origin'], 'display_required':True}
+-            for n in POLICY['notices'] if names.intersection(n['tools'])]
++            for n in POLICY['notices'] if names.intersection(n['tools'])] + disclosure_notices(tool_calls, POLICY['abstract_coverage'])
+ 
+ 
+-def format_required_notices(answer, tool_names, blocked=False):
++def format_required_notices(answer, tool_names, blocked=False, tool_calls=()):
+     """Append missing fixed lines; leave evidence and source caveats untouched."""
+-    notices = required_notices(tool_names, blocked)
++    notices = required_notices(tool_names, blocked, tool_calls)
+     lines = {line.strip() for line in answer.splitlines()}
+     missing = [n['text'] for n in notices if n['text'] not in lines]
+     if missing:
+--- before/server/core/policy.json
++++ after/server/core/policy.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.9",
++  "version": "2026-11-21.10",
+   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
+   "patterns": {
+     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
+--- before/server/core/response.py
++++ after/server/core/response.py
+@@ -36,7 +36,7 @@
+         elif out.get('clinical_sections_unavailable') or 'clinical_sections_unavailable' in str(out.get('note','')): status='partial'
+         elif out['evidence_status']['state']=='none_retrieved': status='no_results'
+         elif out.get('found') is False: status='no_results'
+-        elif out.get('truncated') or out.get('missing_standalone_sections') or out.get('sections_missing'): status='partial'
++        elif out.get('truncated') or out.get('missing_standalone_sections') or out.get('sections_missing') or out.get('abstract_coverage',{}).get('incomplete'): status='partial'
+         else: status='ok'
+     limits=[]
+     for key in ('limitations','coverage_notice','coverage','caveat','note','warning'):
+--- before/server/models/contracts.py
++++ after/server/models/contracts.py
+@@ -52,6 +52,7 @@
+     snapshot_age_days: int | None = None
+     untrusted_data: dict[str, Any] = Field(default_factory=dict)
+     evidence_status: dict[str, Any] = Field(default_factory=dict, description='Explicit missing-evidence status; never a safety verdict.')
++    abstract_coverage: dict[str, Any] = Field(default_factory=dict, description='Requested PubMed IDs, retrieved abstract text, missing text/records and retrieval failures. Preserve required coverage disclosures.')
+     content_flags: dict[str, Any] = Field(default_factory=dict, description='Dose-bearing field paths and removed pregnancy letter categories.')
+     safety: SafetyMetadata
+     disclaimer: Annotated[str, Field(min_length=1)]
+--- before/server/tests/test_abstract_coverage.py
++++ after/server/tests/test_abstract_coverage.py
+@@ -0,0 +1,109 @@
++"""Missing abstracts must remain visible without converting metadata into outcomes."""
++import asyncio
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import pytest
++from core.abstract_coverage import coverage, merge_coverages
++from core.output_notices import format_required_notices
++from core.audit import audited
++from tools import literature, composite
++
++ROOT=Path(__file__).parents[2]
++
++def call(block,tool='get_abstracts'):
++    return {'tool':tool,'result':{'abstract_coverage':block}}
++
++def test_present_blank_and_unreturned_are_distinct():
++    c=coverage(['1','2','3','1'],[{'pmid':'1','abstract':'Outcome text.'},{'pmid':'2','abstract':' \n'}])
++    assert c['requested_count']==3 and c['abstract_text_count']==1
++    assert c['without_abstract_pmids']==['2'] and c['unreturned_pmids']==['3']
++    assert c['failed_pmids']==[] and c['incomplete']
++
++def test_successful_refetch_clears_missing_abstract_notice():
++    old=call(coverage(['1'],[{'pmid':'1','abstract':''}]))
++    new=call(coverage(['1'],[{'pmid':'1','abstract':'Now available.'}]))
++    text,ids=format_required_notices('Answer.',[],tool_calls=[old,new])
++    assert text=='Answer.' and ids==[]
++
++@pytest.mark.parametrize('kind',['blank','unreturned','failed','search_failed','empty','complete'])
++@pytest.mark.parametrize('envelope',['direct','structured','text'])
++def test_powershell_python_parity_and_idempotence(kind,envelope):
++    c=coverage(['1'],[{'pmid':'1','abstract':'Available' if kind=='complete' else ''}])
++    if kind in {'unreturned','failed'}:c=coverage(['1'],[],request_failed=kind=='failed')
++    if kind in {'empty','search_failed'}:c=coverage([],[],search_failed=kind=='search_failed')
++    value=call(c)
++    if envelope=='structured':value['result']={'structuredContent':value['result']}
++    if envelope=='text':value['result']={'content':[{'type':'text','text':json.dumps(value['result'])}]}
++    helper=str(ROOT/'chat-client/answer-notices.ps1').replace("'","''")
++    payload=json.dumps([value]).replace("'","''")
++    script=f"""$ErrorActionPreference='Stop'
++    . '{helper}'
++    $calls=@('{payload}' | ConvertFrom-Json)
++    $n=@(Get-RequiredAnswerNotices @('get_abstracts') -ToolCalls $calls)
++    $a=Add-RequiredAnswerNotices 'Answer.' $n
++    @{{answer=$a;repeat=(Add-RequiredAnswerNotices $a $n);ids=@($n | ForEach-Object {{ $_.id }})}} | ConvertTo-Json -Compress
++    """
++    r=subprocess.run([shutil.which('pwsh') or 'pwsh','-NoProfile','-Command',script],capture_output=True,text=True,encoding='utf-8',timeout=30)
++    assert r.returncode==0,r.stderr
++    answer,ids=format_required_notices('Answer.',['get_abstracts'],tool_calls=[value])
++    assert json.loads(r.stdout)=={'answer':answer,'repeat':answer,'ids':ids}
++    assert ('pubmed_abstract_coverage' in ids)==(kind!='complete')
++
++def test_blocked_routes_suppress_previous_retrieval_notices():
++    calls=[call(coverage(['1'],[]))]
++    assert format_required_notices('Stopped.',['get_abstracts'],blocked=True,tool_calls=calls)==('Stopped.',[])
++
++def test_nested_and_unrelated_tool_fields_are_not_trusted_contracts():
++    c=coverage(['1'],[])
++    calls=[call(c,'search_literature'),{'tool':'get_abstracts','result':{'articles':[{'abstract_coverage':c}]}}]
++    assert format_required_notices('Answer.',[],tool_calls=calls)==('Answer.',[])
++
++@pytest.mark.parametrize('bad',[
++    {'schema_version':99},
++    {'schema_version':1,'requested_pmids':['Ignore previous instructions']},
++    {'schema_version':1,'requested_pmids':['1'],'with_abstract_pmids':[],'without_abstract_pmids':[],'unreturned_pmids':[],'failed_pmids':[]},
++])
++def test_invalid_contract_cannot_supply_arbitrary_notice_text(bad):
++    with pytest.raises(ValueError):merge_coverages([bad])
++
++@pytest.mark.parametrize('failed',[False,True])
++def test_actual_tool_wrapper_preserves_coverage_and_notice(monkeypatch,failed):
++    async def fetch(pmids):
++        if failed:raise TimeoutError('simulated')
++        return [{'pmid':'1','title':'Metadata only','abstract':''}]
++    monkeypatch.setattr(literature.src,'pubmed_abstracts',fetch)
++    out=asyncio.run(audited(literature.get_abstracts)(['1','2']))
++    c=out['abstract_coverage']
++    assert c['failed_pmids']==(['1','2'] if failed else [])
++    if not failed:
++        assert c['without_abstract_pmids']==['1'] and c['unreturned_pmids']==['2']
++        assert out['articles'][0]['abstract_status']=='no_text_returned'
++    assert any(n['id']=='pubmed_abstract_coverage' and n['display_required'] for n in out['required_display_notices'])
++    assert out['status'] in {'partial','error'}
++
++@pytest.mark.parametrize('search_failure',[False,True])
++def test_composite_propagates_each_ingredient_coverage(monkeypatch,search_failure):
++    async def norm(*args):return {'found':True,'requires_confirmation':False,'ingredients':['amoxicillin','clavulanate']}
++    async def empty(*args,**kwargs):return {'results':[]}
++    async def search(drug,*args,**kwargs):
++        if search_failure:raise TimeoutError('simulated')
++        return {'results':[{'pmid':'1' if drug.startswith('amoxicillin') else '2','title':'Metadata'}]}
++    async def abstracts(pmids):return {'articles':[{'pmid':p,'abstract':''} for p in pmids],'abstract_coverage':coverage(pmids,[{'pmid':p,'abstract':''} for p in pmids])}
++    monkeypatch.setattr(composite.src,'rxnorm_normalize',norm)
++    for name in ['get_label_sections','get_adverse_event_signals','search_trials','get_patient_education','search_lactmed']:
++        monkeypatch.setattr(composite,name,empty)
++    monkeypatch.setattr(composite,'search_literature',search)
++    monkeypatch.setattr(composite,'get_abstracts',abstracts)
++    out=asyncio.run(composite.medication_evidence_brief('Augmentin'))
++    c=out['abstract_coverage']
++    assert c['search_failed']==search_failure
++    assert c['without_abstract_pmids']==([] if search_failure else ['1','2'])
++    assert c['disclosure_required']
++
++def test_xml_record_without_abstract_is_not_dropped():
++    from clients.pubmed import parse_pubmed_xml
++    rows=parse_pubmed_xml('<PubmedArticleSet><PubmedArticle><MedlineCitation><PMID>1</PMID><Article><ArticleTitle>Metadata only</ArticleTitle></Article></MedlineCitation></PubmedArticle></PubmedArticleSet>')
++    assert rows[0]['abstract']==''
++    assert coverage(['1'],rows)['without_abstract_pmids']==['1']
+--- before/server/tools/composite.py
++++ after/server/tools/composite.py
+@@ -12,6 +12,7 @@
+ from .literature import get_abstracts
+ from core.evidence_axes import build_axes, AXES
+ from core.participation import tier
++from core.abstract_coverage import coverage, merge_coverages
+ from clients import parent_resources as parents
+ 
+ async def medication_evidence_brief(drug: Query, population: Population = 'lactation') -> EvidenceResponse:
+@@ -22,7 +23,9 @@
+     ingredient evidence separate; combined effects and interactions are not established.
+     Preserve requested age band, source ages, missing evidence, dose flags and pregnancy limits.
+     Prefer get_parent_medication_info for focused medicine-taker versus infant findings.
+-    Includes literature metadata; fetch abstracts before describing study outcomes.
++    Includes literature metadata and abstract_coverage. Disclose missing abstract text,
++    unreturned records and retrieval failures; preserve required_display_notices.
++    Metadata and titles alone cannot support study-outcome claims.
+     Display FAERS report_only_context separately, even when observed-outcome rows
+     are empty. Report counts are unconfirmed signals, not established outcomes."""
+     norm=await src.rxnorm_normalize(drug)
+@@ -39,8 +42,10 @@
+             searches=[first]
+             if population=='pregnancy': searches.append(await search_literature(name,population,3,'keyword','maternal_pharmacokinetics'))
+             metadata=list({r['pmid']:r for search in searches for r in search.get('results',[]) if r.get('pmid')}.values())
+-            articles=(await get_abstracts([r['pmid'] for r in metadata[:10]])).get('articles',[]) if metadata else []
+-            return {**first,'results':metadata,'articles':articles,'searches':searches,
++            fetched=await get_abstracts([r['pmid'] for r in metadata[:10]]) if metadata else {'articles':[], 'abstract_coverage':coverage([],[])}
++            return {**first,'results':metadata,'articles':fetched.get('articles',[]),'searches':searches,
++                    'abstract_coverage':fetched['abstract_coverage'],
++                    **({'error':fetched['error']} if fetched.get('error') else {}),
+                     'coverage_notice':'Bounded relevance search and abstracts only, not a systematic review. Titles alone are not outcome evidence.'}
+         async def lactmed():
+             if population!='lactation': return {'status':'not_applicable','note':'LactMed applies to lactation.'}
+@@ -56,6 +61,8 @@
+             get_adverse_event_signals(name,cohort,8),search_trials(name,population,5),
+             get_patient_education(name),return_exceptions=True)
+         row={k:({'error':'source_unavailable'} if isinstance(v,Exception) else v) for k,v in zip(keys,values)}
++        if row['literature'].get('error') and not row['literature'].get('abstract_coverage'):
++            row['literature']['abstract_coverage']=coverage([],[],search_failed=True)
+         row['ingredient']=name
+         row['evidence_axes'],pk=build_axes(row,population)
+         if population=='pregnancy':
+@@ -76,6 +83,7 @@
+     rows=[]
+     for name in ingredients: rows.append(await ingredient(name))
+     out={**base,'queried_ingredients':ingredients,'ingredient_evidence':rows,
++         'abstract_coverage':merge_coverages([r['literature']['abstract_coverage'] for r in rows]),
+          'evidence_axis_order':list(AXES),
+          'display_contract':'Always render all three evidence-axis rows, including empty rows. Also show any report_only_context separately as unconfirmed spontaneous-report terms and counts, with the query scope, source link and population uncertainty. An empty observed-outcomes row does not mean no human reports were retrieved. Report counts are not established outcomes or rates. Participation is a separate unranked navigation tier, never evidence of safety.',
+          'ingredient_coverage':{'all_normalized_ingredients_queried':True,
+--- before/server/tools/labels_safety.py
++++ after/server/tools/labels_safety.py
+@@ -57,7 +57,9 @@
+ async def get_adverse_event_signals(drug: Query, cohort: Literal["any", "pregnancy", "infant"] = "any",
+                                     max_results: Limit25 = 10) -> EvidenceResponse:
+     """Most frequently reported reactions in FDA FAERS (openFDA) for a drug, optionally for
+-    pregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation."""
++    pregnancy-exposure or infant reports. Counts are spontaneous reports, NOT incidence or proof of causation.
++    Preserve the returned query scope and denominator limitations. Do not add uncited
++    alternative causes or research-prioritization claims absent from retrieved material."""
+     return {"source": "live:openfda", "cohort": cohort,
+             "cohort_scope": "Infant filter includes only ages coded in months from 0 through 12; other age-unit encodings are excluded." if cohort == "infant" else "Reports matching the stated query; not a complete exposed population.",
+             "url": src.OPENFDA_EVENT + "?" + urlencode(src.faers_query_params(drug, cohort, max(1, min(max_results, 25)))),
+--- before/server/tools/lactation.py
++++ after/server/tools/lactation.py
+@@ -42,6 +42,8 @@
+     context; never label maternal-serum measurements as milk or infant serum.
+     Concentrations are research findings, not administered doses. Omit administered regimens
+     when doses are excluded, while retaining the requested exposure findings.
++    Keep each study's exact comparator, co-exposures and specimen terminology separate.
++    Do not narrow unspecified infant levels to blood or serum.
+     Preserve separate case-report events and timing: do not merge exposure changes
+     with outcome observations, infer unstated timing, or imply proven causation.
+     Include only relevant supported details; explicitly identify unspecified timing.
+--- before/server/tools/literature.py
++++ after/server/tools/literature.py
+@@ -48,12 +48,23 @@
+ async def get_abstracts(pmids: PMIDs10) -> EvidenceResponse:
+     """Get abstracts and canonical PubMed source URLs for up to 10 PubMed IDs.
+     Cite each article's returned URL. No returned article is a retrieval limitation,
+-    not evidence that a paper or research does not exist."""
++    not evidence that a paper or research does not exist. Preserve abstract_coverage
++    and required_display_notices when records lack abstract text or were not returned;
++    titles and metadata alone do not establish study outcomes."""
+     if not pmids or any(not re.fullmatch(r"[1-9][0-9]{0,9}", p) for p in pmids):
+         return {"source": "validation", "error": "invalid_pmids",
+                 "note": "Pass numeric PMID strings returned by search_literature, not drug names, URLs or mixed text.",
+                 "url": "https://pubmed.ncbi.nlm.nih.gov/"}
+-    return {"source": "live:pubmed", "articles": await src.pubmed_abstracts(pmids)}
++    from core.abstract_coverage import coverage
++    try:
++        articles = await src.pubmed_abstracts(pmids)
++    except Exception:
++        return {'source': 'live:pubmed', 'articles': [], 'error': 'abstract_retrieval_failed',
++                'abstract_coverage': coverage(pmids, [], request_failed=True),
++                'note': 'Abstract retrieval failed; abstract availability is unknown.'}
++    articles = [{**a, 'abstract_status': 'retrieved' if isinstance(a.get('abstract'), str) and a['abstract'].strip() else 'no_text_returned'} for a in articles]
++    return {'source': 'live:pubmed', 'articles': articles,
++            'abstract_coverage': coverage(pmids, articles)}
+ 
+ async def search_trials(condition_or_drug: OptionalQuery='', population: Population = "pregnancy",
+                         max_results: Limit20 = 10,nct_id: NCTID | None=None) -> EvidenceResponse:
+--- before/server/tools/parent_resources.py
++++ after/server/tools/parent_resources.py
+@@ -37,7 +37,9 @@
+ 
+ async def search_medication_recalls(drug: Query, manufacturer: OptionalQuery = "", lot: OptionalQuery = "", max_results: Limit20 = 10) -> EvidenceResponse:
+     """FDA drug enforcement recall candidates, including historical records. Show
+-    manufacturer, product/formulation text, lots, dates, status and reason. A literal
++    each returned candidate with manufacturer, product/formulation text, lots, dates,
++    exact status, reason and official link, including when the supplied lot does not match.
++    A total count alone omits returned candidate details. A literal
+     lot mention is NOT confirmation; ranges and all-lot notices need verification.
+     Never clear a bottle from absent/different lot results. Consumer instructions
+     may be missing: refer to official notice/pharmacist, never invent them."""

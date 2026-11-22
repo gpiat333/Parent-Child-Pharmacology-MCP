@@ -1,0 +1,62 @@
+<!doctype html><meta charset="utf-8"><title>Answer-quality fixes and verification</title><style>body{font:16px/1.6 system-ui;max-width:1000px;margin:40px auto;padding:20px}pre{white-space:pre-wrap}</style><h1>Answer-quality fixes and verification</h1><pre>Implemented: exact standard-footer deduplication plus client instruction assigning footer ownership to the app; preservation of source-specific limitations and referrals. General chronology guidance deployed in get_lactmed_record, without changing tool signatures or source text. Production chat now performs a source-grounded final review (one additional model call, reasoning low), preserves draft and review-applied metadata and fails closed if review fails. Other chat clients do not inherit these local client controls.
+Evaluation v2 explicitly requests caveats already scored in v1; G06 also asks for source chronology. Original dataset, scores and captured answers were preserved. Version 2 is a development regression, not a held-out benchmark or directly comparable unchanged benchmark.
+Validation: 35 local server tests passed after the final server change; footer append/idempotence/deduplication/caveat-preservation checks passed; five final deployed smoke checks passed. Ten initial v2 chats completed with one standard footer each; exact first-line matches 9/10 (G07 gave the correct value plus an extra explanatory clause on the first line). Fifty MLflow assessments completed: correctness 10/10, safety 10/10, relevance 10/10, exact first-line 9/10, conciseness 6/10. These judge scores describe the initial v2 captures BEFORE final-review changes, not the final client.
+Subsequent targeted final-client checks: three timeline repetitions plus G02/G07/G09 completed (six chats); each retained one standard footer. G07 formatting corrected, G02 and G09 explicit caveats retained. Manual source review found remaining ambiguity: timeline repeat 1 presents events as an ordered list though the antibiotic-stop time relative to the negative stool test is not specified; repeat 3 says stool testing relative to feeding interruption is unspecified even though the negative stool result is explicitly linked to 24 hours after interruption (the wording may mean normal-flora testing but does not say so). Repeat 2 preserves the relationships more clearly. Therefore timeline reliability is improved but NOT fully resolved; all three repeats are not clean clinical-fidelity passes. Automated correctness scores alone did not catch this.
+No clinical certification or independent expert review. Retain flagged answers for review and further evaluation rather than presenting them as a clean demonstration.
+Final deployment: 01f1e2a92d61191d8390bc90b79153de. No infrastructure or permission changes. MLflow v2 run: 00452c0f9c6148489519bbee89286d50.
+</pre><h2>gold-v2-reviewed-final-G02-results</h2><pre>undetectable
+
+LactMed reports undetectable serum budesonide concentrations in all four sampled breastfed infants after maternal Pulmicort Turbihaler inhalation, with assay limits ranging from &lt;8.6 to 17.2 ng/L: https://www.ncbi.nlm.nih.gov/books/NBK501215/
+
+Undetectable concentrations do **not** guarantee safety; they only indicate that concentrations were below the assay’s detection limits in those samples.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre><h2>gold-v2-reviewed-final-G07-results</h2><pre>1.26
+
+The PubMed abstract reports an overall adjusted relative risk of **1.26** (95% CI, 1.04–1.54). The unadjusted relative risk was 1.51; 1.33 and 0.95 were dose-subgroup estimates. Because this was an observational cohort study, the association does not prove causation. [PubMed abstract](https://pubmed.ncbi.nlm.nih.gov/32961123/)
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre><h2>gold-v2-reviewed-final-G09-results</h2><pre>placebo
+
+ClinicalTrials.gov lists NCT03976063 with interventions **nifedipine** and **placebo of nifedipine**: https://clinicaltrials.gov/study/NCT03976063
+
+Trial registration does not establish treatment benefit.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre><h2>gold-v2-reviewed-final-r1-results</h2><pre>gentamicin
+
+Cleocin is clindamycin. LactMed reports:
+
+- A five-day-old breastfed infant developed bloody stools while the mother was receiving clindamycin and gentamicin concurrently.
+- Breastfeeding was discontinued; the infant’s stools were reported to have normal flora and became guaiac-negative 24 hours after breastfeeding was discontinued.
+- Maternal antibiotics were discontinued.
+- On day 6 of life, breastfeeding resumed, with no further difficulties.
+
+The source does not specify the exact elapsed time between maternal antibiotic discontinuation and resumed feeding. This single case, described as “possibly caused” by concurrent clindamycin and gentamicin, does not prove causation.
+
+Source: [LactMed—Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/)
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre><h2>gold-v2-reviewed-final-r2-results</h2><pre>gentamicin
+
+Cleocin is **clindamycin**. LactMed reports:
+
+- The infant’s stools had **normal flora**.
+- The stools became **guaiac-negative 24 hours after breastfeeding was discontinued**.
+- On day 6, breastfeeding resumed **after maternal antibiotics had been discontinued**, with no further difficulties.
+- The source does not specify the exact timing between stool testing, maternal antibiotic discontinuation, and resumed feeding beyond these stated relationships.
+
+The case does not prove causation. LactMed describes the bloody stools as **possibly caused** by concurrent maternal clindamycin and gentamicin; this is a single historical report and does not establish that either antibiotic caused the outcome.
+
+Source: [LactMed—Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/)
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre><h2>gold-v2-reviewed-final-r3-results</h2><pre>gentamicin
+
+Cleocin is **clindamycin**. LactMed reports:
+
+- The five-day-old infant had bloody stools, and the stools were reported to have normal flora.
+- The stools became guaiac-negative **24 hours after breastfeeding was discontinued**.
+- On day 6, breastfeeding resumed **after the mother’s antibiotics had been discontinued**, with no further difficulties.
+- The source does not specify the timing of stool testing relative to breastfeeding interruption or maternal antibiotic discontinuation.
+
+This single case does not prove causation. LactMed describes the bloody stools as **possibly caused** by concurrent maternal clindamycin and gentamicin, so attribution to either antibiotic remains uncertain.
+
+Source: [LactMed—Clindamycin](https://www.ncbi.nlm.nih.gov/books/NBK501208/)
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.</pre>

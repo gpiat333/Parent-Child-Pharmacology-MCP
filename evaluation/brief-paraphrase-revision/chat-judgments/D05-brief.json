@@ -1,0 +1,118 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json",
+        "status": "supported",
+        "reason": "The reference evidence identifies sertraline as the matched ingredient with RxCUI 36437."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
+        "status": "supported",
+        "reason": "The evidence confirms the selected product label, SPL version, effective date, low milk levels, and absence of milk-production data."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38811474/",
+        "status": "supported",
+        "reason": "The evidence identifies this as a postpartum-depression review and shows pregnancy, rather than confirmed lactation, in its metadata."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9286185/",
+        "status": "supported",
+        "reason": "The abstract supports the reported sample sizes, milk and infant-serum measurements, detection findings, and absence of observed adverse effects."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/",
+        "status": "supported",
+        "reason": "The supplied LactMed extract supports the exposure findings, infant observations, truncation and omitted-section limitations, and unknown study-count statement."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The evidence reports 129 records and explicitly characterizes the search as bounded and non-systematic, supporting the stated coverage limitation."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12452737/",
+        "status": "supported",
+        "reason": "The evidence includes this record and its mixed pregnancy/lactation metadata; it is listed in the answer's source links, although no specific claim is attributed to it."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38133585/",
+        "status": "unverified",
+        "reason": "The reference pool lists the record, but the answer does not make a substantive claim specifically attributable to it."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32320387/",
+        "status": "unverified",
+        "reason": "The reference pool lists the record, but the answer does not make a substantive claim specifically attributable to it."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The evidence confirms this is a non-lactation-specific FAERS query and that reporting volume does not establish incidence, risk, or causation."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The evidence supports the interpretation that spontaneous-report counts lack exposure denominators and cannot establish incidence or causation."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT03511118",
+        "status": "supported",
+        "reason": "The evidence identifies the study as recruiting, including sertraline and lactating women/breastfed infants, with no posted results and unconfirmed individual eligibility or site recruitment."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT01385709",
+        "status": "unverified",
+        "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT01796132",
+        "status": "supported",
+        "reason": "The evidence identifies this record as UNKNOWN status and supports the statement that its current status is unverified."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT06384209",
+        "status": "unverified",
+        "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT02565316",
+        "status": "unverified",
+        "reason": "The answer's source list includes this record, but no substantive claim about it appears in the answer."
+      },
+      {
+        "url": "https://medlineplus.gov/pregnancyandmedicines.html",
+        "status": "unverified",
+        "reason": "The answer's source list includes this record, but no substantive pregnancy-specific claim is attributed to it."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer is substantively faithful to the supplied evidence and presents the requested three evidence axes, source links, limitations, and clinician questions without making a personal treatment decision. However, it does not fully satisfy the explicit instruction not to provide doses: it reproduces numerous dose values in the evidence summaries, including the clause “In a study of 12 lactating women...” followed by dose-related source details and multiple dose values throughout the LactMed-linked claims. These are historical source data rather than individualized dosing advice, but they still violate the requested no-doses constraint. The maternal-effects section also largely reports milk/infant exposure rather than effects on the lactating person, though the three-axis structure is present."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 139359,
+    "completion_tokens": 1729,
+    "total_tokens": 141088,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 139356,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 417,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

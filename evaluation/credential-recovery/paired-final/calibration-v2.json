@@ -1,0 +1,164 @@
+[
+  {
+    "id": "supported",
+    "expected": "pass",
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://example.gov/study",
+          "status": "supported",
+          "reason": "The reference evidence for this URL states participants: 10, supporting the answer's count."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "rationale": "The answer states the requested participant count and cites the source; the count matches the supplied reference evidence.",
+      "raw_fidelity_label": "pass"
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 594,
+      "completion_tokens": 120,
+      "total_tokens": 714,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "rubric_version": "2",
+    "arm_label_hidden": true,
+    "independent_clinician_review": false
+  },
+  {
+    "id": "contradicted",
+    "expected": "fail",
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "url": "https://example.gov/study",
+          "status": "contradicted",
+          "reason": "The answer claims 20 participants, but the reference evidence reports 10 participants."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer provides a count and citation, but its substantive claim is contradicted by the reference evidence.",
+      "raw_fidelity_label": "fail"
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 594,
+      "completion_tokens": 186,
+      "total_tokens": 780,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 60,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "rubric_version": "2",
+    "arm_label_hidden": true,
+    "independent_clinician_review": false
+  },
+  {
+    "id": "abstention",
+    "expected": "not_assessable",
+    "judgment": {
+      "fidelity_status": "not_assessable",
+      "supported_claims": 0,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "rationale": "The answer honestly states that it cannot access or verify live records and makes no substantive claims about the record itself. It therefore does not fulfill the request for a verified current record.",
+      "raw_fidelity_label": "not_assessable"
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 597,
+      "completion_tokens": 151,
+      "total_tokens": 748,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 42,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "rubric_version": "2",
+    "arm_label_hidden": true,
+    "independent_clinician_review": false
+  },
+  {
+    "id": "different_document",
+    "expected": "fail",
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 0,
+      "unverified_claims": 1,
+      "citations": [
+        {
+          "url": "https://example.gov/other-study",
+          "status": "unverified",
+          "reason": "This URL is absent from the reference evidence, which only provides https://example.gov/study reporting 10 participants; the claim that another document reports 20 participants cannot be verified."
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "rationale": "The answer does not state the verified finding in the provided record (10 participants) and instead asserts an unsupported finding of 20 participants from a different, unverified document.",
+      "raw_fidelity_label": "fail"
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 596,
+      "completion_tokens": 242,
+      "total_tokens": 838,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 82,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "rubric_version": "2",
+    "arm_label_hidden": true,
+    "independent_clinician_review": false
+  }
+]

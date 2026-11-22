@@ -1,0 +1,68 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json",
+        "status": "supported",
+        "reason": "The evidence confirms an exact RxNorm match for sertraline as a single ingredient."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
+        "status": "supported",
+        "reason": "The evidence identifies the selected product, version, effective date, low milk levels, unavailable milk-production data, formulation-specific scope, and title/code mismatch warning."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/",
+        "status": "supported",
+        "reason": "The evidence supports the LactMed summaries of milk and infant serum measurements, infant outcomes, case reports, study limitations, truncation notices, and lack of an established study count."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9286185/",
+        "status": "supported",
+        "reason": "The supplied abstract supports the reported sample sizes, measured milk and infant serum concentrations, detectable sertraline or desmethylsertraline in some infants, and the reported absence of observed adverse effects."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The evidence identifies this as a bounded relevance search and supports the stated limitations regarding completeness and systematic-review status."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The evidence provides broad sertraline adverse-event reporting volumes and states that the reports are not lactation-specific incidence estimates and do not establish causation."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The evidence supports the FAERS interpretation that spontaneous-report counts lack exposure denominators and cannot establish incidence, risk, or causation."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer is substantially faithful to the supplied reference evidence and includes the requested evidence axes, source links, limitations, and clinician questions. However, it does not fully satisfy the task because it reproduces numerous maternal dose values and dose-related exposure figures, despite the explicit instruction not to provide doses. These appear as historical source content rather than individualized recommendations, but the request prohibited doses without that exception. The answer also includes no medication decision or individualized treatment recommendation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 139152,
+    "completion_tokens": 1349,
+    "total_tokens": 140501,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 139149,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 431,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

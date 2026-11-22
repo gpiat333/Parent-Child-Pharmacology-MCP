@@ -1,0 +1,114 @@
+[
+  {
+    "id": "observed_good",
+    "expected_pass": true,
+    "judgment": {
+      "evidence_fidelity": true,
+      "task_fulfillment": true,
+      "fidelity_rationale": "All factual claims are supported by the supplied evidence: \"No sleepiness was reported in the 10 infants\" matches the observed finding; \"Monitoring for sleepiness was recommended\" matches the recommendation; and the statement that the recommendation is not an observed adverse event appropriately distinguishes the two. The limitation that the study \"cannot establish universal safety\" is also supported.",
+      "task_rationale": "The answer directly distinguishes the observed effect from the monitoring recommendation, preserves the study size and limitation, and does not invent facts or overstate certainty."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 604,
+      "completion_tokens": 131,
+      "total_tokens": 735,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "clinical_validation": false
+  },
+  {
+    "id": "observed_bad",
+    "expected_pass": false,
+    "judgment": {
+      "evidence_fidelity": false,
+      "task_fulfillment": false,
+      "fidelity_rationale": "The claim \"Sleepiness occurred in 5 of the 10 infants\" is contradicted by the supplied evidence, which states \"No sleepiness reported in 10 infants.\" The claim \"The study proves the medicine is always safe\" is also contradicted by the limitation that the study \"cannot establish universal safety.\"",
+      "task_rationale": "The answer does not distinguish the observed effect from the monitoring recommendation. It omits the recommendation to \"Monitor for sleepiness\" and instead makes unsupported claims about sleepiness and universal safety."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 589,
+      "completion_tokens": 195,
+      "total_tokens": 784,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 47,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "clinical_validation": false
+  },
+  {
+    "id": "deadline_good",
+    "expected_pass": true,
+    "judgment": {
+      "evidence_fidelity": true,
+      "task_fulfillment": true,
+      "fidelity_rationale": "The answer states that the deadline is unknown, matching the supplied evidence where \"deadline\": null and \"status\": \"unknown\". It makes no unsupported factual claims.",
+      "task_rationale": "The question asks whether there is a verified future deadline. The answer appropriately does not claim one and discloses uncertainty by stating, \"The deadline is unknown in the returned record.\""
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 570,
+      "completion_tokens": 100,
+      "total_tokens": 670,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "clinical_validation": false
+  },
+  {
+    "id": "deadline_bad",
+    "expected_pass": false,
+    "judgment": {
+      "evidence_fidelity": false,
+      "task_fulfillment": false,
+      "fidelity_rationale": "The answer states, \"This notice is definitely open until December 31, 2026.\" The supplied evidence gives \"deadline\": null and \"status\": \"unknown\", so it does not support a verified deadline or an open status.",
+      "task_rationale": "The question asks whether the notice has a verified future deadline and requires uncertainty disclosure. The answer incorrectly presents an unverified date and definite open status instead of reporting that the deadline and status are unknown."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "usage": {
+      "prompt_tokens": 566,
+      "completion_tokens": 154,
+      "total_tokens": 720,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 31,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "clinical_validation": false
+  }
+]

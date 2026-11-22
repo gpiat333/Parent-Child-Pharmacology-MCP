@@ -1,0 +1,153 @@
+--- before-.8/chat-client/exposure-presentation-instructions.txt
++++ after-.9/chat-client/exposure-presentation-instructions.txt
+@@ -3,3 +3,7 @@
+ When summarizing a retrieved LactMed record, include a short Measured exposure section with the available numeric milk concentration values, units and study context or sampling times. A qualitative word such as low is not a substitute for measurements that were retrieved. State whether infant blood-level information was retrieved. Keep these measurements separate from observed infant symptoms and source recommendations. Use only values supported by retrieved evidence; if measurements cannot be verified, say so rather than supplying numbers from memory.
+ 
+ Do not reproduce administered dose regimens that appear alongside those measurements, calculate an infant dose, convert concentrations into treatment advice, or infer a specimen or population not established by the source context. Concentration measurements do not prove safety.
++
++If a retrieved evidence brief includes FAERS report_only_context, display it in a separate cited report-context paragraph or row, even when observed-outcome findings are empty. Summarize the returned report terms and counts, query scope and population uncertainty. Counts are reporting volume, not rates, confirmed clinical outcomes or proof of causation. Distinguish an absence of retrieved outcome-study findings from an absence of all human reports; do not say no human reports were retrieved when report-only context is present. Preserve the empty clinical-outcome row without promoting spontaneous reports into established clinical findings. Never invent report counts when sources cannot be checked.
++
++Use neutral, source-attributed descriptions of findings. Do not add an overall reassuring or alarm-inducing verdict, including calling evidence generally reassuring, safe, or dangerous as your own conclusion. State what the source measured or observed and its limitations; retain relevant underlying-disease and treatment-change context without inventing balancing facts. If evaluative language is quoted from a source, attribute it explicitly and retain its limits. A research summary cannot determine an individual's benefit-risk balance.
+--- before-.8/server/core/evidence_axes.py
++++ after-.9/server/core/evidence_axes.py
+@@ -1,5 +1,6 @@
+ """Three visible axes using attributed source passages, never a safety inference."""
+ import re
++from copy import deepcopy
+ from .evidence import evidence_state
+ 
+ AXES = {
+@@ -26,8 +27,24 @@
+ def sentences(text):
+     return [s.strip() for s in re.split(r'(?<=[.!?])\s+|\n+',text or '') if s.strip()]
+ 
++def report_context(row,population):
++    """Keep aggregate spontaneous reports visible without making clinical findings."""
++    source=row.get('adverse_events') or {}
++    if source.get('error') or not source.get('top_reactions'):
++        return []
++    return [{'source':'FAERS spontaneous reports','evidence_kind':'report_counts_only',
++             'url':source.get('url'),'queried_at_utc':source.get('queried_at_utc'),
++             'query_cohort':source.get('cohort'),'query_scope':source.get('cohort_scope'),
++             'requested_population':population,'source_population_confirmed':False,
++             'reported_terms':deepcopy(source['top_reactions']),
++             'confirmed_clinical_outcomes':False,'establishes_causation':False,
++             'exposure_denominator_available':False,'incidence_or_risk_calculable':False,
++             'interpretation':deepcopy(source.get('report_count_interpretation',{})),
++             'message':'Spontaneous report terms and counts were retrieved. They are reporting volume, not confirmed outcomes or rates. Keep them separate from observed study findings; query terms do not confirm the source population.'}]
++
+ def build_axes(row,population):
+     axes={key:{'axis':key,'label':label,'items':[],'context_only':[],'reported_gaps':[],
++               'report_only_context':[],
+                'not_evidence_of_safety':True} for key,label in AXES.items()}
+     maternal_pk={'items':[],'reported_gaps':[],'sources_checked':['label 8.1 Clinical Considerations','curated PubMed search and retrieved abstracts'],
+                  'no_data_found':True,'not_evidence_of_safety':True,'personal_dose_calculated':False}
+@@ -92,13 +109,16 @@
+                 item=record(s,source,url,kind='abstract_candidate',pmid=pmid)
+                 if context: item['study_context']=context
+                 maternal_pk['reported_gaps' if MISSING.search(s) else 'items'].append(item)
++    axes['fetal_infant_outcomes']['report_only_context']=report_context(row,population)
+     for axis in axes.values():
+         # Exact duplicates may occur when all-axis and PK searches overlap.
+         for key in ['items','context_only','reported_gaps']:
+             seen=set();axis[key]=[x for x in axis[key] if not ((x['text'],x['url']) in seen or seen.add((x['text'],x['url'])))]
+-        axis['no_evidence_retrieved']=not bool(axis['items'])
+-        axis['state']='source_passages_retrieved' if axis['items'] else 'none_retrieved'
+-        axis['empty_message']='No evidence retrieved for this axis; not evidence of safety.' if not axis['items'] else None
++        axis['outcome_or_effect_passages_retrieved']=bool(axis['items'])
++        axis['report_only_context_retrieved']=bool(axis['report_only_context'])
++        axis['no_evidence_retrieved']=not bool(axis['items'] or axis['report_only_context'])
++        axis['state']='source_passages_retrieved' if axis['items'] else 'report_context_only' if axis['report_only_context'] else 'none_retrieved'
++        axis['empty_message']=None if axis['items'] else ('No observed-outcome findings retrieved for this axis. Spontaneous report context was retrieved separately; it does not establish an outcome, causation or safety.' if axis['report_only_context'] else 'No evidence retrieved for this axis; not evidence of safety.')
+         axis['interpretation']='Passages are grouped heuristically, not adjudicated clinical findings. Preserve human/animal/modeling context and confirm study design. Source advice and planned study measurements are not observed outcomes. Milk/infant concentrations do not establish a maternal clinical effect. Keep empty axes visible.'
+         from .source_context import item_population,evidence_base
+         articles={a.get('pmid'):a for a in literature.get('articles',[])}
+--- before-.8/server/core/output_notices.json
++++ after-.9/server/core/output_notices.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.8",
++  "version": "2026-11-21.9",
+   "origin": "Application output contracts; not source-authored medical findings",
+   "notices": [
+     {
+--- before-.8/server/core/policy.json
++++ after-.9/server/core/policy.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.8",
++  "version": "2026-11-21.9",
+   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
+   "patterns": {
+     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
+--- before-.8/server/tests/test_task_completeness.py
++++ after-.9/server/tests/test_task_completeness.py
+@@ -158,3 +158,46 @@
+     assert passage['concentration_values_as_reported']==['0.69 mg/L']
+     assert passage['source_passage']=='Milk concentration was 0.69 mg/L.'
+     assert 'dosage' not in passage['source_passage']
++
++
++def test_spontaneous_reports_remain_visible_without_becoming_observed_outcomes():
++    source={'cohort':'pregnancy','url':'https://example.test/query',
++            'cohort_scope':'Query subset only','queried_at_utc':'2026-11-21T00:00:00Z',
++            'top_reactions':[{'reaction':'NEONATAL HYPOTONIA','reports':9,
++                              'population_context':{'source_population':'not_established'}}]}
++    axes,_=build_axes({'adverse_events':source},'pregnancy')
++    outcome=axes[2]
++    assert not outcome['items'] and not outcome['outcome_or_effect_passages_retrieved']
++    assert outcome['state']=='report_context_only' and not outcome['no_evidence_retrieved']
++    assert outcome['not_evidence_of_safety'] and 'retrieved separately' in outcome['empty_message']
++    context=outcome['report_only_context'][0]
++    assert context['reported_terms']==source['top_reactions']
++    assert context['url']==source['url'] and context['queried_at_utc']==source['queried_at_utc']
++    assert not context['source_population_confirmed'] and not context['confirmed_clinical_outcomes']
++    assert not context['establishes_causation'] and not context['exposure_denominator_available']
++    assert not context['incidence_or_risk_calculable']
++    assert all(not axis['report_only_context'] for axis in axes[:2])
++    context['reported_terms'][0]['reports']=99
++    assert source['top_reactions'][0]['reports']==9
++
++
++@pytest.mark.parametrize('source',[{}, {'top_reactions':[]},
++    {'error':'source_unavailable','top_reactions':[{'reaction':'STALE','reports':9}]}])
++def test_absent_or_failed_report_retrieval_does_not_invent_signal_context(source):
++    axes,_=build_axes({'adverse_events':source},'pregnancy')
++    outcome=axes[2]
++    assert not outcome['report_only_context'] and outcome['no_evidence_retrieved']
++    assert outcome['state']=='none_retrieved' and outcome['not_evidence_of_safety']
++
++
++def test_report_counts_and_observed_passages_remain_distinct_when_both_returned():
++    row={'lactmed':{'sections':{'Effects in Breastfed Infants':'One infant developed sedation.'}},
++         'adverse_events':{'cohort':'any','top_reactions':[{'reaction':'HEADACHE','reports':4}]}}
++    axes,_=build_axes(row,'lactation')
++    outcome=axes[2]
++    assert outcome['items'][0]['text']=='One infant developed sedation.'
++    assert outcome['report_only_context'][0]['reported_terms'][0]['reports']==4
++    assert outcome['report_only_context'][0]['query_cohort']=='any'
++    assert outcome['report_only_context'][0]['requested_population']=='lactation'
++    assert not outcome['report_only_context'][0]['source_population_confirmed']
++    assert not outcome['no_evidence_retrieved'] and outcome['empty_message'] is None
+--- before-.8/server/tools/composite.py
++++ after-.9/server/tools/composite.py
+@@ -22,7 +22,9 @@
+     ingredient evidence separate; combined effects and interactions are not established.
+     Preserve requested age band, source ages, missing evidence, dose flags and pregnancy limits.
+     Prefer get_parent_medication_info for focused medicine-taker versus infant findings.
+-    Includes literature metadata; fetch abstracts before describing study outcomes."""
++    Includes literature metadata; fetch abstracts before describing study outcomes.
++    Display FAERS report_only_context separately, even when observed-outcome rows
++    are empty. Report counts are unconfirmed signals, not established outcomes."""
+     norm=await src.rxnorm_normalize(drug)
+     base=preserve_population({'source':'composite','drug_input':drug,'resolved':norm,
+         'questions_to_ask_clinician':clinician_questions(population)},population)
+@@ -75,7 +77,7 @@
+     for name in ingredients: rows.append(await ingredient(name))
+     out={**base,'queried_ingredients':ingredients,'ingredient_evidence':rows,
+          'evidence_axis_order':list(AXES),
+-         'display_contract':'Always render all three evidence-axis rows, including empty rows. Participation is a separate unranked navigation tier, never evidence of safety.',
++         'display_contract':'Always render all three evidence-axis rows, including empty rows. Also show any report_only_context separately as unconfirmed spontaneous-report terms and counts, with the query scope, source link and population uncertainty. An empty observed-outcomes row does not mean no human reports were retrieved. Report counts are not established outcomes or rates. Participation is a separate unranked navigation tier, never evidence of safety.',
+          'ingredient_coverage':{'all_normalized_ingredients_queried':True,
+             'interaction_assessment_performed':False,'combined_product_safety_established':False},
+          'warning':'Ingredient searches do not establish combination-product safety or interactions.'}

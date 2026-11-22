@@ -1,0 +1,224 @@
+{
+  "question": "What can infant adverse-event reports involving acetaminophen tell a researcher, and what can they not establish about how often side effects occur or whether the medicine caused them? Use the MCP and state the age scope actually queried.",
+  "criteria": "Report only retrieved counts/events and exact cohort age scope. Reports not incidence or causation; cannot generalize a subset to all infants. Cite returned query. If retrieval fails, disclose it rather than invent counts.",
+  "answer": "I queried acetaminophen in FDA’s FAERS database using the **infant** filter.\n\n**Age scope queried:** records with age coded in **months from 0 through 12**; records using other age units were excluded. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)\n\n### What the reports can tell researchers\nThey show which event terms were reported and the volume of reports in that specific queried group. Returned terms included **vomiting** (117 reports), **pyrexia/fever** (98), and **rash** (60), as well as product-use and administration-related terms. These data can support safety-signal detection and hypothesis generation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)\n\n### What they cannot establish\n- They cannot establish **how often side effects occur** or calculate incidence or risk, because the reports do not provide the number of exposed infants—the exposure denominator is absent. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10) [S2](https://open.fda.gov/apis/drug/event/)\n- They cannot establish that acetaminophen **caused** any reported event. FAERS counts represent reporting volume, not risk, and spontaneous reports do not establish causation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)\n- They do not represent all infants, all exposed infants, or all events involving acetaminophen; this lookup was limited to the stated age coding and query.\n\nThese are limitations and interpretations returned by the MCP lookup, not evidence of clinical validation.\n\nInformational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+  "reference_evidence": [
+    {
+      "tool": "route_parent_question",
+      "arguments": {
+        "question": "What can infant adverse-event reports involving acetaminophen tell a researcher, and what can they not establish about how often side effects occur or whether the medicine caused them? Use the MCP and state the age scope actually queried.",
+        "country": "US"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [],
+        "coverage_limits": [
+          "Heuristic routing and language detection can miss or overblock requests. No diagnosis, severity assessment, or clinical triage is performed; this system has no clinical certification."
+        ],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": null,
+        "generated_at": "2026-11-20T23:35:46.044496-05:00",
+        "source_version": "not_provided_by_upstream",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "not_assessed",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "local:parent-safety-policy",
+        "policy_version": "2026-11-20.3",
+        "route": "evidence",
+        "allow_research": true,
+        "message": null,
+        "limitations": [
+          "Heuristic routing and language detection can miss or overblock requests. No diagnosis, severity assessment, or clinical triage is performed; this system has no clinical certification."
+        ],
+        "language_gate": {
+          "confident_english": true,
+          "segments_checked": 10,
+          "method": "English whole-query threshold (langdetect >=.95 or Lingua >=.80), plus sentence/span checks. Ambiguous fragments need English context and either English ranked first (>=.35), or English >=.15 with two English function-word anchors. Confident foreign fragments do not inherit context.",
+          "limitation": "Heuristic scores are not calibrated clinical confidence. Short technical phrases can be overblocked; mixed-language text can still be missed."
+        }
+      }
+    },
+    {
+      "tool": "normalize_drug",
+      "arguments": {
+        "name": "acetaminophen"
+      },
+      "result": {
+        "status": "ok",
+        "results": [],
+        "source_urls": [
+          "https://rxnav.nlm.nih.gov/REST/rxcui/161/properties.json"
+        ],
+        "coverage_limits": [],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-20T23:35:47.597121-05:00",
+        "generated_at": "2026-11-20T23:35:47.653474-05:00",
+        "source_version": "see_retrieval_provenance",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "not_assessed",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "live:rxnorm",
+        "found": true,
+        "input": "acetaminophen",
+        "rxcui": "161",
+        "matched_name": "acetaminophen",
+        "term_type": "IN",
+        "ingredients": [
+          "acetaminophen"
+        ],
+        "match_type": "exact",
+        "requires_confirmation": false,
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/161/properties.json"
+      }
+    },
+    {
+      "tool": "get_adverse_event_signals",
+      "arguments": {
+        "drug": "acetaminophen",
+        "cohort": "infant",
+        "max_results": 10
+      },
+      "result": {
+        "status": "ok",
+        "results": [
+          {
+            "reaction": "OFF LABEL USE",
+            "reports": 135
+          },
+          {
+            "reaction": "DRUG ADMINISTRATION ERROR",
+            "reports": 121
+          },
+          {
+            "reaction": "VOMITING",
+            "reports": 117
+          },
+          {
+            "reaction": "PYREXIA",
+            "reports": 98
+          },
+          {
+            "reaction": "PRODUCT USE ISSUE",
+            "reports": 83
+          },
+          {
+            "reaction": "OVERDOSE",
+            "reports": 77
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "reports": 65
+          },
+          {
+            "reaction": "RASH",
+            "reports": 60
+          },
+          {
+            "reaction": "TOXICITY TO VARIOUS AGENTS",
+            "reports": 58
+          },
+          {
+            "reaction": "INCORRECT DOSE ADMINISTERED",
+            "reports": 56
+          }
+        ],
+        "source_urls": [
+          "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+          "https://open.fda.gov/apis/drug/event/"
+        ],
+        "coverage_limits": [
+          "FAERS counts reflect reporting volume, not risk; reports do not establish causation and lack exposure denominators."
+        ],
+        "missing_fields": [],
+        "error": null,
+        "retry_hint": null,
+        "retrieved_at": "2026-11-20T23:35:51.201366-05:00",
+        "generated_at": "2026-11-20T23:35:51.202511-05:00",
+        "source_version": "W/\"445-ECrQ4SeYjNeI1ktbQKt/pUl/xgQ\"",
+        "snapshot_date": null,
+        "snapshot_age_days": null,
+        "evidence_status": {
+          "state": "retrieved",
+          "no_evidence_retrieved": false,
+          "not_evidence_of_safety": true,
+          "message": "Retrieved material is not a safety verdict; missing evidence is not evidence of safety."
+        },
+        "disclaimer": "Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.",
+        "source": "live:openfda",
+        "cohort": "infant",
+        "cohort_scope": "Infant filter includes only ages coded in months from 0 through 12; other age-unit encodings are excluded.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "queried_at_utc": "2026-11-20T23:35:49.30216-05:00",
+        "cache_note": "Upstream response may be cached for up to one hour; timestamp is query time.",
+        "top_reactions": [
+          {
+            "reaction": "OFF LABEL USE",
+            "reports": 135
+          },
+          {
+            "reaction": "DRUG ADMINISTRATION ERROR",
+            "reports": 121
+          },
+          {
+            "reaction": "VOMITING",
+            "reports": 117
+          },
+          {
+            "reaction": "PYREXIA",
+            "reports": 98
+          },
+          {
+            "reaction": "PRODUCT USE ISSUE",
+            "reports": 83
+          },
+          {
+            "reaction": "OVERDOSE",
+            "reports": 77
+          },
+          {
+            "reaction": "DRUG INEFFECTIVE",
+            "reports": 65
+          },
+          {
+            "reaction": "RASH",
+            "reports": 60
+          },
+          {
+            "reaction": "TOXICITY TO VARIOUS AGENTS",
+            "reports": 58
+          },
+          {
+            "reaction": "INCORRECT DOSE ADMINISTERED",
+            "reports": 56
+          }
+        ],
+        "caveat": "FAERS counts reflect reporting volume, not risk; reports do not establish causation and lack exposure denominators.",
+        "report_count_interpretation": {
+          "establishes_causation": false,
+          "exposure_denominator_available": false,
+          "incidence_or_risk_calculable": false,
+          "message": "Spontaneous report counts do not establish causation. Exposure denominators are absent; counts cannot estimate incidence or individual risk.",
+          "source_url": "https://open.fda.gov/apis/drug/event/"
+        }
+      }
+    }
+  ],
+  "as_of": "2026-11-20 America/New_York"
+}

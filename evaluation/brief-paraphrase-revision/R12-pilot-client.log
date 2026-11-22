@@ -1,0 +1,25 @@
+Calling MCP tool: route_parent_question
+Calling MCP tool: normalize_drug
+Calling MCP tool: get_adverse_event_signals
+Completed with 3 MCP tool calls.
+**Age scope queried:** infants with age coded in **months 0–12**; records using other age units were excluded. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+These reports can help researchers:
+
+- Describe the **volume and types of spontaneous reports** in this queried cohort. Examples included vomiting (117 reports), pyrexia (98), rash (60), seizure (35), and liver injury (28). [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+- Identify report patterns that may be studied further using data with defined exposure and outcome denominators.
+
+They cannot establish:
+
+- **How often side effects occur.** Exposure denominators were unavailable, so these counts cannot calculate incidence or risk. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+- **That acetaminophen caused a reported event.** The MCP result states that spontaneous-report counts do not establish causation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+- **That the reports are confirmed infant-specific clinical findings.** For the returned reaction entries, `source_population` was **“not_established”** and `age_band_confirmed` was **false** in the returned metadata. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+- **That unreported events did not occur or that the medicine is safe.** This query provides reporting volume, not a safety verdict. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Accordingly, the reports are useful for descriptive surveillance and hypothesis generation, but not for estimating how commonly side effects occur or proving causality. The lookup itself also notes that the upstream response may be cached for up to one hour. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Application limits:
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.
+

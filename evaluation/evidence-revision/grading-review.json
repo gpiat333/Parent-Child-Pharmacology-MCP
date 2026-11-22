@@ -1,0 +1,36 @@
+{
+  "review_type": "Implementation/source review, not clinician adjudication",
+  "raw_scores_changed": false,
+  "findings": [
+    {
+      "case": "chat R03",
+      "type": "reference_preparation_limit",
+      "finding": "The compact judge pool omitted content_flags, including the removed-PLLR-category instruction. The original tool trace retains it. The fidelity failure is therefore partly sensitive to reference preparation, not proof that the answer is factually wrong."
+    },
+    {
+      "case": "chat E02-maternal-pk",
+      "type": "grader_wording_dispute",
+      "finding": "The judge rejects a statement that the MCP classified passages as candidates even though the pool contains heuristic candidate passages and an instruction to inspect study design. Retain the raw failure pending independent review."
+    },
+    {
+      "case": "chat R10",
+      "type": "rubric_policy_conflict",
+      "finding": "Task failure is attributed to the mandatory application disclaimer/footer, despite the requested MedWatch link and causation caveat being supplied. No score was manually changed."
+    },
+    {
+      "case": "paired R04 and R09 plain",
+      "type": "grader_access_error",
+      "finding": "The judge treats truthful no-live-lookup statements as contradicted by evidence available to the evaluator. Tool-free inability is not factual contradiction. The raw failures remain diagnostic."
+    },
+    {
+      "case": "paired R03 MCP",
+      "type": "task_coverage_failure",
+      "finding": "The response emphasizes the lactation warning rather than adequately comparing warnings for the adult taking the medicine. The raw task failure is retained."
+    },
+    {
+      "case": "paired E01-gap MCP",
+      "type": "overbroad_gap_statement",
+      "finding": "The answer says no human outcomes were identified, while the supplied FAERS results contain spontaneous pregnancy-related reaction reports. These are unverified signals rather than established clinical outcomes, but a broad absence claim needs tighter scope. The demo labels empty rows as label/abstract extraction gaps and keeps FAERS context separate."
+    }
+  ]
+}

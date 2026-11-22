@@ -1,0 +1,86 @@
+--- before/server/core/output_notices.json
++++ after/server/core/output_notices.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.4",
++  "version": "2026-11-21.5",
+   "origin": "Application output contracts; not source-authored medical findings",
+   "notices": [
+     {
+--- before/server/core/policy.json
++++ after/server/core/policy.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2026-11-21.4",
++  "version": "2026-11-21.5",
+   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
+   "patterns": {
+     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
+--- before/server/core/workflows.py
++++ after/server/core/workflows.py
+@@ -6,12 +6,15 @@
+ import re
+ 
+ BRIEF = r"(?:(?:medication|pregnancy|lactation|pediatric)\s+)?evidence\s+brief"
+-CREATE = r"(?:prepare|create|compile|build|generate|draft|make|provide|write)"
++CREATE = r"(?:prepare|create|compile|build|generate|draft|make|provide|write|give|show|send)"
++# Share the object grammar so adding a request verb cannot bypass its negation
++# (for example, "give me a brief" versus "don't give me a brief").
++BRIEF_OBJECT = rf"(?:me\s+)?(?:(?:an?|the|any)\s+)?{BRIEF}"
+ NEGATED = re.compile(
+     rf"\b(?:(?:do\s+not|don't|dont|never)\s+(?:use|call|{CREATE})|avoid|skip|without|instead\s+of|rather\s+than)"
+-    rf"\s+(?:using\s+|calling\s+)?(?:(?:an?|the|any)\s+)?{BRIEF}\b", re.I)
++    rf"\s+(?:using\s+|calling\s+)?{BRIEF_OBJECT}\b", re.I)
+ REQUESTED = re.compile(
+-    rf"\b(?:{CREATE}\s+(?:me\s+)?(?:(?:an?|the)\s+)?{BRIEF}|"
++    rf"\b(?:{CREATE}\s+{BRIEF_OBJECT}|"
+     rf"(?:use|using|call)\s+(?:(?:an?|the)\s+)?{BRIEF}\s+tool)\b", re.I)
+ 
+ 
+--- before/server/tests/test_brief_workflow.py
++++ after/server/tests/test_brief_workflow.py
+@@ -19,6 +19,44 @@
+ def test_explicit_brief_request_maps_to_composite_workflow(question):
+     # Intent recognition is separate from the conservative language gate.
+     assert requested_workflow(question)['required_tool']=='medication_evidence_brief'
++
++
++@pytest.mark.parametrize('verb', ['give', 'show', 'send'])
++@pytest.mark.parametrize('recipient', ['', 'me '])
++def test_brief_delivery_paraphrases_require_composite(verb, recipient):
++    question=f'Please {verb} {recipient}a pregnancy evidence brief for lamotrigine.'
++    assert requested_workflow(question)['required_tool']=='medication_evidence_brief'
++
++
++@pytest.mark.parametrize('verb', ['give', 'show', 'send'])
++@pytest.mark.parametrize('negation', ['Do not', "Don't", 'Never'])
++def test_negated_delivery_paraphrases_do_not_require_composite(verb, negation):
++    question=f'{negation} {verb} me an evidence brief. Search LactMed only.'
++    assert requested_workflow(question) is None
++
++
++@pytest.mark.parametrize('question', [
++    'Give me a pregnancy evidence brief for lamotrigine.',
++    'Show me a pregnancy evidence brief for lamotrigine.',
++    'Send me a pregnancy evidence brief for lamotrigine.',
++])
++def test_delivery_paraphrases_pass_whole_question_preflight(question):
++    decision=route(question)
++    assert decision['allow_research']
++    assert decision['requested_workflow']['required_tool']=='medication_evidence_brief'
++
++
++@pytest.mark.parametrize('suffix', [
++    'for my little white pill.',
++    'for lamotrigine. I want to harm myself with my pills.',
++    'for lamotrigine. My baby cannot breathe.',
++    'for lamotrigine. Should I stop taking my medicine?',
++    'for lamotrigine. Puedo tomar sertralina durante la lactancia.',
++])
++def test_delivery_paraphrase_cannot_override_stop(suffix):
++    decision=route('Give me a pregnancy evidence brief '+suffix)
++    assert not decision['allow_research']
++    assert 'requested_workflow' not in decision
+ 
+ 
+ @pytest.mark.parametrize('case_id',['E01-gap','D05-brief','D06-clinician-questions'])

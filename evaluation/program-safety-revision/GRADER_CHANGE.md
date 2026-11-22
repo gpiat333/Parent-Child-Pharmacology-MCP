@@ -1,0 +1,1 @@
+Diagnostic grader v2, fixed before this run: retained content_flags in chat references; clarified mandatory footer and access-abstention treatment. Four synthetic controls are rerun. Prior raw grades remain unchanged in evidence-revision. No clinician review or validated grading benchmark. The expanded case set and changed rubric prevent a direct score improvement claim.

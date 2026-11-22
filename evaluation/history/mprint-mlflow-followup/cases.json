@@ -1,0 +1,273 @@
+[
+  {
+    "id": "M01",
+    "question": "Use MPRINT Gold to find two PK studies using max_results=2 for Zoloft in lactation. Resolve the brand, expand PK, preserve source population wording, and report matching versus returned counts and snapshot status. Cite the returned sources, retain relevant limits, and provide no dosing or treatment advice.",
+    "expected_facts": [
+      "Zoloft resolves to sertraline. PK means pharmacokinetics.",
+      "Gold lactation/PK filter returns PMID 38841362 and 30116895, population lactation. Three matching records, two returned.",
+      "Versioned snapshot, not live complete portal; inclusion is not proof of efficacy/safety. Do not add identifiers not returned by tools."
+    ],
+    "reference_evidence": {
+      "source": "snapshot:mprint:gold",
+      "repository_url": "https://github.com/langli-lab/mprint-kp-data",
+      "dataset_revision": "4bdee90dff3610816e86d0eed29b4c4d0fe76e89",
+      "retrieved_at_utc": "2026-11-17T20:46:16.556578+00:00",
+      "coverage": "Gold study metadata and aggregate PE/CT and PK-summary outcome rows; Silver automated study-type labels. Individual-patient outcomes, PK parameter tables and Silver drug/population mappings excluded.",
+      "snapshot_is_live": false,
+      "outcomes_retrieved_at_utc": "2026-11-17T21:33:46.760396+00:00",
+      "tables_included": [
+        "gold/PK/PK_Study_cleaned_cui.csv",
+        "gold/PE/PE_CT_Study_info.csv",
+        "silver/pmid2study_type.csv",
+        "gold/PE/PE_CT_Outcomes.csv",
+        "gold/PK/PK_Outcomes_summary.csv"
+      ],
+      "coverage_notice": "Versioned export, not the complete live portals. Filters and row limits can omit records; an empty result is not an evidence-gap finding.",
+      "curation": "expert-curated study metadata",
+      "caveat": "Publication inclusion/classification is not proof of efficacy, safety, study quality, or MPRINT funding. Read the original paper. Snapshot absence is not absence of evidence.",
+      "results": [
+        {
+          "source_file": "gold/PK/PK_Study_cleaned_cui.csv",
+          "source_row": 781,
+          "source_fields": {
+            "PMID": "38841362",
+            "DOI": "10.3389/fphar.2024.1414677",
+            "Population": "lactation",
+            "Study type": "PK",
+            "Drug name": "paroxetine, citalopram, sertraline",
+            "Species": "Human",
+            "curation_workbook": "PRGLAC_PK_curation_Cleaned.xlsx",
+            "curation_folder": "PK curation_Shijun"
+          },
+          "pmid": "38841362",
+          "drug_names": "paroxetine, citalopram, sertraline",
+          "population": "lactation",
+          "study_type": "PK",
+          "study_type_labels": [
+            "pharmacokinetics"
+          ],
+          "matched_names": [
+            "sertraline"
+          ],
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38841362/",
+          "dataset_url": "https://github.com/langli-lab/mprint-kp-data/blob/4bdee90dff3610816e86d0eed29b4c4d0fe76e89/gold/PK/PK_Study_cleaned_cui.csv"
+        },
+        {
+          "source_file": "gold/PK/PK_Study_cleaned_cui.csv",
+          "source_row": 399,
+          "source_fields": {
+            "PMID": "30116895",
+            "DOI": "10.1007/s00737-018-0905-3",
+            "Population": "lactation",
+            "Study type": "PK",
+            "Drug name": "Sertraline",
+            "Species": "Human",
+            "curation_workbook": "PK Curation_BPCA_Cleaned.xlsx",
+            "curation_folder": "PK curation_Shijun"
+          },
+          "pmid": "30116895",
+          "drug_names": "Sertraline",
+          "population": "lactation",
+          "study_type": "PK",
+          "study_type_labels": [
+            "pharmacokinetics"
+          ],
+          "matched_names": [
+            "sertraline"
+          ],
+          "url": "https://pubmed.ncbi.nlm.nih.gov/30116895/",
+          "dataset_url": "https://github.com/langli-lab/mprint-kp-data/blob/4bdee90dff3610816e86d0eed29b4c4d0fe76e89/gold/PK/PK_Study_cleaned_cui.csv"
+        }
+      ],
+      "matching_records": 3,
+      "returned_records": 2,
+      "results_truncated": true,
+      "applied_filters": {
+        "population": "lactation",
+        "study_type": "PK"
+      },
+      "searched_names": [
+        "Zoloft",
+        "sertraline"
+      ],
+      "filter_scope": "Conservative matches on source population text; generic maternal does not imply pregnancy or lactation. Original mixed population labels are preserved, not exclusive cohorts.",
+      "search_scope": "Any searched name may match; all tokens of that name must match curated drug fields. Ingredient matches do not establish combination-product evidence. Sorted by descending PMID, not publication date; multiple rows can describe one paper.",
+      "resolution": {
+        "status": "verified",
+        "details": {
+          "found": true,
+          "input": "Zoloft",
+          "rxcui": "82728",
+          "matched_name": "Zoloft",
+          "term_type": "BN",
+          "ingredients": [
+            "sertraline"
+          ],
+          "match_type": "exact",
+          "requires_confirmation": false,
+          "url": "https://rxnav.nlm.nih.gov/REST/rxcui/82728/properties.json"
+        },
+        "mapping_method": "RxNorm ingredient names matched to Gold name text; RxCUIs are NOT equated with MPRINT UMLS CUIs."
+      }
+    }
+  },
+  {
+    "id": "M02",
+    "question": "Compare Gold study types for two sertraline records with Silver labels for those same PMIDs. Distinguish expert-curated metadata from automated labels, without inferring clinical outcomes. Cite the returned sources, retain relevant limits, and provide no dosing or treatment advice.",
+    "expected_facts": [
+      "Gold PMID 39626074 is Postpartum/CT. PMID 38841362 is lactation/PK.",
+      "Silver 39626074 is CT; 38841362 has PE and PK. CT=clinical trial, PE=pharmacoepidemiology, PK=pharmacokinetics.",
+      "Gold metadata is expert curated; Silver classifications automated. Labels do not establish outcomes."
+    ],
+    "reference_evidence": {
+      "gold": {
+        "source": "snapshot:mprint:gold",
+        "repository_url": "https://github.com/langli-lab/mprint-kp-data",
+        "dataset_revision": "4bdee90dff3610816e86d0eed29b4c4d0fe76e89",
+        "retrieved_at_utc": "2026-11-17T20:46:16.556578+00:00",
+        "coverage": "Gold study metadata and aggregate PE/CT and PK-summary outcome rows; Silver automated study-type labels. Individual-patient outcomes, PK parameter tables and Silver drug/population mappings excluded.",
+        "snapshot_is_live": false,
+        "outcomes_retrieved_at_utc": "2026-11-17T21:33:46.760396+00:00",
+        "tables_included": [
+          "gold/PK/PK_Study_cleaned_cui.csv",
+          "gold/PE/PE_CT_Study_info.csv",
+          "silver/pmid2study_type.csv",
+          "gold/PE/PE_CT_Outcomes.csv",
+          "gold/PK/PK_Outcomes_summary.csv"
+        ],
+        "coverage_notice": "Versioned export, not the complete live portals. Filters and row limits can omit records; an empty result is not an evidence-gap finding.",
+        "curation": "expert-curated study metadata",
+        "caveat": "Publication inclusion/classification is not proof of efficacy, safety, study quality, or MPRINT funding. Read the original paper. Snapshot absence is not absence of evidence.",
+        "results": [
+          {
+            "source_file": "gold/PE/PE_CT_Study_info.csv",
+            "source_row": 1708,
+            "source_fields": {
+              "PMID": "39626074",
+              "Population": "Postpartum",
+              "Study type": "CT",
+              "Drug names": "Sertraline",
+              "sample size": "62",
+              "study design": "randomized controlled trial",
+              "curation_workbook": "Sertraline .xlsx",
+              "curation_folder": "Jiezel's Curations/PRGLAC"
+            },
+            "pmid": "39626074",
+            "drug_names": "Sertraline",
+            "population": "Postpartum",
+            "study_type": "CT",
+            "study_type_labels": [
+              "clinical trial"
+            ],
+            "matched_names": [
+              "sertraline"
+            ],
+            "url": "https://pubmed.ncbi.nlm.nih.gov/39626074/",
+            "dataset_url": "https://github.com/langli-lab/mprint-kp-data/blob/4bdee90dff3610816e86d0eed29b4c4d0fe76e89/gold/PE/PE_CT_Study_info.csv"
+          },
+          {
+            "source_file": "gold/PK/PK_Study_cleaned_cui.csv",
+            "source_row": 781,
+            "source_fields": {
+              "PMID": "38841362",
+              "DOI": "10.3389/fphar.2024.1414677",
+              "Population": "lactation",
+              "Study type": "PK",
+              "Drug name": "paroxetine, citalopram, sertraline",
+              "Species": "Human",
+              "curation_workbook": "PRGLAC_PK_curation_Cleaned.xlsx",
+              "curation_folder": "PK curation_Shijun"
+            },
+            "pmid": "38841362",
+            "drug_names": "paroxetine, citalopram, sertraline",
+            "population": "lactation",
+            "study_type": "PK",
+            "study_type_labels": [
+              "pharmacokinetics"
+            ],
+            "matched_names": [
+              "sertraline"
+            ],
+            "url": "https://pubmed.ncbi.nlm.nih.gov/38841362/",
+            "dataset_url": "https://github.com/langli-lab/mprint-kp-data/blob/4bdee90dff3610816e86d0eed29b4c4d0fe76e89/gold/PK/PK_Study_cleaned_cui.csv"
+          }
+        ],
+        "matching_records": 38,
+        "returned_records": 2,
+        "results_truncated": true,
+        "applied_filters": {
+          "population": "any",
+          "study_type": "any"
+        },
+        "searched_names": [
+          "sertraline"
+        ],
+        "filter_scope": "Conservative matches on source population text; generic maternal does not imply pregnancy or lactation. Original mixed population labels are preserved, not exclusive cohorts.",
+        "search_scope": "Any searched name may match; all tokens of that name must match curated drug fields. Ingredient matches do not establish combination-product evidence. Sorted by descending PMID, not publication date; multiple rows can describe one paper.",
+        "resolution": {
+          "status": "not_requested"
+        }
+      },
+      "silver": {
+        "source": "snapshot:mprint:silver",
+        "repository_url": "https://github.com/langli-lab/mprint-kp-data",
+        "dataset_revision": "4bdee90dff3610816e86d0eed29b4c4d0fe76e89",
+        "retrieved_at_utc": "2026-11-17T20:46:16.556578+00:00",
+        "coverage": "Gold study metadata and aggregate PE/CT and PK-summary outcome rows; Silver automated study-type labels. Individual-patient outcomes, PK parameter tables and Silver drug/population mappings excluded.",
+        "snapshot_is_live": false,
+        "outcomes_retrieved_at_utc": "2026-11-17T21:33:46.760396+00:00",
+        "tables_included": [
+          "gold/PK/PK_Study_cleaned_cui.csv",
+          "gold/PE/PE_CT_Study_info.csv",
+          "silver/pmid2study_type.csv",
+          "gold/PE/PE_CT_Outcomes.csv",
+          "gold/PK/PK_Outcomes_summary.csv"
+        ],
+        "coverage_notice": "Versioned export, not the complete live portals. Filters and row limits can omit records; an empty result is not an evidence-gap finding.",
+        "curation": "automated publication classification",
+        "caveat": "Publication inclusion/classification is not proof of efficacy, safety, study quality, or MPRINT funding. Read the original paper. Snapshot absence is not absence of evidence.",
+        "results": [
+          {
+            "pmid": "39626074",
+            "found": true,
+            "classifications": [
+              {
+                "study_type": "CT",
+                "source_row": 484537,
+                "study_type_label": "clinical trial"
+              }
+            ],
+            "url": "https://pubmed.ncbi.nlm.nih.gov/39626074/"
+          },
+          {
+            "pmid": "38841362",
+            "found": true,
+            "classifications": [
+              {
+                "study_type": "PE",
+                "source_row": 259270,
+                "study_type_label": "pharmacoepidemiology"
+              },
+              {
+                "study_type": "PK",
+                "source_row": 112470,
+                "study_type_label": "pharmacokinetics"
+              }
+            ],
+            "url": "https://pubmed.ncbi.nlm.nih.gov/38841362/"
+          }
+        ],
+        "classification_legend": {
+          "PK": "pharmacokinetics",
+          "PE": "pharmacoepidemiology",
+          "CT": "clinical trial",
+          "Biomarker": "biomarker",
+          "Vaccine": "vaccine",
+          "Food, nutrition, and others": "food, nutrition, and other studies"
+        },
+        "dataset_url": "https://github.com/langli-lab/mprint-kp-data/blob/4bdee90dff3610816e86d0eed29b4c4d0fe76e89/silver/pmid2study_type.csv",
+        "limitation": "Study-type annotations only. No Silver drug or population mappings loaded. Labels may be multiple and are not human clinical review. Unknown codes are preserved verbatim."
+      }
+    }
+  }
+]

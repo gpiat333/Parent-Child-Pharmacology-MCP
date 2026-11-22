@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+const w='C:/Users/piatkowskigs/Desktop/.submission-abstract-disclosure-review';
+const skill='C:/Users/piatkowskigs/.codex/plugins/cache/openai-primary-runtime/presentations/26.1117.12345/skills/presentations';
+process.env.RUNTIME_NODE_MODULES='C:/Users/piatkowskigs/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules';
+const {finalizePresentation}=await import(pathToFileURL(skill+'/container_tools/artifact_tool_utils.mjs').href);
+const map=JSON.parse(await fs.readFile(w+'/slide-map.json','utf8')),owners=map.slides.filter(x=>x.nativeTables).map(x=>x.slide);
+const revision=process.argv[2]||'v1';await fs.mkdir(w+'/output',{recursive:true});
+await finalizePresentation({workspaceDir:w,candidatePath:w+'/professional-draft.pptx',finalPath:w+'/output/professional-'+revision+'.pptx',pythonExecutable:'C:/Users/piatkowskigs/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe',integrityValidatorPath:skill+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:skill+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-bullet-geometry','--validate-heading-fit',...owners.flatMap(x=>['--require-native-table-slide',String(x)])],explicitTotalSlideCount:map.total,requiredNativeTableOwnerSlides:owners,fontPolicy:{basis:'reference',families:['Arial'],referencePath:w+'/reference.pptx',referenceSha256:crypto.createHash('sha256').update(await fs.readFile(w+'/reference.pptx')).digest('hex')},verifyArtifactToolImport:true,receiptPath:w+'/deck-validation-'+revision+'.json'});
+console.log('Validated '+map.total+' slides.');process.exit(0);

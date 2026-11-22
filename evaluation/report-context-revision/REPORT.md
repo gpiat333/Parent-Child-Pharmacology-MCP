@@ -1,0 +1,75 @@
+# Final report-context evaluation
+
+GSA hackathon prototype. Not an official NIH MCP tool. No production-readiness claim.
+
+Policy `2026-11-21.9` fixes incomplete source presentation and preserves uncertainty. The cumulative changes retain available LactMed sections, extract exact numeric concentration passages, retain adult and population sections from the same selected label, include an explicit retrieved count for each requested fiscal year, preserve the FAERS population caveat, and distinguish maternal endpoints from offspring measurements.
+
+The final repair makes FAERS report terms and counts visible in a separate `report_only_context` field. An empty observed-outcomes row no longer implies that no human reports were retrieved. Report counts remain unconfirmed signals: they do not establish outcomes, rates, causation, or the patient's population. Shared production instructions also require neutral source-attributed wording instead of an added reassuring or alarming verdict. The same clarification is supplied to both paired arms.
+
+The existing Databricks sandbox app was updated to `01f1e5f7f6fc162fb8c3cc875e7f8546`. No GitHub upload or official submission occurred. No new infrastructure or permissions were created. Unit tests and the driver ran locally; the app, model gateway and MLflow tracking ran in Databricks.
+
+## Verified results
+
+| Measure | Result | Meaning |
+|---|---:|---|
+| Local unit tests | 562 passed | Zero failures, errors or skips; 31 added since .5, including five for report context |
+| Frozen source / verified runtime | 114 / 93 files | Active runtime matches staged files byte for byte |
+| Inventory | 30 tools / 4 prompts / 4 resources | Existing sandbox |
+| Schemas / invalid calls | 30 valid / 8 rejected | Runtime contracts |
+| Source/workflow captures | 20 | Partial and empty statuses retained, not clinical passes |
+| Separate routing probes | 12/12 | Outside the unchanged benchmark |
+| Original missed brief question | Completed; brief first | Separate end-to-end regression |
+| First-attempt / final chats | 28/28 / 28/28 | Completed answers were not regenerated |
+| Expected routes / tool selections | 28/28 / 28/28 | Required/allowed checks |
+| Fixed stops | 7/7 | Zero downstream evidence/model calls |
+| URL membership | 21/21 | URL presence is not claim support |
+| Research fidelity | 21 pass / 0 fail / 0 N/A | Fallible model grades |
+| Research tasks fulfilled | 20/21 | Seven fixed stops excluded |
+| Required notices retained | 13/13 | Fixed application text |
+| Final MLflow rows verified | 42/42 | 21 research + 7 stops + 14 paired; zero scorer execution errors |
+
+Four synthetic controls matched 4/4 fidelity and 4/4 task expectations. This does not validate the grader or establish clinical accuracy.
+
+## Seven paired questions
+
+| Measure | MCP workflow | Plain model |
+|---|---:|---:|
+| Completed answers | 7/7 | 7/7 |
+| Tasks fulfilled | 6/7 | 1/7 |
+| Fidelity pass / fail / N/A | 7 / 0 / 0 | 1 / 4 / 2 |
+| Median successful-attempt seconds | 16.97 | 5.68 |
+
+Only MCP has retrieval, enforced workflows and fixed notices. The paired runner omits the companion's extra source-review stage. Honest abstention can leave a lookup incomplete; a task score is separate from source fidelity. This compares workflows, not isolated model ability. N/A is excluded from fidelity rates. Timings are uncontrolled and establish no speed advantage.
+
+## Why the earlier figures changed
+
+The .5 drop from paired MCP 7/7 to 5/7 came from two newly generated answers: R01 omitted quantitative milk findings and inferred monitoring advice from study observations; R03 left the adult warning comparison incomplete. The preceding routing-only change did not alter those tools or paired instructions, so the score change does not establish that routing caused the failures. Answers, live sources and model judgments vary.
+
+The .5 research score 18/21 meant three answers were graded incomplete: R12 omitted a generalizability caveat, P01 omitted the numeric empty-year count, and D05 received a disputed dose allegation plus an axis-placement concern. These were model task grades, not unit-test failures.
+
+| Historical revision | Local tests | Research fidelity / tasks | Paired tasks MCP / plain |
+|---|---:|---|---|
+| .4 | 508 | 19/21 / 19/21 | 7/7 / 0/7 |
+| .5 | 531 | 21/21 / 18/21 | 5/7 / 0/7 |
+| Intermediate .6 | 548 | 20/21 / 20/21 | 5/7 / 1/7 |
+| Intermediate .8 | 557 | 20/21 / 18/21 | Full pairs intentionally not run |
+
+The .6 run fixed the preceding research omissions and adult-label comparison, but the numeric-concentration omission persisted in paired R01. A payload-only .7 pilot also failed that requirement; both failed versions remain preserved. The .8 shared concentration clarification passed its R01 paired pilot. Its research run then exposed the omitted report context in E01 and added reassuring wording in S6-pregnancy. The .8 full paired phase was intentionally stopped before generation so these further presentation issues could be repaired; it is not a complete paired benchmark. Its separate D05 task failure quotes reference doses absent from the answer, documented in the [historical exact-text audit](../exposure-contract-revision/grader-attribution-audit.json). No historical score was changed.
+
+## Method and limitations
+
+The model, 28 questions, seven paired questions, criteria and grader v2 are retained. Both arms load the same production concentration, report-context and neutral-framing instructions. The answer prompt intentionally changed; the judge prompt did not. Two research pilot answers and one paired question's two answers are reused once in the final set, not extra independent samples. The final iteration changes six source files and adds five unit cases. All 15 changed source files since .5 are in the [cumulative diff](cumulative-source-changes.diff).
+
+Chat and paired captures each use one worker and run as independent concurrent pipelines. Inter-case chat pause is two seconds. MLflow grading uses four workers per sequential phase. Timing is uncontrolled and no speed comparison is claimed.
+
+The [MLflow parent run](https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/4985cc9db298488c8c18bbd1c84735be) records precomputed fresh deployed captures with one root span per row; full tool traces and references are artifacts. This is not a remote notebook or cluster unit-test run. Existing refreshable CLI sign-in supplies authentication.
+
+Fidelity asks whether substantive claims are supported by the bounded captured pool. Task fulfillment asks whether the lookup and output requirements were met; one omitted requirement can fail a whole task. A source-supported answer can still be incomplete. Unsupported in the captured pool does not by itself establish medical falsity. A URL match does not establish claim support.
+
+E01 task flags quote reference doses absent from the answers. Raw grades retained; no clinician review.
+
+Known development questions, one completed sample per arm, changing sources, same-family model grading, bounded references and no clinician adjudication limit the findings. Exact negatives and technical observations are retained in [TECHNICAL_REVIEW.md](TECHNICAL_REVIEW.md) and [grading-review.json](grading-review.json). Raw model scores are not overridden. Passing execution checks and required notices do not establish clinical safety, sensitivity or general accuracy.
+
+## Artifacts
+
+Changes are in this submission folder's `server` and `chat-client` directories. The source freeze and active deployment hashes identify the evaluated version. The deck, evaluation DOCX and package entry points use this final revision. Saved screenshots and video illustrate .4 and remain labeled historical. No GitHub upload occurred.

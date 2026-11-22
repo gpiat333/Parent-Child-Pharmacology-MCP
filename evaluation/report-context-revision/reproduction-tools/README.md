@@ -1,0 +1,1 @@
+Exact local orchestration helpers for this evaluation. Paths are machine-specific and must be adapted elsewhere. Existing Databricks CLI sign-in supplies authentication; no credentials are embedded. Deployment helpers are audit records, not instructions to redeploy. MLflow evaluates fresh deployed captures in precomputed mode; full tool-call traces are artifacts.

@@ -1,0 +1,83 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The DailyMed citation supports the identified QPharma product label, adult warnings and adverse reactions, lactation language, truncation, and missing-section limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The LactMed citation supports the reported milk and infant-serum concentrations, observed infant findings, source recommendations, and study-population limitations.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "It identifies greater risk in settings including significant kidney dysfunction, tissue hypoperfusion or low oxygenation, unstable heart failure, older age, liver disease, dehydration, sepsis, excessive alcohol intake, surgery, and contrast studies.",
+        "reference_quote": "In addition, Metformin Hydrochloride Tablets USP should be temporarily discontinued prior to any intravascular radiocontrast study and for any surgical procedure",
+        "explanation": "The label associates increased lactic-acidosis risk with several medical conditions, but the retrieved passage describes surgery and contrast studies as circumstances requiring temporary discontinuation, not as settings that increase risk. This is an unsupported conflation of the label's procedural precaution with its risk-factor statements."
+      }
+    ],
+    "rationale": "The answer largely fulfills the comparison, separates adult label warnings from infant observations and exposure measurements, identifies the retrieved products and sources, discloses missing sections, and avoids administered doses. Its main fidelity defect is treating surgery and contrast studies as increased-risk settings rather than reporting the label's separate temporary-discontinuation precaution."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "355b1ed3c58b6fb6c22092a574b31da1ceb82123373aade87aea07a59b0ea155",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 25,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed citation supports the identified QPharma product label, adult warnings and adverse reactions, lactation language, truncation, and missing-section limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed citation supports the reported milk and infant-serum concentrations, observed infant findings, source recommendations, and study-population limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"It identifies greater risk in settings including significant kidney dysfunction, tissue hypoperfusion or low oxygenation, unstable heart failure, older age, liver disease, dehydration, sepsis, excessive alcohol intake, surgery, and contrast studies.\",\n      \"reference_quote\": \"In addition, Metformin Hydrochloride Tablets USP should be temporarily discontinued prior to any intravascular radiocontrast study and for any surgical procedure\",\n      \"explanation\": \"The label associates increased lactic-acidosis risk with several medical conditions, but the retrieved passage describes surgery and contrast studies as circumstances requiring temporary discontinuation, not as settings that increase risk. This is an unsupported conflation of the label's procedural precaution with its risk-factor statements.\"\n    }\n  ],\n  \"rationale\": \"The answer largely fulfills the comparison, separates adult label warnings from infant observations and exposure measurements, identifies the retrieved products and sources, discloses missing sections, and avoids administered doses. Its main fidelity defect is treating surgery and contrast studies as increased-risk settings rather than reporting the label's separate temporary-discontinuation precaution.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 58167,
+        "completion_tokens": 798,
+        "total_tokens": 58965,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 58164,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 346,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 58167,
+    "completion_tokens": 798,
+    "total_tokens": 58965,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 58164,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 346,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

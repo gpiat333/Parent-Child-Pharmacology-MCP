@@ -1,0 +1,88 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 13,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/2591497/properties.json",
+        "status": "supported",
+        "reason": "The evidence confirms exact resolution of daridorexant to RxCUI 2591497."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef",
+        "status": "supported",
+        "reason": "The label supports insufficient human pregnancy data, the animal findings, and the pregnancy registry phone number."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The reference evidence shows this maternal-pregnancy pharmacokinetic query returned zero records."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The reference evidence shows three retrieved records with empty abstracts and unestablished pregnancy source populations."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630579/",
+        "status": "supported",
+        "reason": "The record is one of the three retrieved records and its abstract was empty."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35802843/",
+        "status": "supported",
+        "reason": "The record is one of the three retrieved records and its abstract was empty."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630580/",
+        "status": "supported",
+        "reason": "The record is one of the three retrieved records and its abstract was empty."
+      },
+      {
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+        "status": "supported",
+        "reason": "The FDA directory evidence lists the QUVIVIQ Pregnancy Registry, website, phone number, and ongoing status, with non-endorsement and verification limitations."
+      },
+      {
+        "url": "https://www.QuviviqPregnancyStudy.com",
+        "status": "supported",
+        "reason": "The website is listed in the FDA directory evidence as the registry website."
+      },
+      {
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule",
+        "status": "supported",
+        "reason": "The URL is included as a basis for the bounded source-review limitation regarding pregnancy resources."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
+        "status": "supported",
+        "reason": "The URL is included as a basis for the bounded source-review limitation and is correctly characterized as a lactation resource rather than pregnancy evidence."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer satisfies most structural requirements: all three axes remain visible, animal findings are separated from human evidence, empty abstracts are acknowledged, maternal PK is reported within the retrieved scope, the FDA directory and registry contacts are separated from evidence, and no medication decisions or doses are provided. However, it states: \"no human pregnancy outcome findings were retrieved\" and presents the outcomes row as empty for human outcomes. The reference evidence includes retrieved FAERS reports associated with fetal exposure during pregnancy and neonatal terms including premature baby, neonatal hypotonia, neonatal behavioural syndrome, neonatal respiratory distress, cardiac disorder, and cardiomegaly. These reports are not validated human outcomes and require strong caveats because the queried population is not established and the reports cannot establish causation or incidence, but they are nevertheless retrieved outcome-related evidence and should not be omitted while asserting that no such findings were retrieved. This omission and contradiction means the requested observed-outcomes axis was not fully fulfilled."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 26652,
+    "completion_tokens": 1908,
+    "total_tokens": 28560,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 26649,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

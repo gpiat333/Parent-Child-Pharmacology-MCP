@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-20",
+  "scope": "Packaged source only; no deployed calls",
+  "bounded_tools": [
+    {
+      "tool": "search_medication_recalls",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_drug_safety_alerts",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "find_recruiting_studies",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_pregnancy_registries",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_parent_input_opportunities",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_lactmed",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "semantic_search_lactmed",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_literature",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_pediatric_labeling_changes",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_trials",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_funded_research",
+      "minimum": 1,
+      "maximum": 25
+    },
+    {
+      "tool": "search_mprint_gold",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "get_mprint_gold_outcomes",
+      "minimum": 1,
+      "maximum": 20
+    },
+    {
+      "tool": "search_mprint",
+      "minimum": 1,
+      "maximum": 15
+    },
+    {
+      "tool": "get_adverse_event_signals",
+      "minimum": 1,
+      "maximum": 25
+    },
+    {
+      "tool": "search_bpca_evidence",
+      "minimum": 1,
+      "maximum": 25
+    },
+    {
+      "tool": "search_nichd_studies",
+      "minimum": 1,
+      "maximum": 25
+    }
+  ],
+  "rejected_cases": [
+    {
+      "tool": "search_lactmed",
+      "arguments": {
+        "drug": "sertraline",
+        "max_results": -1
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_lactmed_record",
+      "arguments": {
+        "book_id": ""
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_lactmed_record",
+      "arguments": {
+        "book_id": " "
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_abstracts",
+      "arguments": {
+        "pmids": []
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_abstracts",
+      "arguments": {
+        "pmids": [
+          ""
+        ]
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_mprint_gold_outcomes",
+      "arguments": {
+        "pmid": ""
+      },
+      "rejected_before_callback": true
+    },
+    {
+      "tool": "get_patient_education",
+      "arguments": {
+        "topic": "test",
+        "rxcui": ""
+      },
+      "rejected_before_callback": true
+    }
+  ]
+}

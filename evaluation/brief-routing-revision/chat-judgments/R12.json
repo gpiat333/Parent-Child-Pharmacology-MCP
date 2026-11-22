@@ -1,0 +1,42 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25",
+        "status": "supported",
+        "reason": "The returned MCP evidence gives this exact query, its age scope (ages 0 through 12 coded in months), and the reported reaction counts cited in the answer."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The evidence associates this source with the limitations that FAERS counts reflect reporting volume, lack exposure denominators, cannot estimate incidence or risk, and do not establish causation."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately states the queried cohort scope and reports counts that match the retrieved MCP results, while correctly explaining that spontaneous-report counts describe reporting volume rather than incidence or causation and cannot be generalized to all infants. The clause that events may have other explanations, including underlying illness or other exposures, is reasonable but those specific examples are not directly stated in the supplied reference evidence. The general claim that low or absent reporting does not establish safety is consistent with the evidence status, though it is not separately cited."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 8891,
+    "completion_tokens": 866,
+    "total_tokens": 9757,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 8888,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

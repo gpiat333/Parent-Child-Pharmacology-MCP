@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 19,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "status": "supported",
+        "reason": "The retrieved MCP evidence gives the queried scope as ages 0 through 12 coded in months, excludes other age-unit encodings, and reports the cited reaction counts. It also supports the report-subset limitation and the statements that reporting volume does not establish incidence, risk, or causation."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The supplied MCP evidence associates this source with the interpretation that FAERS lacks exposure denominators, that counts cannot estimate incidence or individual risk, and that reports do not establish causation or generalize to all infants or exposed people."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately states the exact queried scope—FAERS reports for ages 0–12 months coded in months, with other age units excluded—and correctly presents the retrieved counts as reporting patterns rather than incidence or causal evidence. The listed counts match the MCP results: off-label use 135, drug administration error 121, vomiting 117, pyrexia 98, overdose 77, rash 60, and toxicity to various agents 58. It also correctly explains that these reports cannot establish side-effect frequency, causation, or risks for all infants or exposed infants. No substantive claim conflicts with the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 5995,
+    "completion_tokens": 974,
+    "total_tokens": 6969,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5992,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

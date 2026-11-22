@@ -1,0 +1,1 @@
+Historical initial November 21 run: 443 tests and 30 tools. Completed 28 chats and seven pairs before the final scientific-selector/Spanish-string correction. Raw records and matching source snapshot are retained unchanged. The paired E02 case exposed a cord-blood selector overblock. Current results are in ../program-safety-revision.

@@ -1,0 +1,62 @@
+{
+  "deployment": "01f1e460818a1da1b370b6a4e47f76ca",
+  "unit_tests": 186,
+  "deployed_checks": "18/18",
+  "client_checks": "12 policy + 7 citation + 4 privacy-trace + 5 citation-repair",
+  "refusal_controls": "16/16",
+  "calibration_gate_controls": "5/5",
+  "followup": {
+    "completed": 10,
+    "tool_selection": 10,
+    "boundary_behavior": 10,
+    "citation_provenance": 10
+  },
+  "raw_mlflow": {
+    "run_id": "c26935e4279f42baa32cbde33da7d327",
+    "profile": "full",
+    "status": "completed",
+    "metrics": {
+      "task_fulfillment_v2/mean": 0.9,
+      "citation_provenance/mean": 1.0,
+      "tool_selection/mean": 1.0,
+      "boundary_behavior/mean": 1.0,
+      "evidence_fidelity_v2/mean": 1.0
+    }
+  },
+  "judge_calibration": {
+    "evidence_fidelity_v2": {
+      "matched_controls": 4,
+      "total_controls": 4,
+      "calibration_passed": true,
+      "score_use": "passed_small_control_set_not_clinical_validation"
+    },
+    "task_fulfillment_v2": {
+      "matched_controls": 3,
+      "total_controls": 4,
+      "calibration_passed": false,
+      "score_use": "diagnostic_only_do_not_use_as_acceptance_gate"
+    }
+  },
+  "extra_calls_outside_original_allowed_sets": [
+    {
+      "id": "E01",
+      "tools": [
+        "search_literature",
+        "get_patient_education"
+      ]
+    },
+    {
+      "id": "E08",
+      "tools": [
+        "get_patient_education"
+      ]
+    }
+  ],
+  "live_citation_repair": {
+    "fixture": "Deliberately corrupted synthetic citation; source catalog from saved registry lookup",
+    "passed": true,
+    "repair_attempted": true,
+    "answer": "FDA pregnancy registry directory [S2](https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries)"
+  },
+  "client_sha256": "55725b3832d8b549d8f4d8477b63b55f735156babe6e32860f04f6cc9535f1b8"
+}

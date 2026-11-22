@@ -1,0 +1,42 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 12,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "status": "supported",
+        "reason": "The retrieved MCP evidence supports the queried age scope of 0 through 12 months with other age-unit encodings excluded, the counts for vomiting (117), pyrexia/fever (98), and rash (60), the additional medication-use and toxicity-related terms, the absence of an exposure denominator, and the non-causal interpretation of spontaneous reports."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "unverified",
+        "reason": "The evidence identifies this as the openFDA source and associates it with the denominator and causation caveat, but the supplied evidence does not include the documentation text needed to verify the separate claim that the documentation describes the data source and its use."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer accurately reports retrieved counts and the exact queried age scope, and correctly explains that FAERS reports indicate reporting volume rather than incidence, risk, or causation. However, it does not explicitly state the required limitation that a subset of queried reports cannot be generalized to all infants. It also presents an openFDA-documentation claim that is not verifiable from the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 5635,
+    "completion_tokens": 942,
+    "total_tokens": 6577,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5632,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

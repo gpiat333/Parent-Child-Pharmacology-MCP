@@ -1,0 +1,15 @@
+I queried acetaminophen in FDA’s FAERS database using the **infant** filter.
+
+**Age scope queried:** records with age coded in **months from 0 through 12**; records using other age units were excluded. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What the reports can tell researchers
+They show which event terms were reported and the volume of reports in that specific queried group. Returned terms included **vomiting** (117 reports), **pyrexia/fever** (98), and **rash** (60), as well as product-use and administration-related terms. These data can support safety-signal detection and hypothesis generation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What they cannot establish
+- They cannot establish **how often side effects occur** or calculate incidence or risk, because the reports do not provide the number of exposed infants—the exposure denominator is absent. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10) [S2](https://open.fda.gov/apis/drug/event/)
+- They cannot establish that acetaminophen **caused** any reported event. FAERS counts represent reporting volume, not risk, and spontaneous reports do not establish causation. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+- They do not represent all infants, all exposed infants, or all events involving acetaminophen; this lookup was limited to the stated age coding and query.
+
+These are limitations and interpretations returned by the MCP lookup, not evidence of clinical validation.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

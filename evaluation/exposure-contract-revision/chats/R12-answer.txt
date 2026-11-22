@@ -1,0 +1,27 @@
+The query covered acetaminophen FAERS reports with age coded in **months from 0 through 12**. Other age-unit encodings were excluded, so this is not a dataset of all infants or all exposed children. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What these reports can show
+
+They can show the **reporting volume of coded reaction terms** within that queried subset. Examples included:
+
+- Vomiting: **117 reports**
+- Pyrexia: **98**
+- Rash: **60**
+- Toxicity to various agents: **58**
+
+Some frequent terms were not clinical symptoms—for example, “off-label use” and product-use or administration-related terms. The returned metadata says the source population and exact age-band applicability were **not established in the returned metadata** for each listed term. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10)
+
+### What they cannot establish
+
+- **How often side effects occur:** FAERS lacks an exposure denominator—the number of infants who received acetaminophen—so these counts cannot calculate incidence, prevalence, or individual risk.
+- **Whether acetaminophen caused an event:** Spontaneous reports do not establish causation.
+- **Risk in all infants or all exposed infants:** The results cover only the queried report subset and cannot be generalized to those broader populations.
+- **That a report term represents a confirmed adverse effect:** A reported term is not, by itself, a verified diagnosis or causal finding.
+
+Thus, these counts represent **reporting volume, not incidence or causation**. They may describe reported signals, but the retrieved evidence cannot determine how frequently side effects occur or whether acetaminophen caused them. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10) [S2](https://open.fda.gov/apis/drug/event/)
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 13,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "status": "supported",
+        "reason": "The returned evidence confirms the queried scope of ages coded in months from 0 through 12, exclusion of other age-unit encodings, and the reported counts for vomiting (117), pyrexia (98), rash (60), and toxicity to various agents (58). It also supports the statements about reporting volume, non-symptom terms, and unestablished population and age-band applicability."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The retrieved evidence explicitly states that FAERS counts reflect reporting volume rather than risk, lack exposure denominators, do not establish causation, cannot calculate incidence or individual risk, and cannot be generalized to all infants or exposed people."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately reports the queried age scope and retrieved reaction counts, and correctly explains that the results describe only a queried report subset. It appropriately states that spontaneous-report counts cannot establish incidence, individual risk, causation, confirmed diagnoses, or population-wide risk. No substantive claim conflicts with the reference evidence, and the returned query is cited."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 5140,
+    "completion_tokens": 841,
+    "total_tokens": 5981,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5137,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 415,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

@@ -1,0 +1,44 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 10,
+    "contradicted_claims": 1,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metformin",
+        "status": "unverified",
+        "reason": "The supplied evidence supports label claims using a specific DailyMed lookup URL for the QPharma product, not this search-directory URL. The cited directory alone does not establish the associated claims."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/",
+        "status": "supported",
+        "reason": "The LactMed extract supports low milk concentrations, low estimated infant exposure, reported absence of adverse effects, growth and development observations, and limited study populations."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer appropriately separates adult label warnings from infant exposure and outcome findings, avoids dosing, and accurately reports most LactMed findings and limitations. However, the clause \"The U.S. prescribing information has a boxed warning for lactic acidosis\" is not established by the supplied retrieved evidence: the selected label extract lists \"boxed_warning\" among missing sections and warns that missing sections do not prove absence or presence. More importantly, the retrieved DailyMed label explicitly contains a lactation section warning that hypoglycemia in nursing infants may exist; the answer omits this infant-specific label warning and states broadly that the label does not provide an infant-specific warning equivalent to the adult boxed warning. That omission prevents a complete source comparison. The answer also fails to name the retrieved product precisely as \"METFORMIN HCL TABLET [QPHARMA, INC.]\" and does not disclose the label-extraction limitation that the warnings section was truncated and that the product/formulation was not confirmed. The B12 assertion is also not supported by the supplied extracted label evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 34297,
+    "completion_tokens": 1130,
+    "total_tokens": 35427,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 34294,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 669,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

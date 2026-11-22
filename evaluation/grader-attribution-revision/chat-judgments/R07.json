@@ -1,0 +1,73 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the study title, recruiting status, pediatric age range, Canadian location, epilepsy-related condition, observational design, study size, contact details, and study link.",
+        "url": "https://clinicaltrials.gov/study/NCT05863910"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the bounded Canadian recruiting-study query and the returned-record count and search limitations.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=pediatric+epilepsy+AND+%28child+OR+infant%29&filter.overallStatus=RECRUITING&pageSize=20&format=json&query.locn=Canada"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer accurately reports the single returned recruiting Canadian pediatric record, includes a direct study link and contact, preserves the indirect and unconfirmed epilepsy relevance, does not substitute completed studies, and appropriately avoids claiming an exhaustive absence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "45124fa352f4c2abc16347bbd21472fc9b9c17f458723c891d6b5fd59c25cffb",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 14,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the study title, recruiting status, pediatric age range, Canadian location, epilepsy-related condition, observational design, study size, contact details, and study link.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded Canadian recruiting-study query and the returned-record count and search limitations.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer accurately reports the single returned recruiting Canadian pediatric record, includes a direct study link and contact, preserves the indirect and unconfirmed epilepsy relevance, does not substitute completed studies, and appropriately avoids claiming an exhaustive absence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 5085,
+        "completion_tokens": 446,
+        "total_tokens": 5531,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 5082,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 201,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 5085,
+    "completion_tokens": 446,
+    "total_tokens": 5531,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5082,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 201,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

@@ -1,0 +1,47 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 15,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/161/properties.json",
+        "status": "supported",
+        "reason": "The retrieved RxNorm evidence identifies acetaminophen as an exact ingredient match."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=10",
+        "status": "supported",
+        "reason": "The returned query matches acetaminophen, restricts age units to months and ages 0 through 12, and returns the cited reaction terms and counts. The evidence also states that counts reflect reporting volume, do not establish causation, and lack exposure denominators."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The retrieved MCP evidence associates this source with the interpretation that spontaneous-report counts cannot estimate incidence or individual risk and do not establish causation."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately reports the retrieved reaction counts, states the actual queried cohort scope as ages coded in months from 0 through 12 inclusive, and correctly explains that FAERS reporting volumes cannot establish incidence, individual risk, or causation. It also appropriately cautions that administration and use-related terms are not automatically adverse effects and that the results are signals rather than proof. The returned evidence confirms the listed counts and the query scope; no substantive claims are contradicted or left unverifiable."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 5779,
+    "completion_tokens": 978,
+    "total_tokens": 6757,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 5776,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 512,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

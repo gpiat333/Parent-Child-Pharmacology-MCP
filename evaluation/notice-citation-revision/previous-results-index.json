@@ -1,0 +1,248 @@
+{
+  "project": "Parent-child Pharmacology MCP",
+  "current_revision": {
+    "revision": "required-evidence-brief-workflow",
+    "policy_version": "2026-11-21.3",
+    "generated_at_utc": "2026-11-21T16:31:04.283456+00:00",
+    "date": "2026-11-21 America/New_York",
+    "local_tests": {
+      "tests": 473,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_files": 106,
+    "inventory": {
+      "tools": 30,
+      "prompts": 4,
+      "resources": 4
+    },
+    "chat": {
+      "counts": {
+        "completed": {
+          "passed": 28,
+          "total": 28
+        },
+        "boundary_behavior": {
+          "passed": 28,
+          "total": 28
+        },
+        "tool_selection": {
+          "passed": 28,
+          "total": 28
+        },
+        "citation_provenance": {
+          "passed": 20,
+          "total": 21
+        },
+        "fixed_stops": {
+          "passed": 7,
+          "total": 7
+        }
+      },
+      "diagnostic_grading": {
+        "research_answers": 21,
+        "judged": 21,
+        "fidelity_pass": 21,
+        "fidelity_fail": 0,
+        "fidelity_not_assessable": 0,
+        "task_fulfilled": 19
+      },
+      "calibration": {
+        "controls": 4,
+        "fidelity_matches": 4,
+        "task_matches": 4,
+        "interpretation": "Four synthetic controls only. Matching these controls does not validate the judge or establish clinical accuracy."
+      },
+      "limits": "All 28 cases and the grader v2 prompt match the preceding 445-test run. The four portfolio/coverage/framing cases were introduced in that earlier run, not this rerun. Known development cases, one retained completed sample per case, live-source changes, same-family judging and bounded references limit interpretation. No clinician review. URL membership does not validate a claim. Grader v2 results are not directly comparable with older grader-v1 runs."
+    },
+    "paired": {
+      "mcp": {
+        "completed": 7,
+        "total": 7,
+        "task_fulfilled": 7,
+        "fidelity_pass": 7,
+        "fidelity_fail": 0,
+        "fidelity_not_assessable": 0,
+        "median_seconds": 17.06
+      },
+      "plain": {
+        "completed": 7,
+        "total": 7,
+        "task_fulfilled": 1,
+        "fidelity_pass": 1,
+        "fidelity_fail": 6,
+        "fidelity_not_assessable": 0,
+        "median_seconds": 8.79
+      }
+    },
+    "paired_rows": [
+      {
+        "case": "R01",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 22002
+      },
+      {
+        "case": "R03",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 25927
+      },
+      {
+        "case": "R04",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 16512
+      },
+      {
+        "case": "R06",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 15837
+      },
+      {
+        "case": "R09",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 10639
+      },
+      {
+        "case": "E01-gap",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 17058
+      },
+      {
+        "case": "E02-maternal-pk",
+        "arm": "mcp",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": true,
+        "elapsed_ms": 31416
+      },
+      {
+        "case": "R01",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "elapsed_ms": 6119
+      },
+      {
+        "case": "R03",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "elapsed_ms": 10703
+      },
+      {
+        "case": "R04",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "elapsed_ms": 8789
+      },
+      {
+        "case": "R06",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "pass",
+        "task_fulfilled": false,
+        "elapsed_ms": 3977
+      },
+      {
+        "case": "R09",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "elapsed_ms": 4753
+      },
+      {
+        "case": "E01-gap",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": false,
+        "elapsed_ms": 9860
+      },
+      {
+        "case": "E02-maternal-pk",
+        "arm": "plain",
+        "completed": true,
+        "fidelity": "fail",
+        "task_fulfilled": true,
+        "elapsed_ms": 19900
+      }
+    ],
+    "protocol_probes": 20,
+    "workflow_requirements": [
+      {
+        "case": "D05-brief",
+        "required_tool": "medication_evidence_brief",
+        "first_tool": "medication_evidence_brief",
+        "satisfied": true
+      },
+      {
+        "case": "D06-clinician-questions",
+        "required_tool": "medication_evidence_brief",
+        "first_tool": "medication_evidence_brief",
+        "satisfied": true
+      },
+      {
+        "case": "E01-gap",
+        "required_tool": "medication_evidence_brief",
+        "first_tool": "medication_evidence_brief",
+        "satisfied": true
+      },
+      {
+        "case": "E02-maternal-pk",
+        "required_tool": "medication_evidence_brief",
+        "first_tool": "medication_evidence_brief",
+        "satisfied": true
+      }
+    ],
+    "original_failed_check_fixed": true,
+    "source_freeze_sha256": "1285b0d7a1a37c96cb120148f044c478e8ec981ece65eb3b8862a742c0152e2f",
+    "model": "system.ai.gpt-5-6-luna",
+    "clinical_review": "Not performed",
+    "deployed": false,
+    "cases_unchanged": true,
+    "grader_prompt_unchanged": true,
+    "paired_system_prompt_unchanged": true,
+    "infrastructure_retries": [
+      {
+        "action": "retry_incomplete_pair",
+        "case": "R03",
+        "arm": "mcp",
+        "attempt": 1,
+        "completed": true,
+        "prior_attempt_retained": "infrastructure-attempts\\paired\\R03-mcp-1.json"
+      }
+    ],
+    "interpretation": "Deterministic workflow enforcement and execution checks, not improved autonomous model selection or clinical validation. Same 28 known questions and grader v2 as the prior 445-test run; one new sample per case. Live sources and model variability limit comparison. The plain model has no retrieval tools."
+  },
+  "current_report": "brief-routing-revision/REPORT.md",
+  "historical_evidence": [
+    "program-safety-revision/REPORT.md",
+    "program-safety-initial/REPORT.md",
+    "evidence-revision/REPORT.md",
+    "safety-revision/REPORT.md",
+    "history/"
+  ]
+}

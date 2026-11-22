@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 12,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25",
+        "status": "supported",
+        "reason": "The retrieved MCP evidence gives the queried scope as ages coded in months 0 through 12, lists the cited reaction counts, and states that the results are reporting volume rather than incidence, do not establish causation, and cannot be generalized to all infants."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The supplied MCP evidence associates this URL with the limitations that FAERS counts lack exposure denominators, do not establish causation, and cannot estimate incidence or individual risk."
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "rationale": "The answer accurately reports the retrieved age scope and example events/counts, and correctly distinguishes reporting volume from incidence, risk, causation, and generalizability. One interpretive statement—\"signal generation and prioritizing follow-up research\"—is reasonable but is not directly stated in the supplied reference evidence; it is explicitly labeled as interpretation rather than presented as a retrieved finding. No claims are contradicted, and retrieval was successful."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 9363,
+    "completion_tokens": 985,
+    "total_tokens": 10348,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 9360,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 574,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

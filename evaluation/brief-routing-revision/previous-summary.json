@@ -1,0 +1,213 @@
+{
+  "revision": "program-discovery-and-safety-context-final",
+  "policy_version": "2026-11-21.2",
+  "date": "2026-11-21 America/New_York",
+  "generated_at_utc": "2026-11-21T15:19:09.671292+00:00",
+  "local_tests": {
+    "tests": 445,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "inventory": {
+    "tools": 30,
+    "prompts": 4,
+    "resources": 4
+  },
+  "original_false_positive_fixed": true,
+  "chat": {
+    "counts": {
+      "completed": {
+        "passed": 28,
+        "total": 28
+      },
+      "boundary_behavior": {
+        "passed": 28,
+        "total": 28
+      },
+      "tool_selection": {
+        "passed": 27,
+        "total": 28
+      },
+      "citation_provenance": {
+        "passed": 21,
+        "total": 21
+      },
+      "fixed_stops": {
+        "passed": 7,
+        "total": 7
+      }
+    },
+    "diagnostic_grading": {
+      "research_answers": 21,
+      "judged": 21,
+      "fidelity_pass": 20,
+      "fidelity_fail": 1,
+      "fidelity_not_assessable": 0,
+      "task_fulfilled": 17
+    },
+    "calibration": {
+      "controls": 4,
+      "fidelity_matches": 4,
+      "task_matches": 4,
+      "interpretation": "Four synthetic controls only. Matching these controls does not validate the judge or establish clinical accuracy."
+    },
+    "limits": "One run of 24 known cases plus four new portfolio/coverage/framing cases. Grader v2 retains content flags and clarifies footer/abstention handling. Scores are not directly comparable with the previous grader. Diagnostic same-family grader, no clinician review. URL membership does not validate a claim. Failure/abstention and missing evidence remain visible. No deployment."
+  },
+  "paired": {
+    "mcp": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 6,
+      "fidelity_pass": 6,
+      "fidelity_fail": 1,
+      "fidelity_not_assessable": 0,
+      "median_seconds": 22.88
+    },
+    "plain": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 1,
+      "fidelity_pass": 2,
+      "fidelity_fail": 5,
+      "fidelity_not_assessable": 0,
+      "median_seconds": 7.07
+    }
+  },
+  "paired_rows": [
+    {
+      "case": "R01",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 22879,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": false
+    },
+    {
+      "case": "R03",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 23690,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "honest_abstention": false
+    },
+    {
+      "case": "R04",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 13429,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": false
+    },
+    {
+      "case": "R06",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 21428,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": false
+    },
+    {
+      "case": "R09",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 11987,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": true
+    },
+    {
+      "case": "E01-gap",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 34840,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": false
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "mcp",
+      "completed": true,
+      "elapsed_ms": 54941,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "honest_abstention": false
+    },
+    {
+      "case": "R01",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 6681,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "honest_abstention": false
+    },
+    {
+      "case": "R03",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 10632,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "honest_abstention": false
+    },
+    {
+      "case": "R04",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 7074,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "honest_abstention": true
+    },
+    {
+      "case": "R06",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 4544,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "honest_abstention": true
+    },
+    {
+      "case": "R09",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 5172,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "honest_abstention": true
+    },
+    {
+      "case": "E01-gap",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 10970,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "honest_abstention": false
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "plain",
+      "completed": true,
+      "elapsed_ms": 20381,
+      "fidelity": "fail",
+      "task_fulfilled": true,
+      "honest_abstention": true
+    }
+  ],
+  "protocol_probes": 17,
+  "source_freeze_sha256": "38d4a76152e53fcd07342a6ea658d1455bf5b338e957272a49d1fdaf882dc5c7",
+  "model": "system.ai.gpt-5-6-luna",
+  "clinical_review": "Not performed",
+  "deployed": false,
+  "infrastructure_retries": [],
+  "grader_version": "v2: content flags retained; footer/access-abstention rules clarified",
+  "interpretation": "Execution and diagnostic model labels only. No clinical accuracy or speed superiority. Known cases, one run, same-family judge, bounded references. Changed grading rules and expanded cases prevent direct improvement claims."
+}

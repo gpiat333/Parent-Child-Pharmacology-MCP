@@ -1,0 +1,43 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 4,
+    "contradicted_claims": 1,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts",
+        "status": "unverified",
+        "reason": "The reference pool contains this URL only as a link and does not provide page content establishing the associated claims beyond identifying it as an FDA recall resource."
+      },
+      {
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-recalls",
+        "status": "unverified",
+        "reason": "The reference pool supplies this URL as official recall guidance but does not provide page content supporting the answer's statement that the page explains recalls are tied to specific products and lots."
+      }
+    ],
+    "uncited_source_claims": 5,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer correctly states that a no-match does not establish that a bottle was unaffected and appropriately calls for verification of the exact product, manufacturer, formulation, lot, expiration, and distribution records. Those points are supported by the reference evidence, whose explicit limitations say that candidate matches are not bottle-level clearance and that no match does not prove safety. However, the clause \"I cannot perform a live FDA recall-database search here, so I cannot verify whether NOTREAL-77 appears in current records\" conflicts with the supplied evidence: live FDA enforcement searches were performed for naproxen with lot NOTREAL-77, and the results characterize the lot as not found in the returned recall text, expressly not as clearance. The answer therefore did not fulfill the requested lookup. Claims about manufacturer/pharmacy-level withdrawals, illegible or misread lot numbers, and counterfeit or diverted products are not established in the reference pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 16555,
+    "completion_tokens": 1069,
+    "total_tokens": 17624,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 16552,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 638,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "arm_label_hidden": true,
+  "independent_clinician_review": false
+}

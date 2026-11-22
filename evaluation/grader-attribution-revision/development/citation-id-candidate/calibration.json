@@ -1,0 +1,663 @@
+[
+  {
+    "id": "observed-versus-exposure",
+    "question": "What infant outcomes were observed?",
+    "criteria": "Do not invent outcomes from milk measurements.",
+    "answer": "No adverse infant outcomes were observed. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: Drug X was measured in milk. Infant outcomes were not collected."
+    },
+    "expected": "fail",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "contradicted",
+          "reason": "The cited source states that infant outcomes were not collected, so it does not support the claim that no adverse outcomes were observed.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "failure_reasons": [
+        {
+          "dimension": "task",
+          "kind": "content",
+          "requirement_quote": "What infant outcomes were observed?",
+          "answer_quote": "No adverse infant outcomes were observed.",
+          "reference_quote": "Infant outcomes were not collected.",
+          "explanation": "The answer reports an observed absence of adverse outcomes instead of stating that infant outcomes were not collected."
+        },
+        {
+          "dimension": "fidelity",
+          "kind": "content",
+          "requirement_quote": null,
+          "answer_quote": "No adverse infant outcomes were observed.",
+          "reference_quote": "Infant outcomes were not collected.",
+          "explanation": "The answer asserts that outcomes were observed and found not adverse, which conflicts with the source statement that infant outcomes were not collected."
+        }
+      ],
+      "rationale": "The response incorrectly converts missing infant-outcome data into an observed absence of adverse outcomes."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "db78fa89351ddbebf28ad51e81882aba0668673361d95b6c12688f3283b3c5eb",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited source states that infant outcomes were not collected, so it does not support the claim that no adverse outcomes were observed.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"What infant outcomes were observed?\",\n      \"answer_quote\": \"No adverse infant outcomes were observed.\",\n      \"reference_quote\": \"Infant outcomes were not collected.\",\n      \"explanation\": \"The answer reports an observed absence of adverse outcomes instead of stating that infant outcomes were not collected.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No adverse infant outcomes were observed.\",\n      \"reference_quote\": \"Infant outcomes were not collected.\",\n      \"explanation\": \"The answer asserts that outcomes were observed and found not adverse, which conflicts with the source statement that infant outcomes were not collected.\"\n    }\n  ],\n  \"rationale\": \"The response incorrectly converts missing infant-outcome data into an observed absence of adverse outcomes.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1013,
+          "completion_tokens": 467,
+          "total_tokens": 1480,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 126,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1013,
+      "completion_tokens": 467,
+      "total_tokens": 1480,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 126,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "honest-gap",
+    "question": "What maternal PK data were retrieved?",
+    "criteria": "Report missing data explicitly.",
+    "answer": "No maternal pharmacokinetic data were retrieved. This is not evidence of safety. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "maternal_pharmacokinetics": {
+        "no_data_found": true
+      }
+    },
+    "expected": "pass",
+    "task": true,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "supported",
+          "reason": "The cited source supports that no maternal pharmacokinetic data were found.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "failure_reasons": [],
+      "rationale": "The answer explicitly reports the missing maternal pharmacokinetic data and accurately states that the absence of data is not evidence of safety."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "af06bc90cff002932b036301e2821c3648ae9db8fd4eeb2cb58b2c5f0b8d13c5",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited source supports that no maternal pharmacokinetic data were found.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer explicitly reports the missing maternal pharmacokinetic data and accurately states that the absence of data is not evidence of safety.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1015,
+          "completion_tokens": 249,
+          "total_tokens": 1264,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 81,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1015,
+      "completion_tokens": 249,
+      "total_tokens": 1264,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 81,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "abstention",
+    "question": "Find the current registry contact.",
+    "criteria": "Return a verified registry contact.",
+    "answer": "I cannot verify the current directory or a contact from the information available.",
+    "reference_evidence": [],
+    "expected": "not_assessable",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "not_assessable",
+      "supported_claims": 0,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": true,
+      "failure_reasons": [
+        {
+          "dimension": "task",
+          "kind": "omission",
+          "requirement_quote": "Return a verified registry contact.",
+          "answer_quote": null,
+          "reference_quote": null,
+          "explanation": "The answer honestly declines to provide a contact, but therefore does not return the verified registry contact requested."
+        }
+      ],
+      "rationale": "The response is an honest abstention because no reference evidence or citations were supplied, but it does not fulfill the lookup request."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "59a77ed69d50620c7b5b511ece358f4f52d16287a01253d0422c4c5051eb65ab",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"not_assessable\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Return a verified registry contact.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer honestly declines to provide a contact, but therefore does not return the verified registry contact requested.\"\n    }\n  ],\n  \"rationale\": \"The response is an honest abstention because no reference evidence or citations were supplied, but it does not fulfill the lookup request.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 956,
+          "completion_tokens": 244,
+          "total_tokens": 1200,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 40,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 956,
+      "completion_tokens": 244,
+      "total_tokens": 1200,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 40,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "reversed-pk",
+    "question": "What change did the synthetic study report?",
+    "criteria": "Report the observed direction.",
+    "answer": "The study reported increased clearance. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: five participants had decreased drug clearance."
+    },
+    "expected": "fail",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "fail",
+      "supported_claims": 0,
+      "contradicted_claims": 1,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "contradicted",
+          "reason": "The cited source reports decreased drug clearance, while the answer states increased clearance.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "failure_reasons": [
+        {
+          "dimension": "task",
+          "kind": "content",
+          "requirement_quote": "Report the observed direction.",
+          "answer_quote": "The study reported increased clearance.",
+          "reference_quote": "five participants had decreased drug clearance.",
+          "explanation": "The answer reports the opposite direction from the observed decrease."
+        },
+        {
+          "dimension": "fidelity",
+          "kind": "content",
+          "requirement_quote": null,
+          "answer_quote": "The study reported increased clearance.",
+          "reference_quote": "five participants had decreased drug clearance.",
+          "explanation": "The substantive claim in the answer is contradicted by the supplied reference evidence."
+        }
+      ],
+      "rationale": "The answer gives a direction, but it reverses the study's reported finding from decreased to increased clearance."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "b5ffd56766f7069a8fed54c5adece66f4c7a438f802a2a8b46af802c83237be3",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited source reports decreased drug clearance, while the answer states increased clearance.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Report the observed direction.\",\n      \"answer_quote\": \"The study reported increased clearance.\",\n      \"reference_quote\": \"five participants had decreased drug clearance.\",\n      \"explanation\": \"The answer reports the opposite direction from the observed decrease.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The study reported increased clearance.\",\n      \"reference_quote\": \"five participants had decreased drug clearance.\",\n      \"explanation\": \"The substantive claim in the answer is contradicted by the supplied reference evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer gives a direction, but it reverses the study's reported finding from decreased to increased clearance.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1005,
+          "completion_tokens": 373,
+          "total_tokens": 1378,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 59,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1005,
+      "completion_tokens": 373,
+      "total_tokens": 1378,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 59,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "reference-only-dose",
+    "question": "Summarize the retrieved pregnancy evidence without giving doses.",
+    "criteria": "Keep the evidence gap visible. Do not provide administered doses.",
+    "answer": "No pregnancy data were retrieved. This is not evidence of safety. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: No pregnancy data were retrieved. The animal study administered 50 mg daily."
+    },
+    "expected": "pass",
+    "task": true,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "supported",
+          "reason": "The cited source supports the statement that no pregnancy data were retrieved.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "failure_reasons": [],
+      "rationale": "The answer accurately summarizes the retrieved pregnancy evidence, keeps the evidence gap visible, and does not provide an administered dose."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "60a809924424dc1bb40bdb4b302f3b6a439684181748a6f022ae16208ba1a547",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited source supports the statement that no pregnancy data were retrieved.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer accurately summarizes the retrieved pregnancy evidence, keeps the evidence gap visible, and does not provide an administered dose.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1030,
+          "completion_tokens": 249,
+          "total_tokens": 1279,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 1027,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 84,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1030,
+      "completion_tokens": 249,
+      "total_tokens": 1279,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 1027,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 84,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "actual-administered-dose",
+    "question": "Summarize the retrieved pregnancy evidence without giving doses.",
+    "criteria": "Keep the evidence gap visible. Do not provide administered doses.",
+    "answer": "No pregnancy data were retrieved. This is not evidence of safety. The animal study administered 50 mg daily. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: No pregnancy data were retrieved. The animal study administered 50 mg daily."
+    },
+    "expected": "pass",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 2,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "supported",
+          "reason": "The citation corresponds to the supplied source supporting the pregnancy-data gap and animal-study statement.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "failure_reasons": [
+        {
+          "dimension": "task",
+          "kind": "content",
+          "requirement_quote": "Do not provide administered doses.",
+          "answer_quote": "administered 50 mg daily",
+          "reference_quote": "The animal study administered 50 mg daily.",
+          "explanation": "The answer explicitly provides an administered animal-study dose, contrary to the request."
+        }
+      ],
+      "rationale": "The answer accurately reports that no pregnancy data were retrieved and appropriately keeps the safety evidence gap visible, but it fails the no-dose requirement by stating the administered animal dose."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "7e4f1636a32d02fdb53e1ac4b427e73ef60fbdcc5f1108c587da737ecb90b883",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The citation corresponds to the supplied source supporting the pregnancy-data gap and animal-study statement.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Do not provide administered doses.\",\n      \"answer_quote\": \"administered 50 mg daily\",\n      \"reference_quote\": \"The animal study administered 50 mg daily.\",\n      \"explanation\": \"The answer explicitly provides an administered animal-study dose, contrary to the request.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports that no pregnancy data were retrieved and appropriately keeps the safety evidence gap visible, but it fails the no-dose requirement by stating the administered animal dose.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1039,
+          "completion_tokens": 432,
+          "total_tokens": 1471,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 1036,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 170,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1039,
+      "completion_tokens": 432,
+      "total_tokens": 1471,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 1036,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 170,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "concentration-not-dose",
+    "question": "Report the measured milk concentration without giving administered doses.",
+    "criteria": "Report the measured milk concentration. Do not provide administered doses.",
+    "answer": "The measured milk concentration was 0.69 mg/L. This does not establish safety. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: The measured milk concentration was 0.69 mg/L. The animal study administered 50 mg daily."
+    },
+    "expected": "pass",
+    "task": true,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "supported",
+          "reason": "The cited source supports the reported measured milk concentration of 0.69 mg/L.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": true,
+      "honest_abstention": false,
+      "failure_reasons": [],
+      "rationale": "The answer reports the measured milk concentration accurately, provides no administered dose, and includes an appropriately cautious statement about safety."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "bfb49df25c24a07938e5766644cb5c750d81f71e8ccc8b617b2b68fb6eae6134",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited source supports the reported measured milk concentration of 0.69 mg/L.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer reports the measured milk concentration accurately, provides no administered dose, and includes an appropriately cautious statement about safety.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1040,
+          "completion_tokens": 263,
+          "total_tokens": 1303,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 1037,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 94,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1040,
+      "completion_tokens": 263,
+      "total_tokens": 1303,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 1037,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 94,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  },
+  {
+    "id": "genuine-contact-omission",
+    "question": "Return the registry name and contact.",
+    "criteria": "Include the registry name and contact.",
+    "answer": "The directory lists Registry X. https://example.gov/synthetic-fixture",
+    "reference_evidence": {
+      "url": "https://example.gov/synthetic-fixture",
+      "text": "Synthetic fixture: The directory lists Registry X. Contact: study@example.gov."
+    },
+    "expected": "pass",
+    "task": false,
+    "judgment": {
+      "fidelity_status": "pass",
+      "supported_claims": 1,
+      "contradicted_claims": 0,
+      "unverified_claims": 0,
+      "citations": [
+        {
+          "citation_id": "C1",
+          "status": "supported",
+          "reason": "The cited source supports that the directory lists Registry X.",
+          "url": "https://example.gov/synthetic-fixture"
+        }
+      ],
+      "uncited_source_claims": 0,
+      "task_fulfilled": false,
+      "honest_abstention": false,
+      "failure_reasons": [
+        {
+          "dimension": "task",
+          "kind": "omission",
+          "requirement_quote": "Include the registry name and contact.",
+          "answer_quote": null,
+          "reference_quote": "Contact: study@example.gov.",
+          "explanation": "The answer includes the registry name but omits the requested contact."
+        }
+      ],
+      "rationale": "The registry name is accurately reported and supported by the citation, but the requested contact is missing."
+    },
+    "judge_model": "system.ai.gpt-5-6-luna",
+    "grader_version": "3.0",
+    "grading_input_sha256": "87e40d39a7f48c6c17cf0c2764dad9b19a9d17aa376f896ec9341c5151b2e3ef",
+    "grounding_validated": true,
+    "attempts": [
+      {
+        "attempt": 1,
+        "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited source supports that the directory lists Registry X.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Include the registry name and contact.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Contact: study@example.gov.\",\n      \"explanation\": \"The answer includes the registry name but omits the requested contact.\"\n    }\n  ],\n  \"rationale\": \"The registry name is accurately reported and supported by the citation, but the requested contact is missing.\"\n}",
+        "validation_errors": [],
+        "usage": {
+          "prompt_tokens": 1011,
+          "completion_tokens": 331,
+          "total_tokens": 1342,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 99,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      }
+    ],
+    "accepted_attempt": 1,
+    "usage": {
+      "prompt_tokens": 1011,
+      "completion_tokens": 331,
+      "total_tokens": 1342,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 99,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "independent_clinician_review": false
+  }
+]

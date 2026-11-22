@@ -1,0 +1,19 @@
+The query covered **infants coded as 0–12 months old**, using age recorded in months; other age-unit encodings were excluded. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+### What these reports can tell researchers
+
+They can show which reaction terms were reported and the corresponding **reporting volume** in that queried cohort. Examples included vomiting (117 reports), pyrexia (98), rash (60), irritability (42), seizure (35), acute hepatic failure (28), and liver injury (28). [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+The returned records also included medication-use and exposure-related terms such as administration error, overdose, and accidental exposure. These are report categories, not automatically adverse effects caused by acetaminophen. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+### What they cannot establish
+
+- **How often side effects occur:** The reports have no exposure denominator, so the counts cannot calculate incidence, prevalence, or individual risk.
+- **Whether acetaminophen caused a reported event:** The MCP interpretation states that spontaneous-report counts do not establish causation.
+- **That higher counts indicate higher risk:** The returned counts represent reporting volume, not risk.
+- **That unlisted effects did not occur:** This extract cannot establish absence of other events or safety.
+- **That the source population was fully characterized:** The returned population metadata marked the source population and confirmed age band as “not established” for the individual reaction terms, despite the query’s infant age filter. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25)
+
+Thus, these data are useful for describing reported signals and generating hypotheses, but they cannot determine how frequently adverse effects occur or prove that acetaminophen caused them. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25) [S2](https://open.fda.gov/apis/drug/event/)
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

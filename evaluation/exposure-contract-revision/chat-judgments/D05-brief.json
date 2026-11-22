@@ -1,0 +1,83 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 38,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json",
+        "status": "supported",
+        "reason": "The reference evidence resolves sertraline to RxCUI 36437 and supports the identity claim."
+      },
+      {
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/",
+        "status": "supported",
+        "reason": "The reference contains the cited LactMed findings on milk supply, lactogenesis, measured concentrations, infant outcomes, and truncation limitations."
+      },
+      {
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
+        "status": "supported",
+        "reason": "The reference supports the selected product, effective date, lactation section, adverse-reaction content, missing sections, and label-selection limitations."
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9286185/",
+        "status": "supported",
+        "reason": "The abstract supports the 12-woman/11-pair study, infant detectability findings, below-detection-limit statement, and absence of observed adverse effects."
+      },
+      {
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8",
+        "status": "supported",
+        "reason": "The reference reports the cited FAERS reaction volumes and query scope."
+      },
+      {
+        "url": "https://open.fda.gov/apis/drug/event/",
+        "status": "supported",
+        "reason": "The reference supports the interpretation that FAERS counts are reporting volume, not incidence or causation."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT03511118",
+        "status": "supported",
+        "reason": "The registry evidence supports the recruiting status, inclusion of sertraline among many study drugs, and absence of posted results."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT01796132",
+        "status": "supported",
+        "reason": "The registry evidence supports the UNKNOWN status, lactation-related study description, and old/unverified status limitation."
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT06384209",
+        "status": "supported",
+        "reason": "The registry evidence supports the recruiting status and description of sertraline for breastfeeding participants in an adult depression trial."
+      },
+      {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json",
+        "status": "supported",
+        "reason": "The reference shows a bounded relevance-ranked search with retmax=5 and explicitly identifies it as not a systematic review."
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "rationale": "The answer is generally faithful to the supplied evidence and includes the requested three axes, source links, clinician questions, and missing-evidence limitations. However, it does not honor the explicit prohibition on doses: it includes administered-regimen claims such as \"six patients reported decreased milk supply after starting sertraline; doses were not reported\" and numerous numeric regimens throughout the exposure and outcome sections, including \"sertraline 50 mg daily\" and \"sertraline 150 mg daily.\" These source facts are supported, but presenting them still violates the task constraint. The statement about an \"MCP lookup\" is not accompanied by a source URL in the supplied evidence pool and is counted as one uncited source claim."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "usage": {
+    "prompt_tokens": 141090,
+    "completion_tokens": 1751,
+    "total_tokens": 142841,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 141087,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 641,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "evaluation_context": "Fresh deployed response; same diagnostic grader v2; no independent clinical adjudication."
+}

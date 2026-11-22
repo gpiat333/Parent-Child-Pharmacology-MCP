@@ -1,0 +1,126 @@
+{
+  "verified_at_utc": "2026-11-21T22:25:50.608109+00:00",
+  "checks": [
+    {
+      "check": "LactMed exposes all source section roles",
+      "passed": true,
+      "detail": {
+        "returned": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "missing": [],
+        "truncated": false
+      }
+    },
+    {
+      "check": "Adult and population label sections retained together",
+      "passed": true,
+      "detail": {
+        "setid": "06ade2e1-5981-4e3d-b7e9-7ff083eb4551",
+        "adult_sections": [
+          "warnings",
+          "drug_interactions",
+          "adverse_reactions"
+        ],
+        "population_sections": [
+          "pregnancy",
+          "lactation",
+          "pediatric_use"
+        ]
+      }
+    },
+    {
+      "check": "FAERS subset cannot generalize",
+      "passed": true,
+      "detail": {
+        "cohort_scope": "Infant filter includes only ages coded in months from 0 through 12; other age-unit encodings are excluded.",
+        "notice_ids": [
+          "faers_population_scope",
+          "clinical_framing_review"
+        ]
+      }
+    },
+    {
+      "check": "Long LactMed brief retains maternal section",
+      "passed": true,
+      "detail": {
+        "returned": [
+          "Summary of Use during Lactation",
+          "Drug Levels",
+          "Effects in Breastfed Infants",
+          "Effects on Lactation and Breastmilk"
+        ],
+        "omitted": [],
+        "section_status": {
+          "Summary of Use during Lactation": {
+            "found": true,
+            "characters_in_source_extract": 1088,
+            "characters_returned": 1088,
+            "returned": true,
+            "truncated": false
+          },
+          "Drug Levels": {
+            "found": true,
+            "characters_in_source_extract": 10846,
+            "characters_returned": 5169,
+            "returned": true,
+            "truncated": true
+          },
+          "Effects in Breastfed Infants": {
+            "found": true,
+            "characters_in_source_extract": 12448,
+            "characters_returned": 5168,
+            "returned": true,
+            "truncated": true
+          },
+          "Effects on Lactation and Breastmilk": {
+            "found": true,
+            "characters_in_source_extract": 4456,
+            "characters_returned": 4456,
+            "returned": true,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "check": "Every requested year has an explicit count",
+      "passed": true,
+      "detail": {
+        "year_coverage": [
+          {
+            "fiscal_year": 2024,
+            "administering_ic_filter": "HD",
+            "retrieved_project_records": 0,
+            "portfolio_project_records": null,
+            "complete_result_set": false,
+            "interpretation": "Count in the retrieved extract only. Zero does not establish zero projects in the full portfolio unless the result set is complete."
+          },
+          {
+            "fiscal_year": 2025,
+            "administering_ic_filter": "HD",
+            "retrieved_project_records": 20,
+            "portfolio_project_records": null,
+            "complete_result_set": false,
+            "interpretation": "Count in the retrieved extract only. Zero does not establish zero projects in the full portfolio unless the result set is complete."
+          }
+        ],
+        "complete_result_set": false
+      }
+    },
+    {
+      "check": "Capped empty years do not claim zero full portfolio",
+      "passed": true,
+      "detail": {
+        "retrieved": 20,
+        "total_matching": 96
+      }
+    }
+  ],
+  "passed": 6,
+  "source": "Selected current-run captures from the unchanged 28-case benchmark.",
+  "scope": "Structural source/display contracts, not clinical validation or a separate answer score."
+}

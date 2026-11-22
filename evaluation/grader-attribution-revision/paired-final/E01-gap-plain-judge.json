@@ -1,0 +1,130 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 2,
+    "unverified_claims": 5,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not include or verify this URL as the applicable FDA-listed registry contact.",
+        "url": "https://womensmentalhealth.org/research/pregnancyregistry/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The supplied evidence includes a DailyMed label URL, but does not include or verify this 2022 FDA label URL.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      }
+    ],
+    "uncited_source_claims": 3,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": "FDA-approved Quviviq (daridorexant) prescribing information",
+        "reference_quote": null,
+        "explanation": "The answer cites a label URL but does not cite the FDA pregnancy-exposure-registry directory, which was explicitly required."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": "lists the following registry contact:",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer shows a separate registry-contact section, but gives contacts for the National Pregnancy Registry for Psychiatric Medications rather than the FDA-directory-listed QUVIVIQ Pregnancy Registry contact supplied in the evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "available postmarketing reports are insufficient",
+        "reference_quote": "There are no available data on QUVIVIQ use in pregnant women to evaluate for drug-associated risks of major birth defects, miscarriage, or other adverse maternal or fetal outcomes.",
+        "explanation": "The supplied evidence states that pregnancy data are unavailable; it does not support the answer's specific assertion about insufficient postmarketing reports."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "National Pregnancy Registry for Psychiatric Medications",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer identifies a different registry and provides different contact details from the QUVIVIQ registry information retrieved in the evidence."
+      }
+    ],
+    "rationale": "The answer keeps the three evidence rows visible, states that no pregnancy-specific maternal pharmacokinetic data were retrieved, avoids administered doses and medication decisions, and separates registry information from treatment decisions. It nevertheless fails to cite the required FDA directory, gives registry contacts that do not match the retrieved FDA-directory evidence, and makes an unsupported assertion about postmarketing reports."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "c190778e72f43bc2979cd074d533ede01a62eef4cc85e01a05890191a0fdb43a",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 5,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not include this URL or verify that it is the applicable FDA-listed registry contact.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence includes a DailyMed label but does not include or verify this 2022 FDA label URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": \"FDA-approved Quviviq (daridorexant) prescribing information\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an FDA label URL but does not cite the FDA pregnancy-exposure-registry directory, which was explicitly required.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications: 1-866-961-2388\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer presents contacts for a different national psychiatric-medications registry rather than the FDA-directory-listed QUVIVIQ pregnancy registry contact supplied in the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"available postmarketing reports are insufficient to establish a drug-associated risk\",\n      \"reference_quote\": \"There are no available data on QUVIVIQ use in pregnant women to evaluate for drug-associated risks of major birth defects, miscarriage, or other adverse maternal or fetal outcomes.\",\n      \"explanation\": \"The supplied label evidence states that pregnancy data are unavailable; it does not support the answer's specific assertion about insufficient postmarketing reports.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA labeling identifies a pregnancy-exposure registry\",\n      \"reference_quote\": \"There will be a pregnancy exposure registry that monitors pregnancy outcomes in women exposed to QUVIVIQ during pregnancy. Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"Although a registry is supported, the answer attributes and describes the registry without giving the supplied QUVIVIQ registry contact and instead supplies different contacts.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps the requested evidence rows visible, avoids administered doses and medication decisions, and appropriately distinguishes absent human evidence from animal findings. However, it fails the required directory citation and supplies registry contacts that do not match the retrieved FDA-directory evidence. It also makes an unsupported postmarketing-report assertion and cites URLs not verified in the supplied evidence.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 104548,
+        "completion_tokens": 1039,
+        "total_tokens": 105587,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 104545,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 300,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 5,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not include or verify this URL as the applicable FDA-listed registry contact.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence includes a DailyMed label URL, but does not include or verify this 2022 FDA label URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": \"FDA-approved Quviviq (daridorexant) prescribing information\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites a label URL but does not cite the FDA pregnancy-exposure-registry directory, which was explicitly required.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"lists the following registry contact:\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer shows a separate registry-contact section, but gives contacts for the National Pregnancy Registry for Psychiatric Medications rather than the FDA-directory-listed QUVIVIQ Pregnancy Registry contact supplied in the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"available postmarketing reports are insufficient\",\n      \"reference_quote\": \"There are no available data on QUVIVIQ use in pregnant women to evaluate for drug-associated risks of major birth defects, miscarriage, or other adverse maternal or fetal outcomes.\",\n      \"explanation\": \"The supplied evidence states that pregnancy data are unavailable; it does not support the answer's specific assertion about insufficient postmarketing reports.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer identifies a different registry and provides different contact details from the QUVIVIQ registry information retrieved in the evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer keeps the three evidence rows visible, states that no pregnancy-specific maternal pharmacokinetic data were retrieved, avoids administered doses and medication decisions, and separates registry information from treatment decisions. It nevertheless fails to cite the required FDA directory, gives registry contacts that do not match the retrieved FDA-directory evidence, and makes an unsupported assertion about postmarketing reports.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 105358,
+        "completion_tokens": 803,
+        "total_tokens": 106161,
+        "prompt_tokens_details": {
+          "cached_tokens": 104545,
+          "cache_write_tokens": 810,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 109,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 105358,
+    "completion_tokens": 803,
+    "total_tokens": 106161,
+    "prompt_tokens_details": {
+      "cached_tokens": 104545,
+      "cache_write_tokens": 810,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 109,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Unchanged .9 response and reference pool; newly graded with v3. No clinician adjudication."
+}

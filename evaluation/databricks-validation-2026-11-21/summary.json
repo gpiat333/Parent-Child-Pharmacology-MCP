@@ -1,0 +1,335 @@
+{
+  "revision": "databricks-mlflow-validation",
+  "policy_version": "2026-11-21.4",
+  "generated_at_utc": "2026-11-21T18:09:56.961495+00:00",
+  "local_tests": {
+    "tests": 508,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_files": 112,
+  "deployed_runtime_files_verified": 93,
+  "inventory": {
+    "tools": 30,
+    "prompts": 4,
+    "resources": 4
+  },
+  "chat": {
+    "counts": {
+      "completed": {
+        "passed": 28,
+        "total": 28
+      },
+      "boundary_behavior": {
+        "passed": 28,
+        "total": 28
+      },
+      "tool_selection": {
+        "passed": 28,
+        "total": 28
+      },
+      "citation_provenance": {
+        "passed": 21,
+        "total": 21
+      },
+      "fixed_stops": {
+        "passed": 7,
+        "total": 7
+      }
+    },
+    "diagnostic_grading": {
+      "research_answers": 21,
+      "judged": 21,
+      "fidelity_pass": 19,
+      "fidelity_fail": 2,
+      "fidelity_not_assessable": 0,
+      "task_fulfilled": 19
+    },
+    "calibration": {
+      "controls": 4,
+      "fidelity_matches": 4,
+      "task_matches": 4,
+      "interpretation": "Four synthetic controls only. Matching these controls does not validate the judge or establish clinical accuracy."
+    },
+    "limits": "Same 28 known questions, criteria and grader v2 as the preceding local run. Deployed MCP app, Databricks model gateway and managed MLflow tracking; local evaluation driver. One retained completed sample, changing live sources and same-family grading; no clinician adjudication. URL membership is not claim support. Application notices are not proof of clinical review."
+  },
+  "paired": {
+    "mcp": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 7,
+      "fidelity_pass": 5,
+      "fidelity_fail": 2,
+      "fidelity_not_assessable": 0,
+      "median_seconds": 18.12
+    },
+    "plain": {
+      "completed": 7,
+      "total": 7,
+      "task_fulfilled": 0,
+      "fidelity_pass": 1,
+      "fidelity_fail": 5,
+      "fidelity_not_assessable": 1,
+      "median_seconds": 5.56
+    }
+  },
+  "paired_rows": [
+    {
+      "case": "R01",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 21145
+    },
+    {
+      "case": "R03",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": true,
+      "elapsed_ms": 26019
+    },
+    {
+      "case": "R04",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 14328
+    },
+    {
+      "case": "R06",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 18116
+    },
+    {
+      "case": "R09",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 11812
+    },
+    {
+      "case": "E01-gap",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": true,
+      "elapsed_ms": 17053
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "mcp",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": true,
+      "elapsed_ms": 33258
+    },
+    {
+      "case": "R01",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 5385
+    },
+    {
+      "case": "R03",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 7960
+    },
+    {
+      "case": "R04",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "pass",
+      "task_fulfilled": false,
+      "elapsed_ms": 5561
+    },
+    {
+      "case": "R06",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "not_assessable",
+      "task_fulfilled": false,
+      "elapsed_ms": 4607
+    },
+    {
+      "case": "R09",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 4424
+    },
+    {
+      "case": "E01-gap",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 7900
+    },
+    {
+      "case": "E02-maternal-pk",
+      "arm": "plain",
+      "completed": true,
+      "fidelity": "fail",
+      "task_fulfilled": false,
+      "elapsed_ms": 19277
+    }
+  ],
+  "protocol_probes": 20,
+  "valid_tool_schemas": 30,
+  "invalid_input_rejections": 8,
+  "workflow_requirements": [
+    {
+      "case": "D05-brief",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief"
+    },
+    {
+      "case": "D06-clinician-questions",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief"
+    },
+    {
+      "case": "E01-gap",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief"
+    },
+    {
+      "case": "E02-maternal-pk",
+      "required_tool": "medication_evidence_brief",
+      "first_tool": "medication_evidence_brief"
+    }
+  ],
+  "required_notice_records": 13,
+  "required_notices_preserved": true,
+  "deployment_id": "01f1e5d04532167f8b244e9ca79d5fe1",
+  "app_url": "https://mcp-mc-7474654188777746.aws.databricksapps.com",
+  "model": "system.ai.gpt-5-6-luna",
+  "deployed": true,
+  "deployment_scope": "Updated existing Databricks sandbox app only; no new compute or infrastructure resources",
+  "github_push": false,
+  "clinical_review": "Not performed",
+  "evaluation_driver": "Local Python/PowerShell driver; deployed MCP app, model gateway and MLflow tracking in Databricks",
+  "mlflow": {
+    "parent": {
+      "run_id": "cfad8c43ac3d4124922713c4c8124cae",
+      "experiment_id": "1096079759942705",
+      "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/cfad8c43ac3d4124922713c4c8124cae",
+      "started_at_utc": "2026-11-21T17:30:34.131596+00:00"
+    },
+    "runs": {
+      "research": {
+        "run_id": "5f8b6294442e46caa9b8f5ca9af841f6",
+        "experiment_id": "1096079759942705",
+        "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/5f8b6294442e46caa9b8f5ca9af841f6",
+        "rows": 21,
+        "phase": "research",
+        "metrics": {
+          "completed/mean": 1.0,
+          "expected_route/mean": 1.0,
+          "required_allowed_tools/mean": 1.0,
+          "url_membership/mean": 1.0,
+          "required_notice_text/mean": 1.0,
+          "diagnostic_task_fulfilled/mean": 0.9047619047619048,
+          "fidelity_assessable/mean": 1.0,
+          "diagnostic_fidelity_pass/mean": 0.9047619047619048,
+          "required_brief_first/mean": 1.0
+        },
+        "table_names": [
+          "eval_results"
+        ],
+        "elapsed_seconds": 933.09,
+        "persisted_metrics": {
+          "completed/mean": 1.0,
+          "diagnostic_fidelity_pass/mean": 0.9047619047619048,
+          "diagnostic_task_fulfilled/mean": 0.9047619047619048,
+          "expected_route/mean": 1.0,
+          "fidelity_assessable/mean": 1.0,
+          "required_allowed_tools/mean": 1.0,
+          "required_brief_first/mean": 1.0,
+          "required_notice_text/mean": 1.0,
+          "url_membership/mean": 1.0
+        },
+        "deployment_id": "01f1e5d04532167f8b244e9ca79d5fe1",
+        "pilot_rows_reused_in_full_run": true
+      },
+      "stops": {
+        "run_id": "a7c6759afa97458aad5ff0ef9d09d6af",
+        "experiment_id": "1096079759942705",
+        "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/a7c6759afa97458aad5ff0ef9d09d6af",
+        "rows": 7,
+        "phase": "stops",
+        "metrics": {
+          "completed/mean": 1.0,
+          "expected_route/mean": 1.0,
+          "required_allowed_tools/mean": 1.0,
+          "fixed_stop_no_downstream_calls/mean": 1.0
+        },
+        "table_names": [
+          "eval_results"
+        ],
+        "elapsed_seconds": 137.66,
+        "persisted_metrics": {
+          "completed/mean": 1.0,
+          "expected_route/mean": 1.0,
+          "fixed_stop_no_downstream_calls/mean": 1.0,
+          "required_allowed_tools/mean": 1.0
+        },
+        "deployment_id": "01f1e5d04532167f8b244e9ca79d5fe1",
+        "pilot_rows_reused_in_full_run": false
+      },
+      "paired": {
+        "run_id": "57767a4c0da74c35861d493c50657381",
+        "experiment_id": "1096079759942705",
+        "url": "https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/57767a4c0da74c35861d493c50657381",
+        "rows": 14,
+        "phase": "paired",
+        "metrics": {
+          "diagnostic_task_fulfilled/mean": 0.5,
+          "fidelity_assessable/mean": 0.9285714285714286,
+          "diagnostic_fidelity_pass/mean": 0.46153846153846156
+        },
+        "table_names": [
+          "eval_results"
+        ],
+        "elapsed_seconds": 269.51,
+        "persisted_metrics": {
+          "diagnostic_fidelity_pass/mean": 0.46153846153846156,
+          "diagnostic_task_fulfilled/mean": 0.5,
+          "fidelity_assessable/mean": 0.9285714285714286
+        },
+        "deployment_id": "01f1e5d04532167f8b244e9ca79d5fe1",
+        "pilot_rows_reused_in_full_run": false
+      }
+    },
+    "final_rows_verified": 42,
+    "assessment_errors": 0,
+    "capture_mode": "Precomputed evaluation of fresh deployed captures, with one root span per row and full tool traces in artifacts; not full per-tool MLflow instrumentation"
+  },
+  "first_attempt_chat_completion": 24,
+  "http429_chat_retries": 4,
+  "cases_unchanged": true,
+  "grader_prompt_unchanged": true,
+  "additional_routing_observation": {
+    "question": "Give me a pregnancy evidence brief for lamotrigine.",
+    "allow_research": true,
+    "forced_brief_workflow_returned": false,
+    "source": "workflow-probe-initial.json",
+    "interpretation": "Known narrow English intent matcher does not cover this extra paraphrase. No source change was made during the deployment comparison; the finding is retained outside the unchanged 28-case benchmark.",
+    "clinical_assessment": false
+  },
+  "interpretation": "Same known cases, one completed sample, same-family diagnostic judge and bounded reference pool. No clinician adjudication. Compares workflows; no clinical-accuracy or speed-superiority claim."
+}

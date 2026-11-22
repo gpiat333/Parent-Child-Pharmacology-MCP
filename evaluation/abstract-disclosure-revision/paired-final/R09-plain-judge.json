@@ -1,0 +1,85 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 1,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited FDA Drug Safety Communications index is included among the retrieved FDA source URLs, although it does not document the specific returned montelukast notice.",
+        "url": "https://www.fda.gov/drugs/drug-safety-and-availability/drug-safety-communications"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.",
+        "answer_quote": null,
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The answer did not summarize or link the returned montelukast notice; it linked only the general FDA index."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No FDA records were retrieved in this lookup",
+        "reference_quote": "FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis",
+        "explanation": "The supplied search results contain one returned FDA safety-communication record, so the answer's assertion that no records were retrieved is contradicted."
+      }
+    ],
+    "rationale": "The answer correctly disclosed that full notice text was not retrieved and cautioned that an empty result would not prove the absence of safety communications. However, it incorrectly reported no returned records and omitted the returned notice title and its specific link."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.0",
+  "grading_input_sha256": "3d5342be97ccc05fd482c2e3fde77b9814d475a9f6b6d3a153bfbd3be21df3c3",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited FDA Drug Safety Communications index is included among the retrieved FDA source URLs, although it does not document the specific returned montelukast notice.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them, and explain if full notice text was not retrieved.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The answer did not summarize or link the returned montelukast notice; it linked only the general FDA index.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No FDA records were retrieved in this lookup\",\n      \"reference_quote\": \"FDA requires Boxed Warning about serious mental health side effects for asthma and allergy drug montelukast (Singulair); advises restricting use for allergic rhinitis\",\n      \"explanation\": \"The supplied search results contain one returned FDA safety-communication record, so the answer's assertion that no records were retrieved is contradicted.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly disclosed that full notice text was not retrieved and cautioned that an empty result would not prove the absence of safety communications. However, it incorrectly reported no returned records and omitted the returned notice title and its specific link.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 7988,
+        "completion_tokens": 845,
+        "total_tokens": 8833,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7985,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 398,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 7988,
+    "completion_tokens": 845,
+    "total_tokens": 8833,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 7985,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 398,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .10 response and reference pool; graded with unchanged v3. No clinician adjudication."
+}

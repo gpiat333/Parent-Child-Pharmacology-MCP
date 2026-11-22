@@ -1,0 +1,39 @@
+{
+  "mlflow": {
+    "mode": "production",
+    "run_id": "547d2ebde11c4fd78e56fb255113c4d3",
+    "metrics": {
+      "response_contract/mean": 1.0,
+      "identifier_provenance/mean": 1.0,
+      "safety/mean": 1.0,
+      "source_fidelity/mean": 0.6,
+      "relevance_to_query/mean": 1.0,
+      "correctness/mean": 0.9
+    },
+    "rows": 10
+  },
+  "unit_tests": {
+    "passed": 87,
+    "failed": 0,
+    "elapsed_seconds": 8.24
+  },
+  "completed_chat_cases": 10,
+  "scorer_assessments": 60,
+  "scorer_errors": 0,
+  "review_type": "AI-assisted source comparison; clinical expert review pending",
+  "review_notes": {
+    "M01": "Benchmark mismatch: the question asks for two studies but does not require max_results=2. The agent retrieved three records and described two; its returned count agrees with the actual tool response. The frozen key expected two returned. Keep the raw correctness failure; make the limit explicit in a future benchmark version.",
+    "M02": "Judge/rubric issue: the rationale requires outcome values and units in a classification comparison, and asks the answer itself to flag unsupported claims. It identifies no specific unsupported factual claim. Treat this flag as disputed, not an established server defect.",
+    "M03": "Wording improvement: null fields are rendered as \"not reported\". Prefer \"missing in the exported data (null)\" to avoid implying that the original paper did not report them. Numeric values and units otherwise match the retrieved rows. The judge demand for the literal word null is overly strict, but provenance wording can improve.",
+    "M04": "Judge/rubric issue: the rationale says the answer must explicitly perform the comparison and flag claims, instead of the judge checking its accuracy. It identifies no concrete incorrect value. Review confirms the requested third row and pagination. Attribute linkage caveats to this MCP implementation rather than implying they were written by the dataset authors.",
+    "M10": "Judge/rubric issue: a Silver classification-only question has no outcome values, units or missing-value comparison to report. The rationale identifies no concrete unsupported classification claim."
+  },
+  "limitations": [
+    "Development regression set, not held-out validation.",
+    "Captured answers evaluated in MLflow; MCP tool calls retained locally, not instrumented as full MLflow tool spans.",
+    "Safety is a general content-safety judge, not clinical safety or certification.",
+    "Identifier provenance is a limited pattern/numeric-presence heuristic, not a complete semantic check.",
+    "The custom source-fidelity rubric needs calibration: instructions to the judge were sometimes interpreted as answer requirements.",
+    "No raw scores or frozen expected facts were changed after observing results. No deployment changes in this test run."
+  ]
+}
