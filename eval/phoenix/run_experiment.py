@@ -47,8 +47,8 @@ if __name__ == "__main__":
         dataset=dataset,
         task=task,
         evaluators=[exact_match],
-        experiment_name="MPRINT fixed snapshot v1; runner v2",
-        experiment_description="Single fresh answers; unchanged questions and exact references. Runner v2 uses joined candidate metadata, supported none reasoning, and bounded arithmetic. No clinical validity claim.",
+        experiment_name="MPRINT fixed snapshot v1; runner v3",
+        experiment_description="Single fresh answers; unchanged questions and exact references. Runner v3 adds exact source-field binding to joined metadata, supported none reasoning and bounded arithmetic. No clinical validity claim.",
         repetitions=1,
         retries=0,
     )
@@ -86,7 +86,7 @@ if __name__ == "__main__":
             for p in files
             if p.is_file()
         },
-        "limitations": "Known fixed-snapshot benchmark, small sample, exact format, two evidence tools plus a client arithmetic helper. Runner v2 changes instructions, candidate metadata and arithmetic, so improvement cannot be attributed to one change. Not clinical validation, a whole-toolset or plain-model comparison. Existing development chat grades remain separate.",
+        "limitations": "Known fixed-snapshot benchmark, small sample, exact format, two evidence tools plus client arithmetic and source-field binding utilities. Runner v3 adds instructions and exact field copying, so improvement cannot be attributed to one change. Not clinical validation, a whole-toolset or plain-model comparison. Existing development chat grades remain separate.",
     }
     summary["scoring_mode"] = (
         "saved captures; no answer regeneration" if args.replay_captures else "fresh generation"
