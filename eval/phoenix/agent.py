@@ -19,11 +19,13 @@ from parent_child_pharmacology.core.source_value import copy_source_value
 
 
 class ParentChildPharmacologyAgent:
-    def __init__(self, evidence_directory, prompt_version="v4", replay_only=False):
+    def __init__(self, evidence_directory, prompt_version="v5", replay_only=False):
         self.root = Path(evidence_directory).resolve()
         self.replay_only = replay_only
         self.prompt_version = prompt_version
         sys.path.insert(0, str(self.root))
+        repo_root = Path(os.environ.get("MCP_REPO_ROOT", Path(__file__).resolve().parents[2]))
+        sys.path.insert(0, str(repo_root / "chat-client"))
         spec = importlib.util.spec_from_file_location(
             "benchmark_gateway", self.root / "paired_evaluation.py"
         )
@@ -102,7 +104,9 @@ class ParentChildPharmacologyAgent:
                         arguments["include_classifications"] = True
                     if name == "return_source_value":
                         try:
-                            value = copy_source_value(calls, **arguments)
+                            value = copy_source_value(
+                                calls, **arguments, require_metadata_selection=True
+                            )
                             answer, completed = value["value"], True
                         except (ValueError, TypeError) as exc:
                             value = {"error": type(exc).__name__, "message": str(exc)}

@@ -26,7 +26,9 @@ SCHEMA = {
 }
 
 
-def copy_source_value(calls, source_call_index, value_path, record_pmid):
+def copy_source_value(
+    calls, source_call_index, value_path, record_pmid, *, require_metadata_selection=False
+):
     if type(source_call_index) is not int or not 0 <= source_call_index < len(calls):
         raise ValueError("Unknown source call")
     call = calls[source_call_index]
@@ -37,6 +39,10 @@ def copy_source_value(calls, source_call_index, value_path, record_pmid):
         "select_snapshot_records",
     }:
         raise ValueError("Not a research-value source")
+    if require_metadata_selection and call.get("tool") == "find_mprint_records":
+        raise ValueError(
+            "Metadata answers must use select_snapshot_records on the original candidate cohort, with the requested filters and ordering. Copy the selected field or filtered count from that result, not from an unfiltered or narrowed lookup."
+        )
     if not isinstance(value_path, str) or not value_path.startswith("/") or len(value_path) > 512:
         raise ValueError("Use a bounded JSON pointer within the captured result")
     if value_path.startswith("/result/"):

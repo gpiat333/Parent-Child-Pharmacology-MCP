@@ -16,9 +16,11 @@ Each question requires a single exact answer, such as a selected record's DOI, a
 
 In .14, B09 retrieved the correct candidate but copied another candidate's DOI. Intermediate .15 fixed that case with exact source-field copying, but scored 9/10 because B04 returned the unfiltered candidate count instead of the count satisfying every condition.
 
-The current .16 client adds deterministic metadata filtering, exclusion rules, pagination checks, distinct-PMID counting and PMID ordering. The source-copy utility binds a scalar to its captured record. These operations cannot make a wrongly selected filter or field correct. Arithmetic, filtering and source copying are **three local client utilities**, not additional registered MCP tools; the server remains at 30 tools.
+The .16 client added deterministic metadata filtering, exclusion rules, pagination checks, distinct-PMID counting and PMID ordering. The source-copy utility binds a scalar to its captured record. These operations cannot make a wrongly selected filter or field correct. Arithmetic, filtering and source copying are **three local client utilities**, not additional registered MCP tools; the server remains at 30 tools.
 
-The final evaluation repeats the same ten questions three times using the same frozen source. All 30 answers are retained, including failures. See the [current report](../evaluation/display-contract-revision/REPORT.md) and [repeatability results](../evaluation/display-contract-revision/repeatability/summary.json). Thirty attempts are not 30 independent questions or a held-out benchmark.
+The final .17 evaluation repeats the same ten questions three times using the same frozen source. All 30 answers are retained, including failures. See the [current report](../evaluation/cohort-enforcement-revision/REPORT.md) and [repeatability results](../evaluation/cohort-enforcement-revision/repeatability/summary.json). Thirty attempts are not 30 independent questions or a held-out benchmark.
+
+The .16 primary run also scored 9/10: the corrected filtered count passed, but the model bypassed the optional selector, narrowed the original candidate set to a different PMID, and returned that record's DOI. The .17 client **requires metadata selection before final copying** and rejects selection that drops the original candidate cohort. The model still supplies filters and ordering; this is not proof of correct interpretation. A .16 repeat-launch import failure occurred before any answers, was archived, and is repaired in the final launcher.
 
 ## Why it differs from the other numbers
 

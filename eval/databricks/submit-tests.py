@@ -26,6 +26,9 @@ with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
             if f.is_file() and "__pycache__" not in str(f) and f.suffix != ".pyc":
                 z.write(f, f.relative_to(P))
     for name in [
+        "eval/harness/paired_evaluation.py",
+        "eval/harness/grader_contract.py",
+        "eval/harness/model-call.ps1",
         "main.py",
         "pyproject.toml",
         "uv.lock",
@@ -113,7 +116,7 @@ call(
     "PYTHON",
 )
 spec = {
-    "run_name": "MCP .16 frozen source unit tests - no App deployment",
+    "run_name": "MCP .17 frozen source unit tests - no App deployment",
     "timeout_seconds": 1800,
     "tasks": [
         {

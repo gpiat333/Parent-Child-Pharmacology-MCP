@@ -98,6 +98,25 @@ def select_records(
         if not (required | excluded) <= set(r.get("classification_legend", {})):
             raise ValueError("Use label codes from the source legend")
         pages.append((i, r))
+    # A follow-up identifier lookup cannot redefine the candidate universe.
+    anchor = next(
+        (
+            i
+            for i, c in enumerate(calls)
+            if c.get("tool") == "find_mprint_records"
+            and c.get("arguments", {}).get("drug")
+            and not c.get("arguments", {}).get("pmid")
+            and isinstance(c.get("result"), dict)
+            and not c["result"].get("error")
+            and isinstance(c["result"].get("results"), list)
+            and c["result"]["results"]
+        ),
+        None,
+    )
+    if anchor is not None and anchor not in source_call_indices:
+        raise ValueError(
+            "Selection must include the original candidate page; a narrowed PMID lookup or replacement query cannot change the cohort."
+        )
     if require_complete:
         offset = 0
         for _, r in sorted(pages, key=lambda page: page[1].get("offset", -1)):
