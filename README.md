@@ -4,11 +4,45 @@
 
 **THIS MCP HAS BEEN MADE FOR THE PURPOSE OF THE GSA HACKATHON AS A PROTOTYPE AND IS NOT AN NIH OFFICIAL MCP TOOL. NO PRODUCTION READINESS CLAIM.**
 
-Public medication evidence is spread across labels, lactation records, publications, trial registries and research datasets. A parent preparing for a clinician visit, a researcher looking for evidence gaps, and a program officer reviewing a research portfolio need different views of that evidence—and need to see what is missing.
+Pediatric and maternal medication information is spread across product labels, lactation records, publications, trial registries and research datasets—and it is divided twice over. Once by population: evidence about a fetus, a breastfed infant and a six-year-old belongs to different literatures, and “pediatric” alone spans a preterm neonate to an adolescent. Once again by purpose: what the drug is, what the label says, what published studies found, what is being studied now, and what outcomes were actually measured each live somewhere different.
 
-This MCP server gives AI clients structured, cited access to those sources through **30 tools, four prompts and four resources**. Its evidence brief separates effects on the pregnant or lactating person, measured fetal or infant exposure, and observed fetal or infant outcomes. Empty rows stay visible. **Missing data never means safe.**
+Naming sits on top of both. A parent knows a brand name, a label uses the ingredient, a paper uses the generic, and a dataset keys on a PMID or an RxCUI. Before anyone can search, they have to work out which population they are asking about, which kind of resource answers that question, and what the medicine is even called.
 
-The bundled companion supports user-guided evidence discovery and clinician preparation. Preflight checks stop unsupported requests before research; permitted requests produce evidence, limitations and questions to discuss with a clinician. It is not an independent clinical decision-maker.
+A parent preparing for a clinician visit, a clinician reviewing source evidence, a researcher scoping what has already been studied, and a program officer reviewing a portfolio each need a different view of that evidence—and each needs to see what is missing. This MCP server gives AI clients structured, cited access to those sources through one interface.
+
+### How it answers
+
+After preflight permits research, the workflow addresses the three problems: resolve the drug name, flagging uncertain matches instead of guessing; preserve the requested population and age band in population-aware searches and the composite brief; then use the resource that answers the question. A source match alone does not establish that a finding applies to the requested population.
+
+The evidence brief separates three things that are easily conflated: effects on the pregnant or lactating person, measured fetal or infant exposure, and observed fetal or infant outcomes. Empty rows stay visible. **Missing data never means safe.** Where retrieved evidence runs out, the server makes that gap explicit. A separate participation lookup can surface registries and recruiting studies, without implying that participation is appropriate or that a listed study will resolve the gap.
+
+### What it connects
+
+The sources divide along the same lines as the problem. RxNorm helps resolve medicine names and ingredients. DailyMed supplies in-use product labeling, which may differ from the latest FDA-approved version, and an FDA dataset tracks pediatric labeling changes over time. [LactMed, NLM’s peer-reviewed lactation database](https://www.ncbi.nlm.nih.gov/books/NBK501922/), covers drug and chemical levels in breast milk and infant blood and reported effects in breastfed infants. It is a lactation resource, not a pregnancy database.
+
+PubMed and ClinicalTrials.gov cover what has been published and what is being studied. openFDA carries adverse-event reports and recalls, MedlinePlus provides patient education, and NIH RePORTER shows what is funded and by which institute. NICHD-supported resources—BPCA and Pediatric Trials Network study summaries, MPRINT Gold and Silver, and public study metadata from the Data and Specimen Hub (DASH)—support pediatric therapeutics and study discovery. DASH discovery does not provide controlled participant-level data.
+
+Public source adapters query online sources, subject to caching, availability and bounded retrieval. The MPRINT tables are versioned published snapshots carried with the server. Source dates, coverage limits and configured data paths are described in the [source coverage](#data-sources-and-tool-coverage) and [architecture](documentation/ARCHITECTURE.md) sections.
+
+### Why the gaps matter
+
+Important evidence gaps remain for pregnant people, lactating people and children. NICHD identifies therapeutics development for these populations as lagging behind that for adults outside pregnancy. Federal efforts including BPCA and PREA for pediatrics, the PRGLAC recommendations for pregnancy and lactation, MPRINT and the Pediatric Trials Network address these gaps; their existence does not mean the gaps are closed. [NICHD research priorities](https://www.nichd.nih.gov/about/advisory/council/202610/Concept_Review_by_Council/Maternal_Pediatric_Pharmacology_Therapeutics) · [PRGLAC recommendations](https://www.nichd.nih.gov/about/advisory/PRGLAC/recommendations).
+
+For a given medicine, this server makes the shape of what remains visible: what has been published, what is currently under study, and where the sources return nothing at all. Trial and registry records are presented as information only—listed, never ranked, recommended, or encouraged. Absence is reported as absence *in the retrieved sources*, not as proof that no evidence exists anywhere.
+
+### Safety and boundaries
+
+A companion chat client is included. Its heuristic preflight checks are designed to stop urgent/crisis, identity-unconfirmed and personal treatment-advice requests before downstream evidence retrieval or model answering. Permitted requests return evidence, its limitations, and questions to bring to a clinician. Other clients must enforce the same preflight and display contracts; MCP registration alone does not guarantee that behavior.
+
+The workflow must not provide personal dosing or medication-change advice, determine eligibility, perform clinical triage, or make clinical decisions. Retrieved source passages can contain dosing or administration information; those fields are flagged for client handling rather than guaranteed absent. This is user-guided evidence discovery and clinician preparation, not an independent clinical decision-maker. [Safety controls and remaining risks](#safety-and-security).
+
+### At a glance
+
+**30 tools, 4 prompts and 4 resources** spanning drug identity, lactation and pregnancy evidence, literature and trials, labeling and safety signals, NICHD research data, and study participation.
+
+---
+
+*Prototype built for the GSA MCP Hackathon by Gabriela Piatkowski, MS; Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch, NICHD. Not an official NIH product, service or endorsement. No production-readiness claim. Views are the author’s.*
 
 **Start here:** [Demo video](#demo-video) · [Screenshots](#screenshots) · [For judges](#for-judges) · [Results](#results-at-a-glance) · [Run locally](#run-it-yourself)
 
