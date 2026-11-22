@@ -20,7 +20,10 @@ ROOT = Path(__file__).parents[1]
         (["summarize_research_portfolio"], ["portfolio_interpretation"]),
         (["search_funded_research"], ["portfolio_interpretation"]),
         (["get_label_sections"], ["clinical_framing_review"]),
-        (["get_lactmed_record", "get_label_sections"], ["clinical_framing_review"]),
+        (
+            ["get_lactmed_record", "get_label_sections"],
+            ["lactmed_bounded_extract", "clinical_framing_review"],
+        ),
         (["medication_evidence_brief"], ["faers_population_scope", "clinical_framing_review"]),
         (["get_adverse_event_signals"], ["faers_population_scope", "clinical_framing_review"]),
         (

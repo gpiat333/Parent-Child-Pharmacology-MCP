@@ -158,3 +158,26 @@ def test_real_e01_reference_doses_are_rejected_as_answer_quotes(arm):
            'reference_evidence':json.loads((old/'paired-final/E01-gap-reference.json').read_text(encoding='utf-8'))+cap['calls']}
     j=dose_failure();j['failure_reasons'][0]['answer_quote']='8 and 10 times the maximum recommended human dose (MRHD) of 50 mg'
     assert any('not in CANDIDATE_ANSWER' in e for e in validate_judgment(j,p))
+
+
+def footer_failure_fixture(answer):
+    from grader_contract import APPLICATION_FOOTER
+    p=copy.deepcopy(BASE);p['criteria']='Avoid unrelated medical advice.';p['answer']=answer
+    j=passing();j['task_fulfilled']=False
+    j['failure_reasons']=[{'dimension':'task','kind':'content','requirement_quote':p['criteria'],'answer_quote':APPLICATION_FOOTER.split('Patients ')[1],'reference_quote':None,'explanation':'The answer gives unrelated advice.'}]
+    return j,p
+
+def test_mandatory_footer_cannot_supply_a_negative_content_finding():
+    from grader_contract import APPLICATION_FOOTER
+    j,p=footer_failure_fixture('The official reporting page was retrieved.\n\n'+APPLICATION_FOOTER)
+    assert any('mandatory informational footer' in e for e in validate_judgment(j,p))
+
+def test_same_advice_in_the_answer_body_is_not_exempted():
+    from grader_contract import APPLICATION_FOOTER
+    j,p=footer_failure_fixture(APPLICATION_FOOTER.split('Patients ')[1]+'\n\n'+APPLICATION_FOOTER)
+    assert validate_judgment(j,p)==[]
+
+def test_footer_like_text_outside_the_exact_application_suffix_is_assessable():
+    from grader_contract import APPLICATION_FOOTER
+    j,p=footer_failure_fixture(APPLICATION_FOOTER+' Additional unrelated advice follows.')
+    assert validate_judgment(j,p)==[]

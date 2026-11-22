@@ -1,11 +1,20 @@
 {
-  "version": "2026-11-22.13",
+  "version": "2026-11-22.14",
   "origin": "Application output contracts; not source-authored medical findings",
   "notices": [
     {
       "id": "study_team_confirmation",
-      "tools": ["find_recruiting_studies"],
+      "tools": [
+        "find_recruiting_studies"
+      ],
       "text": "The study team must confirm eligibility and current site availability. This lookup does not determine eligibility or recommend participation."
+    },
+    {
+      "id": "lactmed_bounded_extract",
+      "tools": [
+        "get_lactmed_record"
+      ],
+      "text": "This LactMed response is a bounded extract, not a complete record. Omitted sections or truncation can limit the summary; absence of retrieved findings is not evidence of safety."
     },
     {
       "id": "faers_population_scope",
