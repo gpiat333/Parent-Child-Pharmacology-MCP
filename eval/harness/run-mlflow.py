@@ -24,7 +24,7 @@ deployment='unchanged; see Databricks app receipt'
 parent_path=out/'parent-run.json'
 if parent_path.exists():parent=read(parent_path)
 else:
- run=client.create_run(EXPERIMENT,tags={'mlflow.runName':'mcp-mc-local-template-alignment-2026-11-21','deployment_id':deployment,'evaluation_driver':'local .11 MCP and evaluation driver; model and MLflow in Databricks; deployed .9 app unchanged','policy_version':'2026-11-21.11','grader_version':'3.0','clinical_validation':'false','github_push':'authorized-private-only'})
+ run=client.create_run(EXPERIMENT,tags={'mlflow.runName':'mcp-mc-local-template-gap-remediation-2026-11-21','deployment_id':deployment,'evaluation_driver':'local .12 MCP and evaluation driver; model and MLflow in Databricks; deployed .9 app unchanged','policy_version':'2026-11-21.12','grader_version':'3.0','clinical_validation':'false','github_push':'authorized-private-only'})
  parent={'run_id':run.info.run_id,'experiment_id':EXPERIMENT,'url':HOST+'/ml/experiments/'+EXPERIMENT+'/runs/'+run.info.run_id,'started_at_utc':datetime.now(timezone.utc).isoformat()};save(parent_path,parent)
 registered={s.name:s for s in list_scorers(experiment_id=EXPERIMENT)}
 for scorer in [execution_contracts,diagnostic_contracts]:
@@ -50,9 +50,9 @@ else:
   data.append({'inputs':{'case_id':case['id'],'arm':'chat','question':case['question']},'outputs':{'answer':d['answer'],'completed':d['completed'],'capture_artifact':'chats/'+case['id']+'-results.json'},'expectations':{'case':case,'criteria':case.get('criteria','Fixed stop contract'),'reference_artifact':'chats/'+case['id']+'-results.json'}})
 summary_path=out/(label+'-run.json')
 assert not summary_path.exists(),'Completed MLflow run already recorded; inspect rather than overwrite'
-with mlflow.start_run(run_name='fresh-local-'+label+'-v3-2026-11-21',tags={'mlflow.parentRunId':parent['run_id'],'deployment_id':deployment,'phase':args.phase,'input_mode':'fresh local .11 captures; offline evaluation of saved answers','grader':'v3-grounded-attribution','clinical_validation':'false','evidence_storage':'Full evidence in artifacts; compact references in expectations.'}) as run:
+with mlflow.start_run(run_name='fresh-local-'+label+'-v3-2026-11-21',tags={'mlflow.parentRunId':parent['run_id'],'deployment_id':deployment,'phase':args.phase,'input_mode':'fresh local .12 captures; offline evaluation of saved answers','grader':'v3-grounded-attribution','clinical_validation':'false','evidence_storage':'Full evidence in artifacts; compact references in expectations.'}) as run:
  started=time.time();save(out/(label+'-started.json'),{'run_id':run.info.run_id,'rows':len(data),'started_at_utc':datetime.now(timezone.utc).isoformat()})
- mlflow.log_params({'cases':len(data),'model':'system.ai.gpt-5-6-luna','deployment_id':deployment,'driver':'local','mcp_runtime':'Local loopback submission .11; not deployed','model_runtime':'Databricks AI Gateway'})
+ mlflow.log_params({'cases':len(data),'model':'system.ai.gpt-5-6-luna','deployment_id':deployment,'driver':'local','mcp_runtime':'Local loopback submission .12; not deployed','model_runtime':'Databricks AI Gateway'})
  result=mlflow.genai.evaluate(data=data,scorers=suite)
  for name,table in result.tables.items():
   table.to_json(out/(label+'-'+name+'.json'),orient='records',indent=2,default_handler=str)

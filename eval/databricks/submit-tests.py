@@ -113,7 +113,7 @@ call(
     "PYTHON",
 )
 spec = {
-    "run_name": "MCP .11 frozen source unit tests - no App deployment",
+    "run_name": "MCP .12 frozen source unit tests - no App deployment",
     "timeout_seconds": 1800,
     "tasks": [
         {

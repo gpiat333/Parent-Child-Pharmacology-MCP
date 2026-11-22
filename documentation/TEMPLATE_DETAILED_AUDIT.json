@@ -1,0 +1,533 @@
+{
+  "reviewed_at_utc": "2026-11-22T03:54:56.530950+00:00",
+  "template_commit": "f39249f1768309e3ef8b31742390a4f3a656b5f3",
+  "project_commit": "c7b2301250d3953e8b2174a1a22fea0681e62362",
+  "tracked_files": 65,
+  "human_readable_files_reviewed": 64,
+  "lockfiles_structurally_inspected": 1,
+  "executed_template_scripts": false,
+  "runtime_modified": false,
+  "deployed": false,
+  "files": [
+    {
+      "path": ".agents/skills/ibm-cloud-iaas-deploy/SKILL.md",
+      "status": "Read; optional platform",
+      "review_note": "IBM participant/helper/API-key/registry/Code Engine workflow. Not installed or executed; its credential-printing examples were not followed.",
+      "bytes_checkout": 7466,
+      "sha256_checkout": "de2ac619101f9056de00afe01f942f27fc3c8b465309f06eccbc63107621557d",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-builder/SKILL.md",
+      "status": "Read; not installed; partial adherence",
+      "review_note": "Reviewed all four phases including mandatory security gate and XML evaluation prescription. It is not fully satisfied.",
+      "bytes_checkout": 17606,
+      "sha256_checkout": "1dfb1d750eeafb831ef262fb42680d6879ca42be53f620a498e969031cc6d14d",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-builder/references/evaluation.md",
+      "status": "Read; substantive deviation",
+      "review_note": "Ten independent, stable, multi-hop exact-answer XML questions prescribed. Current live-source development cases are not that benchmark.",
+      "bytes_checkout": 22256,
+      "sha256_checkout": "b918567cd62dd76a26a13faea54440d0a89c718fd1a8c048965cca10d52b0cb5",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-builder/references/mcp_best_practices.md",
+      "status": "Read; partial adherence",
+      "review_note": "Reviewed naming, output formats, pagination, outbound/inbound controls, annotations and tests. See A1-A5.",
+      "bytes_checkout": 11567,
+      "sha256_checkout": "15530bcffa3320b620cba94c931de99da046745d4d6cf62d7af115b9dcb47372",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-builder/references/node_mcp_server.md",
+      "status": "Read; alternate implementation",
+      "review_note": "Reviewed TypeScript/Zod/registerTool/structuredContent/build/tests guidance. No TypeScript server required for this Python implementation.",
+      "bytes_checkout": 31189,
+      "sha256_checkout": "1519a1246b7429d46ad74140d48c8be31bd39b07df03b76309cea6dfddf22c53",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-builder/references/python_mcp_server.md",
+      "status": "Read; partial/adapted",
+      "review_note": "Reviewed flat schema guidance, instructions, examples, lifespans and checklist. SDK version differs; tool schema behavior tested, instructions absent.",
+      "bytes_checkout": 33044,
+      "sha256_checkout": "cc8339fd4b59527a9a7f475a895511c735f569f69b3670966147944022a8899e",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".agents/skills/mcp-eval/SKILL.md",
+      "status": "Read; alternative harness",
+      "review_note": "Phoenix/LangChain/CSV/prompt-version/judge guide. Current MLflow harness differs and uses same-family judging; not a literal implementation.",
+      "bytes_checkout": 12262,
+      "sha256_checkout": "fb81c3944b546a358e323b71d1b20bbc068e3383f3d89bba4c878e862a723fda",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".dockerignore",
+      "status": "Adapted",
+      "review_note": "Build-context exclusions present; project container build is different and not validated by uv build.",
+      "bytes_checkout": 228,
+      "sha256_checkout": "6664ebc8c41d4eda231cb93364488ac449b4dfd0278f363abf6bde06489fc822",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".env.example",
+      "status": "Adapted",
+      "review_note": "Loopback default, NCBI and Databricks evaluation settings documented without secrets.",
+      "bytes_checkout": 1147,
+      "sha256_checkout": "2a59f8b84cd2c662c6ce44dd31fc5ca60d07051c2324fde9fbf43ca99b5c9dbc",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "status": "Adapted",
+      "review_note": "Project uses pinned uv, Python 3.13, Windows/Linux and application/grader/package checks; narrower lint rules and explicit paths.",
+      "bytes_checkout": 623,
+      "sha256_checkout": "f4288d782c57d2d8a7eb7b6e54123e29712ec2057662701992160b71a8aec76c",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".gitignore",
+      "status": "Adapted",
+      "review_note": "Secrets, environments, caches and build products excluded; historical public evaluation captures intentionally retained.",
+      "bytes_checkout": 701,
+      "sha256_checkout": "8b5430556c449e0e9e193f968ff44ad5b55679b7328d794466e63aa54bfd11e8",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": ".python-version",
+      "status": "Adapted",
+      "review_note": "Project requires Python 3.13, template pins 3.11.",
+      "bytes_checkout": 6,
+      "sha256_checkout": "ceba8fa5c10f40fbed8feb7eb5238b63dda568908acfd874ee413747b29936c8",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "Dockerfile",
+      "status": "Adapted, unvalidated deployment",
+      "review_note": "Project uses python:3.13, pinned requirements, explicit PYTHONPATH and port 8000. No Docker build/live container test in this audit.",
+      "bytes_checkout": 896,
+      "sha256_checkout": "99cee20d600942d2a91f7610f6c855e68408b708a2ad7d5a55dfdcedd6f1d117",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "LICENSE",
+      "status": "Retained separately",
+      "review_note": "Full template MIT text retained as LICENSE-GSA-TEMPLATE with NOTICE.md; not a blanket license for third-party datasets.",
+      "bytes_checkout": 1112,
+      "sha256_checkout": "234f2f4b1124d31864dd1665ae48e19a7848ed931afb974b73ec5f5d6bf49dd3",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "QUICKSTART.md",
+      "status": "Adapted",
+      "review_note": "Project has uv/stdio/client/loopback HTTP instructions; Python 3.13 instead of template 3.11.",
+      "bytes_checkout": 2385,
+      "sha256_checkout": "94364bb307fc5ba1d9e32c98a0cfb65ffdf6763c5c084f14b7ca5fa9cd72c986",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "README.md",
+      "status": "Adapted",
+      "review_note": "Read all sections. Root packaging, registration, HTTP boundaries and evaluation guidance map to the project; not a verbatim copy or full checklist compliance.",
+      "bytes_checkout": 8660,
+      "sha256_checkout": "6af09972953e047c5472a3c3e729ff939b4af777d2ff2f617c0bca0e90ebf3a9",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "SECURITY.md",
+      "status": "Partial",
+      "review_note": "Public-data and secret/logging controls adapted. The stricter builder checklist is not fully met; see findings A1 and A2.",
+      "bytes_checkout": 3112,
+      "sha256_checkout": "33452d305a1b96f86127509b88a35bc603b977ce40e26f0600f76c131910a12b",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/README.md",
+      "status": "Adapted",
+      "review_note": "Project documents future Databricks staging. IBM/cloud.gov alternatives are not implemented or tested.",
+      "bytes_checkout": 2688,
+      "sha256_checkout": "a48fba199d12079def6c9260dbfae3c44a5f0be20b036bf28910509c8d5264c2",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/databricks/.env.example",
+      "status": "Not copied; adapted configuration",
+      "review_note": "Root project .env.example carries host/profile settings; no automated deploy coordinates/script copied.",
+      "bytes_checkout": 1602,
+      "sha256_checkout": "6f2dcf52dd7f50d68197f4cd5c26c5c0b0397bddf83fb84524d240399c94f30e",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/databricks/README.md",
+      "status": "Partial replacement",
+      "review_note": "Project future staging runbook lacks package installation/PYTHONPATH wiring and live .11 deployment validation.",
+      "bytes_checkout": 6064,
+      "sha256_checkout": "46912152a79ca42df77a30444faa926922ada91db98eee354ca0f94a3cf7df40",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/databricks/app.yaml",
+      "status": "Partial replacement",
+      "review_note": "Project command is python main.py; template explicitly exposes src through PYTHONPATH. See A6.",
+      "bytes_checkout": 1178,
+      "sha256_checkout": "e3e4936a985e225f5a46dc39c7d6b74433745182afab807276c2715a3b28ec65",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/databricks/deploy-databricks-app.sh",
+      "status": "Not copied or run",
+      "review_note": "Read create/reuse, root app.yaml staging, sync, deploy and cleanup. No automated App-deploy kit equivalence claimed.",
+      "bytes_checkout": 4539,
+      "sha256_checkout": "955228a9a668fbd3d29cd2f711c1f699a8ddc86e5ee3de0ea7fa5943e4dde5e4",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/databricks/smoke-test.sh",
+      "status": "Not copied or run",
+      "review_note": "Read auth-aware reachability checks; raw tools/list is not full MCP handshake. Current Inspector is local .11.",
+      "bytes_checkout": 2521,
+      "sha256_checkout": "5aab1dc45f81f4efd1cec4dda4a31406e4a7cb4d23bd3b054d08815b212500d8",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/README.md",
+      "status": "Read; optional platform",
+      "review_note": "Three alternative IBM kits, explicitly choose one. Project does not target IBM.",
+      "bytes_checkout": 2478,
+      "sha256_checkout": "ef1614fb3327337f59e1e961ffc682f8f2ea79499e77383ffa634da582146540",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/code-engine-git-build/.env.example",
+      "status": "Read; optional platform",
+      "review_note": "code-engine-git-build: Deployment coordinates and runtime credential boundary. Not copied or executed.",
+      "bytes_checkout": 3517,
+      "sha256_checkout": "5f00da2906a31a91a2a898c8c47c31e452081df288e16a446342f21877f12851",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/code-engine-git-build/README.md",
+      "status": "Read; optional platform",
+      "review_note": "code-engine-git-build: Full prerequisites, setup, registration, teardown and limitations. Not copied or executed.",
+      "bytes_checkout": 5497,
+      "sha256_checkout": "aab52895ffcece0dbd5fc60ad2fbac0d696c10f5883d60fc379c0a04ffef4e38",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/code-engine-git-build/deploy-build-from-git.sh",
+      "status": "Read; optional platform",
+      "review_note": "code-engine-git-build: Registry namespace/secret, Code Engine project and server-side Git build/deploy. Not copied or executed.",
+      "bytes_checkout": 7458,
+      "sha256_checkout": "181e9acc58e8c74d82372415ceb0b0f4aa88fbcd319c4332895d4d3dbb4deb70",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/code-engine-git-build/smoke-test.sh",
+      "status": "Read; optional platform",
+      "review_note": "code-engine-git-build: Health status and JSON-RPC reachability, not full authenticated MCP handshake. Not copied or executed.",
+      "bytes_checkout": 1909,
+      "sha256_checkout": "bb02887c3d1eb336b7f112700c6ea3d7d8dd655f282feef6be7b58050dceca4e",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/.env.example",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Deployment coordinates and runtime credential boundary. Not copied or executed.",
+      "bytes_checkout": 1047,
+      "sha256_checkout": "0d88c4903b4dd708ab318f87369fa21e85ae6a113d80a50b203c9646d13f804b",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/README.md",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Full prerequisites, setup, registration, teardown and limitations. Not copied or executed.",
+      "bytes_checkout": 6809,
+      "sha256_checkout": "a662e343ed1851a0804a59eddaa5fabcf12dbe493c6ee3aee4872bbcf1f711f5",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/register-toolkit.sh",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Flattened package staging, ADK environment, toolkit replacement/import and cleanup. Not copied or executed.",
+      "bytes_checkout": 4649,
+      "sha256_checkout": "122bad562fe62534073d9d30a9b8c341253e35d8112c3740761830760b0c5755",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/requirements.txt",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Runtime dependency list; comments say pinned but version ranges are used. Not copied or executed.",
+      "bytes_checkout": 571,
+      "sha256_checkout": "ab90efe91297559fa60b26dc1f888c9a9ac1a452a9e48b7842caf3ecd0633ad8",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/server.py",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Flattened-package stdio adapter. Not copied or executed.",
+      "bytes_checkout": 1171,
+      "sha256_checkout": "9e7928975021f0198270b503c29732b1a5e91ee11ae1ef93b2c3456f8a4c5b49",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/local-mcp-toolkit/toolkit.yaml",
+      "status": "Read; optional platform",
+      "review_note": "local-mcp-toolkit: Toolkit metadata, wildcard tools and staging package_root. Not copied or executed.",
+      "bytes_checkout": 1297,
+      "sha256_checkout": "a7716a05a5f8194d86c6c3dc3cb95b18d7fc7c24d528cd5f7595098996866e48",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/prebuilt-image/.env.example",
+      "status": "Read; optional platform",
+      "review_note": "prebuilt-image: Deployment coordinates and runtime credential boundary. Not copied or executed.",
+      "bytes_checkout": 2028,
+      "sha256_checkout": "e0ad4e5fde7bab65d0ecf674e544ae9109bdef9c4fbe96d2e796180adf2a8341",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/prebuilt-image/README.md",
+      "status": "Read; optional platform",
+      "review_note": "prebuilt-image: Full prerequisites, setup, registration, teardown and limitations. Not copied or executed.",
+      "bytes_checkout": 7707,
+      "sha256_checkout": "e76449c861abf4b9b237b07977adf486ea1506cd1566cb1a6c911f5484fd992d",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/prebuilt-image/deploy-code-engine.sh",
+      "status": "Read; optional platform",
+      "review_note": "prebuilt-image: Existing public image deployment only; no build-from-Git despite stale README passages. Not copied or executed.",
+      "bytes_checkout": 3732,
+      "sha256_checkout": "244cbdb5a113ef42d8fed2666f9dd72b8e580c642331c8a4aa10605ceac7cf47",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "deploy/ibm/prebuilt-image/smoke-test.sh",
+      "status": "Read; optional platform",
+      "review_note": "prebuilt-image: Health status and JSON-RPC reachability, not full authenticated MCP handshake. Not copied or executed.",
+      "bytes_checkout": 1902,
+      "sha256_checkout": "2a523df741a20d2eb5e8bfc80ebe2a564366e881fe3315773485bb6e1188eb8d",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "docs/README.md",
+      "status": "Not copied; reference-only",
+      "review_note": "Vendor educational-material/non-endorsement notice. At this commit docs/ contains only this file, not hidden vendor manuals.",
+      "bytes_checkout": 1799,
+      "sha256_checkout": "2110b8e0ad4f01e167b7d9715f93e68bfd19536998165b67bf4f69557f3ec7eb",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "eval/README.md",
+      "status": "Adapted, not equivalent",
+      "review_note": "Phoenix/XML/CSV layout is absent; project uses JSON cases and custom MLflow harness. Read the separate Databricks kit too.",
+      "bytes_checkout": 2003,
+      "sha256_checkout": "0c3b5c796bd5feeed962b747613bb81fb1e13300276c50217848e9aa84235929",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "eval/databricks/README.md",
+      "status": "Different execution design",
+      "review_note": "Template notebook calls generated agent against deployed App using M2M. Current chats use local MCP; remote notebook runs unit tests.",
+      "bytes_checkout": 9561,
+      "sha256_checkout": "64c17d1ec971c54d93493ac701e842c18e5a15fe20adba867e7b4976435a412e",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "eval/databricks/agent_eval_offline.py",
+      "status": "Different implementation",
+      "review_note": "Reviewed configurable scorers, expected_facts, Responses API, explicit trace destination, shared async loop and predict_fn. Current captures scored by custom harness.",
+      "bytes_checkout": 9676,
+      "sha256_checkout": "50c8437ec0cc69b25196e56c2e6e73070a3d89e7c189fc5463d77046e8c2ea2e",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "eval/databricks/agent_server/eval_auth.py",
+      "status": "Not adopted",
+      "review_note": "Reviewed M2M WorkspaceClient monkeypatch for generated agent. Current profile-authenticated local harness does not use this shim.",
+      "bytes_checkout": 3771,
+      "sha256_checkout": "2799b83f1b1fcd4d3dddf162e901bb4e52d1c835570e8b8416511d6fa1ce146c",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "eval/databricks/setup-eval-sp.sh",
+      "status": "Not copied or run",
+      "review_note": "Reviewed SP entitlement, CAN_USE, OAuth secret and secret scope provisioning. It mutates identity/permissions and is not needed for this audit.",
+      "bytes_checkout": 9022,
+      "sha256_checkout": "16badc6c33d43f4fa53f29b0d83abe5443b33e193ed34b704044f2b2153bbd74",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "main.py",
+      "status": "Aligned pattern",
+      "review_note": "Thin root entry point imports project package main; installed environment or src path is required.",
+      "bytes_checkout": 232,
+      "sha256_checkout": "bc4732598a4f35580d10d6ed5cc39a69261fe4fbc47e719168525c6a9e300c56",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "manifest.yaml",
+      "status": "Optional target absent",
+      "review_note": "cloud.gov buildpack manifest absent; no cloud.gov deployment claimed.",
+      "bytes_checkout": 723,
+      "sha256_checkout": "8bd4a5f8580e3f0d75ade493ede04db232aac8ff46e567a137fcb32df77b6fcd",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "pyproject.toml",
+      "status": "Adapted",
+      "review_note": "Hatch/uv/src layout retained. Project uses official mcp 1.30.0 FastMCP, not the template standalone fastmcp package; isolated eval dependency group.",
+      "bytes_checkout": 1237,
+      "sha256_checkout": "59bfd212abc4baa5b15cb96efa7f3670ac8fc3b67feeecd996a6a80911d2c8f8",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "requirements.txt",
+      "status": "Adapted",
+      "review_note": "Project delegates to server/requirements.lock. This installs dependencies, not the project itself; affects future App staging.",
+      "bytes_checkout": 352,
+      "sha256_checkout": "972c1b5bc40b9370d3f0325eccbe21f62c708171643a329a69b4b7f1c6dfac8b",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "server.json",
+      "status": "Adapted",
+      "review_note": "Project registry metadata is present and previously schema-validated; no public registry publication claimed.",
+      "bytes_checkout": 554,
+      "sha256_checkout": "e7133c5982d031968423f132555507b65de1b15f4c046a17428df41be88be17f",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/__init__.py",
+      "status": "Aligned pattern",
+      "review_note": "Renamed package and explicit project version.",
+      "bytes_checkout": 266,
+      "sha256_checkout": "17ff814a0599daa4669ce8cd2a3b0f24a62e53bf4307f85b257589e962e618f7",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/app.py",
+      "status": "Partial",
+      "review_note": "Transport, registrations and routes retained; top-level FastMCP instructions omitted. Project uses SDK FastMCP and compatibility imports.",
+      "bytes_checkout": 2620,
+      "sha256_checkout": "2ecdce3ba778bfbef963b15677e3cf3442e3189b881b148c45811d3237dbd84f",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/config.py",
+      "status": "Adapted",
+      "review_note": "Project core/config.py uses dotenv and environment variables with validation, not one BaseSettings object.",
+      "bytes_checkout": 1708,
+      "sha256_checkout": "280cca0b52b89e4b0a71c1805d2cbae9fe8a5dc40ae978d4c0e940c62806e1fc",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/models.py",
+      "status": "Partial/adapted",
+      "review_note": "Project model package provides bounded schemas and enums. Uniform pagination/format contract is absent.",
+      "bytes_checkout": 1310,
+      "sha256_checkout": "9d81a107fb288f81b3b11466527b9f0dcb89aa4f68c1e0ecc47cc9edb65f91a6",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/prompts/__init__.py",
+      "status": "Aligned pattern",
+      "review_note": "Separate prompt registration; four project prompts.",
+      "bytes_checkout": 655,
+      "sha256_checkout": "c0f582fa16194a94afe41afe51e4a77974422fbfef05f8331a6ad89f63b2c1d4",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/prompts/example.py",
+      "status": "Replaced sample",
+      "review_note": "Domain prompts replace the generic dataset-exploration example.",
+      "bytes_checkout": 1035,
+      "sha256_checkout": "6235d8333a4489236b164318c8154c83c250710d5ab32ffedbf8e0d07142873d",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/resources/__init__.py",
+      "status": "Aligned pattern",
+      "review_note": "Separate resource registration; four project resources.",
+      "bytes_checkout": 611,
+      "sha256_checkout": "8522fd0522893ad7e2ef38eafdcf0318ce73141f18544093f574dcad482dc61a",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/resources/example.py",
+      "status": "Replaced sample",
+      "review_note": "Domain resources replace generic info/document examples.",
+      "bytes_checkout": 1525,
+      "sha256_checkout": "d01f3ee99f1edc15f2c9882769e02b28291e6ef35aee3adbda841cd68d367cd7",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/routes.py",
+      "status": "Aligned pattern",
+      "review_note": "Project health/version routes and local ASGI tests exist.",
+      "bytes_checkout": 1049,
+      "sha256_checkout": "1a177c4884d09cad864a83a6f0b4ad71ca67d80010e30bef79291efeb93844f2",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/tools/__init__.py",
+      "status": "Aligned pattern",
+      "review_note": "Project aggregator registers 30 individually named tool modules.",
+      "bytes_checkout": 688,
+      "sha256_checkout": "5fb5f305b48b586f390c9a84f16c3e415b416b349db44292d9078a11d27e324b",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/tools/example_tool.py",
+      "status": "Adapted",
+      "review_note": "One registrar per tool delegates to domain services. Explicit schemas replace SDK metadata using pinned private APIs; not identical decorator pattern.",
+      "bytes_checkout": 4398,
+      "sha256_checkout": "25e0035a4e9d2e0f89810d853c8726e444e7fb160f31d9f94b565bbbe5de2170",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "src/example_server/utils.py",
+      "status": "Partial/adapted",
+      "review_note": "Project core/http.py has exact host allowlist, timeouts, retry/cache and response caps; connection-time IP validation absent.",
+      "bytes_checkout": 4071,
+      "sha256_checkout": "5d0ba5c76c1ddd2a1cd50813a6a9cc124d2823f2e074918818ec5d5fadf27e3f",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "tests/__init__.py",
+      "status": "Reviewed empty file",
+      "review_note": "Empty package marker; no behavior to copy.",
+      "bytes_checkout": 0,
+      "sha256_checkout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "tests/test_http_security.py",
+      "status": "Partial/adapted",
+      "review_note": "Host/redirect/size/proxy rejection tests present. No full resolver/transport rebinding or per-tool authorization denial matrix.",
+      "bytes_checkout": 4067,
+      "sha256_checkout": "d284e32034c65404c1e212aa3ed2cca266463af17ec5cc556e9dfd651daaccbb",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "tests/test_server.py",
+      "status": "Adapted",
+      "review_note": "Project tests registration, default transport, health/version plus real stdio Inspector/connection checks.",
+      "bytes_checkout": 1601,
+      "sha256_checkout": "57de0d2bdb2db055c9c1afb883edd57c8145a0bc5ad458da8aabd31410f1e89b",
+      "method": "Full text read (empty file noted)"
+    },
+    {
+      "path": "uv.lock",
+      "status": "Mechanically inspected",
+      "review_note": "Parsed all TOML: 84 packages, 813 distribution artifacts, all with SHA-256; PyPI plus editable project sources. Project has its own lock, not these versions.",
+      "bytes_checkout": 277703,
+      "sha256_checkout": "86bae86af18dd5d70c38e223bc8877a82bd3382279f276feb99b0e5b645b5ffa",
+      "method": "TOML structural/package/artifact inspection"
+    }
+  ]
+}

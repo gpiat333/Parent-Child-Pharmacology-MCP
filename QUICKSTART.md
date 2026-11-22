@@ -32,3 +32,6 @@ uv build
 ```
 
 For chat evaluations and Databricks MLflow, see [eval/README.md](eval/README.md). Those tests require separately authorized model access and generate costs. Every client must enforce the preflight and required-display contracts. An arbitrary MCP client may not do so.
+
+
+Remote HTTP now requires application-verified RS256 tokens and individual tool scopes in addition to platform access controls. See SECURITY.md and .env.example. Default stdio and optional loopback HTTP remain suitable for local public-data development. No new App deployment is included.

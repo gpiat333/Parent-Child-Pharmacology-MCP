@@ -21,6 +21,9 @@ from parent_child_pharmacology.clients import (
 from parent_child_pharmacology.core import config as cfg
 from parent_child_pharmacology.core import safety as parent_safety
 from parent_child_pharmacology.core.audit import LibraryPrivacyFilter
+from parent_child_pharmacology.core.auth import auth_configuration
+from parent_child_pharmacology.core.instructions import INSTRUCTIONS
+from parent_child_pharmacology.core.registration import ToolCatalog
 from parent_child_pharmacology.prompts import register_prompts
 from parent_child_pharmacology.resources import register_resources
 from parent_child_pharmacology.routes import register_routes
@@ -53,8 +56,15 @@ if hosted_url:
     if host and host.endswith(".databricksapps.com"):
         hosts.append(host)
 hosts += [h.strip() for h in os.getenv("MCP_ALLOWED_HOSTS", "").split(",") if h.strip()]
+verifier, auth_settings = auth_configuration(*transport_settings()[:2])
+catalog = ToolCatalog(auth_required=verifier is not None)
+globals().update(register_tools(catalog))
 mcp = FastMCP(
     "Parent-child Pharmacology MCP",
+    instructions=INSTRUCTIONS,
+    tools=catalog,
+    token_verifier=verifier,
+    auth=auth_settings,
     stateless_http=True,
     json_response=True,
     transport_security=TransportSecuritySettings(
@@ -63,7 +73,6 @@ mcp = FastMCP(
         allowed_origins=["http://127.0.0.1:*", "http://localhost:*", "http://[::1]:*"],
     ),
 )
-globals().update(register_tools(mcp))
 register_prompts(mcp)
 register_resources(mcp)
 register_routes(mcp)

@@ -22,3 +22,6 @@ Thirty small tool registrar modules expose domain services. Four prompts and fou
 The evidence brief keeps maternal effects, measured fetal/infant transfer or exposure, and observed fetal/infant outcomes separate, retaining empty rows. Participation remains separate and unranked, suppressed on stops. LactMed is lactation-only. Missing abstracts, expected-but-missing sections, truncation, population tags, dose-bearing passages and source dates are machine-readable. These are discovery and display contracts, not clinical inference or certification.
 
 `eval/` contains the current portable harness. `evaluation/` holds immutable dated captures, diagnostic grades and run receipts. The paired runner compares the same model with and without MCP tools, with explicit workflow differences. Databricks testing does not imply a new App deployment. See `SECURITY.md` and the current evaluation report for runtime boundaries and verified results.
+
+
+Remote HTTP now requires application-verified RS256 tokens and individual tool scopes in addition to platform access controls. See SECURITY.md and .env.example. Default stdio and optional loopback HTTP remain suitable for local public-data development. No new App deployment is included.

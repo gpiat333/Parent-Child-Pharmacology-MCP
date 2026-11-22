@@ -36,6 +36,10 @@ Population = Literal[
 
 class StrictInput(ArgModelBase):
     model_config = ConfigDict(extra="forbid", strict=True)
+    response_format: Literal["json", "markdown"] = Field(
+        "json",
+        description="Text display format. Both formats retain the full typed structuredContent and safety notices.",
+    )
 
 
 class RouteParentQuestionInput(StrictInput):
@@ -135,6 +139,10 @@ class SemanticSearchLactmedInput(StrictInput):
 
 
 class SearchLiteratureInput(StrictInput):
+    offset: Annotated[int, Field(ge=0, le=9999)] = Field(
+        0,
+        description="PubMed retstart offset from pagination.next_offset. Nonzero offsets use live PubMed; PubMed limits retrieval to the first 10,000 hits.",
+    )
     query: Query = Field(..., description="Query.", examples=["levetiracetam breastfeeding"])
     population: Population = Field("any", description="Population.", examples=["lactation"])
     max_results: Limit20 = Field(

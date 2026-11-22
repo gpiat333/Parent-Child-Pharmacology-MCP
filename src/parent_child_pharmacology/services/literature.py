@@ -41,6 +41,7 @@ async def search_literature(
     publication_type: PublicationType = "any",
     date_from: ISODate | None = None,
     date_to: ISODate | None = None,
+    offset: int = 0,
 ) -> EvidenceResponse:
     """Search PubMed literature. Pregnancy/lactation use curated, versioned MeSH strategies with optional focus; no default date restriction. publication_type maps a small enum to PubMed types; date_from/date_to are inclusive publication-date bounds. These filters force live PubMed. Results retain source publication types, PMC IDs and availability-derived free/full-text fields; an ID alone is not proof of access. Pass a medicine name, not PubMed syntax. For other populations, 'keyword' hits live PubMed;
     'semantic' uses the lakehouse vector index of maternal/child abstracts; 'auto' prefers semantic.
@@ -51,7 +52,7 @@ async def search_literature(
 
     curated = strategy(query, population, focus)
     max_results = max(1, min(max_results, 20))
-    filtered = publication_type != "any" or date_from or date_to
+    filtered = publication_type != "any" or date_from or date_to or offset
     if not curated and not filtered and mode != "keyword" and cfg.USE_LAKEHOUSE:
         q = query if population == "any" else f"{query} ({population})"
         try:
@@ -68,6 +69,9 @@ async def search_literature(
         except Exception as e:
             log.warning("vector search failed (%s)", type(e).__name__)
     params = {"focus": focus} if focus != "all" else {}
+    if offset:
+        params["offset"] = offset
+        max_results = min(max_results, 10000 - offset)
     if publication_type != "any":
         params["publication_type"] = publication_type
     if date_from:

@@ -102,15 +102,3 @@ class EvidenceResponse(BaseModel):
     )
     safety: SafetyMetadata
     disclaimer: Annotated[str, Field(min_length=1)]
-
-
-def enforce_input_contract(registered_tool):
-    """Apply one strict policy to FastMCP-generated argument models and advertised schemas.
-
-    FastMCP 1.x has no public argument-model config hook. Keep this integration in
-    one place and cover the advertised schema AND protocol execution in tests.
-    """
-    model = registered_tool.fn_metadata.arg_model
-    model.model_config = ConfigDict(**{**model.model_config, "extra": "forbid", "strict": True})
-    model.model_rebuild(force=True)
-    registered_tool.parameters = model.model_json_schema(by_alias=True)

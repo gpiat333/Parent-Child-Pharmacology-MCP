@@ -35,10 +35,21 @@ if args.phase == "prepare":
         ROOT / "eval/harness", out, ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache")
     )
     files = [
-        *ROOT.joinpath("src").rglob("*.py"),
+        *(
+            p
+            for p in ROOT.joinpath("src").rglob("*")
+            if "__pycache__" not in p.parts and p.suffix != ".pyc"
+        ),
         *ROOT.joinpath("chat-client").glob("*"),
+        *(
+            p
+            for p in ROOT.joinpath("eval/harness").rglob("*")
+            if "__pycache__" not in p.parts and p.suffix != ".pyc"
+        ),
+        ROOT / "main.py",
         ROOT / "pyproject.toml",
         ROOT / "uv.lock",
+        ROOT / "server/requirements.lock",
     ]
     hashes = {
         str(p.relative_to(ROOT)).replace("\\", "/"): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -47,8 +58,8 @@ if args.phase == "prepare":
     }
     design = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "version": "0.11.0",
-        "policy": "2026-11-21.11",
+        "version": "0.12.0",
+        "policy": "2026-11-21.12",
         "source_sha256": hashes,
         "model": os.environ["AGENT_MODEL"],
         "judge_model": os.getenv("JUDGE_MODEL", os.environ["AGENT_MODEL"]),

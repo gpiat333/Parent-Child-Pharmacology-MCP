@@ -60,6 +60,7 @@ def pubmed_search_params(
     publication_type="any",
     date_from=None,
     date_to=None,
+    offset=0,
 ) -> dict:
     curated = strategy(query, population, focus)
     term = (
@@ -69,6 +70,8 @@ def pubmed_search_params(
         + (f" AND {POPULATION_FILTERS[population]}" if population in POPULATION_FILTERS else "")
     )
     params = dict(db="pubmed", term=term, retmax=n, sort="relevance", retmode="json")
+    if offset:
+        params["retstart"] = offset
     if not curated:
         params.update(datetype="pdat", reldate=years * 365)
     return literature_filters(params, publication_type, date_from, date_to)

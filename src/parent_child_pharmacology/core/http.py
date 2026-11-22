@@ -78,11 +78,14 @@ def retry_delay(value):
 
 class Http:
     def __init__(self):
+        from .egress import PinnedTransport
+
         self._c = httpx.AsyncClient(
+            transport=PinnedTransport(),
             timeout=30,
             follow_redirects=False,
             trust_env=False,
-            headers={"User-Agent": "parent-child-pharmacology-mcp/0.11"},
+            headers={"User-Agent": "parent-child-pharmacology-mcp/0.12"},
         )
         self._locks, self._last, self._cache = {}, {}, {}
 

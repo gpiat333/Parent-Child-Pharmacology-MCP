@@ -7,3 +7,7 @@ env:
     value: "streamable-http"
 # Set MCP_ALLOWED_HOSTS to the assigned App hostname if DATABRICKS_APP_URL
 # is not supplied by the platform. Keep gateway OAuth and restricted sharing.
+# Remote startup deliberately fails until MCP_AUTH_PUBLIC_KEY, MCP_AUTH_ISSUER
+# and MCP_AUTH_AUDIENCE are configured for an operator-managed RS256 issuer.
+# Tokens need mcp:connect and individual tool:<name> scopes. Root main.py adds
+# its own adjacent src directory; no editable project install is assumed.

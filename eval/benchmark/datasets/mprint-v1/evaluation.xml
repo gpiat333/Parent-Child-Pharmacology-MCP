@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<evaluation>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Find all caffeine records using the PK study-type filter, without a population filter. Inspect their PK-summary outcomes to locate the study comparing infants with and without apnoea. For its BPD rows, calculate the apnoeic-group event proportion minus the apnoea-free-group event proportion, using each row's own Subjects n denominator. Return the difference in percentage points as a number with exactly two decimal places, without a percent sign. Do not interpret it as a drug effect.</question>
+    <answer>23.44</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Among caffeine Gold records carrying both pharmacokinetic and clinical-trial labels, find the study whose PK-summary outcomes are organized by study site. Review every site, excluding the Total category. Which site has a nonzero exported mortality value while both its seizure and heart-rhythm-disturbance values are zero? Return the exact site label only.</question>
+    <answer>Site 4</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Find the complete set of sertraline Gold records selected by the lactation and PK filters. Cross-check each PMID against the automated Silver classifications. Exactly one candidate has an additional label for biological indicators, beyond the shared pharmacokinetic and pharmacoepidemiology labels. Return that candidate's DOI exactly as stored in Gold, without a URL prefix.</question>
+    <answer>10.1007/s00737-018-0905-3</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. For every metformin Gold record selected by lactation plus PK, join its PMID to both Silver classifications and the Gold PK-summary table. How many distinct PMIDs have all three automated labels for biological indicators, pharmacoepidemiology, and pharmacokinetics, yet return zero rows from the exported PK-summary table? Count only this snapshot condition; do not infer that the original papers lack outcomes. Return an integer only.</question>
+    <answer>2</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Find the complete amoxicillin Gold clinical-trial cohort using the CT filter and no population restriction. Inspect each PMID's PE/CT outcomes. Retain only studies with an outcome row whose actual exposure is amoxicillin-clavulanate and whose statistic is a median with an interquartile range. Sum the Gold study-metadata sample sizes for those retained PMIDs, once per PMID. Return the integer only; do not infer exposure from the list of drugs in study_context.</question>
+    <answer>376</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Select the sertraline Gold CT record with the greatest numeric PMID, not the most recent date. In that record's PE/CT outcome table, compare each exposure's three correlation-coefficient values relating depression scales to Asberg. For each exposure compute maximum minus minimum. Which exposure has the largest spread? Return the exact Exposure string, and use the outcome rows rather than assuming every row belongs to the drug named in study metadata.</question>
+    <answer>Estradiol</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Find all fluoxetine Gold records selected by lactation plus PK, then identify the PMID with the largest number of distinct automated Silver study-type labels. Inspect all of its PK-summary rows, retaining only rows with study_context_matched=true to avoid counting workbook copies. Subtract the maternal reported mean post/pre-exposure percentage for serotonin from the infant whole-blood reported mean post/pre-exposure percentage. Use the stored percentage summaries, not ratios recalculated from mean concentrations. Return the percentage-point difference with exactly one decimal place and no unit.</question>
+    <answer>89.1</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Within the complete fluoxetine Gold lactation-plus-PK cohort, find the only PMID that also receives an automated Silver clinical-trial label. Page through its PK-summary outcomes and use only study_context_matched=true rows. Calculate (mean weight at 12 months minus mean birth weight) for the fluoxetine group, then subtract the same change for the control group. Keep the groups separate and ignore duplicate workbook exports. Return the resulting number of grams as an integer only. This arithmetic is not a causal treatment-effect estimate.</question>
+    <answer>60</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. For nifedipine with pregnancy and PK filters, restrict this audit to the first nine Gold records in the tool's descending-numeric-PMID order; the search is not exhaustive. Check Silver labels for all nine. Among candidates labeled clinical trial and pharmacokinetics but not pharmacoepidemiology in Silver, choose the one with the smaller numeric PMID. Return its Gold DOI exactly, without a URL prefix.</question>
+    <answer>10.1016/j.ejogrb.2008.02.003</answer>
+  </qa_pair>
+  <qa_pair>
+    <question>Use only the bundled MPRINT snapshot revision 4bdee90dff3610816e86d0eed29b4c4d0fe76e89. This is a dataset audit, not a treatment or safety question. Run a levetiracetam search with population=neonate and study_type=CT, and restrict the candidate set to its first nine descending-PMID Gold records. The broad search band can return Children and mixed maternal/neonatal labels. Inspect the original population fields and keep the candidate labeled solely Neonatal. Read its PE/CT outcome rows and return the exported percentage for control of seizures after exposure. Return the numeric value with exactly one decimal place and no percent sign; do not treat the search filter or the outcome as a safety verdict.</question>
+    <answer>65.9</answer>
+  </qa_pair>
+</evaluation>
