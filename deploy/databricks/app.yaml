@@ -5,6 +5,11 @@ env:
     value: "false"
   - name: MCP_TRANSPORT
     value: "streamable-http"
+  # Databricks workspace sign-in is the access control (Databricks' pattern for MCP servers
+  # on Apps). Only takes effect inside Databricks Apps; every /mcp request must carry the
+  # identity headers the Databricks front door adds.
+  - name: MCP_AUTH_MODE
+    value: "databricks_apps"
 # Set MCP_ALLOWED_HOSTS to the assigned App hostname if DATABRICKS_APP_URL
 # is not supplied by the platform. Keep gateway OAuth and restricted sharing.
 # Remote startup deliberately fails until MCP_AUTH_PUBLIC_KEY, MCP_AUTH_ISSUER

@@ -49,8 +49,52 @@ class JWTVerifier:
             return None
 
 
+# Headers the Databricks Apps front door sets after a user signs in to the workspace.
+GATEWAY_IDENTITY_HEADERS = (b"x-forwarded-email", b"x-forwarded-user")
+
+
+def databricks_gateway_mode(env=None):
+    """True only when explicitly enabled AND actually running inside Databricks Apps.
+
+    In this mode Databricks' own workspace sign-in is the access control, the same pattern
+    Databricks uses for MCP servers hosted on Databricks Apps. Every MCP request must carry the
+    identity headers the Databricks front door adds; tool scopes are not checked.
+    """
+    env = os.environ if env is None else env
+    return (
+        env.get("MCP_AUTH_MODE", "") == "databricks_apps"
+        and bool(env.get("DATABRICKS_APP_PORT"))
+        and bool(env.get("DATABRICKS_APP_NAME") or env.get("DATABRICKS_APP_URL"))
+    )
+
+
+class DatabricksGatewayGuard:
+    """Reject MCP requests that did not come through the Databricks Apps sign-in."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http" and scope.get("path", "").startswith("/mcp"):
+            headers = dict(scope.get("headers") or [])
+            if not any(headers.get(h, b"").strip() for h in GATEWAY_IDENTITY_HEADERS):
+                body = b'{"error":"databricks_sign_in_required"}'
+                await send(
+                    {
+                        "type": "http.response.start",
+                        "status": 401,
+                        "headers": [(b"content-type", b"application/json")],
+                    }
+                )
+                await send({"type": "http.response.body", "body": body})
+                return
+        await self.app(scope, receive, send)
+
+
 def auth_configuration(mode, host):
     remote = mode == "streamable-http" and host not in {"127.0.0.1", "localhost", "::1"}
+    if remote and databricks_gateway_mode():
+        return None, None
     required = remote or os.getenv("MCP_AUTH_REQUIRED", "false").lower() == "true"
     if not required:
         return None, None

@@ -85,7 +85,15 @@ def main():
     else:
         import uvicorn
 
-        uvicorn.run(mcp.streamable_http_app(), host=host, port=port, access_log=False)
+        from parent_child_pharmacology.core.auth import (
+            DatabricksGatewayGuard,
+            databricks_gateway_mode,
+        )
+
+        app = mcp.streamable_http_app()
+        if databricks_gateway_mode():
+            app = DatabricksGatewayGuard(app)
+        uvicorn.run(app, host=host, port=port, access_log=False)
 
 
 if __name__ == "__main__":
