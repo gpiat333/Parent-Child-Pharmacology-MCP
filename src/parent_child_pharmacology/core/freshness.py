@@ -1,6 +1,6 @@
 """Freshness of bundled (non-live) data, so users can see when a saved copy may be out of date.
 
-MPRINT is the only bundled dataset; every other source is fetched live. Each MPRINT result
+MPRINT and LactMed are bundled, dated copies; other sources are fetched live. Each MPRINT result
 carries an offline freshness block (no network call). The snapshot resource and the
 maintainer script additionally compare the bundled revision with the upstream repository.
 """
@@ -84,3 +84,29 @@ async def check_upstream():
         "unable_to_check": "The upstream repository could not be reached. Freshness is unknown, not confirmed.",
     }[out["status"]]
     return out
+
+
+LACTMED_MANIFEST = MANIFEST.parent / "lactmed-manifest.json"
+
+
+def lactmed_freshness(record_revised_on=None, now=None):
+    """Offline freshness block for the bundled LactMed package."""
+    m = json.loads(LACTMED_MANIFEST.read_text(encoding="utf-8"))
+    published = datetime.fromisoformat(m["package_published_utc"])
+    age = max(0, ((now or datetime.now(timezone.utc)) - published).days)
+    due = age >= 60
+    return {
+        "dataset": "LactMed",
+        "mode": "saved_copy_of_official_package",
+        "package_published_on": published.date().isoformat(),
+        "record_revised_on": record_revised_on,
+        "age_days": age,
+        "status": "check_recommended" if due else "within_check_window",
+        "check_after_days": 60,
+        "how_to_check": f"Compare with the LactMed entry in {m['file_list_url']} or open the record link.",
+        "display_note": (
+            f"LactMed text comes from NCBI's official package published {published.date().isoformat()}"
+            + (f"; this record was last revised {record_revised_on}." if record_revised_on else ".")
+            + " LactMed updates monthly, so check the record link for newer changes."
+        ),
+    }

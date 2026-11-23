@@ -47,7 +47,7 @@ async def search_lactmed(drug: Query, max_results: Limit20 = 5) -> EvidenceRespo
     return {"source": "live:ncbi", "results": await src.lactmed_search(drug, max_results)}
 
 
-async def get_lactmed_record(book_id: BookID, max_chars: TextLimit = 6000) -> EvidenceResponse:
+async def get_lactmed_record(book_id: BookID, max_chars: TextLimit = 16000) -> EvidenceResponse:
     """Get LactMed text for one record: use during lactation, drug levels, effects on
     breastfed infants and on lactation. Alternate Drugs to Consider is excluded from
     returned text and synthesis; this tool never recommends a substitution. First call search_lactmed and pass
@@ -70,7 +70,10 @@ async def get_lactmed_record(book_id: BookID, max_chars: TextLimit = 6000) -> Ev
     For partial chronology, group only explicitly linked events rather than a fully
     ordered sequence; name the specific ordering that remains unknown.
     If outcome text is truncated, retrieve more with max_chars (up to 20000) or
-    state the limitation; do not infer outcomes from monitoring advice."""
+    state the limitation; do not infer outcomes from monitoring advice.
+    Text comes from NCBI's official LactMed package (see data_freshness). Bracketed
+    numbers such as [54] are LactMed citations: link reported findings to their studies
+    using the returned references list."""
     if not book_id.isascii() or not book_id.isdigit():
         return {
             "source": "validation",

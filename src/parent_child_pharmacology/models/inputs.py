@@ -124,7 +124,7 @@ class GetLactmedRecordInput(StrictInput):
         description="Numeric LactMed record ID returned by search_lactmed.",
         examples=["4569784"],
     )
-    max_chars: TextLimit = Field(6000, description="Max chars.", examples=[6000])
+    max_chars: TextLimit = Field(16000, description="Max chars.", examples=[16000])
 
 
 class SemanticSearchLactmedInput(StrictInput):

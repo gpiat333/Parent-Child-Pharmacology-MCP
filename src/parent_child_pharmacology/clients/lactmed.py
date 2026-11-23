@@ -1,7 +1,11 @@
 """lactmed public-source adapter; no MCP registration."""
 
 import html.parser
+import json
 import re
+import sqlite3
+import zlib
+from pathlib import Path
 
 from parent_child_pharmacology.core.http import http
 
@@ -210,7 +214,58 @@ def parse_lactmed_html(page: str) -> dict[str, str]:
     return {h: " ".join(t) for h, t in sections.items() if t and h != "References"}
 
 
-async def lactmed_record(book_id: str, max_chars: int = 6000) -> dict:
+SNAPSHOT = Path(__file__).resolve().parents[1] / "mc" / "data" / "lactmed.sqlite"
+_MARKER = re.compile(r"\[(\d+(?:\s*[-\u2013,]\s*\d+)*)\]")
+
+
+def snapshot_record(stem):
+    """Read one record from the bundled official LactMed package (read-only)."""
+    if not stem or not SNAPSHOT.exists():
+        return None
+    con = sqlite3.connect(SNAPSHOT.resolve().as_uri() + "?mode=ro", uri=True)
+    try:
+        row = con.execute("SELECT payload FROM records WHERE stem = ?", (stem,)).fetchone()
+    finally:
+        con.close()
+    return json.loads(zlib.decompress(row[0])) if row else None
+
+
+def cited_numbers(text):
+    """Expand LactMed citation markers such as [47-53] or [12,15] into reference numbers."""
+    numbers = set()
+    for group in _MARKER.findall(text or ""):
+        for part in re.split(r"\s*,\s*", group):
+            bounds = re.split(r"\s*[-\u2013]\s*", part)
+            if len(bounds) == 2 and bounds[0].isdigit() and bounds[1].isdigit():
+                low, high = int(bounds[0]), int(bounds[1])
+                numbers.update(str(n) for n in range(low, min(high, low + 200) + 1))
+            elif part.isdigit():
+                numbers.add(part)
+    return numbers
+
+
+def reference_links(text, references):
+    cited = cited_numbers(text)
+    out = []
+    for ref in references:
+        if ref.get("number") in cited:
+            url = (
+                f"https://pubmed.ncbi.nlm.nih.gov/{ref['pmid']}/"
+                if ref.get("pmid")
+                else f"https://doi.org/{ref['doi']}"
+                if ref.get("doi")
+                else None
+            )
+            out.append({**ref, "url": url})
+    return out
+
+
+def is_browser_challenge(page):
+    head = (page or "")[:4000].lower()
+    return "recaptcha" in head or "checking your browser" in head
+
+
+async def lactmed_record(book_id: str, max_chars: int = 16000) -> dict:
     if not re.fullmatch(r"[0-9]+", book_id):
         return {
             "book_id": book_id,
@@ -227,9 +282,43 @@ async def lactmed_record(book_id: str, max_chars: int = 6000) -> dict:
     if not acc:
         return {"book_id": book_id, "text": "", "note": "No accession found for this ID"}
     url = f"https://www.ncbi.nlm.nih.gov/books/{acc}/"
+    # Search summaries name the record file, e.g. lactmed/chapter/LM328/PMC.
+    parts = (s.get("id") or "").split("/")
+    stem = parts[2] if len(parts) > 2 and parts[0] == "lactmed" else None
+    record = snapshot_record(stem)
+    if record:
+        from parent_child_pharmacology.core.freshness import lactmed_freshness
+
+        payload = lactmed_payload(record["sections"], max_chars)
+        links = reference_links(payload["text"], record["references"])
+        return {
+            "source": "snapshot:lactmed",
+            "book_id": book_id,
+            "title": s.get("title") or record["title"],
+            "url": url,
+            "record_revised_on": record.get("revised_on"),
+            "data_freshness": lactmed_freshness(record.get("revised_on")),
+            **payload,
+            "references": links,
+            "references_total_in_record": len(record["references"]),
+            "citation_instructions": "Numbers in square brackets, such as [54], are LactMed's own citations. "
+            "Link each finding you report to its study using the references list (PubMed URL when available). "
+            "Only references cited in the returned text are listed.",
+        }
     r = await http.request("GET", url, ttl=86400, interval=0.4)
+    if is_browser_challenge(r.text):
+        return {
+            "book_id": book_id,
+            "title": s.get("title"),
+            "url": url,
+            "text": "",
+            "error": "source_blocked_by_browser_check",
+            "note": "NCBI returned a browser check instead of the record, and this server does not bypass it. "
+            "The record is not in the bundled LactMed snapshot. Open the link to read it.",
+        }
     sections = parse_lactmed_html(r.text)
     return {
+        "source": "live:ncbi",
         "book_id": book_id,
         "title": s.get("title"),
         "url": url,
