@@ -533,32 +533,52 @@ for i, (n, job, examples) in enumerate(groups31):
     text(s, 6.25, y + 0.3, 6.4, 0.32, examples, size=13, color=MUTED)
 text(s, 0.65, 6.6, 12.0, 0.5,
      "31 tools, 4 prompts, 4 resources, 15 public sources. GSA's criteria ask for goal-oriented tools an AI can "
-     "select without ambiguity, not thin wrappers. Full list on the next slide.", size=13, color=MUTED, italic=True)
+     "select without ambiguity, not thin wrappers. Full list, with what each tool does, on the next two slides.", size=13, color=MUTED, italic=True)
 
-# 5ab ─ All 31 tools (main deck)
-s = new("All 31 tools, grouped by the job each one does", notes=(
-    "Here is the full list, grouped by job. Identity tools confirm the exact medicine and its ingredients. "
-    "Breastfeeding tools read LactMed and the MotherToBaby fact sheets. Label tools read the pregnancy, "
-    "lactation and pediatric sections, plus what the product contains and what it is approved for. "
-    "Literature and trial tools search PubMed and ClinicalTrials.gov. The MPRINT tools read the curated "
-    "pharmacology tables, and if you ask whether the MPRINT data is current, find_mprint_records checks "
-    "MPRINT's repository live and says whether newer data exists. Research tools search NIH-funded projects "
-    "across all institutes, BPCA summaries and NICHD studies. Safety tools cover adverse-event reports, "
-    "recalls, alerts and shortages. The parent tools route the question first and handle reporting and public "
-    "input. Two composite tools build the evidence brief and the coverage check. Small, single-purpose tools "
-    "are what let an AI pick the right one."))
-table(s, 0.65, 1.5, 12.0, [2.6, 9.4], [
-    ["Group", "Tools"],
-    ["Identity", "normalize_drug, find_products_containing_ingredient, get_patient_education"],
-    ["Breastfeeding", "search_lactmed, get_lactmed_record, semantic_search_lactmed, search_mothertobaby_fact_sheets"],
-    ["Pregnancy and labels", "get_label_sections, search_pediatric_labeling_changes, find_pregnancy_exposure_registries, search_pregnancy_registries"],
-    ["Literature and trials", "search_literature, get_abstracts, search_trials, find_recruiting_studies"],
-    ["MPRINT data", "find_mprint_records (also checks for newer MPRINT data when asked), get_mprint_details"],
-    ["NIH and NICHD research", "search_funded_research (all NIH institutes), summarize_research_portfolio, search_bpca_evidence, search_nichd_studies"],
-    ["Safety", "get_adverse_event_signals, search_medication_recalls, search_drug_safety_alerts, search_drug_shortages"],
-    ["Parents", "route_parent_question, get_parent_medication_info, search_parent_input_opportunities, get_reporting_resources"],
-    ["Composite", "medication_evidence_brief, check_evidence_coverage"],
-], size=14, row_h=0.52)
+# 5ab ─ All 31 tools and what each one does (main deck, two slides)
+TOOLS = [
+    ("route_parent_question", "Safety check", "Runs first: lets research through, or gives a fixed referral (911, 988, clinician)"),
+    ("normalize_drug", "Identity", "Turns a brand name, misspelling or combination product into its generic ingredients (RxNorm)"),
+    ("find_products_containing_ingredient", "Identity", "Lists products with the same ingredient, to spot double exposure"),
+    ("get_patient_education", "Identity", "MedlinePlus patient pages, including Spanish pages by drug code"),
+    ("search_lactmed", "Breastfeeding", "Finds the LactMed record for a medicine"),
+    ("get_lactmed_record", "Breastfeeding", "Drug levels in milk and effects in breastfed infants, with a link to every cited study"),
+    ("semantic_search_lactmed", "Breastfeeding", "Plain-language search across LactMed, when the optional index is set up"),
+    ("search_mothertobaby_fact_sheets", "Breastfeeding", "MotherToBaby fact sheets in English or Spanish, word for word"),
+    ("get_label_sections", "Labels", "FDA label: pregnancy, lactation and pediatric sections, warnings, ingredients, approved uses"),
+    ("search_pediatric_labeling_changes", "Labels", "FDA's history of pediatric labeling changes under BPCA and PREA"),
+    ("search_pregnancy_registries", "Pregnancy", "FDA's list of pregnancy exposure registries, by medicine or condition"),
+    ("find_pregnancy_exposure_registries", "Pregnancy", "Registries for a confirmed medicine, listed separately, never recommended"),
+    ("search_literature", "Studies", "Searches PubMed, with pregnancy and breastfeeding filters"),
+    ("get_abstracts", "Studies", "Abstracts and links for specific PubMed papers"),
+    ("search_trials", "Studies", "Clinical trials of any status, for the research picture"),
+    ("find_recruiting_studies", "Studies", "Studies now recruiting, with public eligibility and contacts; never recommended"),
+    ("find_mprint_records", "MPRINT", "Curated pharmacology studies; when asked, checks live whether MPRINT has newer data"),
+    ("get_mprint_details", "MPRINT", "A study's outcome tables, or its automated study-type labels"),
+    ("search_funded_research", "NIH research", "NIH-funded projects on a topic, across all institutes or NICHD only"),
+    ("summarize_research_portfolio", "NIH research", "Project counts and funding totals by institute and fiscal year"),
+    ("search_bpca_evidence", "NIH research", "NICHD BPCA and Pediatric Trials Network study summaries"),
+    ("search_nichd_studies", "NIH research", "NICHD DASH studies and publications, such as MFMU and the Neonatal Research Network"),
+    ("get_adverse_event_signals", "Safety", "Most-reported reactions in FDA adverse-event reports (counts, not rates)"),
+    ("search_medication_recalls", "Safety", "FDA recall records, with lots, dates and status"),
+    ("search_drug_safety_alerts", "Safety", "FDA Drug Safety Communications"),
+    ("search_drug_shortages", "Safety", "FDA drug-shortage records"),
+    ("get_parent_medication_info", "Parents", "A focused parent answer: side effects and breastfed-infant findings"),
+    ("search_parent_input_opportunities", "Parents", "NIH and FDA notices inviting public comment on research"),
+    ("get_reporting_resources", "Parents", "Where to report a medication problem (FDA MedWatch) and get involved"),
+    ("medication_evidence_brief", "All-in-one", "One call builds an evidence brief for pregnancy, breastfeeding or a child"),
+    ("check_evidence_coverage", "All-in-one", "Quick count of how much each source has, before a full search"),
+]
+for part, rows in enumerate([TOOLS[:16], TOOLS[16:]], 1):
+    s = new(f"All 31 tools and what each one does ({part} of 2)", notes=(
+        "Here is every tool and the one job it does, in roughly the order a question uses them. The safety "
+        "check always runs first. Identity tools make sure we have the right medicine. Then come the "
+        "breastfeeding, label, pregnancy and study tools. " if part == 1 else
+        "The rest cover MPRINT's curated pharmacology data, which can be checked live for newer releases just "
+        "by asking; NIH and NICHD research, across all NIH institutes; FDA safety records; parent-facing help; "
+        "and the two all-in-one tools: the evidence brief and the coverage check."))
+    table(s, 0.65, 1.3, 12.0, [3.55, 1.65, 6.8],
+          [["Tool", "Group", "What it does"]] + [list(r) for r in rows], size=12, row_h=0.32)
 
 # 5ac ─ Sources (main deck)
 s = new("The sources behind the tools, and what each one can and can't support", notes=(
