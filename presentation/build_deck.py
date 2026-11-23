@@ -1019,14 +1019,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 884 automated tests pass in a Databricks serverless notebook; on my Mac, the "
-    "PowerShell client checks are skipped because PowerShell isn't installed. "
+    "I tested in layers. All 884 automated tests pass on my Mac and in a Databricks serverless notebook, "
+    "including the PowerShell client checks. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("884", "automated tests", "All pass in a Databricks serverless notebook"),
+    ("884", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1048,22 +1048,23 @@ text(s, 9.2, 1.9, 3.2, 4.6, [
 ], size=14, color=INK, space_after=10)
 
 # 14 ─ Results
-s = new("Results: with the MCP, 7 of 7 tasks done; without it, 0 of 7", notes=(
-    "The clearest result: with the MCP, the model fulfilled all seven paired tasks. Without tools, the same "
-    "model fulfilled none, mostly because it couldn't verify current records. All 28 chats took the expected "
-    "route with the expected tools, and all seven stop cases made zero downstream calls. The benchmark scored "
-    "9 of 10; the one miss copied the wrong DOI. These are known development questions with a model judge, "
-    "and there has been no clinician review yet."))
+s = new("Results: with the MCP, 7 of 7 tasks done; without it, none", notes=(
+    "These are from a fresh run on the current version, November 23. With the MCP, the model fulfilled all "
+    "seven paired tasks. Without tools, the same model fulfilled none of the six that could be graded, mostly "
+    "because it couldn't verify current records; the grader couldn't produce a valid grade for the seventh, so "
+    "it is reported as ungraded. All 28 chats took the expected route with the expected tools, and all seven "
+    "stop cases made zero downstream calls. The benchmark scored 10 of 10. These are known development "
+    "questions with a model judge, and there has been no clinician review yet."))
 box(s, 0.65, 1.6, 5.9, 3.0, fill=DEEP)
 text(s, 0.95, 1.8, 5.3, 0.4, "Paired tasks fulfilled", size=16, color=MIST2)
 text(s, 0.95, 2.3, 2.6, 1.2, "7/7", size=60, font=HEAD, bold=True, color=WHITE)
 text(s, 0.95, 3.5, 2.6, 0.4, "with the MCP", size=15, color=MIST2)
-text(s, 3.6, 2.3, 2.6, 1.2, "0/7", size=60, font=HEAD, bold=True, color=CORAL_T)
-text(s, 3.6, 3.5, 2.6, 0.4, "same model, no tools", size=15, color=MIST2)
+text(s, 3.6, 2.3, 2.6, 1.2, "0/6", size=60, font=HEAD, bold=True, color=CORAL_T)
+text(s, 3.6, 3.5, 2.8, 0.8, ["same model, no tools", "(1 more could not be graded)"], size=15, color=MIST2)
 res = [("28/28", "chats took the expected route and tools"),
        ("7/7", "stop cases made zero downstream calls"),
        ("21/21", "research tasks fulfilled"),
-       ("9/10", "exact benchmark answers")]
+       ("10/10", "exact benchmark answers")]
 for i, (num, lab) in enumerate(res):
     x = 6.85 + (i % 2) * 2.95
     y = 1.6 + (i // 2) * 1.55
@@ -1072,12 +1073,13 @@ for i, (num, lab) in enumerate(res):
     text(s, x + 0.25, y + 0.78, 2.35, 0.6, lab, size=13, color=INK)
 text(s, 0.65, 4.95, 12.0, 1.6, [
     [("What the misses taught me. ", {"bold": True, "color": DEEP}),
-     ("Source fidelity was 17 of 21: four answers drifted beyond what the sources said, so I tightened the "
-      "answer instructions. The benchmark miss copied a DOI from the wrong candidate. Earlier versions "
-      "scored 3/10 on the same benchmark; most of those failures were safety-check false positives.", {})],
+     ("Source fidelity rose from 17 to 19 of 21 after I tightened the answer instructions. Both remaining "
+      "misses credited a tool notice to \u201cthe MCP\u201d instead of naming the source; the facts were supported. "
+      "The benchmark went from 3/10 to 10/10: early misses were safety-check false positives, and a wrong-DOI "
+      "copy was fixed by copying the field from the selected record.", {})],
 ], size=15, color=INK)
 text(s, 0.65, 6.6, 12.0, 0.5,
-     "Evaluated version .14 (re-run on the current version pending). Known development questions, one answer each, model-judged. No clinician review yet.",
+     "Evaluated on the current version (policy .20), November 23, 2026. Known development questions, one answer each, model-judged. No clinician review yet.",
      size=13, color=MUTED, italic=True)
 
 # 14b ─ Hands-on testing
@@ -1239,38 +1241,39 @@ table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
 ], size=13, row_h=0.46)
 
 s = new("Full evaluation numbers", appendix=True,
-        notes="All numbers are from the evaluated version and are reported separately because they measure different things.")
+        notes="All numbers are from the policy .20 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "709 local; 709 Databricks", "No failures, errors or skips"],
+    ["Automated tests", "884 local; 884 Databricks", "No failures, errors or skips"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
-    ["MCP Inspector", "9/9", "Protocol, schemas and sample contracts"],
+    ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],
     ["Routes and tool checks", "28/28 and 28/28", "Checked from traces"],
     ["Stop cases", "7/7", "No downstream evidence or model calls"],
-    ["Research answers", "17/21 fidelity; 21/21 tasks", "Separate model judgments"],
-    ["Paired tasks", "MCP 7/7; plain 0/7", "Same model and instructions"],
-    ["Paired fidelity (pass/fail/N/A)", "MCP 7/0/0; plain 1/5/1", "N/A is not counted as a pass"],
-    ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
+    ["Research answers", "19/21 fidelity; 21/21 tasks", "Separate model judgments"],
+    ["Paired tasks", "MCP 7/7; plain 0/6 + 1 ungraded", "Same model and instructions"],
+    ["Paired fidelity (pass/fail/N/A)", "MCP 7/0/0; plain 1/3/2", "N/A is not counted as a pass"],
+    ["Benchmark", "10/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 884 tests pass on Databricks.",
+     "Evaluated on version 0.19.0, policy .20. Model calls and grading in Databricks; every run, trace and grade logged in MLflow.",
      size=12, color=MUTED, italic=True)
 
-s = new("Benchmark history: 3/10 to 9/10", appendix=True, notes=(
+s = new("Benchmark history: 3/10 to 10/10", appendix=True, notes=(
     "The same ten questions and references were used throughout. Most early failures came from the safety "
     "and language checks blocking legitimate research questions."))
 hist = [("3/10", "Earlier version", "Three false safety stops, one arithmetic error, three wrong candidate sets"),
         ("10/10", "Intermediate run", "Bounded English task recognition, joined candidates, pagination"),
-        ("9/10", "Evaluated version", "One answer copied the DOI of a different candidate")]
+        ("9/10", "Version .14", "One answer copied the DOI of a different candidate"),
+        ("10/10", "Current version .20", "The client selects the record, then copies the DOI from it")]
 for i, (num, head, body) in enumerate(hist):
-    x = 0.65 + i * 4.1
-    box(s, x, 1.75, 3.8, 3.6, fill=MIST)
-    text(s, x + 0.3, 2.0, 3.2, 1.0, num, size=48, font=HEAD, bold=True, color=TEAL)
-    text(s, x + 0.3, 3.1, 3.2, 0.4, head, size=17, bold=True, color=DEEP)
-    text(s, x + 0.3, 3.6, 3.2, 1.6, body, size=15, color=INK)
-    if i < 2:
-        connector(s, x + 3.8, 3.55, x + 4.1, 3.55, color=TEAL, width=2.5)
+    x = 0.65 + i * 3.08
+    box(s, x, 1.75, 2.82, 3.6, fill=MIST)
+    text(s, x + 0.25, 2.0, 2.4, 1.0, num, size=44, font=HEAD, bold=True, color=TEAL)
+    text(s, x + 0.25, 3.1, 2.4, 0.4, head, size=17, bold=True, color=DEEP)
+    text(s, x + 0.25, 3.6, 2.4, 1.6, body, size=14, color=INK)
+    if i < 3:
+        connector(s, x + 2.82, 3.55, x + 3.08, 3.55, color=TEAL, width=2.5)
 text(s, 0.65, 5.75, 12.0, 0.9,
      "Every run is kept, including the failures. No answer was replaced or corrected by hand.", size=15,
      color=INK)
