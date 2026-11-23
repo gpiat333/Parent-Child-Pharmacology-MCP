@@ -1,3 +1,3 @@
-# Deployment boundary
+# Deployment
 
-The .11 package is tested but not deployed. The existing Databricks App remains .9. Use [the current Databricks kit](../deploy/databricks/README.md) for a future separately authorized deployment and [the quickstart](../QUICKSTART.md) for local use. Retired server-only descriptors are removed to prevent accidental use with the new layout. No CI job deploys or changes permissions.
+The Databricks App `mcp-mc` runs source 0.19.0, policy 2026-11-23.26, deployed November 23, 2026 (deployment `01f1e77924a01179b82b6e9b4fe23efd`). See [deployment status](DEPLOYMENT_STATUS.md) for what was checked and how to roll back, and [the Databricks kit](../deploy/databricks/README.md) for the staging steps. Use [the quickstart](../QUICKSTART.md) for local use. No CI job deploys or changes permissions.

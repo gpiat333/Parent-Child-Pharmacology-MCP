@@ -1273,7 +1273,7 @@ nexts = ["Clinician review of real answers, especially for false reassurance or 
          "Weekly freshness checks for the LactMed and MotherToBaby packages, as MPRINT already has",
          "Clinical review of the Spanish safety messages, then answers in Spanish",
          "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
-         "Deploy the current version to the Databricks App"]
+         "Hosted evaluation and security review of the deployed Databricks App"]
 for i, t in enumerate(nexts):
     y = 2.15 + i * 0.98
     circle_num(s, 6.85, y - 0.04, str(i + 1), d=0.5, fill=CORAL, size=15)

@@ -9,7 +9,7 @@
 | Databricks test notebook | Runs the revised application tests in an isolated job environment | Uploading a test bundle and running a notebook does not install it into the App |
 | Databricks model gateway | Supplies model calls for evaluations using the existing model configuration | This work does not create or redeploy a model endpoint |
 | Databricks MLflow | Stores runs, scores, traces and reviewed artifacts | Logging an experiment does not serve the MCP or change its App deployment |
-| Existing Databricks App `mcp-mc` | Still the historical **.9** deployment, ID `01f1e5f7f6fc162fb8c3cc875e7f8546` | A deliberate App deployment is needed to run the revised package there |
+| Databricks App `mcp-mc` | **Policy .26**, deployment `01f1e77924a01179b82b6e9b4fe23efd` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-policy26` | Redeploy from a new staged folder; the previous .9 deployment (`01f1e5f7f6fc162fb8c3cc875e7f8546`) stays available for rollback |
 | Companion chat client | Revised local client scripts and output contracts | Any hosted client must be updated too; the server cannot force an arbitrary client to enforce its safety/display contracts |
 
 ## What a future hosted release would involve
@@ -22,4 +22,28 @@
 
 No new model training, new model endpoint, new database, or public GitHub release is inherently required for these code changes. Spanish chat also does not become supported merely by deploying the package: its review prerequisites remain separate in [Language support](LANGUAGE_SUPPORT.md).
 
-The existing App is not a live demonstration of the newest evaluation results. This work makes no production-readiness, penetration-test or clinical-certification claim. [Security requirements](../SECURITY.md) and the [latest evaluation index](../evaluation/README.md) record remaining boundaries.
+ This work makes no production-readiness, penetration-test or clinical-certification claim. [Security requirements](../SECURITY.md) and the [latest evaluation index](../evaluation/README.md) record remaining boundaries.
+
+## November 23, 2026 deployment (policy .26)
+
+**Access control.** The app runs with `MCP_AUTH_MODE=databricks_apps` (set in `deploy/databricks/app.yaml`). This mode takes effect only inside Databricks Apps: workspace sign-in is the access control, which is Databricks' own pattern for MCP servers hosted on Databricks Apps. Every `/mcp` request must carry the identity header the Databricks front door adds after sign-in; `/health` and `/version` stay open for platform probes. Per-tool scopes are not checked in this mode. Outside Databricks, remote HTTP still requires the RS256 token issuer described in the kit. Only people with permission on the app can reach it.
+
+**What was staged.** `src/` (including the bundled LactMed, MotherToBaby and MPRINT snapshots), `main.py`, `requirements.txt`, `server/requirements.lock` and `app.yaml`. No `.env`, tests, evaluation captures or credentials.
+
+**Checks on the deployed app** (November 23, 2026, signed in through the Databricks CLI):
+
+| Check | Result |
+|---|---|
+| `/version` | 0.19.0, policy 2026-11-23.26 |
+| `/health` | healthy |
+| Request without workspace sign-in | Redirected to Databricks login (HTTP 302) |
+| MCP `initialize`, `tools/list` | OK; 31 tools |
+| `route_parent_question`, "I'm breastfeeding. Can I take ibuprofen?" | evidence route with the clinician message |
+| `route_parent_question`, Spanish question | Stops with the Spanish message (`message_es`) |
+| `normalize_drug` Zoloft (live RxNorm) | sertraline |
+| `search_lactmed` sertraline (live NCBI) | Sertraline record found |
+| `find_mprint_records` update check (live GitHub) | up_to_date |
+
+These are smoke checks, not a hosted re-run of the model-graded evaluation; the scored results describe policy .25 run on a local server. No load or penetration testing was done.
+
+**Rollback.** `databricks apps deploy mcp-mc --source-code-path <previous folder>` redeploys an earlier version; the .9 source remains at its original bundle path.
