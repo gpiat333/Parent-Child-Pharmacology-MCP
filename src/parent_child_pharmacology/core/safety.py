@@ -144,6 +144,24 @@ def route(question, country="US", *, language_required=True):
             route="privacy", allow_research=False, message=POLICY["messages"]["messages_9"]
         )
         return result
+    # A request to set aside these rules (role-play, "you are now", "you're allowed to")
+    # never changes them, however the question is framed.
+    if re.search(POLICY["patterns"]["instruction_override"], q):
+        result.update(
+            route="instruction_override",
+            allow_research=False,
+            allow_model_answer=False,
+            message=POLICY["messages"]["instruction_override"],
+        )
+        return result
+    # Whether a person or child should get a vaccine is an individual decision.
+    if re.search(POLICY["patterns"]["vaccine_decision"], q):
+        result.update(
+            route="clinician_or_pharmacist",
+            allow_research=False,
+            message=POLICY["messages"]["vaccine_decision"],
+        )
+        return result
     # Exclude common instruction suffixes; they are not requests for dosing.
     # Remove only the explicit exclusion, never the remainder of the question.
     # A second actual request ("...but what dose should I give?") stays visible.
@@ -155,10 +173,17 @@ def route(question, country="US", *, language_required=True):
     personal = bool(
         self_take
         and not re.search(POLICY["patterns"]["patterns_5"], decision_intent)
+        and not re.search(POLICY["patterns"]["decision_any_subject"], decision_intent)
         and not re.search(POLICY["patterns"]["dose_words"], decision_intent)
     )
+    # Decisions for anyone (she, my patient, the mom), not only "I", stop here.
     if not personal and re.search(
-        POLICY["patterns"]["patterns_5"] + "|" + POLICY["patterns"]["self_take_question"], intent
+        POLICY["patterns"]["patterns_5"]
+        + "|"
+        + POLICY["patterns"]["self_take_question"]
+        + "|"
+        + POLICY["patterns"]["decision_any_subject"],
+        intent,
     ):
         result.update(
             route="clinician_or_pharmacist",
@@ -182,6 +207,21 @@ def route(question, country="US", *, language_required=True):
             message=POLICY["messages"]["messages_11"],
         )
         return result
+    # Requests unrelated to medicines (ordering food, weather, poems) are out of scope.
+    if re.search(POLICY["patterns"]["creative_request"], q) or (
+        re.search(POLICY["patterns"]["off_topic_task"], q)
+        and not re.search(POLICY["patterns"]["domain_terms"], q)
+    ):
+        result.update(
+            route="out_of_scope",
+            allow_research=False,
+            allow_model_answer=False,
+            message=POLICY["messages"]["off_topic"],
+        )
+        return result
+    # "Yes or no", "your opinion" or "safe for my baby" asks for a verdict: share the
+    # evidence with the same fixed message that the decision belongs with a clinician.
+    personal = personal or bool(re.search(POLICY["patterns"]["verdict_request"], intent))
     if personal:
         result["personal_question"] = True
         result["message"] = POLICY["messages"]["personal_question"]
@@ -199,6 +239,12 @@ def route(question, country="US", *, language_required=True):
         from .language import english_confidence, mask_longest_term
 
         result["language_gate"] = english_confidence(question)
+        if not result["language_gate"]["confident_english"]:
+            from .language import english_question_frame
+
+            if english_question_frame(question):
+                result["language_gate"]["confident_english"] = True
+                result["language_gate"]["accepted_by"] = "english_question_frame"
         if personal and not result["language_gate"]["confident_english"]:
             # "Can I take <drug>?" is English sentence structure; a short question built around a
             # drug name can fall below the detector threshold. Accept it only if the masked

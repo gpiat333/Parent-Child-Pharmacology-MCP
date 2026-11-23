@@ -149,6 +149,50 @@ def scientific_selector(text):
         return False
 
 
+QUESTION_STARTS = set(
+    "do does did is are was were can could may might should will would what which who when where why how has have tell show find give list compare summarize explain".split()
+)
+COMMON_ENGLISH = set(
+    """a an the and or but if of to in on at for with without from by about into during while after before since than
+    as is are was were be been being am do does did done have has had can could may might must shall should will would
+    not no yes it its this that these those there here what which who whom whose when where why how i me my mine we
+    us our you your he him his she her they them their baby babies child children kid kids son daughter infant infants
+    newborn newborns toddler toddlers mom moms mother mothers women woman pregnant pregnancy breastfeeding breastfeed
+    nursing milk supply safe safety okay ok fine risk risks harm harmful cause causes caused effect effects side use
+    using used take taking took give giving stop start continue get getting help any some all more most less much
+    many other same different really still also just only very too well good bad known know say says said research
+    evidence study studies data oil oils essential vitamin vitamins supplement supplements herb herbs herbal tea drug
+    drugs medicine medicines medication medications pill pills vaccine vaccines shot shots link linked""".split()
+)
+FOREIGN_FUNCTION_WORDS = set(
+    "el la los las del en y que para por con durante puedo tomar mi es seguro embarazo lactancia bebé le les du des "
+    "pendant je est et pour avec une der das und ich ist nicht mit für os com não posso gravidez il di gravidanza "
+    "mientras puis".split()
+)
+
+
+def english_question_frame(text):
+    """Short plain English questions the detectors under-score ("Do vaccines cause autism?").
+
+    Accept only an English question opener, mostly common English words, at most two
+    other words (usually a medicine or condition name), no common Spanish, French,
+    German, Portuguese or Italian function words, and no confident foreign detection.
+    """
+    words = re.findall(r"[a-zà-ÿ']+", text.lower())
+    if not 3 <= len(words) <= 16 or words[0] not in QUESTION_STARTS:
+        return False
+    if any(w in FOREIGN_FUNCTION_WORDS for w in words):
+        return False
+    known = COMMON_ENGLISH | ENGLISH_FUNCTION_WORDS | SELECTOR_WORDS | QUESTION_STARTS
+    unknown = [w for w in words if w not in known]
+    if len(unknown) > 2 or len(unknown) * 2 > len(words):
+        return False
+    try:
+        return not detector()(text)["foreign_confident"]
+    except Exception:
+        return False
+
+
 @lru_cache(maxsize=1)
 def detector():
     from langdetect import DetectorFactory, detect_langs

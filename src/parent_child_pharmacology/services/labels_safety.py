@@ -29,6 +29,9 @@ log = logging.getLogger("mc")
 async def get_label_sections(drug: Query) -> EvidenceResponse:
     """FDA label (via DailyMed, NLM) pregnancy, lactation and pediatric-use sections,
     plus medicine_taker_sections for adult adverse reactions and warnings from the same label.
+    Also returns product_description (label section 11 or OTC ingredient lists): chemical name,
+    molecular formula and weight, and active and inactive ingredients, for questions about what a
+    medicine contains. Cite it; do not add chemistry from memory.
     Inspect both groups for adult-versus-breastfed-infant comparisons, with LactMed for infant findings.
     Returns pllr_8_1 with Risk Summary, Clinical Considerations, Data and a source-only maternal_dose_adjustment field, including explicit nulls.
     OTC labels may return pregnancy_lactation as one combined warning.
