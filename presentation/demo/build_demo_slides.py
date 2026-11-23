@@ -1,6 +1,6 @@
 """Build the short demo slides for a self-narrated recording with a live Databricks demo.
 
-Keeps twelve slides from the main deck and the demo cards in scenes.json, adds a live-demo slide,
+Keeps sixteen slides from the main deck and the demo cards in scenes.json, adds live-demo and testing slides,
 and puts a voiceover script in each slide's speaker notes. Three answer cards follow the closing
 slide as backups, in case the live demo can't be recorded.
 
@@ -13,7 +13,24 @@ import argparse
 import json
 from pathlib import Path
 
-from cards import DEEP, HEAD, MIST2, PURPLE, WHITE, RGBColor, box, chat_card, grid_card, text
+from cards import (
+    CORAL,
+    CORAL_T,
+    DEEP,
+    HEAD,
+    INK,
+    MIST,
+    MIST2,
+    MUTED,
+    PURPLE,
+    TEAL,
+    WHITE,
+    RGBColor,
+    box,
+    chat_card,
+    grid_card,
+    text,
+)
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR
@@ -78,6 +95,24 @@ SLIDES = [
      "ClinicalTrials.gov, MotherToBaby and NIH research data, through 31 tools. It follows her "
      "from pregnancy, to breastfeeding, to her child's medicines, with newborns, infants, children and "
      "teens kept separate."),
+    ("deck:Architecture: a safety check runs before any federal source is called",
+     "Here's how it works. An AI client, like Claude Desktop, VS Code or the Databricks Playground, "
+     "connects to the server. Every question goes through a safety check first, before any federal "
+     "source is called. Then the server runs the right tool, and source adapters call live public APIs, "
+     "or dated copies of MPRINT and LactMed, over allowlisted HTTPS only. On Databricks, model serving, "
+     "MLflow, Apps and a serverless notebook handle evaluation, hosting and testing."),
+    ("deck:Why 31 tools",
+     "There are 31 tools, and each does one clear job, so an AI can pick the right one. A typical "
+     "question uses three: the safety check, an evidence brief that gathers every source in one call, "
+     "and one follow-up if needed, like the full LactMed record. The rest are grouped by job: checking "
+     "the medicine name, pregnancy and breastfeeding sources, studies and data, children's medicines "
+     "and NIH programs, safety notices, and participation and reporting."),
+    ("deck:All 31 tools and what each one does (1 of 2)",
+     "Here's the full list of all 31 tools and what each one does: the safety check, matching a "
+     "medicine's name, breastfeeding sources, drug labels, pregnancy registries and published studies."),
+    ("deck:All 31 tools and what each one does (2 of 2)",
+     "And the rest: MPRINT's pharmacology studies, NIH-funded research, FDA safety notices, tools for "
+     "parents, and the all-in-one evidence brief."),
     ("live",
      "Here it is live. The server is deployed as a Databricks App, and I've added it to the Databricks "
      "AI Playground as a tool.\n\n"
@@ -100,9 +135,18 @@ SLIDES = [
      "Questions in Spanish don't get an automatic answer yet, because the safety rules are written and "
      "tested in English. But the reply itself is in Spanish, reviewed by a native speaker, and points to "
      "MotherToBaby, 988 in Spanish and MedlinePlus en español."),
+    ("testing",
+     "I tested it in several ways, not only on Databricks. The scored evaluation used OpenAI's "
+     "GPT-5.6 Luna: scripted chats, side-by-side pairs with and without the server, and a benchmark. I "
+     "also tested it by hand in Claude, which caught problems the automated tests missed, like answers "
+     "that were cut off and plain English questions being blocked. All of those are fixed. Safety "
+     "probes: trying to trick it doesn't work, off-topic requests stop, crisis language gets 988, and "
+     "vaccine decisions go to a pediatrician, while questions about vaccines and autism, supplements, or "
+     "what's in a medicine get evidence, not opinions. Questions in Spanish get a reply in Spanish, "
+     "reviewed by a native speaker, and 36 everyday English phrasings are tested so normal questions "
+     "aren't blocked. In all, 1,026 automated tests pass on my Mac and on Databricks."),
     ("deck:Results: with the MCP",
-     "I tested it with scripted chats, side-by-side comparisons with and without the server, and an "
-     "exact-answer benchmark, all tracked in MLflow on Databricks. With the server, the model completed "
+     "Here are the scored results, tracked in MLflow on Databricks. With the server, the model completed "
      "all seven paired tasks. Without it, none. Every research answer stuck to its sources, and the "
      "benchmark got ten of ten exact answers."),
     ("deck:Thank you",
@@ -152,6 +196,47 @@ def live_demo_slide(prs):
          size=12, italic=True, color=MIST2)
 
 
+TESTS = [
+    ("GPT (OpenAI)", "28 chats, 7 pairs",
+     "GPT-5.6 Luna through Databricks: research and must-stop questions, MCP-versus-no-tools pairs and a "
+     "10-question benchmark, model-graded in MLflow."),
+    ("Claude (Anthropic)", "Hands-on chats",
+     "Claude Desktop and the Claude app found cut-off LactMed answers, missing study links and blocked "
+     "plain English like “Link the studies.” All fixed."),
+    ("Safety probes", "Jailbreaks fail",
+     "Off-topic requests stop, crisis language gets 988, vaccine decisions go to a pediatrician. "
+     "Vaccine–autism, supplement and drug-chemistry questions get evidence."),
+    ("Languages", "English and Spanish",
+     "Spanish, French and mixed questions stop with a referral; Spanish ones get it in Spanish, reviewed "
+     "by a native speaker. 36 everyday English requests must pass."),
+    ("Automated tests", "1,026 pass",
+     "On a Mac and in a Databricks serverless notebook, including 229 safety, referral and language "
+     "tests. MCP Inspector: 9 of 9 protocol checks."),
+    ("Live deployment", "Databricks App",
+     "Runs behind Databricks sign-in, checked with a live MCP handshake, and used from the AI Playground "
+     "with Claude Opus 5 in this demo."),
+]
+
+
+def testing_slide(prs):
+    s = prs.slides.add_slide(prs.slide_layouts[6])
+    s.background.fill.solid()
+    s.background.fill.fore_color.rgb = WHITE
+    text(s, 0.65, 0.4, 8.0, 0.4, "HOW IT WAS TESTED", size=13, bold=True, color=TEAL)
+    text(s, 0.65, 0.8, 12.0, 0.7, "Tested with GPT and Claude, safety probes and Spanish", size=30,
+         font=HEAD, bold=True, color=DEEP)
+    for i, (tag, stat, detail) in enumerate(TESTS):
+        x, y = 0.65 + (i % 3) * 4.11, 1.75 + (i // 3) * 2.6
+        safety = tag == "Safety probes"
+        box(s, x, y, 3.81, 2.4, CORAL_T if safety else MIST, radius=0.06)
+        text(s, x + 0.3, y + 0.2, 3.21, 0.3, tag, size=14, bold=True, color=CORAL if safety else TEAL)
+        text(s, x + 0.3, y + 0.52, 3.21, 0.5, stat, size=24, font=HEAD, bold=True, color=DEEP)
+        text(s, x + 0.3, y + 1.1, 3.21, 1.2, detail, size=14, color=INK, space_after=0)
+    text(s, 0.65, 6.95, 12.0, 0.4,
+         "Known development questions; model outputs graded by a model. No clinician review yet.",
+         size=12, italic=True, color=MUTED)
+
+
 def find_deck_slide(slides, needle):
     for slide in slides:
         if any(sh.has_text_frame and sh.text_frame.text.strip().startswith(needle) for sh in slide.shapes):
@@ -185,8 +270,8 @@ def main():
         if kind == "deck":
             slide = find_deck_slide(original, name)
             drop_slide_number(slide, original.index(slide) + 1)
-        elif kind == "live":
-            live_demo_slide(prs)
+        elif kind in ("live", "testing"):
+            (live_demo_slide if kind == "live" else testing_slide)(prs)
             slide = prs.slides[-1]
         else:
             card = dict(cards[name])
