@@ -10,8 +10,6 @@ _MODULES = [
         "parent_common",
         "fda_navigation",
         "trial_navigation",
-        "parent_evidence",
-        "federal_register",
     ]
 ]
 for _module in _MODULES:

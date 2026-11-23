@@ -22,11 +22,8 @@ DOMAINS = {
     "nichd": ["search_nichd_resources"],
     "parent_resources": [
         "route_parent_question",
-        "get_parent_medication_info",
         "search_fda_drug_notices",
-        "find_recruiting_studies",
         "find_pregnancy_exposure_registries",
-        "search_parent_input_opportunities",
         "search_mothertobaby_fact_sheets",
     ],
     "composite": ["medication_evidence_brief"],

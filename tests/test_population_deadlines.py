@@ -39,29 +39,6 @@ def test_age_field_screening(elig, status):
     assert not result["individual_eligibility_confirmed"]
 
 
-@pytest.mark.parametrize(
-    "deadline,relation,known",
-    [
-        ("2026-11-20", "future", True),
-        ("2026-11-19", "today", True),
-        ("2020-01-01", "past", True),
-        (None, "unknown", False),
-        ("bad", "unknown", False),
-        ("2026-02-30", "unknown", False),
-    ],
-)
-def test_deadline_independent_of_meeting_and_submission(deadline, relation, known):
-    r = p.input_row(
-        {"comments_close_on": deadline, "dates": "The meeting was held in 2020."},
-        date(2026, 11, 19),
-    )
-    assert r["comment_deadline"]["relation_to_as_of"] == relation
-    assert r["comment_deadline"]["date_known"] == known
-    assert not r["submission_open_confirmed"]
-    assert r["submission_status"] == "not_verified"
-    assert not r["meeting_dates_used_for_deadline"]
-
-
 def studies():
     return [
         {

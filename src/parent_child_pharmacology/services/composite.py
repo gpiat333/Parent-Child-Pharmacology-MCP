@@ -46,7 +46,9 @@ async def medication_evidence_brief(
     Normalize the exact product then search EACH confirmed active ingredient. Keep
     ingredient evidence separate; combined effects and interactions are not established.
     Preserve requested age band, source ages, missing evidence, dose flags and pregnancy limits.
-    Prefer get_parent_medication_info for focused medicine-taker versus infant findings.
+    Also the tool for focused parent questions about side effects in the person taking the
+    medicine versus findings in a breastfed infant: the label's medicine_taker_sections and the
+    LactMed infant findings are both returned, and must be kept apart.
     Includes literature metadata and abstract_coverage. Disclose missing abstract text,
     unreturned records and retrieval failures; preserve required_display_notices.
     Metadata and titles alone cannot support study-outcome claims.
@@ -185,12 +187,6 @@ async def medication_evidence_brief(
                 {
                     "registries": registry,
                     "recruiting_studies": recruiting,
-                    "public_input_notices": {
-                        "status": "not_searched",
-                        "results": [],
-                        "tool": "search_parent_input_opportunities",
-                        "note": "Available separately by research topic; no drug-specific notice inferred.",
-                    },
                 }
             )
         row["adverse_events"]["requested_population"] = population
@@ -276,6 +272,7 @@ async def medication_evidence_brief(
         from parent_child_pharmacology.core.evidence import content_flags
 
         # Flags are recomputed so their paths point into the payload that is returned.
+        # The evidence status computed above, from everything retrieved, is kept as is.
         out = summarize(out)
         out["content_flags"] = content_flags(out)
     else:

@@ -52,6 +52,5 @@ CACHE_TTL_SECONDS = {
     "wsearch.nlm.nih.gov": 3600,
     "connect.medlineplus.gov": 3600,
     "www.nichd.nih.gov": 86400,
-    "www.federalregister.gov": 3600,
     "api.github.com": 86400,
 }

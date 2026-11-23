@@ -111,3 +111,28 @@ def test_axis_inventory_counts_all_retrieved_passages_not_only_those_listed():
     result = summarize(brief(found=12))
     notice = axis_notices([{"tool": "medication_evidence_brief", "result": result}])[0]
     assert "12" in notice["text"]
+
+
+def test_condensed_brief_is_not_re_annotated_and_keeps_its_retrieved_status():
+    from parent_child_pharmacology.core.evidence import annotate
+
+    full = brief()
+    full["evidence_status"] = {"state": "retrieved", "no_evidence_retrieved": False}
+    out = annotate(summarize(full))
+    row = out["ingredient_evidence"][0]
+    # LactMed text was retrieved, then left out of the summary: status must still say retrieved.
+    assert out["evidence_status"]["state"] == "retrieved"
+    assert "framing_contract" not in row["lactmed"] and "content_flags" not in row["lactmed"]
+    assert out["framing_contract"]["preserve_source_balance_context"]
+    assert "population_context" not in row["literature"]["results"][0]
+
+
+def test_summary_keeps_medicine_taker_label_sections_for_parent_questions():
+    full = brief()
+    full["ingredient_evidence"][0]["label"] = {
+        "sections": {"lactation": "x" * 4000},
+        "medicine_taker_sections": {"adverse_reactions": {"text": "Nausea was reported."}},
+    }
+    label = summarize(full)["ingredient_evidence"][0]["label"]
+    assert label["medicine_taker_sections"]["adverse_reactions"]["text"] == "Nausea was reported."
+    assert "sections" in label["omitted_in_summary"]

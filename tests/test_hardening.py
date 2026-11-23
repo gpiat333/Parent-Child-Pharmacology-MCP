@@ -218,7 +218,7 @@ def test_capabilities_and_inactive_tool(monkeypatch):
 
     monkeypatch.setattr(config, "USE_LAKEHOUSE", False)
     cap = capabilities()
-    assert len(cap["tools"]) == 24
+    assert len(cap["tools"]) == 21
     assert all(tool["enabled"] for tool in cap["tools"])
     assert "semantic_search_lactmed" not in {tool["name"] for tool in cap["tools"]}
     assert cap["snapshot"]["snapshot_age_days"] >= 0

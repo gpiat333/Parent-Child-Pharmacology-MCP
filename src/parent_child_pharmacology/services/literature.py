@@ -139,31 +139,46 @@ async def get_abstracts(pmids: PMIDs10) -> EvidenceResponse:
 
 async def search_trials(
     condition_or_drug: OptionalQuery = "",
-    population: Population = "pregnancy",
+    population: Population | None = None,
     max_results: Limit20 = 10,
     nct_id: NCTID | None = None,
+    recruiting_only: bool = False,
+    location: OptionalQuery = "",
 ) -> EvidenceResponse:
-    """Research landscape across trial statuses, including historical studies. Supply nct_id alone for a direct single-record fetch. Each record includes exact status and results_posted/has_results; completed does not mean results posted, and neither establishes benefit.
-    For joining a study, location, contacts or current enrollment, prefer
-    find_recruiting_studies. Search ClinicalTrials.gov for pregnancy, lactation or pediatrics.
-    Use returned conditions, interventions and summaries to assess relevance. Omit
-    indirect matches from the main answer; registration/status is not evidence of benefit.
-    When asked to omit dose numbers, use intervention name_without_strength.
-    It is display formatting, not normalized ingredient identity; original name is retained.
-    Link EVERY listed study using its returned study URL and state its exact status.
-    For current/ongoing studies, separate RECRUITING, ENROLLING_BY_INVITATION and
-    ACTIVE_NOT_RECRUITING from NOT_YET_RECRUITING, historical/closed and UNKNOWN.
-    ACTIVE_NOT_RECRUITING does not mean open enrollment. Never place completed or
-    unknown-status studies in the ongoing list. State when no relevant ongoing study
-    was returned; do not imply the search was exhaustive."""
+    """Search ClinicalTrials.gov. Two uses:
+    Research landscape (default): studies of any status, including historical ones, for
+    pregnancy, lactation or pediatrics. Supply nct_id alone for one record. Each record
+    includes exact status and results_posted; completed does not mean results posted, and
+    neither establishes benefit. State each study's exact status and link it. Never place
+    completed or unknown-status studies in an ongoing list; ACTIVE_NOT_RECRUITING does not
+    mean open enrollment. When asked to omit dose numbers, use name_without_strength.
+    Recruiting now (recruiting_only=true): for "can I join a study?" questions. Returns
+    RECRUITING studies with public eligibility, contacts, site status, locations and update
+    dates, as an unranked participation listing. location is a city, state or country, never
+    a home address. Not an eligibility decision or enrollment; the study team must confirm
+    current availability, and overall recruitment does not mean every site recruits. With
+    population='pediatric', adult-only and unverified-age records are withheld; if none
+    remain, say no verified pediatric match was found in this bounded search.
+    Do not imply either search is exhaustive."""
+    if recruiting_only:
+        from parent_child_pharmacology.clients import parent_resources as parents
+        from parent_child_pharmacology.core.participation import tier
+
+        found = await parents.recruiting_studies(
+            condition_or_drug, population or "any", location, max_results
+        )
+        return {**tier(found), "search_mode": "recruiting_only"}
+    population = population or "pregnancy"
     if nct_id:
         return {
             "source": "live:clinicaltrials.gov",
             "lookup_method": "direct_nct_id",
+            "search_mode": "research_landscape",
             "studies": [await src.trial_by_nct(nct_id, population)],
         }
     return {
         "source": "live:clinicaltrials.gov",
+        "search_mode": "research_landscape",
         "studies": await src.trials_search(
             condition_or_drug, population, max(1, min(max_results, 20))
         ),

@@ -60,10 +60,10 @@ def test_research_wrapper_cannot_hide_personal_danger(suffix):
 
 
 def test_study_team_handoff_is_appended_once_and_suppressed_on_stop():
-    text, ids = format_required_notices("One record returned.", ["find_recruiting_studies"])
+    text, ids = format_required_notices("One record returned.", ["search_trials"])
     assert "study_team_confirmation" in ids and "must confirm eligibility" in text
-    assert format_required_notices(text, ["find_recruiting_studies"])[0] == text
-    assert not format_required_notices("Stopped.", ["find_recruiting_studies"], blocked=True)[1]
+    assert format_required_notices(text, ["search_trials"])[0] == text
+    assert not format_required_notices("Stopped.", ["search_trials"], blocked=True)[1]
 
 
 def test_mprint_enriched_pages_keep_distinct_labels_and_export_counts(tmp_path, monkeypatch):

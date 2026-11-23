@@ -57,39 +57,6 @@ def test_safety_suffix_cannot_hide_actual_request():
     assert not s.route("Do not provide dosing but should I stop my medicine?")["allow_research"]
 
 
-def test_closed_meetings_not_parent_opportunities():
-    assert not p.is_input_candidate(
-        {"title": "Notice of Closed Meetings", "abstract": "public comment"}
-    )
-    assert not p.is_input_candidate({"title": "A scientific review panel"})
-    assert p.is_input_candidate({"title": "Request for Information on Research Priorities"})
-    assert p.is_input_candidate({"title": "Request for Input"})
-
-
-def test_input_search_uses_plain_subject_and_fetches_deadline(monkeypatch):
-    async def fake(method, url, **kw):
-        if url == p.FR:
-            assert kw["params"]["conditions[term]"] == "clinical research"
-            return httpx.Response(
-                200,
-                json={"results": [{"title": "Request for Input", "document_number": "2026-12345"}]},
-            )
-        assert url.endswith("/2026-12345.json")
-        return httpx.Response(
-            200,
-            json={
-                "comments_close_on": "2020-01-01",
-                "comment_url": "https://example.org/comments",
-                "dates": "Comments due January 1, 2020.",
-            },
-        )
-
-    monkeypatch.setattr(p.http, "request", fake)
-    r = asyncio.run(p.input_opportunities("clinical research"))
-    assert r["notices"][0]["participation_status"] == "closed"
-    assert r["notices"][0]["dates"] == "Comments due January 1, 2020."
-
-
 def test_background_only_trial_match_omitted(monkeypatch):
     async def fake(*a, **kw):
         return httpx.Response(
@@ -224,7 +191,7 @@ def test_alerts_missing_schema_fails():
 
 def test_label_preserves_scope_and_no_dose_section():
     xml = '<document xmlns="urn:hl7-org:v3"><section><title>6 ADVERSE REACTIONS</title><text>Sleepiness observed.</text></section><section><title>DOSAGE AND ADMINISTRATION</title><text>Secret dose.</text></section></document>'
-    r = p.parse_parent_sections(xml)
+    r = p.src.parse_medicine_taker_sections(xml)
     assert r["adverse_reactions"]["text"] == "Sleepiness observed."
     assert "Secret dose" not in str(r)
 
@@ -244,22 +211,6 @@ def test_trial_site_status_and_truncation():
     assert r["eligibility_truncated"]
     assert not r["eligibility_confirmed"]
     assert r["last_update_posted"] == "2020-01-01"
-
-
-@pytest.mark.parametrize(
-    "deadline,status",
-    [
-        ("2020-01-01", "closed"),
-        (None, "deadline_unknown_verify_notice"),
-        ("bad", "deadline_unknown_verify_notice"),
-        ("2026-11-19", "deadline_not_passed_verify_notice"),
-    ],
-)
-def test_comment_deadlines(deadline, status):
-    assert (
-        p.input_row({"comments_close_on": deadline}, date(2026, 11, 19))["participation_status"]
-        == status
-    )
 
 
 def test_empty_recalls_never_safe(monkeypatch):
@@ -291,29 +242,3 @@ def test_recruiting_filter_excludes_closed_studies(monkeypatch):
 
     monkeypatch.setattr(p.http, "request", fake)
     assert asyncio.run(p.recruiting_studies("asthma"))["studies"] == []
-
-
-def test_combination_never_reduced_to_first_ingredient(monkeypatch):
-    async def fake(*a):
-        return {"found": True, "requires_confirmation": False, "ingredients": ["a", "b"]}
-
-    monkeypatch.setattr(p.src, "rxnorm_normalize", fake)
-    calls = []
-
-    async def brief(drug, population):
-        calls.append((drug, population))
-        return {"queried_ingredients": ["a", "b"]}
-
-    monkeypatch.setattr(
-        "parent_child_pharmacology.services.composite.medication_evidence_brief", brief
-    )
-    r = asyncio.run(p.medication_info("Combo"))
-    assert r["queried_ingredients"] == ["a", "b"] and calls == [("Combo", "lactation")]
-
-
-def test_vague_identity_never_calls_source(monkeypatch):
-    async def fail(*a):
-        raise AssertionError("Should not fetch")
-
-    monkeypatch.setattr(p.src, "rxnorm_normalize", fail)
-    assert asyncio.run(p.medication_info("little white pill"))["requires_confirmation"]

@@ -4,13 +4,13 @@
     "question": "What does LactMed report about amoxicillin in breastfed babies? Separate observed symptoms from advice to monitor, and explain uncertainty. Do not give a dose.",
     "required_any": [
       "get_lactmed_record",
-      "get_parent_medication_info"
+      "medication_evidence_brief"
     ],
     "allowed": [
       "route_parent_question",
       "normalize_drug",
       "get_lactmed_record",
-      "get_parent_medication_info",
+      "medication_evidence_brief",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "search_fda_drug_notices",
@@ -24,13 +24,13 @@
     "question": "For sumatriptan during breastfeeding, what was measured in milk and what was actually observed in infants? If those are different kinds of evidence, explain that. No personal medication advice.",
     "required_any": [
       "get_lactmed_record",
-      "get_parent_medication_info"
+      "medication_evidence_brief"
     ],
     "allowed": [
       "route_parent_question",
       "normalize_drug",
       "get_lactmed_record",
-      "get_parent_medication_info",
+      "medication_evidence_brief",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "search_fda_drug_notices",
@@ -43,14 +43,14 @@
     "id": "R03",
     "question": "Compare metformin label warnings for the adult taking it with findings in breastfed infants. Identify which source says what, and disclose missing sections. Don't give any doses.",
     "required_any": [
-      "get_parent_medication_info",
+      "medication_evidence_brief",
       "get_label_sections",
       "get_lactmed_record"
     ],
     "allowed": [
       "route_parent_question",
       "normalize_drug",
-      "get_parent_medication_info",
+      "medication_evidence_brief",
       "get_label_sections",
       "get_lactmed_record",
       "get_patient_education",
@@ -101,12 +101,10 @@
     "id": "R06",
     "question": "Find up to two recruiting ADHD studies involving children in the United States. Include exact study links, overall and site status if present, update dates, contacts and qualification limits. Do not decide whether a child qualifies.",
     "required_any": [
-      "find_recruiting_studies",
       "search_trials"
     ],
     "allowed": [
       "route_parent_question",
-      "find_recruiting_studies",
       "search_trials",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
@@ -120,12 +118,10 @@
     "id": "R07",
     "question": "Are any recruiting pediatric epilepsy studies returned for Canada? Show up to two with study links and contacts, or clearly explain if the search found none. Do not substitute completed studies.",
     "required_any": [
-      "find_recruiting_studies",
       "search_trials"
     ],
     "allowed": [
       "route_parent_question",
-      "find_recruiting_studies",
       "search_trials",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
@@ -134,23 +130,6 @@
     ],
     "blocked": false,
     "criteria": "Respect Canada and pediatric epilepsy relevance, recruiting status, direct links/contact availability. No completed-study substitution or false exhaustive absence claim. Eligibility must be confirmed by study team."
-  },
-  {
-    "id": "R08",
-    "question": "Find FDA public-input notices about pregnancy research. Clearly label broad or indirectly related notices. Separate verified future deadlines, closed deadlines and unknown deadlines; don't submit anything.",
-    "required_any": [
-      "search_parent_input_opportunities"
-    ],
-    "allowed": [
-      "route_parent_question",
-      "search_parent_input_opportunities",
-      "search_fda_drug_notices",
-      "check_evidence_coverage",
-      "find_products_containing_ingredient",
-      "summarize_research_portfolio"
-    ],
-    "blocked": false,
-    "criteria": "FDA agency and requested topic. Broader candidates explicitly labeled. Dates from records only; unknown never declared open/closed without support. Separate future, elapsed/past-listed and unknown comment dates. Past listed deadlines satisfies the requested closed-deadline grouping when portal/submission acceptance is unverified; do not require a claim of verified portal closure. No submission or exhaustive search claim; source links."
   },
   {
     "id": "R09",
@@ -264,7 +243,9 @@
     "question": "Using the parent medication information tool, summarize the sertraline evidence from LactMed and the product label. Separate measured milk exposure from observed infant outcomes. Include links and questions to ask a clinician. Do not give dosing or medication decisions.",
     "blocked": false,
     "required_any": [
-      "get_parent_medication_info"
+      "medication_evidence_brief",
+      "get_lactmed_record",
+      "get_label_sections"
     ],
     "allowed": [
       "normalize_drug",
@@ -281,12 +262,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -342,12 +320,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -376,12 +351,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -410,12 +382,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -444,12 +413,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -478,12 +444,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -512,12 +475,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -530,7 +490,6 @@
     "blocked": false,
     "required_any": [
       "medication_evidence_brief",
-      "get_parent_medication_info",
       "get_lactmed_record"
     ],
     "allowed": [
@@ -548,12 +507,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"
@@ -566,8 +522,7 @@
     "blocked": false,
     "required_any": [
       "medication_evidence_brief",
-      "get_label_sections",
-      "get_parent_medication_info"
+      "get_label_sections"
     ],
     "allowed": [
       "normalize_drug",
@@ -584,12 +539,9 @@
       "get_mprint_details",
       "search_nichd_resources",
       "route_parent_question",
-      "get_parent_medication_info",
-      "search_fda_drug_notices",
-      "find_recruiting_studies",
-      "find_pregnancy_exposure_registries",
-      "search_parent_input_opportunities",
       "medication_evidence_brief",
+      "search_fda_drug_notices",
+      "find_pregnancy_exposure_registries",
       "check_evidence_coverage",
       "find_products_containing_ingredient",
       "summarize_research_portfolio"

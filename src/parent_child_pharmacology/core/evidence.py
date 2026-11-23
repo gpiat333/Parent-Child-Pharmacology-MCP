@@ -174,10 +174,15 @@ def annotate(out, requested_population=None):
     )
 
     requested_population = requested_population or out.get("population")
+    # A summary brief was annotated in full before it was condensed. Annotating its sources
+    # again would restore the per-source notices it left out, and would judge evidence
+    # status from the condensed copy instead of from what was actually retrieved.
+    condensed = out.get("detail") == "summary" and "evidence_status" in out
+    retrieved_status = out.get("evidence_status") if condensed else None
     for key in CHILDREN:
-        if isinstance(out.get(key), dict):
+        if isinstance(out.get(key), dict) and not condensed:
             out[key] = annotate(out[key], requested_population)
-    if "ingredient_evidence" in out:
+    if "ingredient_evidence" in out and not condensed:
         out["ingredient_evidence"] = [
             annotate(row, requested_population) for row in out["ingredient_evidence"]
         ]
@@ -215,7 +220,7 @@ def annotate(out, requested_population=None):
             "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary.",
             "source_attribution": SOURCE_ATTRIBUTION_RULE,
         }
-    out["evidence_status"] = evidence_state(out)
+    out["evidence_status"] = retrieved_status or evidence_state(out)
     out["content_flags"] = content_flags(out)
     if out.get("allow_research") is False or out.get("requires_confirmation"):
         from .participation import tier

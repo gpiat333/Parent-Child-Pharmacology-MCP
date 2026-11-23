@@ -50,7 +50,6 @@ def capabilities():
             "openFDA",
             "FDA public pages/workbook",
             "NICHD public metadata",
-            "Federal Register",
         ],
         "snapshot": snapshot_metadata(),
         "cache": {"storage": "process memory", "host_ttl_caps_seconds": config.CACHE_TTL_SECONDS},

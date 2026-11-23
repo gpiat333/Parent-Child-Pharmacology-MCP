@@ -83,7 +83,7 @@ def test_valid_boundaries_and_intentional_empty_discovery(name, args):
 
 def test_all_tools_advertise_strict_inputs_and_typed_envelope():
     tools = asyncio.run(server.mcp.list_tools())
-    assert len(tools) == 24
+    assert len(tools) == 21
     for tool in tools:
         assert tool.inputSchema["additionalProperties"] is False
         assert set(tool.outputSchema["required"]) >= {"safety", "disclaimer"}
@@ -143,7 +143,22 @@ def test_output_contract_rejects_missing_or_mistyped_metadata():
 
 
 def test_tool_descriptions_distinguish_goals():
-    assert "find_recruiting_studies" in registered("search_trials").description
-    assert "search_trials" in registered("find_recruiting_studies").description
-    assert "get_parent_medication_info" in registered("medication_evidence_brief").description
-    assert "medication_evidence_brief" in registered("get_parent_medication_info").description
+    trials = registered("search_trials").description
+    assert "research landscape" in trials and "recruiting_only=true" in trials
+    brief = registered("medication_evidence_brief").description
+    assert "focused parent questions" in brief and "detail='full'" in brief
+    assert "Lactation only" in registered("get_lactmed_record").description
+
+
+def test_descriptions_are_short_and_results_carry_the_answer_rules(monkeypatch):
+    for tool in asyncio.run(server.mcp.list_tools()):
+        assert len(tool.description) < 900, tool.name
+
+    async def fake(*a):
+        return {"found": True, "rxcui": "123", "ingredients": ["test ingredient"]}
+
+    monkeypatch.setattr(server.src, "rxnorm_normalize", fake)
+    result = asyncio.run(server.normalize_drug("test"))
+    assert "never silently substitute" in result["answer_rules"]
+    stop = asyncio.run(server.normalize_drug("what dose should I take"))
+    assert stop["allow_research"] is False and "answer_rules" not in stop

@@ -67,7 +67,7 @@ async def get_label_sections(drug: Query) -> EvidenceResponse:
             "sections": {k: r[k] for k in ("pregnancy", "lactation") if r.get(k)},
             "medicine_taker_sections": {},
             "medicine_taker_sections_status": "not_available_in_cached_extract",
-            "section_scope_notice": "Cached extract has no medicine-taker sections. Use get_parent_medication_info for adult adverse reactions and warnings before attempting an adult/infant comparison.",
+            "section_scope_notice": "Cached extract has no medicine-taker sections. Use the live label for adult adverse reactions and warnings before attempting an adult/infant comparison.",
             "url": f"https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid={r['setid']}",
         }
     label = await src.dailymed_label(drug)

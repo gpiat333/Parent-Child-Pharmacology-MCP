@@ -1,10 +1,6 @@
 """Navigation tier, never efficacy evidence, ranking, enrollment or recommendation."""
 
-TOOLS = {
-    "find_pregnancy_exposure_registries",
-    "find_recruiting_studies",
-    "search_parent_input_opportunities",
-}
+TOOLS = {"find_pregnancy_exposure_registries"}
 
 
 def tier(payload=None, *, suppressed=False, reason=None):

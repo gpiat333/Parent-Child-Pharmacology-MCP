@@ -55,49 +55,6 @@ class RouteParentQuestionInput(StrictInput):
     )
 
 
-class GetParentMedicationInfoInput(StrictInput):
-    drug: Query = Field(
-        ...,
-        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
-        examples=["sertraline"],
-    )
-
-
-class FindRecruitingStudiesInput(StrictInput):
-    topic: Query = Field(
-        ...,
-        description="Condition or medicine to find recruiting studies for.",
-        examples=["pediatric epilepsy"],
-    )
-    population: Population = Field(
-        "any",
-        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
-        examples=["lactation"],
-    )
-    location: OptionalQuery = Field(
-        "",
-        description="City, state or country used to filter study sites; never a home address.",
-        examples=["Maryland"],
-    )
-    max_results: Limit20 = Field(
-        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
-    )
-
-
-class SearchParentInputOpportunitiesInput(StrictInput):
-    topic: Query = Field(
-        ...,
-        description="Short research subject such as pregnancy or clinical research, not a whole question.",
-        examples=["pediatric epilepsy"],
-    )
-    agency: Literal["NIH", "FDA"] = Field(
-        "NIH", description="Which agency's Federal Register notices to search.", examples=["NIH"]
-    )
-    max_results: Limit20 = Field(
-        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
-    )
-
-
 class NormalizeDrugInput(StrictInput):
     name: Query = Field(
         ...,
@@ -190,25 +147,39 @@ class SearchPediatricLabelingChangesInput(StrictInput):
 class SearchTrialsInput(StrictInput):
     condition_or_drug: OptionalQuery = Field(
         "",
-        description="Condition or drug; omit when fetching by nct_id.",
+        description="Condition or medicine; omit when fetching by nct_id.",
         examples=["pediatric epilepsy"],
     )
-    population: Population = Field(
-        "pregnancy",
-        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
+    population: Population | None = Field(
+        None,
+        description="Who the studies should be about. When omitted: pregnancy for the research "
+        "landscape, any for recruiting_only.",
         examples=["lactation"],
     )
-    max_results: Limit20 = Field(
-        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
-    )
+    max_results: Limit20 = Field(10, description="Maximum studies returned (1-20).", examples=[5])
     nct_id: NCTID | None = Field(
         None, description="Exact NCT identifier for a direct record fetch, without a search."
+    )
+    recruiting_only: bool = Field(
+        False,
+        description="true for studies recruiting now, with eligibility, contacts and sites, as an "
+        "unranked participation listing. false for the research landscape across all statuses.",
+    )
+    location: OptionalQuery = Field(
+        "",
+        description="recruiting_only: city, state or country to filter study sites; never a "
+        "home address.",
+        examples=["Maryland"],
     )
 
     @model_validator(mode="after")
     def selector(self):
         if bool(self.condition_or_drug) == bool(self.nct_id):
             raise ValueError("Provide exactly one of condition_or_drug or nct_id")
+        if self.recruiting_only and self.nct_id:
+            raise ValueError("recruiting_only needs condition_or_drug, not nct_id")
+        if self.location and not self.recruiting_only:
+            raise ValueError("location applies only when recruiting_only is true")
         return self
 
 
@@ -468,10 +439,7 @@ INPUT_MODELS = {
     "route_parent_question": RouteParentQuestionInput,
     "search_fda_drug_notices": SearchFdaDrugNoticesInput,
     "search_nichd_resources": SearchNichdResourcesInput,
-    "get_parent_medication_info": GetParentMedicationInfoInput,
-    "find_recruiting_studies": FindRecruitingStudiesInput,
     "find_pregnancy_exposure_registries": FindPregnancyExposureRegistriesInput,
-    "search_parent_input_opportunities": SearchParentInputOpportunitiesInput,
     "normalize_drug": NormalizeDrugInput,
     "get_lactmed_record": GetLactmedRecordInput,
     "search_literature": SearchLiteratureInput,

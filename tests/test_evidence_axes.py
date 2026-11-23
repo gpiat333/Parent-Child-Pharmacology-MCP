@@ -130,8 +130,6 @@ def test_all_years_for_pregnancy_avoids_arbitrary_recent_only_gap():
     "name",
     [
         "find_pregnancy_exposure_registries",
-        "find_recruiting_studies",
-        "search_parent_input_opportunities",
     ],
 )
 @pytest.mark.parametrize(

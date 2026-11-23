@@ -108,9 +108,9 @@ def reference(case):
             return [m.call('get_lactmed_record',{'drug':'amoxicillin','max_chars':20000})]
         if case['id'] in ['E01-gap','E02-maternal-pk']:
             return [m.call('medication_evidence_brief',{'drug':'daridorexant' if case['id']=='E01-gap' else 'lamotrigine','population':'pregnancy','detail':'full'})]
-        calls={'R03':('get_parent_medication_info',{'drug':'metformin'}),
+        calls={'R03':('medication_evidence_brief',{'drug':'metformin','population':'lactation','detail':'full'}),
                'R04':('search_fda_drug_notices',{'kind':'recalls','drug':'naproxen','lot':'NOTREAL-77','max_results':5}),
-               'R06':('find_recruiting_studies',{'topic':'ADHD','population':'pediatric','location':'United States','max_results':2}),
+               'R06':('search_trials',{'condition_or_drug':'ADHD','population':'pediatric','location':'United States','max_results':2,'recruiting_only':True}),
                'R09':('search_fda_drug_notices',{'kind':'safety_communications','drug':'montelukast','max_results':5})}
         name,args=calls[case['id']];return [m.call(name,args)]
     finally:m.close()

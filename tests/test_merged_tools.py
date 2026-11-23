@@ -101,3 +101,38 @@ def test_registry_lookup_lists_the_directory_without_a_drug(monkeypatch):
     out = asyncio.run(parent_resources.find_pregnancy_exposure_registries())
     assert out["args"] == ["", 20] and out["tier"] == "participation" and not out["ranked"]
     assert [r["registry"] for r in out["results"]] == ["A", "B"]
+
+
+def test_recruiting_mode_is_an_unranked_participation_listing(monkeypatch):
+    from parent_child_pharmacology.services import literature
+
+    seen = []
+
+    async def recruiting(topic, population, location, n):
+        seen.append((topic, population, location, n))
+        return {"source": "test", "studies": [{"title": "B"}, {"title": "A"}]}
+
+    monkeypatch.setattr(parents, "recruiting_studies", recruiting)
+    out = asyncio.run(
+        literature.search_trials("ADHD", "pediatric", 2, recruiting_only=True, location="Canada")
+    )
+    assert seen == [("ADHD", "pediatric", "Canada", 2)]
+    assert out["tier"] == "participation" and not out["ranked"] and not out["recommended"]
+    assert [s["title"] for s in out["studies"]] == ["A", "B"]
+    asyncio.run(literature.search_trials("ADHD", recruiting_only=True))
+    assert seen[1][1] == "any"
+
+
+def test_landscape_mode_keeps_its_pregnancy_default(monkeypatch):
+    from parent_child_pharmacology.services import literature
+
+    seen = []
+
+    async def trials(term, population, n):
+        seen.append(population)
+        return []
+
+    monkeypatch.setattr(literature.src, "trials_search", trials)
+    out = asyncio.run(literature.search_trials("sertraline"))
+    assert seen == ["pregnancy"] and out["search_mode"] == "research_landscape"
+    assert "tier" not in out

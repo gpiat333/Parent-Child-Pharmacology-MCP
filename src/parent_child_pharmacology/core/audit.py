@@ -9,6 +9,7 @@ import uuid
 
 from parent_child_pharmacology.clients import lakehouse
 from parent_child_pharmacology.core import config as cfg
+from parent_child_pharmacology.services.descriptions import answer_rules
 
 from .http import UpstreamUnavailable, request_provenance
 from .response import normalize
@@ -140,7 +141,7 @@ def _participation_tier(name, out):
     )
 
 
-def _envelope(name, out, provenance):
+def _envelope(name, out, provenance, rules=""):
     """Add the safety metadata, shared response fields and required display notices."""
     from .abstract_coverage import disclosure_notices
     from .output_notices import POLICY, required_notices
@@ -157,6 +158,8 @@ def _envelope(name, out, provenance):
         or bool(out.get("error"))
     )
     out["required_display_notices"] = required_notices([name], blocked=stopped)
+    if rules and not stopped:
+        out["answer_rules"] = rules
     # Source failures need coverage disclosure; policy and identity stops do not.
     if out.get("allow_research") is not False and not out.get("requires_confirmation"):
         out["required_display_notices"] += disclosure_notices(
@@ -168,6 +171,8 @@ def _envelope(name, out, provenance):
 def audited(fn):
     """Wrap a tool: screen its arguments, run it, and return one consistent envelope."""
     name = fn.__name__
+    # Read now: registration replaces the wrapper's docstring with the short description.
+    rules = answer_rules(fn.__doc__)
 
     @functools.wraps(fn)  # preserves signature so FastMCP builds the right JSON schema
     async def wrapper(*args, **kwargs):
@@ -192,7 +197,7 @@ def audited(fn):
                 out = _failure(name, exc)
             if isinstance(out, dict) and out.get("error"):
                 error = error or "tool_error"
-            out = _envelope(name, out, provenance)
+            out = _envelope(name, out, provenance, rules)
         finally:
             request_provenance.reset(token)
         if cfg.USE_LAKEHOUSE:

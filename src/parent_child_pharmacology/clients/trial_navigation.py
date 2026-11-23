@@ -15,7 +15,6 @@ ALERTS = "https://www.fda.gov/drugs/drug-safety-and-availability/drug-safety-com
 REGISTRIES = (
     "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
 )
-FR = "https://www.federalregister.gov/api/v1/documents.json"
 DIRECTORIES = [
     {
         "title": "NIH public involvement",

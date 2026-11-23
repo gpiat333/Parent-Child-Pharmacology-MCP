@@ -2,7 +2,7 @@
 
 # Tool migration
 
-Current local protocol (0.20.0): 24 tools, four prompts, five resources. Not deployed; the hosted App still runs the 31-tool .27 build. See [November 23 consolidation](#november-23-consolidation-0200).
+Current local protocol (0.21.0): 21 tools, four prompts, five resources. Not deployed; the hosted App still runs the 31-tool .27 build. See [November 23 consolidation](#november-23-consolidation-0200).
 
 | Former name | Current interface |
 |---|---|
@@ -47,3 +47,15 @@ Nine tools were merged into goal-level tools, taking the catalog from 31 to 24. 
 `medication_evidence_brief` gains `detail`. The default `summary` returns every evidence axis with totals, the first five passages per list and compact source records, and names what it left out; `full` returns every passage and the source text. Both companion clients count `*_total` fields so the three-axis inventory reports all retrieved passages. The `evidence` field now lists the top-level field names instead of repeating them, and per-ingredient axes are returned once, under top-level `evidence_axes`.
 
 Not changed: `get_parent_medication_info` and `search_parent_input_opportunities` stay registered because evaluation cases D01, R03 and R08 depend on them. The 0.20.0 source has not been re-run through the chat, paired or benchmark evaluations.
+
+## November 23 second consolidation (0.21.0)
+
+Three more tools were folded in or removed, taking the catalog from 24 to 21. This supersedes the "Not changed" note above.
+
+| Former tool | Current interface |
+|---|---|
+| get_parent_medication_info | medication_evidence_brief; the summary keeps the label's `medicine_taker_sections` beside the LactMed infant findings |
+| find_recruiting_studies | search_trials with `recruiting_only=true` and optional `location`; results are an unranked participation listing |
+| search_parent_input_opportunities | Removed with its Federal Register client; `www.federalregister.gov` is no longer on the outbound allowlist |
+
+Tool descriptions now say only what a tool does and when to choose it. The longer guidance on how to write an answer from a result is returned with each non-stop result as `answer_rules`. Evaluation case R08 (public-input notices) is retired, leaving 27 cases: 20 research and 7 stops. `search_trials` takes an optional `population`; when omitted it is pregnancy for the research landscape and any for recruiting studies. The study-team confirmation notice now attaches to every `search_trials` result.

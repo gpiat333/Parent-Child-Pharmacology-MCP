@@ -12,10 +12,8 @@ from parent_child_pharmacology.models.contracts import (
     EvidenceResponse,
     Limit20,
     OptionalQuery,
-    Query,
     Question,
 )
-from parent_child_pharmacology.models.inputs import Population
 
 log = logging.getLogger("mc")
 
@@ -40,17 +38,6 @@ async def route_parent_question(question: Question, country: Country = "US") -> 
             "message": "Use a short question without an identifiable health history.",
         }
     return parent_safety.route(question, country)
-
-
-async def get_parent_medication_info(drug: Query) -> EvidenceResponse:
-    """Preferred for parent questions about side effects and breastfeeding infant findings.
-    Use this focused bundle, not medication_evidence_brief, when papers/trials/FAERS
-    are not requested. Parent-facing evidence bundle after confirming drug identity. Separates label
-    adverse effects in the medicine taker, LactMed infant evidence, and MedlinePlus
-    education links. Monitoring recommendations are not observed infant effects.
-    Follow source limitations; never diagnose symptoms or give personal medication
-    decisions, doses, schedules, missed-dose or taper instructions."""
-    return await parents.medication_info(drug)
 
 
 NoticeKind = Literal["recalls", "safety_communications", "shortages", "reporting_links"]
@@ -101,24 +88,6 @@ async def search_fda_drug_notices(
     return {**out, "notice_kind": kind}
 
 
-async def find_recruiting_studies(
-    topic: Query,
-    population: Population = "any",
-    location: OptionalQuery = "",
-    max_results: Limit20 = 10,
-) -> EvidenceResponse:
-    """Preferred for participation questions ("can I join a study?"). Use search_trials
-    for a research landscape across statuses, not enrollment discovery.
-    Discover potentially relevant RECRUITING studies and public eligibility,
-    contacts, site status, locations and update dates. Location is city/state/country,
-    not home address. Not an eligibility decision or enrollment. Overall recruitment
-    does not mean every site recruits; study team must confirm current availability.
-    Use population='pediatric' for children: only records with pediatric age metadata
-    are listed; adult-only and unverified-age records are withheld. If none remain,
-    lead with no verified pediatric match in this bounded search, not broader studies."""
-    return await parents.recruiting_studies(topic, population, location, max_results)
-
-
 async def find_pregnancy_exposure_registries(
     drug: OptionalQuery = "", max_results: Limit20 = 20
 ) -> EvidenceResponse:
@@ -132,20 +101,3 @@ async def find_pregnancy_exposure_registries(
     from parent_child_pharmacology.core.participation import tier
 
     return tier(await parents.pregnancy_registries(drug, max_results))
-
-
-async def search_parent_input_opportunities(
-    topic: Query, agency: Literal["NIH", "FDA"] = "NIH", max_results: Limit20 = 10
-) -> EvidenceResponse:
-    """Discover NIH/FDA Federal Register notices plus public-engagement directories.
-    Use a concise subject such as 'clinical research' or 'pregnancy', not a whole
-    question or extra words such as 'parent public input'. If empty, simplify the
-    subject while preserving the research topic; do not invent opportunities.
-    Candidates may be RFIs, comment requests or meetings; verify title/text, audience,
-    official deadline and submission instructions. Use comment_deadline.date and
-    relation_to_as_of to group dates, separately from submission_status and relevance.
-    A known future date is not an unknown date even if submission acceptance is
-    unverified. Meeting dates never establish comment deadlines or closure.
-    Unknown comment deadline is neither verified open nor verified closed.
-    Coverage is incomplete. Never submit comments or collect personal histories."""
-    return await parents.input_opportunities(topic, agency, max_results)

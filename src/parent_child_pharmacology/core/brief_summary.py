@@ -36,18 +36,24 @@ DROPPED_TEXT = {
     ),
     "label": (
         "sections",
-        "medicine_taker_sections",
         "pllr_8_1",
         "section_population_context",
         "product_description",
         "approved_use_sections",
         "content_flags",
     ),
-    "literature": ("articles", "searches", "content_flags"),
+    "literature": ("articles", "searches", "query_strategy", "search_metadata", "content_flags"),
     "adverse_events": ("content_flags",),
     "trials": ("content_flags",),
     "patient_info": ("content_flags",),
 }
+# Notices that annotation repeats on every source; the brief states each once at the top.
+REPEATED_NOTICES = (
+    "framing_contract",
+    "continuity_of_care_notice",
+    "pregnancy_coverage_notice",
+    "evidence_status",
+)
 ROW_FIELDS = {
     ("literature", "results"): ("pmid", "title", "journal", "year", "publication_types", "url"),
     ("trials", "studies"): ("nct", "title", "status", "results_posted", "url"),
@@ -90,7 +96,7 @@ def _source(name, payload):
     if not isinstance(payload, dict):
         return payload
     dropped = [k for k in DROPPED_TEXT.get(name, ()) if k in payload]
-    out = {k: v for k, v in payload.items() if k not in dropped}
+    out = {k: v for k, v in payload.items() if k not in dropped and k not in REPEATED_NOTICES}
     for (source, key), fields in ROW_FIELDS.items():
         rows = out.get(key)
         if source != name or not isinstance(rows, list):
@@ -135,6 +141,12 @@ def summarize(brief):
             }
         rows.append(slim)
     out["ingredient_evidence"] = rows
+    priorities = out.get("research_priorities_context")
+    if isinstance(priorities, dict):
+        # Keep why the gap matters and where to read it; the 15 recommendations are in the full view.
+        out["research_priorities_context"] = {
+            k: priorities[k] for k in ("framework", "why_shown", "links") if k in priorities
+        } | {"recommendations": "Listed with detail='full'."}
     out["detail"] = "summary"
     out["passage_notice"] = PASSAGE_NOTICE
     out["coverage_notice"] = (

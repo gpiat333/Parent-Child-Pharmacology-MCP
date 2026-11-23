@@ -30,7 +30,6 @@ APPROVED_HOSTS = frozenset(
         "connect.medlineplus.gov",
         "www.nichd.nih.gov",
         "dash.nichd.nih.gov",
-        "www.federalregister.gov",
         # Read-only freshness check of the bundled MPRINT snapshot's upstream repository.
         "api.github.com",
     }

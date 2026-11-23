@@ -160,12 +160,13 @@ def test_population_enum_preserves_band(band):
     for name in [
         "search_literature",
         "search_trials",
-        "find_recruiting_studies",
         "medication_evidence_brief",
         "find_mprint_records",
     ]:
-        schema = INPUT_MODELS[name].model_json_schema()
-        assert band in schema["properties"]["population"]["enum"]
+        population = INPUT_MODELS[name].model_json_schema()["properties"]["population"]
+        # search_trials allows an omitted population, so its enum sits under anyOf.
+        enum = population.get("enum") or population["anyOf"][0]["enum"]
+        assert band in enum
     assert preserve_population({}, band)["requested_age_band"] == band
     assert preserve_population({}, band)["population_coverage"]["source_band_confirmed"] is False
 
@@ -271,12 +272,12 @@ def test_protocol_has_two_mprint_tools_and_clinician_prompt():
     from parent_child_pharmacology.app import mcp
 
     tools = {x.name for x in asyncio.run(mcp.list_tools())}
-    assert len(tools) == 24
+    assert len(tools) == 21
     assert {x for x in tools if "mprint" in x} == {"find_mprint_records", "get_mprint_details"}
     assert "medication_evidence_brief" in tools and "medication_safety_brief" not in tools
     prompts = {x.name for x in asyncio.run(mcp.list_prompts())}
     assert len(prompts) == 4 and "questions_to_ask_clinician" in prompts
-    assert "search_parent_input_opportunities" in tools
+    assert "search_parent_input_opportunities" not in tools
 
 
 @pytest.mark.parametrize(
