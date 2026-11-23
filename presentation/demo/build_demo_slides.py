@@ -1,6 +1,6 @@
 """Build the short demo slides for a self-narrated recording with a live Databricks demo.
 
-Keeps eight slides from the main deck and the demo cards in scenes.json, adds a live-demo slide,
+Keeps twelve slides from the main deck and the demo cards in scenes.json, adds a live-demo slide,
 and puts a voiceover script in each slide's speaker notes. Three answer cards follow the closing
 slide as backups, in case the live demo can't be recorded.
 
@@ -51,10 +51,31 @@ SLIDES = [
     ("deck:At 2 a.m., every place she turns falls short",
      "Right now, every place she turns falls short. Her doctor's office is closed. A web search turns up "
      "forums. MotherToBaby's experts answer the next business day. And the best evidence, in LactMed, "
-     "is written for clinicians."),
+     "is written for clinicians. Why is this so hard?"),
+    ("deck:Many medicines lack data for pregnancy and for children",
+     "Pregnant people and children are usually left out of the studies that establish a new medicine's "
+     "safety. Fewer than 10 percent of medicines approved since 1980 have enough information to "
+     "determine their safety in pregnancy, yet nine in ten women in the United States take a medication "
+     "during pregnancy. And in 1997, fewer than 20 percent of prescription drugs were labeled for use in "
+     "children."),
+    ("deck:Two decades of federal programs and research have worked to close the gap",
+     "For two decades, federal programs have worked to close that gap: the Best Pharmaceuticals for "
+     "Children Act and the Pediatric Research Equity Act, NICHD's Obstetric and Pediatric Pharmacology and "
+     "Therapeutics Branch, LactMed, the Pediatric Trials Network, FDA's Pregnancy and Lactation Labeling "
+     "Rule, the PRGLAC task force and the MPRINT Hub. Each effort produced evidence, but each in a "
+     "different place and format."),
+    ("deck:The evidence gap is real, but a lot of evidence exists",
+     "So the gap is real, but a lot of evidence exists: almost 2,000 LactMed drug records, 656 "
+     "MotherToBaby fact sheets in English and Spanish, more than 3,800 curated MPRINT study records, and "
+     "1.3 million PubMed records labeled by study type. PubMed, ClinicalTrials.gov, drug labels and FDA "
+     "data are searched live, every time. And where evidence is missing, the server says so."),
+    ("deck:However, what is known is scattered across agencies",
+     "But what's known is scattered across agencies: NLM, FDA, NIH and NICHD, and nonprofits like "
+     "MotherToBaby. For a parent, a researcher or a clinician, that means different names, IDs and "
+     "formats: public APIs, web pages, spreadsheets and PDFs. No single place connects them."),
     ("deck:One MCP server connects pregnancy, breastfeeding and pediatric data",
-     "So I built one MCP server that brings these federal sources together: LactMed, FDA drug labels, "
-     "PubMed, ClinicalTrials.gov, MotherToBaby and NIH research data, through 31 tools. It follows her "
+     "So I built one MCP server that connects them: LactMed, FDA drug labels, PubMed, "
+     "ClinicalTrials.gov, MotherToBaby and NIH research data, through 31 tools. It follows her "
      "from pregnancy, to breastfeeding, to her child's medicines, with newborns, infants, children and "
      "teens kept separate."),
     ("live",

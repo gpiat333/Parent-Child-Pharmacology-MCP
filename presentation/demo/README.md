@@ -12,7 +12,7 @@ Needs LibreOffice, macOS `say`, and the Python packages python-pptx, pypdfium2, 
 
 ## Demo slides for a self-narrated recording
 
-`../Parent-child Pharmacology MCP — Demo slides.pptx` is a short deck for recording the demo in your own voice: eight slides from the main deck and the demo cards, plus a live-demo slide where the recording switches to the deployed Databricks App in the Databricks AI Playground. Each slide's speaker notes hold a voiceover script. Three answer cards after the closing slide are backups in case the live demo can't be recorded. To rebuild:
+`../Parent-child Pharmacology MCP — Demo slides.pptx` is a short deck for recording the demo in your own voice: twelve slides from the main deck (including the evidence gap, federal programs, available evidence and scattered sources) and the demo cards, plus a live-demo slide where the recording switches to the deployed Databricks App in the Databricks AI Playground. Each slide's speaker notes hold a voiceover script. Three answer cards after the closing slide are backups in case the live demo can't be recorded. To rebuild:
 
 ```
 python build_demo_slides.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v24.pptx"
