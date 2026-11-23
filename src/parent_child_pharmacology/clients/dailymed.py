@@ -90,6 +90,30 @@ def parse_product_description(xml, max_chars=3000):
     return out
 
 
+APPROVED_USE_CODES = {"34067-9": "indications_and_usage", "34092-7": "clinical_studies"}
+APPROVED_USE_TITLES = {
+    "indications and usage": "indications_and_usage",
+    "indications & usage": "indications_and_usage",
+    "clinical studies": "clinical_studies",
+}
+
+
+def parse_approved_use_sections(xml, max_chars=3000):
+    """What the product is approved for and the studies behind it (mostly adults)."""
+    ns = {"h": "urn:hl7-org:v3"}
+    out = {}
+    for sec in ET.fromstring(xml).iterfind(".//h:section", ns):
+        title = re.sub(r"^[\d.\s]+", "", text_of(sec.find("h:title", ns))).strip().lower()
+        code = sec.find("h:code", ns)
+        key = APPROVED_USE_TITLES.get(title) or (
+            APPROVED_USE_CODES.get(code.get("code")) if code is not None else None
+        )
+        text = text_of(sec.find("h:text", ns))
+        if key and text and key not in out:
+            out[key] = {"text": text[:max_chars], "truncated": len(text) > max_chars}
+    return out
+
+
 def parse_dailymed_sections(xml: str, max_chars: int = 4000) -> dict[str, str]:
     ns = {"h": "urn:hl7-org:v3"}
     found = {}
@@ -216,6 +240,8 @@ async def dailymed_label(drug: str) -> dict:
                 ],
                 "medicine_taker_sections_truncated": any(v["truncated"] for v in adult.values()),
                 "product_description": parse_product_description(x.text),
+                "approved_use_sections": parse_approved_use_sections(x.text),
+                "approved_use_notice": "Approved uses (indications) and the clinical studies behind them, mostly in adults. A use not listed is off-label; off-label use in children is common and is not recorded in the label. Approval in adults does not establish a dose, safety or effectiveness in children.",
                 "product_description_notice": "What this product contains, from the same label: chemical name, molecular formula and weight, and active and inactive ingredients where the label lists them. Structural formula images are not returned. Describes this one product, not other brands or formulations.",
                 "section_scope_notice": "sections contains pregnancy, lactation and pediatric-use text. medicine_taker_sections contains adverse reactions and warnings from the SAME selected label. For adult-versus-infant comparisons, inspect both groups and LactMed; do not treat a population section as the full adult warning profile. Missing sections are extraction limitations, not proof of absence.",
                 "spl_version": version.get("value")

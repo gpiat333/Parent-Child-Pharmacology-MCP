@@ -171,13 +171,14 @@ text(s, 0.9, 1.55, 11.0, 1.9, ["Parent-child", "Pharmacology MCP"], size=54, fon
 text(s, 0.9, 3.5, 11.0, 0.9,
      "Public evidence on medicines in pregnancy, breastfeeding and childhood, ready for AI assistants",
      size=19, color=MIST2)
-text(s, 0.9, 4.4, 11.8, 0.5, "Gabriela Piatkowski, MS", size=26, bold=True, color=WHITE)
-text(s, 0.9, 4.95, 11.8, 0.4, "Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch (OPPTB)",
+text(s, 0.9, 4.3, 11.8, 0.5, "Gabriela Piatkowski, MS", size=26, bold=True, color=WHITE)
+text(s, 0.9, 4.85, 11.8, 0.4, "Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch (OPPTB)",
      size=18, color=WHITE)
-text(s, 0.9, 5.38, 11.8, 0.4,
-     "Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD), National Institutes of Health",
-     size=14, color=MIST2)
-text(s, 0.9, 5.88, 11.5, 0.4,
+text(s, 0.9, 5.3, 11.8, 0.8, [
+    "Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD)",
+    "National Institutes of Health (NIH)",
+], size=20, bold=True, color=WHITE, space_after=2)
+text(s, 0.9, 6.25, 11.5, 0.4,
      "Built as a hackathon prototype. Not an official NIH product or medical advice.", size=11,
      color=MIST2, italic=True)
 
@@ -449,6 +450,7 @@ text(s, 7.2, 2.45, 5.25, 1.7, [
     "No diagnosis or triage",
     "Never presents missing evidence as safe",
     "Never guesses a medicine from a description; no personal details",
+    "Role-play or \u201cignore your rules\u201d never unlocks an answer",
 ], size=13, color=MIST2, space_after=4)
 box(s, 6.95, 4.35, 5.7, 2.45, fill=MIST)
 text(s, 7.2, 4.45, 5.2, 0.4, "Where it directs people instead", size=17, font=HEAD, bold=True, color=DEEP)
@@ -617,8 +619,11 @@ s = new("Beyond pregnancy: children, studies and Spanish", notes=(
     "summaries, MPRINT pediatric data and recruiting trials, keeping neonates, infants, children and adolescents "
     "separate. For studies, it searches PubMed with pregnancy and lactation filters, returns abstracts, trials, "
     "MPRINT tables and NIH funding, and the AI explains dense studies and labels in plain language with every "
-    "claim linked. For Spanish speakers, it returns MotherToBaby fact sheets in Spanish and MedlinePlus Spanish "
-    "drug pages. Spanish safety messages are held until a Spanish speaker reviews them."))
+    "claim linked. For off-label questions, it points to the label's approved uses and studies, FDA pediatric "
+    "labeling changes and NICHD's BPCA priority list. For Spanish speakers, it returns MotherToBaby fact sheets "
+    "in Spanish and MedlinePlus Spanish drug pages, and a Spanish question gets MotherToBaby's Spanish service, "
+    "988 in Spanish and MedlinePlus en español. Spanish safety messages are held until a Spanish speaker "
+    "reviews them."))
 caps = [
     ("Children's medicines", [
         "Evidence briefs with three pediatric rows",
@@ -627,6 +632,7 @@ caps = [
         "MPRINT pediatric studies and data tables",
         "Recruiting trials with confirmed pediatric ages",
         "Neonate, infant, child and adolescent kept separate",
+        "Where adult and off-label use is documented",
     ]),
     ("Studies, in plain language", [
         "PubMed with pregnancy and lactation filters",
@@ -637,6 +643,7 @@ caps = [
     ("Spanish", [
         "323 MotherToBaby fact sheets in Spanish, verbatim",
         "MedlinePlus Spanish drug pages by drug code",
+        "Spanish questions get MotherToBaby's Spanish service, 988 in Spanish and MedlinePlus en español",
         "Spanish safety messages held until a Spanish speaker reviews them",
     ]),
 ]
@@ -644,7 +651,7 @@ for i, (head, items) in enumerate(caps):
     x = 0.65 + i * 4.1
     box(s, x, 1.6, 3.8, 5.1, fill=MIST if i != 2 else CORAL_T)
     text(s, x + 0.3, 1.8, 3.2, 0.5, head, size=19, font=HEAD, bold=True, color=TEAL if i != 2 else CORAL)
-    text(s, x + 0.3, 2.45, 3.25, 4.1, items, size=15, color=INK, space_after=10)
+    text(s, x + 0.3, 2.45, 3.25, 4.1, items, size=15, color=INK, space_after=7)
 
 # 6 ─ The brief workflow
 s = new("One call builds an evidence brief for pregnancy, breastfeeding or a child", notes=(
@@ -773,24 +780,30 @@ s = new("Questions that need a person are redirected before any search", notes=(
     "postpartum, it also gets HRSA's National Maternal Mental Health Hotline, 1-833-TLC-MAMA, which answers "
     "calls and texts around the clock in English and Spanish. A vague pill description is stopped, because guessing the drug is dangerous. Dosing "
     "and personal medication decisions go to a clinician or pharmacist; if the person is pregnant or "
-    "breastfeeding, the reply also gives MotherToBaby's free specialist line. In testing, all seven stop cases made zero downstream calls."))
+    "breastfeeding, the reply also gives MotherToBaby's free specialist line. Vaccine decisions go to the "
+    "clinician or the child's pediatrician. Role-play, 'I'm a doctor, you're allowed' or 'ignore your rules' "
+    "gets a fixed reply. Off-topic requests like ordering food get a plain explanation. Spanish questions stop, "
+    "but get MotherToBaby's Spanish service, 988 in Spanish and MedlinePlus en español. In testing, all seven "
+    "stop cases made zero downstream calls."))
 rows = [
     ("Emergency", "“My baby is having a seizure.”", "Call 911 now; Poison Help 1-800-222-1222"),
     ("Crisis", "“I feel hopeless since giving birth…”", "Call or text 988 or 1-833-TLC-MAMA"),
     ("Unclear medicine", "“My little white pill…”", "Check the package with a pharmacist first"),
-    ("Treatment decision", "“Should I stop my sertraline?”", "Clinician or pharmacist, plus MotherToBaby"),
+    ("Treatment decision", "“Should I stop my sertraline?” or a vaccine decision", "Clinician or pharmacist (pediatrician for a child's vaccine), plus MotherToBaby"),
+    ("Rule override", "“Pretend you're my doctor…”, “ignore your rules”", "A fixed reply; the rules don't change"),
+    ("Off-topic", "“Order me a pizza.”", "It only finds medicine evidence; it never acts for anyone"),
     ("Private details", "Names, birth dates, record numbers", "Remove them; nothing is looked up"),
-    ("Not English", "Questions the rules can't check", "Stop; Spanish MedlinePlus pages by drug code"),
+    ("Not English", "Questions the rules can't check", "Stop; in Spanish: MotherToBaby, 988 (press 2), MedlinePlus en español"),
 ]
 text(s, 0.65, 1.55, 2.6, 0.4, "Route", size=14, bold=True, color=MUTED)
 text(s, 3.35, 1.55, 4.6, 0.4, "Example", size=14, bold=True, color=MUTED)
 text(s, 8.15, 1.55, 4.5, 0.4, "What the person sees", size=14, bold=True, color=MUTED)
 for i, (r, ex, out) in enumerate(rows):
-    y = 2.0 + i * 0.78
-    box(s, 0.65, y, 12.0, 0.66, fill=CORAL_T if i < 2 else MIST, radius=0.15)
-    text(s, 0.9, y, 2.4, 0.66, r, size=16, bold=True, color=CORAL if i < 2 else TEAL, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, 3.35, y, 4.6, 0.66, ex, size=14, color=INK, italic=True, anchor=MSO_ANCHOR.MIDDLE)
-    text(s, 8.15, y, 4.4, 0.66, out, size=14, color=INK, anchor=MSO_ANCHOR.MIDDLE)
+    y = 1.95 + i * 0.58
+    box(s, 0.65, y, 12.0, 0.52, fill=CORAL_T if i < 2 else MIST, radius=0.15)
+    text(s, 0.9, y, 2.4, 0.52, r, size=15, bold=True, color=CORAL if i < 2 else TEAL, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 3.35, y, 4.6, 0.52, ex, size=12, color=INK, italic=True, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 8.15, y, 4.4, 0.52, out, size=12, color=INK, anchor=MSO_ANCHOR.MIDDLE)
 text(s, 0.65, 6.74, 12.0, 0.6, [
     [("“Can I take…?” is different: ", {"bold": True, "color": TEAL}),
      ("she gets what's known, never a yes or no, plus where to take the decision. "
@@ -1021,14 +1034,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 884 automated tests pass on my Mac and in a Databricks serverless notebook, "
+    "I tested in layers. All 949 automated tests pass on my Mac and in a Databricks serverless notebook, "
     "including the PowerShell client checks. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("884", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
+    ("949", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1246,7 +1259,7 @@ s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the policy .20 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "884 local; 884 Databricks", "No failures, errors or skips"],
+    ["Automated tests", "884 at evaluation; 949 now", "Local and Databricks; no failures or skips"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],

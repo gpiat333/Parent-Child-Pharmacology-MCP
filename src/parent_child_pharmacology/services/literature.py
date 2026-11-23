@@ -178,7 +178,9 @@ async def search_funded_research(
     activity_code: ActivityCode = "",
     organization: OptionalQuery = "",
 ) -> EvidenceResponse:
-    """Search NIH RePORTER for funded projects (newest first) on a maternal/child topic. Optional IC enum (HD maps to NICHD), fiscal_years, exact activity_code and organization-name filters become reproducible query_criteria. Fiscal-year award obligations and direct costs remain separate; neither is lifetime project value.
+    """Search NIH RePORTER for funded projects (newest first) on a maternal/child topic, across all
+    NIH institutes by default (set ic, e.g. HD for NICHD, to narrow). For a medicine, combine the drug
+    with a population ("sertraline pregnancy"); a drug name alone matches any project mentioning it. Optional IC enum (HD maps to NICHD), fiscal_years, exact activity_code and organization-name filters become reproducible query_criteria. Fiscal-year award obligations and direct costs remain separate; neither is lifetime project value.
     For NICHD program staff: portfolio oversight, topic discovery and links to public awards;
     no assessment of grant performance, private records, or funding recommendations.
     Use title and abstract to assess relevance; omit indirect matches from the main

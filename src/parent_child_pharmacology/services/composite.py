@@ -35,7 +35,9 @@ async def medication_evidence_brief(
     """Use for explicit requests to prepare an evidence brief for pregnancy, breastfeeding or a
     child's medicine (population neonate, infant, child, adolescent or pediatric). Pediatric briefs use
     three pediatric axes: effectiveness and safety findings, pharmacokinetics and exposure, and
-    labeling status and changes (DailyMed 8.4, FDA pediatric labeling changes, BPCA/PTN links).
+    labeling status and changes (DailyMed 8.4, FDA pediatric labeling changes, BPCA/PTN links), plus
+    off_label_context on where adult and off-label evidence is documented. Pregnancy and lactation
+    briefs include research_priorities_context with the 15 PRGLAC recommendations.
     Call before optional individual source lookups when preflight requested_workflow
     requires it. Compile public evidence and questions to ask a clinician, never a safety verdict.
     Normalize the exact product then search EACH confirmed active ingredient. Keep
@@ -136,6 +138,10 @@ async def medication_evidence_brief(
         if row["literature"].get("error") and not row["literature"].get("abstract_coverage"):
             row["literature"]["abstract_coverage"] = coverage([], [], search_failed=True)
         row["ingredient"] = name
+        if isinstance(row.get("label"), dict):
+            # Composition and adult approval text are available from get_label_sections.
+            for key in ("product_description", "approved_use_sections"):
+                row["label"].pop(key, None)
         if pediatric:
             from .nichd import search_bpca_evidence
 
@@ -247,5 +253,9 @@ async def medication_evidence_brief(
         }
         out["specialist_referral"] = MOTHERTOBABY
         out["research_priorities_context"] = PRGLAC_CONTEXT
+    if pediatric:
+        from parent_child_pharmacology.core.referrals import OFF_LABEL_CONTEXT
+
+        out["off_label_context"] = OFF_LABEL_CONTEXT
     out["citations"] = list(dict.fromkeys(urls(rows)))
     return annotate(out)

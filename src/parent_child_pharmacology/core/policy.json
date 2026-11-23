@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-23.21",
+  "version": "2026-11-23.22",
   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
   "patterns": {
     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
@@ -24,7 +24,9 @@
     "instruction_override": "\\bignore\\s+(?:all\\s+|any\\s+|your\\s+|the\\s+)?(?:previous\\s+|prior\\s+|above\\s+|earlier\\s+|safety\\s+)?(?:rules|instructions|guidelines|polic(?:y|ies)|restrictions)\\b|\\bdisregard\\s+(?:all\\s+|any\\s+|your\\s+|the\\s+)?(?:previous\\s+|prior\\s+|safety\\s+)?(?:rules|instructions|guidelines|polic(?:y|ies)|restrictions)\\b|\\byou\\s+are\\s+now\\b|\\bdeveloper\\s+mode\\b|\\bjailbreak\\w*\\b|\\bpretend\\s+(?:you|to\\s+be|that\\s+you|this\\s+is)\\b|\\b(?:act|behave)\\s+as\\s+(?:if\\s+you\\s+(?:are|were)\\s+)?(?:a|an|my)\\s+(?:doctor|physician|pharmacist|prescriber|nurse)\\b|\\bsystem\\s+prompt\\b|\\byou'?re\\s+allowed\\s+to\\b|\\byou\\s+are\\s+allowed\\s+to\\b|\\bi\\s+give\\s+you\\s+permission\\b",
     "off_topic_task": "^\\s*(?:please\\s+|hey,?\\s+|hi,?\\s+|can\\s+you\\s+|could\\s+you\\s+|would\\s+you\\s+)?(?:order|buy|book|reserve|purchase|deliver|send|e-?mail|text|call|schedule|play|draw|translate|sing|remind)\\s+(?:me|us|a|an|the|my|our|some|for)\\b|\\b(?:weather|pizza|recipes?|movies?|flights?|hotels?|restaurants?|homework|horoscope|stock\\s+prices?)\\b",
     "creative_request": "\\b(?:write|compose|make|tell|sing)\\s+(?:me\\s+|us\\s+)?(?:a|an|some)\\s+(?:\\w+\\s+){0,2}(?:poems?|songs?|jokes?|limericks?|story|stories|raps?)\\b",
-    "domain_terms": "\\b(?:medic\\w*|drugs?|pills?|tablets?|capsules?|doses?|dosing|vaccin\\w*|shots?|supplements?|herb\\w*|vitamins?|oils?|pregnan\\w*|breastfe\\w*|lactat\\w*|milk|infants?|bab(?:y|ies)|child\\w*|pediatric\\w*|paediatric\\w*|studies|study|trials?|research\\w*|evidence|labels?|lactmed|mprint|pubmed|side\\s+effects?|prescri\\w*|pharmac\\w*|teratogen\\w*|registr\\w*|fda|nih|nichd|grants?|funding|recalls?|shortages?)\\b"
+    "domain_terms": "\\b(?:medic\\w*|drugs?|pills?|tablets?|capsules?|doses?|dosing|vaccin\\w*|shots?|supplements?|herb\\w*|vitamins?|oils?|pregnan\\w*|breastfe\\w*|lactat\\w*|milk|infants?|bab(?:y|ies)|child\\w*|pediatric\\w*|paediatric\\w*|studies|study|trials?|research\\w*|evidence|labels?|lactmed|mprint|pubmed|side\\s+effects?|prescri\\w*|pharmac\\w*|teratogen\\w*|registr\\w*|fda|nih|nichd|grants?|funding|recalls?|shortages?)\\b",
+    "spanish_markers": "[¿¡]|\\b(?:el|los|las|del|para|por|durante|puedo|tomar|mi|seguro|segura|embarazo|embarazada|lactancia|bebé|bebe|amamantar|amamantando|medicamento|medicina|debo|hijo|hija|niño|niña|quiero|morir|ayuda|estoy|tengo|matarme|suicid\\w*arme)\\b",
+    "supplement_terms": "\\b(?:herb\\w*|supplements?|essential\\s+oils?|teas?|botanical\\w*|natural\\s+remed\\w*)\\b"
   },
   "messages": {
     "messages_1": "Public evidence and resource navigation; not individual treatment or eligibility decisions.",

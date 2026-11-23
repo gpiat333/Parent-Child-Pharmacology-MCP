@@ -324,3 +324,57 @@ async def lactmed_record(book_id: str, max_chars: int = 16000) -> dict:
         "url": url,
         **lactmed_payload(sections, max_chars),
     }
+
+
+# Common vaccine names mapped to LactMed record titles (LactMed groups vaccines by type).
+VACCINE_TITLES = {
+    "flu": "Influenza Vaccines",
+    "influenza": "Influenza Vaccines",
+    "mmr": "Measles-Mumps-Rubella Vaccine",
+    "measles": "Measles-Mumps-Rubella Vaccine",
+    "mmrv": "Measles-Mumps-Rubella-Varicella Vaccine",
+    "tdap": "Diphtheria-Tetanus-Pertussis Vaccines",
+    "dtap": "Diphtheria-Tetanus-Pertussis Vaccines",
+    "whooping cough": "Diphtheria-Tetanus-Pertussis Vaccines",
+    "pertussis": "Diphtheria-Tetanus-Pertussis Vaccines",
+    "rsv": "Respiratory Syncytial Virus Vaccine",
+    "respiratory syncytial virus": "Respiratory Syncytial Virus Vaccine",
+    "hpv": "Human Papillomavirus Vaccines",
+    "covid": "COVID-19 Vaccines",
+    "covid-19": "COVID-19 Vaccines",
+    "chickenpox": "Varicella Vaccine",
+    "varicella": "Varicella Vaccine",
+    "shingles": "Zoster Vaccines",
+    "hep b": "Hepatitis B Vaccine",
+    "hepatitis b": "Hepatitis B Vaccine",
+    "hep a": "Hepatitis A Vaccine",
+    "hepatitis a": "Hepatitis A Vaccine",
+    "hib": "Haemophilus Vaccines",
+    "polio": "Poliovirus Vaccines",
+    "pneumococcal": "Pneumococcal Vaccines",
+    "meningococcal": "Meningococcal Vaccines",
+    "rotavirus": "Rotavirus Vaccines",
+}
+
+
+def snapshot_title_match(name):
+    """Exact LactMed record title for a common name, from the bundled package's titles."""
+    q = re.sub(r"\s+", " ", (name or "").lower()).strip()
+    base = re.sub(
+        r"\s*\b(?:vaccines?|vaccinations?|shots?|jabs?|immuni[sz]ations?)\b\s*", " ", q
+    ).strip()
+    if re.search(r"\b(?:vaccin\w*|shots?|jabs?|immuni[sz]\w*)\b", q) or q in VACCINE_TITLES:
+        if base in VACCINE_TITLES:
+            return VACCINE_TITLES[base]
+    if not SNAPSHOT.exists():
+        return None
+    con = sqlite3.connect(SNAPSHOT.resolve().as_uri() + "?mode=ro", uri=True)
+    try:
+        titles = [r[0] for r in con.execute("SELECT title FROM records")]
+    finally:
+        con.close()
+    lowered = {t.lower(): t for t in titles}
+    for candidate in (q, q + "s", q[:-1] if q.endswith("s") else None):
+        if candidate and candidate in lowered:
+            return lowered[candidate]
+    return None

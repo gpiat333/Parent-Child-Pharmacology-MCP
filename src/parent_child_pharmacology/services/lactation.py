@@ -44,6 +44,16 @@ async def search_lactmed(drug: Query, max_results: Limit20 = 5) -> EvidenceRespo
                 for r in rows
             ],
         }
+    from parent_child_pharmacology.clients.lactmed import snapshot_title_match
+
+    title = snapshot_title_match(drug)
+    if title and title.lower() != drug.lower().strip():
+        return {
+            "source": "live:ncbi",
+            "results": await src.lactmed_search(title, max_results),
+            "matched_lactmed_title": title,
+            "match_note": f"Searched the LactMed record title {title!r} for {drug!r}. LactMed groups vaccines by type.",
+        }
     return {"source": "live:ncbi", "results": await src.lactmed_search(drug, max_results)}
 
 

@@ -93,6 +93,11 @@ def route(question, country="US", *, language_required=True):
                         "role": "Non-emergency support and resources; callback service, not a crisis line.",
                     }
                 )
+            if re.search(POLICY["patterns"]["spanish_markers"], q):
+                from .referrals import SPANISH_RESOURCES
+
+                result["referrals"].append(SPANISH_RESOURCES["referrals"][1])
+                result["source_urls"].append(SPANISH_RESOURCES["referrals"][1]["website"])
             if re.search(r"overdos|poison|pills|tablets|bottle", q):
                 result["message"] += " " + POLICY["messages"]["messages_8"]
                 result["source_urls"].append(POISON)
@@ -263,9 +268,20 @@ def route(question, country="US", *, language_required=True):
                 allow_model_answer=False,
                 message=POLICY["messages"]["language_support"],
             )
+            # Spanish questions still stop, but get fixed, verified Spanish-language services.
+            if re.search(POLICY["patterns"]["spanish_markers"], q):
+                from .referrals import SPANISH_RESOURCES
+
+                result["referrals"] = SPANISH_RESOURCES["referrals"]
+                result["spanish_resources"] = SPANISH_RESOURCES
+                result["source_urls"] = [r["website"] for r in SPANISH_RESOURCES["referrals"]]
     if not result["allow_research"]:
         result.pop("personal_question", None)
         result.pop("answer_framing", None)
+    if result["allow_research"] and re.search(POLICY["patterns"]["supplement_terms"], q):
+        from .referrals import SUPPLEMENT_CONTEXT
+
+        result["supplement_context"] = SUPPLEMENT_CONTEXT
     if result["allow_research"]:
         from .workflows import requested_workflow
 

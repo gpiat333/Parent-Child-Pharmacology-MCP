@@ -1,8 +1,15 @@
 """rxnorm public-source adapter; no MCP registration."""
 
+import re
+
 from parent_child_pharmacology.core.http import http
 
 RXNAV = "https://rxnav.nlm.nih.gov/REST"
+VACCINE_NOTE = (
+    "RxNorm lists vaccines by specific product, not by common names such as 'flu vaccine' or 'Tdap'. "
+    "Ask for the product or brand name on the vaccine record. For breastfeeding, search_lactmed finds "
+    "LactMed's vaccine records by type (for example, Influenza Vaccines)."
+)
 
 
 async def products_containing_ingredient(ingredient, n=20):
@@ -73,7 +80,10 @@ async def rxnorm_normalize(name: str) -> dict:
         )
         cands = (r.json().get("approximateGroup") or {}).get("candidate") or []
     if not exact_ids and not cands:
-        return {"found": False, "input": name, "url": "https://rxnav.nlm.nih.gov/"}
+        out = {"found": False, "input": name, "url": "https://rxnav.nlm.nih.gov/"}
+        if re.search(r"\b(?:vaccin\w*|shots?|immuni[sz]\w*|tdap|dtap|mmr|rsv|hpv)\b", name, re.I):
+            out["note"] = VACCINE_NOTE
+        return out
     rxcui = exact_ids[0] if exact_ids else cands[0]["rxcui"]
     props = (
         await http.request("GET", f"{RXNAV}/rxcui/{rxcui}/properties.json", ttl=86400)
@@ -84,7 +94,11 @@ async def rxnorm_normalize(name: str) -> dict:
             "found": False,
             "input": name,
             "requires_confirmation": True,
-            "note": "No verified active RxNorm identity. Check spelling with a pharmacist or original record.",
+            "note": VACCINE_NOTE
+            if re.search(
+                r"\b(?:vaccin\w*|shots?|immuni[sz]\w*|tdap|dtap|mmr|rsv|hpv)\b", name, re.I
+            )
+            else "No verified active RxNorm identity. Check spelling with a pharmacist or original record.",
             "url": "https://rxnav.nlm.nih.gov/",
         }
     if props.get("tty") == "IN":
