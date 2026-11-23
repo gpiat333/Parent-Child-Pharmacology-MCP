@@ -7,7 +7,7 @@ SCHEMA = {
     "type": "function",
     "function": {
         "name": "calculate_aggregate_expression",
-        "description": "Compute arithmetic on retrieved aggregate research numbers, not a personal dose or clinical recommendation. Use explicit parentheses and each row's own denominator. No evidence lookup is performed.",
+        "description": "Compute arithmetic on retrieved aggregate research numbers, not a personal dose or clinical recommendation. Supports + - * /, parentheses, and max(), min() and abs(). Use explicit parentheses and each row's own denominator. No evidence lookup is performed.",
         "parameters": {
             "type": "object",
             "properties": {
@@ -42,6 +42,21 @@ def calculate(expression, decimal_places):
             value = visit(node.operand, depth + 1)
             if isinstance(node.op, ast.USub):
                 value = -value
+        elif (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id in {"max", "min", "abs"}
+            and not node.keywords
+            and 1 <= len(node.args) <= 50
+            and (node.func.id != "abs" or len(node.args) == 1)
+        ):
+            args = [visit(a, depth + 1) for a in node.args]
+            if node.func.id == "abs":
+                value = abs(args[0])
+            elif node.func.id == "max":
+                value = max(args)
+            else:
+                value = min(args)
         elif isinstance(node, ast.BinOp) and isinstance(
             node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div)
         ):
@@ -57,7 +72,9 @@ def calculate(expression, decimal_places):
                     raise ValueError("Denominator must not be zero")
                 value = left / right
         else:
-            raise ValueError("Only numeric literals, parentheses and + - * / are allowed")
+            raise ValueError(
+                "Only numeric literals, parentheses, + - * / and max(), min(), abs() are allowed"
+            )
         if not value.is_finite() or abs(value) > Decimal("1e20"):
             raise ValueError("Numeric result is outside the allowed range")
         return value

@@ -100,5 +100,5 @@ def test_nested_repeat_harness_imports_actual_client_modules(tmp_path, monkeypat
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     agent = module.ParentChildPharmacologyAgent(nested)
-    assert agent.gateway.ROOT == root and agent.prompt_version == "v6"
+    assert agent.gateway.ROOT == root and agent.prompt_version == "v7"
     assert (agent.root / "model-call.ps1").is_file()

@@ -37,6 +37,7 @@ def copy_source_value(
         "get_mprint_details",
         "calculate_aggregate_expression",
         "select_snapshot_records",
+        "aggregate_outcome_rows",
     }:
         raise ValueError("Not a research-value source")
     if require_metadata_selection and call.get("tool") == "find_mprint_records":
