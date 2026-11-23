@@ -27,6 +27,9 @@ async def route_parent_question(question: Question, country: Country = "US") -> 
     clinical triage. Country is explicit; never invent a local emergency number.
     On an allowed request, enforce requested_workflow.required_tool when present:
     call that tool before other retrieval or a final answer. All stop rules take priority.
+    If personal_question is true ("Can I take X?"), research is allowed: share what the
+    sources say and what is unknown, show the message and referrals, and never answer yes
+    or no or call it safe for this person.
     Do not include names, contact details, birth dates or medical record numbers."""
     if len(question) > 4000:
         return {

@@ -148,7 +148,18 @@ def route(question, country="US", *, language_required=True):
     # Remove only the explicit exclusion, never the remainder of the question.
     # A second actual request ("...but what dose should I give?") stays visible.
     intent = re.sub(POLICY["patterns"]["patterns_4"], "", q)
-    if re.search(POLICY["patterns"]["patterns_5"], intent):
+    # "Can I take X?" is answered with what is known plus a clear statement that the
+    # decision belongs with a clinician; dose, start/stop/switch and taper requests still stop.
+    self_take = re.search(POLICY["patterns"]["self_take_question"], intent)
+    decision_intent = re.sub(POLICY["patterns"]["self_take_question"], "", intent)
+    personal = bool(
+        self_take
+        and not re.search(POLICY["patterns"]["patterns_5"], decision_intent)
+        and not re.search(POLICY["patterns"]["dose_words"], decision_intent)
+    )
+    if not personal and re.search(
+        POLICY["patterns"]["patterns_5"] + "|" + POLICY["patterns"]["self_take_question"], intent
+    ):
         result.update(
             route="clinician_or_pharmacist",
             allow_research=False,
@@ -171,10 +182,34 @@ def route(question, country="US", *, language_required=True):
             message=POLICY["messages"]["messages_11"],
         )
         return result
+    if personal:
+        result["personal_question"] = True
+        result["message"] = POLICY["messages"]["personal_question"]
+        result["answer_framing"] = (
+            "Share what the sources say and what is unknown. Never answer yes or no or say it is safe for this "
+            "person. Show the message and referrals."
+        )
+        if re.search(POLICY["patterns"]["exposure_counseling"], q):
+            from .referrals import MOTHERTOBABY, MOTHERTOBABY_MESSAGE
+
+            result["message"] += " " + MOTHERTOBABY_MESSAGE
+            result["referrals"] = [MOTHERTOBABY]
+            result["source_urls"] = [MOTHERTOBABY["website"]]
     if language_required:
-        from .language import english_confidence
+        from .language import english_confidence, mask_longest_term
 
         result["language_gate"] = english_confidence(question)
+        if personal and not result["language_gate"]["confident_english"]:
+            # "Can I take <drug>?" is English sentence structure; a short question built around a
+            # drug name can fall below the detector threshold. Accept it only if the masked
+            # question is ranked English and nothing is confidently foreign.
+            from .language import detector
+
+            masked = mask_longest_term(question)
+            score = detector()(masked) if masked else None
+            if score and score["english_top"] and not score["foreign_confident"]:
+                result["language_gate"]["confident_english"] = True
+                result["language_gate"]["accepted_by"] = "english_self_take_question_frame"
         if not result["language_gate"]["confident_english"]:
             result.update(
                 route="language_support",
@@ -182,6 +217,9 @@ def route(question, country="US", *, language_required=True):
                 allow_model_answer=False,
                 message=POLICY["messages"]["language_support"],
             )
+    if not result["allow_research"]:
+        result.pop("personal_question", None)
+        result.pop("answer_framing", None)
     if result["allow_research"]:
         from .workflows import requested_workflow
 

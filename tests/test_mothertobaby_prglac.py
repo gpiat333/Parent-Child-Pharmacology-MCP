@@ -12,7 +12,6 @@ from parent_child_pharmacology.core.safety import route
     "question",
     [
         "I'm pregnant. Should I stop taking my sertraline?",
-        "Can I take ibuprofen while breastfeeding?",
         "What dose of acetaminophen is OK while nursing?",
     ],
 )

@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-22.19",
+  "version": "2026-11-23.20",
   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
   "patterns": {
     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
@@ -15,6 +15,8 @@
     "acute_marker": "\\b(?:now|right now|currently|tonight|today|happening|won't stop|keeps?|help|emergency|911|just)\\b",
     "crisis_condition": "\\b(?:postpartum|post[ -]?natal|perinatal)\\s+(?:depress\\w*|psychos\\w*)",
     "exposure_counseling": "\\b(?:pregnan\\w*|breastfeed\\w*|breast\\s*milk|nursing|lactat\\w*|postpartum|trying\\s+to\\s+conceive)\\b",
+    "dose_words": "\\b(?:doses?|dosage|double|extra|missed|taper\\w*|schedule|how\\s+(?:much|many|often)|\\d+\\s*(?:mg|mcg|ml|pills?|tablets?))\\b",
+    "self_take_question": "\\b(?:can|may|could)\\s+i\\s+(?:still\\s+|safely\\s+)?take\\b",
     "personal_marker": "\\b(?:i|i'm|im|i've|me|my|myself)\\b"
   },
   "messages": {
@@ -31,6 +33,7 @@
     "messages_11": "I cannot identify a medicine from its appearance or a vague description. Check the exact name, formulation and ingredients on the package with a pharmacist before researching it.",
     "messages_12": "If someone has collapsed, is having a seizure, has trouble breathing, or cannot be awakened, call 911 immediately. ",
     "crisis_us": "You deserve support. I cannot answer this as a medication research question. Please call or text 988 (Suicide & Crisis Lifeline) for support now. If you or someone else is in immediate danger, call 911.",
+    "personal_question": "I can't tell you whether to take it. That decision depends on your health and belongs with your clinician or pharmacist. Here is what the public evidence says, including what isn't known, so you can bring it to that conversation.",
     "maternal_hotline": "For pregnant and postpartum people, the National Maternal Mental Health Hotline is free, confidential and available 24/7 by call or text at 1-833-TLC-MAMA (1-833-852-6262), in English and Spanish.",
     "perinatal_support": "For additional non-emergency perinatal support, contact the Postpartum Support International HelpLine at 1-800-944-4773. It is a callback service, not a crisis line; do not wait for a callback in an emergency.",
     "language_support": "This prototype cannot confidently apply its English safety rules to this question. Further evidence retrieval and model answering are stopped. Please ask in English or seek help from a clinician or pharmacist with an interpreter. Spanish MedlinePlus drug education is available separately using a confirmed RxNorm ID."
