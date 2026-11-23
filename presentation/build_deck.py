@@ -138,12 +138,15 @@ def picture(slide, path, x, y, max_w, max_h, border=True):
     return w, h
 
 
+TITLE_SIZE = 24
+
+
 def new(title=None, dark=False, notes=None, appendix=False):
     s = prs.slides.add_slide(BLANK)
     bg(s, DEEP if dark else WHITE)
     _n[0] += 1
     if title:
-        tsize = 32 if len(title) <= 46 else 27 if len(title) <= 58 else 24 if len(title) <= 66 else 22
+        tsize = TITLE_SIZE
         text(s, 0.65, 0.5, 12.0, 0.9, title, size=tsize, font=HEAD, bold=True, color=WHITE if dark else DEEP,
              anchor=MSO_ANCHOR.TOP)
     if not dark:
@@ -182,25 +185,16 @@ text(s, 0.9, 5.88, 11.5, 0.4,
 s = new(notes=(
     "Picture a new mom, awake at 2:07 in the morning, feeding her baby. She takes Zoloft, and she wonders "
     "whether it is reaching her baby, and whether she should stop. It is one of the most common questions in "
-    "this field, and the same kinds of questions follow her through pregnancy, breastfeeding and raising a "
-    "child. This is an illustrative scenario, not a real patient."))
+    "this field. This is an illustrative scenario, not a real patient."))
 MOM = REPO / "presentation/assets/mother-newborn.png"
 picture(s, MOM, 0.6, 0.85, 3.6, 5.95, border=False)
-text(s, 4.75, 0.85, 7.9, 0.8, "2:07 a.m.", size=40, font=HEAD, bold=True, color=CORAL)
-text(s, 4.75, 1.7, 7.95, 1.4,
+text(s, 4.75, 1.55, 7.9, 0.8, "2:07 a.m.", size=40, font=HEAD, bold=True, color=CORAL)
+text(s, 4.75, 2.4, 7.95, 1.4,
      "A new mom is awake at night, thinking about the medication she takes while feeding her infant.",
      size=24, font=HEAD, bold=True, color=DEEP, line=1.05)
-box(s, 4.75, 3.25, 7.95, 1.35, fill=MIST)
-text(s, 5.05, 3.25, 7.4, 1.35, "“I take Zoloft. Is it getting into my breast milk? Should I stop?”",
+box(s, 4.75, 4.0, 7.95, 1.35, fill=MIST)
+text(s, 5.05, 4.0, 7.4, 1.35, "“I take Zoloft. Is it getting into my breast milk? Should I stop?”",
      size=22, font=HEAD, italic=True, color=DEEP, anchor=MSO_ANCHOR.MIDDLE)
-text(s, 4.75, 4.9, 7.95, 0.5, "The same kinds of questions follow her through every stage:", size=16, color=INK)
-for i, stage in enumerate(["Pregnancy", "Breastfeeding", "Raising a child"]):
-    x = 4.75 + i * 2.7
-    box(s, x, 5.45, 2.45, 0.72, fill=TEAL if i == 1 else MIST2, radius=0.5)
-    text(s, x, 5.45, 2.45, 0.72, stage, size=17, bold=True, color=WHITE if i == 1 else DEEP,
-         anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
-    if i < 2:
-        connector(s, x + 2.45, 5.81, x + 2.7, 5.81, color=TEAL, width=2)
 text(s, 4.75, 6.75, 7.9, 0.4, "Illustrative scenario, not a real patient.", size=12, color=MUTED, italic=True)
 
 # 2b ─ Her night
@@ -209,10 +203,10 @@ s = new("At 2 a.m., every place she turns falls short", notes=(
     "just for emergencies. A Google search lists forums and 'safe' medicine lists that CDC says often lack "
     "evidence. MotherToBaby has resources and experts, but it takes more searching, and expert chats aren't "
     "available until the next business day. LactMed has the right evidence, but it's written for clinicians, "
-    "with drug levels in micrograms per liter and dozens of citations. The FDA label's lactation section is on "
-    "DailyMed in regulatory language, and the studies are in PubMed as technical abstracts. With this MCP, one "
-    "question returns all of it in plain language with links, plus who to call in the morning, and crisis "
-    "lines if she needs them now."))
+    "with drug levels in micrograms per liter and dozens of citations. The drug label on DailyMed is written "
+    "for regulators, and the studies in PubMed are written for scientists. This MCP brings these sources "
+    "together. It matches the brand name on her bottle to the medicine's ingredient, lets her ask in plain "
+    "language, and finds evidence she can talk through with her doctor, plus who to call when she needs help."))
 import math
 picture(s, MOM, 0.55, 1.4, 3.3, 5.6, border=False)
 cx, amp, top, bottom = 4.55, 0.28, 1.45, 5.15
@@ -230,9 +224,9 @@ path.line.width = Pt(6)
 stops = [
     ("Doctor's office", "Not open until 8 a.m.; the after-hours line is just for emergencies"),
     ("Google search", "Forums and “safe” medicine lists that CDC says often lack evidence"),
-    ("MotherToBaby", "Resources and experts, but more searching; expert chats wait until the next business day"),
-    ("LactMed", "The right evidence, but written for clinicians: drug levels in mcg/L, dozens of citations"),
-    ("FDA label and PubMed", "Label sections in regulatory language; studies as technical abstracts"),
+    ("MotherToBaby", "Resources and experts, but expert chats wait until the next business day"),
+    ("LactMed", "The right evidence, but written for clinicians (drug levels in mcg/L)"),
+    ("Drug label and published studies", "Written for regulators and scientists, not for parents"),
 ]
 for i, (head, body) in enumerate(stops):
     k = int(160 * i / (len(stops) - 1))
@@ -240,15 +234,16 @@ for i, (head, body) in enumerate(stops):
     circle_num(s, x - 0.2, y - 0.2, "", d=0.4, fill=TEAL)
     text(s, 5.3, y - 0.3, 7.45, 0.4, head, size=17, bold=True, color=DEEP)
     text(s, 5.3, y + 0.08, 7.45, 0.7, body, size=15, color=INK)
-box(s, 4.3, 5.95, 8.45, 1.1, fill=DEEP)
-text(s, 4.55, 5.95, 8.0, 1.1, [
-    [("With this MCP: ", {"bold": True, "color": WHITE}),
-     ("one question returns LactMed's findings with study links, the label's lactation section, the "
-      "MotherToBaby fact sheet and questions for her doctor, plus who to call.", {"color": MIST2})]],
-     size=16, anchor=MSO_ANCHOR.MIDDLE)
+box(s, 4.3, 5.65, 8.45, 1.3, fill=DEEP)
+text(s, 4.55, 5.65, 8.0, 1.3, [
+    [("This MCP brings these sources together. ", {"bold": True, "color": WHITE}),
+     ("It matches the brand name on her bottle to the medicine's ingredient, lets her ask in plain "
+      "language, and finds evidence she can talk through with her doctor, plus who to call when she "
+      "needs help.", {"color": MIST2})]],
+     size=15, anchor=MSO_ANCHOR.MIDDLE)
 
 # 3 ─ Evidence gap
-s = new("Most medicines lack data for pregnancy and for children", notes=(
+s = new("Many medicines lack data for pregnancy and for children", notes=(
     "CDC puts the pregnancy problem in one number: fewer than ten percent of medicines approved since 1980 have "
     "enough information to determine their safety during pregnancy, yet nine in ten women take a medication "
     "while pregnant. Children had the same problem: a 1997 Senate report found fewer than twenty percent of "
@@ -260,22 +255,22 @@ stats3 = [
     ("9 in 10", "women in the United States take a medication during pregnancy", MIST),
     ("<20%", "of prescription drugs were labeled for use in children in 1997, before the Best Pharmaceuticals for Children Act (BPCA) and the Pediatric Research Equity Act (PREA)", DEEP),
 ]
+text(s, 0.65, 1.3, 12.0, 0.9, [
+    [("Why: ", {"bold": True, "color": CORAL}),
+     ("pregnant people and children are usually left out of the studies that establish a new medicine's "
+      "safety, so many answers have to include what isn't known.", {})]], size=20, color=DEEP)
 for i, (num, label, fill) in enumerate(stats3):
     x = 0.65 + i * 4.1
-    box(s, x, 1.7, 3.8, 3.7, fill=fill)
+    box(s, x, 2.45, 3.8, 3.85, fill=fill)
     dark = fill == DEEP
-    text(s, x + 0.35, 1.95, 3.2, 1.3, num, size=60, font=HEAD, bold=True, color=WHITE if dark else TEAL)
-    text(s, x + 0.35, 3.25, 3.15, 2.1, label, size=15, color=MIST2 if dark else INK)
-text(s, 0.65, 5.75, 12.0, 0.8, [
-    [("Why: ", {"bold": True, "color": DEEP}),
-     ("pregnant people and children are usually left out of the studies that establish a new medicine's "
-      "safety, so most answers have to include what isn't known.", {})]], size=16, color=INK)
+    text(s, x + 0.35, 2.7, 3.2, 1.3, num, size=60, font=HEAD, bold=True, color=WHITE if dark else TEAL)
+    text(s, x + 0.35, 4.0, 3.15, 2.2, label, size=15, color=MIST2 if dark else INK)
 text(s, 0.65, 6.75, 12.0, 0.5,
      "Sources: CDC, Medicine and Pregnancy and Treating for Two; National Academies, Safe and Effective Medicines "
      "for Children (2012), citing a 1997 Senate report.", size=11, color=MUTED, italic=True)
 
 # 4 ─ Federal efforts timeline
-s = new("Two decades of federal work to close the gap", notes=(
+s = new("Two decades of federal programs and research have worked to close the gap", notes=(
     "This gap is well known, and federal programs have worked on it for over twenty years. Congress passed the "
     "Best Pharmaceuticals for Children Act in 2002 and the Pediatric Research Equity Act in 2003. NICHD created "
     "my branch, OPPTB, in 2004. NLM launched LactMed in 2006. NICHD's Pediatric Trials Network began in 2010. "
@@ -345,8 +340,8 @@ text(s, 0.65, 6.5, 12.0, 0.6, [
       "LactMed or the MotherToBaby fact sheets from NCBI's latest package.", {})]], size=13, color=INK)
 
 # 5 ─ Scattered across agencies
-s = new("What we know is scattered across agencies, resources and databases", notes=(
-    "Here is where that evidence lives today. NLM hosts LactMed, DailyMed labels, PubMed, ClinicalTrials.gov, "
+s = new("However, what is known is scattered across agencies, resources and databases", notes=(
+    "However, all of that lives in different places. NLM hosts LactMed, DailyMed labels, PubMed, ClinicalTrials.gov, "
     "RxNorm and MedlinePlus. FDA has adverse-event reports, pediatric labeling changes and pregnancy registry "
     "listings. NIH and NICHD have funded projects in RePORTER, BPCA and Pediatric Trials Network summaries, "
     "MPRINT data and DASH. MotherToBaby, a nonprofit, publishes fact sheets. Each uses different names, IDs "
@@ -364,7 +359,7 @@ for i, (head, fill, hc, items) in enumerate(agencies):
     text(s, x + 0.25, 1.8, 2.4, 0.5, head, size=20, font=HEAD, bold=True, color=hc)
     text(s, x + 0.25, 2.45, 2.4, 3.4, items, size=15, color=INK, space_after=8)
 text(s, 0.65, 6.25, 12.0, 0.8, [
-    [("For a parent, that means different names, IDs and formats: ", {"bold": True, "color": DEEP}),
+    [("For a parent, a researcher or a clinician, that means different names, IDs and formats: ", {"bold": True, "color": DEEP}),
      ("public APIs, web pages, spreadsheets and PDFs. No single place connects them.", {})]], size=16, color=INK)
 
 # 3 ─ One question, many sources
@@ -434,7 +429,7 @@ s = new(notes=(
     "and covered by tests."))
 text(s, 0.65, 0.45, 12.0, 1.2,
      "Should an AI assistant handle questions about a highly sensitive topic such as maternal and pediatric pharmacology?",
-     size=26, font=HEAD, bold=True, color=DEEP, line=1.0)
+     size=TITLE_SIZE, font=HEAD, bold=True, color=DEEP, line=1.0)
 reasons = [
     ("The evidence is already public", "The question isn't whether people find it; it's whether they see it with its population, date and limits."),
     ("The gaps matter as much as the findings", "Saying “no evidence retrieved; not evidence of safety” is part of the answer."),
@@ -508,7 +503,7 @@ text(s, 0.65, 6.6, 12.0, 0.5,
      "select without ambiguity, not thin wrappers. Full list in the appendix.", size=13, color=MUTED, italic=True)
 
 # 5aa ─ Lifespan
-s = new("One server follows her from pregnancy to breastfeeding to her child", notes=(
+s = new("One MCP server connects pregnancy, breastfeeding and pediatric data", notes=(
     "The same server stays useful as her questions change. In pregnancy it brings the label's pregnancy "
     "section, studies, pregnancy registries and the MotherToBaby fact sheet, with PRGLAC context when evidence "
     "is thin. While she breastfeeds, it brings LactMed with links to every study, the label's lactation section "
@@ -553,7 +548,8 @@ s = new("How it complements LactMed and MotherToBaby", notes=(
     "A judge who knows this field will ask: why not just use LactMed, or call MotherToBaby? Neither is a "
     "competitor. LactMed is a source this server reads. LactRx is MotherToBaby's app with the same LactMed "
     "content. MotherToBaby is a nonprofit service whose specialists weigh the evidence for one person, which "
-    "this server deliberately does not do. What the server adds is breadth across pregnancy, breastfeeding and "
+    "this server deliberately does not do; for a personal question it points people to their clinician or "
+    "pharmacist, and to MotherToBaby. What the server adds is breadth across pregnancy, breastfeeding and "
     "children's medicines, machine-readable answers with sources, visible gaps, and availability at any hour. "
     "After hours, MotherToBaby replies the next business day; this server can help someone prepare for that "
     "conversation."))
@@ -585,8 +581,9 @@ for i, (head, fill, hc, rows) in enumerate(cols):
     text(s, x + 0.3, 2.4, 3.2, 3.4, body, size=15, color=WHITE if fill == DEEP else INK, space_after=3)
 text(s, 0.65, 6.1, 12.0, 0.9, [
     [("What it does not do: ", {"bold": True, "color": CORAL}),
-     ("weigh the evidence for one person. For an individual pregnancy or breastfeeding question, it refers "
-      "people to MotherToBaby (866-626-6847) and shares their English and Spanish fact sheets.", {})]], size=15, color=INK)
+     ("weigh the evidence for one person. For an individual question, it refers people to their clinician or "
+      "pharmacist, and for pregnancy or breastfeeding also to MotherToBaby (866-626-6847), with their English "
+      "and Spanish fact sheets.", {})]], size=15, color=INK)
 
 # 5c ─ Beyond parents
 s = new("Beyond parents: clinicians, researchers and program staff", notes=(
@@ -731,22 +728,27 @@ text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the s
      color=MUTED, italic=True)
 
 # 8c ─ Studies and registries
-s = new("Why it shows studies and registries, and how it keeps them separate", notes=(
+s = new("Why this MCP shows studies and registries, and how it keeps them separate", notes=(
     "Pregnant women and children are often left out of drug studies, which is why so much evidence is "
     "missing. The way that gap closes is participation: pregnancy exposure registries, trials that include "
     "pregnant women or children, and public input on research priorities, which is also what PRGLAC "
     "recommends. So when the answer is 'not much is known', the server can add 'here is research under way'. "
-    "It handles this carefully. These listings sit in a separate participation tier, in alphabetical order, "
+    "Clinical trials are never recommended or ranked, and there is no pressure to sign up. These listings sit in a separate participation tier, in alphabetical order, "
     "never ranked or recommended. The server never decides eligibility, contacts anyone or submits anything. "
     "The tier is hidden completely for emergencies, crises, treatment decisions, privacy and language stops, "
     "and unclear medicines. Pediatric trials appear only when the trial lists confirmed pediatric ages."))
-box(s, 0.65, 1.55, 5.3, 5.2, fill=DEEP)
-text(s, 0.95, 1.75, 4.8, 0.45, "Why it's included", size=19, font=HEAD, bold=True, color=WHITE)
-text(s, 0.95, 2.35, 4.75, 4.3, [
+box(s, 0.65, 1.55, 5.3, 3.3, fill=DEEP)
+text(s, 0.95, 1.7, 4.8, 0.45, "Why it's included", size=19, font=HEAD, bold=True, color=WHITE)
+text(s, 0.95, 2.2, 4.75, 2.6, [
     "Pregnant women and children are often left out of drug studies. That's why the evidence is missing.",
     "Gaps close when people take part: registries, trials and public input on research. PRGLAC recommends this too.",
     "So “not much is known” can come with “here is research under way.”",
-], size=18, color=MIST2, space_after=18)
+], size=17, color=MIST2, space_after=10)
+box(s, 0.65, 5.05, 5.3, 1.7, fill=CORAL_T)
+text(s, 0.95, 5.15, 4.8, 1.5, [
+    [("Clinical trials are never recommended or ranked.", {"bold": True, "color": CORAL, "size": 20, "font": HEAD})],
+    [("No pressure to sign up: listings are information only.", {"bold": True, "color": DEEP, "size": 16})],
+], anchor=MSO_ANCHOR.MIDDLE, space_after=6)
 text(s, 6.3, 1.55, 6.4, 0.45, "How it's handled", size=19, font=HEAD, bold=True, color=TEAL)
 rules = [
     ("A separate tier", "Kept apart from the evidence; alphabetical, never ranked"),
