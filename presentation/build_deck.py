@@ -236,7 +236,7 @@ s = new("At 2 a.m., every place she turns falls short", notes=(
     "language, and finds evidence she can talk through with her doctor, plus who to call when she needs help."))
 import math
 picture(s, MOM, 0.55, 1.4, 3.3, 5.6, border=False)
-cx, amp, top, bottom = 4.55, 0.28, 1.45, 5.15
+cx, amp, top, bottom = 4.55, 0.28, 1.45, 4.75
 pts = []
 for k in range(161):
     y = top + (bottom - top) * k / 160
@@ -261,13 +261,18 @@ for i, (head, body) in enumerate(stops):
     circle_num(s, x - 0.2, y - 0.2, "", d=0.4, fill=TEAL)
     text(s, 5.3, y - 0.3, 7.45, 0.4, head, size=17, bold=True, color=DEEP)
     text(s, 5.3, y + 0.08, 7.45, 0.7, body, size=15, color=INK)
-box(s, 4.3, 5.65, 8.45, 1.3, fill=DEEP)
-text(s, 4.55, 5.65, 8.0, 1.3, [
+box(s, 4.3, 5.2, 8.45, 1.15, fill=DEEP)
+text(s, 4.55, 5.2, 8.0, 1.15, [
     [("This MCP brings these sources together. ", {"bold": True, "color": WHITE}),
      ("It matches the brand name on her bottle to the medicine's ingredient, lets her ask in plain "
       "language, and finds evidence she can talk through with her doctor, plus who to call when she "
       "needs help.", {"color": MIST2})]],
      size=15, anchor=MSO_ANCHOR.MIDDLE)
+box(s, 4.3, 6.47, 8.45, 0.53, fill=CORAL_T)
+text(s, 4.55, 6.47, 8.0, 0.53, [
+    [("It does not give treatment advice. ", {"bold": True, "color": CORAL}),
+     ("Her clinician or pharmacist makes those decisions.", {"color": INK})]],
+     size=14, anchor=MSO_ANCHOR.MIDDLE)
 
 # 3 ─ Evidence gap
 s = new("Many medicines lack data for pregnancy and for children", notes=(
