@@ -82,7 +82,11 @@ The intended mission contribution is to support pregnancy, lactation, child-heal
 
 ## Demo video
 
-[**Watch or download the narrated demonstration (3:10, WebM)**](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
+[**Watch or download the current narrated demo (3:14, MP4)**](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20(policy%20.24).mp4)
+
+The current demo (November 23, 2026; policy .24) shows real outputs: model answers from the final evaluation chats and fixed server replies. It covers the LactMed answer with study links, the three-part evidence brief, “Can I take ibuprofen?”, the safety routes, the live MPRINT update check, Spanish-language help and the final results. Narration uses a Microsoft neural voice; captions are in [demo.vtt](presentation/demo/demo.vtt), and [scenes.json](presentation/demo/scenes.json) rebuilds it after edits.
+
+[Older narrated demonstration (3:10, WebM)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
 
 [![Open the saved demonstration: exposure and outcomes remain separate](presentation/current-demo/cross-source.png)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
 

@@ -5,8 +5,9 @@ Edit scenes.json (narration, card text, which deck slide to show) and re-run:
     python build_demo.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v20.pptx" --out demo.mp4
 
 Needs: python-pptx, pypdfium2, Pillow, imageio-ffmpeg, LibreOffice, and macOS `say`.
-Narration uses the voice named in scenes.json (default "Ava (Premium)"); if it is not
-installed, the fallback voice is used and the manifest says so.
+Narration uses the engine and voice in scenes.json: "edge" (Microsoft neural voices via the edge-tts
+package; the narration text is sent to Microsoft's speech service) or "say" (a macOS voice; if it is
+not installed, the fallback voice is used and the manifest says so).
 """
 
 import argparse
@@ -155,10 +156,12 @@ def main():
     deck = Path(args.deck)
     if not deck.is_absolute():
         deck = (Path(args.scenes).parent / deck).resolve()
+    engine = spec.get("engine", "say")
     voice = args.voice or spec["voice"]
-    if not available_voice(voice):
+    if engine == "say" and not available_voice(voice):
         print(f"Voice {voice!r} is not installed; using {spec['fallback_voice']!r}.", file=sys.stderr)
         voice = spec["fallback_voice"]
+    edge = shutil.which("edge-tts") or str(Path(sys.executable).with_name("edge-tts"))
     work = Path(tempfile.mkdtemp(prefix="demo-build-"))
 
     # Frames: rendered deck slides plus demo cards.
@@ -186,9 +189,16 @@ def main():
             if not match:
                 raise SystemExit(f"No deck slide starts with {scene['deck_title']!r}")
             frame = deck_png[match[0]]
-        audio = work / f"a{n:02d}.aiff"
-        subprocess.run(["say", "-v", voice, "-r", str(spec.get("rate_wpm", 170)), "-o", str(audio),
-                        scene["narration"]], check=True)
+        if engine == "edge":
+            # Microsoft neural voice via edge-tts: only the narration text is sent to the speech service.
+            audio = work / f"a{n:02d}.mp3"
+            subprocess.run([edge, "--voice", voice, f"--rate={spec.get('rate', '+0%')}",
+                            "--text", scene["narration"], "--write-media", str(audio)], check=True,
+                           capture_output=True)
+        else:
+            audio = work / f"a{n:02d}.aiff"
+            subprocess.run(["say", "-v", voice, "-r", str(spec.get("rate_wpm", 170)), "-o", str(audio),
+                            scene["narration"]], check=True)
         speech = seconds(audio)
         duration = speech + 1.2
         frames = int(duration * 30)
@@ -211,7 +221,7 @@ def main():
     vtt = ["WEBVTT", ""] + [f"{vtt_time(a)} --> {vtt_time(b)}\n{txt}\n" for a, b, txt in cues]
     out.with_suffix(".vtt").write_text("\n".join(vtt), encoding="utf-8")
     out.with_suffix(".manifest.json").write_text(json.dumps(
-        {"voice": voice, "deck": deck.name, "seconds": round(t, 1), "scenes": manifest}, indent=2), encoding="utf-8")
+        {"engine": engine, "voice": voice, "deck": deck.name, "seconds": round(t, 1), "scenes": manifest}, indent=2), encoding="utf-8")
     shutil.rmtree(work, ignore_errors=True)
     print(json.dumps({"video": str(out), "seconds": round(t, 1), "voice": voice}))
 
