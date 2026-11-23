@@ -583,6 +583,36 @@ text(s, 0.65, 6.6, 12.0, 0.5,
      "Known development questions, one answer each, graded by a model judge. No clinician review yet.",
      size=13, color=MUTED, italic=True)
 
+# 14b ─ Hands-on testing
+s = new("Using it myself found three more problems", notes=(
+    "Scripted tests measure known questions. So I also connected the server to Claude Desktop and used it the "
+    "way a parent or researcher would. A sertraline answer said it was cut off, because the record extract was "
+    "capped at 6,000 characters. Findings like a French pharmacovigilance study had no link, because the "
+    "reference list was being discarded. And the MotherToBaby fact sheet couldn't be read: the tool only "
+    "returned links, and NCBI's pages now show automated readers a browser check, which the server never "
+    "bypasses. I fixed all three that night by reading NCBI's official LactMed and MotherToBaby packages, and "
+    "each fix has tests."))
+found = [
+    ("A LactMed answer said it was cut off", "Extracts now default to 16,000 characters; anything cut is still flagged"),
+    ("No link to the studies behind findings", "Each finding keeps LactMed's citation, such as [54], with its PubMed link"),
+    ("A MotherToBaby fact sheet couldn't be read", "Answers come verbatim from NCBI's official package, attributed to OTIS"),
+]
+text(s, 0.65, 1.55, 5.6, 0.4, "What I saw in the chat", size=14, bold=True, color=MUTED)
+text(s, 6.85, 1.55, 5.8, 0.4, "What changed", size=14, bold=True, color=MUTED)
+for i, (saw, fix) in enumerate(found):
+    y = 2.05 + i * 1.3
+    box(s, 0.65, y, 5.85, 1.1, fill=CORAL_T)
+    text(s, 0.95, y, 5.3, 1.1, saw, size=16, bold=True, color=DEEP, anchor=MSO_ANCHOR.MIDDLE)
+    box(s, 6.85, y, 5.8, 1.1, fill=MIST)
+    text(s, 7.15, y, 5.3, 1.1, fix, size=15, color=INK, anchor=MSO_ANCHOR.MIDDLE)
+    connector(s, 6.5, y + 0.55, 6.85, y + 0.55, color=TEAL, width=2.5)
+text(s, 0.65, 6.05, 12.0, 0.8, [
+    [("Example: ", {"bold": True, "color": DEEP}),
+     ("[54] Trenque et al., Drug Saf 2011, the French pharmacovigilance study, now links to "
+      "pubmed.ncbi.nlm.nih.gov/22077504.", {})]], size=15, color=INK)
+text(s, 0.65, 6.85, 11.0, 0.35, "Hand-run Claude Desktop chats by the developer; qualitative, not scored. Details: documentation/HANDS_ON_TESTING.md.",
+     size=11, color=MUTED, italic=True)
+
 # 15 ─ Security
 s = new("Security", notes=(
     "The data are public, but I still treated the server as something that could be misused. Outbound "
