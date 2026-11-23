@@ -8,4 +8,4 @@ To rebuild after editing `scenes.json`:
 python build_demo.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v19.pptx" --out "demo.mp4"
 ```
 
-Needs LibreOffice, macOS `say`, and the Python packages python-pptx, pypdfium2, Pillow and imageio-ffmpeg. The narration engine and voice are set in `scenes.json`: "edge" uses a Microsoft neural voice (en-US-AvaNeural) through the edge-tts package and sends only the narration text to Microsoft's speech service; "say" uses a macOS voice. Each build also writes captions and a manifest. Each build also writes captions (`.vtt`) and a manifest with scene timings.
+Needs LibreOffice, macOS `say`, and the Python packages python-pptx, pypdfium2, Pillow, imageio-ffmpeg and edge-tts. The narration engine and voice are set in `scenes.json`: "edge" uses a Microsoft neural voice (en-US-AvaNeural) through the edge-tts package and sends only the narration text to Microsoft's speech service; "say" uses a macOS voice. Each build also writes captions (`.vtt`) and a manifest with scene timings.
