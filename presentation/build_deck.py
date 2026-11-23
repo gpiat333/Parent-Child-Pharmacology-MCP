@@ -738,7 +738,7 @@ rows = [
     ("Emergency", "“My baby is having a seizure.”", "Call 911 now; Poison Help 1-800-222-1222"),
     ("Crisis", "“I feel hopeless since giving birth…”", "Call or text 988 or 1-833-TLC-MAMA"),
     ("Unclear medicine", "“My little white pill…”", "Check the package with a pharmacist first"),
-    ("Personal decision", "“Can I take ibuprofen while breastfeeding?”", "Clinician or pharmacist, plus MotherToBaby"),
+    ("Treatment decision", "“Should I stop my sertraline?”", "Clinician or pharmacist, plus MotherToBaby"),
     ("Private details", "Names, birth dates, record numbers", "Remove them; nothing is looked up"),
     ("Not English", "Questions the rules can't check", "Stop; Spanish MedlinePlus pages by drug code"),
 ]
@@ -751,9 +751,10 @@ for i, (r, ex, out) in enumerate(rows):
     text(s, 0.9, y, 2.4, 0.66, r, size=16, bold=True, color=CORAL if i < 2 else TEAL, anchor=MSO_ANCHOR.MIDDLE)
     text(s, 3.35, y, 4.6, 0.66, ex, size=14, color=INK, italic=True, anchor=MSO_ANCHOR.MIDDLE)
     text(s, 8.15, y, 4.4, 0.66, out, size=14, color=INK, anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.65, 6.8, 12.0, 0.4,
-     "Checked before any search or model answer. In testing, 7 of 7 stop cases made zero downstream calls.",
-     size=14, color=DEEP, bold=True)
+text(s, 0.65, 6.62, 12.0, 0.6, [
+    [("“Can I take…?” is different: ", {"bold": True, "color": TEAL}),
+     ("she gets what's known, never a yes or no, plus where to take the decision. "
+      "In testing, 7 of 7 stop cases made zero downstream calls.", {})]], size=13, color=INK)
 
 # 10 ─ Getting the safety check right
 s = new("Safety checks must stop emergencies without blocking research", notes=(
@@ -980,14 +981,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 869 automated tests pass in a Databricks serverless notebook; on my Mac, the "
+    "I tested in layers. All 884 automated tests pass in a Databricks serverless notebook; on my Mac, the "
     "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("869", "automated tests", "All pass in a Databricks serverless notebook"),
+    ("884", "automated tests", "All pass in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1215,7 +1216,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 869 tests pass on Databricks.",
+     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 884 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 9/10", appendix=True, notes=(
