@@ -29,4 +29,6 @@ Current source 0.19.0, policy 2026-11-22.19. Policy .15 fixes safety-routing fal
 
 **LactMed study links (November 22, 2026):** Databricks serverless run 405600821258309 passed **857/857** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-lactmed-refs/databricks-job-output.json).
 
+**MotherToBaby fact sheet text (November 22, 2026):** Databricks serverless run 396432898767817 passed **861/861** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-mtb-text/databricks-job-output.json).
+
 [Current evidence](../evaluation/retrieval-reliability-final/REPORT.md)

@@ -327,7 +327,7 @@ for i, (head, fill, hc, rows) in enumerate(cols):
 text(s, 0.65, 6.1, 12.0, 0.9, [
     [("What it does not do: ", {"bold": True, "color": CORAL}),
      ("weigh the evidence for one person. For an individual pregnancy or breastfeeding question, it refers "
-      "people to MotherToBaby (866-626-6847) and links their fact sheets.", {})]], size=15, color=INK)
+      "people to MotherToBaby (866-626-6847) and shares their English and Spanish fact sheets.", {})]], size=15, color=INK)
 
 # 6 ─ The brief workflow
 s = new("One call turns a question into an evidence brief", notes=(
@@ -522,14 +522,14 @@ for i, (head, body) in enumerate(decs):
 
 # 13 ─ How I tested
 s = new("How I tested it", notes=(
-    "I tested in layers. All 857 automated tests pass in a Databricks serverless notebook; on my Mac, the "
+    "I tested in layers. All 861 automated tests pass in a Databricks serverless notebook; on my Mac, the "
     "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("857", "automated tests", "All pass in a Databricks serverless notebook"),
+    ("861", "automated tests", "All pass in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -612,8 +612,8 @@ s = new("What I learned and what comes next", notes=(
     "my own filter was blocking legitimate research. And automated graders make mistakes too, so I read "
     "the failures myself. Next, I need a clinician to review real answers, a Spanish speaker to review the "
     "held Spanish safety messages, and new evaluation questions covering the MotherToBaby referral, fact "
-    "sheets and who funds this research. The fact sheet tool links sheets but doesn't read them yet; NCBI "
-    "publishes them as an official package too, so the LactMed approach carries over."))
+    "sheets and who funds this research, plus weekly freshness checks for the LactMed and MotherToBaby "
+    "packages like the one MPRINT already has."))
 text(s, 0.65, 1.6, 5.8, 0.4, "Lessons", size=20, font=HEAD, bold=True, color=TEAL)
 lessons = [("Interpretation is the real work", "Retrieval was quick to build. Keeping populations, exposure and outcomes apart took most of the effort."),
            ("Test safety rules both ways", "My filter blocked research on seizures and postpartum depression until I tested for over-blocking."),
@@ -625,7 +625,7 @@ for i, (head, body) in enumerate(lessons):
     text(s, 0.95, y + 0.55, 5.3, 0.85, body, size=14, color=INK)
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
 nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
-         "Read MotherToBaby fact sheet text from NCBI's official package, as LactMed now does; today the server links them",
+         "Weekly freshness checks for the LactMed and MotherToBaby packages, as MPRINT already has",
          "Spanish-speaker review before enabling Spanish safety messages",
          "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
          "Deploy the current version to the Databricks App"]
@@ -707,7 +707,7 @@ table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
     ["MPRINT", "Published pharmacology tables (MIT license), as a dated read-only snapshot."],
     ["NIH RePORTER", "Funded projects and portfolios. An award is not a finding."],
     ["NICHD BPCA and DASH", "Pediatric study summaries and study discovery. Controlled data are not retrieved."],
-    ["MotherToBaby (OTIS, via NLM)", "English and Spanish consumer fact sheets. Nonprofit content; links only."],
+    ["MotherToBaby (OTIS, via NLM)", "English and Spanish consumer fact sheets, verbatim and attributed. Nonprofit content."],
 ], size=13, row_h=0.46)
 
 s = new("Full evaluation numbers", appendix=True,
@@ -726,7 +726,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 857 tests pass on Databricks.",
+     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 861 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Six ways an answer can mislead", appendix=True, notes=(
