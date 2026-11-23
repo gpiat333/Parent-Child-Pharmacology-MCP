@@ -160,19 +160,21 @@ s = new(dark=True, notes=(
     "Therapeutics Branch. I built this MCP server for the Dataset Access Server track. It gives AI assistants "
     "structured access to public evidence about medicines in pregnancy, breastfeeding and childhood. "
     "This is my own hackathon prototype, not an NIH product."))
-waves(s, 6.15, 0.95, [TEAL, PURPLE, RGBColor(0x9A, 0xA4, 0xF0), RGBColor(0xB9, 0xA6, 0xF2)])
+waves(s, 6.35, 0.85, [TEAL, PURPLE, RGBColor(0x9A, 0xA4, 0xF0), RGBColor(0xB9, 0xA6, 0xF2)])
 text(s, 0.9, 1.0, 9.5, 0.5, "GSA MCP Server and AI Agent Hackathon  ·  Dataset Access Server track",
      size=14, color=MIST2)
 text(s, 0.9, 1.55, 11.0, 1.9, ["Parent-child", "Pharmacology MCP"], size=54, font=HEAD, bold=True,
      color=WHITE, space_after=0, line=0.95)
-text(s, 0.9, 3.55, 10.0, 1.0,
+text(s, 0.9, 3.5, 11.0, 0.9,
      "Public evidence on medicines in pregnancy, breastfeeding and childhood, ready for AI assistants",
-     size=20, color=MIST2)
-text(s, 0.9, 4.6, 9.0, 1.0, [
-    [("Gabriela Piatkowski, MS", {"bold": True, "color": WHITE})],
-    "Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch, NICHD",
-], size=14, color=MIST2, space_after=2)
-text(s, 0.9, 5.5, 11.5, 0.4,
+     size=19, color=MIST2)
+text(s, 0.9, 4.4, 11.8, 0.5, "Gabriela Piatkowski, MS", size=26, bold=True, color=WHITE)
+text(s, 0.9, 4.95, 11.8, 0.4, "Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch (OPPTB)",
+     size=18, color=WHITE)
+text(s, 0.9, 5.38, 11.8, 0.4,
+     "Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD), National Institutes of Health",
+     size=14, color=MIST2)
+text(s, 0.9, 5.88, 11.5, 0.4,
      "Built as a hackathon prototype. Not an official NIH product or medical advice.", size=11,
      color=MIST2, italic=True)
 
@@ -313,7 +315,7 @@ text(s, 6.8, 5.75, 5.85, 0.9,
 text(s, 6.8, 6.55, 5.85, 0.6, "Coral: NICHD programs and milestones.", size=11, color=MUTED, italic=True)
 
 # 5 ─ Scattered across agencies
-s = new("What we do know is scattered across agencies", notes=(
+s = new("What we know is scattered across agencies, resources and databases", notes=(
     "Here is where that evidence lives today. NLM hosts LactMed, DailyMed labels, PubMed, ClinicalTrials.gov, "
     "RxNorm and MedlinePlus. FDA has adverse-event reports, pediatric labeling changes and pregnancy registry "
     "listings. NIH and NICHD have funded projects in RePORTER, BPCA and Pediatric Trials Network summaries, "
@@ -361,11 +363,15 @@ text(s, 0.65, 4.05, 12.0, 0.4, "Searched live, every time", size=16, bold=True, 
 text(s, 0.65, 4.45, 12.0, 0.7,
      "All of PubMed  ·  ClinicalTrials.gov  ·  DailyMed labels  ·  FDA adverse-event reports, "
      "recalls and pediatric labeling changes  ·  NIH RePORTER  ·  RxNorm and MedlinePlus", size=15, color=INK)
-box(s, 0.65, 5.35, 12.0, 1.3, fill=CORAL_T)
-text(s, 0.95, 5.35, 11.4, 1.3, [
+box(s, 0.65, 5.25, 12.0, 1.1, fill=CORAL_T)
+text(s, 0.95, 5.25, 11.4, 1.1, [
     [("Where evidence is missing, it says so, ", {"bold": True, "color": DEEP}),
      ("and points to what is under way: recruiting trials, pregnancy exposure registries and NIH-funded "
       "research on the same medicine.", {})]], size=16, color=INK, anchor=MSO_ANCHOR.MIDDLE)
+text(s, 0.65, 6.5, 12.0, 0.6, [
+    [("Kept current: ", {"bold": True, "color": TEAL}),
+     ("every answer shows the date of its data. A weekly check flags new MPRINT releases, and one script rebuilds "
+      "LactMed or the MotherToBaby fact sheets from NCBI's latest package.", {})]], size=13, color=INK)
 
 # 3 ─ One question, many sources
 s = new("Answering one question means visiting many sources", notes=(
@@ -453,6 +459,44 @@ for i, (head, body) in enumerate(groups):
     box(s, x, y, 3.8, 1.6, fill=MIST)
     text(s, x + 0.3, y + 0.2, 3.3, 0.4, head, size=17, bold=True, color=TEAL)
     text(s, x + 0.3, y + 0.65, 3.3, 0.9, body, size=14, color=INK)
+
+# 5a ─ Why 31 tools
+s = new("Why 31 tools: each does one clear job an AI can pick correctly", notes=(
+    "Thirty-one sounds like a lot, but a typical question uses three: the safety check, the evidence brief, and "
+    "maybe one follow-up such as the full LactMed record or a MotherToBaby fact sheet. The rest are there so the "
+    "AI can answer a specific question from the right source, and so every answer says which source it came "
+    "from. GSA's judging criteria ask for exactly this: precise tools built around user goals, with names an AI "
+    "can choose without ambiguity, not thin wrappers around a single API call."))
+text(s, 0.65, 1.5, 4.6, 0.45, "A typical question uses three", size=18, font=HEAD, bold=True, color=TEAL)
+flow = [("route_parent_question", "Safety check on the actual question"),
+        ("medication_evidence_brief", "One call gathers every source"),
+        ("One follow-up, if needed", "Full LactMed record, fact sheet, trials…")]
+for i, (name, what) in enumerate(flow):
+    y = 2.05 + i * 1.35
+    box(s, 0.65, y, 4.4, 1.1, fill=DEEP if i < 2 else MIST)
+    text(s, 0.9, y + 0.12, 4.0, 0.4, name, size=14, bold=True, color=WHITE if i < 2 else DEEP,
+         font="Courier New" if i < 2 else BODY)
+    text(s, 0.9, y + 0.55, 4.0, 0.5, what, size=13, color=MIST2 if i < 2 else INK)
+    if i < 2:
+        connector(s, 2.85, y + 1.1, 2.85, y + 1.35, color=TEAL, width=2.5)
+text(s, 5.6, 1.5, 7.1, 0.45, "The rest, grouped by the job they do", size=18, font=HEAD, bold=True, color=TEAL)
+groups31 = [
+    ("3", "Check the question and the medicine", "Safety check, RxNorm names, products with an ingredient"),
+    ("2", "Build a brief or check coverage", "Evidence brief; how much each source has"),
+    ("7", "Pregnancy and breastfeeding sources", "LactMed, labels, MotherToBaby, MedlinePlus"),
+    ("5", "Studies and data", "PubMed, abstracts, ClinicalTrials.gov, MPRINT"),
+    ("5", "Children's medicines and NIH programs", "Pediatric labeling, BPCA/PTN, DASH, RePORTER"),
+    ("4", "Safety notices", "FAERS reports, recalls, alerts, shortages"),
+    ("5", "Participation and reporting", "Registries, recruiting studies, public input, reporting"),
+]
+for i, (n, job, examples) in enumerate(groups31):
+    y = 2.05 + i * 0.66
+    circle_num(s, 5.6, y + 0.06, n, d=0.46, fill=TEAL, size=14)
+    text(s, 6.25, y, 6.4, 0.32, job, size=14, bold=True, color=DEEP)
+    text(s, 6.25, y + 0.3, 6.4, 0.32, examples, size=12, color=MUTED)
+text(s, 0.65, 6.65, 12.0, 0.5,
+     "GSA's criteria ask for goal-oriented tools an AI can select without ambiguity, not thin wrappers. "
+     "Full list in the appendix.", size=12, color=MUTED, italic=True)
 
 # 5b ─ Where it fits
 s = new("How it complements LactMed and MotherToBaby", notes=(
