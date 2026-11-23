@@ -1135,14 +1135,14 @@ for i, (head, body) in enumerate(notes_r):
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
     "I tested in layers. The evaluated version passed all its automated tests on my Mac and in a Databricks "
-    "serverless notebook. The current 24-tool version passes 1,017 tests locally; its 41 PowerShell client "
-    "checks and the chat evaluations below have not been re-run on it yet. "
+    "serverless notebook. The current 24-tool version passes all 1,058 tests on Linux and Windows, including the "
+    "PowerShell client checks. The chat evaluations below have not been re-run on it yet. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("1,017", "automated tests", "Pass locally on the 24-tool version; 41 Windows client checks still to run"),
+    ("1,058", "automated tests", "All pass on Linux and Windows for the 24-tool version"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1304,7 +1304,7 @@ s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the final policy .25 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "968 at evaluation; 1,017 local now", "41 PowerShell client checks not re-run on the 24-tool version"],
+    ["Automated tests", "968 at evaluation; 1,058 now", "All pass on Linux and Windows, PowerShell client checks included"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],
