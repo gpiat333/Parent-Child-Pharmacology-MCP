@@ -9,7 +9,7 @@
 | Databricks test notebook | Runs the revised application tests in an isolated job environment | Uploading a test bundle and running a notebook does not install it into the App |
 | Databricks model gateway | Supplies model calls for evaluations using the existing model configuration | This work does not create or redeploy a model endpoint |
 | Databricks MLflow | Stores runs, scores, traces and reviewed artifacts | Logging an experiment does not serve the MCP or change its App deployment |
-| Databricks App `mcp-mc` | **Policy .26**, deployment `01f1e77924a01179b82b6e9b4fe23efd` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-policy26` | Redeploy from a new staged folder; the previous .9 deployment (`01f1e5f7f6fc162fb8c3cc875e7f8546`) stays available for rollback |
+| Databricks App `mcp-mc` | **Policy .27**, deployment `01f1e77b7f631005b51803936dbda628` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-policy27` | Redeploy from a new staged folder; the previous .9 deployment (`01f1e5f7f6fc162fb8c3cc875e7f8546`) stays available for rollback |
 | Companion chat client | Revised local client scripts and output contracts | Any hosted client must be updated too; the server cannot force an arbitrary client to enforce its safety/display contracts |
 
 ## What a future hosted release would involve
@@ -47,3 +47,7 @@ No new model training, new model endpoint, new database, or public GitHub releas
 These are smoke checks, not a hosted re-run of the model-graded evaluation; the scored results describe policy .25 run on a local server. No load or penetration testing was done.
 
 **Rollback.** `databricks apps deploy mcp-mc --source-code-path <previous folder>` redeploys an earlier version; the .9 source remains at its original bundle path.
+
+## November 23, 2026 redeployment (policy .27)
+
+Hands-on testing in Claude found that “What does LactMed say about sertraline and breastfeeding? Link the studies.” was blocked as non-English. Policy .27 fixes the language check and adds a landing page at `/`. Redeployed as `01f1e77b7f631005b51803936dbda628` from `/Workspace/Users/<owner>/apps/mcp-mc-policy27`; the .26 folder remains for rollback. Checks on the hosted app: `/version` 2026-11-23.27; `/` shows the landing page; the LactMed question, “List FDA recalls for naproxen.” and “Thanks! Now do the same for escitalopram.” route to evidence; a Spanish question still stops with the Spanish message.
