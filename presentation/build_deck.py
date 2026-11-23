@@ -177,6 +177,28 @@ for ci, (head, qs) in enumerate(cols):
         text(s, x + 0.3, y + 0.2, 5.25, 1.0, f"“{q}”", size=16, color=INK, italic=True,
              anchor=MSO_ANCHOR.MIDDLE)
 
+# 2b ─ The evidence is thin
+s = new("The evidence itself is thin", notes=(
+    "CDC puts the problem in one number. Fewer than ten percent of medicines approved since 1980 have "
+    "enough information to determine their safety during pregnancy, yet nine in ten women take a medication "
+    "while pregnant. Pregnant people are usually left out of the trials that establish a new drug's safety. "
+    "So for most questions, the honest answer includes what is not known, and the tool has to show that."))
+box(s, 0.65, 1.7, 5.85, 3.9, fill=DEEP)
+text(s, 1.0, 1.95, 5.2, 1.4, "<10%", size=72, font=HEAD, bold=True, color=WHITE)
+text(s, 1.0, 3.45, 5.2, 2.0,
+     "of medicines approved since 1980 have enough information to determine their safety during pregnancy",
+     size=18, color=MIST2)
+box(s, 6.85, 1.7, 5.8, 3.9, fill=MIST)
+text(s, 7.2, 1.95, 5.2, 1.4, "9 in 10", size=72, font=HEAD, bold=True, color=TEAL)
+text(s, 7.2, 3.45, 5.1, 2.0, "women in the United States take a medication during pregnancy", size=18, color=INK)
+text(s, 0.65, 5.95, 12.0, 0.8, [
+    [("Why: ", {"bold": True, "color": DEEP}),
+     ("pregnant people are usually left out of the studies that establish a new medicine's safety. "
+      "Most answers have to include what isn't known.", {})]], size=16, color=INK)
+text(s, 0.65, 6.85, 9.5, 0.35,
+     "Source: CDC, Medicine and Pregnancy: An Overview, and Treating for Two (cdc.gov/medicine-and-pregnancy).",
+     size=11, color=MUTED, italic=True)
+
 # 3 ─ One question, many sources
 s = new("Answering one question means visiting many sources", notes=(
     "Take the Zoloft question. First you have to know Zoloft is sertraline. The label's pregnancy section is "
@@ -262,6 +284,46 @@ for i, (head, body) in enumerate(groups):
     text(s, x + 0.3, y + 0.2, 3.3, 0.4, head, size=17, bold=True, color=TEAL)
     text(s, x + 0.3, y + 0.65, 3.3, 0.9, body, size=14, color=INK)
 
+# 5b ─ Where it fits
+s = new("Where it fits next to LactMed and MotherToBaby", notes=(
+    "A judge who knows this field will ask: why not just use LactMed, or call MotherToBaby? Neither is a "
+    "competitor. LactMed is a source this server reads. LactRx is MotherToBaby's app with the same LactMed "
+    "content. MotherToBaby is a nonprofit service whose specialists weigh the evidence for one person, which "
+    "this server deliberately does not do. What the server adds is breadth across pregnancy, breastfeeding and "
+    "children's medicines, machine-readable answers with sources, visible gaps, and availability at any hour. "
+    "After hours, MotherToBaby replies the next business day; this server can help someone prepare for that "
+    "conversation."))
+cols = [
+    ("LactMed and LactRx", MIST, TEAL, [
+        ("Covers", "Breastfeeding only"),
+        ("Who runs it", "NLM database; LactRx is MotherToBaby's app with the same content"),
+        ("How you use it", "Search the website or app yourself"),
+    ]),
+    ("MotherToBaby", CORAL_T, CORAL, [
+        ("Covers", "Pregnancy and breastfeeding exposures"),
+        ("Who runs it", "OTIS, a nonprofit of teratology specialists"),
+        ("How you use it", "Talk to a specialist, weekdays 8 am to 7 pm ET; next business day after hours"),
+    ]),
+    ("This MCP server", DEEP, WHITE, [
+        ("Covers", "Pregnancy, breastfeeding and children's medicines"),
+        ("Who runs it", "Reads 14 public sources, including LactMed, labels, studies, trials and NICHD data"),
+        ("How you use it", "Any AI assistant, any hour; cited, structured answers with gaps shown"),
+    ]),
+]
+for i, (head, fill, hc, rows) in enumerate(cols):
+    x = 0.65 + i * 4.1
+    box(s, x, 1.6, 3.8, 4.25, fill=fill)
+    text(s, x + 0.3, 1.8, 3.2, 0.45, head, size=19, font=HEAD, bold=True, color=hc)
+    body = []
+    for label, val in rows:
+        body.append([(label, {"bold": True, "size": 12, "color": MIST2 if fill == DEEP else MUTED})])
+        body.append(val)
+    text(s, x + 0.3, 2.4, 3.2, 3.4, body, size=15, color=WHITE if fill == DEEP else INK, space_after=3)
+text(s, 0.65, 6.1, 12.0, 0.9, [
+    [("What it does not do: ", {"bold": True, "color": CORAL}),
+     ("weigh the evidence for one person. For an individual pregnancy or breastfeeding exposure question, "
+      "MotherToBaby specialists (866-626-6847) are the right next step.", {})]], size=15, color=INK)
+
 # 6 ─ The brief workflow
 s = new("One call turns a question into an evidence brief", notes=(
     "Here is what medication_evidence_brief does. It confirms the medicine through RxNorm first, and stops "
@@ -333,12 +395,13 @@ text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the s
 # 9 ─ Safety routing
 s = new("Some questions shouldn't get a research answer", notes=(
     "Before any search or AI answer, the question goes through route_parent_question. These are the actual "
-    "current replies. Emergencies get 911 and Poison Help. A crisis gets 988 and the Postpartum Support "
-    "International line. A vague pill description is stopped, because guessing the drug is dangerous. Dosing "
+    "current replies. Emergencies get 911 and Poison Help. A crisis gets 988; if the person is pregnant or "
+    "postpartum, it also gets HRSA's National Maternal Mental Health Hotline, 1-833-TLC-MAMA, which answers "
+    "calls and texts around the clock in English and Spanish. A vague pill description is stopped, because guessing the drug is dangerous. Dosing "
     "questions go to a clinician or pharmacist. In testing, all seven stop cases made zero downstream calls."))
 rows = [
     ("Emergency", "“My baby is having a seizure.”", "Call 911 now; Poison Help 1-800-222-1222"),
-    ("Crisis", "“I feel hopeless since giving birth…”", "Call or text 988; Postpartum Support International"),
+    ("Crisis", "“I feel hopeless since giving birth…”", "Call or text 988 or 1-833-TLC-MAMA"),
     ("Unclear medicine", "“My little white pill…”", "Check the package with a pharmacist first"),
     ("Dosing", "“How much ibuprofen should I give my 2-year-old?”", "Ask the prescriber or pharmacist"),
     ("Private details", "Names, birth dates, record numbers", "Remove them; nothing is looked up"),
@@ -362,14 +425,15 @@ s = new("A safety rule has to work in both directions", notes=(
     "During final review I found the safety check was too eager. Any mention of seizures or postpartum "
     "depression triggered the emergency or crisis message, even in a research question. That would have "
     "blocked core NICHD topics like epilepsy drugs in pregnancy. The fix separates describing an event from "
-    "naming a condition, and 29 new tests pin both directions."))
+    "naming a condition, and 29 new tests pin both directions. The same review found that \u201csince giving "
+    "birth\u201d was not recognized as postpartum; it now adds the maternal mental health hotline."))
 pairs = [
     ("“What does research say about lamotrigine for seizures in pregnancy?”",
      "Before: emergency message", "Now: research answer", False),
     ("“What is known about postpartum depression treatment with zuranolone?”",
      "Before: crisis message", "Now: research answer", False),
     ("“My baby is having a seizure.”", "Before: call 911", "Now: call 911", True),
-    ("“I think I have postpartum depression.”", "Before: 988 and PSI", "Now: 988 and PSI", True),
+    ("“I feel hopeless since giving birth.”", "Before: 988 only", "Now: adds TLC-MAMA", True),
 ]
 for i, (qtext, before, after, same) in enumerate(pairs):
     y = 1.65 + i * 1.2
@@ -409,7 +473,7 @@ box(s, 0.65, 6.4, 3.7, 0.7, fill=DEEP)
 text(s, 0.85, 6.4, 3.4, 0.7, "Live public APIs and pages", size=14, bold=True, color=WHITE,
      anchor=MSO_ANCHOR.MIDDLE)
 box(s, 4.55, 6.4, 3.7, 0.7, fill=DEEP)
-text(s, 4.75, 6.4, 3.4, 0.7, "MPRINT read-only snapshot", size=14, bold=True, color=WHITE,
+text(s, 4.75, 6.4, 3.4, 0.7, "MPRINT snapshot, dated and checked", size=14, bold=True, color=WHITE,
      anchor=MSO_ANCHOR.MIDDLE)
 connector(s, 2.5, 6.15, 2.5, 6.4, color=TEAL, width=2)
 connector(s, 6.4, 6.15, 6.4, 6.4, color=TEAL, width=2)
@@ -427,7 +491,8 @@ s = new("Four design decisions", notes=(
     "First, I built tools around what people are trying to do, not around each API. The evidence brief and "
     "the coverage check each combine several sources. Second, the medicine must be confirmed before any "
     "evidence lookup. Third, missing data is a first-class result. Fourth, MPRINT tables ship as a local "
-    "read-only snapshot, so answers are reproducible and the snapshot version is always reported."))
+    "read-only snapshot, so answers are reproducible. Every MPRINT result says how old the copy is, the "
+    "snapshot resource checks MPRINT's GitHub for newer data, and a weekly GitHub job fails if there is."))
 decs = [
     ("Tools for goals, not endpoints", "medication_evidence_brief and check_evidence_coverage each combine "
      "several sources, so an agent makes one meaningful call instead of eight thin ones."),
@@ -435,8 +500,8 @@ decs = [
      "requires_confirmation; a description of a pill stops the request."),
     ("Missing stays missing", "Empty searches, absent label sections and truncated records are explicit "
      "fields. A failed source is reported as unavailable, not as zero."),
-    ("Snapshots you can reproduce", "MPRINT tables ship as read-only SQLite with the revision and date in every "
-     "response. Queries are parameterized."),
+    ("Dated, checkable snapshots", "MPRINT tables ship as read-only SQLite. Every result shows the copy's date, "
+     "and a weekly check flags newer upstream data."),
 ]
 for i, (head, body) in enumerate(decs):
     x = 0.65 + (i % 2) * 6.15
@@ -448,13 +513,13 @@ for i, (head, body) in enumerate(decs):
 
 # 13 ─ How I tested
 s = new("How I tested it", notes=(
-    "I tested in layers. 738 automated tests pass both on my machine and in a Databricks serverless notebook. "
+    "I tested in layers. 754 automated tests pass both on my machine and in a Databricks serverless notebook. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("738", "automated tests", "All pass locally and in a Databricks serverless notebook"),
+    ("754", "automated tests", "All pass locally and in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -516,7 +581,7 @@ s = new("Security", notes=(
     "and each tool needs its own scope. Database queries are parameterized, questions are never written to "
     "logs, and identifying details are blocked before any lookup."))
 sec = [
-    ("Outbound traffic", "Allowlisted federal HTTPS hosts only. No redirects, 5 MB cap, public-IP pinning."),
+    ("Outbound traffic", "Allowlisted federal HTTPS hosts, plus read-only GitHub for the data check. No redirects, 5 MB cap."),
     ("Remote access", "Signed RS256 tokens with a separate scope for each tool. Won't start without them."),
     ("Inputs", "Pydantic models reject bad values. SQL is parameterized. No user-supplied URLs."),
     ("Privacy", "Names, birth dates and record numbers are blocked. Questions are never logged."),
@@ -536,7 +601,9 @@ s = new("What I learned and what comes next", notes=(
     "Three lessons. Interpretation was harder than retrieval. Safety rules need tests in both directions; "
     "my own filter was blocking legitimate research. And automated graders make mistakes too, so I read "
     "the failures myself. Next, I need a clinician to review real answers, a Spanish speaker to review the "
-    "held Spanish safety messages, new unseen test questions, and the current version deployed on Databricks."))
+    "held Spanish safety messages, a referral path to MotherToBaby for individual pregnancy questions, new "
+    "unseen test questions such as who funds breastfeeding medication research, and the current version "
+    "deployed on Databricks."))
 text(s, 0.65, 1.6, 5.8, 0.4, "Lessons", size=20, font=HEAD, bold=True, color=TEAL)
 lessons = [("Interpretation is the real work", "Retrieval was quick to build. Keeping populations, exposure and outcomes apart took most of the effort."),
            ("Test safety rules both ways", "My filter blocked research on seizures and postpartum depression until I tested for over-blocking."),
@@ -548,13 +615,14 @@ for i, (head, body) in enumerate(lessons):
     text(s, 0.95, y + 0.55, 5.3, 0.85, body, size=14, color=INK)
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
 nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
+         "Refer individual pregnancy exposure questions to MotherToBaby; add its NLM-hosted fact sheets, labeled as nonprofit content",
          "Spanish-speaker review before enabling Spanish safety messages",
-         "New, unseen test questions and other MCP clients",
+         "Unseen test questions, such as \u201cwho funds breastfeeding medication research?\u201d",
          "Deploy the current version to the Databricks App"]
 for i, t in enumerate(nexts):
-    y = 2.15 + i * 1.2
-    circle_num(s, 6.85, y + 0.1, str(i + 1), d=0.5, fill=CORAL, size=15)
-    text(s, 7.6, y, 5.0, 1.0, t, size=16, color=INK, anchor=MSO_ANCHOR.TOP)
+    y = 2.15 + i * 0.98
+    circle_num(s, 6.85, y - 0.04, str(i + 1), d=0.5, fill=CORAL, size=15)
+    text(s, 7.6, y, 5.05, 0.9, t, size=15, color=INK, anchor=MSO_ANCHOR.TOP)
 
 # 17 ─ Close
 s = new(dark=True, notes="Thank you. The repository has the code, the full evaluation records and a quickstart.")
@@ -647,7 +715,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Policy .15 adds the safety-check fix; all 738 tests pass on Databricks.",
+     "Evaluated on policy .14. Policies .15 and .16 add the safety fixes and hotline; all 754 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Six ways an answer can mislead", appendix=True, notes=(
