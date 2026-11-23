@@ -12,6 +12,8 @@ import sys
 import time
 from pathlib import Path
 
+from parent_child_pharmacology.core.outcome_groups import SCHEMA as GROUP_SCHEMA
+from parent_child_pharmacology.core.outcome_groups import aggregate_rows
 from parent_child_pharmacology.core.research_arithmetic import SCHEMA, calculate
 from parent_child_pharmacology.core.snapshot_select import SCHEMA as SELECT_SCHEMA
 from parent_child_pharmacology.core.snapshot_select import select_records
@@ -33,7 +35,7 @@ def expects_source_label(question):
 
 
 class ParentChildPharmacologyAgent:
-    def __init__(self, evidence_directory, prompt_version="v6", replay_only=False):
+    def __init__(self, evidence_directory, prompt_version="v7", replay_only=False):
         self.root = Path(evidence_directory).resolve()
         self.replay_only = replay_only
         self.prompt_version = prompt_version
@@ -87,7 +89,7 @@ class ParentChildPharmacologyAgent:
                 for t in client.rpc("tools/list", {})["tools"]
                 if t["name"] in names
             ]
-            tools.extend([SCHEMA, VALUE_SCHEMA, SELECT_SCHEMA])
+            tools.extend([SCHEMA, VALUE_SCHEMA, SELECT_SCHEMA, GROUP_SCHEMA])
             for _ in range(24):
                 reply = self.gateway.model_call(messages, tools, reasoning_effort="none")
                 usage.append(reply.get("usage", {}))
@@ -110,6 +112,7 @@ class ParentChildPharmacologyAgent:
                         "calculate_aggregate_expression",
                         "return_source_value",
                         "select_snapshot_records",
+                        "aggregate_outcome_rows",
                     }:
                         raise ValueError("Unexpected benchmark tool")
                     raw_arguments = call["function"]["arguments"]
@@ -168,6 +171,17 @@ class ParentChildPharmacologyAgent:
                             "arguments": arguments,
                             "result": value,
                             "execution": "local captured-metadata filtering; not an MCP retrieval",
+                        }
+                    elif name == "aggregate_outcome_rows":
+                        try:
+                            value = aggregate_rows(calls, **arguments)
+                        except (ValueError, TypeError) as exc:
+                            value = {"error": type(exc).__name__, "message": str(exc)}
+                        result = {
+                            "tool": name,
+                            "arguments": arguments,
+                            "result": value,
+                            "execution": "local per-group statistics over captured rows; not an MCP retrieval",
                         }
                     elif name == "calculate_aggregate_expression":
                         try:
