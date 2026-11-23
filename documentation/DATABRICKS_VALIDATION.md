@@ -23,4 +23,6 @@ Current source 0.14.0, policy 2026-11-22.17. Policy .15 fixes safety-routing fal
 
 **Policy .16 re-run (November 22, 2026):** Databricks serverless run 214446837417092 passed **754/754** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-policy16/databricks-job-output.json).
 
+**Policy .17 re-run (November 22, 2026):** Databricks serverless run 466777602936619 passed **768/768** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-policy17/databricks-job-output.json).
+
 [Current evidence](../evaluation/retrieval-reliability-final/REPORT.md)

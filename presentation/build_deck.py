@@ -182,7 +182,11 @@ s = new("The evidence itself is thin", notes=(
     "CDC puts the problem in one number. Fewer than ten percent of medicines approved since 1980 have "
     "enough information to determine their safety during pregnancy, yet nine in ten women take a medication "
     "while pregnant. Pregnant people are usually left out of the trials that establish a new drug's safety. "
-    "So for most questions, the honest answer includes what is not known, and the tool has to show that."))
+    "So for most questions, the honest answer includes what is not known, and the tool has to show that. "
+    "Congress created PRGLAC, the Task Force on Research Specific to Pregnant Women and Lactating Women, in "
+    "the 21st Century Cures Act. Its 2018 report made 15 recommendations, and NICHD's Council tracks "
+    "implementation. Pregnancy and lactation briefs now include that context, so an empty evidence row is "
+    "read as a known research gap, not as safety."))
 box(s, 0.65, 1.7, 5.85, 3.9, fill=DEEP)
 text(s, 1.0, 1.95, 5.2, 1.4, "<10%", size=72, font=HEAD, bold=True, color=WHITE)
 text(s, 1.0, 3.45, 5.2, 2.0,
@@ -191,11 +195,12 @@ text(s, 1.0, 3.45, 5.2, 2.0,
 box(s, 6.85, 1.7, 5.8, 3.9, fill=MIST)
 text(s, 7.2, 1.95, 5.2, 1.4, "9 in 10", size=72, font=HEAD, bold=True, color=TEAL)
 text(s, 7.2, 3.45, 5.1, 2.0, "women in the United States take a medication during pregnancy", size=18, color=INK)
-text(s, 0.65, 5.95, 12.0, 0.8, [
+text(s, 0.65, 5.85, 12.0, 1.0, [
     [("Why: ", {"bold": True, "color": DEEP}),
-     ("pregnant people are usually left out of the studies that establish a new medicine's safety. "
-      "Most answers have to include what isn't known.", {})]], size=16, color=INK)
-text(s, 0.65, 6.85, 9.5, 0.35,
+     ("pregnant people are usually left out of the studies that establish a new medicine's safety. NICHD's "
+      "PRGLAC task force made 15 recommendations in 2018 to close this gap; pregnancy and lactation briefs "
+      "now link to them.", {})]], size=15, color=INK)
+text(s, 0.65, 6.95, 9.5, 0.35,
      "Source: CDC, Medicine and Pregnancy: An Overview, and Treating for Two (cdc.gov/medicine-and-pregnancy).",
      size=11, color=MUTED, italic=True)
 
@@ -255,11 +260,11 @@ text(s, 0.65, 6.45, 12.0, 0.4,
 
 # 5 ─ What I built
 s = new("What I built", notes=(
-    "The server has 30 tools, 4 reusable prompts and 4 resources. The tools are grouped around the jobs "
+    "The server has 31 tools, 4 reusable prompts and 4 resources. The tools are grouped around the jobs "
     "people actually do: confirm the medicine, look at breastfeeding or pregnancy evidence, search the "
     "literature and trials, look at NICHD research, and check safety notices. The most important tool is "
     "medication_evidence_brief, which does the whole workflow in one call."))
-stats = [("30", "tools"), ("4", "prompts"), ("4", "resources"), ("14", "public sources")]
+stats = [("31", "tools"), ("4", "prompts"), ("4", "resources"), ("15", "public sources")]
 for i, (num, lab) in enumerate(stats):
     x = 0.65 + i * 1.75
     text(s, x, 1.55, 1.6, 0.8, num, size=40, font=HEAD, bold=True, color=TEAL)
@@ -272,7 +277,7 @@ text(s, 8.25, 1.7, 4.2, 1.0, [
 groups = [
     ("Identify the medicine", "RxNorm names, ingredients and products; parent-friendly MedlinePlus pages"),
     ("Breastfeeding", "LactMed search and full records, with exposure and infant outcomes kept apart"),
-    ("Pregnancy and labels", "DailyMed pregnancy and lactation sections, FDA pediatric labeling changes"),
+    ("Pregnancy and labels", "DailyMed pregnancy and lactation sections, pediatric labeling changes, MotherToBaby fact sheets"),
     ("Research", "PubMed with pregnancy and lactation filters, abstracts, ClinicalTrials.gov, MPRINT data"),
     ("NICHD programs", "RePORTER funding portfolios, BPCA study summaries, DASH study discovery"),
     ("Safety and participation", "Recalls, safety alerts, shortages, FAERS signals, registries, recruiting studies"),
@@ -306,7 +311,7 @@ cols = [
     ]),
     ("This MCP server", DEEP, WHITE, [
         ("Covers", "Pregnancy, breastfeeding and children's medicines"),
-        ("Who runs it", "Reads 14 public sources, including LactMed, labels, studies, trials and NICHD data"),
+        ("Who runs it", "Reads 15 public sources, including LactMed, labels, studies, trials and NICHD data"),
         ("How you use it", "Any AI assistant, any hour; cited, structured answers with gaps shown"),
     ]),
 ]
@@ -321,8 +326,8 @@ for i, (head, fill, hc, rows) in enumerate(cols):
     text(s, x + 0.3, 2.4, 3.2, 3.4, body, size=15, color=WHITE if fill == DEEP else INK, space_after=3)
 text(s, 0.65, 6.1, 12.0, 0.9, [
     [("What it does not do: ", {"bold": True, "color": CORAL}),
-     ("weigh the evidence for one person. For an individual pregnancy or breastfeeding exposure question, "
-      "MotherToBaby specialists (866-626-6847) are the right next step.", {})]], size=15, color=INK)
+     ("weigh the evidence for one person. For an individual pregnancy or breastfeeding question, it refers "
+      "people to MotherToBaby (866-626-6847) and links their fact sheets.", {})]], size=15, color=INK)
 
 # 6 ─ The brief workflow
 s = new("One call turns a question into an evidence brief", notes=(
@@ -398,12 +403,13 @@ s = new("Some questions shouldn't get a research answer", notes=(
     "current replies. Emergencies get 911 and Poison Help. A crisis gets 988; if the person is pregnant or "
     "postpartum, it also gets HRSA's National Maternal Mental Health Hotline, 1-833-TLC-MAMA, which answers "
     "calls and texts around the clock in English and Spanish. A vague pill description is stopped, because guessing the drug is dangerous. Dosing "
-    "questions go to a clinician or pharmacist. In testing, all seven stop cases made zero downstream calls."))
+    "and personal medication decisions go to a clinician or pharmacist; if the person is pregnant or "
+    "breastfeeding, the reply also gives MotherToBaby's free specialist line. In testing, all seven stop cases made zero downstream calls."))
 rows = [
     ("Emergency", "“My baby is having a seizure.”", "Call 911 now; Poison Help 1-800-222-1222"),
     ("Crisis", "“I feel hopeless since giving birth…”", "Call or text 988 or 1-833-TLC-MAMA"),
     ("Unclear medicine", "“My little white pill…”", "Check the package with a pharmacist first"),
-    ("Dosing", "“How much ibuprofen should I give my 2-year-old?”", "Ask the prescriber or pharmacist"),
+    ("Personal decision", "“Can I take ibuprofen while breastfeeding?”", "Clinician or pharmacist, plus MotherToBaby"),
     ("Private details", "Names, birth dates, record numbers", "Remove them; nothing is looked up"),
     ("Not English", "Questions the rules can't check", "Stop; Spanish MedlinePlus pages by drug code"),
 ]
@@ -513,13 +519,13 @@ for i, (head, body) in enumerate(decs):
 
 # 13 ─ How I tested
 s = new("How I tested it", notes=(
-    "I tested in layers. 754 automated tests pass both on my machine and in a Databricks serverless notebook. "
+    "I tested in layers. 768 automated tests pass both on my machine and in a Databricks serverless notebook. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("754", "automated tests", "All pass locally and in a Databricks serverless notebook"),
+    ("768", "automated tests", "All pass locally and in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -601,9 +607,9 @@ s = new("What I learned and what comes next", notes=(
     "Three lessons. Interpretation was harder than retrieval. Safety rules need tests in both directions; "
     "my own filter was blocking legitimate research. And automated graders make mistakes too, so I read "
     "the failures myself. Next, I need a clinician to review real answers, a Spanish speaker to review the "
-    "held Spanish safety messages, a referral path to MotherToBaby for individual pregnancy questions, new "
-    "unseen test questions such as who funds breastfeeding medication research, and the current version "
-    "deployed on Databricks."))
+    "held Spanish safety messages, and new evaluation questions covering the MotherToBaby referral, fact "
+    "sheets and who funds this research. The fact sheet tool links sheets but doesn't read them yet, because "
+    "NLM's site shows automated readers a browser check, and I won't work around it."))
 text(s, 0.65, 1.6, 5.8, 0.4, "Lessons", size=20, font=HEAD, bold=True, color=TEAL)
 lessons = [("Interpretation is the real work", "Retrieval was quick to build. Keeping populations, exposure and outcomes apart took most of the effort."),
            ("Test safety rules both ways", "My filter blocked research on seizures and postpartum depression until I tested for over-blocking."),
@@ -615,9 +621,9 @@ for i, (head, body) in enumerate(lessons):
     text(s, 0.95, y + 0.55, 5.3, 0.85, body, size=14, color=INK)
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
 nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
-         "Refer individual pregnancy exposure questions to MotherToBaby; add its NLM-hosted fact sheets, labeled as nonprofit content",
+         "Read MotherToBaby fact sheet text once NLM allows automated access; today the server links them",
          "Spanish-speaker review before enabling Spanish safety messages",
-         "Unseen test questions, such as \u201cwho funds breastfeeding medication research?\u201d",
+         "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
          "Deploy the current version to the Databricks App"]
 for i, t in enumerate(nexts):
     y = 2.15 + i * 0.98
@@ -639,7 +645,7 @@ text(s, 0.9, 5.6, 11.5, 0.9, [
 # ─── Appendix ───
 s = new(dark=True, notes="Reference slides for judges who want more detail.")
 text(s, 0.9, 2.6, 11.0, 1.0, "Appendix", size=48, font=HEAD, bold=True, color=WHITE)
-text(s, 0.9, 3.7, 11.0, 1.6, ["All 30 tools  ·  Sources and their limits  ·  Full evaluation numbers",
+text(s, 0.9, 3.7, 11.0, 1.6, ["All 31 tools  ·  Sources and their limits  ·  Full evaluation numbers",
                                "Six ways an answer can mislead  ·  Benchmark history  ·  Prompts and resources"],
      size=18, color=MIST2, space_after=8)
 
@@ -670,11 +676,11 @@ def table(slide, x, y, w, col_w, rows, header=True, size=13, row_h=0.42):
     return t
 
 
-s = new("All 30 tools", appendix=True, notes="The full tool list, grouped by job.")
+s = new("All 31 tools", appendix=True, notes="The full tool list, grouped by job.")
 table(s, 0.65, 1.5, 12.0, [2.6, 9.4], [
     ["Group", "Tools"],
     ["Identity", "normalize_drug, find_products_containing_ingredient, get_patient_education"],
-    ["Breastfeeding", "search_lactmed, get_lactmed_record, semantic_search_lactmed"],
+    ["Breastfeeding", "search_lactmed, get_lactmed_record, semantic_search_lactmed, search_mothertobaby_fact_sheets"],
     ["Pregnancy and labels", "get_label_sections, search_pediatric_labeling_changes, find_pregnancy_exposure_registries, search_pregnancy_registries"],
     ["Literature and trials", "search_literature, get_abstracts, search_trials, find_recruiting_studies"],
     ["MPRINT data", "find_mprint_records, get_mprint_details"],
@@ -697,7 +703,8 @@ table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
     ["MPRINT", "Published pharmacology tables (MIT license), as a dated read-only snapshot."],
     ["NIH RePORTER", "Funded projects and portfolios. An award is not a finding."],
     ["NICHD BPCA and DASH", "Pediatric study summaries and study discovery. Controlled data are not retrieved."],
-], size=13, row_h=0.5)
+    ["MotherToBaby (OTIS, via NLM)", "English and Spanish consumer fact sheets. Nonprofit content; links only."],
+], size=13, row_h=0.46)
 
 s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the evaluated version and are reported separately because they measure different things.")
@@ -715,7 +722,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Policies .15 and .16 add the safety fixes and hotline; all 754 tests pass on Databricks.",
+     "Evaluated on policy .14. Policies .15 to .17 add safety fixes, referrals and fact sheets; all 768 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Six ways an answer can mislead", appendix=True, notes=(
