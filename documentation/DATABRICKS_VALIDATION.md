@@ -19,4 +19,6 @@ Current source 0.14.0, policy 2026-11-22.15. Policy .15 fixes safety-routing fal
 
 [Verified MLflow run](https://dbc-aae0ba16-8727.cloud.databricks.com/ml/experiments/1096079759942705/runs/a6b8c5b2f9394469af76172510a5b4d6). Notebook run 72360106331552 passed 709 tests.
 
+**Policy .15 re-run (November 22, 2026):** Databricks serverless run 378121935866176 passed **738/738** tests on the frozen .15 source (0 failures, 0 errors, 0 skipped, including the PowerShell parity tests). [Receipt](../evaluation/databricks-validation-2026-11-22-policy15/databricks-job-output.json).
+
 [Current evidence](../evaluation/retrieval-reliability-final/REPORT.md)

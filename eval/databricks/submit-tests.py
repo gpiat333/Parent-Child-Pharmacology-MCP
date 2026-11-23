@@ -113,7 +113,11 @@ call(
     "PYTHON",
 )
 spec = {
-    "run_name": "MCP .14 frozen source unit tests - no App deployment",
+    "run_name": "MCP policy "
+    + json.loads(
+        (P / "src/parent_child_pharmacology/core/policy.json").read_text(encoding="utf-8")
+    )["version"]
+    + " frozen source unit tests - no App deployment",
     "timeout_seconds": 1800,
     "tasks": [
         {
