@@ -334,7 +334,7 @@ for i, (head, fill, hc, items) in enumerate(agencies):
     text(s, x + 0.25, 1.8, 2.4, 0.5, head, size=20, font=HEAD, bold=True, color=hc)
     text(s, x + 0.25, 2.45, 2.4, 3.4, items, size=15, color=INK, space_after=8)
 text(s, 0.65, 6.25, 12.0, 0.8, [
-    [("Different names, IDs and formats: ", {"bold": True, "color": DEEP}),
+    [("For a parent, that means different names, IDs and formats: ", {"bold": True, "color": DEEP}),
      ("public APIs, web pages, spreadsheets and PDFs. No single place connects them.", {})]], size=16, color=INK)
 
 # 5b ─ What exists
@@ -685,8 +685,8 @@ s = new(notes=(
     "This is the question I asked myself first. Medicines in pregnancy, breastfeeding and childhood are "
     "high-stakes, and a wrong answer can do real harm. My answer is yes, with firm limits. The evidence is "
     "already public; what's missing is context, so people see a finding with its population, its date and "
-    "its gaps. Showing what isn't known matters as much as showing what is. It makes two decades of federal "
-    "work visible and usable. And it prepares people for a conversation with a clinician, never replaces it. "
+    "its gaps. Showing what isn't known matters as much as showing what is. Research that families already paid "
+    "for, through public studies and databases, becomes something they can actually use. And it prepares people for a conversation with a clinician, never replaces it. "
     "On the right: the lines it won't cross, and where it directs people instead. Each is enforced in code "
     "and covered by tests."))
 text(s, 0.65, 0.45, 12.0, 1.2,
@@ -695,7 +695,7 @@ text(s, 0.65, 0.45, 12.0, 1.2,
 reasons = [
     ("The evidence is already public", "The question isn't whether people find it; it's whether they see it with its population, date and limits."),
     ("The gaps matter as much as the findings", "Saying “no evidence retrieved; not evidence of safety” is part of the answer."),
-    ("Federal work becomes visible", "BPCA, PRGLAC, MPRINT and LactMed produced evidence most families never see."),
+    ("Research families already paid for becomes usable", "Public studies and databases hold evidence most families never see."),
     ("It prepares, it doesn't decide", "Every brief ends with questions to bring to a clinician."),
 ]
 text(s, 0.65, 1.9, 6.0, 0.45, "Why I think yes", size=19, font=HEAD, bold=True, color=TEAL)
