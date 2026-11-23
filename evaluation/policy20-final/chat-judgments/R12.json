@@ -1,0 +1,78 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 15,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the queried age scope, bounded top-25 extract, reported reaction counts, and FAERS limitations.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the description of the FDA adverse-event reporting system and its limitations.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the statement that the identity lookup matched acetaminophen.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/161/properties.json"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer states the actual queried age scope, reports retrieved reaction terms and counts, and correctly explains that spontaneous-report counts lack denominators, cannot establish incidence or causation, and cannot be generalized to all infants or exposed people. The citations correspond to the returned sources, despite using answer labels S1–S3 rather than inventory identifiers."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "d5206162f4aeb2d886f2eb7c278966370e76d56aabe37fcb28542962aa50f21d",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 15,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the queried age scope, bounded top-25 extract, reported reaction counts, and FAERS limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the description of the FDA adverse-event reporting system and its limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the statement that the identity lookup matched acetaminophen.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer states the actual queried age scope, reports retrieved reaction terms and counts, and correctly explains that spontaneous-report counts lack denominators, cannot establish incidence or causation, and cannot be generalized to all infants or exposed people. The citations correspond to the returned sources, despite using answer labels S1–S3 rather than inventory identifiers.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 10133,
+        "completion_tokens": 673,
+        "total_tokens": 10806,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 10130,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 380,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 10133,
+    "completion_tokens": 673,
+    "total_tokens": 10806,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 10130,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 380,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

@@ -1,0 +1,117 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 1,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "contradicted",
+        "reason": "The cited URL is not the retrieved LactMed Amoxicillin record; the retrieved record is NBK500887, not NBK500922.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK500922/"
+      }
+    ],
+    "uncited_source_claims": 6,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize actual retrieved infant observations separately from recommendations and milk measurements.",
+        "answer_quote": null,
+        "reference_quote": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+        "explanation": "The answer explicitly declines to provide the retrieved milk concentrations and therefore omits the required measured-exposure summary."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite the record and disclose missing/truncated evidence.",
+        "answer_quote": null,
+        "reference_quote": "Relevant published information was not found as of the revision date.",
+        "explanation": "The answer does not disclose the retrieved record's specific limitation that relevant published infant-level information was not found, and its citation points to the wrong record."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "LactMed advises monitoring the breastfed infant for **diarrhea, rash, and thrush**.",
+        "reference_quote": "A symptom monitored in a study is not automatically a clinical recommendation to monitor it.",
+        "explanation": "The retrieved material reports symptoms monitored in a study but does not provide the asserted LactMed monitoring advice. The answer converts study procedures into a recommendation."
+      }
+    ],
+    "rationale": "The answer avoids giving an administered dose and generally distinguishes reported symptoms from proof of causation, but it fails to use the retrieved LactMed record. It omits the required milk measurements, presents study monitoring as LactMed advice, cites the wrong record URL, and does not state the specific infant-level evidence limitation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "791d2814ec2ff40082eed90c1359b08a34dce970fdc491ecf256340cbbf35ba3",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited URL is not the retrieved LactMed Amoxicillin record; the retrieved record is NBK500887, whereas the answer cites NBK500922.\"\n    }\n  ],\n  \"uncited_source_claims\": 6,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The answer explicitly declines to provide the retrieved milk concentrations and therefore omits the required measured-exposure summary.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite the record and disclose missing/truncated evidence.\",\n      \"answer_quote\": \"Direct source: **LactMed—Amoxicillin**, U.S. National Library of Medicine: https://www.ncbi.nlm.nih.gov/books/NBK500922/\",\n      \"reference_quote\": \"https://www.ncbi.nlm.nih.gov/books/NBK500887/\",\n      \"explanation\": \"The answer cites a different URL and does not disclose that the retrieved extract was bounded but not truncated, or that infant-level published information was absent as of the revision date.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Separate observed symptoms from advice to monitor\",\n      \"answer_quote\": \"LactMed advises monitoring the breastfed infant for **diarrhea, rash, and thrush**.\",\n      \"reference_quote\": \"A small, controlled, prospective study had mothers monitor their infants for signs of adverse effects\",\n      \"explanation\": \"The retrieved text describes monitoring within a study, but does not state that LactMed advises parents to monitor for those symptoms. The answer converts a study procedure into source-level advice.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"I can’t verify the current LactMed record from this environment\",\n      \"reference_quote\": \"Amoxicillin produces low levels in milk that are not expected to cause adverse effects in breastfed infants.\",\n      \"explanation\": \"The answer presents itself as unable to verify the record despite the supplied retrieval containing the record and its exact findings. This leads it to omit available numeric and study-specific evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed describes occasional reports of **diarrhea, rash, and thrush or candidiasis**\",\n      \"reference_quote\": \"Occasionally, rash and disruption of the infant's gastrointestinal flora, resulting in diarrhea or thrush, have been reported\",\n      \"explanation\": \"The general symptom summary is supported, but it lacks the retrieved study-specific distinctions and presents the findings without the record's important qualification that these effects were not adequately evaluated.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed reports that amoxicillin enters breast milk in **low concentrations**\",\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The low-concentration characterization is broadly supported, but the answer omits the retrieved values and study context, which the criteria require.\"\n    }\n  ],\n  \"rationale\": \"The answer avoids giving an administered dose and appropriately distinguishes reported symptoms from causation in general, but it fails to use the retrieved LactMed record. It omits the required milk measurements, misstates a study monitoring procedure as LactMed advice, provides an incorrect record URL, and does not adequately disclose the actual infant-level evidence limitation.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 31358,
+        "completion_tokens": 1233,
+        "total_tokens": 32591,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 31355,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 217,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited URL is not the retrieved LactMed Amoxicillin record; the retrieved record is NBK500887, not NBK500922.\"\n    }\n  ],\n  \"uncited_source_claims\": 6,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The answer explicitly declines to provide the retrieved milk concentrations and therefore omits the required measured-exposure summary.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite the record and disclose missing/truncated evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Relevant published information was not found as of the revision date.\",\n      \"explanation\": \"The answer does not disclose the retrieved record's specific limitation that relevant published infant-level information was not found, and its citation points to the wrong record.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed advises monitoring the breastfed infant for **diarrhea, rash, and thrush**.\",\n      \"reference_quote\": \"A symptom monitored in a study is not automatically a clinical recommendation to monitor it.\",\n      \"explanation\": \"The retrieved material reports symptoms monitored in a study but does not provide the asserted LactMed monitoring advice. The answer converts study procedures into a recommendation.\"\n    }\n  ],\n  \"rationale\": \"The answer avoids giving an administered dose and generally distinguishes reported symptoms from proof of causation, but it fails to use the retrieved LactMed record. It omits the required milk measurements, presents study monitoring as LactMed advice, cites the wrong record URL, and does not state the specific infant-level evidence limitation.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 32458,
+        "completion_tokens": 903,
+        "total_tokens": 33361,
+        "prompt_tokens_details": {
+          "cached_tokens": 31355,
+          "cache_write_tokens": 1100,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 332,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 32458,
+    "completion_tokens": 903,
+    "total_tokens": 33361,
+    "prompt_tokens_details": {
+      "cached_tokens": 31355,
+      "cache_write_tokens": 1100,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 332,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

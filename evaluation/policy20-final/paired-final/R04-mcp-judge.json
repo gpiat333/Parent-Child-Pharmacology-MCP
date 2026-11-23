@@ -1,0 +1,86 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the bounded FDA naproxen enforcement-record search, the 12 returned records, the listed limitations, and the reported statuses.",
+        "url": "https://api.fda.gov/drug/enforcement.json?search=product_description%3A%22naproxen%22&sort=report_date%3Adesc&limit=20"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Links to the returned Acella naproxen oral suspension recall record and supports its listed lots and ongoing status.",
+        "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number%3A%22D-0523-2026%22"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Links to the returned Glenmark naproxen sodium tablet recall record and supports its listed lot and ongoing status.",
+        "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number%3A%22D-0346-2025%22"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Links to the returned Glenmark naproxen tablet recall record and supports its listed lots and ongoing status.",
+        "url": "https://api.fda.gov/drug/enforcement.json?search=recall_number%3A%22D-0124-2024%22"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer reports the bounded search and nonmatch without treating it as bottle clearance, preserves formulation/manufacturer/lot/status distinctions, provides official FDA links, and explains verification of identity, lot, expiration, scope, and manufacturer or pharmacist confirmation. Its claims are supported by the supplied FDA search evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "a84e251c0d262fd3fcd06d737a1bde908074b054b0926d044b6d9458fa497995",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 14,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded FDA naproxen enforcement-record search, the 12 returned records, the listed limitations, and the reported statuses.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Links to the returned Acella naproxen oral suspension recall record and supports its listed lots and ongoing status.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Links to the returned Glenmark naproxen sodium tablet recall record and supports its listed lot and ongoing status.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Links to the returned Glenmark naproxen tablet recall record and supports its listed lots and ongoing status.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer reports the bounded search and nonmatch without treating it as bottle clearance, preserves formulation/manufacturer/lot/status distinctions, provides official FDA links, and explains verification of identity, lot, expiration, scope, and manufacturer or pharmacist confirmation. Its claims are supported by the supplied FDA search evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24927,
+        "completion_tokens": 651,
+        "total_tokens": 25578,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24924,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 297,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24927,
+    "completion_tokens": 651,
+    "total_tokens": 25578,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24924,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 297,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

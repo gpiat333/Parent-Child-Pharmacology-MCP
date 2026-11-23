@@ -1,0 +1,76 @@
+{
+  "grader_error": "Grader did not produce a valid grounded assessment within three attempts",
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": \"No live FDA record results were retrieved, so candidate records and their statuses cannot be listed here.\",\n      \"reference_quote\": \"The fictional bottle lot is NOTREAL-77.\",\n      \"explanation\": \"FDA recall records were returned in the supplied evidence, but the answer omitted the returned candidate records, their statuses, and official links.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"results\\\": [{\\\"recall_number\\\": \\\"D-0523-2026\\\"\",\n      \"explanation\": \"The answer says no live FDA results were retrieved, whereas the supplied FDA search returned multiple naproxen recall records.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not clearance and identifies appropriate identity checks, but it incorrectly claims that no records were retrieved and fails to report the returned records, statuses, and official links required by the task.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 24271,
+        "completion_tokens": 685,
+        "total_tokens": 24956,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24268,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 332,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"FDA recall records were returned in the supplied evidence, but the answer omitted the returned candidate records, their statuses, and official links.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"\\\"total_matches\\\": 12\",\n      \"explanation\": \"The answer says no live FDA results were retrieved, while the supplied FDA search reports twelve matching recall records.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not clearance and identifies appropriate product, manufacturer, lot, expiration, and source verification steps. However, it incorrectly states that no FDA results were retrieved and fails to list the returned records, statuses, and official links.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 24708,
+        "completion_tokens": 523,
+        "total_tokens": 25231,
+        "prompt_tokens_details": {
+          "cached_tokens": 24268,
+          "cache_write_tokens": 437,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 203,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"FDA recall records were returned in the supplied evidence, but the answer omitted the returned candidate records, their statuses, and official links.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"\\\"status\\\": \\\"ok\\\", \\\"results\\\": [\",\n      \"explanation\": \"The answer says no live FDA results were retrieved, while the supplied recall-search evidence shows a successful response containing results.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not clearance and identifies appropriate product, manufacturer, lot, expiration, and source verification steps. However, it incorrectly states that no FDA results were retrieved and fails to list the returned records, statuses, and official links.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 25098,
+        "completion_tokens": 462,
+        "total_tokens": 25560,
+        "prompt_tokens_details": {
+          "cached_tokens": 24705,
+          "cache_write_tokens": 390,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 136,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "score_assigned": false
+}

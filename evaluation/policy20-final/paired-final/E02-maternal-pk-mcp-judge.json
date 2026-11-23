@@ -1,0 +1,122 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 31,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the label-based pregnancy, pharmacokinetic, registry, outcome, and limitation statements.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the described bounded PubMed pregnancy search and its reported retrieval scope.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports statements about pregnancy-related antiseizure-medication levels, seizure risk, and monitoring.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the description of the registered recruiting pharmacokinetic pregnancy study and lack of posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT05450978"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the naturalistic 60-mother study description, breastmilk lamotrigine concentration-by-dose finding, and study limitations.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The article title and retrieved metadata support that the review covers lamotrigine pharmacokinetics in pregnancy; the answer appropriately says numerical findings were not available in the returned abstract.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33573557/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the guideline statements concerning lamotrigine, seizure control, fetal outcomes, and caution about replacing effective therapy.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38748979/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports the reported FAERS reaction terms and counts, with the answer preserving the report-only and causality limitations.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "Supports the openFDA methodological caveats about spontaneous reports, absent denominators, and lack of causal inference.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "Supports the existence and limitations of the FDA-listed North American antiepileptic-drug pregnancy registry.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer fulfills the requested three-axis pregnancy brief, distinguishes maternal effects, fetal exposure, and fetal outcomes, separates label Clinical Considerations from clinician decisions, preserves study populations and design limitations, avoids administered dose values and personal medication advice, and makes evidence gaps explicit. Its cited substantive claims are supported by the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "1fde75f86d45d969082adca6fb930f4235ec9277c397f88b1d45f524457c6681",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 31,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label-based pregnancy, pharmacokinetic, registry, outcome, and limitation statements.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the described bounded PubMed pregnancy search and its reported retrieval scope.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports statements about pregnancy-related antiseizure-medication levels, seizure risk, and monitoring.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the description of the registered recruiting pharmacokinetic pregnancy study and lack of posted results.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the naturalistic 60-mother study description, breastmilk lamotrigine concentration-by-dose finding, and study limitations.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The article title and retrieved metadata support that the review covers lamotrigine pharmacokinetics in pregnancy; the answer appropriately says numerical findings were not available in the returned abstract.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the guideline statements concerning lamotrigine, seizure control, fetal outcomes, and caution about replacing effective therapy.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS reaction terms and counts, with the answer preserving the report-only and causality limitations.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the openFDA methodological caveats about spontaneous reports, absent denominators, and lack of causal inference.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the existence and limitations of the FDA-listed North American antiepileptic-drug pregnancy registry.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer fulfills the requested three-axis pregnancy brief, distinguishes maternal effects, fetal exposure, and fetal outcomes, separates label Clinical Considerations from clinician decisions, preserves study populations and design limitations, avoids administered dose values and personal medication advice, and makes evidence gaps explicit. Its cited substantive claims are supported by the supplied evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 244203,
+        "completion_tokens": 1044,
+        "total_tokens": 245247,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 244200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 411,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 244203,
+    "completion_tokens": 1044,
+    "total_tokens": 245247,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 244200,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 411,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

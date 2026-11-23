@@ -1,0 +1,164 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 7,
+    "contradicted_claims": 0,
+    "unverified_claims": 10,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "This URL is not in the supplied reference evidence, so its asserted support for the label and pharmacokinetic information cannot be verified from the pool.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/020241s062,020764s055,022251s026lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "This PubMed record was not supplied in the reference evidence; the cited study's population, design, and findings cannot be checked against the pool.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18342345/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "unverified",
+        "reason": "This PubMed record was not supplied in the reference evidence, so the claim attributed to it cannot be verified from the pool.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15557498/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "unverified",
+        "reason": "This PubMed record was not supplied in the reference evidence, so the oral-cleft claim attributed to it cannot be verified from the pool.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15753449/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "unverified",
+        "reason": "This PubMed record was not supplied in the reference evidence, so the EURAP claim attributed to it cannot be verified from the pool.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29606454/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The brief describes pharmacokinetic findings but does not preserve the actual population and study design for the cited pharmacokinetic studies. It refers generally to studies, cohorts, and a review rather than identifying the relevant human populations and designs."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Distinguish Clinical Considerations source content from clinician dose decisions.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer discusses literature-derived pharmacokinetics but does not clearly identify what was retrieved from the label's Clinical Considerations section versus what represents clinician decisions. It also does not explicitly report the label's Clinical Considerations wording about decreased concentrations during pregnancy and restoration after delivery as label content."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lamotrigine crosses the placenta; published pregnancy studies have measured drug in cord blood or compared cord and maternal concentrations.",
+        "reference_quote": null,
+        "explanation": "The supplied evidence does not contain a verified human placental-transfer or cord-blood finding. It contains breastmilk and infant-exposure material, plus a recruiting study concerning fetal exposure, but not the asserted published measurement result."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Pregnancy has been associated with increased lamotrigine clearance and lower maternal concentrations in pharmacokinetic studies.",
+        "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
+        "explanation": "The reference supports decreased concentrations and postpartum restoration, but the supplied pool does not directly establish the stronger clearance claim as a measured human pharmacokinetic result or provide the study design supporting it."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lower concentrations may be accompanied by loss of seizure control in some people treated for epilepsy",
+        "reference_quote": "Physiologic changes during pregnancy affect ASM levels and in turn, risk for seizures, necessitating frequent monitoring of ASM serum concentrations.",
+        "explanation": "The pool supports a general relationship between changing antiseizure-medication levels and seizure risk, but does not specifically establish that lower lamotrigine concentrations were accompanied by loss of seizure control in the claimed studies."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The International League Against Epilepsy/American Academy of Neurology review reports pregnancy-related pharmacokinetic changes",
+        "reference_quote": null,
+        "explanation": "The supplied evidence does not identify or support this specific attribution to an International League Against Epilepsy/American Academy of Neurology review."
+      }
+    ],
+    "rationale": "The answer follows the requested three-axis structure, keeps dose numbers and personal dosing advice out, states several appropriate evidence gaps, and includes clinician questions. However, important fetal-transfer and pharmacokinetic assertions are not supported in the supplied evidence, the cited URLs are outside the deterministic reference pool, and the answer does not preserve the required study populations and designs or clearly separate Clinical Considerations content from clinician dose decisions."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "161fc1da1bca58640b064a62fc2a655cee4a93e8a875709e0f49dda2bd44429f",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 10,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not in the supplied reference evidence, so its asserted support for the label and pharmacokinetic information cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence; the cited study's population, design, and findings cannot be checked against the pool.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the claim attributed to it cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the oral-cleft claim attributed to it cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the EURAP claim attributed to it cannot be verified from the pool.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The brief describes pharmacokinetic findings but does not preserve the actual population and study design for the cited pharmacokinetic studies. It refers generally to studies, cohorts, and a review rather than identifying the relevant human populations and designs.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Distinguish Clinical Considerations source content from clinician dose decisions.\",\n      \"answer_quote\": \"The literature describes:\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer discusses literature-derived pharmacokinetics but does not clearly identify what was retrieved from the label's Clinical Considerations section versus what represents clinician decisions. It also does not explicitly report the label's Clinical Considerations wording about decreased concentrations during pregnancy and restoration after delivery as label content.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine crosses the placenta; published pregnancy studies have measured drug in cord blood or compared cord and maternal concentrations.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not contain a verified human placental-transfer or cord-blood finding. It contains breastmilk and infant-exposure material, plus a recruiting study concerning fetal exposure, but not the asserted published measurement result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Pregnancy has been associated with increased lamotrigine clearance and lower maternal concentrations in pharmacokinetic studies.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"The reference supports decreased concentrations and postpartum restoration, but the supplied pool does not directly establish the stronger clearance claim as a measured human pharmacokinetic result or provide the study design supporting it.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lower concentrations may be accompanied by loss of seizure control in some people treated for epilepsy\",\n      \"reference_quote\": \"Physiologic changes during pregnancy affect ASM levels and in turn, risk for seizures, necessitating frequent monitoring of ASM serum concentrations.\",\n      \"explanation\": \"The pool supports a general relationship between changing antiseizure-medication levels and seizure risk, but does not specifically establish that lower lamotrigine concentrations were accompanied by loss of seizure control in the claimed studies.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The International League Against Epilepsy/American Academy of Neurology review reports pregnancy-related pharmacokinetic changes\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not identify or support this specific attribution to an International League Against Epilepsy/American Academy of Neurology review.\"\n    }\n  ],\n  \"rationale\": \"The answer follows the requested three-axis structure, keeps dose numbers and personal dosing advice out, states several appropriate evidence gaps, and includes clinician questions. However, important fetal-transfer and pharmacokinetic assertions are not supported in the supplied evidence, the cited URLs are outside the deterministic reference pool, and the answer does not preserve the required study populations and designs or clearly separate Clinical Considerations content from clinician dose decisions.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 242724,
+        "completion_tokens": 1612,
+        "total_tokens": 244336,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 242721,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 461,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 7,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 10,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"This URL is not in the supplied reference evidence, so its asserted support for the label and pharmacokinetic information cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence; the cited study's population, design, and findings cannot be checked against the pool.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the claim attributed to it cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the oral-cleft claim attributed to it cannot be verified from the pool.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"unverified\",\n      \"reason\": \"This PubMed record was not supplied in the reference evidence, so the EURAP claim attributed to it cannot be verified from the pool.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The brief describes pharmacokinetic findings but does not preserve the actual population and study design for the cited pharmacokinetic studies. It refers generally to studies, cohorts, and a review rather than identifying the relevant human populations and designs.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Distinguish Clinical Considerations source content from clinician dose decisions.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer discusses literature-derived pharmacokinetics but does not clearly identify what was retrieved from the label's Clinical Considerations section versus what represents clinician decisions. It also does not explicitly report the label's Clinical Considerations wording about decreased concentrations during pregnancy and restoration after delivery as label content.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine crosses the placenta; published pregnancy studies have measured drug in cord blood or compared cord and maternal concentrations.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not contain a verified human placental-transfer or cord-blood finding. It contains breastmilk and infant-exposure material, plus a recruiting study concerning fetal exposure, but not the asserted published measurement result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Pregnancy has been associated with increased lamotrigine clearance and lower maternal concentrations in pharmacokinetic studies.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"The reference supports decreased concentrations and postpartum restoration, but the supplied pool does not directly establish the stronger clearance claim as a measured human pharmacokinetic result or provide the study design supporting it.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lower concentrations may be accompanied by loss of seizure control in some people treated for epilepsy\",\n      \"reference_quote\": \"Physiologic changes during pregnancy affect ASM levels and in turn, risk for seizures, necessitating frequent monitoring of ASM serum concentrations.\",\n      \"explanation\": \"The pool supports a general relationship between changing antiseizure-medication levels and seizure risk, but does not specifically establish that lower lamotrigine concentrations were accompanied by loss of seizure control in the claimed studies.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The International League Against Epilepsy/American Academy of Neurology review reports pregnancy-related pharmacokinetic changes\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not identify or support this specific attribution to an International League Against Epilepsy/American Academy of Neurology review.\"\n    }\n  ],\n  \"rationale\": \"The answer follows the requested three-axis structure, keeps dose numbers and personal dosing advice out, states several appropriate evidence gaps, and includes clinician questions. However, important fetal-transfer and pharmacokinetic assertions are not supported in the supplied evidence, the cited URLs are outside the deterministic reference pool, and the answer does not preserve the required study populations and designs or clearly separate Clinical Considerations content from clinician dose decisions.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 243941,
+        "completion_tokens": 1170,
+        "total_tokens": 245111,
+        "prompt_tokens_details": {
+          "cached_tokens": 242721,
+          "cache_write_tokens": 1217,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 22,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 243941,
+    "completion_tokens": 1170,
+    "total_tokens": 245111,
+    "prompt_tokens_details": {
+      "cached_tokens": 242721,
+      "cache_write_tokens": 1217,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 22,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

@@ -1,0 +1,78 @@
+{
+  "grader_error": "Grader did not produce a valid grounded assessment within three attempts",
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 2,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Retrieved material is not a safety verdict; missing evidence is not evidence of safety.\",\n      \"explanation\": \"Recall records were returned, but the answer lists no candidate records, statuses, or official links.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"The search returned 12 naproxen recall records.\",\n      \"explanation\": \"The answer declines to report the available search results, so it does not complete the requested lookup.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"The search returned 12 naproxen recall records.\",\n      \"explanation\": \"This statement conflicts with the supplied retrieval evidence, which contains returned FDA recall records.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not bottle clearance and identifies several appropriate verification dimensions. However, it omits the returned recall candidates, statuses, and official links, and incorrectly states that no FDA records were retrieved.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 24271,
+        "completion_tokens": 699,
+        "total_tokens": 24970,
+        "prompt_tokens_details": {
+          "cached_tokens": 24268,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 287,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 2,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Candidate product-name matches only, not bottle-level clearance. Verify formulation, manufacturer, lot and expiration against the official notice.\",\n      \"explanation\": \"Recall records were returned, but the answer lists no candidate records, statuses, or official links.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"total_matches\\\": 12\",\n      \"explanation\": \"The supplied FDA search returned 12 naproxen recall records, but the answer does not report the available lookup results.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"total_matches\\\": 12\",\n      \"explanation\": \"The answer states that no live FDA records were retrieved, contrary to the supplied search evidence showing 12 returned matches.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not bottle clearance and identifies several appropriate verification dimensions. However, it omits the returned recall candidates, statuses, and official links, and incorrectly states that no FDA records were retrieved.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE",
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 24785,
+        "completion_tokens": 625,
+        "total_tokens": 25410,
+        "prompt_tokens_details": {
+          "cached_tokens": 24268,
+          "cache_write_tokens": 514,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 210,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 2,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Recall records were returned, but the answer lists no candidate records, statuses, or official links.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not provide the requested lookup result even though the supplied search returned records.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No live FDA record results were retrieved\",\n      \"reference_quote\": \"\\\"total_matches\\\": 12\",\n      \"explanation\": \"The answer states that no FDA records were retrieved, while the supplied search evidence reports 12 total matches.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a lot nonmatch is not bottle clearance and identifies appropriate verification dimensions. It is nevertheless incomplete because it omits the returned recall candidates, statuses, and official links, and it inaccurately says that no FDA records were retrieved.\"\n}",
+      "validation_errors": [
+        "failure_reasons[2] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 25288,
+        "completion_tokens": 595,
+        "total_tokens": 25883,
+        "prompt_tokens_details": {
+          "cached_tokens": 24782,
+          "cache_write_tokens": 503,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 213,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "score_assigned": false
+}

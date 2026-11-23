@@ -1,0 +1,132 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 30,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The supplied evidence confirms exact lamotrigine ingredient matching.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The DailyMed extract supports the label, Clinical Considerations, registry findings, retrieval limitations, and label metadata described.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The abstract supports the 60-mother naturalistic study, serum and breastmilk measurements, lamotrigine milk concentration-by-dose findings, and reported child outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The ClinicalTrials.gov record supports the EUROCAT registry design, summary finding, and absence of posted results.",
+        "url": "https://clinicaltrials.gov/study/NCT01055327"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The abstract supports pregnancy-related ASM concentration changes and monitoring discussion.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The PubMed record supports that the review covers lamotrigine, pregnancy, pharmacokinetics, and clinical implications, while the supplied abstract lacks numerical PK results.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33573557/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The supplied openFDA results contain the listed spontaneous-report terms and counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The openFDA documentation supports interpretation of spontaneous reports as noncausal reporting data without incidence estimates.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "The supplied PubMed search metadata supports the bounded, non-systematic search and its retrieval status.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "The supplied pharmacokinetic-search metadata supports the bounded PK search and its limitations.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C11",
+        "status": "unverified",
+        "reason": "This FDA labeling-rule page is listed as a basis URL for the source-review notice but does not itself establish the claim that no curated federal pregnancy counterpart was identified.",
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule"
+      },
+      {
+        "citation_id": "C12",
+        "status": "unverified",
+        "reason": "This LactMed page is listed as a basis URL, but it does not itself establish the prototype's source-review finding about the absence of a curated federal pregnancy counterpart.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer provides all three requested axes, distinguishes maternal effects from fetal exposure and fetal outcomes, separates Clinical Considerations from individualized decisions, preserves study populations and designs, makes evidence gaps explicit, includes clinician questions, and avoids administered dose values or personal medication advice. Its source claims are supported by the supplied evidence, although two basis-URL citations do not independently substantiate the cited source-review finding."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "b7042875325c7b3469b72067240be15e18be3d94af13c4dccb025156b9512108",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 30,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied evidence confirms exact lamotrigine ingredient matching.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed extract supports the label, Clinical Considerations, registry findings, retrieval limitations, and label metadata described.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The abstract supports the 60-mother naturalistic study, serum and breastmilk measurements, lamotrigine milk concentration-by-dose findings, and reported child outcomes.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The ClinicalTrials.gov record supports the EUROCAT registry design, summary finding, and absence of posted results.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The abstract supports pregnancy-related ASM concentration changes and monitoring discussion.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The PubMed record supports that the review covers lamotrigine, pregnancy, pharmacokinetics, and clinical implications, while the supplied abstract lacks numerical PK results.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied openFDA results contain the listed spontaneous-report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The openFDA documentation supports interpretation of spontaneous reports as noncausal reporting data without incidence estimates.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied PubMed search metadata supports the bounded, non-systematic search and its retrieval status.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"The supplied pharmacokinetic-search metadata supports the bounded PK search and its limitations.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"unverified\",\n      \"reason\": \"This FDA labeling-rule page is listed as a basis URL for the source-review notice but does not itself establish the claim that no curated federal pregnancy counterpart was identified.\"\n    },\n    {\n      \"citation_id\": \"C12\",\n      \"status\": \"unverified\",\n      \"reason\": \"This LactMed page is listed as a basis URL, but it does not itself establish the prototype's source-review finding about the absence of a curated federal pregnancy counterpart.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer provides all three requested axes, distinguishes maternal effects from fetal exposure and fetal outcomes, separates Clinical Considerations from individualized decisions, preserves study populations and designs, makes evidence gaps explicit, includes clinician questions, and avoids administered dose values or personal medication advice. Its source claims are supported by the supplied evidence, although two basis-URL citations do not independently substantiate the cited source-review finding.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 64600,
+        "completion_tokens": 1440,
+        "total_tokens": 66040,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 64597,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 682,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 64600,
+    "completion_tokens": 1440,
+    "total_tokens": 66040,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 64597,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 682,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

@@ -1,0 +1,127 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 2,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 5,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": null,
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer does not provide the retrieved FDA-directory registry website and phone contact in a separate section, despite those contacts being available in the evidence."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer supplies no citations and does not cite the product label or FDA pregnancy-registry directory."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.",
+        "answer_quote": null,
+        "reference_quote": "Daridorexant caused maternal toxicities of decreased weight gain and food consumption at the dose of 120 mg/kg/day.",
+        "explanation": "Although the three rows are visible, the answer omits the retrieved animal-versus-human distinction and the maternal animal finding required for a pregnancy evidence brief."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No FDA registry contact information could be verified from the available retrieval.",
+        "reference_quote": "QUVIVIQ Pregnancy Registry",
+        "explanation": "The supplied evidence contains a retrieved FDA directory listing for the QUVIVIQ Pregnancy Registry with a website and phone number, so this statement is contradicted by the evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No source passages, registry records, or study abstracts were available for direct verification in this session.",
+        "reference_quote": "There will be a pregnancy exposure registry that monitors pregnancy outcomes in women exposed to QUVIVIQ during pregnancy.",
+        "explanation": "The evidence includes retrieved label source text and registry-related records; therefore, the answer's broader statement that no source passages or registry records were available is contradicted."
+      }
+    ],
+    "rationale": "The answer correctly keeps all three axes visible, avoids dosing and medication decisions, and accurately reports the lack of retrieved maternal PK findings and verified human pregnancy outcome or exposure measurements. However, it incorrectly claims that registry records and source passages were unavailable, omits the available FDA registry contact information, omits retrieved animal evidence, and provides none of the required citations."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "e45aac2772a1636b62b1ad4a96ea94ca187f855f32eb56c5aa8878452d225841",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"No FDA registry contact information could be verified\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer does not provide the retrieved FDA-directory registry website and phone contact in a separate section, despite those contacts being available in the evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer supplies no citations and does not cite the product label or FDA pregnancy-registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.\",\n      \"answer_quote\": \"No verified pregnancy-specific human outcome data retrieved.\",\n      \"reference_quote\": \"Daridorexant caused maternal toxicities of decreased weight gain and food consumption at the dose of 120 mg/kg/day.\",\n      \"explanation\": \"Although the three rows are visible, the answer omits the retrieved animal-versus-human distinction and the maternal animal finding required for a pregnancy evidence brief.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No FDA registry contact information could be verified from the available retrieval.\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The supplied evidence contains a retrieved FDA directory listing for the QUVIVIQ Pregnancy Registry with a website and phone number, so this statement is contradicted by the evidence pool.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No source passages, registry records, or study abstracts were available for direct verification in this session.\",\n      \"reference_quote\": \"abstract_coverage: abstract text was retrieved for 0 of 3 requested PMIDs\",\n      \"explanation\": \"The evidence includes source passages and registry records; only the requested PubMed abstract text was unavailable. The answer overstates the retrieval gap.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly keeps all three axes visible, avoids dosing and medication decisions, and accurately reports the lack of retrieved maternal PK findings and verified human pregnancy outcome or exposure measurements. However, it incorrectly claims that registry records and source passages were unavailable, omits the available FDA registry contact information, fails to report retrieved animal evidence, and provides none of the required citations.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[2] omission answer_quote must be null",
+        "failure_reasons[4] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 107757,
+        "completion_tokens": 914,
+        "total_tokens": 108671,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 107754,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 211,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer does not provide the retrieved FDA-directory registry website and phone contact in a separate section, despite those contacts being available in the evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer supplies no citations and does not cite the product label or FDA pregnancy-registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Daridorexant caused maternal toxicities of decreased weight gain and food consumption at the dose of 120 mg/kg/day.\",\n      \"explanation\": \"Although the three rows are visible, the answer omits the retrieved animal-versus-human distinction and the maternal animal finding required for a pregnancy evidence brief.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No FDA registry contact information could be verified from the available retrieval.\",\n      \"reference_quote\": \"QUVIVIQ Pregnancy Registry\",\n      \"explanation\": \"The supplied evidence contains a retrieved FDA directory listing for the QUVIVIQ Pregnancy Registry with a website and phone number, so this statement is contradicted by the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No source passages, registry records, or study abstracts were available for direct verification in this session.\",\n      \"reference_quote\": \"There will be a pregnancy exposure registry that monitors pregnancy outcomes in women exposed to QUVIVIQ during pregnancy.\",\n      \"explanation\": \"The evidence includes retrieved label source text and registry-related records; therefore, the answer's broader statement that no source passages or registry records were available is contradicted.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly keeps all three axes visible, avoids dosing and medication decisions, and accurately reports the lack of retrieved maternal PK findings and verified human pregnancy outcome or exposure measurements. However, it incorrectly claims that registry records and source passages were unavailable, omits the available FDA registry contact information, omits retrieved animal evidence, and provides none of the required citations.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 108558,
+        "completion_tokens": 833,
+        "total_tokens": 109391,
+        "prompt_tokens_details": {
+          "cached_tokens": 107754,
+          "cache_write_tokens": 801,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 139,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 108558,
+    "completion_tokens": 833,
+    "total_tokens": 109391,
+    "prompt_tokens_details": {
+      "cached_tokens": 107754,
+      "cache_write_tokens": 801,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 139,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

@@ -54,7 +54,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 | Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
-**Version and access:** current source is **0.19.0**, policy **2026-11-23.20**. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. Policy .17 adds a MotherToBaby referral for individual pregnancy and breastfeeding medication questions, a MotherToBaby fact sheet search (NLM Bookshelf, labeled as nonprofit content), PRGLAC research-gap context in pregnancy and lactation briefs, and an NIH-only scope note on funding results. Version 0.19.0 (policy .19) combines that work with the November 22 evidence-display and snapshot-filtering changes, which were developed separately as 0.18.0. Policy .20 lets “Can I take X?” questions receive the public evidence with a fixed message that the decision belongs with a clinician or pharmacist (plus MotherToBaby for pregnancy or breastfeeding); dose, start/stop, switch and taper requests still stop. The current source passed 884/884 tests in a Databricks serverless run ([receipt](evaluation/databricks-validation-2026-11-23-policy20/databricks-job-output.json)). This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .14. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
+**Version and access:** current source is **0.19.0**, policy **2026-11-23.20**. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .20 ([report](evaluation/policy20-final/REPORT.md)). Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. Policy .17 adds a MotherToBaby referral for individual pregnancy and breastfeeding medication questions, a MotherToBaby fact sheet search (NLM Bookshelf, labeled as nonprofit content), PRGLAC research-gap context in pregnancy and lactation briefs, and an NIH-only scope note on funding results. Version 0.19.0 (policy .19) combines that work with the November 22 evidence-display and snapshot-filtering changes, which were developed separately as 0.18.0. Policy .20 lets “Can I take X?” questions receive the public evidence with a fixed message that the decision belongs with a clinician or pharmacist (plus MotherToBaby for pregnancy or breastfeeding); dose, start/stop, switch and taper requests still stop. The current source passed 884/884 tests in a Databricks serverless run ([receipt](evaluation/databricks-validation-2026-11-23-policy20/databricks-job-output.json)). This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .14. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
 
 The [complete 65-file template audit and remediation table](documentation/TEMPLATE_DETAILED_AUDIT.md) records implemented controls, deliberate adaptations, and deployment prerequisites still outstanding.
 
@@ -161,21 +161,21 @@ Browse the [30-tool catalog](src/parent_child_pharmacology/tools/__init__.py), [
 
 **Hands-on testing.** I also connected the server to Claude Desktop and used it in ordinary chats. That found three problems the scripted cases missed (cut-off LactMed answers, no links to cited studies, unreadable MotherToBaby fact sheets), all fixed and tested. See [hands-on testing](documentation/HANDS_ON_TESTING.md).
 
-**Latest evaluated version: .14.** Scores measure different things and must remain separate.
+**Latest evaluated version: .20** (November 23, 2026; [report](evaluation/policy20-final/REPORT.md)). Scores measure different things and must remain separate.
 
 | Measure | Verified result | Interpretation |
 |---|---|---|
-| Application tests | **709 local; 709 Databricks** | No failures, errors or skips |
+| Application tests | **884 local; 884 Databricks** | No failures, errors or skips |
 | Grader unit tests | **33 passed** | Separate evaluator contracts |
-| MCP Inspector | **9/9** | Protocol, schemas and sampled contracts |
+| MCP Inspector | **9/9 (.14; not repeated for .20)** | Protocol, schemas and sampled contracts |
 | Fresh chats | **28/28 completed** | 21 research and seven stop cases |
 | Expected routes and tool checks | **28/28 routes; 28/28 tools** | Trace contract checks |
 | Fixed stops | **7/7** | No downstream evidence or model calls |
-| Research answers | **17/21 fidelity; 21/21 tasks fulfilled** | Separate fallible model judgments |
-| Paired tasks | **MCP 7/7; plain 0/7** | Same model and shared instructions; different workflows |
-| Paired fidelity pass / fail / N/A | **MCP 7/0/0; plain 1/5/1** | N/A is not a fidelity pass |
-| Citation and trace checks | **21/21 URL membership; 42 MLflow rows verified** | URL membership does not establish claim support |
-| Fixed-snapshot benchmark | **9/10 exact answers; 10/10 final answers** | Separate Phoenix task, not the seven-case comparison |
+| Research answers | **19/21 fidelity; 21/21 tasks fulfilled** | Separate fallible model judgments |
+| Paired tasks | **MCP 7/7; plain 0/6 scored, 1 unscored** | Same model and shared instructions; different workflows |
+| Paired fidelity pass / fail / N/A | **MCP 7/0/0; plain 1/3/2** | N/A is not a fidelity pass |
+| Citation and trace checks | **21/21 URL membership; 41 MLflow rows verified** | URL membership does not establish claim support |
+| Fixed-snapshot benchmark | **10/10 exact answers; 10/10 completed** | Separate Phoenix task, not the seven-case comparison |
 
 ### What changed and what the grades mean
 
@@ -183,7 +183,7 @@ The research fixes add mandatory study-team eligibility/availability and bounded
 
 The previous 3/10 benchmark had seven failures: B06/B09 were blocked by English-language false positives; B10 confused an aggregate seizure-control outcome with an active symptom; B01 miscalculated proportions; B04 miscounted matching Silver annotations; B07/B08 inspected the wrong or incomplete candidate set. The revised runtime adds narrowly bounded English task recognition, distinguishes named aggregate outcomes while preserving personal/acute routing, and returns optional joined Silver classifications and exported-row counts with explicit pagination. Counts retain snapshot and unmatched-row limitations. The revised benchmark client inspects the requested cohort and uses a bounded decimal arithmetic helper. The helper is client-side, not a 31st MCP tool. All ten questions and reference answers are unchanged; no expected answer is supplied to the model.
 
-The final .14 benchmark scored 9/10; the intermediate .13 run scored 10/10. Both are retained. The remaining final B09 error returned the DOI of a different retrieved candidate despite selecting the correct PMID for an additional lookup. This is an answer-attribution failure, not missing source data. No answer was replaced or manually corrected to raise the score.
+The final .14 benchmark scored 9/10; the intermediate .13 run scored 10/10. Both are retained. The remaining final B09 error returned the DOI of a different retrieved candidate despite selecting the correct PMID for an additional lookup. This is an answer-attribution failure, not missing source data. No answer was replaced or manually corrected to raise the score. In the .20 run the benchmark client requires selecting the record from the original candidate set and copies the DOI from that record; all ten answers, including B09, matched exactly.
 
 Fidelity asks whether claims are supported by the captured references. Task fulfillment asks whether all requested requirements were met. Neither is clinical accuracy. These are known development cases, one retained completed answer per case/arm, bounded references and a fallible same-family model judge. There was no clinician adjudication, manual score override or selection of a better completed answer. Live sources and model outputs vary. Other clients must enforce preflight and display contracts themselves.
 
