@@ -1132,14 +1132,14 @@ for i, (head, body) in enumerate(notes_r):
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
     "I tested in layers. The evaluated version passed all its automated tests on my Mac and in a Databricks "
-    "serverless notebook. The current 21-tool version passes all 1,037 tests on Linux and Windows, including the "
+    "serverless notebook. The current 21-tool version passes all 1,048 tests on Linux and Windows, including the "
     "PowerShell client checks. The chat evaluations below have not been re-run on it yet. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("1,037", "automated tests", "All pass on Linux and Windows for the 21-tool version"),
+    ("1,048", "automated tests", "All pass on Linux and Windows for the 21-tool version"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1255,12 +1255,12 @@ s = new("A design review cut 31 tools to 21 and made answers 20 times smaller", 
     "did nearly the same job. And the safety check let through some crisis wording while blocking ordinary "
     "short searches. I merged the overlapping tools, from thirty-one down to twenty-one, made the brief "
     "return a summary first with totals and a clear statement of what it left out, and fixed the routing "
-    "rules with tests in both directions. All 1,037 tests pass. What I have not done yet is re-run the chat "
+    "rules with tests in both directions. All 1,048 tests pass. What I have not done yet is re-run the chat "
     "evaluations on this version, so the scores on the results slide describe the earlier one."))
 stats = [("31 \u2192 21", "tools", "Overlapping lookups merged into goal-level tools"),
          ("42.6K \u2192 23K", "tokens to load the tool list", "Short descriptions; answer rules travel with each result"),
          ("1.5M \u2192 60K", "characters in one evidence brief", "A summary first, the full text on request"),
-         ("1,037", "tests pass", "On Linux and Windows, client checks included")]
+         ("1,048", "tests pass", "On Linux and Windows, client checks included")]
 for i, (num, lab, note) in enumerate(stats):
     x = 0.65 + i * 3.05
     box(s, x, 1.5, 2.85, 1.75, fill=MIST)
@@ -1340,7 +1340,7 @@ s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the final policy .25 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "968 at evaluation; 1,037 now", "All pass on Linux and Windows, PowerShell client checks included"],
+    ["Automated tests", "968 at evaluation; 1,048 now", "All pass on Linux and Windows, PowerShell client checks included"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],
