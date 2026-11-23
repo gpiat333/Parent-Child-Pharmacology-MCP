@@ -519,13 +519,14 @@ for i, (head, body) in enumerate(decs):
 
 # 13 ─ How I tested
 s = new("How I tested it", notes=(
-    "I tested in layers. 768 automated tests pass both on my machine and in a Databricks serverless notebook. "
+    "I tested in layers. All 848 automated tests pass in a Databricks serverless notebook; on my Mac, the "
+    "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("768", "automated tests", "All pass locally and in a Databricks serverless notebook"),
+    ("848", "automated tests", "All pass in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -722,7 +723,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Policies .15 to .17 add safety fixes, referrals and fact sheets; all 768 tests pass on Databricks.",
+     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets and display checks; all 848 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Six ways an answer can mislead", appendix=True, notes=(
