@@ -158,6 +158,13 @@ def content_flags(out):
     }
 
 
+SOURCE_ATTRIBUTION_RULE = (
+    "Report a source's warnings and recommendations as that source's statements (\"The label states "
+    'that..."), never in your own voice as an instruction to the reader. When saying whom to check with, '
+    "name only the contacts the results name."
+)
+
+
 def annotate(out, requested_population=None):
     out = dict(out)
     from .source_context import (
@@ -206,6 +213,7 @@ def annotate(out, requested_population=None):
             "preserve_source_balance_context": True,
             "clinical_framing_review_performed": False,
             "instruction": "When reporting adverse findings, retain relevant source context on treatment benefits, underlying disease and consequences of changing treatment if available. Disclose missing context; do not invent reassurance. Accurate facts can still induce inappropriate stopping. Clinical review remains necessary.",
+            "source_attribution": SOURCE_ATTRIBUTION_RULE,
         }
     out["evidence_status"] = evidence_state(out)
     out["content_flags"] = content_flags(out)
