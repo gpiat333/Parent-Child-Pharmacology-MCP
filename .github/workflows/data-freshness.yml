@@ -1,0 +1,19 @@
+name: MPRINT data freshness
+on:
+  schedule:
+    - cron: "0 13 * * 1"  # Mondays 13:00 UTC
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.9"
+      - run: uv python install 3.13
+      - run: uv sync --locked
+      # Fails (red) when MPRINT has published newer data than the bundled snapshot.
+      - run: uv run --locked python scripts/check_mprint_freshness.py

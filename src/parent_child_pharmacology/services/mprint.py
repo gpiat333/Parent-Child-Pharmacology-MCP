@@ -29,7 +29,8 @@ async def find_mprint_records(
     Snapshot inclusion is not proof of safety, quality, or MPRINT funding.
     Follow next_offset for complete cohorts. include_classifications joins automated Silver
     labels and exported outcome counts for all returned PMIDs; these are not clinical findings.
-    Age-band requests preserve the requested band; broad source labels are not age-band confirmation."""
+    Age-band requests preserve the requested band; broad source labels are not age-band confirmation.
+    Results come from a dated saved copy: show data_freshness.display_note with any MPRINT answer."""
     if not drug and not pmid:
         return {"source": "validation", "error": "selector_required"}
     broad = (
@@ -54,7 +55,8 @@ async def get_mprint_details(
     Gold null means missing in exported data, not zero. Context joins are by PMID and workbook,
     not cohort or treatment arm; do not assign every outcome to every drug. Doses are source
     observations, never recommendations. No individual-patient data. Preserve snapshot provenance.
-    Silver returns the single-PMID classification lookup; max_results/offset apply to Gold only."""
+    Silver returns the single-PMID classification lookup; max_results/offset apply to Gold only.
+    Results come from a dated saved copy: show data_freshness.display_note with any MPRINT answer."""
     if table == "silver_classifications":
         out = await mprint_data.silver_classifications([pmid])
     else:

@@ -31,6 +31,8 @@ APPROVED_HOSTS = frozenset(
         "www.nichd.nih.gov",
         "dash.nichd.nih.gov",
         "www.federalregister.gov",
+        # Read-only freshness check of the bundled MPRINT snapshot's upstream repository.
+        "api.github.com",
     }
 )
 MAX_RESPONSE_BYTES = 5_000_000

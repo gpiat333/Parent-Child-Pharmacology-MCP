@@ -7,6 +7,8 @@ import sqlite3
 import zlib
 from pathlib import Path
 
+from parent_child_pharmacology.core.freshness import mprint_freshness
+
 DATA = Path(__file__).resolve().parents[1] / "mc" / "data"
 DATABASE = DATA / "mprint.sqlite"
 OUTCOMES_DATABASE = DATA / "mprint-outcomes.sqlite"
@@ -66,6 +68,7 @@ def _base(tier):
         "retrieved_at_utc": manifest["retrieved_at_utc"],
         "coverage": manifest["scope"],
         "snapshot_is_live": False,
+        "data_freshness": mprint_freshness(),
         "outcomes_retrieved_at_utc": manifest.get("outcomes_retrieved_at_utc"),
         "tables_included": [x["path"] for x in manifest.get("files", [])],
         "classification_legend": dict(TYPE_LABELS),
