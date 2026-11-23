@@ -56,7 +56,7 @@ RePORTER supports NICHD program staff discovering public awards by topic and lin
 
 Expected/missing/returned sections, truncation, selected-label provenance, per-item source population and unknown study counts remain explicit. FAERS caveats and MPRINT dates remain in payloads. `continuity_of_care_notice` and `source_balance_context` support balanced framing, without personal treatment advice or invented reassurance. S2 and S6 remain partially controlled and need clinician review.
 
-New Spanish safety/referral strings are held pending human Spanish-language review. No clinical evidence is machine-translated. See [items 38–48 and S1–S6](PROGRAM_AND_SAFETY_REVISION.md) for complete fields, decisions and primary sources.
+Spanish safety and referral messages were reviewed by a native Spanish speaker and enabled in policy .26 as fixed text (`message_es`); Spanish questions still stop. No clinical evidence is machine-translated. See [items 38–48 and S1–S6](PROGRAM_AND_SAFETY_REVISION.md) for complete fields, decisions and primary sources.
 
 ## Required evidence brief workflow
 

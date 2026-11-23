@@ -721,8 +721,8 @@ s = new("Beyond pregnancy: children, studies and Spanish", notes=(
     "claim linked. For off-label questions, it points to the label's approved uses and studies, FDA pediatric "
     "labeling changes and NICHD's BPCA priority list. For Spanish speakers, it returns MotherToBaby fact sheets "
     "in Spanish and MedlinePlus Spanish drug pages, and a Spanish question gets MotherToBaby's Spanish service, "
-    "988 in Spanish and MedlinePlus en español. Spanish safety messages are held until a Spanish speaker "
-    "reviews them."))
+    "988 in Spanish and MedlinePlus en español, in a Spanish message a native Spanish speaker reviewed, worded "
+    "the way MedlinePlus, 988 and PSI word it in Spanish."))
 caps = [
     ("Children's medicines", [
         "Evidence briefs with three pediatric rows",
@@ -743,7 +743,7 @@ caps = [
         "323 MotherToBaby fact sheets in Spanish, verbatim",
         "MedlinePlus Spanish drug pages by drug code",
         "Spanish questions get MotherToBaby's Spanish service, 988 in Spanish and MedlinePlus en español",
-        "Spanish safety messages held until a Spanish speaker reviews them",
+        "Safety messages in Spanish, reviewed by a native speaker",
     ]),
 ]
 for i, (head, items) in enumerate(caps):
@@ -1136,14 +1136,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 968 automated tests pass on my Mac and in a Databricks serverless notebook, "
+    "I tested in layers. All 976 automated tests pass on my Mac and in a Databricks serverless notebook, "
     "including the PowerShell client checks. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("968", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
+    ("976", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1271,7 +1271,7 @@ for i, (head, body) in enumerate(lessons):
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
 nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
          "Weekly freshness checks for the LactMed and MotherToBaby packages, as MPRINT already has",
-         "Spanish-speaker review before enabling Spanish safety messages",
+         "Clinical review of the Spanish safety messages, then answers in Spanish",
          "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
          "Deploy the current version to the Databricks App"]
 for i, t in enumerate(nexts):
@@ -1305,7 +1305,7 @@ s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the final policy .25 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "968 local; 968 Databricks", "No failures, errors or skips"],
+    ["Automated tests", "968 at evaluation; 976 now", "Local and Databricks; no failures or skips"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],
