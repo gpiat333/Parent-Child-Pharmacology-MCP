@@ -6,7 +6,11 @@ server never attempts to bypass one.
 """
 
 import html
+import json
 import re
+import sqlite3
+import zlib
+from pathlib import Path
 
 from .ncbi import _ncbi
 
@@ -56,6 +60,7 @@ async def fact_sheet_search(drug: str, n: int = 5) -> list[dict]:
         sheets.append(
             {
                 "title": title,
+                "doc_id": doc_id,
                 "url": f"https://www.ncbi.nlm.nih.gov/books/{accession}/",
                 "accession": accession,
                 "language": _language(doc_id),
@@ -63,3 +68,46 @@ async def fact_sheet_search(drug: str, n: int = 5) -> list[dict]:
             }
         )
     return sheets[:n]
+
+
+SNAPSHOT = Path(__file__).resolve().parents[1] / "mc" / "data" / "mothertobaby.sqlite"
+
+
+def _connect():
+    return sqlite3.connect(SNAPSHOT.resolve().as_uri() + "?mode=ro", uri=True)
+
+
+def snapshot_sheet(doc_id):
+    """Verbatim fact sheet text from the bundled official NCBI package, or None."""
+    if not doc_id or not SNAPSHOT.exists():
+        return None
+    con = _connect()
+    try:
+        row = con.execute("SELECT payload FROM sheets WHERE doc_id = ?", (doc_id,)).fetchone()
+    finally:
+        con.close()
+    return json.loads(zlib.decompress(row[0])) if row else None
+
+
+def snapshot_search(drug, n=5):
+    """Offline title/id match, used when the live NCBI search is unavailable."""
+    if not SNAPSHOT.exists():
+        return []
+    needle = drug.lower().strip()
+    con = _connect()
+    try:
+        rows = con.execute("SELECT doc_id, title, language FROM sheets").fetchall()
+    finally:
+        con.close()
+    hits = [r for r in rows if needle in _stem(r[0]) or needle in (r[1] or "").lower()]
+    return [
+        {
+            "title": t,
+            "doc_id": d,
+            "url": None,
+            "accession": None,
+            "language": lang,
+            "bookshelf_date": None,
+        }
+        for d, t, lang in hits[:n]
+    ]

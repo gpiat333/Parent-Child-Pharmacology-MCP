@@ -62,7 +62,7 @@ def _fake_ncbi(summary):
     return fake
 
 
-def test_fact_sheet_search_returns_labeled_links_only(monkeypatch):
+def test_fact_sheet_search_returns_labeled_sheets(monkeypatch):
     from parent_child_pharmacology.clients import mothertobaby
     from parent_child_pharmacology.services.fact_sheets import search_mothertobaby_fact_sheets
 
@@ -87,16 +87,17 @@ def test_fact_sheet_search_returns_labeled_links_only(monkeypatch):
         },
     }
     monkeypatch.setattr(mothertobaby, "_ncbi", _fake_ncbi(summary))
-    out = asyncio.run(search_mothertobaby_fact_sheets("sertraline", "es"))
+    out = asyncio.run(search_mothertobaby_fact_sheets("sertraline", "es", include_text=False))
     assert [s["title"] for s in out["fact_sheets"]] == ["Sertralina"]
-    assert out["page_text_retrieved"] is False
+    assert out["text_included"] is False
     assert "nonprofit" in out["publisher"]
     assert out["specialist_referral"]["call"] == "866-626-6847"
-    both = asyncio.run(search_mothertobaby_fact_sheets("sertraline"))
+    both = asyncio.run(search_mothertobaby_fact_sheets("sertraline", include_text=False))
     # A sheet that only mentions the medicine in passing (paroxetine) is excluded.
     assert [s["language"] for s in both["fact_sheets"]] == ["en", "es"]
     assert both["fact_sheets"][0] == {
         "title": "Sertraline (Zoloft®)",
+        "doc_id": "sertraline-en",
         "url": "https://www.ncbi.nlm.nih.gov/books/NBK582954/",
         "accession": "NBK582954",
         "language": "en",
@@ -135,3 +136,67 @@ def test_funders_question_reaches_research_not_a_stop():
     out = route("Who are the major funders of breastfeeding and medication research?")
     assert out["route"] == "evidence"
     assert "requested_workflow" not in out
+
+
+def test_fact_sheet_text_is_verbatim_whole_answers_with_attribution():
+    from parent_child_pharmacology.clients.mothertobaby import snapshot_sheet
+    from parent_child_pharmacology.services.fact_sheets import _attach_text
+
+    record = snapshot_sheet("sertraline-en")
+    assert record["qa"][0]["question"] == "What is sertraline?"
+    sheets = _attach_text([{"doc_id": "sertraline-en"}], 1500)
+    text = sheets[0]["text"]
+    assert "CC BY-NC-ND 3.0" in text["attribution"] and "OTIS" in text["attribution"]
+    originals = {qa["question"]: qa["answer"] for qa in record["qa"]}
+    for qa in text["questions_and_answers"]:
+        assert qa["answer"] == originals[qa["question"]]
+    kept = {qa["question"] for qa in text["questions_and_answers"]}
+    assert kept | set(text["questions_omitted_by_length_limit"]) == set(originals)
+    assert text["questions_omitted_by_length_limit"]
+
+
+def test_unknown_sheet_has_no_text_and_says_so():
+    from parent_child_pharmacology.services.fact_sheets import _attach_text
+
+    sheet = _attach_text([{"doc_id": "not-a-sheet-en"}], 8000)[0]
+    assert sheet["text"] is None and "open the link" in sheet["text_note"]
+
+
+def test_search_falls_back_to_bundled_package_when_ncbi_search_fails(monkeypatch):
+    from parent_child_pharmacology.clients import mothertobaby
+    from parent_child_pharmacology.services.fact_sheets import search_mothertobaby_fact_sheets
+
+    async def down(*a, **k):
+        raise RuntimeError("NCBI unavailable")
+
+    monkeypatch.setattr(mothertobaby, "_ncbi", down)
+    from parent_child_pharmacology.services import fact_sheets
+
+    monkeypatch.setattr(fact_sheets, "fact_sheet_search", mothertobaby.fact_sheet_search)
+    out = asyncio.run(search_mothertobaby_fact_sheets("sertraline", "es", 1))
+    assert out["search_mode"] == "snapshot_fallback"
+    assert out["fact_sheets"][0]["title"].startswith("Sertralina")
+    assert out["fact_sheets"][0]["text"]["questions_and_answers"]
+
+
+def test_builder_reads_question_answer_pairs():
+    import importlib.util
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parents[1] / "scripts/build_mothertobaby_snapshot.py"
+    spec = importlib.util.spec_from_file_location("mtb_build", path)
+    build = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build)
+    xml = (
+        b"<book-part-wrapper><book-part-meta><title-group><title>Drugx</title></title-group>"
+        b"<permissions><copyright-statement>Copyright by OTIS, May 2025</copyright-statement></permissions>"
+        b"</book-part-meta><question-wrap-group><question-preamble><p>About drugx.</p></question-preamble>"
+        b"<question-wrap><question><p><bold>What is drugx?</bold></p></question>"
+        b"<answer><p>A medicine.</p><p>Second paragraph.</p></answer></question-wrap>"
+        b"</question-wrap-group></book-part-wrapper>"
+    )
+    sheet = build.parse_sheet(xml)
+    assert sheet["title"] == "Drugx" and sheet["copyright"] == "Copyright by OTIS, May 2025"
+    assert sheet["qa"] == [
+        {"question": "What is drugx?", "answer": "A medicine. Second paragraph."}
+    ]

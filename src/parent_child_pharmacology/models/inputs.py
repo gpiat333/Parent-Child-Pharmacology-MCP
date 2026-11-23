@@ -340,6 +340,8 @@ class SearchMothertobabyFactSheetsInput(StrictInput):
     drug: Query = Field(..., description="Medicine or exposure name.", examples=["sertraline"])
     language: Literal["any", "en", "es"] = Field("any", description="Fact sheet language.")
     max_results: Limit20 = 5
+    include_text: bool = Field(True, description="Return verbatim question-and-answer text.")
+    max_chars: TextLimit = Field(8000, description="Total text budget; whole answers only.")
 
 
 INPUT_MODELS = {

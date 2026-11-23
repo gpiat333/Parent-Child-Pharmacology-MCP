@@ -204,14 +204,16 @@ async def medication_evidence_brief(
         sheets = []
         for name in ingredients:
             try:
-                sheets += (await search_mothertobaby_fact_sheets(name, "en", 2))["fact_sheets"]
+                sheets += (
+                    await search_mothertobaby_fact_sheets(name, "en", 2, include_text=False)
+                )["fact_sheets"]
             except Exception:
                 pass
         out["consumer_fact_sheets"] = {
             "publisher": "MotherToBaby (OTIS, a nonprofit), distributed by NLM Bookshelf",
             "fact_sheets": sheets,
-            "page_text_retrieved": False,
-            "note": "Consumer summaries, not federal evidence. Link them; do not summarize unread text.",
+            "text_included": False,
+            "note": "Consumer summaries, not federal evidence. Use search_mothertobaby_fact_sheets for their text.",
         }
         out["specialist_referral"] = MOTHERTOBABY
         out["research_priorities_context"] = PRGLAC_CONTEXT
