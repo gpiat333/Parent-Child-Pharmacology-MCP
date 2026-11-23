@@ -13,6 +13,12 @@ from parent_child_pharmacology.models.contracts import (
 )
 from parent_child_pharmacology.models.inputs import Population
 
+UPDATE_PROCESS = (
+    "The server is read-only, so a question never rewrites the saved copy. When newer MPRINT data exists, a "
+    "maintainer rebuilds the snapshot and updates mprint-manifest.json; a weekly automated check also flags "
+    "new releases. Until then, answers keep using the dated saved copy and say so."
+)
+
 
 async def find_mprint_records(
     drug: OptionalQuery = "",
@@ -23,14 +29,30 @@ async def find_mprint_records(
     resolve_names: bool = True,
     offset: Offset = 0,
     include_classifications: bool = False,
+    check_for_updates: bool = False,
 ) -> EvidenceResponse:
-    """Find curated Gold study metadata by drug or exact PMID; one selector is required.
+    """Find curated Gold study metadata by drug or exact PMID; one selector is required,
+    unless check_for_updates is true. When a user asks whether MPRINT data is current, up to date
+    or has newer releases, call with check_for_updates=true (drug optional): the server checks the
+    MPRINT repository live and reports whether newer data exists than the saved copy.
     If both supplied, both must match. Follow with get_mprint_details for outcomes.
     Snapshot inclusion is not proof of safety, quality, or MPRINT funding.
     Follow next_offset for complete cohorts. include_classifications joins automated Silver
     labels and exported outcome counts for all returned PMIDs; these are not clinical findings.
     Age-band requests preserve the requested band; broad source labels are not age-band confirmation.
     Results come from a dated saved copy: show data_freshness.display_note with any MPRINT answer."""
+    upstream = None
+    if check_for_updates:
+        from parent_child_pharmacology.core.freshness import check_upstream, mprint_freshness
+
+        upstream = await check_upstream()
+        if not drug and not pmid:
+            return {
+                "source": "local:mprint-snapshot",
+                "data_freshness": mprint_freshness(),
+                "upstream_check": upstream,
+                "update_process": UPDATE_PROCESS,
+            }
     if not drug and not pmid:
         return {"source": "validation", "error": "selector_required"}
     broad = (
@@ -39,6 +61,8 @@ async def find_mprint_records(
     out = await mprint_data.search_gold(
         drug, max_results, broad, study_type, resolve_names, pmid, offset, include_classifications
     )
+    if upstream is not None:
+        out = {**out, "upstream_check": upstream, "update_process": UPDATE_PROCESS}
     return preserve_population(out, population)
 
 

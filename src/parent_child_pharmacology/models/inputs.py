@@ -271,11 +271,15 @@ class FindMprintRecordsInput(StrictInput):
         False,
         description="Join automated Silver labels and exported outcome counts for each returned PMID. Not clinical findings.",
     )
+    check_for_updates: bool = Field(
+        False,
+        description="Check live whether MPRINT has published newer data than the saved copy. Use when asked if MPRINT data is current.",
+    )
 
     @model_validator(mode="after")
     def require_selector(self):
-        if not self.drug and not self.pmid:
-            raise ValueError("Provide drug or pmid")
+        if not self.drug and not self.pmid and not self.check_for_updates:
+            raise ValueError("Provide drug or pmid, or set check_for_updates")
         return self
 
 

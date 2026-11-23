@@ -43,6 +43,16 @@ async def _safe_log(*a) -> None:
         log.warning("audit log failed (%s)", type(e).__name__)
 
 
+# Answers may repeat this server's notices; say who wrote them so attribution is verifiable.
+NOTICE_ATTRIBUTION = (
+    "Notices, interpretation rules, routing messages and clinician questions in this result (for example "
+    "continuity_of_care_notice, coverage and population notices, deadline interpretations and "
+    "required_display_notices) are written by this MCP server, Parent-child Pharmacology MCP. They are not "
+    "quoted from the cited sources. When repeating one, attribute it to this MCP server, never to a cited "
+    "source or dataset author."
+)
+
+
 def audited(fn):
     @functools.wraps(fn)  # preserves signature so FastMCP builds the right JSON schema
     async def wrapper(*args, **kwargs):
@@ -152,6 +162,7 @@ def audited(fn):
 
                 out.setdefault("safety", envelope(out))
                 out.setdefault("disclaimer", cfg.DISCLAIMER)
+                out.setdefault("notice_attribution", NOTICE_ATTRIBUTION)
                 if out.get("error"):
                     ok = False
                     err = err or "tool_error"
