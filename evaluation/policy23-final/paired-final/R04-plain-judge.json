@@ -1,0 +1,86 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 8,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer honestly states that it cannot access live records and therefore does not provide the requested FDA lookup or returned candidate records."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "No FDA or other official links are supplied."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Confirmation from the manufacturer, pharmacist, or FDA",
+        "reference_quote": "Verify formulation, manufacturer, lot and expiration against the official notice.",
+        "explanation": "The supplied evidence supports checking the official notice and consulting a pharmacist, but does not specifically establish manufacturer or FDA confirmation as a required verification step."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and identifies the key product, manufacturer, lot, expiration, and NDC distinctions. It is an honest abstention from the requested live lookup, but it omits the FDA results, statuses, and official links required by the task."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "154eb22c7c3db04383bd383c994e6a14a5d505a999c40418b220f30a45555e02",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer honestly states that it cannot access live records and therefore does not provide the requested FDA lookup or returned candidate records.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"No FDA or other official links are supplied.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Confirmation from the manufacturer, pharmacist, or FDA\",\n      \"reference_quote\": \"Verify formulation, manufacturer, lot and expiration against the official notice.\",\n      \"explanation\": \"The supplied evidence supports checking the official notice and consulting a pharmacist, but does not specifically establish manufacturer or FDA confirmation as a required verification step.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies the key product, manufacturer, lot, expiration, and NDC distinctions. It is an honest abstention from the requested live lookup, but it omits the FDA results, statuses, and official links required by the task.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24916,
+        "completion_tokens": 774,
+        "total_tokens": 25690,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24913,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 378,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24916,
+    "completion_tokens": 774,
+    "total_tokens": 25690,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24913,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 378,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

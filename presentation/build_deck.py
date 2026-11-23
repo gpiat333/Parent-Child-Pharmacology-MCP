@@ -157,6 +157,32 @@ def new(title=None, dark=False, notes=None, appendix=False):
     return s
 
 
+def table(slide, x, y, w, col_w, rows, header=True, size=13, row_h=0.42):
+    shp = slide.shapes.add_table(len(rows), len(rows[0]), Inches(x), Inches(y), Inches(w),
+                                 Inches(row_h * len(rows)))
+    t = shp.table
+    for ci, cw in enumerate(col_w):
+        t.columns[ci].width = Inches(cw)
+    for ri, row in enumerate(rows):
+        for ci, val in enumerate(row):
+            c = t.cell(ri, ci)
+            c.margin_left = c.margin_right = Inches(0.12)
+            c.margin_top = c.margin_bottom = Inches(0.05)
+            c.fill.solid()
+            c.fill.fore_color.rgb = DEEP if (header and ri == 0) else (MIST if ri % 2 else WHITE)
+            tf = c.text_frame
+            tf.word_wrap = True
+            p = tf.paragraphs[0]
+            p.text = ""
+            r = p.add_run()
+            r.text = val
+            r.font.name = BODY
+            r.font.size = Pt(size)
+            r.font.bold = (header and ri == 0) or ci == 0
+            r.font.color.rgb = WHITE if (header and ri == 0) else (TEAL if ci == 0 else INK)
+    return t
+
+
 # 1 ─ Title
 s = new(dark=True, notes=(
     "I'm Gabriela Piatkowski, a program analyst in NICHD's Obstetric and Pediatric Pharmacology and "
@@ -312,7 +338,11 @@ s = new("The evidence gap is real, but a lot of evidence exists across many sour
     "PubMed records. Live searches reach all of PubMed, ClinicalTrials.gov, DailyMed labels, NIH RePORTER and "
     "FDA's adverse-event reports. The problem is not that nothing exists; it is that it is hard to reach and "
     "hard to read. And where evidence is missing, the server says so, and points to the trials, registries and "
-    "funded research trying to fill the gap."))
+    "funded research trying to fill the gap. And it stays current: every answer shows the date of its data, and "
+    "if you ask the AI whether the MPRINT data is current, the server checks MPRINT's repository live and tells you "
+    "whether newer data has been published. The server is read-only, so a question never rewrites the data; a "
+    "weekly automated check flags new MPRINT releases, and one script rebuilds LactMed or the MotherToBaby fact "
+    "sheets from NCBI's latest package."))
 holdings = [
     ("1,976", "LactMed drug records", "Official NCBI package, Oct 2026"),
     ("656", "MotherToBaby fact sheets", "329 English, 323 Spanish"),
@@ -335,10 +365,11 @@ text(s, 0.95, 5.25, 11.4, 1.1, [
     [("Where evidence is missing, it says so, ", {"bold": True, "color": DEEP}),
      ("and points to what is under way: recruiting trials, pregnancy exposure registries and NIH-funded "
       "research on the same medicine.", {})]], size=16, color=INK, anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.65, 6.5, 12.0, 0.6, [
+text(s, 0.65, 6.45, 12.0, 0.75, [
     [("Kept current: ", {"bold": True, "color": TEAL}),
-     ("every answer shows the date of its data. A weekly check flags new MPRINT releases, and one script rebuilds "
-      "LactMed or the MotherToBaby fact sheets from NCBI's latest package.", {})]], size=13, color=INK)
+     ("every answer shows its data's date. Ask \u201cIs the MPRINT data current?\u201d and the server checks MPRINT live "
+      "for newer data. A weekly check also flags new releases; one script rebuilds LactMed or the fact sheets.", {})]],
+     size=14, color=INK)
 
 # 5 ─ Scattered across agencies
 s = new("However, what is known is scattered across agencies, resources and databases", notes=(
@@ -502,7 +533,55 @@ for i, (n, job, examples) in enumerate(groups31):
     text(s, 6.25, y + 0.3, 6.4, 0.32, examples, size=13, color=MUTED)
 text(s, 0.65, 6.6, 12.0, 0.5,
      "31 tools, 4 prompts, 4 resources, 15 public sources. GSA's criteria ask for goal-oriented tools an AI can "
-     "select without ambiguity, not thin wrappers. Full list in the appendix.", size=13, color=MUTED, italic=True)
+     "select without ambiguity, not thin wrappers. Full list on the next slide.", size=13, color=MUTED, italic=True)
+
+# 5ab ─ All 31 tools (main deck)
+s = new("All 31 tools, grouped by the job each one does", notes=(
+    "Here is the full list, grouped by job. Identity tools confirm the exact medicine and its ingredients. "
+    "Breastfeeding tools read LactMed and the MotherToBaby fact sheets. Label tools read the pregnancy, "
+    "lactation and pediatric sections, plus what the product contains and what it is approved for. "
+    "Literature and trial tools search PubMed and ClinicalTrials.gov. The MPRINT tools read the curated "
+    "pharmacology tables, and if you ask whether the MPRINT data is current, find_mprint_records checks "
+    "MPRINT's repository live and says whether newer data exists. Research tools search NIH-funded projects "
+    "across all institutes, BPCA summaries and NICHD studies. Safety tools cover adverse-event reports, "
+    "recalls, alerts and shortages. The parent tools route the question first and handle reporting and public "
+    "input. Two composite tools build the evidence brief and the coverage check. Small, single-purpose tools "
+    "are what let an AI pick the right one."))
+table(s, 0.65, 1.5, 12.0, [2.6, 9.4], [
+    ["Group", "Tools"],
+    ["Identity", "normalize_drug, find_products_containing_ingredient, get_patient_education"],
+    ["Breastfeeding", "search_lactmed, get_lactmed_record, semantic_search_lactmed, search_mothertobaby_fact_sheets"],
+    ["Pregnancy and labels", "get_label_sections, search_pediatric_labeling_changes, find_pregnancy_exposure_registries, search_pregnancy_registries"],
+    ["Literature and trials", "search_literature, get_abstracts, search_trials, find_recruiting_studies"],
+    ["MPRINT data", "find_mprint_records (also checks for newer MPRINT data when asked), get_mprint_details"],
+    ["NIH and NICHD research", "search_funded_research (all NIH institutes), summarize_research_portfolio, search_bpca_evidence, search_nichd_studies"],
+    ["Safety", "get_adverse_event_signals, search_medication_recalls, search_drug_safety_alerts, search_drug_shortages"],
+    ["Parents", "route_parent_question, get_parent_medication_info, search_parent_input_opportunities, get_reporting_resources"],
+    ["Composite", "medication_evidence_brief, check_evidence_coverage"],
+], size=14, row_h=0.52)
+
+# 5ac ─ Sources (main deck)
+s = new("The sources behind the tools, and what each one can and can't support", notes=(
+    "Each source answers a different part of the question, and each has limits the server reports with the "
+    "answer. Most sources are searched live. Three are saved, dated copies: LactMed and the MotherToBaby fact "
+    "sheets come from NCBI's official packages, and MPRINT from its published release. Every answer from them "
+    "shows its date. MPRINT can also be checked on request: ask the AI whether the MPRINT data is current, and "
+    "the server checks MPRINT's repository live and reports whether newer data has been published since the "
+    "saved copy. The server is read-only, so a question never rewrites the data; when newer data exists, one "
+    "maintainer step rebuilds the copy, and a weekly automated check also flags new releases."))
+table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
+    ["Source", "Used for, and its limit"],
+    ["LactMed (NLM)", "Breastfeeding evidence from NCBI's official package, with PubMed links for each cited study."],
+    ["DailyMed (NLM)", "Label sections 8.1 to 8.4, approved uses and contents. In-use labeling may differ from the latest FDA-approved version."],
+    ["PubMed and PMC", "Studies and abstracts. Study type and population need separate checks."],
+    ["ClinicalTrials.gov", "Registrations and recruiting status. No eligibility decisions."],
+    ["openFDA", "FAERS reports, recalls, alerts, shortages. Report counts are not rates and don't show cause."],
+    ["RxNorm and MedlinePlus", "Medicine identity and patient education, including Spanish pages by drug code."],
+    ["MPRINT", "Published pharmacology tables (MIT license) as a dated copy; checked live for newer data when asked."],
+    ["NIH RePORTER", "Funded projects across all NIH institutes. An award is not a finding."],
+    ["NICHD BPCA and DASH", "Pediatric study summaries and study discovery. Controlled data are not retrieved."],
+    ["MotherToBaby (OTIS, via NLM)", "English and Spanish consumer fact sheets, verbatim and attributed. Nonprofit content."],
+], size=13, row_h=0.46)
 
 # 5aa ─ Lifespan
 s = new("One MCP server connects pregnancy, breastfeeding and pediatric data", notes=(
@@ -980,9 +1059,12 @@ decision(3, "every tool call passes a safety check first", (
 decision(4, "dated copies of official data, with study links", (
     "NCBI's web pages now show automated readers a browser check, which the server never bypasses. So LactMed "
     "and MotherToBaby text come from NCBI's official download packages, like MPRINT. Each answer states the "
-    "package date, and LactMed findings keep their citation numbers with PubMed links."),
+    "package date, and LactMed findings keep their citation numbers with PubMed links. Dated copies can go "
+    "stale, so the server can check by prompting: ask whether the MPRINT data is current, and "
+    "find_mprint_records with check_for_updates compares the saved revision with MPRINT's repository live. A "
+    "weekly GitHub workflow runs the same check."),
     [("Decision", "Read LactMed and MotherToBaby from NCBI's official packages; MPRINT from its release."),
-     ("Location", "scripts/build_lactmed_snapshot.py, clients/lactmed.py, core/freshness.py"),
+     ("Location", "scripts/build_lactmed_snapshot.py, core/freshness.py, services/mprint.py (check_for_updates)"),
      ("Rationale", "Reliable access, reproducible answers, and LactMed's own references with PubMed IDs."),
      ("Example", "Citation [54] returns Trenque et al., Drug Saf 2011, PMID 22077504.")],
     ["record = snapshot_record(\"LM328\")  # Sertraline",
@@ -1194,66 +1276,11 @@ text(s, 0.9, 5.6, 11.5, 0.9, [
 # ─── Appendix ───
 s = new(dark=True, notes="Reference slides for judges who want more detail.")
 text(s, 0.9, 2.6, 11.0, 1.0, "Appendix", size=48, font=HEAD, bold=True, color=WHITE)
-text(s, 0.9, 3.7, 11.0, 1.6, ["All 31 tools  ·  Sources and their limits  ·  Full evaluation numbers",
-                               "Benchmark history  ·  Prompts and resources"],
+text(s, 0.9, 3.7, 11.0, 1.6, ["Full evaluation numbers  ·  Benchmark history  ·  Prompts and resources"],
      size=18, color=MIST2, space_after=8)
 
 
-def table(slide, x, y, w, col_w, rows, header=True, size=13, row_h=0.42):
-    shp = slide.shapes.add_table(len(rows), len(rows[0]), Inches(x), Inches(y), Inches(w),
-                                 Inches(row_h * len(rows)))
-    t = shp.table
-    for ci, cw in enumerate(col_w):
-        t.columns[ci].width = Inches(cw)
-    for ri, row in enumerate(rows):
-        for ci, val in enumerate(row):
-            c = t.cell(ri, ci)
-            c.margin_left = c.margin_right = Inches(0.12)
-            c.margin_top = c.margin_bottom = Inches(0.05)
-            c.fill.solid()
-            c.fill.fore_color.rgb = DEEP if (header and ri == 0) else (MIST if ri % 2 else WHITE)
-            tf = c.text_frame
-            tf.word_wrap = True
-            p = tf.paragraphs[0]
-            p.text = ""
-            r = p.add_run()
-            r.text = val
-            r.font.name = BODY
-            r.font.size = Pt(size)
-            r.font.bold = (header and ri == 0) or ci == 0
-            r.font.color.rgb = WHITE if (header and ri == 0) else (TEAL if ci == 0 else INK)
-    return t
 
-
-s = new("All 31 tools", appendix=True, notes="The full tool list, grouped by job.")
-table(s, 0.65, 1.5, 12.0, [2.6, 9.4], [
-    ["Group", "Tools"],
-    ["Identity", "normalize_drug, find_products_containing_ingredient, get_patient_education"],
-    ["Breastfeeding", "search_lactmed, get_lactmed_record, semantic_search_lactmed, search_mothertobaby_fact_sheets"],
-    ["Pregnancy and labels", "get_label_sections, search_pediatric_labeling_changes, find_pregnancy_exposure_registries, search_pregnancy_registries"],
-    ["Literature and trials", "search_literature, get_abstracts, search_trials, find_recruiting_studies"],
-    ["MPRINT data", "find_mprint_records, get_mprint_details"],
-    ["NICHD programs", "search_funded_research, summarize_research_portfolio, search_bpca_evidence, search_nichd_studies"],
-    ["Safety", "get_adverse_event_signals, search_medication_recalls, search_drug_safety_alerts, search_drug_shortages"],
-    ["Parents", "route_parent_question, get_parent_medication_info, search_parent_input_opportunities, get_reporting_resources"],
-    ["Composite", "medication_evidence_brief, check_evidence_coverage"],
-], size=13, row_h=0.5)
-
-s = new("Sources and what each one can support", appendix=True,
-        notes="Each source answers a different part of the question, and each has limits the server reports.")
-table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
-    ["Source", "Used for, and its limit"],
-    ["LactMed (NLM)", "Breastfeeding evidence from NCBI's official package, with PubMed links for each cited study."],
-    ["DailyMed (NLM)", "Label sections 8.1 to 8.4. In-use labeling may differ from the latest FDA-approved version."],
-    ["PubMed and PMC", "Studies and abstracts. Study type and population need separate checks."],
-    ["ClinicalTrials.gov", "Registrations and recruiting status. No eligibility decisions."],
-    ["openFDA", "FAERS reports, recalls, alerts, shortages. Report counts are not rates and don't show cause."],
-    ["RxNorm and MedlinePlus", "Medicine identity and patient education, including Spanish pages by drug code."],
-    ["MPRINT", "Published pharmacology tables (MIT license), as a dated read-only snapshot."],
-    ["NIH RePORTER", "Funded projects and portfolios. An award is not a finding."],
-    ["NICHD BPCA and DASH", "Pediatric study summaries and study discovery. Controlled data are not retrieved."],
-    ["MotherToBaby (OTIS, via NLM)", "English and Spanish consumer fact sheets, verbatim and attributed. Nonprofit content."],
-], size=13, row_h=0.46)
 
 s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the policy .20 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")

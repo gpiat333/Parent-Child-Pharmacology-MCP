@@ -1,0 +1,77 @@
+{
+  "grader_error": "Grader did not produce a valid grounded assessment within three attempts",
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 5,\n  \"unverified_claims\": 3,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Prepare a pregnancy evidence brief for lamotrigine.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines to provide the requested evidence brief despite retrieved label and literature evidence being available in the supplied pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature\",\n      \"answer_quote\": \"No Clinical Considerations passage or literature abstract/full-text passage was retrieved here.\",\n      \"reference_quote\": \"As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect.\",\n      \"explanation\": \"The answer does not describe the retrieved Clinical Considerations PK evidence or the available literature evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Three axes and explicit gaps.\",\n      \"answer_quote\": \"Not retrieved.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Although three headings are present, the answer leaves the substantive effects, exposure, and outcome axes unfilled rather than reporting the retrieved findings and their limitations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No specific study records were retrieved.\",\n      \"reference_quote\": \"The International Lamotrigine Pregnancy Registry reported major congenital malformations in 2.2% (95% CI: 1.6%, 3.1%) of 1,558 infants exposed to lamotrigine monotherapy in the first trimester of pregnancy.\",\n      \"explanation\": \"The supplied evidence includes specific label, registry, PubMed, trial, and pharmacokinetic records, so the blanket claim that no study records were retrieved is contradicted.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No Clinical Considerations passage or literature abstract/full-text passage was retrieved here.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"A Clinical Considerations passage and multiple literature abstracts were retrieved in the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No PubMed abstract-coverage assessment was performed\",\n      \"reference_quote\": \"The requested PubMed records were listed with abstract text for all seven requested PMIDs.\",\n      \"explanation\": \"The supplied pool contains an abstract-coverage assessment, including requested, returned, and abstract-bearing PMIDs.\"\n    }\n  ],\n  \"rationale\": \"The response is a transparent abstention and appropriately avoids doses or personal medication advice, but it fails the requested lookup-and-synthesis task. It also makes several blanket statements that conflict with the retrieved evidence, including claims that no study records, Clinical Considerations passage, literature passage, or abstract-coverage assessment were available.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[2] omission answer_quote must be null",
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 231469,
+        "completion_tokens": 970,
+        "total_tokens": 232439,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 231466,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 192,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 5,\n  \"unverified_claims\": 3,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Prepare a pregnancy evidence brief for lamotrigine.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines to provide the requested evidence brief despite retrieved label and literature evidence being available in the supplied pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect.\",\n      \"explanation\": \"The answer does not describe the retrieved Clinical Considerations PK evidence or the available literature evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Three axes and explicit gaps.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Although three headings are present, the answer leaves the substantive effects, exposure, and outcome axes unfilled rather than reporting the retrieved findings and their limitations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No specific study records were retrieved.\",\n      \"reference_quote\": \"The International Lamotrigine Pregnancy Registry reported major congenital malformations in 2.2% (95% CI: 1.6%, 3.1%) of 1,558 infants exposed to lamotrigine monotherapy in the first trimester of pregnancy.\",\n      \"explanation\": \"The supplied evidence includes specific label, registry, PubMed, trial, and pharmacokinetic records, so the blanket claim that no study records were retrieved is contradicted.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No Clinical Considerations passage or literature abstract/full-text passage was retrieved here.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"A Clinical Considerations passage and multiple literature abstracts were retrieved in the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No PubMed abstract-coverage assessment was performed\",\n      \"reference_quote\": \"The requested PubMed records were listed with abstract text for all seven requested PMIDs.\",\n      \"explanation\": \"The supplied evidence contains an abstract-coverage assessment showing that all seven requested PubMed records had retrieved abstracts.\"\n    }\n  ],\n  \"rationale\": \"The response is a transparent abstention and appropriately avoids dose numbers and personal medication advice, but it fails the requested lookup-and-synthesis task. It also makes blanket claims that conflict with the retrieved evidence, including claims that no study records, Clinical Considerations passage, literature passage, or PubMed abstract-coverage assessment were available.\"\n}",
+      "validation_errors": [
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 232345,
+        "completion_tokens": 838,
+        "total_tokens": 233183,
+        "prompt_tokens_details": {
+          "cached_tokens": 231466,
+          "cache_write_tokens": 876,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 74,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 2,\n  \"contradicted_claims\": 5,\n  \"unverified_claims\": 3,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Prepare a pregnancy evidence brief for lamotrigine.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer declines to provide the requested evidence brief despite retrieved label and literature evidence being available in the supplied pool.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"As with other AEDs, physiological changes during pregnancy may affect lamotrigine concentrations and/or therapeutic effect.\",\n      \"explanation\": \"The answer does not describe the retrieved Clinical Considerations PK evidence or the available literature evidence.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Three axes and explicit gaps.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Although three headings are present, the answer leaves the substantive effects, exposure, and outcome axes unfilled rather than reporting the retrieved findings and their limitations.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No specific study records were retrieved.\",\n      \"reference_quote\": \"The International Lamotrigine Pregnancy Registry reported major congenital malformations in 2.2% (95% CI: 1.6%, 3.1%) of 1,558 infants exposed to lamotrigine monotherapy in the first trimester of pregnancy.\",\n      \"explanation\": \"The supplied evidence includes specific label, registry, PubMed, trial, and pharmacokinetic records, so the blanket claim that no study records were retrieved is contradicted.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No Clinical Considerations passage or literature abstract/full-text passage was retrieved here.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"A Clinical Considerations passage and multiple literature abstracts were retrieved in the supplied evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No PubMed abstract-coverage assessment was performed\",\n      \"reference_quote\": \"with_abstract_pmids\\\": [\\\"35133310\\\", \\\"32768086\\\", \\\"40593436\\\", \\\"37684052\\\", \\\"12780873\\\", \\\"33573557\\\", \\\"36103361\\\"]\",\n      \"explanation\": \"The supplied evidence contains an abstract-coverage assessment showing that all seven requested PubMed records had retrieved abstracts.\"\n    }\n  ],\n  \"rationale\": \"The response is a transparent abstention and appropriately avoids dose numbers and personal medication advice, but it fails the requested lookup-and-synthesis task. It also makes blanket claims that conflict with the retrieved evidence, including claims that no study records, Clinical Considerations passage, literature passage, or PubMed abstract-coverage assessment were available.\"\n}",
+      "validation_errors": [
+        "failure_reasons[5] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 233179,
+        "completion_tokens": 862,
+        "total_tokens": 234041,
+        "prompt_tokens_details": {
+          "cached_tokens": 232342,
+          "cache_write_tokens": 834,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 72,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "score_assigned": false
+}

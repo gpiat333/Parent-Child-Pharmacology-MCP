@@ -1,0 +1,126 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 4,
+    "contradicted_claims": 2,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 4,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer does not provide the requested FDA registry contact details, despite the task specifically requiring them."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer contains no citations and does not cite the product label or FDA registry directory."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "Although the three principal rows are visible, the answer omits available animal findings and does not provide the retrieved evidence brief requested from the supplied sources."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No current FDA registry contact information was retrieved and verified for daridorexant.",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The supplied evidence includes a retrieved FDA-directory listing and registry contact details, so the answer's statement that no contact information was retrieved is contradicted."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Not summarized because no current source passage was retrieved and verified.",
+        "reference_quote": "In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation",
+        "explanation": "The supplied label contains verified animal pregnancy findings, so the answer incorrectly characterizes the relevant source passage as unavailable."
+      }
+    ],
+    "rationale": "The answer preserves empty evidence rows and avoids dosing or medication decisions, but it improperly abstains despite retrieved label, registry, pharmacokinetic-search, and directory evidence. It omits required animal findings, registry contacts, and citations, and makes incorrect claims that registry and label information were not retrieved."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "421feb65a559ab85187ff1721217b47bc0dc8d403eac685477bd4627c5ea97ed",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"No current FDA registry contact information was retrieved and verified for daridorexant.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not provide the requested FDA registry contact details, despite the task specifically requiring them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer contains no citations and does not cite the product label or FDA registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.\",\n      \"answer_quote\": \"Animal or nonhuman findings | Not summarized\",\n      \"reference_quote\": null,\n      \"explanation\": \"Although the three principal rows are visible, the answer omits available animal findings and does not provide the retrieved evidence brief requested from the supplied sources.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No current FDA registry contact information was retrieved and verified for daridorexant.\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The supplied evidence includes a retrieved FDA-directory listing and registry contact details, so the answer's statement that no contact information was retrieved is contradicted.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Not summarized because no current source passage was retrieved and verified.\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"The supplied label contains verified animal pregnancy findings, so the answer incorrectly characterizes the relevant source passage as unavailable.\"\n    }\n  ],\n  \"rationale\": \"The answer preserves empty evidence rows and avoids dosing or medication decisions, but it improperly abstains despite retrieved label, registry, pharmacokinetic-search, and directory evidence. It omits required animal findings, registry contacts, and citations, and makes incorrect claims that registry and label information were not retrieved.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[2] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 110768,
+        "completion_tokens": 1031,
+        "total_tokens": 111799,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 110765,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 375,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 4,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer does not provide the requested FDA registry contact details, despite the task specifically requiring them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer contains no citations and does not cite the product label or FDA registry directory.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Show effects on the pregnant person, measured fetal or infant exposure, and observed fetal or infant outcomes, keeping empty rows visible.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Although the three principal rows are visible, the answer omits available animal findings and does not provide the retrieved evidence brief requested from the supplied sources.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No current FDA registry contact information was retrieved and verified for daridorexant.\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The supplied evidence includes a retrieved FDA-directory listing and registry contact details, so the answer's statement that no contact information was retrieved is contradicted.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Not summarized because no current source passage was retrieved and verified.\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"The supplied label contains verified animal pregnancy findings, so the answer incorrectly characterizes the relevant source passage as unavailable.\"\n    }\n  ],\n  \"rationale\": \"The answer preserves empty evidence rows and avoids dosing or medication decisions, but it improperly abstains despite retrieved label, registry, pharmacokinetic-search, and directory evidence. It omits required animal findings, registry contacts, and citations, and makes incorrect claims that registry and label information were not retrieved.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 111504,
+        "completion_tokens": 765,
+        "total_tokens": 112269,
+        "prompt_tokens_details": {
+          "cached_tokens": 110765,
+          "cache_write_tokens": 736,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 133,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 111504,
+    "completion_tokens": 765,
+    "total_tokens": 112269,
+    "prompt_tokens_details": {
+      "cached_tokens": 110765,
+      "cache_write_tokens": 736,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 133,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}
