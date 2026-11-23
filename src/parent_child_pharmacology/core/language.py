@@ -158,7 +158,7 @@ COMMON_ENGLISH = set(
     not no yes it its this that these those there here what which who whom whose when where why how i me my mine we
     us our you your he him his she her they them their baby babies child children kid kids son daughter infant infants
     newborn newborns toddler toddlers mom moms mother mothers women woman pregnant pregnancy breastfeeding breastfeed
-    nursing milk supply safe safety okay ok fine risk risks harm harmful cause causes caused effect effects side use
+    nursing pumping postpartum milk supply safe safety okay ok fine risk risks harm harmful cause causes caused effect effects side use
     using used take taking took give giving stop start continue get getting help any some all more most less much
     many other same different really still also just only very too well good bad known know say says said research
     evidence study studies data oil oils essential vitamin vitamins supplement supplements herb herbs herbal tea drug
@@ -171,24 +171,51 @@ FOREIGN_FUNCTION_WORDS = set(
 )
 
 
-def english_question_frame(text):
-    """Short plain English questions the detectors under-score ("Do vaccines cause autism?").
+STATEMENT_STARTS = set(
+    "i i'm im i've i'd my we we're our she she's he he's they they're their her his it it's this the "
+    "baby child son daughter".split()
+)
 
-    Accept only an English question opener, mostly common English words, at most two
-    other words (usually a medicine or condition name), no common Spanish, French,
-    German, Portuguese or Italian function words, and no confident foreign detection.
+
+def english_question_frame(text):
+    """Short plain English questions the detectors under-score ("Do vaccines cause autism?",
+    "I'm breastfeeding. Can I take ibuprofen?").
+
+    Each sentence must open with an English question word or a common English statement opener,
+    use mostly common English words with at most two other words (usually a medicine or condition
+    name), contain no common Spanish, French, German, Portuguese or Italian function words, and at
+    least one sentence must be a question. The whole text must not be confidently foreign.
     """
-    words = re.findall(r"[a-zà-ÿ']+", text.lower())
-    if not 3 <= len(words) <= 16 or words[0] not in QUESTION_STARTS:
+    sentences = [re.findall(r"[a-zà-ÿ']+", part.lower()) for part in re.split(r"[.!?;\n]+", text)]
+    sentences = [w for w in sentences if w]
+    total = sum(len(w) for w in sentences)
+    if not sentences or not 3 <= total <= 40 or len(sentences) > 4:
         return False
-    if any(w in FOREIGN_FUNCTION_WORDS for w in words):
-        return False
-    known = COMMON_ENGLISH | ENGLISH_FUNCTION_WORDS | SELECTOR_WORDS | QUESTION_STARTS
-    unknown = [w for w in words if w not in known]
-    if len(unknown) > 2 or len(unknown) * 2 > len(words):
+    known = (
+        COMMON_ENGLISH
+        | ENGLISH_FUNCTION_WORDS
+        | SELECTOR_WORDS
+        | QUESTION_STARTS
+        | STATEMENT_STARTS
+    )
+    asked = False
+    masked = []
+    for words in sentences:
+        if words[0] in QUESTION_STARTS:
+            asked = True
+        elif words[0] not in STATEMENT_STARTS:
+            return False
+        if any(w in FOREIGN_FUNCTION_WORDS for w in words):
+            return False
+        unknown = [w for w in words if w not in known]
+        if len(unknown) > 2 or len(unknown) * 2 > len(words):
+            return False
+        # Medicine names fool detectors; check the sentence with them replaced by "it".
+        masked.append(" ".join("it" if w not in known else w for w in words))
+    if not asked:
         return False
     try:
-        return not detector()(text)["foreign_confident"]
+        return not detector()(". ".join(masked) + "?")["foreign_confident"]
     except Exception:
         return False
 

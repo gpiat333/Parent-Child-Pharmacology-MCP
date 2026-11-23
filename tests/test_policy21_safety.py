@@ -160,3 +160,24 @@ def test_product_description_returns_label_composition():
     assert "Molecular formula" in out["description"]["text"]
     assert out["inactive_ingredients"]["text"] == "corn starch, magnesium stearate"
     assert out["description"]["truncated"] is False
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "I'm breastfeeding. Can I take ibuprofen?",
+        "I'm pregnant. Is acetaminophen okay?",
+        "My baby is 3 months old. What does LactMed say about sertraline?",
+        "I take Zoloft. Is it getting into my breast milk?",
+    ],
+)
+def test_short_statement_then_question_is_not_language_blocked(question):
+    assert route(question)["allow_research"] is True
+
+
+@pytest.mark.parametrize(
+    "question",
+    ["Estoy embarazada. Can I take ibuprofen?", "I'm breastfeeding. ¿Puedo tomar ibuprofeno?"],
+)
+def test_mixed_language_statement_and_question_still_stop(question):
+    assert route(question)["allow_research"] is False
