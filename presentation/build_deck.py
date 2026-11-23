@@ -515,35 +515,38 @@ s = new("One server follows her from pregnancy to breastfeeding to her child", n
     "and the fact sheet, keeping infant exposure and outcomes separate. And when her child needs a medicine, it "
     "brings pediatric labeling and its history, BPCA and Pediatric Trials Network studies, and trials, with "
     "newborns, infants, children and teens kept separate."))
-picture(s, MOM, 0.55, 1.45, 3.0, 5.5, border=False)
 stages = [
-    ("Pregnancy", MIST, [
+    ("Pregnancy", MIST, "mother-pregnant.png", [
         "Label's pregnancy section",
         "Studies, with links",
         "Pregnancy exposure registries",
         "MotherToBaby fact sheet",
         "PRGLAC context where evidence is thin",
     ]),
-    ("Breastfeeding", MIST2, [
+    ("Breastfeeding", MIST2, "mother-newborn-trim.png", [
         "LactMed, with each study linked",
         "Label's lactation section",
         "MotherToBaby fact sheet",
         "Infant exposure and outcomes kept apart",
     ]),
-    ("Her child", CORAL_T, [
+    ("Her child", CORAL_T, "mother-toddler.png", [
         "Pediatric labeling and its history",
         "BPCA and Pediatric Trials Network studies",
         "Recruiting pediatric trials",
         "Newborn, infant, child and teen kept separate",
     ]),
 ]
-for i, (stage, fill, items) in enumerate(stages):
-    x = 3.85 + i * 2.97
-    box(s, x, 1.5, 2.8, 5.2, fill=fill)
-    text(s, x + 0.22, 1.7, 2.4, 0.45, stage, size=20, font=HEAD, bold=True, color=DEEP)
-    text(s, x + 0.22, 2.35, 2.4, 4.2, items, size=14, color=INK, space_after=10)
+for i, (stage, fill, img, items) in enumerate(stages):
+    x = 0.6 + i * 4.1
+    box(s, x, 1.45, 3.9, 5.6, fill=fill)
+    path = MOM.parent / img
+    iw, ih = Image.open(path).size
+    h = 2.5
+    picture(s, path, x + (3.9 - h * iw / ih) / 2, 1.6, 3.6, h, border=False)
+    text(s, x + 0.25, 4.2, 3.4, 0.45, stage, size=22, font=HEAD, bold=True, color=DEEP)
+    text(s, x + 0.25, 4.8, 3.4, 2.2, items, size=16, color=INK, space_after=5)
     if i < 2:
-        connector(s, x + 2.8, 4.1, x + 2.97, 4.1, color=TEAL, width=3)
+        connector(s, x + 3.9, 2.85, x + 4.1, 2.85, color=TEAL, width=3)
 
 # 5b ─ Where it fits
 s = new("How it complements LactMed and MotherToBaby", notes=(
