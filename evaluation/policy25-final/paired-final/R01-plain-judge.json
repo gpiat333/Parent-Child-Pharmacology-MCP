@@ -1,0 +1,117 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 6,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "contradicted",
+        "reason": "The retrieved LactMed record supports reported infant symptoms and milk exposure, but it does not provide a recommendation to monitor; the answer attributes such advice to LactMed.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK500887/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize actual retrieved infant observations separately from recommendations and milk measurements.",
+        "answer_quote": null,
+        "reference_quote": "Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.",
+        "explanation": "The retrieved record contained specific milk concentrations and sampling times, but the answer omitted them despite the requirement to summarize milk measurements."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Separate observed symptoms from advice to monitor, and explain uncertainty.",
+        "answer_quote": "LactMed states that monitoring the infant for changes such as diarrhea, rash, or thrush may be appropriate.",
+        "reference_quote": "A symptom monitored in a study is not automatically a clinical recommendation to monitor it.",
+        "explanation": "The answer presents study monitoring procedures as LactMed advice, rather than distinguishing them from an explicit recommendation."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "LactMed states that monitoring the infant for changes",
+        "reference_quote": "A symptom monitored in a study is not automatically a clinical recommendation to monitor it.",
+        "explanation": "The retrieved record does not support attributing a monitoring recommendation to LactMed."
+      }
+    ],
+    "rationale": "The answer accurately reports the general types of observed symptoms and appropriately notes uncertainty about causation and frequency. It omits the retrieved quantitative milk measurements and incorrectly attributes monitoring advice to LactMed. The answer also does not disclose that the retrieved material is a bounded extract whose completeness is limited."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "84ac8cd551c66a3893e73159d7807e808291a124c88cb4fd8e5f91a3ab5fed39",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The LactMed record supports reported infant symptoms and milk exposure, but it does not state a recommendation to monitor; the answer attributes such advice to LactMed.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": \"I am not supplying numbers.\",\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The retrieved record contained specific milk concentrations and sampling times, but the answer omitted them despite the request and criteria requiring milk measurements to be summarized.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Separate observed symptoms from advice to monitor, and explain uncertainty.\",\n      \"answer_quote\": \"LactMed states that monitoring the infant\",\n      \"reference_quote\": \"A small, controlled, prospective study had mothers monitor their infants for signs of adverse effects\",\n      \"explanation\": \"The source describes monitoring within a study, not LactMed advice to readers. Presenting this as source monitoring advice fails the requested distinction.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed states that monitoring the infant for changes\",\n      \"reference_quote\": \"A symptom monitored in a study is not automatically a clinical recommendation to monitor it.\",\n      \"explanation\": \"The answer converts study procedures into a LactMed recommendation, which is not supported by the retrieved record.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the general types of observed symptoms and appropriately notes uncertainty about causation and frequency. However, it omits retrieved quantitative milk measurements and incorrectly attributes monitoring advice to LactMed. It also does not clearly disclose that the available material is a bounded extract with potentially incomplete evidence.\",\n  \"honest_abstention\": false\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 34799,
+        "completion_tokens": 963,
+        "total_tokens": 35762,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 34796,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 382,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The retrieved LactMed record supports reported infant symptoms and milk exposure, but it does not provide a recommendation to monitor; the answer attributes such advice to LactMed.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize actual retrieved infant observations separately from recommendations and milk measurements.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Average milk levels were 0.69 mg/L (range 0.46 to 0.88 mg/L) at 4 hours and 0.81 mg/L (range 0.39 to 1.3 mg/L) at 5 hours after the dose.\",\n      \"explanation\": \"The retrieved record contained specific milk concentrations and sampling times, but the answer omitted them despite the requirement to summarize milk measurements.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Separate observed symptoms from advice to monitor, and explain uncertainty.\",\n      \"answer_quote\": \"LactMed states that monitoring the infant for changes such as diarrhea, rash, or thrush may be appropriate.\",\n      \"reference_quote\": \"A symptom monitored in a study is not automatically a clinical recommendation to monitor it.\",\n      \"explanation\": \"The answer presents study monitoring procedures as LactMed advice, rather than distinguishing them from an explicit recommendation.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"LactMed states that monitoring the infant for changes\",\n      \"reference_quote\": \"A symptom monitored in a study is not automatically a clinical recommendation to monitor it.\",\n      \"explanation\": \"The retrieved record does not support attributing a monitoring recommendation to LactMed.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately reports the general types of observed symptoms and appropriately notes uncertainty about causation and frequency. It omits the retrieved quantitative milk measurements and incorrectly attributes monitoring advice to LactMed. The answer also does not disclose that the retrieved material is a bounded extract whose completeness is limited.\",\n  \"honest_abstention\": false\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 35464,
+        "completion_tokens": 698,
+        "total_tokens": 36162,
+        "prompt_tokens_details": {
+          "cached_tokens": 34796,
+          "cache_write_tokens": 665,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 126,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 35464,
+    "completion_tokens": 698,
+    "total_tokens": 36162,
+    "prompt_tokens_details": {
+      "cached_tokens": 34796,
+      "cache_write_tokens": 665,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 126,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

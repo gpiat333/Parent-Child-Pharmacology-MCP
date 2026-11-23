@@ -1,0 +1,75 @@
+{
+  "grader_error": "Grader did not produce a valid grounded assessment within three attempts",
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not establish that this URL is the daridorexant pregnancy-registry directory or support the listed contact.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies MotherToBaby as a specialist referral but does not support it as a daridorexant pregnancy-registry contact.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This FDA label URL is not present in the supplied evidence pool; the retrieved label source is a DailyMed URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer provides different registry contacts from those retrieved for Quviviq/daridorexant and does not show the retrieved FDA directory listing and its contact separately.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an unsupported FDA label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"FDA prescribing information for **Quviviq (daridorexant)** states that a pregnancy exposure registry is available\",\n      \"reference_quote\": \"Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"The answer attributes registry contacts to the FDA prescribing information, but the retrieved label provides the Idorsia contact and the retrieved directory provides the Quviviq registry website and phone, not the two contacts listed in the answer.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"MotherToBaby Pregnancy Studies: 1-877-311-8972\",\n      \"reference_quote\": \"MotherToBaby (Organization of Teratology Information Specialists)\",\n      \"explanation\": \"The supplied evidence gives MotherToBaby as a specialist referral with a different phone number and does not identify it as the daridorexant FDA registry contact listed by the answer.\"\n    }\n  ],\n  \"rationale\": \"The three evidence axes and the retrieved-scope maternal PK statement are largely consistent with the evidence, and the answer avoids dosing and treatment decisions. However, its registry contacts and cited FDA label are not supported by the supplied evidence, while the actual FDA directory contact and directory citation are omitted.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 112709,
+        "completion_tokens": 1257,
+        "total_tokens": 113966,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 112706,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 491,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not establish that this URL is the daridorexant pregnancy-registry directory or support the listed contact.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies MotherToBaby as a specialist referral but does not support it as a daridorexant pregnancy-registry contact.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This FDA label URL is not present in the supplied evidence pool; the retrieved label source is a DailyMed URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer provides different registry contacts from those retrieved for Quviviq/daridorexant and does not show the retrieved FDA directory listing and its contact separately.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an unsupported FDA label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA prescribing information for **Quviviq (daridorexant)** states that a pregnancy exposure registry is available\",\n      \"reference_quote\": \"Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"The answer attributes registry contacts to the FDA prescribing information, but the retrieved label provides the Idorsia contact and the retrieved directory provides the Quviviq registry website and phone, not the two contacts listed in the answer.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"MotherToBaby Pregnancy Studies: 1-877-311-8972\",\n      \"reference_quote\": \"MotherToBaby (Organization of Teratology Information Specialists)\",\n      \"explanation\": \"The supplied evidence gives MotherToBaby as a specialist referral with a different phone number and does not identify it as the daridorexant FDA registry contact listed by the answer.\"\n    }\n  ],\n  \"rationale\": \"The three evidence axes and the retrieved-scope maternal PK statement are largely consistent with the evidence, and the answer avoids dosing and treatment decisions. However, its registry contacts and cited FDA label are not supported by the supplied evidence, while the actual FDA directory contact and directory citation are omitted.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 113546,
+        "completion_tokens": 840,
+        "total_tokens": 114386,
+        "prompt_tokens_details": {
+          "cached_tokens": 112706,
+          "cache_write_tokens": 837,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 73,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not establish that this URL is the daridorexant pregnancy-registry directory or support the listed contact.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies MotherToBaby as a specialist referral but does not support it as a daridorexant pregnancy-registry contact.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"unverified\",\n      \"reason\": \"This FDA label URL is not present in the supplied evidence pool; the retrieved label source is a DailyMed URL.\"\n    }\n  ],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer provides different registry contacts from those retrieved for Quviviq/daridorexant and does not show the retrieved FDA directory listing and its contact separately.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an unsupported FDA label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"FDA prescribing information for **Quviviq (daridorexant)**\",\n      \"reference_quote\": \"Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"The answer attributes registry contacts to the FDA prescribing information, but the retrieved label provides the Idorsia contact and the retrieved directory provides the Quviviq registry website and phone, not the two contacts listed in the answer.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"MotherToBaby Pregnancy Studies: 1-877-311-8972\",\n      \"reference_quote\": \"MotherToBaby (Organization of Teratology Information Specialists)\",\n      \"explanation\": \"The supplied evidence gives MotherToBaby as a specialist referral with a different phone number and does not identify it as the daridorexant FDA registry contact listed by the answer.\"\n    }\n  ],\n  \"rationale\": \"The three evidence axes and the retrieved-scope maternal PK statement are largely consistent with the evidence, and the answer avoids dosing and treatment decisions. However, its registry contacts and cited FDA label are not supported by the supplied evidence, while the actual FDA directory contact and directory citation are omitted.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 114384,
+        "completion_tokens": 896,
+        "total_tokens": 115280,
+        "prompt_tokens_details": {
+          "cached_tokens": 113543,
+          "cache_write_tokens": 838,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 138,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "score_assigned": false
+}

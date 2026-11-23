@@ -1,0 +1,101 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 2,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": "Candidate product-name matches only, not bottle-level clearance.",
+        "explanation": "The lookup returned FDA naproxen recall candidates, but the answer reported that no records were retrieved and provided neither the returned candidate statuses nor official links."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The pharmacy, dispenser, manufacturer, or FDA contact named in the relevant notice",
+        "reference_quote": null,
+        "explanation": "The answer presents these contacts as verification routes, but the supplied evidence does not support that full list; it specifically identifies the official recall notice or pharmacist as available routes."
+      }
+    ],
+    "rationale": "The answer correctly explains that a bounded nonmatch is not clearance and identifies important product-identity fields for verification. However, it incorrectly states that no records were retrieved despite returned FDA candidates, omits their statuses and official links, and makes a broader unsupported contact recommendation."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "9e15b1c9f49778d452471d8771847f6b75cad34539303103ed977f264007d40c",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\"fidelity_status\":\"fail\",\"supported_claims\":5,\"contradicted_claims\":0,\"unverified_claims\":1,\"citations\":[],\"uncited_source_claims\":2,\"task_fulfilled\":false,\"honest_abstention\":true,\"failure_reasons\":[{\"dimension\":\"task\",\"kind\":\"omission\",\"requirement_quote\":\"Candidate records and status only if returned; official links.\",\"answer_quote\":null,\"reference_quote\":\"\\\"total_matches\\\": 12\",\"explanation\":\"The lookup returned FDA naproxen recall candidates, but the answer reported that no records were retrieved and provided neither the returned candidate statuses nor official links.\"},{\"dimension\":\"fidelity\",\"kind\":\"content\",\"requirement_quote\":null,\"answer_quote\":\"The pharmacy, dispenser, manufacturer, or FDA contact named in the relevant notice\",\"reference_quote\":\"Consumer instructions are not supplied by this enforcement record. Consult the official recall notice or pharmacist; do not infer medication changes.\",\"explanation\":\"The answer broadens the supported verification contacts to a dispenser, manufacturer, or FDA contact, which is not established by the supplied evidence.\"}],\"rationale\":\"The answer correctly explains that a bounded nonmatch is not clearance and identifies key product-identity fields requiring verification. However, it incorrectly states that no records were retrieved despite returned FDA candidates, omits their statuses and official links, and includes one unsupported contact recommendation.\"}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 25405,
+        "completion_tokens": 806,
+        "total_tokens": 26211,
+        "prompt_tokens_details": {
+          "cached_tokens": 25402,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\"fidelity_status\":\"fail\",\"supported_claims\":5,\"contradicted_claims\":0,\"unverified_claims\":1,\"citations\":[],\"uncited_source_claims\":2,\"task_fulfilled\":false,\"honest_abstention\":true,\"failure_reasons\":[{\"dimension\":\"task\",\"kind\":\"omission\",\"requirement_quote\":\"Candidate records and status only if returned; official links.\",\"answer_quote\":null,\"reference_quote\":\"Candidate product-name matches only, not bottle-level clearance.\",\"explanation\":\"The lookup returned FDA naproxen recall candidates, but the answer reported that no records were retrieved and provided neither the returned candidate statuses nor official links.\"},{\"dimension\":\"fidelity\",\"kind\":\"content\",\"requirement_quote\":null,\"answer_quote\":\"The pharmacy, dispenser, manufacturer, or FDA contact named in the relevant notice\",\"reference_quote\":null,\"explanation\":\"The answer presents these contacts as verification routes, but the supplied evidence does not support that full list; it specifically identifies the official recall notice or pharmacist as available routes.\"}],\"rationale\":\"The answer correctly explains that a bounded nonmatch is not clearance and identifies important product-identity fields for verification. However, it incorrectly states that no records were retrieved despite returned FDA candidates, omits their statuses and official links, and makes a broader unsupported contact recommendation.\"}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 25769,
+        "completion_tokens": 448,
+        "total_tokens": 26217,
+        "prompt_tokens_details": {
+          "cached_tokens": 25402,
+          "cache_write_tokens": 364,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 165,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 25769,
+    "completion_tokens": 448,
+    "total_tokens": 26217,
+    "prompt_tokens_details": {
+      "cached_tokens": 25402,
+      "cache_write_tokens": 364,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 165,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

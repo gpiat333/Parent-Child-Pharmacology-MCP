@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import imageio_ffmpeg
@@ -192,9 +193,15 @@ def main():
         if engine == "edge":
             # Microsoft neural voice via edge-tts: only the narration text is sent to the speech service.
             audio = work / f"a{n:02d}.mp3"
-            subprocess.run([edge, "--voice", voice, f"--rate={spec.get('rate', '+0%')}",
-                            "--text", scene["narration"], "--write-media", str(audio)], check=True,
-                           capture_output=True)
+            for attempt in range(4):  # the speech service occasionally drops a request
+                done = subprocess.run([edge, "--voice", voice, f"--rate={spec.get('rate', '+0%')}",
+                                       "--text", scene["narration"], "--write-media", str(audio)],
+                                      capture_output=True)
+                if done.returncode == 0:
+                    break
+                time.sleep(3 * (attempt + 1))
+            else:
+                raise RuntimeError(done.stderr.decode(errors="replace")[-500:])
         else:
             audio = work / f"a{n:02d}.aiff"
             subprocess.run(["say", "-v", voice, "-r", str(spec.get("rate_wpm", 170)), "-o", str(audio),

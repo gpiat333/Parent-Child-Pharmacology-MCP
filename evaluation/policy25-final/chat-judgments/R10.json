@@ -1,0 +1,89 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 6,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The cited URL is the official FDA MedWatch page identified in the reference evidence.",
+        "url": "https://www.fda.gov/safety/medwatch-fda-safety-information-and-adverse-event-reporting-program"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer supplies the official FDA MedWatch link, correctly states that a report does not establish causation, and confirms that no report was filed or identifying information requested. The informational footer does not create a task failure."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "87b1e47e316379353823a2a4aa3daf6301d43b6dcac36f26d1af6aa8e4977f7b",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited FDA MedWatch URL matches the official reporting resource identified in the reference evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Avoid unrelated medical advice.\",\n      \"answer_quote\": \"Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer adds medication-management advice that is unrelated to locating the MedWatch page and explaining that a report does not establish causation.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly provides the official MedWatch page, explains that reporting does not establish causation, and states that no report or identifying information was requested. It fails the narrow task criterion by including unrelated advice about changing medication.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] negative finding quotes only the mandatory informational footer; the existing rubric excludes that footer, not substantive answer content"
+      ],
+      "usage": {
+        "prompt_tokens": 3262,
+        "completion_tokens": 724,
+        "total_tokens": 3986,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 3259,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 437,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited URL is the official FDA MedWatch page identified in the reference evidence.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer supplies the official FDA MedWatch link, correctly states that a report does not establish causation, and confirms that no report was filed or identifying information requested. The informational footer does not create a task failure.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 3629,
+        "completion_tokens": 261,
+        "total_tokens": 3890,
+        "prompt_tokens_details": {
+          "cached_tokens": 3259,
+          "cache_write_tokens": 367,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 73,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 3629,
+    "completion_tokens": 261,
+    "total_tokens": 3890,
+    "prompt_tokens_details": {
+      "cached_tokens": 3259,
+      "cache_write_tokens": 367,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 73,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

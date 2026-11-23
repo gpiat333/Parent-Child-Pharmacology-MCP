@@ -1,4 +1,4 @@
-# Policy .24 evaluation (November 23, 2026): final
+# Policy .24 evaluation (November 23, 2026): superseded by [.25](../policy25-final/REPORT.md)
 
 Source 0.19.0, policy 2026-11-23.24, benchmark runner v7. Every answer was generated fresh on this version, with the local MCP server (loopback HTTP) and the Databricks model gateway (`system.ai.gpt-5-6-luna`). Answers were graded by the same model family and logged to Databricks MLflow. Questions, reference answers and the grading rubric are unchanged from .14. No App deployment, public release or official submission occurred.
 

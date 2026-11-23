@@ -1,0 +1,144 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 4,
+    "contradicted_claims": 2,
+    "unverified_claims": 3,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not identify this URL as the daridorexant registry contact; the FDA directory instead lists the QUVIVIQ Pregnancy Registry website and phone number.",
+        "url": "https://womensmentalhealth.org/research/pregnancyregistry/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The supplied evidence identifies MotherToBaby as a specialist information service, not as the FDA-listed daridorexant pregnancy-registry contact supplied in the answer.",
+        "url": "https://mothertobaby.org/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "contradicted",
+        "reason": "The cited label claim about the listed contacts conflicts with the supplied label evidence, which gives the Idorsia/QUVIVIQ registry contact rather than the two contacts listed in the answer.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      }
+    ],
+    "uncited_source_claims": 3,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": "National Pregnancy Registry for Psychiatric Medications",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer gives contacts for other resources instead of the FDA-listed QUVIVIQ daridorexant registry contact."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Preserve animal versus human and absent abstracts.",
+        "answer_quote": "No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.",
+        "reference_quote": "Daridorexant did not cause any fetal toxicity or malformation at doses up to 120 mg/kg/day.",
+        "explanation": "The answer presents the outcomes row as wholly empty and omits the retrieved animal findings and the distinction that human findings were absent while animal label data were available."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries",
+        "explanation": "The answer does not cite the supplied FDA registry directory and instead cites unrelated or unsupported registry URLs."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA prescribing information for **Quviviq (daridorexant)** states that a pregnancy exposure registry is available and provides the following contact information",
+        "reference_quote": "Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.",
+        "explanation": "The answer attributes contacts to the FDA prescribing information, but the supplied label provides a different daridorexant registry contact."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.",
+        "reference_quote": "In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation",
+        "explanation": "This broad statement omits or obscures retrieved animal outcome findings and therefore does not faithfully represent the available evidence."
+      }
+    ],
+    "rationale": "The three evidence rows and maternal PK gap are partly responsive, and the answer avoids dosing and treatment decisions. However, it supplies incorrect or unsupported registry contacts, fails to cite the FDA directory, and does not preserve the required animal-versus-human distinction because retrieved animal findings are omitted."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "03662058576e5f5b79878518b47aa3d1c24e5bfc7fa265b218d7e78155be747a",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not identify this URL as the daridorexant registry contact; the FDA directory instead lists the QUVIVIQ Pregnancy Registry website and phone number.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies MotherToBaby as a specialist information service, not as the FDA-listed daridorexant pregnancy-registry contact supplied in the answer.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited label claim about the listed contacts conflicts with the supplied label evidence, which gives the Idorsia/QUVIVIQ registry contact rather than the two contacts listed in the answer.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives contacts for other resources instead of the FDA-listed QUVIVIQ daridorexant registry contact.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": \"No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.\",\n      \"reference_quote\": \"Daridorexant did not cause any fetal toxicity or malformation at doses up to 120 mg/kg/day.\",\n      \"explanation\": \"The answer presents the outcomes row as wholly empty and omits the retrieved animal findings and the distinction that human findings were absent while animal label data were available.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"explanation\": \"The answer does not cite the supplied FDA registry directory and instead cites unrelated or unsupported registry URLs.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA prescribing information for Quviviq (daridorexant) states that a pregnancy exposure registry is available and provides the following contact information\",\n      \"reference_quote\": \"Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"The answer attributes contacts to the FDA prescribing information, but the supplied label provides a different daridorexant registry contact.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"This broad statement omits or obscures retrieved animal outcome findings and therefore does not faithfully represent the available evidence.\"\n    }\n  ],\n  \"rationale\": \"The three evidence rows and maternal PK gap are partly responsive, and the answer avoids dosing and treatment decisions. However, it supplies incorrect or unsupported registry contacts, fails to cite the FDA directory, and does not preserve the required animal-versus-human distinction because retrieved animal findings are omitted.\"\n}",
+      "validation_errors": [
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 112709,
+        "completion_tokens": 1336,
+        "total_tokens": 114045,
+        "prompt_tokens_details": {
+          "cached_tokens": 112706,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 413,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 3,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not identify this URL as the daridorexant registry contact; the FDA directory instead lists the QUVIVIQ Pregnancy Registry website and phone number.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence identifies MotherToBaby as a specialist information service, not as the FDA-listed daridorexant pregnancy-registry contact supplied in the answer.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"contradicted\",\n      \"reason\": \"The cited label claim about the listed contacts conflicts with the supplied label evidence, which gives the Idorsia/QUVIVIQ registry contact rather than the two contacts listed in the answer.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"National Pregnancy Registry for Psychiatric Medications\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives contacts for other resources instead of the FDA-listed QUVIVIQ daridorexant registry contact.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Preserve animal versus human and absent abstracts.\",\n      \"answer_quote\": \"No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.\",\n      \"reference_quote\": \"Daridorexant did not cause any fetal toxicity or malformation at doses up to 120 mg/kg/day.\",\n      \"explanation\": \"The answer presents the outcomes row as wholly empty and omits the retrieved animal findings and the distinction that human findings were absent while animal label data were available.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries\",\n      \"explanation\": \"The answer does not cite the supplied FDA registry directory and instead cites unrelated or unsupported registry URLs.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA prescribing information for **Quviviq (daridorexant)** states that a pregnancy exposure registry is available and provides the following contact information\",\n      \"reference_quote\": \"Pregnant women exposed to QUVIVIQ and healthcare providers are encouraged to call Idorsia Pharmaceuticals Ltd at 1-833-400-9611.\",\n      \"explanation\": \"The answer attributes contacts to the FDA prescribing information, but the supplied label provides a different daridorexant registry contact.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No pregnancy-exposure study outcomes or fetal/infant outcome findings were retrieved.\",\n      \"reference_quote\": \"In animal reproduction studies, oral administration of daridorexant to pregnant rats and rabbits during the period of organogenesis did not cause fetal toxicity or malformation\",\n      \"explanation\": \"This broad statement omits or obscures retrieved animal outcome findings and therefore does not faithfully represent the available evidence.\"\n    }\n  ],\n  \"rationale\": \"The three evidence rows and maternal PK gap are partly responsive, and the answer avoids dosing and treatment decisions. However, it supplies incorrect or unsupported registry contacts, fails to cite the FDA directory, and does not preserve the required animal-versus-human distinction because retrieved animal findings are omitted.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 113703,
+        "completion_tokens": 1086,
+        "total_tokens": 114789,
+        "prompt_tokens_details": {
+          "cached_tokens": 112706,
+          "cache_write_tokens": 994,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 162,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 113703,
+    "completion_tokens": 1086,
+    "total_tokens": 114789,
+    "prompt_tokens_details": {
+      "cached_tokens": 112706,
+      "cache_write_tokens": 994,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 162,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}
