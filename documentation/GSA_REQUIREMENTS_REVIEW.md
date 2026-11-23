@@ -8,7 +8,7 @@ The [sample evaluation DOCX](https://www.gsa.gov/system/files/MCP-hackathon-samp
 |---|---|---|
 | Root runnable project and locked dependencies | `pyproject.toml`, `uv.lock`, `main.py`, `.python-version`, `.env.example`, `QUICKSTART.md` | Python 3.13; local stdio default, optional loopback HTTP |
 | Clear package and registration boundaries | `src/parent_child_pharmacology/{tools,services,clients,models,core,prompts,resources}` | One registrar per tool; domain implementations remain separate services |
-| Discovery and operational routes | 30 tools, four prompts, four resources; `/health`, `/version`; `server.json` | Registry metadata only; no public endpoint or registry publication |
+| Discovery and operational routes | 31 tools, four prompts, four resources; `/health`, `/version`; `server.json` | Registry metadata only; no public endpoint or registry publication |
 | Strict contracts and provenance | Bounded schemas, coverage/truncation metadata, source tags, required notices | Third-party clients must honor preflight and display rules |
 | Outbound and credential security | HTTPS host allowlist, no redirects/proxy inheritance, 5 MB cap, token destination checks | DNS/IP pinning and per-tool remote auth tested; no cloud firewall or penetration-test claim; see `SECURITY.md` |
 | Automated quality checks | Windows/Linux GitHub CI for lint, formatting, unit and grader tests, package build | CI has read-only repository permissions and no deploy step |

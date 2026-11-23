@@ -200,6 +200,7 @@ async def search_funded_research(
         "search_metadata": getattr(rows, "search_metadata", {}),
         "query_criteria": getattr(rows, "search_metadata", {}).get("criteria"),
         "amount_notice": "Fiscal-year obligations in USD, not lifetime project value. Total award and direct costs are separate.",
+        "funder_scope": "NIH RePORTER only. Other funders such as FDA, CDC, PCORI, foundations and industry are not included; say so when answering who funds a topic.",
     }
 
 
@@ -214,6 +215,12 @@ async def summarize_research_portfolio(
     """Aggregate a bounded public RePORTER portfolio by administering IC and fiscal year. Return exact query criteria, counts, separate total-award/direct-cost sums and missing amounts. HD means NICHD. Subprojects are excluded. These are fiscal-year obligations, not lifetime project value or proof of performance; check complete_result_set before describing totals as complete."""
     from parent_child_pharmacology.clients.reporter import research_portfolio
 
-    return await research_portfolio(
+    out = await research_portfolio(
         drug_or_topic, ic, fiscal_years, activity_code, organization, max_projects
     )
+    if isinstance(out, dict):
+        out.setdefault(
+            "funder_scope",
+            "NIH RePORTER only. Other funders such as FDA, CDC, PCORI, foundations and industry are not included; say so when answering who funds a topic.",
+        )
+    return out

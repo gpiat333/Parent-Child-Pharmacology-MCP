@@ -154,6 +154,14 @@ def route(question, country="US", *, language_required=True):
             allow_research=False,
             message=POLICY["messages"]["messages_10"],
         )
+        # Individual pregnancy or breastfeeding exposure questions get a specialist referral.
+        # Not offered on crisis, urgent, privacy or identity routes, which return earlier.
+        if re.search(POLICY["patterns"]["exposure_counseling"], q):
+            from .referrals import MOTHERTOBABY, MOTHERTOBABY_MESSAGE
+
+            result["message"] += " " + MOTHERTOBABY_MESSAGE
+            result["referrals"] = [MOTHERTOBABY]
+            result["source_urls"] = [MOTHERTOBABY["website"]]
         return result
     if identity_is_vague(q):
         result.update(

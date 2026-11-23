@@ -8,6 +8,18 @@ WORKFLOW_TOOLS = {
     "summarize_research_portfolio",
 }
 GUIDANCE = {
+    "search_mothertobaby_fact_sheets": (
+        "Consumer fact sheets on a medicine or exposure in pregnancy or breastfeeding, including Spanish.",
+        "Medicines given to children, clinical evidence synthesis, or summarizing sheet text not retrieved.",
+    ),
+    "search_funded_research": (
+        "Who funds or what NIH funds on a topic: projects, institutes, investigators, awards.",
+        "Evidence about a medicine's effects. Covers NIH only; say so when asked about funders generally.",
+    ),
+    "summarize_research_portfolio": (
+        "Which NIH institutes fund a topic and how much, by fiscal year.",
+        "Evidence about a medicine's effects. Covers NIH only; FDA, CDC, PCORI, foundations and industry are not included.",
+    ),
     "search_trials": (
         "Research discovery across trial statuses.",
         "Participation matching; use find_recruiting_studies.",

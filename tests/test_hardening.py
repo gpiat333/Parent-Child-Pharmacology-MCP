@@ -218,7 +218,7 @@ def test_capabilities_and_inactive_tool(monkeypatch):
 
     monkeypatch.setattr(config, "USE_LAKEHOUSE", False)
     cap = capabilities()
-    assert len(cap["tools"]) == 30
+    assert len(cap["tools"]) == 31
     assert cap["snapshot"]["snapshot_age_days"] >= 0
     result = asyncio.run(semantic_search_lactmed("What lactation evidence exists for sertraline?"))
     assert result["status"] == "not_enabled"

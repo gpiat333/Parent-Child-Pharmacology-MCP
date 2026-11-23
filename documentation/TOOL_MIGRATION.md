@@ -2,7 +2,7 @@
 
 # Tool migration
 
-Current local protocol: 30 tools, four prompts, four resources. No deployment.
+Current local protocol: 31 tools (adds `search_mothertobaby_fact_sheets`), four prompts, four resources. No deployment.
 
 | Former name | Current interface |
 |---|---|

@@ -196,5 +196,24 @@ async def medication_evidence_brief(
         out["maternal_pharmacokinetics"] = [
             {"ingredient": r["ingredient"], **r["maternal_pharmacokinetics"]} for r in rows
         ]
+    if population in {"pregnancy", "lactation"}:
+        from parent_child_pharmacology.core.referrals import MOTHERTOBABY, PRGLAC_CONTEXT
+
+        from .fact_sheets import search_mothertobaby_fact_sheets
+
+        sheets = []
+        for name in ingredients:
+            try:
+                sheets += (await search_mothertobaby_fact_sheets(name, "en", 2))["fact_sheets"]
+            except Exception:
+                pass
+        out["consumer_fact_sheets"] = {
+            "publisher": "MotherToBaby (OTIS, a nonprofit), distributed by NLM Bookshelf",
+            "fact_sheets": sheets,
+            "page_text_retrieved": False,
+            "note": "Consumer summaries, not federal evidence. Link them; do not summarize unread text.",
+        }
+        out["specialist_referral"] = MOTHERTOBABY
+        out["research_priorities_context"] = PRGLAC_CONTEXT
     out["citations"] = list(dict.fromkeys(urls(rows)))
     return annotate(out)

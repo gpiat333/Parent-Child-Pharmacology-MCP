@@ -65,7 +65,7 @@ if args.phase == "prepare":
     design = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "version": "0.14.0",
-        "policy": "2026-11-22.16",
+        "policy": "2026-11-22.17",
         "source_sha256": hashes,
         "model": os.environ["AGENT_MODEL"],
         "judge_model": os.getenv("JUDGE_MODEL", os.environ["AGENT_MODEL"]),

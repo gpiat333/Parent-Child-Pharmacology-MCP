@@ -336,7 +336,14 @@ class MedicationEvidenceBriefInput(StrictInput):
     ] = Field("lactation", description="Population.", examples=["lactation"])
 
 
+class SearchMothertobabyFactSheetsInput(StrictInput):
+    drug: Query = Field(..., description="Medicine or exposure name.", examples=["sertraline"])
+    language: Literal["any", "en", "es"] = Field("any", description="Fact sheet language.")
+    max_results: Limit20 = 5
+
+
 INPUT_MODELS = {
+    "search_mothertobaby_fact_sheets": SearchMothertobabyFactSheetsInput,
     "route_parent_question": RouteParentQuestionInput,
     "get_parent_medication_info": GetParentMedicationInfoInput,
     "search_medication_recalls": SearchMedicationRecallsInput,

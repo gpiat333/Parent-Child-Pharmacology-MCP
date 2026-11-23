@@ -38,7 +38,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 
 ### At a glance
 
-**30 tools, 4 prompts and 4 resources** spanning drug identity, lactation and pregnancy evidence, literature and trials, labeling and safety signals, NICHD research data, and study participation.
+**31 tools, 4 prompts and 4 resources** spanning drug identity, lactation and pregnancy evidence, literature and trials, labeling and safety signals, NICHD research data, and study participation.
 
 ---
 
@@ -54,7 +54,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 | Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
-**Version and access:** current source is **0.14.0**, policy **2026-11-22.16**. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. The .16 source passed 754/754 tests in a Databricks serverless run ([receipt](evaluation/databricks-validation-2026-11-22-policy16/databricks-job-output.json)). This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .14. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
+**Version and access:** current source is **0.14.0**, policy **2026-11-22.17**. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. Policy .17 adds a MotherToBaby referral for individual pregnancy and breastfeeding medication questions, a MotherToBaby fact sheet search (NLM Bookshelf, labeled as nonprofit content), PRGLAC research-gap context in pregnancy and lactation briefs, and an NIH-only scope note on funding results. The .16 source passed 754/754 tests in a Databricks serverless run ([receipt](evaluation/databricks-validation-2026-11-22-policy16/databricks-job-output.json)). This repository is private; GitHub access is required for these materials. The existing Databricks App remains on **.9** and is not a live demo of .14. Workspace access is required for Databricks links below. Publishing this source did not deploy the App, change permissions, make the repository public, or submit the entry to GSA.
 
 The [complete 65-file template audit and remediation table](documentation/TEMPLATE_DETAILED_AUDIT.md) records implemented controls, deliberate adaptations, and deployment prerequisites still outstanding.
 

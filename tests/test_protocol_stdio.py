@@ -18,7 +18,7 @@ def test_local_stdio_client_can_initialize_discover_and_stop_before_retrieval():
         async with stdio_client(parameters) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
-                assert len((await session.list_tools()).tools) == 30
+                assert len((await session.list_tools()).tools) == 31
                 assert len((await session.list_prompts()).prompts) == 4
                 assert len((await session.list_resources()).resources) == 4
                 result = await session.call_tool(

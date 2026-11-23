@@ -71,7 +71,7 @@ def test_valid_boundaries_and_intentional_empty_discovery(name, args):
 
 def test_all_tools_advertise_strict_inputs_and_typed_envelope():
     tools = asyncio.run(server.mcp.list_tools())
-    assert len(tools) == 30
+    assert len(tools) == 31
     for tool in tools:
         assert tool.inputSchema["additionalProperties"] is False
         assert set(tool.outputSchema["required"]) >= {"safety", "disclaimer"}

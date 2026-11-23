@@ -30,6 +30,7 @@ DOMAINS = {
         "find_pregnancy_exposure_registries",
         "search_parent_input_opportunities",
         "get_reporting_resources",
+        "search_mothertobaby_fact_sheets",
     ],
     "composite": ["medication_evidence_brief"],
     "discovery": [

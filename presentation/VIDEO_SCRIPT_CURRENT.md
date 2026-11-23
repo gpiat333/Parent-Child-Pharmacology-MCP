@@ -2,7 +2,7 @@
 
 Saved video remains a historical .4 demonstration.
 
-Current source 0.14.0, policy 2026-11-22.16. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
+Current source 0.14.0, policy 2026-11-22.17. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Policy .16 adds the HRSA National Maternal Mental Health Hotline (1-833-TLC-MAMA) to perinatal crisis replies and recognizes more postpartum wording. Policy .17 adds a MotherToBaby referral for individual pregnancy and breastfeeding medication questions, a MotherToBaby fact sheet search (NLM Bookshelf, labeled as nonprofit content), PRGLAC research-gap context in pregnancy and lactation briefs, and an NIH-only scope note on funding results. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
 
 | Measure | Verified result | Interpretation |
 |---|---|---|
