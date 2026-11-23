@@ -530,6 +530,7 @@ s = new("Beyond pregnancy: children, studies and Spanish", notes=(
     "drug pages. Spanish safety messages are held until a Spanish speaker reviews them."))
 caps = [
     ("Children's medicines", [
+        "Evidence briefs with three pediatric rows",
         "FDA pediatric labeling changes",
         "BPCA and Pediatric Trials Network study summaries",
         "MPRINT pediatric studies and data tables",
@@ -555,7 +556,7 @@ for i, (head, items) in enumerate(caps):
     text(s, x + 0.3, 2.45, 3.25, 4.1, items, size=15, color=INK, space_after=10)
 
 # 6 ─ The brief workflow
-s = new("For pregnancy and breastfeeding, one call builds an evidence brief", notes=(
+s = new("One call builds an evidence brief for pregnancy, breastfeeding or a child", notes=(
     "Here is what medication_evidence_brief does. It confirms the medicine through RxNorm first, and stops "
     "if the name is ambiguous. For combination products, every ingredient gets its own search. The results "
     "are sorted into three evidence axes, so effects on the mother, exposure of the baby, and outcomes in "
@@ -573,20 +574,29 @@ for i, (n, head, body) in enumerate(steps):
     circle_num(s, x + 0.25, 1.75, n, d=0.6)
     text(s, x, 2.55, 2.3, 0.4, head, size=16, bold=True, color=DEEP)
     text(s, x, 2.95, 2.3, 0.7, body, size=14, color=MUTED)
-text(s, 0.65, 4.0, 9.0, 0.4, "The three evidence axes (pregnancy and breastfeeding)", size=18, bold=True, color=TEAL)
-axes = [("The person taking it", "Effects on the pregnant or breastfeeding parent, and their pharmacokinetics when found"),
-        ("Transfer or exposure", "Measured levels in the fetus, breast milk or infant, kept apart from animal or modeled data"),
-        ("Fetal or infant outcomes", "What was observed in the baby, kept apart from exposure measurements")]
-for i, (head, body) in enumerate(axes):
-    x = 0.65 + i * 3.05
-    box(s, x, 4.55, 2.85, 2.05, fill=MIST if i != 2 else CORAL_T)
-    text(s, x + 0.25, 4.7, 2.4, 0.4, head, size=15, bold=True, color=DEEP)
-    text(s, x + 0.25, 5.15, 2.4, 1.4, body, size=13, color=INK)
-box(s, 9.8, 4.0, 2.85, 2.6, fill=DEEP)
-text(s, 10.05, 4.15, 2.4, 0.4, "For a child's medicine", size=15, bold=True, color=WHITE)
-text(s, 10.05, 4.6, 2.4, 1.95, "Pediatric labeling changes, BPCA and PTN summaries, MPRINT pediatric data and "
-     "age-checked trials, with neonate, infant, child and adolescent kept separate.", size=13, color=MIST2)
-
+two_sets = [
+    ("Pregnancy and breastfeeding", MIST, [
+        ("The person taking it", "Effects on the pregnant or breastfeeding parent"),
+        ("Transfer or exposure", "Measured levels in the fetus, breast milk or infant"),
+        ("Fetal or infant outcomes", "What was observed in the baby"),
+    ]),
+    ("A child's medicine", CORAL_T, [
+        ("Effectiveness and safety", "Findings in children, with FAERS counts kept separate"),
+        ("Pharmacokinetics and exposure", "How children absorb and clear the medicine"),
+        ("Labeling status and changes", "Ages established, not established, FDA changes"),
+    ]),
+]
+for r, (group, fill, axes) in enumerate(two_sets):
+    y = 3.95 + r * 1.45
+    text(s, 0.65, y + 0.05, 2.3, 1.2, group, size=15, bold=True, color=TEAL if r == 0 else CORAL,
+         anchor=MSO_ANCHOR.MIDDLE)
+    for i, (head, body) in enumerate(axes):
+        x = 3.05 + i * 3.25
+        box(s, x, y, 3.05, 1.3, fill=fill)
+        text(s, x + 0.2, y + 0.12, 2.7, 0.35, head, size=14, bold=True, color=DEEP)
+        text(s, x + 0.2, y + 0.5, 2.7, 0.75, body, size=12, color=INK)
+text(s, 0.65, 6.9, 12.0, 0.35, "Empty rows stay visible in both sets: “no evidence retrieved; not evidence of safety.”",
+     size=12, color=MUTED, italic=True)
 
 def demo(title, img, question, caption, notes, max_h=3.95):
     s = new(title, notes=notes)
@@ -926,14 +936,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 861 automated tests pass in a Databricks serverless notebook; on my Mac, the "
+    "I tested in layers. All 869 automated tests pass in a Databricks serverless notebook; on my Mac, the "
     "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("861", "automated tests", "All pass in a Databricks serverless notebook"),
+    ("869", "automated tests", "All pass in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1161,7 +1171,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 861 tests pass on Databricks.",
+     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 869 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 9/10", appendix=True, notes=(

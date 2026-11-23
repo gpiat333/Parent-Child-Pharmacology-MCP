@@ -31,4 +31,6 @@ Current source 0.19.0, policy 2026-11-22.19. Policy .15 fixes safety-routing fal
 
 **MotherToBaby fact sheet text (November 22, 2026):** Databricks serverless run 396432898767817 passed **861/861** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-mtb-text/databricks-job-output.json).
 
+**Pediatric evidence briefs (November 23, 2026):** Databricks serverless run 511770629703382 passed **869/869** tests, including the Python/PowerShell pediatric display parity tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-23-pediatric-brief/databricks-job-output.json).
+
 [Current evidence](../evaluation/retrieval-reliability-final/REPORT.md)
