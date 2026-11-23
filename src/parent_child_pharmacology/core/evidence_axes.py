@@ -368,3 +368,189 @@ def build_axes(row, population):
         else "Candidate maternal pharmacokinetic passages retrieved; inspect study population/design. No personalized dose adjustment is inferred."
     )
     return list(axes.values()), maternal_pk
+
+
+PEDIATRIC_POPULATIONS = {"neonate", "infant", "child", "adolescent", "pediatric"}
+PEDIATRIC_AXES = {
+    "pediatric_effectiveness_safety": "Effectiveness and safety findings in children",
+    "pediatric_exposure": "Pharmacokinetics and exposure in children",
+    "pediatric_labeling": "Pediatric labeling status and changes",
+}
+CHILD = re.compile(
+    r"\bchild(?:ren)?\b|p(?:a)?ediatric|\binfants?\b|neonat|newborn|adolescen|\bjuvenile\b|\bteen",
+    re.I,
+)
+NOT_ESTABLISHED = re.compile(
+    r"(?:have|has) not been (?:established|studied|evaluated)|not (?:been )?established", re.I
+)
+ESTABLISHED = re.compile(
+    r"(?:safety and effectiveness|effectiveness and safety|efficacy).{0,220}?(?:have|has) been established",
+    re.I,
+)
+DOSE_TEXT = re.compile(
+    r"\b\d+(?:\.\d+)?\s*(?:mg|mcg|g|mL)(?:/kg)?(?:/day)?\b|dosing recommendation|target dose", re.I
+)
+
+
+def build_pediatric_axes(row, population):
+    """Pediatric counterpart to build_axes: label 8.4, FDA pediatric labeling changes,
+    pediatric abstracts and FAERS report context. Grouping is heuristic, never a dose or
+    safety inference; dose-bearing source text is flagged."""
+    axes = {
+        key: {
+            "axis": key,
+            "label": label,
+            "items": [],
+            "context_only": [],
+            "reported_gaps": [],
+            "report_only_context": [],
+            "not_evidence_of_safety": True,
+        }
+        for key, label in PEDIATRIC_AXES.items()
+    }
+
+    def add(axis, bucket, text, source, url, kind, pmid=None, context=None):
+        item = record(text, source, url, kind=kind, pmid=pmid)
+        if context:
+            item["study_context"] = context
+        if DOSE_TEXT.search(text):
+            item["contains_dose_text"] = True
+            item["dose_text_notice"] = (
+                "Source dosing text is research or labeling context, never a personal dose."
+            )
+        axes[axis][bucket].append(item)
+
+    label = row.get("label", {}) or {}
+    lu = label.get("url")
+    for s in sentences((label.get("sections") or {}).get("pediatric_use")):
+        if NOT_ESTABLISHED.search(s):
+            add(
+                "pediatric_labeling",
+                "reported_gaps",
+                s,
+                "DailyMed 8.4 Pediatric Use",
+                lu,
+                "label_coverage_statement",
+            )
+        elif ESTABLISHED.search(s):
+            add("pediatric_labeling", "items", s, "DailyMed 8.4 Pediatric Use", lu, "label_context")
+        elif ANIMAL.search(s):
+            add(
+                "pediatric_effectiveness_safety",
+                "context_only",
+                s,
+                "DailyMed 8.4 Pediatric Use",
+                lu,
+                "label_context",
+                context="animal",
+            )
+        elif PK.search(s):
+            add("pediatric_exposure", "items", s, "DailyMed 8.4 Pediatric Use", lu, "label_context")
+        elif OUTCOME.search(s) or re.search(r"\bstudy|trial|effect", s, re.I):
+            add(
+                "pediatric_effectiveness_safety",
+                "items",
+                s,
+                "DailyMed 8.4 Pediatric Use",
+                lu,
+                "label_context",
+            )
+    changes = row.get("pediatric_labeling_changes") or {}
+    for change in (changes.get("results") or [])[:10]:
+        text = "; ".join(
+            str(v).strip()
+            for v in [
+                change.get("labeling_change_date"),
+                change.get("trade_name"),
+                change.get("legislation"),
+                change.get("indication"),
+                change.get("labeling_change_summary"),
+            ]
+            if v
+        )
+        add(
+            "pediatric_labeling",
+            "items",
+            text,
+            "FDA Pediatric Labeling Changes",
+            change.get("url"),
+            "labeling_change_record",
+        )
+    literature = row.get("literature", {}) or {}
+    for article in literature.get("articles", []):
+        pmid = article.get("pmid")
+        url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/" if pmid else None
+        for s in sentences(article.get("abstract")):
+            if not CHILD.search(s):
+                continue
+            context = "protocol_not_results" if PROTOCOL.search(s) else None
+            if MISSING.search(s):
+                add(
+                    "pediatric_effectiveness_safety",
+                    "reported_gaps",
+                    s,
+                    "PubMed abstract",
+                    url,
+                    "abstract_candidate",
+                    pmid,
+                )
+            elif PK.search(s):
+                add(
+                    "pediatric_exposure",
+                    "context_only" if context else "items",
+                    s,
+                    "PubMed abstract",
+                    url,
+                    "abstract_candidate",
+                    pmid,
+                    context,
+                )
+            elif OUTCOME.search(s):
+                add(
+                    "pediatric_effectiveness_safety",
+                    "context_only"
+                    if context or PREDICTED.search(s) or ANIMAL.search(s)
+                    else "items",
+                    s,
+                    "PubMed abstract",
+                    url,
+                    "abstract_candidate",
+                    pmid,
+                    context,
+                )
+    axes["pediatric_effectiveness_safety"]["report_only_context"] = report_context(row, population)
+    from .source_context import item_population
+
+    for axis in axes.values():
+        for key in ["items", "context_only", "reported_gaps"]:
+            seen = set()
+            axis[key] = [
+                x
+                for x in axis[key]
+                if not ((x["text"], x["url"]) in seen or seen.add((x["text"], x["url"])))
+            ][:12]
+            for item in axis[key]:
+                item["population_context"] = item_population(item, population)
+        axis["outcome_or_effect_passages_retrieved"] = bool(axis["items"])
+        axis["report_only_context_retrieved"] = bool(axis["report_only_context"])
+        axis["no_evidence_retrieved"] = not bool(axis["items"] or axis["report_only_context"])
+        axis["state"] = (
+            "source_passages_retrieved"
+            if axis["items"]
+            else "report_context_only"
+            if axis["report_only_context"]
+            else "none_retrieved"
+        )
+        axis["empty_message"] = (
+            None
+            if axis["items"]
+            else "No observed findings retrieved for this axis. Spontaneous report context was retrieved separately; it does not establish an outcome, causation or safety."
+            if axis["report_only_context"]
+            else "No evidence retrieved for this axis; not evidence of safety."
+        )
+        axis["interpretation"] = (
+            "Passages are grouped heuristically, not adjudicated clinical findings. Keep the requested age band "
+            "separate from source ages; adult or older-child findings do not describe neonates. Labeling text "
+            "about established ages is not a recommendation. Dose-bearing source text is never a personal dose."
+        )
+    return list(axes.values())

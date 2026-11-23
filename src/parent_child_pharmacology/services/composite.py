@@ -6,14 +6,25 @@ import parent_child_pharmacology.clients as src
 from parent_child_pharmacology.clients import parent_resources as parents
 from parent_child_pharmacology.core.abstract_coverage import coverage, merge_coverages
 from parent_child_pharmacology.core.evidence import annotate, clinician_questions
-from parent_child_pharmacology.core.evidence_axes import AXES, build_axes
+from parent_child_pharmacology.core.evidence_axes import (
+    AXES,
+    PEDIATRIC_AXES,
+    PEDIATRIC_POPULATIONS,
+    build_axes,
+    build_pediatric_axes,
+)
 from parent_child_pharmacology.core.participation import tier
 from parent_child_pharmacology.core.population import preserve_population
 from parent_child_pharmacology.core.response import urls
 from parent_child_pharmacology.models.contracts import EvidenceResponse, Query
 from parent_child_pharmacology.models.inputs import Population
 
-from .labels_safety import get_adverse_event_signals, get_label_sections, get_patient_education
+from .labels_safety import (
+    get_adverse_event_signals,
+    get_label_sections,
+    get_patient_education,
+    search_pediatric_labeling_changes,
+)
 from .lactation import get_lactmed_record, search_lactmed
 from .literature import get_abstracts, search_literature, search_trials
 
@@ -21,7 +32,10 @@ from .literature import get_abstracts, search_literature, search_trials
 async def medication_evidence_brief(
     drug: Query, population: Population = "lactation"
 ) -> EvidenceResponse:
-    """Use for explicit requests to prepare an evidence brief, including pregnancy briefs.
+    """Use for explicit requests to prepare an evidence brief for pregnancy, breastfeeding or a
+    child's medicine (population neonate, infant, child, adolescent or pediatric). Pediatric briefs use
+    three pediatric axes: effectiveness and safety findings, pharmacokinetics and exposure, and
+    labeling status and changes (DailyMed 8.4, FDA pediatric labeling changes, BPCA/PTN links).
     Call before optional individual source lookups when preflight requested_workflow
     requires it. Compile public evidence and questions to ask a clinician, never a safety verdict.
     Normalize the exact product then search EACH confirmed active ingredient. Keep
@@ -53,6 +67,8 @@ async def medication_evidence_brief(
             }
         )
     ingredients = list(dict.fromkeys(norm["ingredients"]))
+    pediatric = population in PEDIATRIC_POPULATIONS
+    axes_map = PEDIATRIC_AXES if pediatric else AXES
 
     async def ingredient(name):
         async def literature():
@@ -120,7 +136,20 @@ async def medication_evidence_brief(
         if row["literature"].get("error") and not row["literature"].get("abstract_coverage"):
             row["literature"]["abstract_coverage"] = coverage([], [], search_failed=True)
         row["ingredient"] = name
-        row["evidence_axes"], pk = build_axes(row, population)
+        if pediatric:
+            from .nichd import search_bpca_evidence
+
+            for key, call in [
+                ("pediatric_labeling_changes", search_pediatric_labeling_changes(name)),
+                ("bpca_study_summaries", search_bpca_evidence(name, 5)),
+            ]:
+                try:
+                    row[key] = await call
+                except Exception:
+                    row[key] = {"error": "source_unavailable", "results": []}
+            row["evidence_axes"], pk = build_pediatric_axes(row, population), None
+        else:
+            row["evidence_axes"], pk = build_axes(row, population)
         if population == "pregnancy":
             row["maternal_pharmacokinetics"] = pk
             row["maternal_dose_adjustment"] = (row["label"].get("pllr_8_1") or {}).get(
@@ -169,7 +198,8 @@ async def medication_evidence_brief(
         "queried_ingredients": ingredients,
         "ingredient_evidence": rows,
         "abstract_coverage": merge_coverages([r["literature"]["abstract_coverage"] for r in rows]),
-        "evidence_axis_order": list(AXES),
+        "evidence_axis_order": list(axes_map),
+        "axis_set": "pediatric" if pediatric else "pregnancy_lactation",
         "display_contract": "Always render all three evidence-axis rows, including empty rows. Also show any report_only_context separately as unconfirmed spontaneous-report terms and counts, with the query scope, source link and population uncertainty. An empty observed-outcomes row does not mean no human reports were retrieved. Report counts are not established outcomes or rates. Participation is a separate unranked navigation tier, never evidence of safety.",
         "ingredient_coverage": {
             "all_normalized_ingredients_queried": True,
@@ -190,7 +220,7 @@ async def medication_evidence_brief(
                 for r in rows
             ],
         }
-        for key, label in AXES.items()
+        for key, label in axes_map.items()
     ]
     if population == "pregnancy":
         out["maternal_pharmacokinetics"] = [

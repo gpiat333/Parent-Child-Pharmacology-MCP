@@ -46,7 +46,10 @@ def axis_notices(tool_calls):
             "|---|---|---:|---:|",
         ]
         axes = result.get("evidence_axes", [])
-        for key, label in POLICY["axes"].items():
+        axis_map = (
+            POLICY["pediatric_axes"] if result.get("axis_set") == "pediatric" else POLICY["axes"]
+        )
+        for key, label in axis_map.items():
             matches = (
                 [a for a in axes if isinstance(a, dict) and a.get("axis") == key]
                 if isinstance(axes, list)

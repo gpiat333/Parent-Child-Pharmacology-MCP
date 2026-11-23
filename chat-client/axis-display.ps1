@@ -15,7 +15,8 @@ function Get-AxisDisplayNotice([object[]]$ToolCalls) {
  foreach($result in $latest.Values){
   $index++;if($latest.Count -gt 1){$lines.Add("Brief $index")}
   $lines.Add('| Evidence axis | Extracted findings | Context-only passages | Gap statements |');$lines.Add('|---|---|---:|---:|')
-  foreach($property in $script:AxisDisplayPolicy.axes.psobject.Properties){
+  $axisMap=if($result.axis_set -ceq 'pediatric'){$script:AxisDisplayPolicy.pediatric_axes}else{$script:AxisDisplayPolicy.axes}
+  foreach($property in $axisMap.psobject.Properties){
    $rows=@($result.evidence_axes | Where-Object {$_.axis -ceq $property.Name});$valid=$rows.Count -eq 1 -and $rows[0].by_ingredient -is [array] -and $rows[0].by_ingredient.Count -gt 0
    $counts=@{items=0;context_only=0;reported_gaps=0}
    if($valid){foreach($group in $rows[0].by_ingredient){foreach($field in @('items','context_only','reported_gaps')){if($group.$field -isnot [array]){$valid=$false}else{$counts[$field]+=$group.$field.Count}}}}
