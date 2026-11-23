@@ -69,6 +69,21 @@ def route(question, country="US", *, language_required=True):
                 }
             ]
             if perinatal:
+                # Fixed strings only: a referral number is never model-generated or paraphrased.
+                result["message"] += " " + POLICY["messages"]["maternal_hotline"]
+                result["source_urls"].append(
+                    "https://mchb.hrsa.gov/national-maternal-mental-health-hotline"
+                )
+                result["referrals"].append(
+                    {
+                        "name": "National Maternal Mental Health Hotline (HRSA)",
+                        "call": "1-833-852-6262",
+                        "text": "1-833-852-6262",
+                        "phone_link": "tel:18338526262",
+                        "sms_link": "sms:18338526262",
+                        "role": "24/7 call or text support for pregnant and postpartum people, in English and Spanish.",
+                    }
+                )
                 result["message"] += " " + POLICY["messages"]["perinatal_support"]
                 result["source_urls"].append("https://postpartum.net/get-help/")
                 result["referrals"].append(

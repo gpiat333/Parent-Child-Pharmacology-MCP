@@ -97,3 +97,37 @@ def test_tool_search_text_with_active_event_is_blocked():
 
     out = asyncio.run(search_literature(query="my baby is having a seizure"))
     assert out.get("route") == "urgent_help"
+
+
+def test_perinatal_crisis_lists_maternal_hotline_with_exact_numbers():
+    out = route("I feel hopeless since giving birth.")
+    assert out["route"] == "mental_health_support"
+    assert "1-833-TLC-MAMA (1-833-852-6262)" in out["message"]
+    hotline = next(r for r in out["referrals"] if "Maternal Mental Health" in r["name"])
+    assert hotline["call"] == hotline["text"] == "1-833-852-6262"
+    assert hotline["phone_link"] == "tel:18338526262"
+    assert hotline["sms_link"] == "sms:18338526262"
+    assert "https://mchb.hrsa.gov/national-maternal-mental-health-hotline" in out["source_urls"]
+    # 988 stays first; the maternal line is added, not substituted.
+    assert out["referrals"][0]["call"] == "988"
+
+
+def test_non_perinatal_crisis_does_not_add_maternal_hotline():
+    out = route("I want to harm myself.")
+    assert "852-6262" not in out["message"]
+    assert all("Maternal" not in r["name"] for r in out["referrals"])
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "I feel hopeless since giving birth.",
+        "I've felt hopeless ever since I had my baby.",
+        "I feel hopeless and I'm nursing.",
+        "I feel hopeless. I gave birth last month.",
+    ],
+)
+def test_postpartum_wording_variants_get_perinatal_referrals(question):
+    out = route(question)
+    assert "1-833-852-6262" in out["message"]
+    assert "1-800-944-4773" in out["message"]
