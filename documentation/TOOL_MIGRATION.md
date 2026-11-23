@@ -2,7 +2,7 @@
 
 # Tool migration
 
-Current local protocol (0.21.0): 21 tools, four prompts, five resources. Not deployed; the hosted App still runs the 31-tool .27 build. See [November 23 consolidation](#november-23-consolidation-0200).
+Current local protocol (0.22.0): 21 tools, four prompts, five resources. Not deployed; the hosted App still runs the 31-tool .27 build. See [November 23 consolidation](#november-23-consolidation-0200).
 
 | Former name | Current interface |
 |---|---|
@@ -59,3 +59,9 @@ Three more tools were folded in or removed, taking the catalog from 24 to 21. Th
 | search_parent_input_opportunities | Removed with its Federal Register client; `www.federalregister.gov` is no longer on the outbound allowlist |
 
 Tool descriptions now say only what a tool does and when to choose it. The longer guidance on how to write an answer from a result is returned with each non-stop result as `answer_rules`. Evaluation case R08 (public-input notices) is retired, leaving 27 cases: 20 research and 7 stops. `search_trials` takes an optional `population`; when omitted it is pregnancy for the research landscape and any for recruiting studies. The study-team confirmation notice now attaches to every `search_trials` result.
+
+## Typed results and trials default (0.22.0)
+
+No tool was added or removed. Seven tools now advertise their own result fields on top of the shared envelope: `route_parent_question`, `normalize_drug`, `get_lactmed_record`, `search_literature`, `get_abstracts`, `search_trials` and `medication_evidence_brief`. Every tool-specific field is optional, because safety stops, identity stops and source failures return the envelope without them; fields a result did not set are left out instead of being returned as nulls. Source records keep any extra fields their source provides. The other 14 tools still share the plain envelope.
+
+`search_trials` no longer applies a pregnancy filter when `population` is omitted, which supersedes the note in the previous section. The default is `any` in both modes; set `population` to limit the search.

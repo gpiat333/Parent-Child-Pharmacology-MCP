@@ -123,7 +123,7 @@ def test_recruiting_mode_is_an_unranked_participation_listing(monkeypatch):
     assert seen[1][1] == "any"
 
 
-def test_landscape_mode_keeps_its_pregnancy_default(monkeypatch):
+def test_landscape_mode_applies_no_population_filter_unless_asked(monkeypatch):
     from parent_child_pharmacology.services import literature
 
     seen = []
@@ -134,5 +134,6 @@ def test_landscape_mode_keeps_its_pregnancy_default(monkeypatch):
 
     monkeypatch.setattr(literature.src, "trials_search", trials)
     out = asyncio.run(literature.search_trials("sertraline"))
-    assert seen == ["pregnancy"] and out["search_mode"] == "research_landscape"
+    asyncio.run(literature.search_trials("sertraline", "pregnancy"))
+    assert seen == ["any", "pregnancy"] and out["search_mode"] == "research_landscape"
     assert "tier" not in out

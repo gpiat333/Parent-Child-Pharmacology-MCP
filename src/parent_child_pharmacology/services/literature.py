@@ -139,15 +139,16 @@ async def get_abstracts(pmids: PMIDs10) -> EvidenceResponse:
 
 async def search_trials(
     condition_or_drug: OptionalQuery = "",
-    population: Population | None = None,
+    population: Population = "any",
     max_results: Limit20 = 10,
     nct_id: NCTID | None = None,
     recruiting_only: bool = False,
     location: OptionalQuery = "",
 ) -> EvidenceResponse:
     """Search ClinicalTrials.gov. Two uses:
-    Research landscape (default): studies of any status, including historical ones, for
-    pregnancy, lactation or pediatrics. Supply nct_id alone for one record. Each record
+    Research landscape (default): studies of any status, including historical ones. Set
+    population to limit them to pregnancy, lactation or a pediatric band; no population
+    filter is applied unless you set one. Supply nct_id alone for one record. Each record
     includes exact status and results_posted; completed does not mean results posted, and
     neither establishes benefit. State each study's exact status and link it. Never place
     completed or unknown-status studies in an ongoing list; ACTIVE_NOT_RECRUITING does not
@@ -165,10 +166,9 @@ async def search_trials(
         from parent_child_pharmacology.core.participation import tier
 
         found = await parents.recruiting_studies(
-            condition_or_drug, population or "any", location, max_results
+            condition_or_drug, population, location, max_results
         )
         return {**tier(found), "search_mode": "recruiting_only"}
-    population = population or "pregnancy"
     if nct_id:
         return {
             "source": "live:clinicaltrials.gov",

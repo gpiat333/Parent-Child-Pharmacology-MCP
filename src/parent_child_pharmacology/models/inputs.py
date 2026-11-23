@@ -150,10 +150,10 @@ class SearchTrialsInput(StrictInput):
         description="Condition or medicine; omit when fetching by nct_id.",
         examples=["pediatric epilepsy"],
     )
-    population: Population | None = Field(
-        None,
-        description="Who the studies should be about. When omitted: pregnancy for the research "
-        "landscape, any for recruiting_only.",
+    population: Population = Field(
+        "any",
+        description="Limit studies to pregnancy, lactation or a pediatric age band. The default, "
+        "any, applies no population filter.",
         examples=["lactation"],
     )
     max_results: Limit20 = Field(10, description="Maximum studies returned (1-20).", examples=[5])

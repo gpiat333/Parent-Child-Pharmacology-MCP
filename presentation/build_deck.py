@@ -1247,33 +1247,72 @@ for i, (head, body) in enumerate(sec):
     text(s, x + 0.3, y + 0.25, 3.2, 0.4, head, size=18, bold=True, color=CORAL if gap else TEAL)
     text(s, x + 0.3, y + 0.8, 3.2, 1.45, body, size=15, color=INK)
 
+# 15b ─ Design review
+s = new("A design review cut 31 tools to 21 and made answers 20 times smaller", notes=(
+    "After the evaluation I had the server's code and design reviewed against GSA's judging criteria. "
+    "The scripted chats had all passed, but the review found things they could not see. One evidence brief "
+    "returned up to one and a half million characters, more than most AI clients can read. Several tools "
+    "did nearly the same job. And the safety check let through some crisis wording while blocking ordinary "
+    "short searches. I merged the overlapping tools, from thirty-one down to twenty-one, made the brief "
+    "return a summary first with totals and a clear statement of what it left out, and fixed the routing "
+    "rules with tests in both directions. All 1,037 tests pass. What I have not done yet is re-run the chat "
+    "evaluations on this version, so the scores on the results slide describe the earlier one."))
+stats = [("31 \u2192 21", "tools", "Overlapping lookups merged into goal-level tools"),
+         ("42.6K \u2192 23K", "tokens to load the tool list", "Short descriptions; answer rules travel with each result"),
+         ("1.5M \u2192 60K", "characters in one evidence brief", "A summary first, the full text on request"),
+         ("1,037", "tests pass", "On Linux and Windows, client checks included")]
+for i, (num, lab, note) in enumerate(stats):
+    x = 0.65 + i * 3.05
+    box(s, x, 1.5, 2.85, 1.75, fill=MIST)
+    text(s, x + 0.2, 1.62, 2.5, 0.55, num, size=24, font=HEAD, bold=True, color=TEAL)
+    text(s, x + 0.2, 2.2, 2.5, 0.35, lab, size=13, bold=True, color=DEEP)
+    text(s, x + 0.2, 2.55, 2.5, 0.65, note, size=12, color=MUTED)
+found = ["One brief returned up to 1.5 million characters, too large for most AI clients",
+         "Several tools did nearly the same job",
+         "Crisis wording such as \u201churting my baby\u201d was let through as research",
+         "Short English searches such as \u201csertraline\u201d were blocked as non-English"]
+changed = ["Merged nine tools, folded in two and removed one; old names are in the migration notes",
+           "The brief shows every evidence row with totals and says what it left out",
+           "Crisis and language rules fixed, with tests in both directions",
+           "Not yet done: the chat evaluations have not been re-run on this version"]
+for x, head, items, color in [(0.65, "What the review found", found, CORAL), (6.85, "What I changed", changed, TEAL)]:
+    box(s, x, 3.5, 5.8, 3.3, fill=WHITE, line=MIST2)
+    text(s, x + 0.3, 3.65, 5.2, 0.4, head, size=18, font=HEAD, bold=True, color=color)
+    for k, item in enumerate(items):
+        y = 4.2 + k * 0.63
+        circle_num(s, x + 0.3, y + 0.02, str(k + 1), d=0.36, fill=color, size=12)
+        text(s, x + 0.85, y, 4.75, 0.6, item, size=14, color=INK)
+
 # 16 ─ Lessons and next steps
 s = new("What I learned and what comes next", notes=(
-    "Three lessons. Interpretation was harder than retrieval. Safety rules need tests in both directions; "
-    "my own filter was blocking legitimate research. And automated graders make mistakes too, so I read "
-    "the failures myself. Next, I need a clinician to review real answers, a Spanish speaker to review the "
+    "Four lessons. Interpretation was harder than retrieval. Safety rules need tests in both directions; "
+    "my own filter was blocking legitimate research. Automated graders make mistakes too, so I read "
+    "the failures myself. And passing answers were hiding a design problem: I had not measured what the "
+    "AI actually receives. First on the list now is re-running the evaluations on the 21-tool version. Next, I need a clinician to review real answers, a Spanish speaker to review the "
     "held Spanish safety messages, and new evaluation questions covering the MotherToBaby referral, fact "
     "sheets and who funds this research, plus weekly freshness checks for the LactMed and MotherToBaby "
     "packages like the one MPRINT already has."))
 text(s, 0.65, 1.6, 5.8, 0.4, "Lessons", size=20, font=HEAD, bold=True, color=TEAL)
 lessons = [("Interpretation is the real work", "Retrieval was quick to build. Keeping populations, exposure and outcomes apart took most of the effort."),
            ("Test safety rules both ways", "My filter blocked research on seizures and postpartum depression until I tested for over-blocking."),
-           ("Check the graders", "The model judge sometimes failed correct answers. I read every failure before changing anything.")]
+           ("Check the graders", "The model judge sometimes failed correct answers. I read every failure before changing anything."),
+           ("Measure what the AI receives", "Every scripted chat passed while one answer ran to 1.5 million characters. A design review caught it.")]
 for i, (head, body) in enumerate(lessons):
-    y = 2.15 + i * 1.6
-    box(s, 0.65, y, 5.85, 1.42, fill=MIST)
-    text(s, 0.95, y + 0.15, 5.3, 0.4, head, size=16, bold=True, color=DEEP)
-    text(s, 0.95, y + 0.55, 5.3, 0.85, body, size=14, color=INK)
+    y = 2.15 + i * 1.2
+    box(s, 0.65, y, 5.85, 1.08, fill=MIST)
+    text(s, 0.95, y + 0.1, 5.3, 0.35, head, size=16, bold=True, color=DEEP)
+    text(s, 0.95, y + 0.45, 5.3, 0.6, body, size=14, color=INK)
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
-nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
+nexts = ["Re-run the chat, paired and benchmark evaluations on the 21-tool version",
+         "Clinician review of real answers, especially for false reassurance or alarm",
          "Weekly freshness checks for the LactMed and MotherToBaby packages, as MPRINT already has",
          "Clinical review of the Spanish safety messages, then answers in Spanish",
          "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
          "Hosted evaluation and security review of the deployed Databricks App"]
 for i, t in enumerate(nexts):
-    y = 2.15 + i * 0.98
+    y = 2.15 + i * 0.8
     circle_num(s, 6.85, y - 0.04, str(i + 1), d=0.5, fill=CORAL, size=15)
-    text(s, 7.6, y, 5.05, 0.9, t, size=15, color=INK, anchor=MSO_ANCHOR.TOP)
+    text(s, 7.6, y, 5.05, 0.75, t, size=15, color=INK, anchor=MSO_ANCHOR.TOP)
 
 # 17 ─ Close
 s = new(dark=True, notes="Thank you. The repository has the code, the full evaluation records and a quickstart.")
@@ -1313,7 +1352,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "10/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on version 0.19.0, policy .25 (31 tools); not yet re-run on 0.21.0. Model calls and grading in Databricks; all 42 rows verified in MLflow.",
+     "Evaluated on version 0.19.0, policy .25 (31 tools); not yet re-run on the current version. Model calls and grading in Databricks; all 42 rows verified in MLflow.",
      size=12, color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 10/10", appendix=True, notes=(

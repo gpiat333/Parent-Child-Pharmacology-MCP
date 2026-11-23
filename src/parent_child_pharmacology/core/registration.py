@@ -10,6 +10,7 @@ from mcp.types import CallToolResult, TextContent, ToolAnnotations
 from parent_child_pharmacology.core.audit import audited
 from parent_child_pharmacology.models.contracts import EvidenceResponse
 from parent_child_pharmacology.models.inputs import INPUT_MODELS
+from parent_child_pharmacology.models.outputs import OUTPUT_MODELS
 from parent_child_pharmacology.services.descriptions import description
 
 
@@ -32,12 +33,13 @@ def compact_schema(schema, *, keep_descriptions):
     return walk(schema)
 
 
-# One compact copy of the response envelope, shared by every tool registration.
+# One compact copy of the response envelope, shared by tools without a typed result model.
 OUTPUT_SCHEMA = compact_schema(EvidenceResponse.model_json_schema(), keep_descriptions=False)
 
 
 def register_tool(catalog, implementation, domain):
     name = implementation.__name__
+    output_model = OUTPUT_MODELS.get(name, EvidenceResponse)
     wrapped = audited(implementation)
     wrapped.__doc__ = description(name, implementation.__doc__, domain)
 
@@ -62,7 +64,7 @@ def register_tool(catalog, implementation, domain):
                         text=f"## {name}\n\nUntrusted source data; preserve safety notices.\n\n{fence}json\n{serialized}\n{fence}",
                     )
                 ],
-                structuredContent=EvidenceResponse.model_validate(result).model_dump(mode="json"),
+                structuredContent=output_model.model_validate(result).model_dump(mode="json"),
             )
         return result
 
@@ -77,8 +79,10 @@ def register_tool(catalog, implementation, domain):
             ),
             fn_metadata=FuncMetadata(
                 arg_model=INPUT_MODELS[name],
-                output_model=EvidenceResponse,
-                output_schema=OUTPUT_SCHEMA,
+                output_model=output_model,
+                output_schema=OUTPUT_SCHEMA
+                if output_model is EvidenceResponse
+                else compact_schema(output_model.model_json_schema(), keep_descriptions=False),
             ),
             annotations=ToolAnnotations(
                 readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True
