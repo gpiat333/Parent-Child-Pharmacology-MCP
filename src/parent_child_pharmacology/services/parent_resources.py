@@ -53,29 +53,52 @@ async def get_parent_medication_info(drug: Query) -> EvidenceResponse:
     return await parents.medication_info(drug)
 
 
-async def search_medication_recalls(
-    drug: Query,
+NoticeKind = Literal["recalls", "safety_communications", "shortages", "reporting_links"]
+ShortageStatus = Literal["any", "Current", "Resolved", "Discontinued"]
+
+
+async def search_fda_drug_notices(
+    kind: NoticeKind,
+    drug: OptionalQuery = "",
     manufacturer: OptionalQuery = "",
     lot: OptionalQuery = "",
+    dosage_form: OptionalQuery = "",
+    status: ShortageStatus = "any",
     max_results: Limit20 = 10,
 ) -> EvidenceResponse:
-    """FDA drug enforcement recall candidates, including historical records. Show
-    each returned candidate with manufacturer, product/formulation text, lots, dates,
-    exact status, reason and official link, including when the supplied lot does not match.
-    A total count alone omits returned candidate details. A literal
-    lot mention is NOT confirmation; ranges and all-lot notices need verification.
-    Never clear a bottle from absent/different lot results. Consumer instructions
-    may be missing: refer to official notice/pharmacist, never invent them."""
-    return await parents.recalls(drug, manufacturer, lot, max_results)
+    """Look up FDA notices about a medicine. Choose one kind:
+    recalls: drug enforcement recall candidates, including historical records (drug required;
+    manufacturer and lot optional). Show each candidate with manufacturer, product text, lots,
+    dates, exact status, reason and official link, including when the supplied lot does not
+    match. A literal lot mention is NOT confirmation; ranges and all-lot notices need
+    verification. Never clear a bottle from absent or different lot results. Consumer
+    instructions may be missing: refer to the official notice or a pharmacist.
+    safety_communications: titles, dates and links on the current FDA Drug Safety
+    Communications index (drug optional). Not full notices or all archives.
+    shortages: FDA drug-shortage records (drug required; dosage_form and status optional).
+    Preserve presentation, availability and update dates: a Current shortage can include an
+    Available presentation. No local pharmacy-stock, substitution or dosing inference.
+    reporting_links: official FDA MedWatch and NIH/FDA public-involvement links (no drug
+    needed). No report is submitted; reporting does not prove causation or replace urgent care.
+    For every kind, no match does not establish safety. Never invent notices or instructions,
+    and do not collect identifiable medical details."""
+    if kind == "reporting_links":
+        return {**parents.reporting_resources(), "notice_kind": kind}
+    if kind == "safety_communications":
+        return {**await parents.safety_alerts(drug, max_results), "notice_kind": kind}
+    if not drug:
+        return {
+            "source": "validation",
+            "error": "drug_required",
+            "notice_kind": kind,
+            "note": f"Provide the medicine name to search {kind}.",
+        }
+    if kind == "recalls":
+        return {**await parents.recalls(drug, manufacturer, lot, max_results), "notice_kind": kind}
+    from parent_child_pharmacology.clients.shortages import search_shortages
 
-
-async def search_drug_safety_alerts(
-    drug: OptionalQuery = "", max_results: Limit20 = 10
-) -> EvidenceResponse:
-    """Search titles on the current FDA Drug Safety Communications index. Returns
-    dates and official notice links, not full notices, personal advice or all archives.
-    No match does not establish safety; use exact brand/generic words separately."""
-    return await parents.safety_alerts(drug, max_results)
+    out = await search_shortages(drug, dosage_form, status, max_results)
+    return {**out, "notice_kind": kind}
 
 
 async def find_recruiting_studies(
@@ -96,24 +119,19 @@ async def find_recruiting_studies(
     return await parents.recruiting_studies(topic, population, location, max_results)
 
 
-async def search_pregnancy_registries(
-    drug: OptionalQuery = "", max_results: Limit20 = 10
+async def find_pregnancy_exposure_registries(
+    drug: OptionalQuery = "", max_results: Limit20 = 20
 ) -> EvidenceResponse:
-    """FDA-listed pregnancy exposure registries: medicine/condition, registry, public
-    contacts, source status and links. FDA does not run or endorse them; list is not
-    comprehensive. Verify enrollment with registry. No eligibility or safety claim."""
-    return await parents.pregnancy_registries(drug, max_results)
-
-
-async def find_pregnancy_exposure_registries(drug: Query) -> EvidenceResponse:
-    """Participation tier: find FDA-directory pregnancy exposure registries for a confirmed
-    medicine. Returns directory source, contacts, links and source status. FDA does not
-    run or endorse these registries. No ranking, recommendation, eligibility decision
-    or contact. Call question preflight first; suppress on urgent/crisis/identity stops.
-    An empty match is a bounded directory result, not proof no registry exists."""
+    """Participation tier: FDA-listed pregnancy exposure registries, for one confirmed medicine
+    or, with no drug, the directory listing. Returns medicine or condition, registry, public
+    contacts, source status and links. FDA does not run or endorse these registries, and the
+    list is not comprehensive. No ranking, recommendation, eligibility decision or contact;
+    enrollment must be verified with the registry. Call question preflight first; suppress on
+    urgent, crisis and identity stops. An empty match is a bounded directory result, not proof
+    that no registry exists."""
     from parent_child_pharmacology.core.participation import tier
 
-    return tier(await parents.pregnancy_registries(drug, 20))
+    return tier(await parents.pregnancy_registries(drug, max_results))
 
 
 async def search_parent_input_opportunities(
@@ -131,10 +149,3 @@ async def search_parent_input_opportunities(
     Unknown comment deadline is neither verified open nor verified closed.
     Coverage is incomplete. Never submit comments or collect personal histories."""
     return await parents.input_opportunities(topic, agency, max_results)
-
-
-async def get_reporting_resources() -> EvidenceResponse:
-    """Official navigation links for FDA MedWatch and NIH/FDA public involvement.
-    No report/comment submitted. Reporting does not prove causation or replace urgent
-    care. Do not collect identifiable medical details in this MCP."""
-    return parents.reporting_resources()

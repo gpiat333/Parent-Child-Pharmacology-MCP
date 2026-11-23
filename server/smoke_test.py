@@ -35,7 +35,7 @@ async def main(url: str, drug: str) -> None:
             tools = (await s.list_tools()).tools
             print("TOOLS:", [t.name for t in tools])
             for name, args in [("normalize_drug", {"name": drug}),
-                               ("search_lactmed", {"drug": drug}),
+                               ("get_lactmed_record", {"drug": drug}),
                                ("get_label_sections", {"drug": drug}),
                                ("medication_evidence_brief", {"drug": drug, "population": "lactation"})]:
                 res = await s.call_tool(name, args)

@@ -271,7 +271,7 @@ def test_protocol_has_two_mprint_tools_and_clinician_prompt():
     from parent_child_pharmacology.app import mcp
 
     tools = {x.name for x in asyncio.run(mcp.list_tools())}
-    assert len(tools) == 31
+    assert len(tools) == 24
     assert {x for x in tools if "mprint" in x} == {"find_mprint_records", "get_mprint_details"}
     assert "medication_evidence_brief" in tools and "medication_safety_brief" not in tools
     prompts = {x.name for x in asyncio.run(mcp.list_prompts())}

@@ -4,7 +4,7 @@ from importlib import import_module
 
 DOMAINS = {
     "identity": ["normalize_drug"],
-    "lactation": ["search_lactmed", "get_lactmed_record", "semantic_search_lactmed"],
+    "lactation": ["get_lactmed_record"],
     "literature": [
         "search_literature",
         "get_abstracts",
@@ -19,24 +19,20 @@ DOMAINS = {
         "get_patient_education",
     ],
     "mprint": ["find_mprint_records", "get_mprint_details"],
-    "nichd": ["search_bpca_evidence", "search_nichd_studies"],
+    "nichd": ["search_nichd_resources"],
     "parent_resources": [
         "route_parent_question",
         "get_parent_medication_info",
-        "search_medication_recalls",
-        "search_drug_safety_alerts",
+        "search_fda_drug_notices",
         "find_recruiting_studies",
-        "search_pregnancy_registries",
         "find_pregnancy_exposure_registries",
         "search_parent_input_opportunities",
-        "get_reporting_resources",
         "search_mothertobaby_fact_sheets",
     ],
     "composite": ["medication_evidence_brief"],
     "discovery": [
         "check_evidence_coverage",
         "find_products_containing_ingredient",
-        "search_drug_shortages",
     ],
 }
 

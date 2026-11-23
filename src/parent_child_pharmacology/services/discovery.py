@@ -1,11 +1,8 @@
 """Bounded source coverage and identity navigation, after mandatory preflight."""
 
-from typing import Literal
-
 from parent_child_pharmacology.models.contracts import (
     EvidenceResponse,
     Limit20,
-    OptionalQuery,
     Query,
 )
 from parent_child_pharmacology.models.inputs import Population
@@ -25,15 +22,3 @@ async def find_products_containing_ingredient(
     from parent_child_pharmacology.clients.rxnorm import products_containing_ingredient
 
     return await products_containing_ingredient(ingredient, max_results)
-
-
-async def search_drug_shortages(
-    drug: Query,
-    dosage_form: OptionalQuery = "",
-    status: Literal["any", "Current", "Resolved", "Discontinued"] = "any",
-    max_results: Limit20 = 10,
-) -> EvidenceResponse:
-    """Search FDA's public drug-shortage records by medicine and optional dosage form/status. Preserve presentation, availability and update dates: Current shortage status can include an Available presentation. No local pharmacy-stock, pediatric suitability, substitution, dosing or safety inference."""
-    from parent_child_pharmacology.clients.shortages import search_shortages
-
-    return await search_shortages(drug, dosage_form, status, max_results)

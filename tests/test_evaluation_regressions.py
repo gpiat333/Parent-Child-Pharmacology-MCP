@@ -29,7 +29,7 @@ def test_invalid_lactmed_id_makes_no_network_call(monkeypatch):
 
     monkeypatch.setattr(src, "_ncbi", forbidden)
     result = asyncio.run(src.lactmed_record("diphenhydramine"))
-    assert "search_lactmed" in result["error"]
+    assert "book_id" in result["error"]
 
 
 def rxnorm_mock(monkeypatch, exact, properties):

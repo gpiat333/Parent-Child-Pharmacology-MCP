@@ -229,6 +229,30 @@ def english_question_frame(text):
         return False
 
 
+TOPIC_WORDS = {"neonates", "infants", "children", "levels", "safety", "nursing", "drugs"}
+
+
+def short_topic_phrase(text):
+    """A medicine name, or a name with English topic words, typed instead of a full question
+    ("sertraline", "lamotrigine breastfeeding levels").
+
+    Detectors cannot score these: a drug name alone has no language. A single name is accepted
+    as a lookup key. A longer phrase needs at least one common English word and at most two
+    other words, and no Spanish, French, German, Portuguese or Italian function word, so
+    "sertralina lactancia" and "Ibuprofen Stillzeit" still stop.
+    """
+    words = re.findall(r"[a-zà-ÿ0-9'-]+", text.lower())
+    if not words or len(words) > 6 or re.search(r"[?¿¡]", text) or not scientific_selector(text):
+        return False
+    if any(w in FOREIGN_FUNCTION_WORDS for w in words):
+        return False
+    if len(words) == 1:
+        return True
+    known = COMMON_ENGLISH | ENGLISH_FUNCTION_WORDS | SELECTOR_WORDS | TOPIC_WORDS
+    unknown = [w for w in words if w not in known]
+    return len(unknown) < len(words) and len(unknown) <= 2
+
+
 @lru_cache(maxsize=1)
 def detector():
     from langdetect import DetectorFactory, detect_langs

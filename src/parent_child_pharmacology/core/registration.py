@@ -13,6 +13,29 @@ from parent_child_pharmacology.models.inputs import INPUT_MODELS
 from parent_child_pharmacology.services.descriptions import description
 
 
+def compact_schema(schema, *, keep_descriptions):
+    """Drop generated titles (and, for the shared output envelope, per-field prose) from a
+    JSON schema. Types, bounds, enums, patterns and required fields are unchanged."""
+    drop = {"title"} if keep_descriptions else {"title", "description"}
+
+    def walk(node, is_property_map=False):
+        if isinstance(node, dict):
+            return {
+                k: walk(v, is_property_map=k in {"properties", "$defs"})
+                for k, v in node.items()
+                if is_property_map or k not in drop
+            }
+        if isinstance(node, list):
+            return [walk(v) for v in node]
+        return node
+
+    return walk(schema)
+
+
+# One compact copy of the response envelope, shared by every tool registration.
+OUTPUT_SCHEMA = compact_schema(EvidenceResponse.model_json_schema(), keep_descriptions=False)
+
+
 def register_tool(catalog, implementation, domain):
     name = implementation.__name__
     wrapped = audited(implementation)
@@ -49,11 +72,13 @@ def register_tool(catalog, implementation, domain):
             name=name,
             description=wrapped.__doc__,
             is_async=True,
-            parameters=INPUT_MODELS[name].model_json_schema(by_alias=True),
+            parameters=compact_schema(
+                INPUT_MODELS[name].model_json_schema(by_alias=True), keep_descriptions=True
+            ),
             fn_metadata=FuncMetadata(
                 arg_model=INPUT_MODELS[name],
                 output_model=EvidenceResponse,
-                output_schema=EvidenceResponse.model_json_schema(),
+                output_schema=OUTPUT_SCHEMA,
             ),
             annotations=ToolAnnotations(
                 readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True

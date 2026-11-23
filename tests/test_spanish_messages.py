@@ -66,8 +66,8 @@ def test_english_messages_use_the_service_voice():
     m = POLICY["messages"]
     for key in [
         "crisis_us",
-        "messages_10",
-        "messages_11",
+        "dose_decision",
+        "unclear_medicine",
         "personal_question",
         "language_support",
         "vaccine_decision",

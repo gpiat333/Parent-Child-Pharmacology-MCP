@@ -17,7 +17,7 @@ flowchart LR
     N --> C
 ```
 
-Thirty small tool registrar modules expose domain services. Four prompts and four resources have separate registration modules. Clients implement upstream retrieval; shared core handles configuration, HTTP policy, preflight, output notices, and audit metadata. `mc` compatibility facades retain existing import surfaces and snapshot access. Root `tests/` contains the application and client-contract regressions.
+Thirty small tool registrar modules expose domain services. Four prompts and five resources have separate registration modules. Clients implement upstream retrieval; shared core handles configuration, HTTP policy, preflight, output notices, and audit metadata. `mc` compatibility facades retain existing import surfaces and snapshot access. Root `tests/` contains the application and client-contract regressions.
 
 The evidence brief keeps maternal effects, measured fetal/infant transfer or exposure, and observed fetal/infant outcomes separate, retaining empty rows. Participation remains separate and unranked, suppressed on stops. LactMed is lactation-only. Missing abstracts, expected-but-missing sections, truncation, population tags, dose-bearing passages and source dates are machine-readable. These are discovery and display contracts, not clinical inference or certification.
 

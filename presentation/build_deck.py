@@ -502,9 +502,9 @@ for i, (when, where) in enumerate(routes):
     text(s, 9.8, y, 2.8, 0.45, where, size=12, color=INK)
 text(s, 0.65, 6.95, 6.0, 0.35, "Each line is enforced in code and covered by tests.", size=12, color=MUTED, italic=True)
 
-# 5a ─ Why 31 tools
-s = new("Why 31 tools: each does one clear job an AI can pick correctly", notes=(
-    "Thirty-one sounds like a lot, but a typical question uses three: the safety check, the evidence brief, and "
+# 5a ─ Why 24 tools
+s = new("Why 24 tools: each does one clear job an AI can pick correctly", notes=(
+    "I started with thirty-one tools and merged the overlapping ones down to twenty-four. A typical question uses three: the safety check, the evidence brief, and "
     "maybe one follow-up such as the full LactMed record or a MotherToBaby fact sheet. The rest are there so the "
     "AI can answer a specific question from the right source, and so every answer says which source it came "
     "from. GSA's judging criteria ask for exactly this: precise tools built around user goals, with names an AI "
@@ -525,11 +525,11 @@ text(s, 5.6, 1.5, 7.1, 0.45, "The rest, grouped by the job they do", size=18, fo
 groups31 = [
     ("3", "Check the question and the medicine", "Safety check, RxNorm names, products with an ingredient"),
     ("2", "Build a brief or check coverage", "Evidence brief; how much each source has"),
-    ("7", "Pregnancy and breastfeeding sources", "LactMed, labels, MotherToBaby, MedlinePlus"),
+    ("5", "Pregnancy and breastfeeding sources", "LactMed, labels, MotherToBaby, MedlinePlus, parent summary"),
     ("5", "Studies and data", "PubMed, abstracts, ClinicalTrials.gov, MPRINT"),
-    ("5", "Children's medicines and NIH programs", "Pediatric labeling, BPCA/PTN, DASH, RePORTER"),
-    ("4", "Safety notices", "FAERS reports, recalls, alerts, shortages"),
-    ("5", "Participation and reporting", "Registries, recruiting studies, public input, reporting"),
+    ("4", "Children's medicines and NIH programs", "Pediatric labeling, NICHD resources, RePORTER"),
+    ("2", "Safety notices", "FAERS reports; FDA recalls, alerts, shortages and reporting links"),
+    ("3", "Participation", "Registries, recruiting studies, public input"),
 ]
 for i, (n, job, examples) in enumerate(groups31):
     y = 2.05 + i * 0.66
@@ -537,23 +537,20 @@ for i, (n, job, examples) in enumerate(groups31):
     text(s, 6.25, y, 6.4, 0.32, job, size=14, bold=True, color=DEEP)
     text(s, 6.25, y + 0.3, 6.4, 0.32, examples, size=13, color=MUTED)
 text(s, 0.65, 6.6, 12.0, 0.5,
-     "31 tools, 4 prompts, 4 resources, 15 public sources. GSA's criteria ask for goal-oriented tools an AI can "
+     "24 tools, 4 prompts, 5 resources, 15 public sources. GSA's criteria ask for goal-oriented tools an AI can "
      "select without ambiguity, not thin wrappers. Full list, with what each tool does, on the next two slides.", size=13, color=MUTED, italic=True)
 
-# 5ab ─ All 31 tools and what each one does (main deck, two slides)
+# 5ab ─ All 24 tools and what each one does (main deck, two slides)
 TOOLS = [
     ("route_parent_question", "Safety check", "Runs first: lets research through, or gives a fixed referral (911, 988, clinician)"),
     ("normalize_drug", "Identity", "Turns a brand name, misspelling or combination product into its generic ingredients (RxNorm)"),
     ("find_products_containing_ingredient", "Identity", "Lists products with the same ingredient, to spot double exposure"),
     ("get_patient_education", "Identity", "MedlinePlus patient pages, including Spanish pages by drug code"),
-    ("search_lactmed", "Breastfeeding", "Finds the LactMed record for a medicine"),
-    ("get_lactmed_record", "Breastfeeding", "Drug levels in milk and effects in breastfed infants, with a link to every cited study"),
-    ("semantic_search_lactmed", "Breastfeeding", "Plain-language search across LactMed, when the optional index is set up"),
+    ("get_lactmed_record", "Breastfeeding", "Finds and reads a medicine's LactMed record: milk levels, infant effects, a link to every cited study"),
     ("search_mothertobaby_fact_sheets", "Breastfeeding", "MotherToBaby fact sheets in English or Spanish, word for word"),
     ("get_label_sections", "Labels", "FDA label: pregnancy, lactation and pediatric sections, warnings, ingredients, approved uses"),
     ("search_pediatric_labeling_changes", "Labels", "FDA's history of pediatric labeling changes under BPCA and PREA"),
-    ("search_pregnancy_registries", "Pregnancy", "FDA's list of pregnancy exposure registries, by medicine or condition"),
-    ("find_pregnancy_exposure_registries", "Pregnancy", "Registries for a confirmed medicine, listed separately, never recommended"),
+    ("find_pregnancy_exposure_registries", "Pregnancy", "FDA-listed pregnancy exposure registries, listed separately, never recommended"),
     ("search_literature", "Studies", "Searches PubMed, with pregnancy and breastfeeding filters"),
     ("get_abstracts", "Studies", "Abstracts and links for specific PubMed papers"),
     ("search_trials", "Studies", "Clinical trials of any status, for the research picture"),
@@ -562,20 +559,16 @@ TOOLS = [
     ("get_mprint_details", "MPRINT", "A study's outcome tables, or its automated study-type labels"),
     ("search_funded_research", "NIH research", "NIH-funded projects on a topic, across all institutes or NICHD only"),
     ("summarize_research_portfolio", "NIH research", "Project counts and funding totals by institute and fiscal year"),
-    ("search_bpca_evidence", "NIH research", "NICHD BPCA and Pediatric Trials Network study summaries"),
-    ("search_nichd_studies", "NIH research", "NICHD DASH studies and publications, such as MFMU and the Neonatal Research Network"),
+    ("search_nichd_resources", "NIH research", "NICHD BPCA and Pediatric Trials Network summaries, or DASH studies such as MFMU"),
     ("get_adverse_event_signals", "Safety", "Most-reported reactions in FDA adverse-event reports (counts, not rates)"),
-    ("search_medication_recalls", "Safety", "FDA recall records, with lots, dates and status"),
-    ("search_drug_safety_alerts", "Safety", "FDA Drug Safety Communications"),
-    ("search_drug_shortages", "Safety", "FDA drug-shortage records"),
+    ("search_fda_drug_notices", "Safety", "FDA recalls, safety communications, shortages, or where to report a problem (MedWatch)"),
     ("get_parent_medication_info", "Parents", "A focused parent answer: side effects and breastfed-infant findings"),
     ("search_parent_input_opportunities", "Parents", "NIH and FDA notices inviting public comment on research"),
-    ("get_reporting_resources", "Parents", "Where to report a medication problem (FDA MedWatch) and get involved"),
-    ("medication_evidence_brief", "All-in-one", "One call builds an evidence brief for pregnancy, breastfeeding or a child"),
+    ("medication_evidence_brief", "All-in-one", "One call builds an evidence brief; a summary by default, the full text on request"),
     ("check_evidence_coverage", "All-in-one", "Quick count of how much each source has, before a full search"),
 ]
-for part, rows in enumerate([TOOLS[:16], TOOLS[16:]], 1):
-    s = new(f"All 31 tools and what each one does ({part} of 2)", notes=(
+for part, rows in enumerate([TOOLS[:12], TOOLS[12:]], 1):
+    s = new(f"All 24 tools and what each one does ({part} of 2)", notes=(
         "Here is every tool and the one job it does, in roughly the order a question uses them. The safety "
         "check always runs first. Identity tools make sure we have the right medicine. Then come the "
         "breastfeeding, label, pregnancy and study tools. " if part == 1 else
@@ -1016,10 +1009,10 @@ def decision(num, title, notes, rows, code_lines, code_title):
     return s
 
 decision(1, "one file per tool, registered centrally", (
-    "Each of the 31 tools lives in its own file under tools, and a central catalog registers them by domain. "
+    "Each of the 24 tools lives in its own file under tools, and a central catalog registers them by domain. "
     "Shared behavior, such as the safety check and response envelope, is applied once in register_tool. "
     "Adding a tool doesn't touch the others, and each is tested on its own."),
-    [("Decision", "Each MCP tool is its own file; one catalog registers all 31 by domain."),
+    [("Decision", "Each MCP tool is its own file; one catalog registers all 24 by domain."),
      ("Location", "src/parent_child_pharmacology/tools/, core/registration.py"),
      ("Rationale", "Separation of concerns, independent tests, and shared safety and response handling applied in one place."),
      ("Example", "The MotherToBaby fact sheet tool added today is a six-line file; behavior lives in services/fact_sheets.py.")],
@@ -1035,8 +1028,8 @@ decision(1, "one file per tool, registered centrally", (
      "",
      "# tools/__init__.py",
      "DOMAINS = {\"identity\": [\"normalize_drug\"],",
-     "           \"lactation\": [\"search_lactmed\", ...],",
-     "           ... }   # 31 tools in 9 domains"],
+     "           \"lactation\": [\"get_lactmed_record\"],",
+     "           ... }   # 24 tools in 9 domains"],
     "Real code (abridged)")
 
 decision(2, "strict, typed inputs reject bad requests", (
@@ -1111,7 +1104,7 @@ s = new("What a tool call returns: a LactMed record with study links", notes=(
     "with PubMed links for every cited study. The AI client turns this into a plain-language answer; the "
     "structure keeps it honest."))
 box(s, 0.65, 1.55, 7.0, 5.2, fill=MIST, radius=0.04)
-text(s, 0.9, 1.7, 6.5, 0.35, "get_lactmed_record(book_id=\"4573436\")  →  real response, abridged",
+text(s, 0.9, 1.7, 6.5, 0.35, "get_lactmed_record(drug=\"sertraline\")  →  real response, abridged",
      size=12, bold=True, color=MUTED)
 text(s, 0.9, 2.15, 6.6, 4.5, [
     "{",
@@ -1141,14 +1134,15 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 1,026 automated tests pass on my Mac and in a Databricks serverless notebook, "
-    "including the PowerShell client checks. "
+    "I tested in layers. The evaluated version passed all its automated tests on my Mac and in a Databricks "
+    "serverless notebook. The current 24-tool version passes 1,017 tests locally; its 41 PowerShell client "
+    "checks and the chat evaluations below have not been re-run on it yet. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("1,026", "automated tests", "All pass on my Mac and in a Databricks serverless notebook"),
+    ("1,017", "automated tests", "Pass locally on the 24-tool version; 41 Windows client checks still to run"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1200,7 +1194,7 @@ text(s, 0.65, 4.95, 12.0, 1.6, [
       "warning as \u201cthe label states\u201d, not as advice. The benchmark went from 3/10 to 10/10.", {})],
 ], size=15, color=INK)
 text(s, 0.65, 6.6, 12.0, 0.5,
-     "Final version (policy .25), November 23, 2026. Known development questions, one answer each, model-judged. No clinician review yet.",
+     "Evaluated version (policy .25, 31 tools), November 23, 2026; the 24-tool version is not yet re-evaluated. Known development questions, one answer each, model-judged. No clinician review yet.",
      size=13, color=MUTED, italic=True)
 
 # 14b ─ Hands-on testing
@@ -1310,7 +1304,7 @@ s = new("Full evaluation numbers", appendix=True,
         notes="All numbers are from the final policy .25 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "968 at evaluation; 1,026 now", "Local and Databricks; no failures or skips"],
+    ["Automated tests", "968 at evaluation; 1,017 local now", "41 PowerShell client checks not re-run on the 24-tool version"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "28/28 completed", "21 research and 7 stop cases"],
@@ -1322,7 +1316,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "10/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on version 0.19.0, policy .25. Model calls and grading in Databricks; all 42 rows verified in MLflow.",
+     "Evaluated on version 0.19.0, policy .25 (31 tools); not yet re-run on 0.20.0. Model calls and grading in Databricks; all 42 rows verified in MLflow.",
      size=12, color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 10/10", appendix=True, notes=(

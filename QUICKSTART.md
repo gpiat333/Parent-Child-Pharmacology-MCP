@@ -9,7 +9,7 @@ uv sync --locked --group dev
 uv run --locked python main.py
 ```
 
-The default transport is **stdio**, for an MCP client to launch as a subprocess. Configure the client with command `uv`, arguments `run --locked --directory /absolute/path/to/repository python main.py`, and its own absolute repository path. Do not send terminal prose into the JSON-RPC stream. The server exposes 31 tools, four prompts and four resources.
+The default transport is **stdio**, for an MCP client to launch as a subprocess. Configure the client with command `uv`, arguments `run --locked --directory /absolute/path/to/repository python main.py`, and its own absolute repository path. Do not send terminal prose into the JSON-RPC stream. The server exposes 24 tools, four prompts and five resources.
 
 For loopback HTTP in PowerShell:
 

@@ -53,141 +53,152 @@ NOTICE_ATTRIBUTION = (
 )
 
 
+# Free-text arguments that are screened like a question before any source is called.
+SCREENED_ARGUMENTS = {
+    "drug",
+    "name",
+    "query",
+    "question",
+    "topic",
+    "condition_or_drug",
+    "drug_or_topic",
+    "ingredient",
+}
+# A short medicine or topic selector is data, not an English sentence.
+SELECTOR_ARGUMENTS = SCREENED_ARGUMENTS - {"question"}
+
+
+def _strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from _strings(item)
+    elif isinstance(value, (tuple, list)):
+        for item in value:
+            yield from _strings(item)
+
+
+def _screen_arguments(name, bound):
+    """Return a stop payload when the arguments must not reach a source, else None.
+
+    The router itself handles urgent concerns before privacy, so it is not screened here.
+    Other tools must not forward obvious identifiers to external evidence services, and a
+    dose, crisis or override request does not become allowed by being sent to a data tool.
+    """
+    if name == "route_parent_question":
+        return None
+    from .language import scientific_selector
+    from .safety import contains_identifiers, route
+
+    if any(contains_identifiers(text) for text in _strings((bound.args, bound.kwargs))):
+        return {
+            "source": "validation",
+            "error": "identifying_input",
+            "allow_research": False,
+            "note": "Remove contact details, birth dates and medical record numbers; use a general research query.",
+        }
+    for key, value in bound.arguments.items():
+        if key not in SCREENED_ARGUMENTS or not isinstance(value, str) or not value.strip():
+            continue
+        selector = key in SELECTOR_ARGUMENTS and scientific_selector(value)
+        decision = route(value, language_required=not selector)
+        if not decision["allow_research"]:
+            return decision
+    return None
+
+
+def _failure(name, exc):
+    """Turn an exception into an error payload without leaking request or upstream detail."""
+    error_id = uuid.uuid4().hex
+    log.warning("tool %s failed (%s), error_id=%s", name, type(exc).__name__, error_id)
+    out = {
+        "error": type(exc).__name__,
+        "error_id": error_id,
+        "note": "Tool failed. Retry, or try a different tool/source.",
+    }
+    if isinstance(exc, UpstreamUnavailable):
+        out["error"] = "upstream_unavailable"
+        out["retry_hint"] = {
+            "retryable": exc.retryable,
+            "retry_after_seconds": exc.retry_after,
+            "reason": exc.reason,
+        }
+    return out
+
+
+def _participation_tier(name, out):
+    """Mark participation results as unranked navigation, emptied on any stop."""
+    from .participation import TOOLS, tier
+
+    if not isinstance(out, dict) or name not in TOOLS:
+        return out
+    return tier(
+        out,
+        suppressed=out.get("allow_research") is False or bool(out.get("requires_confirmation")),
+        reason=out.get("route") or out.get("error"),
+    )
+
+
+def _envelope(name, out, provenance):
+    """Add the safety metadata, shared response fields and required display notices."""
+    from .abstract_coverage import disclosure_notices
+    from .output_notices import POLICY, required_notices
+    from .safety import envelope
+
+    if isinstance(out, dict):
+        out.setdefault("safety", envelope(out))
+        out.setdefault("disclaimer", cfg.DISCLAIMER)
+        out.setdefault("notice_attribution", NOTICE_ATTRIBUTION)
+    out = normalize(out, provenance)
+    stopped = (
+        out.get("allow_research") is False
+        or bool(out.get("requires_confirmation"))
+        or bool(out.get("error"))
+    )
+    out["required_display_notices"] = required_notices([name], blocked=stopped)
+    # Source failures need coverage disclosure; policy and identity stops do not.
+    if out.get("allow_research") is not False and not out.get("requires_confirmation"):
+        out["required_display_notices"] += disclosure_notices(
+            [{"tool": name, "result": out}], POLICY["abstract_coverage"]
+        )
+    return out
+
+
 def audited(fn):
+    """Wrap a tool: screen its arguments, run it, and return one consistent envelope."""
+    name = fn.__name__
+
     @functools.wraps(fn)  # preserves signature so FastMCP builds the right JSON schema
     async def wrapper(*args, **kwargs):
-        t0, ok, err, out = time.perf_counter(), True, None, None
+        started, error = time.perf_counter(), None
         provenance = []
         token = request_provenance.set(provenance)
         try:
-            from parent_child_pharmacology.core.safety import contains_identifiers
-
-            def strings(v):
-                if isinstance(v, str):
-                    yield v
-                elif isinstance(v, dict):
-                    for x in v.values():
-                        yield from strings(x)
-                elif isinstance(v, (tuple, list)):
-                    for x in v:
-                        yield from strings(x)
-
-            # Router handles urgent concerns before privacy. Other tools must not
-            # forward obvious identifiers to external evidence services.
-            if fn.__name__ != "route_parent_question" and any(
-                contains_identifiers(x) for x in strings((args, kwargs))
-            ):
-                out = {
-                    "source": "validation",
-                    "error": "identifying_input",
-                    "allow_research": False,
-                    "note": "Remove contact details, birth dates and medical record numbers; use a general research query.",
-                }
-            else:
-                from .safety import route
-
+            try:
                 bound = inspect.signature(fn).bind(*args, **kwargs)
-                blocked = None
-                if fn.__name__ != "route_parent_question":
-                    for key, value in bound.arguments.items():
-                        if (
-                            key
-                            in {
-                                "drug",
-                                "name",
-                                "query",
-                                "question",
-                                "topic",
-                                "condition_or_drug",
-                                "drug_or_topic",
-                                "ingredient",
-                            }
-                            and isinstance(value, str)
-                            and value.strip()
-                        ):
-                            # A single medicine/topic identifier (or identifier plus
-                            # controlled English population/focus words) is data,
-                            # not an English sentence. Actual questions still require
-                            # preflight; intent/identity rules still run here.
-                            from .language import scientific_selector
+                out = _screen_arguments(name, bound)
+                if out is None:
+                    out = await fn(*args, **kwargs)
+                    if isinstance(out, dict):
+                        bound.apply_defaults()
+                        if "population" in bound.arguments:
+                            from .population import preserve_population
 
-                            selector = key in {
-                                "drug",
-                                "name",
-                                "query",
-                                "topic",
-                                "condition_or_drug",
-                                "drug_or_topic",
-                                "ingredient",
-                            } and scientific_selector(value)
-                            decision = route(value, language_required=not selector)
-                            if not decision["allow_research"]:
-                                blocked = decision
-                                break
-                out = blocked if blocked else await fn(*args, **kwargs)
-                if isinstance(out, dict) and not blocked:
-                    bound.apply_defaults()
-                    if "population" in bound.arguments:
-                        from .population import preserve_population
-
-                        out = preserve_population(out, bound.arguments["population"])
-            from .participation import TOOLS, tier
-
-            if isinstance(out, dict) and fn.__name__ in TOOLS:
-                out = tier(
-                    out,
-                    suppressed=out.get("allow_research") is False
-                    or bool(out.get("requires_confirmation")),
-                    reason=out.get("route") or out.get("error"),
-                )
-        except Exception as e:
-            ok, err = False, type(e).__name__
-            error_id = uuid.uuid4().hex
-            log.warning("tool %s failed (%s), error_id=%s", fn.__name__, err, error_id)
-            out = {
-                "error": err,
-                "error_id": error_id,
-                "note": "Tool failed. Retry, or try a different tool/source.",
-            }
-            if isinstance(e, UpstreamUnavailable):
-                out["error"] = "upstream_unavailable"
-                out["retry_hint"] = {
-                    "retryable": e.retryable,
-                    "retry_after_seconds": e.retry_after,
-                    "reason": e.reason,
-                }
-        try:
-            if isinstance(out, dict):
-                from parent_child_pharmacology.core.safety import envelope
-
-                out.setdefault("safety", envelope(out))
-                out.setdefault("disclaimer", cfg.DISCLAIMER)
-                out.setdefault("notice_attribution", NOTICE_ATTRIBUTION)
-                if out.get("error"):
-                    ok = False
-                    err = err or "tool_error"
-            out = normalize(out, provenance)
-            from .output_notices import required_notices
-
-            stopped = (
-                out.get("allow_research") is False
-                or bool(out.get("requires_confirmation"))
-                or bool(out.get("error"))
-            )
-            out["required_display_notices"] = required_notices([fn.__name__], blocked=stopped)
-            # Source failures need coverage disclosure; policy/identity stops do not.
-            if out.get("allow_research") is not False and not out.get("requires_confirmation"):
-                from .abstract_coverage import disclosure_notices
-                from .output_notices import POLICY
-
-                out["required_display_notices"] += disclosure_notices(
-                    [{"tool": fn.__name__, "result": out}], POLICY["abstract_coverage"]
-                )
+                            out = preserve_population(out, bound.arguments["population"])
+                out = _participation_tier(name, out)
+            except Exception as exc:
+                error = type(exc).__name__
+                out = _failure(name, exc)
+            if isinstance(out, dict) and out.get("error"):
+                error = error or "tool_error"
+            out = _envelope(name, out, provenance)
         finally:
             request_provenance.reset(token)
         if cfg.USE_LAKEHOUSE:
-            src = out.get("source", "n/a") if isinstance(out, dict) else "n/a"
-            _fire(_safe_log(fn.__name__, str(src), int((time.perf_counter() - t0) * 1000), ok, err))
+            source = out.get("source", "n/a") if isinstance(out, dict) else "n/a"
+            elapsed = int((time.perf_counter() - started) * 1000)
+            _fire(_safe_log(name, str(source), elapsed, error is None, error))
         return out
 
     return wrapper

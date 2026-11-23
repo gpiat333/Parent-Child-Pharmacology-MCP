@@ -2,7 +2,7 @@
 
 # Tool migration
 
-Current local protocol: 31 tools (adds `search_mothertobaby_fact_sheets`), four prompts, four resources. No deployment.
+Current local protocol (0.20.0): 24 tools, four prompts, five resources. Not deployed; the hosted App still runs the 31-tool .27 build. See [November 23 consolidation](#november-23-consolidation-0200).
 
 | Former name | Current interface |
 |---|---|
@@ -27,3 +27,23 @@ No tool was added in the 473-test revision. Explicit brief requests now require 
 ## Required output notices and citation checks
 
 No tool was added in the 508-test revision. Allowed tool payloads now expose `required_display_notices`; the companion and paired MCP arm render the corresponding fixed policy text. The deterministic URL checker now separates adjacent Markdown citations. See [correction and limits](NOTICE_CITATION_REVISION.md).
+
+## November 23 consolidation (0.20.0)
+
+Nine tools were merged into goal-level tools, taking the catalog from 31 to 24. Old names are not registered aliases. Historical traces and evaluation reports keep the names that were actually called.
+
+| Former tool | Current interface |
+|---|---|
+| search_lactmed, then get_lactmed_record | get_lactmed_record with `drug`; when several records match it returns candidates and is called again with `book_id` |
+| semantic_search_lactmed | Removed; it returned `not_enabled` in every tested deployment |
+| search_medication_recalls | search_fda_drug_notices with `kind="recalls"` |
+| search_drug_safety_alerts | search_fda_drug_notices with `kind="safety_communications"` |
+| search_drug_shortages | search_fda_drug_notices with `kind="shortages"` |
+| get_reporting_resources | search_fda_drug_notices with `kind="reporting_links"`, and the `parent-child://reporting-resources` resource |
+| search_pregnancy_registries | find_pregnancy_exposure_registries; `drug` is optional and an empty value lists the directory |
+| search_bpca_evidence | search_nichd_resources with `source="bpca_summaries"` |
+| search_nichd_studies | search_nichd_resources with `source="dash_studies"` |
+
+`medication_evidence_brief` gains `detail`. The default `summary` returns every evidence axis with totals, the first five passages per list and compact source records, and names what it left out; `full` returns every passage and the source text. Both companion clients count `*_total` fields so the three-axis inventory reports all retrieved passages. The `evidence` field now lists the top-level field names instead of repeating them, and per-ingredient axes are returned once, under top-level `evidence_axes`.
+
+Not changed: `get_parent_medication_info` and `search_parent_input_opportunities` stay registered because evaluation cases D01, R03 and R08 depend on them. The 0.20.0 source has not been re-run through the chat, paired or benchmark evaluations.

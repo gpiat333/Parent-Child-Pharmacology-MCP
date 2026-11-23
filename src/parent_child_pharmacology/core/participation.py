@@ -2,7 +2,6 @@
 
 TOOLS = {
     "find_pregnancy_exposure_registries",
-    "search_pregnancy_registries",
     "find_recruiting_studies",
     "search_parent_input_opportunities",
 }

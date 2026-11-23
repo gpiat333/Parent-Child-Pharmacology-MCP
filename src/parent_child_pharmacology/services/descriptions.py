@@ -36,13 +36,21 @@ GUIDANCE = {
         "Gold outcomes or Silver classifications by PMID and table enum.",
         "Individual patient data or automatic clinical conclusions.",
     ),
-    "search_lactmed": (
-        "Finding lactation-only LactMed record IDs for a drug.",
-        "Reading full evidence; follow with get_lactmed_record.",
-    ),
     "get_lactmed_record": (
-        "Reading a known lactation-only LactMed record; not pregnancy evidence.",
-        "Searching by drug name; first use search_lactmed.",
+        "Reading the lactation-only LactMed record for a medicine or vaccine, by name.",
+        "Pregnancy or pediatric-use evidence; LactMed covers breastfeeding only.",
+    ),
+    "search_fda_drug_notices": (
+        "FDA recalls, safety communications, shortages, or where to report a medication problem.",
+        "Evidence about a medicine's effects, or clearing a specific bottle or lot.",
+    ),
+    "search_nichd_resources": (
+        "Finding NICHD BPCA/PTN study summaries or public DASH study descriptions.",
+        "Study results or participant-level data; these are index and metadata records.",
+    ),
+    "find_pregnancy_exposure_registries": (
+        "Finding FDA-listed pregnancy exposure registries for a confirmed medicine.",
+        "Eligibility, enrollment or any recommendation to join.",
     ),
     "get_parent_medication_info": (
         "Focused parent evidence about side effects and infant exposure versus outcomes.",
@@ -52,14 +60,12 @@ GUIDANCE = {
         "A broader cross-source research brief.",
         "Focused parent questions; use get_parent_medication_info.",
     ),
-    "semantic_search_lactmed": (
-        "Vector retrieval only when the optional index is configured.",
-        "Default live-only deployment; use search_lactmed instead.",
-    ),
 }
 
 
 def description(name, original, domain):
+    from parent_child_pharmacology.core.participation import TOOLS as PARTICIPATION_TOOLS
+
     use, avoid = GUIDANCE.get(
         name,
         (
@@ -67,23 +73,20 @@ def description(name, original, domain):
             "Personal treatment, dosing, diagnosis, or a safety verdict.",
         ),
     )
-    first = "Call route_parent_question on the actual question; confirm ambiguous medication identity with normalize_drug before evidence lookup."
+    first = "After route_parent_question allows research; confirm an unclear medicine with normalize_drug."
     if name == "route_parent_question":
         first = (
             "Call first. If allow_research is false, honor the route and do not continue research."
         )
+    tier = (
+        "participation"
+        if name in PARTICIPATION_TOOLS
+        else "workflow"
+        if name in WORKFLOW_TOOLS
+        else "building block"
+    )
     return (
         f"Does: {(original or name).strip()}\nUse when: {use}\nNot for: {avoid}\n"
-        f"First/next: {first}\nReturns: A structured evidence envelope with status, results, source_urls, "
-        "coverage_limits, missing_fields, provenance, untrusted evidence, error and disclaimer. "
-        "Missing evidence never means safe. Tier: "
-        + (
-            "participation"
-            if name
-            in __import__("parent_child_pharmacology.core.participation", fromlist=["TOOLS"]).TOOLS
-            else "workflow"
-            if name in WORKFLOW_TOOLS
-            else "building block"
-        )
-        + "."
+        f"First/next: {first}\nReturns: The shared evidence envelope described in the server "
+        f"instructions. Missing evidence never means safe. Tier: {tier}."
     )

@@ -23,7 +23,7 @@ BookID = Annotated[
     Field(
         pattern=r"^[0-9]+$",
         max_length=20,
-        description="Numeric id returned by search_lactmed; not an NBK accession or drug name.",
+        description="Numeric LactMed record id from an earlier result; not an NBK accession or drug name.",
     ),
 ]
 RxCUI = Annotated[

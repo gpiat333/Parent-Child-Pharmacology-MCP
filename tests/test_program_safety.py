@@ -49,7 +49,11 @@ from parent_child_pharmacology.models.inputs import INPUT_MODELS
             {"max_results": -1},
         ),
         ("check_evidence_coverage", {"drug": "acetaminophen"}, {"population": "newbornish"}),
-        ("search_drug_shortages", {"drug": "amoxicillin"}, {"status": "safe"}),
+        (
+            "search_fda_drug_notices",
+            {"kind": "shortages", "drug": "amoxicillin"},
+            {"status": "safe"},
+        ),
     ],
 )
 def test_invalid_new_filters_rejected(name, valid, bad):

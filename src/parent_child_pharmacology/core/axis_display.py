@@ -69,8 +69,12 @@ def axis_notices(tool_calls):
                 )
             )
             if valid:
+                # A summary brief lists only the first passages; its totals are the real counts.
                 counts = {
-                    f: sum(len(g[f]) for g in groups)
+                    f: sum(
+                        g[f + "_total"] if isinstance(g.get(f + "_total"), int) else len(g[f])
+                        for g in groups
+                    )
                     for f in ["items", "context_only", "reported_gaps"]
                 }
                 status = (

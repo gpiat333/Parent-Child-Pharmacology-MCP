@@ -89,5 +89,6 @@ def test_server_tools_are_wired(monkeypatch):
 
     monkeypatch.setattr(n, "search_bpca", bpca)
     monkeypatch.setattr(n, "search_dash", dash)
-    assert asyncio.run(server.search_bpca_evidence.__wrapped__())["source"] == "test"
-    assert asyncio.run(server.search_nichd_studies.__wrapped__())["source"] == "test"
+    merged = server.search_nichd_resources.__wrapped__
+    assert asyncio.run(merged())["source"] == "test"
+    assert asyncio.run(merged(source="dash_studies"))["source"] == "test"

@@ -11,8 +11,8 @@ from parent_child_pharmacology.models.contracts import (
     BookID,
     EvidenceResponse,
     Limit20,
+    OptionalQuery,
     Query,
-    Question,
     TextLimit,
 )
 
@@ -23,7 +23,7 @@ log = logging.getLogger("mc")
 
 async def search_lactmed(drug: Query, max_results: Limit20 = 5) -> EvidenceResponse:
     """Find LactMed (Drugs and Lactation Database, NLM) records by drug name.
-    Returns IDs to pass to get_lactmed_record."""
+    Internal lookup used by get_lactmed_record and the evidence brief; not a registered tool."""
     max_results = max(1, min(max_results, 20))
     rows = await _lakehouse_or_none(
         lh.sql(
@@ -57,11 +57,14 @@ async def search_lactmed(drug: Query, max_results: Limit20 = 5) -> EvidenceRespo
     return {"source": "live:ncbi", "results": await src.lactmed_search(drug, max_results)}
 
 
-async def get_lactmed_record(book_id: BookID, max_chars: TextLimit = 16000) -> EvidenceResponse:
-    """Get LactMed text for one record: use during lactation, drug levels, effects on
+async def get_lactmed_record(
+    book_id: BookID | None = None, max_chars: TextLimit = 16000, drug: OptionalQuery = ""
+) -> EvidenceResponse:
+    """Read the LactMed (Drugs and Lactation Database, NLM) record for a medicine: use during lactation, drug levels, effects on
     breastfed infants and on lactation. Alternate Drugs to Consider is excluded from
-    returned text and synthesis; this tool never recommends a substitution. First call search_lactmed and pass
-    its numeric id as book_id. Never pass a drug name or invent a record ID.
+    returned text and synthesis; this tool never recommends a substitution. Pass drug (a medicine or vaccine
+    name) to find and read its record in one call; when several records match, the candidates are
+    returned and you call again with the chosen book_id. Never invent a record ID.
     Separate measured exposure, observed infant outcomes, and source recommendations.
     A recommendation to monitor a symptom is NOT evidence that the symptom occurred.
     Conversely, a symptom monitored in a study is NOT a recommendation to monitor it.
@@ -84,42 +87,47 @@ async def get_lactmed_record(book_id: BookID, max_chars: TextLimit = 16000) -> E
     Text comes from NCBI's official LactMed package (see data_freshness). Bracketed
     numbers such as [54] are LactMed citations: link reported findings to their studies
     using the returned references list."""
+    if not book_id:
+        if not drug:
+            return {
+                "source": "validation",
+                "error": "drug_or_book_id_required",
+                "note": "Provide a medicine name in drug, or a book_id from an earlier result.",
+                "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
+            }
+        found = await search_lactmed(drug, 5)
+        candidates = found.get("results", [])
+        exact = [c for c in candidates if (c.get("title") or "").casefold() == drug.casefold()]
+        matched = found.get("matched_lactmed_title")
+        if matched:
+            exact = [c for c in candidates if c.get("title") == matched] or exact
+        chosen = exact[0] if len(exact) == 1 else candidates[0] if len(candidates) == 1 else None
+        if not chosen:
+            return {
+                "source": found.get("source", "live:ncbi"),
+                "results": candidates,
+                "requires_record_selection": bool(candidates),
+                "note": "Several LactMed records match. Call again with the book_id of the intended record."
+                if candidates
+                else "No LactMed record was found for this name. This is not evidence of safety.",
+                **({k: found[k] for k in ("matched_lactmed_title", "match_note") if k in found}),
+            }
+        book_id = chosen["id"]
+        selection = {
+            "matched_record": chosen,
+            "other_candidates": [c for c in candidates if c is not chosen],
+            **({k: found[k] for k in ("matched_lactmed_title", "match_note") if k in found}),
+        }
+    else:
+        selection = {}
+
     if not book_id.isascii() or not book_id.isdigit():
         return {
             "source": "validation",
-            "error": "Invalid book_id. Call search_lactmed and use its numeric id, not a drug name.",
+            "error": "Invalid book_id. Pass the medicine name in drug, or a numeric id from an earlier result.",
             "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
         }
     max_chars = max(500, min(max_chars, 20000))
     # Legacy lakehouse text has no section-completeness/alternatives contract.
     # Retrieve the live structured extract rather than emitting unlabeled cached text.
-    return {"source": "live:ncbi", **await src.lactmed_record(book_id, max_chars)}
-
-
-async def semantic_search_lactmed(question: Question, max_results: Limit20 = 5) -> EvidenceResponse:
-    """Natural-language search over lactation-only LactMed record identifiers.
-    Requires the Vector Search index; otherwise explains how to fall back."""
-    if not cfg.USE_LAKEHOUSE:
-        return {
-            "source": "none",
-            "status": "not_enabled",
-            "error": "not_enabled",
-            "note": "Vector index is not configured. Use search_lactmed with a drug name.",
-        }
-    rows = await lh.vector(
-        cfg.index("lactmed_idx"),
-        question,
-        ["book_id", "title", "accession"],
-        max(1, min(max_results, 20)),
-    )
-    return {
-        "source": "lakehouse:vector",
-        "results": [
-            {
-                "id": r["book_id"],
-                "title": r["title"],
-                "url": f"https://www.ncbi.nlm.nih.gov/books/{r['accession']}/",
-            }
-            for r in rows
-        ],
-    }
+    return {"source": "live:ncbi", **await src.lactmed_record(book_id, max_chars), **selection}

@@ -13,11 +13,11 @@ POLICY_VERSION = POLICY["version"]
 
 
 def identity_is_vague(text):
-    return bool(re.search(POLICY["patterns"]["patterns_6"], text, re.I))
+    return bool(re.search(POLICY["patterns"]["vague_identity"], text, re.I))
 
 
 def contains_identifiers(text):
-    return bool(re.search(POLICY["patterns"]["patterns_7"], text, re.I))
+    return bool(re.search(POLICY["patterns"]["personal_identifiers"], text, re.I))
 
 
 def _clauses(text):
@@ -45,7 +45,7 @@ def route(question, country="US", *, language_required=True):
         "allow_research": True,
         "message": None,
         "source_urls": [],
-        "limitations": [POLICY["messages"]["messages_2"]],
+        "limitations": [POLICY["messages"]["routing_limitation"]],
     }
     # A fixed referral, not a diagnosis, severity score, or model-generated answer.
     if _crisis(q):
@@ -107,14 +107,14 @@ def route(question, country="US", *, language_required=True):
                     )
                 result["disclaimer_es"] = es["disclaimer"]
             if re.search(r"overdos|poison|pills|tablets|bottle", q):
-                result["message"] += " " + POLICY["messages"]["messages_8"]
+                result["message"] += " " + POLICY["messages"]["poison_us"]
                 result["source_urls"].append(POISON)
         else:
             result["message"] = (
                 "Please contact local emergency services or a local crisis service for immediate support. This service cannot verify a crisis number for your country. Contact your clinician for perinatal mental-health support."
             )
         return result
-    symptom_text = re.sub(POLICY["patterns"]["patterns_1"], "", q)
+    symptom_text = re.sub(POLICY["patterns"]["negated_symptom"], "", q)
     # A named aggregate outcome is not itself a report of an active symptom.
     # Never use a "research" declaration to bypass a personal/acute concern,
     # and leave any separate symptom clause intact for the urgent matcher.
@@ -132,12 +132,12 @@ def route(question, country="US", *, language_required=True):
     # Event wording ("is having a seizure") is always urgent. A condition name
     # alone ("levetiracetam for seizures") is a research topic unless the same
     # clause also signals an acute situation ("seizures now", "help").
-    urgent = re.search(POLICY["patterns"]["patterns_2"], joined) or any(
+    urgent = re.search(POLICY["patterns"]["urgent_event"], joined) or any(
         re.search(POLICY["patterns"]["urgent_condition"], c)
         and re.search(POLICY["patterns"]["acute_marker"], c)
         for c in _clauses(joined)
     )
-    poison = re.search(POLICY["patterns"]["patterns_3"], q)
+    poison = re.search(POLICY["patterns"]["poison_exposure"], q)
     # Negative educational statements must not suppress a second actual symptom.
     if urgent or poison:
         result.update(
@@ -147,15 +147,13 @@ def route(question, country="US", *, language_required=True):
             clinical_assessment_performed=False,
         )
         if country.upper() == "US":
-            result["message"] = POLICY["messages"]["messages_12"] + POLICY["messages"]["messages_8"]
+            result["message"] = POLICY["messages"]["urgent_us"] + POLICY["messages"]["poison_us"]
         else:
-            result["message"] = POLICY["messages"]["messages_3"]
+            result["message"] = POLICY["messages"]["urgent_non_us"]
         result["source_urls"] = [EMERGENCY, POISON]
         return result
     if contains_identifiers(question):
-        result.update(
-            route="privacy", allow_research=False, message=POLICY["messages"]["messages_9"]
-        )
+        result.update(route="privacy", allow_research=False, message=POLICY["messages"]["privacy"])
         return result
     # A request to set aside these rules (role-play, "you are now", "you're allowed to")
     # never changes them, however the question is framed.
@@ -178,20 +176,20 @@ def route(question, country="US", *, language_required=True):
     # Exclude common instruction suffixes; they are not requests for dosing.
     # Remove only the explicit exclusion, never the remainder of the question.
     # A second actual request ("...but what dose should I give?") stays visible.
-    intent = re.sub(POLICY["patterns"]["patterns_4"], "", q)
+    intent = re.sub(POLICY["patterns"]["no_dose_instruction_suffix"], "", q)
     # "Can I take X?" is answered with what is known plus a clear statement that the
     # decision belongs with a clinician; dose, start/stop/switch and taper requests still stop.
     self_take = re.search(POLICY["patterns"]["self_take_question"], intent)
     decision_intent = re.sub(POLICY["patterns"]["self_take_question"], "", intent)
     personal = bool(
         self_take
-        and not re.search(POLICY["patterns"]["patterns_5"], decision_intent)
+        and not re.search(POLICY["patterns"]["dose_or_treatment_decision"], decision_intent)
         and not re.search(POLICY["patterns"]["decision_any_subject"], decision_intent)
         and not re.search(POLICY["patterns"]["dose_words"], decision_intent)
     )
     # Decisions for anyone (she, my patient, the mom), not only "I", stop here.
     if not personal and re.search(
-        POLICY["patterns"]["patterns_5"]
+        POLICY["patterns"]["dose_or_treatment_decision"]
         + "|"
         + POLICY["patterns"]["self_take_question"]
         + "|"
@@ -201,7 +199,7 @@ def route(question, country="US", *, language_required=True):
         result.update(
             route="clinician_or_pharmacist",
             allow_research=False,
-            message=POLICY["messages"]["messages_10"],
+            message=POLICY["messages"]["dose_decision"],
         )
         # Individual pregnancy or breastfeeding exposure questions get a specialist referral.
         # Not offered on crisis, urgent, privacy or identity routes, which return earlier.
@@ -217,7 +215,7 @@ def route(question, country="US", *, language_required=True):
             route="confirm_identity",
             allow_research=False,
             requires_confirmation=True,
-            message=POLICY["messages"]["messages_11"],
+            message=POLICY["messages"]["unclear_medicine"],
         )
         return result
     # Requests unrelated to medicines (ordering food, weather, poems) are out of scope.
@@ -258,6 +256,14 @@ def route(question, country="US", *, language_required=True):
             if english_question_frame(question):
                 result["language_gate"]["confident_english"] = True
                 result["language_gate"]["accepted_by"] = "english_question_frame"
+        if not result["language_gate"]["confident_english"] and not re.search(
+            POLICY["patterns"]["spanish_markers"], q
+        ):
+            from .language import short_topic_phrase
+
+            if short_topic_phrase(question):
+                result["language_gate"]["confident_english"] = True
+                result["language_gate"]["accepted_by"] = "short_topic_phrase"
         if personal and not result["language_gate"]["confident_english"]:
             # "Can I take <drug>?" is English sentence structure; a short question built around a
             # drug name can fall below the detector threshold. Accept it only if the masked
@@ -306,17 +312,17 @@ def envelope(out):
     """Add portable limits to every tool; clients must enforce the response policy."""
     return {
         "policy_version": POLICY_VERSION,
-        "scope": POLICY["messages"]["messages_1"],
+        "scope": POLICY["messages"]["tool_scope"],
         "requires_identity_confirmation": bool(
             out.get("requires_confirmation") or out.get("found") is False
         ),
         "evidence_unavailable": bool(out.get("error")),
         "rules": [
             "Do not infer safety, drug identity, or absence of evidence from missing or empty results.",
-            POLICY["messages"]["messages_4"],
-            POLICY["messages"]["messages_5"],
-            POLICY["messages"]["messages_6"],
-            POLICY["messages"]["messages_7"],
+            POLICY["messages"]["rule_no_dosing"],
+            POLICY["messages"]["rule_separate_findings"],
+            POLICY["messages"]["rule_preflight_first"],
+            POLICY["messages"]["rule_no_identifiers"],
         ],
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
         "client_enforcement_required": True,

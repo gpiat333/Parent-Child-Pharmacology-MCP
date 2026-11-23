@@ -337,8 +337,11 @@ def build_axes(row, population):
         from .source_context import evidence_base, item_population
 
         articles = {a.get("pmid"): a for a in literature.get("articles", [])}
+        # Many passages share one abstract or LactMed summary as context. Keep the text
+        # on the first passage and point later ones at it, rather than repeating it.
+        first_use = {}
         for key in ["items", "context_only", "reported_gaps"]:
-            for item in axis[key]:
+            for position, item in enumerate(axis[key]):
                 article = articles.get(item.get("pmid"), {})
                 item["population_context"] = item_population({**article, **item}, population)
                 item["evidence_base"] = evidence_base(
@@ -352,6 +355,15 @@ def build_axes(row, population):
                     context = (
                         topics.get("disease_associated_risk") if population == "pregnancy" else None
                     )
+                if context and context in first_use:
+                    item["source_balance_context"] = {
+                        "text": None,
+                        "same_text_as": first_use[context],
+                        "notice": "Same source context as the referenced passage in this axis; not repeated here.",
+                    }
+                    continue
+                if context:
+                    first_use[context] = {"list": key, "index": position}
                 item["source_balance_context"] = {
                     "text": context[:4000] if context else None,
                     "truncated": bool(context and len(context) > 4000),

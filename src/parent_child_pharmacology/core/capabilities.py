@@ -34,8 +34,7 @@ def capabilities():
                 else "workflow"
                 if name in WORKFLOW_TOOLS
                 else "building block",
-                "enabled": name != "semantic_search_lactmed" or config.USE_LAKEHOUSE,
-                "configuration_verified_only": name == "semantic_search_lactmed",
+                "enabled": True,
             }
             for names in DOMAINS.values()
             for name in names

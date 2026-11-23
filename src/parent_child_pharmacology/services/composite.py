@@ -1,6 +1,7 @@
 """Cross-source evidence preparation with explicit ingredient coverage."""
 
 import asyncio
+from typing import Literal
 
 import parent_child_pharmacology.clients as src
 from parent_child_pharmacology.clients import parent_resources as parents
@@ -30,7 +31,9 @@ from .literature import get_abstracts, search_literature, search_trials
 
 
 async def medication_evidence_brief(
-    drug: Query, population: Population = "lactation"
+    drug: Query,
+    population: Population = "lactation",
+    detail: Literal["summary", "full"] = "summary",
 ) -> EvidenceResponse:
     """Use for explicit requests to prepare an evidence brief for pregnancy, breastfeeding or a
     child's medicine (population neonate, infant, child, adolescent or pediatric). Pediatric briefs use
@@ -48,7 +51,10 @@ async def medication_evidence_brief(
     unreturned records and retrieval failures; preserve required_display_notices.
     Metadata and titles alone cannot support study-outcome claims.
     Display FAERS report_only_context separately, even when observed-outcome rows
-    are empty. Report counts are unconfirmed signals, not established outcomes."""
+    are empty. Report counts are unconfirmed signals, not established outcomes.
+    detail='summary' (default) returns every axis with totals, the first passages per list
+    and compact source records; say that it is a summary and never present it as complete.
+    Use detail='full' for every passage and the source text."""
     norm = await src.rxnorm_normalize(drug)
     base = preserve_population(
         {
@@ -232,6 +238,12 @@ async def medication_evidence_brief(
         out["maternal_pharmacokinetics"] = [
             {"ingredient": r["ingredient"], **r["maternal_pharmacokinetics"]} for r in rows
         ]
+    # Each ingredient's axes and pharmacokinetics now live in the top-level lists above.
+    # Leave a pointer in the per-ingredient row instead of a second full copy.
+    for r in rows:
+        r["evidence_axes"] = "See top-level evidence_axes[].by_ingredient for this ingredient."
+        if "maternal_pharmacokinetics" in r:
+            r["maternal_pharmacokinetics"] = "See top-level maternal_pharmacokinetics."
     if population in {"pregnancy", "lactation"}:
         from parent_child_pharmacology.core.referrals import MOTHERTOBABY, PRGLAC_CONTEXT
 
@@ -258,4 +270,14 @@ async def medication_evidence_brief(
 
         out["off_label_context"] = OFF_LABEL_CONTEXT
     out["citations"] = list(dict.fromkeys(urls(rows)))
-    return annotate(out)
+    out = annotate(out)
+    if detail == "summary":
+        from parent_child_pharmacology.core.brief_summary import summarize
+        from parent_child_pharmacology.core.evidence import content_flags
+
+        # Flags are recomputed so their paths point into the payload that is returned.
+        out = summarize(out)
+        out["content_flags"] = content_flags(out)
+    else:
+        out["detail"] = "full"
+    return out

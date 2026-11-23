@@ -7,7 +7,7 @@ from parent_child_pharmacology.core.http import http
 RXNAV = "https://rxnav.nlm.nih.gov/REST"
 VACCINE_NOTE = (
     "RxNorm lists vaccines by specific product, not by common names such as 'flu vaccine' or 'Tdap'. "
-    "Ask for the product or brand name on the vaccine record. For breastfeeding, search_lactmed finds "
+    "Ask for the product or brand name on the vaccine record. For breastfeeding, get_lactmed_record finds "
     "LactMed's vaccine records by type (for example, Influenza Vaccines)."
 )
 

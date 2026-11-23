@@ -24,15 +24,20 @@ def validate(name, arguments):
 @pytest.mark.parametrize(
     "name,args",
     [
-        ("search_lactmed", {"drug": "sertraline", "max_results": -1}),
-        ("search_lactmed", {"drug": "sertraline", "max_results": 21}),
-        ("search_lactmed", {"drug": "sertraline", "max_results": True}),
-        ("search_lactmed", {"drug": "sertraline", "max_results": "5"}),
-        ("search_lactmed", {"drug": "sertraline", "unexpected": True}),
-        ("search_lactmed", {"drug": ""}),
-        ("search_lactmed", {"drug": "   "}),
-        ("search_lactmed", {"drug": "x" * 201}),
-        ("search_lactmed", {"drug": 123}),
+        ("get_lactmed_record", {"drug": "sertraline", "max_chars": 499}),
+        ("get_lactmed_record", {"drug": "sertraline", "max_chars": 20001}),
+        ("get_lactmed_record", {"drug": "sertraline", "max_chars": True}),
+        ("get_lactmed_record", {"drug": "sertraline", "max_chars": "5000"}),
+        ("get_lactmed_record", {"drug": "sertraline", "unexpected": True}),
+        ("get_lactmed_record", {"drug": ""}),
+        ("get_lactmed_record", {"drug": "   "}),
+        ("get_lactmed_record", {"drug": "x" * 201}),
+        ("get_lactmed_record", {"drug": 123}),
+        ("get_lactmed_record", {}),
+        ("search_fda_drug_notices", {"kind": "recalls"}),
+        ("search_fda_drug_notices", {"kind": "shortages"}),
+        ("search_fda_drug_notices", {"kind": "warnings", "drug": "sertraline"}),
+        ("search_fda_drug_notices", {"drug": "sertraline"}),
         ("search_literature", {"query": "sertraline", "population": "adult"}),
         ("get_abstracts", {"pmids": []}),
         ("get_abstracts", {"pmids": ["123"] * 11}),
@@ -42,8 +47,9 @@ def validate(name, arguments):
         ("get_lactmed_record", {"book_id": "sertraline"}),
         ("get_lactmed_record", {"book_id": "123", "max_chars": 20001}),
         ("get_patient_education", {"topic": "sertraline", "rxcui": "bad"}),
-        ("search_nichd_studies", {"page": 101}),
-        ("search_nichd_studies", {"page": -1}),
+        ("search_nichd_resources", {"source": "dash_studies", "page": 101}),
+        ("search_nichd_resources", {"source": "dash_studies", "page": -1}),
+        ("search_nichd_resources", {"source": "pubmed"}),
         ("get_mprint_details", {"pmid": "123", "offset": -1}),
         ("route_parent_question", {"question": "x" * 4001}),
     ],
@@ -56,13 +62,19 @@ def test_invalid_inputs_rejected_before_callback(name, args):
 @pytest.mark.parametrize(
     "name,args",
     [
-        ("search_lactmed", {"drug": " sertraline ", "max_results": 20}),
+        ("get_lactmed_record", {"drug": " sertraline ", "max_chars": 20000}),
+        ("get_lactmed_record", {"book_id": "4573436"}),
         ("get_abstracts", {"pmids": ["123"] * 10}),
-        ("search_bpca_evidence", {}),
-        ("search_nichd_studies", {"network": "mfmu", "page": 100, "max_results": 25}),
+        ("search_nichd_resources", {}),
+        (
+            "search_nichd_resources",
+            {"source": "dash_studies", "network": "mfmu", "page": 100, "max_results": 25},
+        ),
         ("find_mprint_records", {"pmid": "123"}),
-        ("search_drug_safety_alerts", {}),
-        ("search_pregnancy_registries", {}),
+        ("search_fda_drug_notices", {"kind": "safety_communications"}),
+        ("search_fda_drug_notices", {"kind": "reporting_links"}),
+        ("search_fda_drug_notices", {"kind": "recalls", "drug": "naproxen", "lot": "ABC123"}),
+        ("find_pregnancy_exposure_registries", {}),
     ],
 )
 def test_valid_boundaries_and_intentional_empty_discovery(name, args):
@@ -71,14 +83,14 @@ def test_valid_boundaries_and_intentional_empty_discovery(name, args):
 
 def test_all_tools_advertise_strict_inputs_and_typed_envelope():
     tools = asyncio.run(server.mcp.list_tools())
-    assert len(tools) == 31
+    assert len(tools) == 24
     for tool in tools:
         assert tool.inputSchema["additionalProperties"] is False
         assert set(tool.outputSchema["required"]) >= {"safety", "disclaimer"}
         assert tool.outputSchema["additionalProperties"] is True
-    schema = registered("search_lactmed").parameters
-    assert schema["properties"]["max_results"]["maximum"] == 20
-    assert schema["properties"]["drug"]["minLength"] == 1
+    schema = registered("get_lactmed_record").parameters
+    assert schema["properties"]["max_chars"]["maximum"] == 20000
+    assert schema["properties"]["drug"]["maxLength"] == 200
 
 
 def test_invalid_registered_call_does_not_retrieve(monkeypatch):
@@ -89,7 +101,7 @@ def test_invalid_registered_call_does_not_retrieve(monkeypatch):
     from mcp.server.fastmcp.exceptions import ToolError
 
     with pytest.raises(ToolError):
-        asyncio.run(server.mcp.call_tool("search_lactmed", {"drug": "  "}))
+        asyncio.run(server.mcp.call_tool("get_lactmed_record", {"drug": "  "}))
 
 
 def test_protocol_output_preserves_evidence(monkeypatch):

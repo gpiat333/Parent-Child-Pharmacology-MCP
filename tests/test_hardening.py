@@ -82,7 +82,8 @@ def test_retrieved_instructions_are_flagged(text):
     result = normalize({"text": text})
     assert result["status"] == "partial"
     assert result["untrusted_data"]["instruction_like_content_detected"]
-    assert result["evidence"]["text"] == text
+    assert result["text"] == text
+    assert "text" in result["evidence"]["fields"]
 
 
 def test_empty_is_no_results():
@@ -212,13 +213,12 @@ def test_all_tools_advertise_contract_and_annotations():
 
 
 def test_capabilities_and_inactive_tool(monkeypatch):
-    from parent_child_pharmacology.app import semantic_search_lactmed
     from parent_child_pharmacology.core import config
     from parent_child_pharmacology.core.capabilities import capabilities
 
     monkeypatch.setattr(config, "USE_LAKEHOUSE", False)
     cap = capabilities()
-    assert len(cap["tools"]) == 31
+    assert len(cap["tools"]) == 24
+    assert all(tool["enabled"] for tool in cap["tools"])
+    assert "semantic_search_lactmed" not in {tool["name"] for tool in cap["tools"]}
     assert cap["snapshot"]["snapshot_age_days"] >= 0
-    result = asyncio.run(semantic_search_lactmed("What lactation evidence exists for sertraline?"))
-    assert result["status"] == "not_enabled"

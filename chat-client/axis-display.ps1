@@ -19,7 +19,7 @@ function Get-AxisDisplayNotice([object[]]$ToolCalls) {
   foreach($property in $axisMap.psobject.Properties){
    $rows=@($result.evidence_axes | Where-Object {$_.axis -ceq $property.Name});$valid=$rows.Count -eq 1 -and $rows[0].by_ingredient -is [array] -and $rows[0].by_ingredient.Count -gt 0
    $counts=@{items=0;context_only=0;reported_gaps=0}
-   if($valid){foreach($group in $rows[0].by_ingredient){foreach($field in @('items','context_only','reported_gaps')){if($group.$field -isnot [array]){$valid=$false}else{$counts[$field]+=$group.$field.Count}}}}
+   if($valid){foreach($group in $rows[0].by_ingredient){foreach($field in @('items','context_only','reported_gaps')){if($group.$field -isnot [array]){$valid=$false}else{$total=$group."$($field)_total";$counts[$field]+=$(if($total -is [int] -or $total -is [long]){[int]$total}else{$group.$field.Count})}}}}
    if($valid){$status=if($counts.items){$script:AxisDisplayPolicy.found.Replace('{n}',[string]$counts.items)}else{$script:AxisDisplayPolicy.empty};$context=[string]$counts.context_only;$gaps=[string]$counts.reported_gaps}
    else{$status=$script:AxisDisplayPolicy.missing;$context='unknown';$gaps='unknown'}
    $lines.Add('| '+$property.Value+' | '+$status+' | '+$context+' | '+$gaps+' |')

@@ -270,7 +270,7 @@ async def lactmed_record(book_id: str, max_chars: int = 16000) -> dict:
         return {
             "book_id": book_id,
             "text": "",
-            "error": "Invalid book_id. Call search_lactmed first and pass its numeric id, not a drug name.",
+            "error": "Invalid book_id. Pass the medicine name in drug, or a numeric id from an earlier result.",
             "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/",
         }
     s = (

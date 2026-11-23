@@ -45,96 +45,64 @@ class StrictInput(ArgModelBase):
 class RouteParentQuestionInput(StrictInput):
     question: Question = Field(
         ...,
-        description="Question.",
+        description="The user's question in their own words, without names or other identifiers.",
         examples=["What lactation evidence is available for sertraline?"],
     )
-    country: Country = Field("US", description="Country.", examples=["US"])
+    country: Country = Field(
+        "US",
+        description="Country the user is in; used only to choose emergency contacts.",
+        examples=["US"],
+    )
 
 
 class GetParentMedicationInfoInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
-
-
-class SearchMedicationRecallsInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
-    manufacturer: OptionalQuery = Field(
-        "", description="Manufacturer.", examples=["Example manufacturer"]
-    )
-    lot: OptionalQuery = Field("", description="Lot.", examples=["ABC123"])
-    max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
-    )
-
-
-class SearchDrugSafetyAlertsInput(StrictInput):
-    drug: OptionalQuery = Field("", description="Drug.", examples=["sertraline"])
-    max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+    drug: Query = Field(
+        ...,
+        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
+        examples=["sertraline"],
     )
 
 
 class FindRecruitingStudiesInput(StrictInput):
-    topic: Query = Field(..., description="Topic.", examples=["pediatric epilepsy"])
-    population: Population = Field("any", description="Population.", examples=["lactation"])
-    location: OptionalQuery = Field("", description="Location.", examples=["Maryland"])
-    max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+    topic: Query = Field(
+        ...,
+        description="Condition or medicine to find recruiting studies for.",
+        examples=["pediatric epilepsy"],
     )
-
-
-class SearchPregnancyRegistriesInput(StrictInput):
-    drug: OptionalQuery = Field("", description="Drug.", examples=["sertraline"])
-    max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+    population: Population = Field(
+        "any",
+        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
+        examples=["lactation"],
     )
-
-
-class FindPregnancyExposureRegistriesInput(StrictInput):
-    drug: Query = Field(
-        ..., description="Confirmed medicine name. FDA directory navigation, not a recommendation."
+    location: OptionalQuery = Field(
+        "",
+        description="City, state or country used to filter study sites; never a home address.",
+        examples=["Maryland"],
+    )
+    max_results: Limit20 = Field(
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
 
 
 class SearchParentInputOpportunitiesInput(StrictInput):
-    topic: Query = Field(..., description="Topic.", examples=["pediatric epilepsy"])
-    agency: Literal["NIH", "FDA"] = Field("NIH", description="Agency.", examples=["NIH"])
-    max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+    topic: Query = Field(
+        ...,
+        description="Short research subject such as pregnancy or clinical research, not a whole question.",
+        examples=["pediatric epilepsy"],
     )
-
-
-class GetReportingResourcesInput(StrictInput):
-    pass
+    agency: Literal["NIH", "FDA"] = Field(
+        "NIH", description="Which agency's Federal Register notices to search.", examples=["NIH"]
+    )
+    max_results: Limit20 = Field(
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
+    )
 
 
 class NormalizeDrugInput(StrictInput):
-    name: Query = Field(..., description="Name.", examples=["Zoloft"])
-
-
-class SearchLactmedInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
-    max_results: Limit20 = Field(
-        5, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
-    )
-
-
-class GetLactmedRecordInput(StrictInput):
-    book_id: BookID = Field(
+    name: Query = Field(
         ...,
-        description="Numeric LactMed record ID returned by search_lactmed.",
-        examples=["4569784"],
-    )
-    max_chars: TextLimit = Field(16000, description="Max chars.", examples=[16000])
-
-
-class SemanticSearchLactmedInput(StrictInput):
-    question: Question = Field(
-        ...,
-        description="Question.",
-        examples=["What lactation evidence is available for sertraline?"],
-    )
-    max_results: Limit20 = Field(
-        5, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        description="Brand, generic or misspelled medicine name to resolve.",
+        examples=["Zoloft"],
     )
 
 
@@ -143,13 +111,23 @@ class SearchLiteratureInput(StrictInput):
         0,
         description="PubMed retstart offset from pagination.next_offset. Nonzero offsets use live PubMed; PubMed limits retrieval to the first 10,000 hits.",
     )
-    query: Query = Field(..., description="Query.", examples=["levetiracetam breastfeeding"])
-    population: Population = Field("any", description="Population.", examples=["lactation"])
+    query: Query = Field(
+        ...,
+        description="Medicine name plus at most one concept; not a whole question or PubMed syntax.",
+        examples=["levetiracetam breastfeeding"],
+    )
+    population: Population = Field(
+        "any",
+        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
+        examples=["lactation"],
+    )
     max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
     mode: Literal["auto", "semantic", "keyword"] = Field(
-        "auto", description="Mode.", examples=["keyword"]
+        "auto",
+        description="auto prefers semantic search when a vector index is configured; keyword always uses live PubMed.",
+        examples=["keyword"],
     )
     focus: Literal[
         "all", "maternal", "exposure", "offspring_outcomes", "maternal_pharmacokinetics"
@@ -157,9 +135,15 @@ class SearchLiteratureInput(StrictInput):
         "all",
         description="Curated MeSH focus for pregnancy or lactation. Live PubMed; no default date restriction unless date_from/date_to are supplied.",
     )
-    publication_type: PublicationType = "any"
-    date_from: ISODate | None = None
-    date_to: ISODate | None = None
+    publication_type: PublicationType = Field(
+        "any", description="Limit to one PubMed publication type; forces live PubMed."
+    )
+    date_from: ISODate | None = Field(
+        None, description="Earliest publication date, YYYY-MM-DD, inclusive."
+    )
+    date_to: ISODate | None = Field(
+        None, description="Latest publication date, YYYY-MM-DD, inclusive."
+    )
 
     @model_validator(mode="after")
     def dates(self):
@@ -182,16 +166,24 @@ class GetAbstractsInput(StrictInput):
 
 
 class GetLabelSectionsInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
+    drug: Query = Field(
+        ...,
+        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
+        examples=["sertraline"],
+    )
 
 
 class SearchPediatricLabelingChangesInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
+    drug: Query = Field(
+        ...,
+        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
+        examples=["sertraline"],
+    )
     legislation: Literal["any", "BPCA", "PREA"] = Field(
-        "any", description="Legislation.", examples=["BPCA"]
+        "any", description="Filter by the law behind the labeling change.", examples=["BPCA"]
     )
     max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
 
 
@@ -201,9 +193,13 @@ class SearchTrialsInput(StrictInput):
         description="Condition or drug; omit when fetching by nct_id.",
         examples=["pediatric epilepsy"],
     )
-    population: Population = Field("pregnancy", description="Population.", examples=["lactation"])
+    population: Population = Field(
+        "pregnancy",
+        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
+        examples=["lactation"],
+    )
     max_results: Limit20 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
     nct_id: NCTID | None = Field(
         None, description="Exact NCT identifier for a direct record fetch, without a search."
@@ -217,15 +213,21 @@ class SearchTrialsInput(StrictInput):
 
 
 class SearchFundedResearchInput(StrictInput):
-    topic: Query = Field(..., description="Topic.", examples=["pediatric epilepsy"])
+    topic: Query = Field(
+        ...,
+        description="Research topic; for a medicine, add a population, for example sertraline pregnancy.",
+        examples=["pediatric epilepsy"],
+    )
     max_results: Limit25 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
     ic: IC = Field(
         "any",
         description="Administering NIH IC code; HD maps to NICHD in the RePORTER agency filter.",
     )
-    fiscal_years: FiscalYears | None = None
+    fiscal_years: FiscalYears | None = Field(
+        None, description="NIH fiscal years to include, for example [2024, 2025]."
+    )
     activity_code: ActivityCode = Field(
         "",
         description="Exact three-character NIH activity code, e.g. R01, R21, K12; not a wildcard series.",
@@ -234,39 +236,56 @@ class SearchFundedResearchInput(StrictInput):
 
 
 class SummarizeResearchPortfolioInput(StrictInput):
-    drug_or_topic: Query
-    ic: IC = "any"
-    fiscal_years: FiscalYears | None = None
-    activity_code: ActivityCode = ""
-    organization: OptionalQuery = ""
-    max_projects: Annotated[int, Field(ge=1, le=500)] = 200
+    drug_or_topic: Query = Field(
+        ...,
+        description="Research topic or medicine; for a medicine, add a population.",
+        examples=["neonatal pharmacology"],
+    )
+    ic: IC = Field("any", description="Administering NIH institute code; HD is NICHD.")
+    fiscal_years: FiscalYears | None = Field(
+        None, description="NIH fiscal years to include, for example [2024, 2025]."
+    )
+    activity_code: ActivityCode = Field(
+        "", description="Exact three-character NIH activity code such as R01; not a series."
+    )
+    organization: OptionalQuery = Field("", description="Organization name, partial match.")
+    max_projects: Annotated[int, Field(ge=1, le=500)] = Field(
+        200, description="Most project records to retrieve and aggregate (1-500)."
+    )
 
 
 class CheckEvidenceCoverageInput(StrictInput):
-    drug: Query
-    population: Population
+    drug: Query = Field(
+        ..., description="Generic or brand name of one medicine.", examples=["levetiracetam"]
+    )
+    population: Population = Field(
+        ..., description="Who the evidence should be about.", examples=["pregnancy"]
+    )
 
 
 class FindProductsContainingIngredientInput(StrictInput):
-    ingredient: Query
-    max_results: Limit20 = 20
-
-
-class SearchDrugShortagesInput(StrictInput):
-    drug: Query
-    dosage_form: OptionalQuery = ""
-    status: Literal["any", "Current", "Resolved", "Discontinued"] = "any"
-    max_results: Limit20 = 10
+    ingredient: Query = Field(
+        ...,
+        description="One confirmed active ingredient, not a brand or combination product.",
+        examples=["acetaminophen"],
+    )
+    max_results: Limit20 = Field(20, description="Maximum products returned (1-20).")
 
 
 class FindMprintRecordsInput(StrictInput):
     drug: OptionalQuery = Field("", description="Exact drug name, or omit when using PMID.")
     pmid: PMID | None = Field(None, description="Exact PubMed ID. Drug or PMID is required.")
-    population: Population = "any"
-    study_type: Literal["any", "PK", "PE", "CT", "PD", "PG", "RCT"] = "any"
-    max_results: Limit20 = 10
-    resolve_names: bool = True
-    offset: Offset = 0
+    population: Population = Field("any", description="Limit to studies in one population.")
+    study_type: Literal["any", "PK", "PE", "CT", "PD", "PG", "RCT"] = Field(
+        "any",
+        description="PK pharmacokinetics, PE pharmacoepidemiology, CT clinical trial, PD "
+        "pharmacodynamics, PG pharmacogenetics, RCT randomized controlled trial.",
+    )
+    max_results: Limit20 = Field(10, description="Maximum records returned (1-20).")
+    resolve_names: bool = Field(
+        True, description="Also match the generic ingredient when a brand name is given."
+    )
+    offset: Offset = Field(0, description="Row offset from pagination.next_offset.")
     include_classifications: bool = Field(
         False,
         description="Join automated Silver labels and exported outcome counts for each returned PMID. Not clinical findings.",
@@ -284,21 +303,32 @@ class FindMprintRecordsInput(StrictInput):
 
 
 class GetMprintDetailsInput(StrictInput):
-    pmid: PMID
+    pmid: PMID = Field(..., description="PubMed ID of a study returned by find_mprint_records.")
     table: Literal["gold_outcomes", "gold_PE_CT", "gold_PK_summary", "silver_classifications"] = (
-        "gold_outcomes"
+        Field(
+            "gold_outcomes",
+            description="gold_outcomes: all curated outcome rows. gold_PE_CT: pharmacoepidemiology "
+            "and trial outcomes. gold_PK_summary: pharmacokinetic summaries. "
+            "silver_classifications: automated study-type labels, not curated findings.",
+        )
     )
-    max_results: Limit20 = 5
-    offset: Offset = 0
+    max_results: Limit20 = Field(5, description="Maximum outcome rows returned (1-20).")
+    offset: Offset = Field(0, description="Row offset from pagination.next_offset.")
 
 
 class GetAdverseEventSignalsInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
+    drug: Query = Field(
+        ...,
+        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
+        examples=["sertraline"],
+    )
     cohort: Literal["any", "pregnancy", "infant"] = Field(
-        "any", description="Cohort.", examples=["infant"]
+        "any",
+        description="Limit FAERS reports to pregnancy-exposure reports or to infants aged 0 to 12 months.",
+        examples=["infant"],
     )
     max_results: Limit25 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
+        10, description="Maximum records returned; see minimum and maximum.", examples=[5]
     )
 
 
@@ -307,7 +337,11 @@ class GetPatientEducationInput(StrictInput):
         "en",
         description="Spanish drug links require a confirmed RxNorm ID; no Spanish free-text search.",
     )
-    topic: Query = Field(..., description="Topic.", examples=["pediatric epilepsy"])
+    topic: Query = Field(
+        ...,
+        description="Health topic or medicine name in English.",
+        examples=["pediatric epilepsy"],
+    )
     rxcui: RxCUI | None = Field(
         None,
         description="Exact numeric RxNorm concept identifier; not a medicine name.",
@@ -315,54 +349,131 @@ class GetPatientEducationInput(StrictInput):
     )
 
 
-class SearchBpcaEvidenceInput(StrictInput):
-    query: OptionalQuery = Field("", description="Query.", examples=["levetiracetam breastfeeding"])
-    max_results: Limit25 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
-    )
-
-
-class SearchNichdStudiesInput(StrictInput):
-    query: OptionalQuery = Field("", description="Query.", examples=["levetiracetam breastfeeding"])
-    network: Literal["any", "mfmu", "neonatal"] = Field(
-        "any", description="Network.", examples=["mfmu"]
-    )
-    max_results: Limit25 = Field(
-        10, description="Maximum returned records; the schema defines valid bounds.", examples=[5]
-    )
-    page: Page = Field(0, description="Page.", examples=[0])
-
-
 class MedicationEvidenceBriefInput(StrictInput):
-    drug: Query = Field(..., description="Drug.", examples=["sertraline"])
+    drug: Query = Field(
+        ...,
+        description="Generic or brand name of one medicine, for example sertraline or Zoloft.",
+        examples=["sertraline"],
+    )
     population: Literal[
         "pregnancy", "lactation", "neonate", "infant", "child", "adolescent", "pediatric"
-    ] = Field("lactation", description="Population.", examples=["lactation"])
+    ] = Field(
+        "lactation",
+        description="Who the evidence should be about. Age bands: neonate under 28 days, infant to under 2 years, child 2 to 11, adolescent 12 to 17.",
+        examples=["lactation"],
+    )
+    detail: Literal["summary", "full"] = Field(
+        "summary",
+        description="summary: every evidence axis with totals, the first passages per list and "
+        "compact source records. full: every passage and the source text; very large.",
+    )
 
 
 class SearchMothertobabyFactSheetsInput(StrictInput):
     drug: Query = Field(..., description="Medicine or exposure name.", examples=["sertraline"])
     language: Literal["any", "en", "es"] = Field("any", description="Fact sheet language.")
-    max_results: Limit20 = 5
+    max_results: Limit20 = Field(5, description="Maximum fact sheets returned (1-20).")
     include_text: bool = Field(True, description="Return verbatim question-and-answer text.")
     max_chars: TextLimit = Field(8000, description="Total text budget; whole answers only.")
+
+
+class SearchFdaDrugNoticesInput(StrictInput):
+    kind: Literal["recalls", "safety_communications", "shortages", "reporting_links"] = Field(
+        ...,
+        description="Which FDA notices to look up: recalls, safety_communications, shortages, or "
+        "reporting_links for MedWatch and public-involvement links.",
+        examples=["recalls"],
+    )
+    drug: OptionalQuery = Field(
+        "",
+        description="Generic or brand name. Required for recalls and shortages; optional for "
+        "safety_communications; unused for reporting_links.",
+        examples=["sertraline"],
+    )
+    manufacturer: OptionalQuery = Field(
+        "", description="Recalls only: manufacturer name as printed on the package."
+    )
+    lot: OptionalQuery = Field(
+        "", description="Recalls only: lot number as printed on the package.", examples=["ABC123"]
+    )
+    dosage_form: OptionalQuery = Field(
+        "", description="Shortages only: dosage form such as tablet or injection."
+    )
+    status: Literal["any", "Current", "Resolved", "Discontinued"] = Field(
+        "any", description="Shortages only: FDA shortage status filter."
+    )
+    max_results: Limit20 = Field(10, description="Maximum records returned (1-20).")
+
+    @model_validator(mode="after")
+    def drug_when_needed(self):
+        if self.kind in {"recalls", "shortages"} and not self.drug:
+            raise ValueError("drug is required for recalls and shortages")
+        return self
+
+
+class FindPregnancyExposureRegistriesInput(StrictInput):
+    drug: OptionalQuery = Field(
+        "",
+        description="Confirmed medicine name; omit to list the FDA directory. Navigation only, "
+        "not a recommendation.",
+        examples=["topiramate"],
+    )
+    max_results: Limit20 = Field(20, description="Maximum registries returned (1-20).")
+
+
+class GetLactmedRecordInput(StrictInput):
+    drug: OptionalQuery = Field(
+        "",
+        description="Medicine or vaccine name, generic preferred. Finds and reads the record in "
+        "one call.",
+        examples=["sertraline"],
+    )
+    book_id: BookID | None = Field(
+        None,
+        description="Numeric LactMed record id from an earlier result, used to pick one of several "
+        "candidate records. Not an NBK accession or a drug name.",
+        examples=["4573436"],
+    )
+    max_chars: TextLimit = Field(
+        16000, description="Maximum characters of record text (500-20000).", examples=[16000]
+    )
+
+    @model_validator(mode="after")
+    def selector(self):
+        if not self.drug and not self.book_id:
+            raise ValueError("Provide drug or book_id")
+        return self
+
+
+class SearchNichdResourcesInput(StrictInput):
+    query: OptionalQuery = Field(
+        "",
+        description="Drug, condition or title words; empty lists the index.",
+        examples=["levetiracetam"],
+    )
+    source: Literal["bpca_summaries", "dash_studies"] = Field(
+        "bpca_summaries",
+        description="bpca_summaries: BPCA and Pediatric Trials Network study-summary links. "
+        "dash_studies: public NICHD DASH study descriptions and publications.",
+    )
+    network: Literal["any", "mfmu", "neonatal"] = Field(
+        "any", description="dash_studies only: limit to one NICHD research network."
+    )
+    max_results: Limit25 = Field(10, description="Maximum records returned (1-25).")
+    page: Page = Field(0, description="dash_studies only: zero-based result page (0-100).")
 
 
 INPUT_MODELS = {
     "search_mothertobaby_fact_sheets": SearchMothertobabyFactSheetsInput,
     "route_parent_question": RouteParentQuestionInput,
+    "search_fda_drug_notices": SearchFdaDrugNoticesInput,
+    "search_nichd_resources": SearchNichdResourcesInput,
     "get_parent_medication_info": GetParentMedicationInfoInput,
-    "search_medication_recalls": SearchMedicationRecallsInput,
-    "search_drug_safety_alerts": SearchDrugSafetyAlertsInput,
     "find_recruiting_studies": FindRecruitingStudiesInput,
-    "search_pregnancy_registries": SearchPregnancyRegistriesInput,
     "find_pregnancy_exposure_registries": FindPregnancyExposureRegistriesInput,
     "search_parent_input_opportunities": SearchParentInputOpportunitiesInput,
-    "get_reporting_resources": GetReportingResourcesInput,
     "normalize_drug": NormalizeDrugInput,
-    "search_lactmed": SearchLactmedInput,
     "get_lactmed_record": GetLactmedRecordInput,
-    "semantic_search_lactmed": SemanticSearchLactmedInput,
     "search_literature": SearchLiteratureInput,
     "get_abstracts": GetAbstractsInput,
     "get_label_sections": GetLabelSectionsInput,
@@ -373,11 +484,8 @@ INPUT_MODELS = {
     "get_mprint_details": GetMprintDetailsInput,
     "get_adverse_event_signals": GetAdverseEventSignalsInput,
     "get_patient_education": GetPatientEducationInput,
-    "search_bpca_evidence": SearchBpcaEvidenceInput,
-    "search_nichd_studies": SearchNichdStudiesInput,
     "medication_evidence_brief": MedicationEvidenceBriefInput,
     "summarize_research_portfolio": SummarizeResearchPortfolioInput,
     "check_evidence_coverage": CheckEvidenceCoverageInput,
     "find_products_containing_ingredient": FindProductsContainingIngredientInput,
-    "search_drug_shortages": SearchDrugShortagesInput,
 }
