@@ -1,0 +1,119 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 24,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the label-based disease-risk context, pharmacokinetic statements, pregnancy-registry findings, animal findings, and extraction limitations cited in the answer.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the review-level statements about physiologic pregnancy changes affecting antiseizure-medication levels and serum-concentration monitoring.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the 60-mother naturalistic study description and the reported lamotrigine breastmilk concentration-by-dose ratio.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the description of the 2021 review's scope, including lamotrigine pharmacokinetics in pregnancy.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33573557/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the description of the registered study concerning antiseizure-medication clearance, physiologic factors, and fetal or nursing-infant exposure; the answer correctly characterizes it as a registration rather than an outcome report.",
+        "url": "https://clinicaltrials.gov/study/NCT05450978"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the reported FAERS query terms and counts, with the answer preserving the source caveats about reporting volume, absent denominators, and lack of causality.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the explanation that spontaneous-report counts do not establish incidence or causation.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports the pregnancy-registry directory reference and the need for the registry team to confirm eligibility and availability.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "No dose values or personal recommendations.",
+        "answer_quote": "lamotrigine should not be abruptly changed without the prescribing clinician’s guidance.",
+        "reference_quote": "Women with epilepsy who become pregnant should not abruptly discontinue antiepileptic drugs, including lamotrigine, due to the risk of status epilepticus or severe seizures, which may be life-threatening",
+        "explanation": "Although consistent with the cited label, this is phrased as direct medication-change advice and therefore conflicts with the request to avoid personal recommendations."
+      }
+    ],
+    "rationale": "The brief substantially fulfills the requested three-axis structure, distinguishes disease risks from lamotrigine findings, separates maternal pharmacokinetics from fetal exposure and outcomes, preserves study populations and design limits, includes gaps and clinician questions, and avoids administered dose values. The only material task failure is the direct individualized-sounding instruction about not abruptly changing lamotrigine."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "70bb4d0d8b392bd9389494889ba31c15fe9b28c84790c7df7899b8cc3e3c22e4",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label-based disease-risk context, pharmacokinetic statements, pregnancy-registry findings, animal findings, and extraction limitations cited in the answer.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the review-level statements about physiologic pregnancy changes affecting antiseizure-medication levels and serum-concentration monitoring.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the 60-mother naturalistic study description and the reported lamotrigine breastmilk concentration-by-dose ratio.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the description of the 2021 review's scope, including lamotrigine pharmacokinetics in pregnancy.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the description of the registered study concerning antiseizure-medication clearance, physiologic factors, and fetal or nursing-infant exposure; the answer correctly characterizes it as a registration rather than an outcome report.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS query terms and counts, with the answer preserving the source caveats about reporting volume, absent denominators, and lack of causality.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the explanation that spontaneous-report counts do not establish incidence or causation.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the pregnancy-registry directory reference and the need for the registry team to confirm eligibility and availability.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"No dose values or personal recommendations.\",\n      \"answer_quote\": \"lamotrigine should not be abruptly changed without the prescribing clinician’s guidance.\",\n      \"reference_quote\": \"Women with epilepsy who become pregnant should not abruptly discontinue antiepileptic drugs, including lamotrigine, due to the risk of status epilepticus or severe seizures, which may be life-threatening\",\n      \"explanation\": \"Although consistent with the cited label, this is phrased as direct medication-change advice and therefore conflicts with the request to avoid personal recommendations.\"\n    }\n  ],\n  \"rationale\": \"The brief substantially fulfills the requested three-axis structure, distinguishes disease risks from lamotrigine findings, separates maternal pharmacokinetics from fetal exposure and outcomes, preserves study populations and design limits, includes gaps and clinician questions, and avoids administered dose values. The only material task failure is the direct individualized-sounding instruction about not abruptly changing lamotrigine.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 246818,
+        "completion_tokens": 1110,
+        "total_tokens": 247928,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 246815,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 389,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 246818,
+    "completion_tokens": 1110,
+    "total_tokens": 247928,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 246815,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 389,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

@@ -1,0 +1,74 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 26,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The DailyMed URL identifies the retrieved QPharma metformin tablet label and supports the adult warnings, adverse reactions, lactation text, product limitations, truncation, and missing-section disclosures.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The LactMed URL supports the reported milk and infant-serum concentrations, observed infant findings, caution statement, record date, bounded-extract limitation, and study-population qualifications.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer clearly separates adult label warnings from LactMed infant observations, identifies the retrieved product and sources, discloses extraction and population limitations, distinguishes recommendations from observations, and avoids administered doses. Reported concentration measurements are appropriately framed as research exposure findings rather than dosing instructions."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "977cea169958c9dd887f60ca6deda613e1dc42aab14c35e42ad79ecf48afa8fc",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 26,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed URL identifies the retrieved QPharma metformin tablet label and supports the adult warnings, adverse reactions, lactation text, product limitations, truncation, and missing-section disclosures.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed URL supports the reported milk and infant-serum concentrations, observed infant findings, caution statement, record date, bounded-extract limitation, and study-population qualifications.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer clearly separates adult label warnings from LactMed infant observations, identifies the retrieved product and sources, discloses extraction and population limitations, distinguishes recommendations from observations, and avoids administered doses. Reported concentration measurements are appropriately framed as research exposure findings rather than dosing instructions.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 67698,
+        "completion_tokens": 566,
+        "total_tokens": 68264,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 67695,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 285,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 67698,
+    "completion_tokens": 566,
+    "total_tokens": 68264,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 67695,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 285,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

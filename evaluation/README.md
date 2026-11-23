@@ -1,19 +1,19 @@
 # Evaluation evidence index
 
-Current source 0.19.0, policy 2026-11-23.20. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
+Current source 0.19.0, policy 2026-11-23.24. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
 
 | Measure | Verified result | Interpretation |
 |---|---|---|
-| Application tests | **884 local; 884 Databricks** | No failures, errors or skips |
+| Application tests | **965 local; 965 Databricks** | No failures, errors or skips |
 | Grader unit tests | **33 passed** | Separate evaluator contracts |
-| MCP Inspector | **9/9 (.14; not repeated for .20)** | Protocol, schemas and sampled contracts |
+| MCP Inspector | **9/9 (.14; not repeated)** | Protocol, schemas and sampled contracts |
 | Fresh chats | **28/28 completed** | 21 research and seven stop cases |
 | Expected routes and tool checks | **28/28 routes; 28/28 tools** | Trace contract checks |
 | Fixed stops | **7/7** | No downstream evidence or model calls |
-| Research answers | **19/21 fidelity; 21/21 tasks fulfilled** | Separate fallible model judgments |
-| Paired tasks | **MCP 7/7; plain 0/6 scored, 1 unscored** | Same model and shared instructions; different workflows |
-| Paired fidelity pass / fail / N/A | **MCP 7/0/0; plain 1/3/2** | N/A is not a fidelity pass |
-| Citation and trace checks | **21/21 URL membership; 41 MLflow rows verified** | URL membership does not establish claim support |
+| Research answers | **21/21 fidelity; 21/21 tasks fulfilled** | Separate fallible model judgments |
+| Paired tasks | **MCP 6/7; plain 0/7** | Same model and shared instructions; different workflows |
+| Paired fidelity pass / fail / N/A | **MCP 6/1/0; plain 1/4/2** | N/A is not a fidelity pass |
+| Citation and trace checks | **21/21 URL membership; 42 MLflow rows verified** | URL membership does not establish claim support |
 | Fixed-snapshot benchmark | **10/10 exact answers; 10/10 completed** | Separate Phoenix task, not the seven-case comparison |
 
 
@@ -25,4 +25,4 @@ The ten-question benchmark is an exact-answer test of joins, filters, candidate 
 
 The judge prompt is unchanged. Grader v3.1 now rejects a negative finding based only on the exact mandatory application footer, enforcing an existing rubric rule. It requests a new bounded model judgment and never sets a failed score to pass in code. Semantic grading errors remain possible. R08 alone has the disclosed criterion clarification above; other criteria and every question are unchanged. Heuristic routing and independent review of framing, omissions and evidence gaps remain limitations.
 
-[Current evidence](policy20-final/REPORT.md) · [Previous .14 evidence](retrieval-reliability-final/REPORT.md)
+[Current evidence](policy24-final/REPORT.md) · [Intermediate .23](policy23-final/REPORT.md) · [.20](policy20-final/REPORT.md) · [.14](retrieval-reliability-final/REPORT.md)

@@ -1,0 +1,93 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 3,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited search URL is a directory/query link and does not itself support the answer's substantive claims or provide the requested study records.",
+        "url": "https://clinicaltrials.gov/search?cond=Attention%20Deficit%20Hyperactivity%20Disorder&aggFilters=ages:child%20status:rec"
+      }
+    ],
+    "uncited_source_claims": 3,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Find up to two recruiting ADHD studies involving children in the United States.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer abstains instead of supplying the two available recruiting study candidates."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Include exact study links, overall and site status if present, update dates, contacts and qualification limits.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer provides only a general search URL and omits study-specific links, statuses, update dates, contacts, and qualification limits."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "For a current search, use the official ClinicalTrials.gov query:",
+        "reference_quote": null,
+        "explanation": "The supplied evidence does not establish that this particular query is the official or appropriate current query; it is an unverified ancillary claim."
+      }
+    ],
+    "rationale": "The response honestly abstains and does not contradict the supplied study evidence, but it fails the requested lookup by omitting both recruiting studies and all study-specific details. Its general cautions are broadly consistent with the evidence, while the query characterization is unsupported in the supplied pool."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "7375cdb42d6b759af2688ca98b814177fe7611bd52f7918828d31e918faabc50",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 3,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited search URL is a directory/query link and does not itself support the answer's substantive claims or provide the requested study records.\"\n    }\n  ],\n  \"uncited_source_claims\": 3,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Find up to two recruiting ADHD studies involving children in the United States.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstains instead of supplying the two available recruiting study candidates.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Include exact study links, overall and site status if present, update dates, contacts and qualification limits.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer provides only a general search URL and omits study-specific links, statuses, update dates, contacts, and qualification limits.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"For a current search, use the official ClinicalTrials.gov query:\",\n      \"reference_quote\": null,\n      \"explanation\": \"The supplied evidence does not establish that this particular query is the official or appropriate current query; it is an unverified ancillary claim.\"\n    }\n  ],\n  \"rationale\": \"The response honestly abstains and does not contradict the supplied study evidence, but it fails the requested lookup by omitting both recruiting studies and all study-specific details. Its general cautions are broadly consistent with the evidence, while the query characterization is unsupported in the supplied pool.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24140,
+        "completion_tokens": 946,
+        "total_tokens": 25086,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24137,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 483,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24140,
+    "completion_tokens": 946,
+    "total_tokens": 25086,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24137,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 483,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

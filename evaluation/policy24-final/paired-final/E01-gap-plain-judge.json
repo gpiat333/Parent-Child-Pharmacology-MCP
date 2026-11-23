@@ -1,0 +1,131 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 6,
+    "contradicted_claims": 2,
+    "unverified_claims": 4,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The cited FDA label URL is not among the supplied reference URLs, so its specific label content cannot be verified from the evidence pool.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The cited registry URL is not among the supplied reference URLs, and the supplied FDA directory identifies different registry contact details.",
+        "url": "https://npr.uktis.org/"
+      }
+    ],
+    "uncited_source_claims": 2,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Show FDA registry contacts separately without recommending participation.",
+        "answer_quote": "- **Telephone:** 1-877-311-8972",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer gives registry contacts separately, but the telephone contact does not match the FDA directory evidence supplied for daridorexant."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer cites an FDA label and registry website, but it does not cite the supplied FDA pregnancy-exposure-registry directory URL as required."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA label reports animal reproductive-development findings, including fetal effects in rats at exposures associated with maternal toxicity.",
+        "reference_quote": "Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.",
+        "explanation": "The supplied label evidence does not support fetal effects in rats associated with maternal toxicity; it reports no maternal or embryofetal toxicity or fetal malformation in rats. Maternal toxicity was reported in rabbits, not as fetal effects in rats."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "- **Website:** [https://npr.uktis.org/](https://npr.uktis.org/)",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer attributes registry contacts to the FDA label, but the supplied evidence identifies the QUVIVIQ Pregnancy Registry and its website and telephone number differently."
+      }
+    ],
+    "rationale": "The answer preserves the three requested evidence rows, reports no retrieved maternal PK measurements, avoids administered dosing, and keeps participation separate and unranked. However, it supplies incorrect or unsupported registry contacts, omits the required FDA directory citation, and misstates the supplied animal evidence by attributing fetal effects to rats. The cited URLs are outside the supplied evidence pool and therefore cannot substantiate those claims here."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "0da2a1dbc4d9cdfbcb76b65498975ae427501fcd899730e356bd9eb70e4df8ca",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label URL is not among the supplied reference URLs, so its specific label content cannot be verified from the evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited registry URL is not among the supplied reference URLs, and the supplied FDA directory identifies different registry contact details.\"\n    }\n  ],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"Website: [https://npr.uktis.org/](https://npr.uktis.org/)\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives registry contacts separately, but the contacts do not match the FDA directory evidence supplied for daridorexant.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an FDA label and a registry website, but it does not cite the supplied FDA pregnancy-exposure-registry directory URL as required.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label reports animal reproductive-development findings, including fetal effects in rats at exposures associated with maternal toxicity.\",\n      \"reference_quote\": \"Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.\",\n      \"explanation\": \"The supplied label evidence does not support fetal effects in rats associated with maternal toxicity; it reports no maternal or embryofetal toxicity or fetal malformation in rats. Maternal toxicity was reported in rabbits, not as fetal effects in rats.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Website: [https://npr.uktis.org/](https://npr.uktis.org/)\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer attributes registry contacts to the FDA label, but the supplied evidence identifies the QUVIVIQ Pregnancy Registry and its website and telephone number differently.\"\n    }\n  ],\n  \"rationale\": \"The answer preserves the three requested evidence rows, reports no retrieved maternal PK measurements, avoids administered dosing, and keeps participation separate and unranked. However, it supplies incorrect or unsupported registry contacts, omits the required FDA directory citation, and misstates the supplied animal evidence by attributing fetal effects to rats. The cited URLs are outside the supplied evidence pool and therefore cannot substantiate those claims here.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[3] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 110969,
+        "completion_tokens": 1002,
+        "total_tokens": 111971,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 110966,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 247,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 4,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA label URL is not among the supplied reference URLs, so its specific label content cannot be verified from the evidence pool.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited registry URL is not among the supplied reference URLs, and the supplied FDA directory identifies different registry contact details.\"\n    }\n  ],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Show FDA registry contacts separately without recommending participation.\",\n      \"answer_quote\": \"- **Telephone:** 1-877-311-8972\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives registry contacts separately, but the telephone contact does not match the FDA directory evidence supplied for daridorexant.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites an FDA label and registry website, but it does not cite the supplied FDA pregnancy-exposure-registry directory URL as required.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label reports animal reproductive-development findings, including fetal effects in rats at exposures associated with maternal toxicity.\",\n      \"reference_quote\": \"Daridorexant did not cause any maternal or embryofetal toxicities or fetal malformation at doses up to 300 mg/kg/day.\",\n      \"explanation\": \"The supplied label evidence does not support fetal effects in rats associated with maternal toxicity; it reports no maternal or embryofetal toxicity or fetal malformation in rats. Maternal toxicity was reported in rabbits, not as fetal effects in rats.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"- **Website:** [https://npr.uktis.org/](https://npr.uktis.org/)\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer attributes registry contacts to the FDA label, but the supplied evidence identifies the QUVIVIQ Pregnancy Registry and its website and telephone number differently.\"\n    }\n  ],\n  \"rationale\": \"The answer preserves the three requested evidence rows, reports no retrieved maternal PK measurements, avoids administered dosing, and keeps participation separate and unranked. However, it supplies incorrect or unsupported registry contacts, omits the required FDA directory citation, and misstates the supplied animal evidence by attributing fetal effects to rats. The cited URLs are outside the supplied evidence pool and therefore cannot substantiate those claims here.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 111814,
+        "completion_tokens": 832,
+        "total_tokens": 112646,
+        "prompt_tokens_details": {
+          "cached_tokens": 110966,
+          "cache_write_tokens": 845,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 86,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 111814,
+    "completion_tokens": 832,
+    "total_tokens": 112646,
+    "prompt_tokens_details": {
+      "cached_tokens": 110966,
+      "cache_write_tokens": 845,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 86,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

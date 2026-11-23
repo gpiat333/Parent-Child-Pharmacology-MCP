@@ -1,0 +1,77 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 4,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not include this specific FDA URL or establish that it is the applicable official record link.",
+        "url": "https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The search returned FDA naproxen recall records, but the answer did not report any returned candidate records or their statuses and did not provide links to those specific records."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and identifies the product, manufacturer, formulation, lot, and expiration details needing verification. Its honest inability statement does not establish that the requested lookup was completed, so it fails to present the returned records and statuses required by the task."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "ab72a80960aa6cdaca5a43ff41828814aa62ae4ed6f204e34dce11c620a20f6f",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 4,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not include this specific FDA URL or establish that it is the applicable official record link.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The search returned FDA naproxen recall records, but the answer did not report any returned candidate records or their statuses and did not provide links to those specific records.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies the product, manufacturer, formulation, lot, and expiration details needing verification. Its honest inability statement does not establish that the requested lookup was completed, so it fails to present the returned records and statuses required by the task.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 24974,
+        "completion_tokens": 800,
+        "total_tokens": 25774,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 24971,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 499,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 24974,
+    "completion_tokens": 800,
+    "total_tokens": 25774,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 24971,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 499,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}
