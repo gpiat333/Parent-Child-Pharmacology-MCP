@@ -14,11 +14,12 @@ REPO = Path(sys.argv[1])
 OUT = sys.argv[2]
 DEMO = REPO / "presentation/current-demo"
 
-# Palette: deep teal-green ink, a soft mist tint, one warm coral accent.
-DEEP = RGBColor(0x12, 0x3B, 0x3A)
-TEAL = RGBColor(0x0E, 0x5E, 0x5C)
-MIST = RGBColor(0xEC, 0xF3, 0xF2)
-MIST2 = RGBColor(0xD8, 0xE8, 0xE6)
+# Palette: deep indigo ink, blue-violet, lavender tints, one warm coral accent.
+DEEP = RGBColor(0x2A, 0x29, 0x6B)
+TEAL = RGBColor(0x46, 0x50, 0xC4)
+PURPLE = RGBColor(0x7B, 0x5C, 0xD6)
+MIST = RGBColor(0xEE, 0xF0, 0xFB)
+MIST2 = RGBColor(0xCF, 0xD4, 0xF4)
 CORAL = RGBColor(0xC8, 0x55, 0x3D)
 CORAL_T = RGBColor(0xFB, 0xEC, 0xE8)
 INK = RGBColor(0x1E, 0x2A, 0x32)
@@ -107,6 +108,26 @@ def connector(slide, x1, y1, x2, y2, color=MIST2, width=1.75):
     return c
 
 
+def waves(slide, top, height, colors, n=6):
+    """Flowing sine lines across the slide (title and closing slides)."""
+    import math
+
+    for k in range(n):
+        pts = []
+        for i in range(121):
+            x = -0.2 + 13.8 * i / 120
+            y = top + height * (0.5 + 0.38 * math.sin(i / 120 * 2 * math.pi * 1.1 + k * 0.55)
+                                + 0.08 * math.sin(i / 120 * 2 * math.pi * 3 + k))
+            pts.append((Inches(x), Inches(y + k * 0.09)))
+        ff = slide.shapes.build_freeform(pts[0][0], pts[0][1], scale=1.0)
+        ff.add_line_segments(pts[1:], close=False)
+        shp = ff.convert_to_shape()
+        shp.fill.background()
+        shp.shadow.inherit = False
+        shp.line.color.rgb = colors[k % len(colors)]
+        shp.line.width = Pt(1.5 + (k % 3))
+
+
 def picture(slide, path, x, y, max_w, max_h, border=True):
     iw, ih = Image.open(path).size
     scale = min(max_w / iw, max_h / ih)
@@ -138,18 +159,19 @@ s = new(dark=True, notes=(
     "Therapeutics Branch. I built this MCP server for the Dataset Access Server track. It gives AI assistants "
     "structured access to public evidence about medicines in pregnancy, breastfeeding and childhood. "
     "This is my own hackathon prototype, not an NIH product."))
-text(s, 0.9, 1.6, 9.5, 0.5, "GSA MCP Server and AI Agent Hackathon  ·  Dataset Access Server track",
+waves(s, 6.15, 0.95, [TEAL, PURPLE, RGBColor(0x9A, 0xA4, 0xF0), RGBColor(0xB9, 0xA6, 0xF2)])
+text(s, 0.9, 1.0, 9.5, 0.5, "GSA MCP Server and AI Agent Hackathon  ·  Dataset Access Server track",
      size=14, color=MIST2)
-text(s, 0.9, 2.2, 11.0, 1.9, ["Parent-child", "Pharmacology MCP"], size=54, font=HEAD, bold=True,
+text(s, 0.9, 1.55, 11.0, 1.9, ["Parent-child", "Pharmacology MCP"], size=54, font=HEAD, bold=True,
      color=WHITE, space_after=0, line=0.95)
-text(s, 0.9, 4.25, 10.0, 1.0,
+text(s, 0.9, 3.55, 10.0, 1.0,
      "Public evidence on medicines in pregnancy, breastfeeding and childhood, ready for AI assistants",
      size=20, color=MIST2)
-text(s, 0.9, 5.55, 9.0, 1.0, [
+text(s, 0.9, 4.6, 9.0, 1.0, [
     [("Gabriela Piatkowski, MS", {"bold": True, "color": WHITE})],
     "Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch, NICHD",
 ], size=14, color=MIST2, space_after=2)
-text(s, 0.9, 6.75, 11.5, 0.4,
+text(s, 0.9, 5.5, 11.5, 0.4,
      "Built as a hackathon prototype. Not an official NIH product or medical advice.", size=11,
      color=MIST2, italic=True)
 
@@ -168,27 +190,82 @@ text(s, 0.9, 5.45, 11.0, 0.9,
 text(s, 0.9, 6.75, 11.5, 0.4, "Illustrative question, not a real patient. Statistic: CDC, Medicine and Pregnancy.",
      size=11, color=MIST2, italic=True)
 
+# 2b ─ Her night, step by step
+s = new("Her night, step by step", notes=(
+    "Follow her through the night. At 2:07 she can't sleep. Her doctor's office is closed until morning, and "
+    "the after-hours line is for emergencies. A web search gives forums and lists of 'safe' medicines, which "
+    "CDC cautions often lack evidence. MotherToBaby is the right service, but after hours it replies the next "
+    "business day. LactMed is excellent, but it covers breastfeeding, not pregnancy. The label and PubMed are "
+    "written for clinicians. With this MCP, one question to any AI assistant returns the label's pregnancy "
+    "section, studies with links, the MotherToBaby fact sheet, registries and studies she could join, and "
+    "questions for her doctor, plus MotherToBaby's number for the morning and crisis lines if she needs them "
+    "now. It doesn't tell her what to do; it gets her ready for that conversation."))
+import math
+cx, amp, top, bottom = 4.55, 0.42, 1.75, 6.2
+pts = []
+for k in range(161):
+    y = top + (bottom - top) * k / 160
+    pts.append((cx + amp * math.sin(k / 160 * 2 * math.pi * 2.5), y))
+ff = s.shapes.build_freeform(Inches(pts[0][0]), Inches(pts[0][1]), scale=1.0)
+ff.add_line_segments([(Inches(x), Inches(y)) for x, y in pts[1:]], close=False)
+path = ff.convert_to_shape()
+path.fill.background()
+path.shadow.inherit = False
+path.line.color.rgb = MIST2
+path.line.width = Pt(6)
+stops = [
+    ("2:07 a.m.", "Can't sleep. Is my baby okay?", CORAL),
+    ("Doctor's office", "Closed until 8 a.m.; the after-hours line is for emergencies", TEAL),
+    ("Web search", "Forums and “safe” lists that CDC says often lack evidence", TEAL),
+    ("MotherToBaby", "The right experts, but after hours they reply the next business day", TEAL),
+    ("LactMed", "Excellent, but it covers breastfeeding, not pregnancy", TEAL),
+    ("Label and PubMed", "Written for clinicians; studies spread across sites", TEAL),
+]
+for i, (head, body, color) in enumerate(stops):
+    k = int(160 * (0.03 + 0.89 * i / (len(stops) - 1)))
+    x, y = pts[k]
+    circle_num(s, x - 0.19, y - 0.19, "", d=0.38, fill=color)
+    if i % 2 == 0:
+        text(s, 0.55, y - 0.32, x - 0.95, 0.35, head, size=14, bold=True, color=DEEP, align=PP_ALIGN.RIGHT)
+        text(s, 0.55, y - 0.02, x - 0.95, 0.6, body, size=12, color=INK, align=PP_ALIGN.RIGHT)
+    else:
+        text(s, x + 0.4, y - 0.32, 8.75 - x - 0.4, 0.35, head, size=14, bold=True, color=DEEP)
+        text(s, x + 0.4, y - 0.02, 8.75 - x - 0.4, 0.6, body, size=12, color=INK)
+box(s, 0.55, 6.25, 8.3, 0.95, fill=DEEP)
+text(s, 0.8, 6.25, 7.85, 0.95, [
+    [("With this MCP: ", {"bold": True, "color": WHITE}),
+     ("one question returns the label, studies with links, the MotherToBaby fact sheet, registries and "
+      "studies she could join, and questions for her doctor, plus who to call.", {"color": MIST2})]],
+     size=13, anchor=MSO_ANCHOR.MIDDLE)
+picture(s, REPO / "presentation/assets/mother-newborn.png", 9.15, 1.35, 3.6, 5.85, border=False)
+text(s, 9.15, 6.75, 3.6, 0.3, "Illustration", size=10, color=MUTED, italic=True, align=PP_ALIGN.RIGHT)
+
 # 3 ─ Evidence gap
-s = new("Most medicines lack the data to judge pregnancy safety", notes=(
-    "CDC puts the problem in one number. Fewer than ten percent of medicines approved since 1980 have "
+s = new("Most medicines lack data for pregnancy and for children", notes=(
+    "CDC puts the pregnancy problem in one number: fewer than ten percent of medicines approved since 1980 have "
     "enough information to determine their safety during pregnancy, yet nine in ten women take a medication "
-    "while pregnant. Pregnant people are usually left out of the trials that establish a new drug's safety. "
-    "So for most questions, an honest answer includes what is not known, and a tool has to show that."))
-box(s, 0.65, 1.7, 5.85, 3.9, fill=DEEP)
-text(s, 1.0, 1.95, 5.2, 1.4, "<10%", size=72, font=HEAD, bold=True, color=WHITE)
-text(s, 1.0, 3.45, 5.2, 2.0,
-     "of medicines approved since 1980 have enough information to determine their safety during pregnancy",
-     size=18, color=MIST2)
-box(s, 6.85, 1.7, 5.8, 3.9, fill=MIST)
-text(s, 7.2, 1.95, 5.2, 1.4, "9 in 10", size=72, font=HEAD, bold=True, color=TEAL)
-text(s, 7.2, 3.45, 5.1, 2.0, "women in the United States take a medication during pregnancy", size=18, color=INK)
-text(s, 0.65, 5.95, 12.0, 0.8, [
+    "while pregnant. Children had the same problem: a 1997 Senate report found fewer than twenty percent of "
+    "prescription drugs were labeled for use in children. That finding helped drive BPCA and PREA. Pregnant "
+    "people and children are usually left out of the studies that establish a new drug's safety, so an honest "
+    "answer has to include what isn't known."))
+stats3 = [
+    ("<10%", "of medicines approved since 1980 have enough information to determine their safety during pregnancy", DEEP),
+    ("9 in 10", "women in the United States take a medication during pregnancy", MIST),
+    ("<20%", "of prescription drugs were labeled for use in children in 1997, before BPCA and PREA", DEEP),
+]
+for i, (num, label, fill) in enumerate(stats3):
+    x = 0.65 + i * 4.1
+    box(s, x, 1.7, 3.8, 3.7, fill=fill)
+    dark = fill == DEEP
+    text(s, x + 0.35, 1.95, 3.2, 1.3, num, size=60, font=HEAD, bold=True, color=WHITE if dark else TEAL)
+    text(s, x + 0.35, 3.3, 3.15, 2.0, label, size=17, color=MIST2 if dark else INK)
+text(s, 0.65, 5.75, 12.0, 0.8, [
     [("Why: ", {"bold": True, "color": DEEP}),
-     ("pregnant people are usually left out of the studies that establish a new medicine's safety, "
-      "so most answers have to include what isn't known.", {})]], size=16, color=INK)
-text(s, 0.65, 6.95, 9.5, 0.35,
-     "Source: CDC, Medicine and Pregnancy: An Overview, and Treating for Two (cdc.gov/medicine-and-pregnancy).",
-     size=11, color=MUTED, italic=True)
+     ("pregnant people and children are usually left out of the studies that establish a new medicine's "
+      "safety, so most answers have to include what isn't known.", {})]], size=16, color=INK)
+text(s, 0.65, 6.75, 12.0, 0.5,
+     "Sources: CDC, Medicine and Pregnancy and Treating for Two; National Academies, Safe and Effective Medicines "
+     "for Children (2012), citing a 1997 Senate report.", size=11, color=MUTED, italic=True)
 
 # 4 ─ Federal efforts timeline
 s = new("Two decades of federal work to close the gap", notes=(
@@ -275,62 +352,6 @@ text(s, cx + 0.3, cy + 0.15, cw - 0.6, ch - 0.3,
      "“I take Zoloft and just found out I'm pregnant.”", size=18, font=HEAD, color=WHITE,
      italic=True, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
-# 7 ─ Her night, step by step
-s = new("Her night, step by step", notes=(
-    "Follow her through the night. At 2:07 she can't sleep. Her doctor's office is closed until morning, and "
-    "the after-hours line is for emergencies. A web search gives forums and lists of 'safe' medicines, which "
-    "CDC cautions often lack evidence. MotherToBaby is the right service, but after hours it replies the next "
-    "business day. LactMed is excellent, but it covers breastfeeding, not pregnancy. The label and PubMed are "
-    "written for clinicians. With this MCP, one question to any AI assistant returns the label's pregnancy "
-    "section, studies with links, the MotherToBaby fact sheet, registries and studies she could join, and "
-    "questions for her doctor. It also gives her MotherToBaby's number for the morning, and crisis lines if "
-    "she needs them now. It doesn't tell her what to do; it gets her ready for that conversation."))
-# Serpentine path: three runs joined by half-circle turns
-import math
-xs, xe = 1.25, 11.65
-rows = [2.15, 4.05, 5.95]
-pts = []
-for k in range(41):
-    pts.append((xs + (xe - xs) * k / 40, rows[0]))
-for k in range(1, 31):
-    a = -math.pi / 2 + math.pi * k / 30
-    pts.append((xe + 0.95 * math.cos(a), (rows[0] + rows[1]) / 2 + 0.95 * math.sin(a)))
-for k in range(1, 41):
-    pts.append((xe - (xe - xs) * k / 40, rows[1]))
-for k in range(1, 31):
-    a = -math.pi / 2 - math.pi * k / 30
-    pts.append((xs + 0.95 * math.cos(a), (rows[1] + rows[2]) / 2 + 0.95 * math.sin(a)))
-for k in range(1, 9):
-    pts.append((xs + 1.0 * k / 8, rows[2]))
-ff = s.shapes.build_freeform(Inches(pts[0][0]), Inches(pts[0][1]), scale=1.0)
-ff.add_line_segments([(Inches(x), Inches(y)) for x, y in pts[1:]], close=False)
-path = ff.convert_to_shape()
-path.fill.background()
-path.line.color.rgb = MIST2
-path.line.width = Pt(6)
-path.shadow.inherit = False
-stops = [
-    (xs, rows[0], "2:07 a.m.", "Can't sleep. Is my baby okay?", CORAL),
-    (xs + 5.2, rows[0], "Doctor's office", "Closed until 8 a.m.; after-hours line is for emergencies", TEAL),
-    (xe, rows[0], "Web search", "Forums and “safe” lists that CDC says often lack evidence", TEAL),
-    (xe, rows[1], "MotherToBaby", "The right experts, but after hours they reply the next business day", TEAL),
-    (xs + 5.2, rows[1], "LactMed", "Excellent, but it covers breastfeeding, not pregnancy", TEAL),
-    (xs, rows[1], "Label and PubMed", "Written for clinicians; studies spread across sites", TEAL),
-]
-for x, y, head, body, color in stops:
-    circle_num(s, x - 0.22, y - 0.22, "", d=0.44, fill=color)
-    tx = x - 1.6 if x not in (xs,) else x - 0.3
-    tx = min(max(tx, 0.55), 13.333 - 0.6 - 3.2)
-    text(s, tx, y + 0.3, 3.2, 0.35, head, size=14, bold=True, color=DEEP, align=PP_ALIGN.LEFT)
-    text(s, tx, y + 0.62, 3.2, 0.8, body, size=12, color=INK)
-circle_num(s, xs + 1.0, rows[2] - 0.3, "", d=0.6, fill=DEEP)
-box(s, xs + 1.8, rows[2] - 0.62, 9.95, 1.25, fill=DEEP)
-text(s, xs + 2.05, rows[2] - 0.55, 9.5, 1.15, [
-    [("With this MCP: ", {"bold": True, "color": WHITE}),
-     ("one question returns the label's pregnancy section, studies with links, the MotherToBaby fact sheet, "
-      "registries and studies she could join, and questions for her doctor, plus MotherToBaby's number for the "
-      "morning and crisis lines if she needs them now.", {"color": MIST2})]], size=14, anchor=MSO_ANCHOR.MIDDLE)
-
 # 8 ─ Three things she has to get right
 s = new("Three things she has to get right", notes=(
     "Even with the right sources, three things go wrong easily. The medicine: Zoloft is sertraline, a "
@@ -341,8 +362,8 @@ s = new("Three things she has to get right", notes=(
 things = [
     ("1", "The right medicine", "Zoloft is sertraline. A combination pill has several ingredients. “My little "
      "white pill” can't be identified.", "Confirms the name with RxNorm; stops if unclear"),
-    ("2", "The right population", "Breastfeeding evidence isn't pregnancy evidence. Animal and modeled data "
-     "aren't human data.", "Tags every finding with its population"),
+    ("2", "The right population", "Breastfeeding evidence isn't pregnancy evidence. A study in adults or older "
+     "children doesn't tell you about a newborn.", "Tags every finding with its population and age band"),
     ("3", "The right reading", "An empty search isn't good news. Adverse-event report counts aren't rates.",
      "Says “no evidence retrieved; not evidence of safety”"),
 ]
@@ -437,7 +458,7 @@ cols = [
         "What does LactMed report about sertraline in breast milk and observed infant effects?",
         "What published studies examine metformin during pregnancy?",
         "What does the lamotrigine label say in its pregnancy section?"]),
-    ("Researchers and NICHD program staff", [
+    ("Researchers and NIH program staff", [
         "What did NICHD fund in neonatal pharmacology in FY 2024 and FY 2025?",
         "Find BPCA and PTN study summaries and FDA pediatric labeling changes for levetiracetam.",
         "Which MPRINT studies report pharmacokinetics for sertraline?"]),
@@ -451,6 +472,41 @@ for ci, (head, qs) in enumerate(cols):
         text(s, x + 0.3, y + 0.2, 5.25, 1.0, f"“{q}”", size=16, color=INK, italic=True,
              anchor=MSO_ANCHOR.MIDDLE)
 
+
+# 5d ─ Beyond pregnancy
+s = new("Beyond pregnancy: children, studies and Spanish", notes=(
+    "The opening follows a pregnant mother, but much of the server is about children and research. For "
+    "children's medicines it covers FDA pediatric labeling changes, BPCA and Pediatric Trials Network study "
+    "summaries, MPRINT pediatric data and recruiting trials, keeping neonates, infants, children and adolescents "
+    "separate. For studies, it searches PubMed with pregnancy and lactation filters, returns abstracts, trials, "
+    "MPRINT tables and NIH funding, and the AI explains dense studies and labels in plain language with every "
+    "claim linked. For Spanish speakers, it returns MotherToBaby fact sheets in Spanish and MedlinePlus Spanish "
+    "drug pages. Spanish safety messages are held until a Spanish speaker reviews them."))
+caps = [
+    ("Children's medicines", [
+        "FDA pediatric labeling changes",
+        "BPCA and Pediatric Trials Network study summaries",
+        "MPRINT pediatric studies and data tables",
+        "Recruiting trials with confirmed pediatric ages",
+        "Neonate, infant, child and adolescent kept separate",
+    ]),
+    ("Studies, in plain language", [
+        "PubMed with pregnancy and lactation filters",
+        "Abstracts, trials and MPRINT data in one place",
+        "NIH funding portfolios with exact query criteria",
+        "Dense studies and labels explained plainly by the AI, every claim linked",
+    ]),
+    ("Spanish", [
+        "323 MotherToBaby fact sheets in Spanish, verbatim",
+        "MedlinePlus Spanish drug pages by drug code",
+        "Spanish safety messages held until a Spanish speaker reviews them",
+    ]),
+]
+for i, (head, items) in enumerate(caps):
+    x = 0.65 + i * 4.1
+    box(s, x, 1.6, 3.8, 5.1, fill=MIST if i != 2 else CORAL_T)
+    text(s, x + 0.3, 1.8, 3.2, 0.5, head, size=19, font=HEAD, bold=True, color=TEAL if i != 2 else CORAL)
+    text(s, x + 0.3, 2.45, 3.25, 4.1, items, size=15, color=INK, space_after=10)
 
 # 6 ─ The brief workflow
 s = new("One call turns a question into an evidence brief", notes=(
@@ -521,7 +577,7 @@ text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the s
      color=MUTED, italic=True)
 
 # 8b ─ Should AI answer this?
-s = new("Should an AI assistant answer questions this sensitive?", notes=(
+s = new(None, notes=(
     "This is the question I asked myself first. Medicines in pregnancy, breastfeeding and childhood are "
     "high-stakes, and a wrong answer can do real harm. My answer is yes, with firm limits. The evidence is "
     "already public; what's missing is context, so people see a finding with its population, its date and "
@@ -535,24 +591,28 @@ reasons = [
     ("Federal work becomes visible", "BPCA, PRGLAC, MPRINT and LactMed produced evidence most families never see."),
     ("It prepares, it doesn't decide", "Every brief ends with questions to bring to a clinician."),
 ]
-text(s, 0.65, 1.55, 6.6, 0.45, "Why I think yes", size=20, font=HEAD, bold=True, color=TEAL)
+text(s, 0.65, 0.45, 12.0, 0.45, "Maternal and pediatric pharmacology is a highly sensitive topic.", size=18, color=MUTED)
+text(s, 0.65, 0.85, 12.0, 0.8, "Should an AI assistant handle questions about it?", size=32, font=HEAD, bold=True, color=DEEP)
+text(s, 0.65, 1.85, 6.6, 0.45, "Why I think yes", size=20, font=HEAD, bold=True, color=TEAL)
 for i, (head, body) in enumerate(reasons):
-    y = 2.15 + i * 1.2
+    y = 2.45 + i * 1.1
     circle_num(s, 0.65, y + 0.05, str(i + 1), d=0.48, size=15)
     text(s, 1.35, y, 5.9, 0.4, head, size=17, bold=True, color=DEEP)
     text(s, 1.35, y + 0.42, 5.9, 0.75, body, size=14, color=INK)
-box(s, 7.65, 1.55, 5.0, 4.1, fill=DEEP)
-text(s, 7.95, 1.75, 4.5, 0.45, "Lines it won't cross", size=20, font=HEAD, bold=True, color=WHITE)
-text(s, 7.95, 2.4, 4.45, 3.0, [
+box(s, 7.65, 1.85, 5.0, 4.85, fill=DEEP)
+text(s, 7.95, 2.05, 4.5, 0.45, "Lines it won't cross", size=20, font=HEAD, bold=True, color=WHITE)
+text(s, 7.95, 2.6, 4.45, 2.6, [
+    "No individualized treatment advice",
     "No doses, schedules or start/stop decisions",
     "No diagnosis or triage",
     "Missing evidence is never presented as safe",
     "Never guesses a medicine from a description",
     "No names, birth dates or record numbers",
-], size=15, color=MIST2, space_after=9)
-text(s, 7.95, 4.75, 4.45, 1.4, [
-    [("Hands off instead: ", {"bold": True, "color": WHITE}),
-     ("clinician or pharmacist, MotherToBaby, 988, 1-833-TLC-MAMA, Poison Help.", {})]], size=14, color=CORAL_T)
+], size=14, color=MIST2, space_after=6)
+text(s, 7.95, 4.95, 4.45, 1.7, [
+    [("Instead, as appropriate, it directs people to ", {"bold": True, "color": WHITE}),
+     ("a clinician or pharmacist, MotherToBaby (866-626-6847), 988, the Maternal Mental Health Hotline "
+      "(1-833-TLC-MAMA), Poison Help (1-800-222-1222) or 911.", {})]], size=13, color=CORAL_T)
 text(s, 0.65, 6.95, 7.0, 0.35, "Each line is enforced in code and covered by tests.", size=12, color=MUTED, italic=True)
 
 # 9 ─ Safety routing
@@ -847,6 +907,7 @@ for i, t in enumerate(nexts):
 
 # 17 ─ Close
 s = new(dark=True, notes="Thank you. The repository has the code, the full evaluation records and a quickstart.")
+waves(s, 6.15, 0.95, [TEAL, PURPLE, RGBColor(0x9A, 0xA4, 0xF0), RGBColor(0xB9, 0xA6, 0xF2)])
 text(s, 0.9, 2.2, 11.0, 1.2, "Thank you", size=54, font=HEAD, bold=True, color=WHITE)
 text(s, 0.9, 3.5, 11.0, 1.4, [
     "Code, evaluation records and quickstart: GitHub repository Parent-Child-Pharmacology-MCP",
