@@ -751,7 +751,7 @@ for i, (r, ex, out) in enumerate(rows):
     text(s, 0.9, y, 2.4, 0.66, r, size=16, bold=True, color=CORAL if i < 2 else TEAL, anchor=MSO_ANCHOR.MIDDLE)
     text(s, 3.35, y, 4.6, 0.66, ex, size=14, color=INK, italic=True, anchor=MSO_ANCHOR.MIDDLE)
     text(s, 8.15, y, 4.4, 0.66, out, size=14, color=INK, anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.65, 6.62, 12.0, 0.6, [
+text(s, 0.65, 6.74, 12.0, 0.6, [
     [("“Can I take…?” is different: ", {"bold": True, "color": TEAL}),
      ("she gets what's known, never a yes or no, plus where to take the decision. "
       "In testing, 7 of 7 stop cases made zero downstream calls.", {})]], size=13, color=INK)
