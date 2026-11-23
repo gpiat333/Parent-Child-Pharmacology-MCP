@@ -21,7 +21,7 @@ if not base.startswith(("/Users/", "/Shared/")) or ".." in base.split("/"):
     raise ValueError("Choose a new absolute workspace directory under /Users or /Shared")
 archive = W / "frozen-tests.zip"
 with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
-    for root in ["src", "tests", "chat-client", "eval/phoenix"]:
+    for root in ["src", "tests", "chat-client", "eval/phoenix", "scripts"]:
         for f in (P / root).rglob("*"):
             if f.is_file() and "__pycache__" not in str(f) and f.suffix != ".pyc":
                 z.write(f, f.relative_to(P))

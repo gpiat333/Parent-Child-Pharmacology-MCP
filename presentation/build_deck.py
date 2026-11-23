@@ -479,7 +479,7 @@ box(s, 0.65, 6.4, 3.7, 0.7, fill=DEEP)
 text(s, 0.85, 6.4, 3.4, 0.7, "Live public APIs and pages", size=14, bold=True, color=WHITE,
      anchor=MSO_ANCHOR.MIDDLE)
 box(s, 4.55, 6.4, 3.7, 0.7, fill=DEEP)
-text(s, 4.75, 6.4, 3.4, 0.7, "MPRINT snapshot, dated and checked", size=14, bold=True, color=WHITE,
+text(s, 4.75, 6.4, 3.4, 0.7, "MPRINT and LactMed, dated copies", size=14, bold=True, color=WHITE,
      anchor=MSO_ANCHOR.MIDDLE)
 connector(s, 2.5, 6.15, 2.5, 6.4, color=TEAL, width=2)
 connector(s, 6.4, 6.15, 6.4, 6.4, color=TEAL, width=2)
@@ -498,7 +498,10 @@ s = new("Four design decisions", notes=(
     "the coverage check each combine several sources. Second, the medicine must be confirmed before any "
     "evidence lookup. Third, missing data is a first-class result. Fourth, MPRINT tables ship as a local "
     "read-only snapshot, so answers are reproducible. Every MPRINT result says how old the copy is, the "
-    "snapshot resource checks MPRINT's GitHub for newer data, and a weekly GitHub job fails if there is."))
+    "snapshot resource checks MPRINT's GitHub for newer data, and a weekly GitHub job fails if there is. "
+    "LactMed's web pages started showing automated readers a browser check, so LactMed text now comes from "
+    "NCBI's official download package. That also gave me LactMed's citations: every finding links to its "
+    "PubMed study."))
 decs = [
     ("Tools for goals, not endpoints", "medication_evidence_brief and check_evidence_coverage each combine "
      "several sources, so an agent makes one meaningful call instead of eight thin ones."),
@@ -506,8 +509,8 @@ decs = [
      "requires_confirmation; a description of a pill stops the request."),
     ("Missing stays missing", "Empty searches, absent label sections and truncated records are explicit "
      "fields. A failed source is reported as unavailable, not as zero."),
-    ("Dated, checkable snapshots", "MPRINT tables ship as read-only SQLite. Every result shows the copy's date, "
-     "and a weekly check flags newer upstream data."),
+    ("Dated copies with study links", "MPRINT and LactMed ship as read-only copies of official releases. Every "
+     "result shows its date; LactMed findings link to their PubMed studies."),
 ]
 for i, (head, body) in enumerate(decs):
     x = 0.65 + (i % 2) * 6.15
@@ -695,7 +698,7 @@ s = new("Sources and what each one can support", appendix=True,
         notes="Each source answers a different part of the question, and each has limits the server reports.")
 table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
     ["Source", "Used for, and its limit"],
-    ["LactMed (NLM)", "Breastfeeding evidence. Lactation only; missing or truncated sections are reported."],
+    ["LactMed (NLM)", "Breastfeeding evidence from NCBI's official package, with PubMed links for each cited study."],
     ["DailyMed (NLM)", "Label sections 8.1 to 8.4. In-use labeling may differ from the latest FDA-approved version."],
     ["PubMed and PMC", "Studies and abstracts. Study type and population need separate checks."],
     ["ClinicalTrials.gov", "Registrations and recruiting status. No eligibility decisions."],
