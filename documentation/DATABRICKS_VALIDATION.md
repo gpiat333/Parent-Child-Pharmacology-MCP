@@ -27,4 +27,6 @@ Current source 0.19.0, policy 2026-11-22.19. Policy .15 fixes safety-routing fal
 
 **Version 0.19.0 / policy .19 (November 22, 2026, after merging the evidence-display branch):** Databricks serverless run 725529477134538 passed **848/848** tests, including every PowerShell parity test (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-policy19/databricks-job-output.json).
 
+**LactMed study links (November 22, 2026):** Databricks serverless run 405600821258309 passed **857/857** tests (0 failures, 0 errors, 0 skipped). [Receipt](../evaluation/databricks-validation-2026-11-22-lactmed-refs/databricks-job-output.json).
+
 [Current evidence](../evaluation/retrieval-reliability-final/REPORT.md)

@@ -522,14 +522,14 @@ for i, (head, body) in enumerate(decs):
 
 # 13 ─ How I tested
 s = new("How I tested it", notes=(
-    "I tested in layers. All 848 automated tests pass in a Databricks serverless notebook; on my Mac, the "
+    "I tested in layers. All 857 automated tests pass in a Databricks serverless notebook; on my Mac, the "
     "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("848", "automated tests", "All pass in a Databricks serverless notebook"),
+    ("857", "automated tests", "All pass in a Databricks serverless notebook"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("28", "scripted chats", "21 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -612,8 +612,8 @@ s = new("What I learned and what comes next", notes=(
     "my own filter was blocking legitimate research. And automated graders make mistakes too, so I read "
     "the failures myself. Next, I need a clinician to review real answers, a Spanish speaker to review the "
     "held Spanish safety messages, and new evaluation questions covering the MotherToBaby referral, fact "
-    "sheets and who funds this research. The fact sheet tool links sheets but doesn't read them yet, because "
-    "NLM's site shows automated readers a browser check, and I won't work around it."))
+    "sheets and who funds this research. The fact sheet tool links sheets but doesn't read them yet; NCBI "
+    "publishes them as an official package too, so the LactMed approach carries over."))
 text(s, 0.65, 1.6, 5.8, 0.4, "Lessons", size=20, font=HEAD, bold=True, color=TEAL)
 lessons = [("Interpretation is the real work", "Retrieval was quick to build. Keeping populations, exposure and outcomes apart took most of the effort."),
            ("Test safety rules both ways", "My filter blocked research on seizures and postpartum depression until I tested for over-blocking."),
@@ -625,7 +625,7 @@ for i, (head, body) in enumerate(lessons):
     text(s, 0.95, y + 0.55, 5.3, 0.85, body, size=14, color=INK)
 text(s, 6.85, 1.6, 5.8, 0.4, "Next steps", size=20, font=HEAD, bold=True, color=TEAL)
 nexts = ["Clinician review of real answers, especially for false reassurance or alarm",
-         "Read MotherToBaby fact sheet text once NLM allows automated access; today the server links them",
+         "Read MotherToBaby fact sheet text from NCBI's official package, as LactMed now does; today the server links them",
          "Spanish-speaker review before enabling Spanish safety messages",
          "Add referral, fact sheet and \u201cwho funds this research?\u201d questions to the evaluation set",
          "Deploy the current version to the Databricks App"]
@@ -726,7 +726,7 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Benchmark", "9/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets and display checks; all 848 tests pass on Databricks.",
+     "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 857 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
 
 s = new("Six ways an answer can mislead", appendix=True, notes=(
