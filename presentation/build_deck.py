@@ -727,6 +727,40 @@ text(s, 7.95, 4.6, 4.7, 1.5, [
 text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the same tools.", size=11,
      color=MUTED, italic=True)
 
+# 8c ─ Studies and registries
+s = new("Why it shows studies and registries, and how it keeps them separate", notes=(
+    "Pregnant women and children are often left out of drug studies, which is why so much evidence is "
+    "missing. The way that gap closes is participation: pregnancy exposure registries, trials that include "
+    "pregnant women or children, and public input on research priorities, which is also what PRGLAC "
+    "recommends. So when the answer is 'not much is known', the server can add 'here is research under way'. "
+    "It handles this carefully. These listings sit in a separate participation tier, in alphabetical order, "
+    "never ranked or recommended. The server never decides eligibility, contacts anyone or submits anything. "
+    "The tier is hidden completely for emergencies, crises, treatment decisions, privacy and language stops, "
+    "and unclear medicines. Pediatric trials appear only when the trial lists confirmed pediatric ages."))
+box(s, 0.65, 1.55, 5.3, 5.2, fill=DEEP)
+text(s, 0.95, 1.75, 4.8, 0.45, "Why it's included", size=19, font=HEAD, bold=True, color=WHITE)
+text(s, 0.95, 2.35, 4.75, 4.3, [
+    "Pregnant women and children are often left out of drug studies. That's why the evidence is missing.",
+    "Gaps close when people take part: registries, trials and public input on research. PRGLAC recommends this too.",
+    "So “not much is known” can come with “here is research under way.”",
+], size=18, color=MIST2, space_after=18)
+text(s, 6.3, 1.55, 6.4, 0.45, "How it's handled", size=19, font=HEAD, bold=True, color=TEAL)
+rules = [
+    ("A separate tier", "Kept apart from the evidence; alphabetical, never ranked"),
+    ("Never recommended", "“Directory information only” travels with every listing"),
+    ("No eligibility, no sign-ups", "The study team confirms; the server never contacts or submits"),
+    ("Hidden on stop routes", "Emergencies, crises, treatment decisions and other stops"),
+    ("Confirmed ages for children", "Pediatric trials appear only with stated pediatric ages"),
+]
+for i, (head, body) in enumerate(rules):
+    y = 2.1 + i * 0.85
+    circle_num(s, 6.3, y + 0.05, str(i + 1), d=0.44, size=14)
+    text(s, 6.95, y, 5.75, 0.38, head, size=16, bold=True, color=DEEP)
+    text(s, 6.95, y + 0.37, 5.75, 0.45, body, size=14, color=INK)
+text(s, 0.65, 6.9, 12.0, 0.35,
+     "Sources: ClinicalTrials.gov recruiting studies, FDA's pregnancy exposure registry directory, NIH and FDA public-input notices.",
+     size=12, color=MUTED, italic=True)
+
 # 9 ─ Safety routing
 s = new("Questions that need a person are redirected before any search", notes=(
     "Before any search or AI answer, the question goes through route_parent_question. These are the actual "
