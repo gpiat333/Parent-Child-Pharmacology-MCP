@@ -162,7 +162,15 @@ COMMON_ENGLISH = set(
     using used take taking took give giving stop start continue get getting help any some all more most less much
     many other same different really still also just only very too well good bad known know say says said research
     evidence study studies data oil oils essential vitamin vitamins supplement supplements herb herbs herbal tea drug
-    drugs medicine medicines medication medications pill pills vaccine vaccines shot shots link linked""".split()
+    drugs medicine medicines medication medications pill pills vaccine vaccines shot shots link linked
+    links source sources fda nih cdc nlm nichd lactmed pubmed mprint dailymed medlineplus label labels warning
+    warnings recall recalls record records abstract abstracts article articles paper papers trial registry
+    brief short long simple plain language please thanks again now then""".split()
+)
+# Commands and conversational openers that begin ordinary English requests ("Link the studies.").
+DIRECTIVE_STARTS = set(
+    "link include cite search get check describe separate provide keep use add also and then now please "
+    "thanks thank ok okay great so but look focus limit sort repeat continue".split()
 )
 FOREIGN_FUNCTION_WORDS = set(
     "el la los las del en y que para por con durante puedo tomar mi es seguro embarazo lactancia bebé le les du des "
@@ -189,19 +197,20 @@ def english_question_frame(text):
     sentences = [re.findall(r"[a-zà-ÿ']+", part.lower()) for part in re.split(r"[.!?;\n]+", text)]
     sentences = [w for w in sentences if w]
     total = sum(len(w) for w in sentences)
-    if not sentences or not 3 <= total <= 40 or len(sentences) > 4:
+    if not sentences or not 2 <= total <= 40 or len(sentences) > 4:
         return False
     known = (
         COMMON_ENGLISH
         | ENGLISH_FUNCTION_WORDS
         | SELECTOR_WORDS
         | QUESTION_STARTS
+        | DIRECTIVE_STARTS
         | STATEMENT_STARTS
     )
     asked = False
     masked = []
     for words in sentences:
-        if words[0] in QUESTION_STARTS:
+        if words[0] in QUESTION_STARTS or words[0] in DIRECTIVE_STARTS:
             asked = True
         elif words[0] not in STATEMENT_STARTS:
             return False
