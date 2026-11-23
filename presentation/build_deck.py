@@ -143,7 +143,8 @@ def new(title=None, dark=False, notes=None, appendix=False):
     bg(s, DEEP if dark else WHITE)
     _n[0] += 1
     if title:
-        text(s, 0.65, 0.5, 12.0, 0.9, title, size=32, font=HEAD, bold=True, color=WHITE if dark else DEEP,
+        tsize = 32 if len(title) <= 46 else 27 if len(title) <= 58 else 24
+        text(s, 0.65, 0.5, 12.0, 0.9, title, size=tsize, font=HEAD, bold=True, color=WHITE if dark else DEEP,
              anchor=MSO_ANCHOR.TOP)
     if not dark:
         label = f"Appendix  ·  {_n[0]}" if appendix else str(_n[0])
@@ -176,30 +177,41 @@ text(s, 0.9, 5.5, 11.5, 0.4,
      color=MIST2, italic=True)
 
 # 2 ─ Hook
-s = new(dark=True, notes=(
-    "It's 2:07 in the morning. She just found out she's pregnant, and she has taken sertraline for three "
-    "years. Her question is simple, and it is one of the most common questions in this field. Finding a "
-    "trustworthy answer at that hour is not simple. This is an illustrative question, not a real patient."))
-text(s, 0.9, 1.0, 11.5, 1.6, "2:07 a.m.", size=88, font=HEAD, bold=True, color=CORAL_T)
-text(s, 0.9, 2.95, 11.0, 2.2,
-     "“I just found out I’m pregnant. I’ve taken sertraline for three years. "
-     "Is my baby okay? Should I stop?”", size=30, font=HEAD, italic=True, color=WHITE, line=1.1)
-text(s, 0.9, 5.45, 11.0, 0.9,
-     "Nine in ten women take a medication during pregnancy. Most will ask some version of this question.",
-     size=18, color=MIST2)
-text(s, 0.9, 6.75, 11.5, 0.4, "Illustrative question, not a real patient. Statistic: CDC, Medicine and Pregnancy.",
-     size=11, color=MIST2, italic=True)
+s = new(notes=(
+    "Picture a new mom, awake at 2:07 in the morning, feeding her three-month-old. She takes sertraline, and "
+    "she wonders whether it is reaching her baby, and whether she should stop. It is one of the most common "
+    "questions in this field, and the same kinds of questions follow her through pregnancy, breastfeeding and "
+    "raising a child. This is an illustrative scenario, not a real patient."))
+MOM = REPO / "presentation/assets/mother-newborn.png"
+text(s, 0.65, 0.75, 7.6, 0.8, "2:07 a.m.", size=40, font=HEAD, bold=True, color=CORAL)
+text(s, 0.65, 1.6, 7.9, 1.3,
+     "A new mom is awake at night, thinking about the medication she takes while feeding her infant.",
+     size=24, font=HEAD, bold=True, color=DEEP, line=1.05)
+box(s, 0.65, 3.15, 7.9, 1.35, fill=MIST)
+text(s, 0.95, 3.15, 7.3, 1.35,
+     "“I take sertraline. Is it getting into my breast milk? Should I stop?”",
+     size=20, font=HEAD, italic=True, color=DEEP, anchor=MSO_ANCHOR.MIDDLE)
+text(s, 0.65, 4.85, 7.9, 0.5, "The same kinds of questions follow her through every stage:", size=15, color=INK)
+for i, stage in enumerate(["Pregnancy", "Breastfeeding", "Raising a child"]):
+    x = 0.65 + i * 2.7
+    box(s, x, 5.4, 2.45, 0.7, fill=TEAL if i == 1 else MIST2, radius=0.5)
+    text(s, x, 5.4, 2.45, 0.7, stage, size=16, bold=True, color=WHITE if i == 1 else DEEP,
+         anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
+    if i < 2:
+        connector(s, x + 2.45, 5.75, x + 2.7, 5.75, color=TEAL, width=2)
+text(s, 0.65, 6.75, 8.0, 0.4, "Illustrative scenario, not a real patient.", size=11, color=MUTED, italic=True)
+picture(s, MOM, 9.15, 1.0, 3.6, 5.85, border=False)
 
 # 2b ─ Her night, step by step
 s = new("Her night, step by step", notes=(
-    "Follow her through the night. At 2:07 she can't sleep. Her doctor's office is closed until morning, and "
-    "the after-hours line is for emergencies. A web search gives forums and lists of 'safe' medicines, which "
-    "CDC cautions often lack evidence. MotherToBaby is the right service, but after hours it replies the next "
-    "business day. LactMed is excellent, but it covers breastfeeding, not pregnancy. The label and PubMed are "
-    "written for clinicians. With this MCP, one question to any AI assistant returns the label's pregnancy "
-    "section, studies with links, the MotherToBaby fact sheet, registries and studies she could join, and "
-    "questions for her doctor, plus MotherToBaby's number for the morning and crisis lines if she needs them "
-    "now. It doesn't tell her what to do; it gets her ready for that conversation."))
+    "Follow her through the night. At 2:07 she is feeding her baby and can't stop worrying. Her doctor's "
+    "office is closed until morning, and the after-hours line is for emergencies. A web search gives forums and "
+    "lists of 'safe' medicines that CDC cautions often lack evidence. MotherToBaby is the right service, but "
+    "after hours it replies the next business day. LactMed has the evidence, but it is written for clinicians, "
+    "with drug levels in micrograms per liter and dozens of citations. The label's lactation section and the "
+    "studies are on other sites. With this MCP, one question to any AI assistant returns LactMed's findings "
+    "with links to the studies, the label section, the MotherToBaby fact sheet and questions for her doctor, "
+    "plus who to call in the morning, and crisis lines if she needs them now."))
 import math
 cx, amp, top, bottom = 4.55, 0.42, 1.75, 6.2
 pts = []
@@ -214,12 +226,12 @@ path.shadow.inherit = False
 path.line.color.rgb = MIST2
 path.line.width = Pt(6)
 stops = [
-    ("2:07 a.m.", "Can't sleep. Is my baby okay?", CORAL),
+    ("2:07 a.m.", "Feeding her baby. Is my medicine reaching her?", CORAL),
     ("Doctor's office", "Closed until 8 a.m.; the after-hours line is for emergencies", TEAL),
     ("Web search", "Forums and “safe” lists that CDC says often lack evidence", TEAL),
     ("MotherToBaby", "The right experts, but after hours they reply the next business day", TEAL),
-    ("LactMed", "Excellent, but it covers breastfeeding, not pregnancy", TEAL),
-    ("Label and PubMed", "Written for clinicians; studies spread across sites", TEAL),
+    ("LactMed", "Has the evidence, but written for clinicians: levels in mcg/L, dozens of citations", TEAL),
+    ("Label and PubMed", "The label's lactation section and the studies are on other sites", TEAL),
 ]
 for i, (head, body, color) in enumerate(stops):
     k = int(160 * (0.03 + 0.89 * i / (len(stops) - 1)))
@@ -234,11 +246,10 @@ for i, (head, body, color) in enumerate(stops):
 box(s, 0.55, 6.25, 8.3, 0.95, fill=DEEP)
 text(s, 0.8, 6.25, 7.85, 0.95, [
     [("With this MCP: ", {"bold": True, "color": WHITE}),
-     ("one question returns the label, studies with links, the MotherToBaby fact sheet, registries and "
-      "studies she could join, and questions for her doctor, plus who to call.", {"color": MIST2})]],
+     ("one question returns LactMed's findings with study links, the label section, the MotherToBaby fact "
+      "sheet and questions for her doctor, plus who to call.", {"color": MIST2})]],
      size=13, anchor=MSO_ANCHOR.MIDDLE)
-picture(s, REPO / "presentation/assets/mother-newborn.png", 9.15, 1.35, 3.6, 5.85, border=False)
-text(s, 9.15, 6.75, 3.6, 0.3, "Illustration", size=10, color=MUTED, italic=True, align=PP_ALIGN.RIGHT)
+picture(s, MOM, 9.15, 1.0, 3.6, 5.85, border=False)
 
 # 3 ─ Evidence gap
 s = new("Most medicines lack data for pregnancy and for children", notes=(
@@ -269,37 +280,37 @@ text(s, 0.65, 6.75, 12.0, 0.5,
 
 # 4 ─ Federal efforts timeline
 s = new("Two decades of federal work to close the gap", notes=(
-    "This gap is well known, and federal programs have worked on it for over twenty years. The Best "
-    "Pharmaceuticals for Children Act in 2002 and the Pediatric Research Equity Act in 2003 drove pediatric "
-    "studies; NICHD leads the NIH side of BPCA, and created my branch, OPPTB, in 2004. NLM launched LactMed "
-    "in 2006. NICHD's Pediatric Trials Network began in 2010. FDA's Pregnancy and Lactation Labeling Rule "
-    "replaced the old letter categories in 2015. Congress created the PRGLAC task force in 2016, and its 2018 "
-    "report made 15 recommendations. In 2020 NICHD announced funding for the MPRINT Hub. Each effort produced "
-    "evidence, but in a different place and format, which is the next problem."))
+    "This gap is well known, and federal programs have worked on it for over twenty years. Congress passed the "
+    "Best Pharmaceuticals for Children Act in 2002 and the Pediatric Research Equity Act in 2003. NICHD created "
+    "my branch, OPPTB, in 2004. NLM launched LactMed in 2006. NICHD's Pediatric Trials Network began in 2010. "
+    "FDA's Pregnancy and Lactation Labeling Rule took effect in 2015. Congress created the PRGLAC task force in "
+    "2016, and its 2018 report made 15 recommendations. NICHD announced funding for the MPRINT Hub in 2020. "
+    "And this month, our branch published a review of OPPTB's support for this science in Clinical "
+    "Pharmacology and Therapeutics. Each effort produced evidence, in a different place and format."))
 events = [
-    ("2002", "BPCA", "Pediatric studies of on- and off-patent drugs; NICHD leads NIH's role"),
-    ("2003", "PREA", "Requires pediatric studies for many new drug approvals"),
+    ("2002", "BPCA: Best Pharmaceuticals for Children Act", "Studies of drugs in children; NICHD leads NIH's program for off-patent drugs"),
+    ("2003", "PREA: Pediatric Research Equity Act", "Requires pediatric studies for many new drug applications"),
     ("2004", "NICHD OPPTB", "Obstetric and Pediatric Pharmacology and Therapeutics Branch created"),
-    ("2006", "LactMed", "NLM database on medicines and breastfeeding"),
-    ("2010", "Pediatric Trials Network", "NICHD trials network under BPCA"),
-    ("2015", "PLLR", "FDA labels replace A/B/C/D/X letters with pregnancy and lactation summaries"),
-    ("2016–18", "PRGLAC", "Task force from the 21st Century Cures Act; 15 recommendations in 2018"),
-    ("2020", "MPRINT Hub", "NICHD announces funding for maternal and pediatric therapeutics research"),
+    ("2006", "LactMed: Drugs and Lactation Database", "NLM's peer-reviewed summaries on medicines and breastfeeding"),
+    ("2010", "PTN: Pediatric Trials Network", "NICHD clinical trials of off-patent drugs in children, under BPCA"),
+    ("2015", "PLLR: Pregnancy and Lactation Labeling Rule", "FDA replaced A/B/C/D/X letters with pregnancy and lactation summaries"),
+    ("2016–18", "PRGLAC task force", "Task Force on Research Specific to Pregnant Women and Lactating Women; 15 recommendations"),
+    ("2020", "MPRINT Hub", "Maternal and Pediatric Precision in Therapeutics; NICHD announced funding"),
+    ("2026", "OPPTB review, Clin Pharmacol Ther", "“Evolving Mechanisms, Enduring Goals”: OPPTB support since 2004 (PMID 43015252)"),
 ]
-line_y = 4.05
-connector(s, 0.75, line_y, 12.6, line_y, color=TEAL, width=3)
-step = (12.6 - 0.75) / len(events)
 for i, (year, name, what) in enumerate(events):
-    cx = 0.75 + step * (i + 0.5)
-    circle_num(s, cx - 0.14, line_y - 0.14, "", d=0.28, fill=CORAL if name in ("NICHD OPPTB", "PRGLAC", "MPRINT Hub") else TEAL)
-    up = i % 2 == 0
-    yy = 1.55 if up else 4.45
-    connector(s, cx, line_y - 0.14 if up else line_y + 0.14, cx, (yy + 2.25) if up else yy, color=MIST2, width=1.5)
-    text(s, cx - 0.72, yy, 1.44, 0.4, year, size=16, font=HEAD, bold=True, color=CORAL if not up else TEAL, align=PP_ALIGN.CENTER)
-    text(s, cx - 0.72, yy + 0.38, 1.44, 0.6, name, size=14, bold=True, color=DEEP, align=PP_ALIGN.CENTER)
-    text(s, cx - 0.74, yy + 0.98, 1.48, 1.3, what, size=12, color=INK, align=PP_ALIGN.CENTER)
-text(s, 0.65, 6.85, 12.0, 0.4,
-     "Each effort produced evidence, in a different place and format.", size=15, bold=True, color=DEEP)
+    col, row = (0, i) if i < 5 else (1, i - 5)
+    x = 0.65 + col * 6.15
+    y = 1.5 + row * 1.03
+    highlight = name.startswith(("NICHD OPPTB", "OPPTB review", "PRGLAC", "MPRINT"))
+    box(s, x, y, 5.9, 0.92, fill=CORAL_T if highlight else MIST)
+    text(s, x + 0.2, y, 1.0, 0.92, year, size=15, font=HEAD, bold=True, color=CORAL if highlight else TEAL,
+         anchor=MSO_ANCHOR.MIDDLE)
+    text(s, x + 1.25, y + 0.08, 4.5, 0.35, name, size=14, bold=True, color=DEEP)
+    text(s, x + 1.25, y + 0.42, 4.5, 0.5, what, size=12, color=INK)
+text(s, 6.8, 5.75, 5.85, 0.9,
+     "Each effort produced evidence, in a different place and format.", size=16, bold=True, color=DEEP)
+text(s, 6.8, 6.55, 5.85, 0.6, "Coral: NICHD programs and milestones.", size=11, color=MUTED, italic=True)
 
 # 5 ─ Scattered across agencies
 s = new("What we do know is scattered across agencies", notes=(
@@ -324,6 +335,38 @@ text(s, 0.65, 6.25, 12.0, 0.8, [
     [("Different names, IDs and formats: ", {"bold": True, "color": DEEP}),
      ("public APIs, web pages, spreadsheets and PDFs. No single place connects them.", {})]], size=16, color=INK)
 
+# 5b ─ What exists
+s = new("The gap is real, but much evidence exists; it's just hard to reach", notes=(
+    "If the gap is so large, what does this offer? More than you might expect. LactMed alone has nearly two "
+    "thousand drug records. MotherToBaby has 656 fact sheets in English and Spanish. MPRINT's curated tables "
+    "hold thousands of pharmacokinetic and clinical study records, plus 1.3 million automatically labeled "
+    "PubMed records. Live searches reach all of PubMed, ClinicalTrials.gov, DailyMed labels, NIH RePORTER and "
+    "FDA's adverse-event reports. The problem is not that nothing exists; it is that it is hard to reach and "
+    "hard to read. And where evidence is missing, the server says so, and points to the trials, registries and "
+    "funded research trying to fill the gap."))
+holdings = [
+    ("1,976", "LactMed drug records", "Official NCBI package, Oct 2026"),
+    ("656", "MotherToBaby fact sheets", "329 English, 323 Spanish"),
+    ("3,822", "MPRINT curated study records", "803 pharmacokinetic, 3,019 efficacy and trial"),
+    ("1.3M", "PubMed records with study-type labels", "MPRINT automated classifications"),
+]
+for i, (num, label, note) in enumerate(holdings):
+    x = 0.65 + i * 3.1
+    box(s, x, 1.55, 2.85, 2.25, fill=DEEP if i % 2 == 0 else MIST)
+    dark = i % 2 == 0
+    text(s, x + 0.25, 1.7, 2.4, 0.8, num, size=34, font=HEAD, bold=True, color=WHITE if dark else TEAL)
+    text(s, x + 0.25, 2.5, 2.4, 0.6, label, size=14, bold=True, color=WHITE if dark else DEEP)
+    text(s, x + 0.25, 3.1, 2.4, 0.6, note, size=12, color=MIST2 if dark else MUTED)
+text(s, 0.65, 4.05, 12.0, 0.4, "Searched live, every time", size=16, bold=True, color=TEAL)
+text(s, 0.65, 4.45, 12.0, 0.7,
+     "All of PubMed  ·  ClinicalTrials.gov  ·  DailyMed labels  ·  FDA adverse-event reports, "
+     "recalls and pediatric labeling changes  ·  NIH RePORTER  ·  RxNorm and MedlinePlus", size=15, color=INK)
+box(s, 0.65, 5.35, 12.0, 1.3, fill=CORAL_T)
+text(s, 0.95, 5.35, 11.4, 1.3, [
+    [("Where evidence is missing, it says so, ", {"bold": True, "color": DEEP}),
+     ("and points to what is under way: recruiting trials, pregnancy exposure registries and NIH-funded "
+      "research on the same medicine.", {})]], size=16, color=INK, anchor=MSO_ANCHOR.MIDDLE)
+
 # 3 ─ One question, many sources
 s = new("Answering one question means visiting many sources", notes=(
     "Take the Zoloft question. First you have to know Zoloft is sertraline. The label's pregnancy section is "
@@ -333,12 +376,12 @@ s = new("Answering one question means visiting many sources", notes=(
 cx, cy, cw, ch = 4.4, 3.35, 4.55, 1.45
 srcs = [
     (0.65, 1.65, "RxNorm", "Zoloft is sertraline"),
-    (4.85, 1.65, "DailyMed", "Pregnancy section of the label"),
+    (4.85, 1.65, "DailyMed", "Lactation section of the label"),
     (9.05, 1.65, "PubMed", "Published studies"),
     (0.65, 3.45, "ClinicalTrials.gov", "Studies now recruiting"),
     (9.05, 3.45, "FDA registries", "Pregnancy exposure registries"),
     (0.65, 5.25, "MPRINT", "Published PK data tables"),
-    (4.85, 5.25, "LactMed", "If she breastfeeds later"),
+    (4.85, 5.25, "LactMed", "Drug levels and infant effects"),
     (9.05, 5.25, "openFDA", "Reported adverse events"),
 ]
 for x, y, name, what in srcs:
@@ -349,39 +392,42 @@ for x, y, name, what in srcs:
     text(s, x + 0.25, y + 0.55, 3.2, 0.4, what, size=14, color=INK)
 q = box(s, cx, cy, cw, ch, fill=DEEP)
 text(s, cx + 0.3, cy + 0.15, cw - 0.6, ch - 0.3,
-     "“I take Zoloft and just found out I'm pregnant.”", size=18, font=HEAD, color=WHITE,
+     "\u201cI take sertraline and I'm breastfeeding.\u201d", size=18, font=HEAD, color=WHITE,
      italic=True, anchor=MSO_ANCHOR.MIDDLE, align=PP_ALIGN.CENTER)
 
-# 8 ─ Three things she has to get right
-s = new("Three things she has to get right", notes=(
-    "Even with the right sources, three things go wrong easily. The medicine: Zoloft is sertraline, a "
-    "combination product has several ingredients, and 'my little white pill' can't be identified at all. "
-    "The population: breastfeeding evidence isn't pregnancy evidence, and animal data isn't human data. "
-    "And reading the source: an empty search is not good news, and adverse-event report counts are not rates. "
-    "The server handles each one in code rather than leaving it to the AI's judgment."))
-things = [
-    ("1", "The right medicine", "Zoloft is sertraline. A combination pill has several ingredients. “My little "
-     "white pill” can't be identified.", "Confirms the name with RxNorm; stops if unclear"),
-    ("2", "The right population", "Breastfeeding evidence isn't pregnancy evidence. A study in adults or older "
-     "children doesn't tell you about a newborn.", "Tags every finding with its population and age band"),
-    ("3", "The right reading", "An empty search isn't good news. Adverse-event report counts aren't rates.",
-     "Says “no evidence retrieved; not evidence of safety”"),
+# 8 ─ What she has to find
+s = new("A mother looking for medication information has to find the right…", notes=(
+    "Even with good sources, four things go wrong easily, and each one is handled in code rather than left "
+    "to the AI's judgment. First, the medicine, named correctly: Zoloft is sertraline, combination products "
+    "have several ingredients, and a description like 'my little white pill' can't identify anything. Second, "
+    "the population: pregnancy, breastfeeding and a child's age are different evidence. Third, the source: "
+    "each question lives in a different database. Fourth, the meaning: an empty search is not good news, and "
+    "adverse-event report counts are not rates."))
+finds = [
+    ("Medicine, named correctly", "Zoloft is sertraline. A combination pill has several ingredients. “My white pill” can't be identified.",
+     "Confirms the exact medicine and every ingredient with RxNorm; stops if the name is unclear"),
+    ("Population", "Pregnancy, breastfeeding and a child's age are different evidence. Adult studies don't describe newborns.",
+     "Tags every finding with its population and age band; never merges them"),
+    ("Source", "Labels, LactMed, studies, trials and registries each live in a different database.",
+     "Searches them together and links every finding to its source"),
+    ("Meaning of the evidence", "No results isn't good news. Adverse-event report counts aren't rates.",
+     "Says “no evidence retrieved; not evidence of safety” and attaches limits to counts"),
 ]
-for i, (n, head, body, fix) in enumerate(things):
-    x = 0.65 + i * 4.1
-    box(s, x, 1.65, 3.8, 3.85, fill=MIST)
-    circle_num(s, x + 0.35, 1.95, n, d=0.6, fill=CORAL, size=20)
-    text(s, x + 0.35, 2.75, 3.15, 0.5, head, size=20, font=HEAD, bold=True, color=DEEP)
-    text(s, x + 0.35, 3.35, 3.15, 2.0, body, size=16, color=INK)
-    box(s, x, 5.65, 3.8, 0.95, fill=DEEP)
-    text(s, x + 0.3, 5.65, 3.25, 0.95, fix, size=14, bold=True, color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
-text(s, 0.65, 6.85, 12.0, 0.4, "Dark boxes: what the server does about each, in code.", size=12, color=MUTED, italic=True)
+for i, (head, problem, fix) in enumerate(finds):
+    x = 0.65 + i * 3.1
+    box(s, x, 1.55, 2.85, 3.25, fill=MIST)
+    circle_num(s, x + 0.25, 1.75, str(i + 1), d=0.5, fill=CORAL, size=16)
+    text(s, x + 0.25, 2.35, 2.4, 0.7, head, size=17, font=HEAD, bold=True, color=DEEP)
+    text(s, x + 0.25, 3.05, 2.4, 1.7, problem, size=13, color=INK)
+    box(s, x, 4.95, 2.85, 1.75, fill=DEEP)
+    text(s, x + 0.25, 5.05, 2.4, 0.35, "How the MCP handles it", size=11, bold=True, color=MIST2)
+    text(s, x + 0.25, 5.4, 2.4, 1.25, fix, size=13, color=WHITE)
 
 # 5 ─ What I built
-s = new("What I built", notes=(
+s = new("The server: 31 tools connecting AI assistants to the evidence", notes=(
     "The server has 31 tools, 4 reusable prompts and 4 resources. The tools are grouped around the jobs "
     "people actually do: confirm the medicine, look at breastfeeding or pregnancy evidence, search the "
-    "literature and trials, look at NICHD research, and check safety notices. The most important tool is "
+    "literature and trials, look at federal and NIH research programs, and check safety notices. The most important tool is "
     "medication_evidence_brief, which does the whole workflow in one call."))
 stats = [("31", "tools"), ("4", "prompts"), ("4", "resources"), ("15", "public sources")]
 for i, (num, lab) in enumerate(stats):
@@ -398,7 +444,7 @@ groups = [
     ("Breastfeeding", "LactMed search and full records, with exposure and infant outcomes kept apart"),
     ("Pregnancy and labels", "DailyMed pregnancy and lactation sections, pediatric labeling changes, MotherToBaby fact sheets"),
     ("Research", "PubMed with pregnancy and lactation filters, abstracts, ClinicalTrials.gov, MPRINT data"),
-    ("NICHD programs", "RePORTER funding portfolios, BPCA study summaries, DASH study discovery"),
+    ("Federal and NIH programs", "NIH RePORTER funding portfolios, BPCA and PTN summaries, NICHD DASH studies"),
     ("Safety and participation", "Recalls, safety alerts, shortages, FAERS signals, registries, recruiting studies"),
 ]
 for i, (head, body) in enumerate(groups):
@@ -409,7 +455,7 @@ for i, (head, body) in enumerate(groups):
     text(s, x + 0.3, y + 0.65, 3.3, 0.9, body, size=14, color=INK)
 
 # 5b ─ Where it fits
-s = new("Where it fits next to LactMed and MotherToBaby", notes=(
+s = new("How it complements LactMed and MotherToBaby", notes=(
     "A judge who knows this field will ask: why not just use LactMed, or call MotherToBaby? Neither is a "
     "competitor. LactMed is a source this server reads. LactRx is MotherToBaby's app with the same LactMed "
     "content. MotherToBaby is a nonprofit service whose specialists weigh the evidence for one person, which "
@@ -509,7 +555,7 @@ for i, (head, items) in enumerate(caps):
     text(s, x + 0.3, 2.45, 3.25, 4.1, items, size=15, color=INK, space_after=10)
 
 # 6 ─ The brief workflow
-s = new("One call turns a question into an evidence brief", notes=(
+s = new("For pregnancy and breastfeeding, one call builds an evidence brief", notes=(
     "Here is what medication_evidence_brief does. It confirms the medicine through RxNorm first, and stops "
     "if the name is ambiguous. For combination products, every ingredient gets its own search. The results "
     "are sorted into three evidence axes, so effects on the mother, exposure of the baby, and outcomes in "
@@ -527,15 +573,19 @@ for i, (n, head, body) in enumerate(steps):
     circle_num(s, x + 0.25, 1.75, n, d=0.6)
     text(s, x, 2.55, 2.3, 0.4, head, size=16, bold=True, color=DEEP)
     text(s, x, 2.95, 2.3, 0.7, body, size=14, color=MUTED)
-text(s, 0.65, 4.0, 12.0, 0.4, "The three evidence axes", size=18, bold=True, color=TEAL)
+text(s, 0.65, 4.0, 9.0, 0.4, "The three evidence axes (pregnancy and breastfeeding)", size=18, bold=True, color=TEAL)
 axes = [("The person taking it", "Effects on the pregnant or breastfeeding parent, and their pharmacokinetics when found"),
         ("Transfer or exposure", "Measured levels in the fetus, breast milk or infant, kept apart from animal or modeled data"),
         ("Fetal or infant outcomes", "What was observed in the baby, kept apart from exposure measurements")]
 for i, (head, body) in enumerate(axes):
-    x = 0.65 + i * 4.1
-    box(s, x, 4.55, 3.8, 1.85, fill=MIST if i != 2 else CORAL_T)
-    text(s, x + 0.3, 4.75, 3.2, 0.4, head, size=17, bold=True, color=DEEP)
-    text(s, x + 0.3, 5.2, 3.2, 1.1, body, size=14, color=INK)
+    x = 0.65 + i * 3.05
+    box(s, x, 4.55, 2.85, 2.05, fill=MIST if i != 2 else CORAL_T)
+    text(s, x + 0.25, 4.7, 2.4, 0.4, head, size=15, bold=True, color=DEEP)
+    text(s, x + 0.25, 5.15, 2.4, 1.4, body, size=13, color=INK)
+box(s, 9.8, 4.0, 2.85, 2.6, fill=DEEP)
+text(s, 10.05, 4.15, 2.4, 0.4, "For a child's medicine", size=15, bold=True, color=WHITE)
+text(s, 10.05, 4.6, 2.4, 1.95, "Pediatric labeling changes, BPCA and PTN summaries, MPRINT pediatric data and "
+     "age-checked trials, with neonate, infant, child and adolescent kept separate.", size=13, color=MIST2)
 
 
 def demo(title, img, question, caption, notes, max_h=3.95):
@@ -577,46 +627,53 @@ text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the s
      color=MUTED, italic=True)
 
 # 8b ─ Should AI answer this?
-s = new(None, notes=(
+s = new(notes=(
     "This is the question I asked myself first. Medicines in pregnancy, breastfeeding and childhood are "
     "high-stakes, and a wrong answer can do real harm. My answer is yes, with firm limits. The evidence is "
     "already public; what's missing is context, so people see a finding with its population, its date and "
-    "its gaps. Showing what isn't known matters as much as showing what is. It also makes two decades of "
-    "federal work, BPCA, PRGLAC, MPRINT and LactMed, visible and usable. And it is built to prepare someone for "
-    "a conversation with a clinician, never to replace it. On the right are the lines it won't cross. Every "
-    "one is enforced in code and covered by tests."))
+    "its gaps. Showing what isn't known matters as much as showing what is. It makes two decades of federal "
+    "work visible and usable. And it prepares people for a conversation with a clinician, never replaces it. "
+    "On the right: the lines it won't cross, and where it directs people instead. Each is enforced in code "
+    "and covered by tests."))
+text(s, 0.65, 0.45, 12.0, 1.2,
+     "Should an AI assistant handle questions about a highly sensitive topic such as maternal and pediatric pharmacology?",
+     size=26, font=HEAD, bold=True, color=DEEP, line=1.0)
 reasons = [
     ("The evidence is already public", "The question isn't whether people find it; it's whether they see it with its population, date and limits."),
     ("The gaps matter as much as the findings", "Saying “no evidence retrieved; not evidence of safety” is part of the answer."),
     ("Federal work becomes visible", "BPCA, PRGLAC, MPRINT and LactMed produced evidence most families never see."),
     ("It prepares, it doesn't decide", "Every brief ends with questions to bring to a clinician."),
 ]
-text(s, 0.65, 0.45, 12.0, 0.45, "Maternal and pediatric pharmacology is a highly sensitive topic.", size=18, color=MUTED)
-text(s, 0.65, 0.85, 12.0, 0.8, "Should an AI assistant handle questions about it?", size=32, font=HEAD, bold=True, color=DEEP)
-text(s, 0.65, 1.85, 6.6, 0.45, "Why I think yes", size=20, font=HEAD, bold=True, color=TEAL)
+text(s, 0.65, 1.9, 6.0, 0.45, "Why I think yes", size=19, font=HEAD, bold=True, color=TEAL)
 for i, (head, body) in enumerate(reasons):
     y = 2.45 + i * 1.1
-    circle_num(s, 0.65, y + 0.05, str(i + 1), d=0.48, size=15)
-    text(s, 1.35, y, 5.9, 0.4, head, size=17, bold=True, color=DEEP)
-    text(s, 1.35, y + 0.42, 5.9, 0.75, body, size=14, color=INK)
-box(s, 7.65, 1.85, 5.0, 4.85, fill=DEEP)
-text(s, 7.95, 2.05, 4.5, 0.45, "Lines it won't cross", size=20, font=HEAD, bold=True, color=WHITE)
-text(s, 7.95, 2.6, 4.45, 2.6, [
-    "No individualized treatment advice",
-    "No doses, schedules or start/stop decisions",
+    circle_num(s, 0.65, y + 0.05, str(i + 1), d=0.46, size=14)
+    text(s, 1.3, y, 5.3, 0.4, head, size=16, bold=True, color=DEEP)
+    text(s, 1.3, y + 0.4, 5.3, 0.7, body, size=13, color=INK)
+box(s, 6.95, 1.9, 5.7, 2.3, fill=DEEP)
+text(s, 7.2, 2.0, 5.2, 0.4, "Lines it won't cross", size=17, font=HEAD, bold=True, color=WHITE)
+text(s, 7.2, 2.45, 5.25, 1.7, [
+    "No individualized treatment advice, doses or start/stop decisions",
     "No diagnosis or triage",
-    "Missing evidence is never presented as safe",
-    "Never guesses a medicine from a description",
-    "No names, birth dates or record numbers",
-], size=14, color=MIST2, space_after=6)
-text(s, 7.95, 4.95, 4.45, 1.7, [
-    [("Instead, as appropriate, it directs people to ", {"bold": True, "color": WHITE}),
-     ("a clinician or pharmacist, MotherToBaby (866-626-6847), 988, the Maternal Mental Health Hotline "
-      "(1-833-TLC-MAMA), Poison Help (1-800-222-1222) or 911.", {})]], size=13, color=CORAL_T)
-text(s, 0.65, 6.95, 7.0, 0.35, "Each line is enforced in code and covered by tests.", size=12, color=MUTED, italic=True)
+    "Never presents missing evidence as safe",
+    "Never guesses a medicine from a description; no personal details",
+], size=13, color=MIST2, space_after=4)
+box(s, 6.95, 4.35, 5.7, 2.45, fill=MIST)
+text(s, 7.2, 4.45, 5.2, 0.4, "Where it directs people instead", size=17, font=HEAD, bold=True, color=DEEP)
+routes = [
+    ("Personal medication decision", "Clinician or pharmacist"),
+    ("Pregnancy or breastfeeding", "MotherToBaby, 866-626-6847"),
+    ("Crisis or emotional distress", "988 or 1-833-TLC-MAMA"),
+    ("Emergency or possible poisoning", "911; Poison Help 1-800-222-1222"),
+]
+for i, (when, where) in enumerate(routes):
+    y = 4.95 + i * 0.45
+    text(s, 7.2, y, 2.55, 0.45, when, size=12, bold=True, color=TEAL)
+    text(s, 9.8, y, 2.8, 0.45, where, size=12, color=INK)
+text(s, 0.65, 6.95, 6.0, 0.35, "Each line is enforced in code and covered by tests.", size=12, color=MUTED, italic=True)
 
 # 9 ─ Safety routing
-s = new("Some questions shouldn't get a research answer", notes=(
+s = new("Questions that need a person are redirected before any search", notes=(
     "Before any search or AI answer, the question goes through route_parent_question. These are the actual "
     "current replies. Emergencies get 911 and Poison Help. A crisis gets 988; if the person is pregnant or "
     "postpartum, it also gets HRSA's National Maternal Mental Health Hotline, 1-833-TLC-MAMA, which answers "
@@ -645,7 +702,7 @@ text(s, 0.65, 6.8, 12.0, 0.4,
      size=14, color=DEEP, bold=True)
 
 # 10 ─ Getting the safety check right
-s = new("A safety rule has to work in both directions", notes=(
+s = new("Safety checks must stop emergencies without blocking research", notes=(
     "During final review I found the safety check was too eager. Any mention of seizures or postpartum "
     "depression triggered the emergency or crisis message, even in a research question. That would have "
     "blocked core NICHD topics like epilepsy drugs in pregnancy. The fix separates describing an event from "
@@ -696,7 +753,7 @@ text(s, 0.65, 6.7, 12.0, 0.4, "Coral cards still need clinician review of real a
 
 
 # 11 ─ Architecture
-s = new("How it fits together", notes=(
+s = new("Architecture: a safety check runs before any federal source is called", notes=(
     "Any MCP client can connect: Claude Desktop, VS Code, MCP Inspector, or my PowerShell chat client. The "
     "safety check runs first. The FastMCP server validates every input with Pydantic models, and every tool "
     "goes through one shared wrapper for safety checks, errors and provenance. Source adapters call only an "
@@ -704,9 +761,9 @@ s = new("How it fits together", notes=(
     "model serving for the chat model and judge, MLflow for evaluation tracking, and Apps for hosting."))
 layers = [
     ("AI client", "Claude Desktop, VS Code, MCP Inspector or the companion chat client", MIST),
-    ("Safety check first", "route_parent_question screens the actual question", CORAL_T),
-    ("FastMCP server", "Pydantic input models  ·  one audited wrapper for every tool  ·  common response envelope", MIST),
-    ("Source adapters", "HTTPS to an allowlist of federal hosts  ·  retries, caching, size limits", MIST),
+    ("Safety check first", "core/safety.py, core/audit.py: every question and tool query is screened", CORAL_T),
+    ("FastMCP server", "app.py, tools/ (one file per tool), models/inputs.py (Pydantic), core/registration.py", MIST),
+    ("Source adapters", "clients/ (one per source), core/http.py: allowlisted HTTPS, retries, caching, 5 MB cap", MIST),
 ]
 for i, (head, body, fill) in enumerate(layers):
     y = 1.6 + i * 1.2
@@ -733,36 +790,142 @@ text(s, 9.05, 2.45, 3.35, 4.5, [
     [("Serverless notebook", {"bold": True})], "Full test suite run in the cloud",
 ], size=14, color=INK, space_after=3)
 
-# 12 ─ Key decisions
-s = new("Four design decisions", notes=(
-    "First, I built tools around what people are trying to do, not around each API. The evidence brief and "
-    "the coverage check each combine several sources. Second, the medicine must be confirmed before any "
-    "evidence lookup. Third, missing data is a first-class result. Fourth, MPRINT tables ship as a local "
-    "read-only snapshot, so answers are reproducible. Every MPRINT result says how old the copy is, the "
-    "snapshot resource checks MPRINT's GitHub for newer data, and a weekly GitHub job fails if there is. "
-    "LactMed's web pages started showing automated readers a browser check, so LactMed text now comes from "
-    "NCBI's official download package. That also gave me LactMed's citations: every finding links to its "
-    "PubMed study."))
-decs = [
-    ("Tools for goals, not endpoints", "medication_evidence_brief and check_evidence_coverage each combine "
-     "several sources, so an agent makes one meaningful call instead of eight thin ones."),
-    ("Confirm the medicine first", "RxNorm resolves brand names to ingredients. An uncertain match returns "
-     "requires_confirmation; a description of a pill stops the request."),
-    ("Missing stays missing", "Empty searches, absent label sections and truncated records are explicit "
-     "fields. A failed source is reported as unavailable, not as zero."),
-    ("Dated copies with study links", "MPRINT and LactMed ship as read-only copies of official releases. Every "
-     "result shows its date; LactMed findings link to their PubMed studies."),
+# 12 ─ Technical decisions (GSA format)
+def decision(num, title, notes, rows, code_lines, code_title):
+    s = new(f"Technical decision {num}: {title}", notes=notes)
+    y = 1.55
+    for label, value in rows:
+        text(s, 0.65, y, 1.55, 0.4, label, size=15, bold=True, color=TEAL)
+        text(s, 2.2, y, 4.55, 1.4, value, size=15, color=INK)
+        y += 0.55 + 0.27 * (len(value) // 42)
+    box(s, 7.05, 1.55, 5.6, 5.2, fill=MIST, radius=0.04)
+    text(s, 7.3, 1.7, 5.1, 0.35, code_title, size=12, bold=True, color=MUTED)
+    text(s, 7.3, 2.15, 5.2, 4.5, code_lines, size=13, font="Courier New", color=DEEP, space_after=1)
+    return s
+
+decision(1, "one file per tool, registered centrally", (
+    "Each of the 31 tools lives in its own file under tools, and a central catalog registers them by domain. "
+    "Shared behavior, such as the safety check and response envelope, is applied once in register_tool. "
+    "Adding a tool doesn't touch the others, and each is tested on its own."),
+    [("Decision", "Each MCP tool is its own file; one catalog registers all 31 by domain."),
+     ("Location", "src/parent_child_pharmacology/tools/, core/registration.py"),
+     ("Rationale", "Separation of concerns, independent tests, and shared safety and response handling applied in one place."),
+     ("Example", "The MotherToBaby fact sheet tool added today is a six-line file; behavior lives in services/fact_sheets.py.")],
+    ["# tools/search_mothertobaby_fact_sheets.py",
+     "from ..core.registration import register_tool",
+     "from ..services.fact_sheets import (",
+     "    search_mothertobaby_fact_sheets)",
+     "",
+     "def register(mcp):",
+     "    return register_tool(",
+     "        mcp, search_mothertobaby_fact_sheets,",
+     "        \"parent_resources\")",
+     "",
+     "# tools/__init__.py",
+     "DOMAINS = {\"identity\": [\"normalize_drug\"],",
+     "           \"lactation\": [\"search_lactmed\", ...],",
+     "           ... }   # 31 tools in 9 domains"],
+    "Real code (abridged)")
+
+decision(2, "strict, typed inputs reject bad requests", (
+    "Every tool has a named Pydantic input model with strict types, enumerated choices and limits. Invalid "
+    "values are rejected before any source is called, and the AI client sees the allowed choices in the schema."),
+    [("Decision", "A named, strict Pydantic model for every tool's inputs."),
+     ("Location", "src/parent_child_pharmacology/models/inputs.py, models/contracts.py"),
+     ("Rationale", "Validation before retrieval; clients see allowed values; no extra or malformed fields."),
+     ("Example", "language must be any, en or es; max_chars is bounded; unknown fields fail.")],
+    ["class SearchMothertobabyFactSheetsInput(",
+     "        StrictInput):",
+     "    drug: Query = Field(..., examples=[\"sertraline\"])",
+     "    language: Literal[\"any\", \"en\", \"es\"] = \"any\"",
+     "    max_results: Limit20 = 5",
+     "    include_text: bool = True",
+     "    max_chars: TextLimit = 8000",
+     "",
+     "INPUT_MODELS = {",
+     "    \"search_mothertobaby_fact_sheets\":",
+     "        SearchMothertobabyFactSheetsInput,",
+     "    ... }   # one model per tool"],
+    "Real code (abridged)")
+
+decision(3, "every tool call passes a safety check first", (
+    "The audited wrapper runs the same safety router on every query-like argument of every tool, not only on "
+    "the chat question. An emergency, crisis, private details or a vague medicine description stops the call "
+    "before any source is contacted, with a fixed, tested referral message."),
+    [("Decision", "Screen every tool's query arguments, not just the chat question."),
+     ("Location", "src/parent_child_pharmacology/core/audit.py, core/safety.py, core/policy.json"),
+     ("Rationale", "Any AI client can call any tool directly; the server must protect itself."),
+     ("Example", "“my baby is having a seizure” sent to search_literature returns urgent_help, with zero source calls.")],
+    ["# core/audit.py (inside audited)",
+     "decision = route(value,",
+     "    language_required=not selector)",
+     "if not decision[\"allow_research\"]:",
+     "    blocked = decision",
+     "",
+     ">>> route(\"My baby is having a seizure.\")",
+     "{'route': 'urgent_help',",
+     " 'allow_research': False,",
+     " 'message': 'If someone ... is having a",
+     "   seizure ... call 911 immediately. ...'}"],
+    "Real code and output (abridged)")
+
+decision(4, "dated copies of official data, with study links", (
+    "NCBI's web pages now show automated readers a browser check, which the server never bypasses. So LactMed "
+    "and MotherToBaby text come from NCBI's official download packages, like MPRINT. Each answer states the "
+    "package date, and LactMed findings keep their citation numbers with PubMed links."),
+    [("Decision", "Read LactMed and MotherToBaby from NCBI's official packages; MPRINT from its release."),
+     ("Location", "scripts/build_lactmed_snapshot.py, clients/lactmed.py, core/freshness.py"),
+     ("Rationale", "Reliable access, reproducible answers, and LactMed's own references with PubMed IDs."),
+     ("Example", "Citation [54] returns Trenque et al., Drug Saf 2011, PMID 22077504.")],
+    ["record = snapshot_record(\"LM328\")  # Sertraline",
+     "links = reference_links(text,",
+     "                        record[\"references\"])",
+     "",
+     "# returned with every LactMed record",
+     "\"data_freshness\": {",
+     "  \"display_note\": \"LactMed text comes from",
+     "    NCBI's official package published",
+     "    2026-10-22; this record was last",
+     "    revised 2026-08-15. ...\"}"],
+    "Real code and output (abridged)")
+
+# 12b ─ What a tool call returns
+s = new("What a tool call returns: a LactMed record with study links", notes=(
+    "Here is a real, abridged response from get_lactmed_record for sertraline. It says where the text came "
+    "from and how current it is, which sections came back and whether anything was cut, and a reference list "
+    "with PubMed links for every cited study. The AI client turns this into a plain-language answer; the "
+    "structure keeps it honest."))
+box(s, 0.65, 1.55, 7.0, 5.2, fill=MIST, radius=0.04)
+text(s, 0.9, 1.7, 6.5, 0.35, "get_lactmed_record(book_id=\"4573436\")  →  real response, abridged",
+     size=12, bold=True, color=MUTED)
+text(s, 0.9, 2.15, 6.6, 4.5, [
+    "{",
+    "  \"source\": \"snapshot:lactmed\",",
+    "  \"title\": \"Sertraline\",",
+    "  \"record_revised_on\": \"2026-08-15\",",
+    "  \"sections_returned\": [\"Summary of Use during",
+    "      Lactation\", \"Drug Levels\", \"Effects in",
+    "      Breastfed Infants\", \"Effects on Lactation\"],",
+    "  \"truncated\": true,",
+    "  \"references\": [{\"number\": \"54\",",
+    "      \"pmid\": \"22077504\", \"url\":",
+    "      \"https://pubmed.ncbi.nlm.nih.gov/22077504/\"}, ...],",
+    "  \"data_freshness\": {\"display_note\": \"...\"}",
+    "}",
+], size=12, font="Courier New", color=DEEP, space_after=0)
+notes_r = [
+    ("Where it came from", "NCBI's official LactMed package, with the record's revision date"),
+    ("What came back", "Which sections were returned, and a flag when anything was cut"),
+    ("Who to cite", "Each cited study with its PubMed link"),
+    ("How current", "A plain-language freshness note the client shows the user"),
 ]
-for i, (head, body) in enumerate(decs):
-    x = 0.65 + (i % 2) * 6.15
-    y = 1.65 + (i // 2) * 2.65
-    box(s, x, y, 5.85, 2.4, fill=MIST)
-    circle_num(s, x + 0.3, y + 0.3, str(i + 1), d=0.55)
-    text(s, x + 1.05, y + 0.32, 4.5, 0.5, head, size=19, font=HEAD, bold=True, color=DEEP)
-    text(s, x + 1.05, y + 0.95, 4.5, 1.35, body, size=15, color=INK)
+for i, (head, body) in enumerate(notes_r):
+    y = 1.6 + i * 1.3
+    text(s, 8.0, y, 4.65, 0.4, head, size=16, bold=True, color=TEAL)
+    text(s, 8.0, y + 0.42, 4.65, 0.8, body, size=14, color=INK)
 
 # 13 ─ How I tested
-s = new("How I tested it", notes=(
+s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
     "I tested in layers. All 861 automated tests pass in a Databricks serverless notebook; on my Mac, the "
     "PowerShell client checks are skipped because PowerShell isn't installed. "
     "MCP Inspector checked the protocol and schemas. Then 28 scripted chats: 21 research questions and 7 that "
@@ -792,7 +955,7 @@ text(s, 9.2, 1.9, 3.2, 4.6, [
 ], size=14, color=INK, space_after=10)
 
 # 14 ─ Results
-s = new("Results", notes=(
+s = new("Results: with the MCP, 7 of 7 tasks done; without it, 0 of 7", notes=(
     "The clearest result: with the MCP, the model fulfilled all seven paired tasks. Without tools, the same "
     "model fulfilled none, mostly because it couldn't verify current records. All 28 chats took the expected "
     "route with the expected tools, and all seven stop cases made zero downstream calls. The benchmark scored "
@@ -821,11 +984,11 @@ text(s, 0.65, 4.95, 12.0, 1.6, [
       "scored 3/10 on the same benchmark; most of those failures were safety-check false positives.", {})],
 ], size=15, color=INK)
 text(s, 0.65, 6.6, 12.0, 0.5,
-     "Known development questions, one answer each, graded by a model judge. No clinician review yet.",
+     "Evaluated version .14 (re-run on the current version pending). Known development questions, one answer each, model-judged. No clinician review yet.",
      size=13, color=MUTED, italic=True)
 
 # 14b ─ Hands-on testing
-s = new("Using it myself found three more problems", notes=(
+s = new("Hands-on testing in Claude Desktop found three problems tests missed", notes=(
     "Scripted tests measure known questions. So I also connected the server to Claude Desktop and used it the "
     "way a parent or researcher would. A sertraline answer said it was cut off, because the record extract was "
     "capped at 6,000 characters. Findings like a French pharmacovigilance study had no link, because the "
@@ -855,7 +1018,7 @@ text(s, 0.65, 6.85, 11.0, 0.35, "Hand-run Claude Desktop chats by the developer;
      size=11, color=MUTED, italic=True)
 
 # 15 ─ Security
-s = new("Security", notes=(
+s = new("Security: read-only, allowlisted federal sources, no personal data", notes=(
     "The data are public, but I still treated the server as something that could be misused. Outbound "
     "requests can only reach an allowlist of federal hosts over HTTPS, with no redirects and a 5 MB cap, "
     "and DNS answers must be public addresses. Remote hosting refuses to start without token verification, "
