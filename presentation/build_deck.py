@@ -520,6 +520,41 @@ text(s, 7.95, 4.6, 4.7, 1.5, [
 text(s, 0.65, 6.95, 9.5, 0.35, "Recorded output from an earlier version of the same tools.", size=11,
      color=MUTED, italic=True)
 
+# 8b ─ Should AI answer this?
+s = new("Should an AI assistant answer questions this sensitive?", notes=(
+    "This is the question I asked myself first. Medicines in pregnancy, breastfeeding and childhood are "
+    "high-stakes, and a wrong answer can do real harm. My answer is yes, with firm limits. The evidence is "
+    "already public; what's missing is context, so people see a finding with its population, its date and "
+    "its gaps. Showing what isn't known matters as much as showing what is. It also makes two decades of "
+    "federal work, BPCA, PRGLAC, MPRINT and LactMed, visible and usable. And it is built to prepare someone for "
+    "a conversation with a clinician, never to replace it. On the right are the lines it won't cross. Every "
+    "one is enforced in code and covered by tests."))
+reasons = [
+    ("The evidence is already public", "The question isn't whether people find it; it's whether they see it with its population, date and limits."),
+    ("The gaps matter as much as the findings", "Saying “no evidence retrieved; not evidence of safety” is part of the answer."),
+    ("Federal work becomes visible", "BPCA, PRGLAC, MPRINT and LactMed produced evidence most families never see."),
+    ("It prepares, it doesn't decide", "Every brief ends with questions to bring to a clinician."),
+]
+text(s, 0.65, 1.55, 6.6, 0.45, "Why I think yes", size=20, font=HEAD, bold=True, color=TEAL)
+for i, (head, body) in enumerate(reasons):
+    y = 2.15 + i * 1.2
+    circle_num(s, 0.65, y + 0.05, str(i + 1), d=0.48, size=15)
+    text(s, 1.35, y, 5.9, 0.4, head, size=17, bold=True, color=DEEP)
+    text(s, 1.35, y + 0.42, 5.9, 0.75, body, size=14, color=INK)
+box(s, 7.65, 1.55, 5.0, 5.2, fill=DEEP)
+text(s, 7.95, 1.75, 4.5, 0.45, "Lines it won't cross", size=20, font=HEAD, bold=True, color=WHITE)
+text(s, 7.95, 2.4, 4.45, 3.0, [
+    "No doses, schedules or start/stop decisions",
+    "No diagnosis or triage",
+    "Missing evidence is never presented as safe",
+    "Never guesses a medicine from a description",
+    "No names, birth dates or record numbers",
+], size=15, color=MIST2, space_after=9)
+text(s, 7.95, 4.75, 4.45, 1.4, [
+    [("Hands off instead: ", {"bold": True, "color": WHITE}),
+     ("clinician or pharmacist, MotherToBaby, 988, 1-833-TLC-MAMA, Poison Help.", {})]], size=14, color=CORAL_T)
+text(s, 0.65, 6.95, 7.0, 0.35, "Each line is enforced in code and covered by tests.", size=12, color=MUTED, italic=True)
+
 # 9 ─ Safety routing
 s = new("Some questions shouldn't get a research answer", notes=(
     "Before any search or AI answer, the question goes through route_parent_question. These are the actual "
@@ -576,6 +611,29 @@ text(s, 0.65, 6.6, 12.0, 0.6, [
     [("The fix: ", {"bold": True, "color": DEEP}),
      ("naming a condition is a research topic; describing it happening, or yourself, still stops the request. "
       "29 new tests cover both directions.", {})]], size=15, color=INK)
+
+# 10b ─ Six ways an accurate answer can still mislead
+s = new("Six ways an accurate answer can still mislead", notes=(
+    "I wrote down the six ways an accurate-looking answer could still mislead, and what the server does about "
+    "each. Two of them, false reassurance and prompting someone to stop a medicine, need a clinician's eye."))
+mis = [
+    ("Partial looks complete", "Missing sections, truncation and label choice are reported."),
+    ("No reports reads as safe", "Study types and unknown counts travel with no-effects text."),
+    ("Populations get merged", "Every item keeps its source population and age bands."),
+    ("Counts read as rates", "FAERS counts carry no-denominator and no-causation caveats."),
+    ("Old looks current", "Label versions, dates and snapshot revisions are returned."),
+    ("Facts prompt stopping", "Source context and a medication-change caution stay attached."),
+]
+for i, (head, body) in enumerate(mis):
+    x = 0.65 + (i % 3) * 4.1
+    y = 1.65 + (i // 3) * 2.45
+    needs = i in (1, 5)
+    box(s, x, y, 3.8, 2.2, fill=CORAL_T if needs else MIST)
+    text(s, x + 0.3, y + 0.25, 3.2, 0.7, head, size=17, bold=True, color=CORAL if needs else TEAL)
+    text(s, x + 0.3, y + 0.95, 3.2, 1.1, body, size=15, color=INK)
+text(s, 0.65, 6.7, 12.0, 0.4, "Coral cards still need clinician review of real answers.", size=13,
+     color=MUTED, italic=True)
+
 
 # 11 ─ Architecture
 s = new("How it fits together", notes=(
@@ -803,7 +861,7 @@ text(s, 0.9, 5.6, 11.5, 0.9, [
 s = new(dark=True, notes="Reference slides for judges who want more detail.")
 text(s, 0.9, 2.6, 11.0, 1.0, "Appendix", size=48, font=HEAD, bold=True, color=WHITE)
 text(s, 0.9, 3.7, 11.0, 1.6, ["All 31 tools  ·  Sources and their limits  ·  Full evaluation numbers",
-                               "Six ways an answer can mislead  ·  Benchmark history  ·  Prompts and resources"],
+                               "Benchmark history  ·  Prompts and resources"],
      size=18, color=MIST2, space_after=8)
 
 
@@ -881,27 +939,6 @@ table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
 text(s, 0.65, 6.75, 12.0, 0.4,
      "Evaluated on policy .14. Version 0.19.0 adds safety fixes, referrals, fact sheets, display checks and LactMed study links; all 861 tests pass on Databricks.",
      size=12, color=MUTED, italic=True)
-
-s = new("Six ways an answer can mislead", appendix=True, notes=(
-    "I wrote down the six ways an accurate-looking answer could still mislead, and what the server does about "
-    "each. Two of them, false reassurance and prompting someone to stop a medicine, need a clinician's eye."))
-mis = [
-    ("Partial looks complete", "Missing sections, truncation and label choice are reported."),
-    ("No reports reads as safe", "Study types and unknown counts travel with no-effects text."),
-    ("Populations get merged", "Every item keeps its source population and age bands."),
-    ("Counts read as rates", "FAERS counts carry no-denominator and no-causation caveats."),
-    ("Old looks current", "Label versions, dates and snapshot revisions are returned."),
-    ("Facts prompt stopping", "Source context and a medication-change caution stay attached."),
-]
-for i, (head, body) in enumerate(mis):
-    x = 0.65 + (i % 3) * 4.1
-    y = 1.65 + (i // 3) * 2.45
-    needs = i in (1, 5)
-    box(s, x, y, 3.8, 2.2, fill=CORAL_T if needs else MIST)
-    text(s, x + 0.3, y + 0.25, 3.2, 0.7, head, size=17, bold=True, color=CORAL if needs else TEAL)
-    text(s, x + 0.3, y + 0.95, 3.2, 1.1, body, size=15, color=INK)
-text(s, 0.65, 6.7, 12.0, 0.4, "Coral cards still need clinician review of real answers.", size=13,
-     color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 9/10", appendix=True, notes=(
     "The same ten questions and references were used throughout. Most early failures came from the safety "
