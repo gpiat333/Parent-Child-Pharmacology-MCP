@@ -541,7 +541,7 @@ for i, (head, body) in enumerate(reasons):
     circle_num(s, 0.65, y + 0.05, str(i + 1), d=0.48, size=15)
     text(s, 1.35, y, 5.9, 0.4, head, size=17, bold=True, color=DEEP)
     text(s, 1.35, y + 0.42, 5.9, 0.75, body, size=14, color=INK)
-box(s, 7.65, 1.55, 5.0, 5.2, fill=DEEP)
+box(s, 7.65, 1.55, 5.0, 4.1, fill=DEEP)
 text(s, 7.95, 1.75, 4.5, 0.45, "Lines it won't cross", size=20, font=HEAD, bold=True, color=WHITE)
 text(s, 7.95, 2.4, 4.45, 3.0, [
     "No doses, schedules or start/stop decisions",
