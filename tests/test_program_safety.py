@@ -337,12 +337,20 @@ def test_cord_blood_selector_does_not_depend_on_language_guess(monkeypatch):
     assert not language.scientific_selector("quiero tomar sertralina durante la lactancia")
 
 
-def test_unreviewed_spanish_referral_text_is_held():
+def test_spanish_referral_text_is_enabled_only_with_a_recorded_review():
     import json
     from pathlib import Path
 
     policy = json.loads(
-        (Path(__file__).parents[1] / "src/parent_child_pharmacology/core/policy.json").read_text()
+        (Path(__file__).parents[1] / "src/parent_child_pharmacology/core/policy.json").read_text(
+            encoding="utf-8"
+        )
     )
-    assert policy["spanish_referral_review"]["new_spanish_safety_strings_enabled"] is False
-    assert "No puedo" not in policy["messages"]["language_support"]
+    review = policy["spanish_referral_review"]
+    assert review["new_spanish_safety_strings_enabled"] is True
+    assert (
+        review["status"] == "enabled_after_review" and "native Spanish speaker" in review["review"]
+    )
+    # Spanish lives only in messages_es; the English messages stay English.
+    assert "Este servicio" not in policy["messages"]["language_support"]
+    assert "Este servicio" in policy["messages_es"]["language_support"]

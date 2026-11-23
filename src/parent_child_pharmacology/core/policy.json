@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-23.25",
+  "version": "2026-11-23.26",
   "scope": "English heuristic routing with offline language confidence gate; uncertain and non-English questions fail closed. Not validated clinical triage. Structured medicine identifiers are language-neutral.",
   "patterns": {
     "patterns_1": "\\b(?:no|not having) (?:trouble breathing|difficulty breathing|a seizure|seizures)\\b",
@@ -26,7 +26,8 @@
     "creative_request": "\\b(?:write|compose|make|tell|sing)\\s+(?:me\\s+|us\\s+)?(?:a|an|some)\\s+(?:\\w+\\s+){0,2}(?:poems?|songs?|jokes?|limericks?|story|stories|raps?)\\b",
     "domain_terms": "\\b(?:medic\\w*|drugs?|pills?|tablets?|capsules?|doses?|dosing|vaccin\\w*|shots?|supplements?|herb\\w*|vitamins?|oils?|pregnan\\w*|breastfe\\w*|lactat\\w*|milk|infants?|bab(?:y|ies)|child\\w*|pediatric\\w*|paediatric\\w*|studies|study|trials?|research\\w*|evidence|labels?|lactmed|mprint|pubmed|side\\s+effects?|prescri\\w*|pharmac\\w*|teratogen\\w*|registr\\w*|fda|nih|nichd|grants?|funding|recalls?|shortages?)\\b",
     "spanish_markers": "[¿¡]|\\b(?:el|los|las|del|para|por|durante|puedo|tomar|mi|seguro|segura|embarazo|embarazada|lactancia|bebé|bebe|amamantar|amamantando|medicamento|medicina|debo|hijo|hija|niño|niña|quiero|morir|ayuda|estoy|tengo|matarme|suicid\\w*arme)\\b",
-    "supplement_terms": "\\b(?:herb\\w*|supplements?|essential\\s+oils?|teas?|botanical\\w*|natural\\s+remed\\w*)\\b"
+    "supplement_terms": "\\b(?:herb\\w*|supplements?|essential\\s+oils?|teas?|botanical\\w*|natural\\s+remed\\w*)\\b",
+    "spanish_perinatal": "\\b(?:embarazad\\w*|embarazo|posparto|postparto|parto|di a luz|reci[eé]n nacid\\w*|beb[eé]|lactancia|amamant\\w*)\\b"
   },
   "messages": {
     "messages_1": "Public evidence and resource navigation; not individual treatment or eligibility decisions.",
@@ -36,23 +37,41 @@
     "messages_5": "Separate source findings, monitoring recommendations, exposure measurements and causal claims.",
     "messages_6": "Call route_parent_question before parent-facing chat; urgent concerns take precedence over retrieval.",
     "messages_7": "Do not collect identifiable histories or submit reports, comments or enrollment applications.",
-    "messages_8": "For a possible poisoning or medication exposure in the United States, call Poison Help at 1-800-222-1222 now. Do not wait for this research assistant.",
-    "messages_9": "Please remove names, contact details, birth dates and record numbers. Use only the medicine name and a general research question; do not share an identifiable medical history.",
-    "messages_10": "I cannot provide an individualized medication decision, dose, missed-dose instruction, schedule, or taper plan. Please contact your prescribing clinician or pharmacist for an individualized plan.",
-    "messages_11": "I cannot identify a medicine from its appearance or a vague description. Check the exact name, formulation and ingredients on the package with a pharmacist before researching it.",
-    "messages_12": "If someone has collapsed, is having a seizure, has trouble breathing, or cannot be awakened, call 911 immediately. ",
-    "crisis_us": "You deserve support. I cannot answer this as a medication research question. Please call or text 988 (Suicide & Crisis Lifeline) for support now. If you or someone else is in immediate danger, call 911.",
-    "personal_question": "I can't tell you whether to take it. That decision depends on your health and belongs with your clinician or pharmacist. Here is what the public evidence says, including what isn't known, so you can bring it to that conversation.",
-    "maternal_hotline": "For pregnant and postpartum people, the National Maternal Mental Health Hotline is free, confidential and available 24/7 by call or text at 1-833-TLC-MAMA (1-833-852-6262), in English and Spanish.",
-    "perinatal_support": "For additional non-emergency perinatal support, contact the Postpartum Support International HelpLine at 1-800-944-4773. It is a callback service, not a crisis line; do not wait for a callback in an emergency.",
-    "language_support": "This prototype cannot confidently apply its English safety rules to this question. Further evidence retrieval and model answering are stopped. Please ask in English or seek help from a clinician or pharmacist with an interpreter. Spanish MedlinePlus drug education is available separately using a confirmed RxNorm ID.",
-    "instruction_override": "I can't change how I work or set aside my safety rules, however a question is framed. Ask your question directly and I'll share the public evidence. A decision about taking a medicine belongs with your clinician or pharmacist.",
-    "vaccine_decision": "I can't tell you whether you or your child should get a vaccine. That decision belongs with your clinician or your child's pediatrician, who can check the recommended schedule and any reason to wait. I can share published research on a vaccine if you ask about the research.",
-    "off_topic": "This server only looks up public evidence about medicines during pregnancy, breastfeeding and childhood. It can't place orders, send messages or do other tasks, and it never acts on anyone's behalf."
+    "messages_8": "If you are in the United States and suspect a poisoning or a medication exposure, call Poison Help at 1-800-222-1222 now. Don't wait for an answer from this service.",
+    "messages_9": "Please remove names, contact details, birth dates and medical record numbers. Include only the medicine name and a general question; don't share a medical history that could identify someone.",
+    "messages_10": "This service can't give personal medication decisions, doses, missed-dose instructions, schedules or plans to stop a medicine gradually. Contact the clinician who prescribed it, or your pharmacist, for a plan that fits you.",
+    "messages_11": "This service can't identify a medicine from its appearance or a general description. Before looking it up, check the exact name, form (tablet, liquid and so on) and ingredients on the package with a pharmacist.",
+    "messages_12": "Call 911 right away if someone has collapsed, is having a seizure, is having trouble breathing, or can't be woken up. ",
+    "crisis_us": "You deserve support. This service can't help with this as a medication research question. Please call or text 988 (Suicide & Crisis Lifeline) for help right now. If you or someone else is in immediate danger, call 911.",
+    "personal_question": "This service can't tell you whether to take it. That decision depends on your health and is one to make with your clinician or pharmacist. Here is what the public evidence says, including what isn't known, so you can bring it to that conversation.",
+    "maternal_hotline": "For pregnant and postpartum people, the National Maternal Mental Health Hotline is free, confidential and open 24 hours a day, 7 days a week. Call or text 1-833-TLC-MAMA (1-833-852-6262), in English and Spanish.",
+    "perinatal_support": "For non-emergency support during pregnancy and after birth, contact the Postpartum Support International HelpLine at 1-800-944-4773. It returns calls later and is not a crisis line; in an emergency, don't wait for a call back.",
+    "language_support": "This service can't answer this question yet, because its safety rules work only in English. Please ask in English, or get help from a clinician or pharmacist with an interpreter. Spanish MedlinePlus drug education is available separately using a confirmed RxNorm ID.",
+    "instruction_override": "This service always follows its safety rules, however a question is worded. Ask your question directly to see the public evidence. To decide whether to take a medicine, talk with your clinician or pharmacist.",
+    "vaccine_decision": "This service can't tell you whether you or your child should get a vaccine. Talk with your clinician or your child's pediatrician, who can check the recommended schedule and any reason to wait. If you'd like, this service can show published research about a vaccine.",
+    "off_topic": "This service only looks up public evidence about medicines during pregnancy, breastfeeding and childhood. It can't place orders, send messages or do other tasks for you."
   },
   "spanish_referral_review": {
-    "status": "held_pending_human_spanish_review",
-    "new_spanish_safety_strings_enabled": false,
-    "scope": "Non-English or uncertain questions fail closed. No machine translation of medical evidence. Code-based Spanish MedlinePlus education remains available."
+    "status": "enabled_after_review",
+    "new_spanish_safety_strings_enabled": true,
+    "review": "First-round review by a native Spanish speaker (NIH colleague), November 23, 2026, as comments on all 19 messages. Every comment was applied. Wording was then aligned with official Spanish used by MedlinePlus en español, the 988 Lifeline and Postpartum Support International, with Linguee for context. A second review round was not performed.",
+    "scope": "Fixed safety and referral messages only, returned as message_es when a question or crisis message is in Spanish. Spanish questions still stop: no machine translation of medical evidence and no Spanish free-text answers."
+  },
+  "messages_es": {
+    "crisis_us": "Usted merece apoyo. Este servicio no puede ayudarle con esto como una pregunta de investigación sobre medicamentos. Llame o envíe un mensaje de texto al 988 (Línea 988 de Prevención del Suicidio y Crisis) para recibir ayuda inmediata. Para atención en español, marque 988 y presione 2, o envíe la palabra AYUDA al 988. Si usted u otra persona está en peligro inmediato, llame al 911.",
+    "maternal_hotline": "Para mujeres embarazadas y nuevas mamás, la Línea Nacional de Asistencia a la Salud Mental Materna es gratuita, confidencial y atiende las 24 horas del día, los 7 días de la semana. Llame o envíe un mensaje de texto al 1-833-TLC-MAMA (1-833-852-6262); para español, marque 2.",
+    "perinatal_support": "Para recibir apoyo que no sea de emergencia durante el embarazo o después del parto, comuníquese con la Línea Cálida de Postpartum Support International al 1-800-944-4773 (marque 1 para atención en español). La Línea Cálida devuelve las llamadas más tarde y no es una línea de crisis; en caso de emergencia, no espere a que le devuelvan la llamada.",
+    "urgent": "Llame de inmediato al 911 si alguien sufre un colapso, tiene una crisis convulsiva, presenta dificultades respiratorias o no es posible despertarlo. ",
+    "poison": "Si está en los Estados Unidos y sospecha que alguien ha sido envenenado o expuesto a un medicamento, llame de inmediato a la línea de ayuda de control de envenenamientos (Poison Help) al 1-800-222-1222. No espere una respuesta de este servicio.",
+    "language_support": "Este servicio todavía no puede responder preguntas en español, porque sus reglas de seguridad solo funcionan en inglés. Puede recibir ayuda gratuita en español aquí:\n- MotherToBaby: información gratuita sobre medicamentos durante el embarazo y la lactancia; sus especialistas hablan español. 866-626-6847, mothertobaby.org/es (de lunes a viernes, de 8:00 a 19:00, hora del Este).\n- Si tiene pensamientos suicidas o una emergencia de salud mental: llame al 988 y presione 2, o envíe la palabra AYUDA al 988.\n- MedlinePlus en español: información sobre medicinas, hierbas y suplementos, de la Biblioteca Nacional de Medicina de los EE. UU.\n- En caso de emergencia, llame al 911.",
+    "personal_question": "Este servicio no puede decirle si debe tomarlo. Esa decisión depende de su salud y debe tomarse junto con su profesional de la salud o su farmacéutico. A continuación se muestra lo que dice la evidencia pública, incluido lo que todavía no se sabe, para que pueda llevarlo a esa conversación.",
+    "dose_decision": "Este servicio no puede dar decisiones personales sobre medicamentos, dosis, instrucciones sobre qué hacer si omitió una dosis, horarios ni planes para dejar de tomar un medicamento poco a poco. Comuníquese con el médico que le recetó el medicamento o con su farmacéutico para recibir un plan adecuado para usted.",
+    "mothertobaby": "Si tiene una pregunta sobre su propio embarazo o lactancia, los especialistas de MotherToBaby pueden hablar con usted de forma gratuita y en español: llame al 866-626-6847 o visite mothertobaby.org/es (de lunes a viernes, de 8:00 a 19:00, hora del Este).",
+    "unclear_medicine": "Este servicio no puede identificar un medicamento por su aspecto ni por una descripción general. Antes de buscar información, revise con un farmacéutico el nombre exacto, la presentación (tabletas, líquido, etc.) y los ingredientes que aparecen en el empaque.",
+    "privacy": "Por favor, elimine nombres, datos de contacto, fechas de nacimiento y números de registro médico. Escriba solo el nombre del medicamento y una pregunta general; no comparta información médica que permita identificar a una persona.",
+    "disclaimer": "Esta información es solo informativa y no debe utilizarse como sustituto de la atención o la asesoría de un profesional médico. Proviene de información pública de los NIH, la NLM y la FDA, que puede estar incompleta o desactualizada. Antes de empezar a tomar, dejar de tomar o cambiar cualquier medicamento, hable con un profesional de la salud, un farmacéutico o el centro de control de envenenamientos.",
+    "vaccine_decision": "Este servicio no puede decirle si usted o su hijo deben vacunarse. Consulte con su profesional de la salud o con el pediatra de su hijo, quien puede revisar el calendario de vacunación recomendado y si hay alguna razón para esperar. Si lo desea, este servicio puede mostrarle estudios publicados sobre una vacuna.",
+    "instruction_override": "Este servicio siempre sigue sus reglas de seguridad, sin importar cómo esté redactada la pregunta. Haga su pregunta directamente para ver la evidencia pública. Para decidir si debe tomar un medicamento, consulte con su profesional de la salud o su farmacéutico.",
+    "off_topic": "Este servicio solo busca evidencia pública sobre medicamentos durante el embarazo, la lactancia y la infancia. No puede hacer pedidos, enviar mensajes ni realizar otras tareas por usted."
   }
 }

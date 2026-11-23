@@ -98,6 +98,14 @@ def route(question, country="US", *, language_required=True):
 
                 result["referrals"].append(SPANISH_RESOURCES["referrals"][1])
                 result["source_urls"].append(SPANISH_RESOURCES["referrals"][1]["website"])
+                # Reviewed Spanish text (see spanish_referral_review); fixed, never generated.
+                es = POLICY["messages_es"]
+                result["message_es"] = es["crisis_us"]
+                if perinatal or re.search(POLICY["patterns"]["spanish_perinatal"], q):
+                    result["message_es"] += (
+                        " " + es["maternal_hotline"] + " " + es["perinatal_support"]
+                    )
+                result["disclaimer_es"] = es["disclaimer"]
             if re.search(r"overdos|poison|pills|tablets|bottle", q):
                 result["message"] += " " + POLICY["messages"]["messages_8"]
                 result["source_urls"].append(POISON)
@@ -275,6 +283,9 @@ def route(question, country="US", *, language_required=True):
                 result["referrals"] = SPANISH_RESOURCES["referrals"]
                 result["spanish_resources"] = SPANISH_RESOURCES
                 result["source_urls"] = [r["website"] for r in SPANISH_RESOURCES["referrals"]]
+                # Reviewed Spanish text for the person who wrote in Spanish; fixed, never generated.
+                result["message_es"] = POLICY["messages_es"]["language_support"]
+                result["disclaimer_es"] = POLICY["messages_es"]["disclaimer"]
     if not result["allow_research"]:
         result.pop("personal_question", None)
         result.pop("answer_framing", None)

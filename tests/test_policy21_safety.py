@@ -102,7 +102,7 @@ def test_off_topic_requests_are_out_of_scope(question):
     r = route(question)
     assert r["route"] == "out_of_scope"
     assert r["allow_research"] is False and r["allow_model_answer"] is False
-    assert "never acts on anyone's behalf" in r["message"]
+    assert "other tasks for you" in r["message"]
 
 
 @pytest.mark.parametrize(
