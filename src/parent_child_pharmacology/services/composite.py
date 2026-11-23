@@ -123,18 +123,14 @@ async def medication_evidence_brief(
         row["evidence_axes"], pk = build_axes(row, population)
         if population == "pregnancy":
             row["maternal_pharmacokinetics"] = pk
-            row["maternal_dose_adjustment"] = (
-                row["label"]
-                .get("pllr_8_1", {})
-                .get(
-                    "maternal_dose_adjustment",
-                    {
-                        "clinical_considerations_text": None,
-                        "dose_adjustment_text": None,
-                        "dose_adjustment_data_found": False,
-                        "source_context_only": True,
-                    },
-                )
+            row["maternal_dose_adjustment"] = (row["label"].get("pllr_8_1") or {}).get(
+                "maternal_dose_adjustment",
+                {
+                    "clinical_considerations_text": None,
+                    "dose_adjustment_text": None,
+                    "dose_adjustment_data_found": False,
+                    "source_context_only": True,
+                },
             )
             try:
                 registry = await parents.pregnancy_registries(name, 20)

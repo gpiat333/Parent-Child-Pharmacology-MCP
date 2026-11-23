@@ -91,6 +91,19 @@ def technical_english_clause(text, whole):
     )
 
 
+def mask_longest_term(text):
+    """Replace the single longest word (usually a medicine or condition name).
+
+    Detectors read many INN drug names and clinical terms as Latin/Italian.
+    Only one token is masked, and the result must still pass the stricter
+    contextual check, so a clause written in another language stays blocked.
+    """
+    words = re.findall(r"[A-Za-z][A-Za-z'-]{6,}", text)
+    if not words:
+        return None
+    return text.replace(max(words, key=len), "it", 1)
+
+
 def contextual_english(text, score, whole):
     anchors = set(re.findall(r"[a-z]+", text.lower())) & ENGLISH_FUNCTION_WORDS
     return (
@@ -113,7 +126,11 @@ def scientific_selector(text):
     if (
         not words
         or len(words) > 6
-        or not all(re.fullmatch(r"[A-Za-z][A-Za-z0-9-]{1,79}", w) for w in words)
+        # Names such as "5-ASA" or "St. John's wort" carry digits and punctuation.
+        or not all(
+            re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9'.-]{1,79}", w) and re.search(r"[A-Za-z]{2}", w)
+            for w in words
+        )
     ):
         return False
     if len(words) == 1:
@@ -168,11 +185,19 @@ def english_confidence(text):
         whole = detector()(text)
         whole["english"] = whole["english"] or technical_english_clause(text, {"english": True})
         scores = [detector()(p) for p in parts]
+
         # D05's "Do not provide medication decisions or doses" is ranked English
         # by Lingua but below the standalone threshold. Context may resolve an
         # ambiguous English-leading fragment, never a confidently foreign clause.
+        def masked_english(p):
+            m = mask_longest_term(p)
+            return bool(m) and contextual_english(m, detector()(m), whole)
+
         passes = [
-            s["english"] or contextual_english(p, s, whole) or technical_english_clause(p, whole)
+            s["english"]
+            or contextual_english(p, s, whole)
+            or technical_english_clause(p, whole)
+            or (whole["english"] and masked_english(p))
             for p, s in zip(parts, scores)
         ]
         return {

@@ -11,6 +11,8 @@ from urllib.parse import urlsplit
 
 import httpx
 
+from parent_child_pharmacology import __version__
+
 from .config import CACHE_TTL_SECONDS
 
 request_provenance = ContextVar("request_provenance", default=None)
@@ -85,7 +87,7 @@ class Http:
             timeout=30,
             follow_redirects=False,
             trust_env=False,
-            headers={"User-Agent": "parent-child-pharmacology-mcp/0.12"},
+            headers={"User-Agent": f"parent-child-pharmacology-mcp/{__version__}"},
         )
         self._locks, self._last, self._cache = {}, {}, {}
 

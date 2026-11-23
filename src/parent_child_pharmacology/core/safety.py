@@ -20,6 +20,22 @@ def contains_identifiers(text):
     return bool(re.search(POLICY["patterns"]["patterns_7"], text, re.I))
 
 
+def _clauses(text):
+    return [c for c in re.split(r"[.!?;\n]", text) if c.strip()]
+
+
+def _crisis(q):
+    if re.search(POLICY["patterns"]["crisis"], q, re.I):
+        return True
+    # Naming a perinatal mood condition is a research topic; describing one's
+    # own condition still routes to support.
+    return any(
+        re.search(POLICY["patterns"]["crisis_condition"], c)
+        and re.search(POLICY["patterns"]["personal_marker"], c)
+        for c in _clauses(q)
+    )
+
+
 def route(question, country="US", *, language_required=True):
     q = question.lower().replace("’", "'")
     result = {
@@ -32,7 +48,7 @@ def route(question, country="US", *, language_required=True):
         "limitations": [POLICY["messages"]["messages_2"]],
     }
     # A fixed referral, not a diagnosis, severity score, or model-generated answer.
-    if re.search(POLICY["patterns"]["crisis"], q, re.I):
+    if _crisis(q):
         perinatal = bool(re.search(POLICY["patterns"]["perinatal"], q, re.I))
         result.update(
             route="mental_health_support",
@@ -42,16 +58,14 @@ def route(question, country="US", *, language_required=True):
         )
         if country.upper() == "US":
             result["message"] = POLICY["messages"]["crisis_us"]
-            result["source_urls"] = [
-                "https://988lifeline.org?oai_link_source=model_response_hotline"
-            ]
+            result["source_urls"] = ["https://988lifeline.org"]
             result["referrals"] = [
                 {
                     "name": "988 Suicide & Crisis Lifeline",
                     "call": "988",
                     "text": "988",
-                    "phone_link": "tel:988?oai_link_source=model_response_hotline",
-                    "sms_link": "sms:988?oai_link_source=model_response_hotline",
+                    "phone_link": "tel:988",
+                    "sms_link": "sms:988",
                 }
             ]
             if perinatal:
@@ -86,7 +100,15 @@ def route(question, country="US", *, language_required=True):
                 "aggregate outcome",
                 clause,
             )
-    urgent = re.search(POLICY["patterns"]["patterns_2"], "".join(clauses))
+    joined = "".join(clauses)
+    # Event wording ("is having a seizure") is always urgent. A condition name
+    # alone ("levetiracetam for seizures") is a research topic unless the same
+    # clause also signals an acute situation ("seizures now", "help").
+    urgent = re.search(POLICY["patterns"]["patterns_2"], joined) or any(
+        re.search(POLICY["patterns"]["urgent_condition"], c)
+        and re.search(POLICY["patterns"]["acute_marker"], c)
+        for c in _clauses(joined)
+    )
     poison = re.search(POLICY["patterns"]["patterns_3"], q)
     # Negative educational statements must not suppress a second actual symptom.
     if urgent or poison:

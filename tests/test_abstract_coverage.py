@@ -62,7 +62,12 @@ def test_powershell_python_parity_and_idempotence(kind, envelope):
     @{{answer=$a;repeat=(Add-RequiredAnswerNotices $a $n);ids=@($n | ForEach-Object {{ $_.id }})}} | ConvertTo-Json -Compress
     """
     r = subprocess.run(
-        [shutil.which("pwsh") or "pwsh", "-NoProfile", "-Command", script],
+        [
+            shutil.which("pwsh") or pytest.skip("PowerShell (pwsh) is not installed"),
+            "-NoProfile",
+            "-Command",
+            script,
+        ],
         capture_output=True,
         text=True,
         encoding="utf-8",

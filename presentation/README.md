@@ -1,6 +1,6 @@
 # Presentation and demonstration
 
-Current source 0.14.0, policy 2026-11-22.14. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
+Current source 0.14.0, policy 2026-11-22.15. Policy .15 fixes safety-routing false positives found after evaluation (condition names such as seizures or postpartum depression were treated as emergencies); evaluation results describe .14. Evaluated locally with Databricks model calls and MLflow tracking; the same frozen source passed in a Databricks serverless notebook. The existing App remains .9. No App deployment, public release or official submission occurred.
 
 | Measure | Verified result | Interpretation |
 |---|---|---|

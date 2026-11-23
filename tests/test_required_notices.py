@@ -96,7 +96,12 @@ def test_powershell_and_python_clients_render_identical_fixed_contract(tools, bl
     @{{answer=$a;repeat=$b;ids=@($n | ForEach-Object {{ $_.id }})}} | ConvertTo-Json -Compress
     """
     run = subprocess.run(
-        [shutil.which("pwsh") or "pwsh", "-NoProfile", "-Command", script],
+        [
+            shutil.which("pwsh") or pytest.skip("PowerShell (pwsh) is not installed"),
+            "-NoProfile",
+            "-Command",
+            script,
+        ],
         capture_output=True,
         text=True,
         encoding="utf-8",

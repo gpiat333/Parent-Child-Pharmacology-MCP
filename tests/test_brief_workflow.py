@@ -129,7 +129,12 @@ def powershell(script):
     helper = Path(__file__).parents[1] / "chat-client/parent-chat-policy.ps1"
     command = ". '" + str(helper).replace("'", "''") + "'\n" + script
     result = subprocess.run(
-        [shutil.which("pwsh") or "pwsh", "-NoProfile", "-Command", command],
+        [
+            shutil.which("pwsh") or pytest.skip("PowerShell (pwsh) is not installed"),
+            "-NoProfile",
+            "-Command",
+            command,
+        ],
         capture_output=True,
         text=True,
         encoding="utf-8",
