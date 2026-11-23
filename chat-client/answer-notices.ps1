@@ -1,3 +1,5 @@
+. (Join-Path $PSScriptRoot 'portfolio-display.ps1')
+. (Join-Path $PSScriptRoot 'axis-display.ps1')
 $script:AnswerNoticePolicy = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'src/parent_child_pharmacology/core/output_notices.json') | ConvertFrom-Json
 
 function Get-AbstractCoverageNotice([object[]]$ToolCalls) {
@@ -64,11 +66,13 @@ function Get-RequiredAnswerNotices([string[]]$ToolNames, [switch]$Blocked, [obje
         }
     }
     Get-AbstractCoverageNotice $ToolCalls
+    Get-AxisDisplayNotice $ToolCalls
+    Get-PortfolioFilterNotice $ToolCalls
 }
 
 function Add-RequiredAnswerNotices([string]$Answer, $Notices) {
     $lines = @($Answer -split '\r?\n' | ForEach-Object { $_.Trim() })
-    $missing = @($Notices | Where-Object { $_.text -cnotin $lines } | ForEach-Object { $_.text })
+    $missing = @($Notices | Where-Object { if($_.text.Contains("`n")){ -not ("`n"+$Answer.Trim()+"`n").Contains("`n"+$_.text+"`n") } else { $_.text -cnotin $lines } } | ForEach-Object { $_.text })
     if ($missing.Count) { return $Answer.TrimEnd() + "`n`nApplication limits:`n" + ($missing -join "`n") }
     return $Answer
 }

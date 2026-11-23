@@ -64,13 +64,13 @@ if args.phase == "prepare":
     }
     design = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "version": "0.14.0",
-        "policy": "2026-11-22.17",
+        "version": "0.19.0",
+        "policy": "2026-11-22.19",
         "source_sha256": hashes,
         "model": os.environ["AGENT_MODEL"],
         "judge_model": os.getenv("JUDGE_MODEL", os.environ["AGENT_MODEL"]),
         "endpoint": os.environ["MCP_EVAL_ENDPOINT"],
-        "method": "Fresh single captures on 28 known cases and seven paired cases. Unchanged judge prompt with v3.1 validation that rejects footer-only negative findings; R08 criterion clarified to accept elapsed/past-listed deadlines without claiming verified portal closure. All questions and other criteria unchanged. Same-family diagnostic judgments, no clinician review. Fixed MPRINT benchmark questions/answers unchanged; v2 runner uses supported none reasoning, joined candidate metadata and bounded arithmetic. Local MCP; Databricks models/tracking. No deployment. Failed attempts retained; no answer selection by score.",
+        "method": "Fresh single captures on 28 known cases and seven paired cases. Unchanged judge prompt with v3.1 validation that rejects footer-only negative findings; R08 criterion clarified to accept elapsed/past-listed deadlines without claiming verified portal closure. All questions and other criteria unchanged. Same-family diagnostic judgments, no clinician review. Fixed MPRINT benchmark questions/answers unchanged; v5 runner uses supported none reasoning, joined candidate metadata, bounded arithmetic, deterministic metadata filtering and source-field binding; chat grounding instructions revised; deterministic three-axis inventory added; grading rubric unchanged from .14. Local MCP; Databricks models/tracking. No deployment. Failed attempts retained; no answer selection by score.",
     }
     (out / "run-design.json").write_text(json.dumps(design, indent=2), encoding="utf-8")
     print(out)

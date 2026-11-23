@@ -11,19 +11,34 @@ def required_notices(tool_names, blocked=False, tool_calls=()):
         return []
     names = set(tool_names)
     from .abstract_coverage import disclosure_notices
+    from .axis_display import axis_notices
+    from .portfolio_display import portfolio_notices
 
-    return [
-        {"id": n["id"], "text": n["text"], "origin": POLICY["origin"], "display_required": True}
-        for n in POLICY["notices"]
-        if names.intersection(n["tools"])
-    ] + disclosure_notices(tool_calls, POLICY["abstract_coverage"])
+    return (
+        [
+            {"id": n["id"], "text": n["text"], "origin": POLICY["origin"], "display_required": True}
+            for n in POLICY["notices"]
+            if names.intersection(n["tools"])
+        ]
+        + disclosure_notices(tool_calls, POLICY["abstract_coverage"])
+        + axis_notices(tool_calls)
+        + portfolio_notices(tool_calls, POLICY["portfolio_filters"])
+    )
 
 
 def format_required_notices(answer, tool_names, blocked=False, tool_calls=()):
     """Append missing fixed lines; leave evidence and source caveats untouched."""
     notices = required_notices(tool_names, blocked, tool_calls)
     lines = {line.strip() for line in answer.splitlines()}
-    missing = [n["text"] for n in notices if n["text"] not in lines]
+    missing = [
+        n["text"]
+        for n in notices
+        if (
+            ("\n" + n["text"] + "\n") not in ("\n" + answer.strip() + "\n")
+            if "\n" in n["text"]
+            else n["text"] not in lines
+        )
+    ]
     if missing:
         answer = answer.rstrip() + "\n\nApplication limits:\n" + "\n".join(missing)
     return answer, [n["id"] for n in notices]
