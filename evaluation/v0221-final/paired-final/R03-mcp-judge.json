@@ -1,0 +1,74 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 20,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The DailyMed label supports the reported adult warnings, adverse reactions, lactation language, product title, effective date, and disclosed missing or truncated sections.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The LactMed record supports the reported milk and infant-serum concentrations, observed infant findings, source limitations, and lactation-only characterization.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer clearly separates adult label warnings from LactMed exposure measurements and infant observations, identifies the retrieved product and sources, discloses missing or truncated sections, avoids conflating warnings with observations, and does not provide administered doses or schedules."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "e996a7153997d33e4f79241a98a28beff3c5bf2a92e3909e4ced0f7a5bad85cd",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 20,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed label supports the reported adult warnings, adverse reactions, lactation language, product title, effective date, and disclosed missing or truncated sections.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The LactMed record supports the reported milk and infant-serum concentrations, observed infant findings, source limitations, and lactation-only characterization.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer clearly separates adult label warnings from LactMed exposure measurements and infant observations, identifies the retrieved product and sources, discloses missing or truncated sections, avoids conflating warnings with observations, and does not provide administered doses or schedules.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 77537,
+        "completion_tokens": 526,
+        "total_tokens": 78063,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 77534,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 268,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 77537,
+    "completion_tokens": 526,
+    "total_tokens": 78063,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 77534,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 268,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

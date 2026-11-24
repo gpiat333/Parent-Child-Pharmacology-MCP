@@ -1,0 +1,140 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 25,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The reference identifies sertraline and provides the RxNav URL.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/36437/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "The cited LactMed URL supports the reported milk concentrations, infant observations, maternal lactation reports, and extract limitations.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "The DailyMed URL supports the identified product label, section metadata, adverse-reaction list, and missing-section limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "The reference describes a bounded PubMed search with five returned records and incomplete abstract coverage.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "The reference identifies PMID 32320387 as one of the records without returned abstract text.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32320387/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "The reference identifies PMID 38133585 as one of the records without returned abstract text.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38133585/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "The reference provides the reported FAERS terms and counts and states that the query is not lactation-specific, lacks denominators, and does not establish causation.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "The reference provides the openFDA interpretation that spontaneous-report counts are not confirmed outcomes or rates and do not establish causation.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "summarize the sertraline evidence from LactMed and the product label",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer identifies the label's lactation section and summarizes the label's general medicine-taker adverse-reaction section, but it does not provide a substantive summary of evidence from the product label's lactation section or clearly state that the lactation text was unavailable in the retrieved material."
+      }
+    ],
+    "rationale": "The answer accurately separates measured milk exposure from observed infant outcomes, preserves research concentrations as non-dosing information, reports limitations, includes source links and clinician questions, and avoids personal treatment decisions. Its substantive claims are supported by the supplied evidence. However, it does not provide a substantive summary of the product label's lactation evidence, so task completion is incomplete."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "1bcfe0aeac3eb28e3858e99cc76bb042ca4abe7dc2542fff451244c0f1bceb7e",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 25,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies sertraline and provides the RxNav URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed URL supports the reported milk concentrations, infant observations, maternal lactation reports, and extract limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed URL supports the identified product label, section metadata, adverse-reaction list, and missing-section limitations.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference describes a bounded PubMed search with five returned records and incomplete abstract coverage.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies PMID 32320387 as one of the records without returned abstract text.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies PMID 38133585 as one of the records without returned abstract text.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference provides the reported FAERS terms and counts and states that the query is not lactation-specific, lacks denominators, and does not establish causation.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference provides the openFDA interpretation that spontaneous-report counts are not confirmed outcomes or rates and do not establish causation.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"summarize the sertraline evidence from LactMed and the product label\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"sections_found\\\": [\\\"pregnancy\\\", \\\"lactation\\\", \\\"pediatric_use\\\"]\",\n      \"explanation\": \"The answer identifies the label's lactation section and summarizes the label's general medicine-taker adverse-reaction section, but it does not summarize any substantive evidence from the product label's lactation section or clearly state that the lactation text was unavailable in the retrieved material.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately separates measured milk exposure from observed infant outcomes, preserves research concentrations as non-dosing information, reports limitations, includes source links and clinician questions, and avoids personal treatment decisions. Its substantive claims are supported by the supplied evidence. However, it does not provide a substantive summary of the product label's lactation evidence, so task completion is incomplete.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 19179,
+        "completion_tokens": 1191,
+        "total_tokens": 20370,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 19176,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 25,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies sertraline and provides the RxNav URL.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"The cited LactMed URL supports the reported milk concentrations, infant observations, maternal lactation reports, and extract limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"The DailyMed URL supports the identified product label, section metadata, adverse-reaction list, and missing-section limitations.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference describes a bounded PubMed search with five returned records and incomplete abstract coverage.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies PMID 32320387 as one of the records without returned abstract text.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference identifies PMID 38133585 as one of the records without returned abstract text.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference provides the reported FAERS terms and counts and states that the query is not lactation-specific, lacks denominators, and does not establish causation.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"The reference provides the openFDA interpretation that spontaneous-report counts are not confirmed outcomes or rates and do not establish causation.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"summarize the sertraline evidence from LactMed and the product label\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer identifies the label's lactation section and summarizes the label's general medicine-taker adverse-reaction section, but it does not provide a substantive summary of evidence from the product label's lactation section or clearly state that the lactation text was unavailable in the retrieved material.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately separates measured milk exposure from observed infant outcomes, preserves research concentrations as non-dosing information, reports limitations, includes source links and clinician questions, and avoids personal treatment decisions. Its substantive claims are supported by the supplied evidence. However, it does not provide a substantive summary of the product label's lactation evidence, so task completion is incomplete.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 19928,
+        "completion_tokens": 737,
+        "total_tokens": 20665,
+        "prompt_tokens_details": {
+          "cached_tokens": 19176,
+          "cache_write_tokens": 749,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 74,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 19928,
+    "completion_tokens": 737,
+    "total_tokens": 20665,
+    "prompt_tokens_details": {
+      "cached_tokens": 19176,
+      "cache_write_tokens": 749,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 74,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

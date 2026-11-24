@@ -1,0 +1,135 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 24,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the identified DailyMed product, adult warning and adverse-reaction information, lactation statement, and disclosed label-extraction limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the reported infant observations, measured milk and infant-serum concentrations, source population limits, and bounded-record limitations.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the cited prospective study involving 111 infants and reported comparative infant outcomes.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16737874/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The label itself states that stopping or changing treatment should be discussed with the prescribing clinician",
+        "reference_quote": null,
+        "explanation": "The answer attributes clinician-discussion advice to the DailyMed label, but that attribution is not supported by the retrieved label passage. The clinician-discussion wording appears in the application continuity-of-care notice rather than as a statement identified in the label."
+      }
+    ],
+    "rationale": "The answer appropriately separates adult label warnings from LactMed infant observations, identifies the product and sources, discloses missing or truncated sections, and avoids administered doses. The remaining fidelity issue is the unsupported attribution of clinician-discussion advice to the product label."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "61e316df304218a296fc46ecf240a66a5692537d5e5565326454f9034cfbe480",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the identified DailyMed product, adult warning and adverse-reaction information, lactation statement, and disclosed label-extraction limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported infant observations, measured milk and infant-serum concentrations, source population limits, and bounded-record limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the cited prospective study involving 111 infants and reported comparative infant outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label itself states that stopping or changing treatment should be discussed with the prescribing clinician\",\n      \"reference_quote\": \"a decision should be made whether to discontinue nursing or to discontinue the drug, taking into account the importance of the drug to the mother.\",\n      \"explanation\": \"The answer attributes clinician-discussion advice to the DailyMed label, but the retrieved label passage discusses deciding whether to discontinue nursing or the drug and does not state that treatment changes should be discussed with a prescribing clinician. That clinician-discussion language comes from the application notice, not the cited label.\"\n    }\n  ],\n  \"rationale\": \"The answer separates adult label warnings from LactMed infant observations, identifies the retrieved product and LactMed record, reports measured concentrations without giving administered doses, and discloses missing or truncated sections. Its only material fidelity problem is misattributing the continuity-of-care advice to the product label.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 76533,
+        "completion_tokens": 854,
+        "total_tokens": 77387,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 76530,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 405,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the identified DailyMed product, adult warning and adverse-reaction information, lactation statement, and disclosed label-extraction limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported infant observations, measured milk and infant-serum concentrations, source population limits, and bounded-record limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the cited prospective study involving 111 infants and reported comparative infant outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label itself states that stopping or changing treatment should be discussed with the prescribing clinician\",\n      \"reference_quote\": \"Because the potential for hypoglycemia in nursing infants may exist, a decisionshould be made whether to discontinue nursing or to discontinue the drug, taking into account the importance of the drug to the mother.\",\n      \"explanation\": \"The answer attributes clinician-discussion advice to the DailyMed label, but the retrieved label passage discusses deciding whether to discontinue nursing or the drug and does not state that treatment changes should be discussed with a prescribing clinician. The clinician-discussion language appears in the application continuity-of-care notice, not in the cited label passage.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately separates adult label warnings from LactMed infant observations, identifies the product and sources, discloses missing or truncated sections, and avoids administered doses. The remaining fidelity error is the unsupported attribution of clinician-discussion advice to the product label.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 77052,
+        "completion_tokens": 634,
+        "total_tokens": 77686,
+        "prompt_tokens_details": {
+          "cached_tokens": 76530,
+          "cache_write_tokens": 519,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 173,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 24,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the identified DailyMed product, adult warning and adverse-reaction information, lactation statement, and disclosed label-extraction limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported infant observations, measured milk and infant-serum concentrations, source population limits, and bounded-record limitations.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the cited prospective study involving 111 infants and reported comparative infant outcomes.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The label itself states that stopping or changing treatment should be discussed with the prescribing clinician\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer attributes clinician-discussion advice to the DailyMed label, but that attribution is not supported by the retrieved label passage. The clinician-discussion wording appears in the application continuity-of-care notice rather than as a statement identified in the label.\"\n    }\n  ],\n  \"rationale\": \"The answer appropriately separates adult label warnings from LactMed infant observations, identifies the product and sources, discloses missing or truncated sections, and avoids administered doses. The remaining fidelity issue is the unsupported attribution of clinician-discussion advice to the product label.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 77583,
+        "completion_tokens": 533,
+        "total_tokens": 78116,
+        "prompt_tokens_details": {
+          "cached_tokens": 77049,
+          "cache_write_tokens": 531,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 127,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 3,
+  "usage": {
+    "prompt_tokens": 77583,
+    "completion_tokens": 533,
+    "total_tokens": 78116,
+    "prompt_tokens_details": {
+      "cached_tokens": 77049,
+      "cache_write_tokens": 531,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 127,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

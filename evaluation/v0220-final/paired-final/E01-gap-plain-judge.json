@@ -1,0 +1,131 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 6,
+    "contradicted_claims": 2,
+    "unverified_claims": 2,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "unverified",
+        "reason": "The supplied evidence does not verify the cited Utah registry webpage or the contact details given in the answer; the retrieved FDA directory instead lists a different website and telephone number.",
+        "url": "https://womenshealth.utah.edu/registries/qsleep"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The cited 2022 FDA label was not among the retrieved label sources, which supplied a current DailyMed label instead; the specific claims attributed to this citation are therefore not verifiable from the evidence pool.",
+        "url": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/214985s000lbl.pdf"
+      }
+    ],
+    "uncited_source_claims": 2,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Registry website:",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The answer gives registry contact information that conflicts with the FDA directory contact information retrieved in the evidence."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Telephone:",
+        "reference_quote": "Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611",
+        "explanation": "The telephone number in the answer is not the number supplied by the retrieved FDA directory."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The FDA label states that changing medication can carry risks",
+        "reference_quote": "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.",
+        "explanation": "The answer attributes a continuity-of-care notice to the FDA label, but the supplied evidence identifies that notice as an application-generated contract rather than source-authored label text."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Cite label and directory.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer cites a label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory as required."
+      }
+    ],
+    "rationale": "The answer correctly presents the three requested axes, keeps the rows visible, states the retrieved maternal PK gap, separates registry information from recommendations, and avoids administered doses. However, the registry contacts conflict with the retrieved FDA directory, the required directory citation is missing, and a continuity-of-care notice is incorrectly attributed to the FDA label."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "cfd38c8b44c03184c8e8cf2eb3556f6eddc26dc89587b2ff0958f0c335eab18e",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not verify the cited Utah registry webpage or the contact details given in the answer; the retrieved FDA directory instead lists a different website and telephone number.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited 2022 FDA label was not among the retrieved label sources, which supplied a current DailyMed label instead; the specific claims attributed to this citation are therefore not verifiable from the evidence pool.\"\n    }\n  ],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Registry website: https://womenshealth.utah.edu/registries/qsleep\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives registry contact information that conflicts with the FDA directory contact information retrieved in the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Telephone: 1-833-943-5746\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The telephone number in the answer is not the number supplied by the retrieved FDA directory.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label states that changing medication can carry risks\",\n      \"reference_quote\": \"Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.\",\n      \"explanation\": \"The answer attributes a continuity-of-care notice to the FDA label, but the supplied evidence identifies that notice as an application-generated contract rather than source-authored label text.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites a label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory as required.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly presents the three requested axes, keeps the rows visible, states the retrieved maternal PK gap, separates registry information from recommendations, and avoids administered doses. However, the registry contacts conflict with the retrieved FDA directory, the required directory citation is missing, and a system continuity notice is incorrectly attributed to the FDA label.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] answer_quote is not in CANDIDATE_ANSWER",
+        "failure_reasons[1] answer_quote is not in CANDIDATE_ANSWER"
+      ],
+      "usage": {
+        "prompt_tokens": 40156,
+        "completion_tokens": 847,
+        "total_tokens": 41003,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 40153,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 157,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 6,\n  \"contradicted_claims\": 2,\n  \"unverified_claims\": 2,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"unverified\",\n      \"reason\": \"The supplied evidence does not verify the cited Utah registry webpage or the contact details given in the answer; the retrieved FDA directory instead lists a different website and telephone number.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited 2022 FDA label was not among the retrieved label sources, which supplied a current DailyMed label instead; the specific claims attributed to this citation are therefore not verifiable from the evidence pool.\"\n    }\n  ],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Registry website:\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The answer gives registry contact information that conflicts with the FDA directory contact information retrieved in the evidence.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Telephone:\",\n      \"reference_quote\": \"Website: www.QuviviqPregnancyStudy.com Phone: 1-833-400-9611\",\n      \"explanation\": \"The telephone number in the answer is not the number supplied by the retrieved FDA directory.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The FDA label states that changing medication can carry risks\",\n      \"reference_quote\": \"Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.\",\n      \"explanation\": \"The answer attributes a continuity-of-care notice to the FDA label, but the supplied evidence identifies that notice as an application-generated contract rather than source-authored label text.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Cite label and directory.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer cites a label URL but does not cite the retrieved FDA pregnancy-exposure-registry directory as required.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly presents the three requested axes, keeps the rows visible, states the retrieved maternal PK gap, separates registry information from recommendations, and avoids administered doses. However, the registry contacts conflict with the retrieved FDA directory, the required directory citation is missing, and a continuity-of-care notice is incorrectly attributed to the FDA label.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 40936,
+        "completion_tokens": 755,
+        "total_tokens": 41691,
+        "prompt_tokens_details": {
+          "cached_tokens": 40153,
+          "cache_write_tokens": 780,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 89,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 40936,
+    "completion_tokens": 755,
+    "total_tokens": 41691,
+    "prompt_tokens_details": {
+      "cached_tokens": 40153,
+      "cache_write_tokens": 780,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 89,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

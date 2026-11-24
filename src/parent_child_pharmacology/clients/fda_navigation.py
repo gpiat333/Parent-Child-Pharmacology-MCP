@@ -185,6 +185,12 @@ async def recalls(drug, manufacturer="", lot="", max_results=10):
         "dataset_last_updated": data.get("meta", {}).get("last_updated"),
         "results": [recall_row(r, manufacturer, lot) for r in data.get("results", [])],
         "total_matches": data.get("meta", {}).get("results", {}).get("total"),
+        "verification_contacts": {
+            "named_in_this_result": ["the official FDA recall notice", "a pharmacist"],
+            "rule": "When saying whom to check with, name only these. The recalling firm appears in "
+            "each record to identify the product; this result does not name it, or any manufacturer, "
+            "as someone to contact.",
+        },
         "limitations": [
             "Candidate product-name matches only, not bottle-level clearance. Verify formulation, manufacturer, lot and expiration against the official notice.",
             "No match, a different lot, or a terminated recall does not prove your product safe. Lot ranges and all-lot notices require human interpretation.",

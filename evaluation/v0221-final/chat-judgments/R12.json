@@ -1,0 +1,72 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 28,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the queried FAERS age scope, returned reaction counts, query limitations, and the cited MCP retrieval.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Matches the returned openFDA source documenting FAERS reporting limitations and interpretation.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer reports retrieved counts and the actual queried age scope, clearly distinguishes reporting volume from incidence and causation, avoids generalizing the subset to all infants or exposed people, and cites the returned query. Its additional cautions about non-side-effect terms and bounded results are consistent with the retrieved MCP material."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "8cd90e09a78c30b34260a1337d19092ca4d2697d80a4e4fd5cc3968ff3f63345",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 28,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the queried FAERS age scope, returned reaction counts, query limitations, and the cited MCP retrieval.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Matches the returned openFDA source documenting FAERS reporting limitations and interpretation.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer reports retrieved counts and the actual queried age scope, clearly distinguishes reporting volume from incidence and causation, avoids generalizing the subset to all infants or exposed people, and cites the returned query. Its additional cautions about non-side-effect terms and bounded results are consistent with the retrieved MCP material.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 11049,
+        "completion_tokens": 547,
+        "total_tokens": 11596,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 11046,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 298,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 11049,
+    "completion_tokens": 547,
+    "total_tokens": 11596,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 11046,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 298,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

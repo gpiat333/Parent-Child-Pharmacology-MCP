@@ -1,0 +1,84 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 21,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the LactMed exposure, infant-outcome, lactation-effect, truncation, and evidence-limit claims attributed to the retrieved extract.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501191/"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the DailyMed product-label identity, product-selection limitation, missing-section limitation, and lactation title/code mismatch claims.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed search, five returned records, abstract-coverage limitation, and non-systematic-search claims.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22sertraline%22%5BMeSH+Terms%5D+OR+%22sertraline%22%5BSubstance+Name%5D+OR+%22sertraline%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the FAERS reporting terms and counts and the limitations concerning population scope, causation, incidence, and exposure denominators.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22sertraline%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer prepares clinician questions about sertraline during breastfeeding, preserves the three requested evidence axes, distinguishes exposure from outcomes and report-only data, discloses retrieval gaps and provenance, and avoids dosing or personal treatment decisions. Its substantive source claims are appropriately cited and consistent with the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "153f96ae8e2b43f66407e2a0fa92177cdb57d05d540940f8491ffa6fbef2058d",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 21,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the LactMed exposure, infant-outcome, lactation-effect, truncation, and evidence-limit claims attributed to the retrieved extract.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the DailyMed product-label identity, product-selection limitation, missing-section limitation, and lactation title/code mismatch claims.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed search, five returned records, abstract-coverage limitation, and non-systematic-search claims.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FAERS reporting terms and counts and the limitations concerning population scope, causation, incidence, and exposure denominators.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer prepares clinician questions about sertraline during breastfeeding, preserves the three requested evidence axes, distinguishes exposure from outcomes and report-only data, discloses retrieval gaps and provenance, and avoids dosing or personal treatment decisions. Its substantive source claims are appropriately cited and consistent with the supplied evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 17058,
+        "completion_tokens": 538,
+        "total_tokens": 17596,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 17055,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 177,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 17058,
+    "completion_tokens": 538,
+    "total_tokens": 17596,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 17055,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 177,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

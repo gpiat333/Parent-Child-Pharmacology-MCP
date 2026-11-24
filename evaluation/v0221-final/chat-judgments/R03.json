@@ -1,0 +1,128 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 18,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports verification of metformin as the reviewed ingredient.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/6809/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the selected DailyMed label's adult warnings, adverse reactions, interaction information, truncation, and missing extracted sections.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the LactMed infant observations, measured milk and infant-serum concentrations, and section-completeness limitations.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501020/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed search and the stated incomplete abstract coverage.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22metformin%22%5BMeSH+Terms%5D+OR+%22metformin%22%5BSubstance+Name%5D+OR+%22metformin%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the reported FAERS terms, query scope, and limitations concerning causation, denominators, and generalizability.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous-report counts are not confirmed outcomes or incidence estimates.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "name retrieved products and source limitations",
+        "answer_quote": null,
+        "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
+        "explanation": "The answer identifies metformin and refers to a selected DailyMed product label, but it does not explicitly name the retrieved product as METFORMIN HCL TABLET [QPHARMA, INC.]. It does disclose the relevant source limitations."
+      }
+    ],
+    "rationale": "The answer accurately separates adult label warnings, adverse reactions, and interactions from LactMed infant observations and exposure measurements. It avoids administered doses, distinguishes measured concentrations from dosing, reports missing or bounded evidence, and does not conflate warnings with infant outcomes. The main task omission is failure to explicitly name the retrieved DailyMed product."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "1638499d3b2cd27c5852461edf77a050d764c5e3c6339ea77831690e7e5ed096",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports verification of metformin as the reviewed ingredient.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected DailyMed label's adult warnings, adverse reactions, interaction information, truncation, and missing extracted sections.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the LactMed infant observations, measured milk and infant-serum concentrations, and section-completeness limitations.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed search and the stated incomplete abstract coverage.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS terms, query scope, and limitations concerning causation, denominators, and generalizability.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report counts are not confirmed outcomes or incidence estimates.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"\\\"title\\\": \\\"METFORMIN HCL TABLET [QPHARMA, INC.]\\\"\",\n      \"explanation\": \"The answer identifies metformin and refers to a selected DailyMed product label, but it does not explicitly name the retrieved product as METFORMIN HCL TABLET [QPHARMA, INC.]. It does disclose the relevant source limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately separates adult label warnings, adverse reactions, and interactions from LactMed infant observations and exposure measurements. It avoids administered doses, distinguishes measured concentrations from dosing, reports missing or bounded evidence, and does not conflate warnings with infant outcomes. The main task omission is failure to explicitly name the retrieved DailyMed product.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 20675,
+        "completion_tokens": 1121,
+        "total_tokens": 21796,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 20672,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 566,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 18,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports verification of metformin as the reviewed ingredient.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected DailyMed label's adult warnings, adverse reactions, interaction information, truncation, and missing extracted sections.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the LactMed infant observations, measured milk and infant-serum concentrations, and section-completeness limitations.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed search and the stated incomplete abstract coverage.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS terms, query scope, and limitations concerning causation, denominators, and generalizability.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report counts are not confirmed outcomes or incidence estimates.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"name retrieved products and source limitations\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer identifies metformin and refers to a selected DailyMed product label, but it does not explicitly name the retrieved product as METFORMIN HCL TABLET [QPHARMA, INC.]. It does disclose the relevant source limitations.\"\n    }\n  ],\n  \"rationale\": \"The answer accurately separates adult label warnings, adverse reactions, and interactions from LactMed infant observations and exposure measurements. It avoids administered doses, distinguishes measured concentrations from dosing, reports missing or bounded evidence, and does not conflate warnings with infant outcomes. The main task omission is failure to explicitly name the retrieved DailyMed product.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 21294,
+        "completion_tokens": 660,
+        "total_tokens": 21954,
+        "prompt_tokens_details": {
+          "cached_tokens": 20672,
+          "cache_write_tokens": 619,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 115,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 21294,
+    "completion_tokens": 660,
+    "total_tokens": 21954,
+    "prompt_tokens_details": {
+      "cached_tokens": 20672,
+      "cache_write_tokens": 619,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 115,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

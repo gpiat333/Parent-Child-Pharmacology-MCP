@@ -3,6 +3,11 @@
 import re
 
 CONTINUITY_NOTICE = "Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment."
+# Stated beside the notice itself: answers had credited this sentence to a product label.
+CONTINUITY_NOTICE_ORIGIN = (
+    "Written by this MCP server. It is not a statement from the label, LactMed or any other cited "
+    "source: never write that a source states or recommends it."
+)
 NO_EFFECT = re.compile(
     r"no (?:adverse |side |untoward )?effects|no adverse reactions|none.{0,30}(?:adverse|effects)|not.{0,35}(?:adversely affected|adverse effects)",
     re.I,

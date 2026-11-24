@@ -1,0 +1,141 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 26,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports the selected DailyMed label, Clinical Considerations PK statements, registry findings, animal findings, and stated evidence limitations.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=474fb321-575c-4b97-9dbe-080061652ee4"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the exact lamotrigine ingredient identity and product matching.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/28439/properties.json"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Supports the review-level statements about pregnancy-related antiseizure-medication levels, seizure management, and monitoring.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/32768086/"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the review context concerning epilepsy and pregnancy management.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35133310/"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the review-level distinction between epilepsy-associated outcomes and lamotrigine-specific findings.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37684052/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the 60-mother serum and breastmilk study, its follow-up, and the absence of lamotrigine-specific pregnancy concentration details in the retrieved passage.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36103361/"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Supports the reported FAERS terms and counts and their limited, non-causal interpretation.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22lamotrigine%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous-report data do not establish causation or incidence.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "Supports the bounded PubMed pregnancy search described in the answer.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "Supports the bounded PK-focused PubMed search described in the answer.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22lamotrigine%22%5BMeSH+Terms%5D+OR+%22lamotrigine%22%5BSubstance+Name%5D+OR+%22lamotrigine%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C11",
+        "status": "unverified",
+        "reason": "The cited FDA labeling-rule page is present in the source inventory, but the supplied evidence does not show that it supports the MCP source-review finding about a curated federal pregnancy counterpart.",
+        "url": "https://www.fda.gov/drugs/labeling/questions-and-answers-pregnancy-and-lactation-labeling-rule"
+      },
+      {
+        "citation_id": "C12",
+        "status": "unverified",
+        "reason": "The cited NLM/MotherToBaby page is present in the source inventory, but the supplied evidence does not establish the answer's claim about the MCP's source-review finding.",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK501922/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+        "answer_quote": null,
+        "reference_quote": "We investigated changes in concentrations of psychopharmacological medication during pregnancy and lactation in serum and breastmilk at different time points in a naturalistic sample of 60 mothers and observed the development of the exposed children in the first 12 months.",
+        "explanation": "The answer preserves the sample size, measurements, and follow-up but does not preserve the available design descriptor that this was a naturalistic sample."
+      }
+    ],
+    "rationale": "The brief accurately separates maternal effects, fetal or infant exposure, and fetal or infant outcomes; distinguishes label Clinical Considerations from individualized decisions; preserves important gaps; and avoids dose values and personal medication advice. Its main task deficiency is omission of the available naturalistic design description for the 60-mother study."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "42bfca48ddda7ef93e5a94fb05f8a9b8ef0b11df4a2f91f454d46a56a15cfb95",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 26,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the selected DailyMed label, Clinical Considerations PK statements, registry findings, animal findings, and stated evidence limitations.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the exact lamotrigine ingredient identity and product matching.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the review-level statements about pregnancy-related antiseizure-medication levels, seizure management, and monitoring.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the review context concerning epilepsy and pregnancy management.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the review-level distinction between epilepsy-associated outcomes and lamotrigine-specific findings.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the 60-mother serum and breastmilk study, its follow-up, and the absence of lamotrigine-specific pregnancy concentration details in the retrieved passage.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the reported FAERS terms and counts and their limited, non-causal interpretation.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report data do not establish causation or incidence.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PubMed pregnancy search described in the answer.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the bounded PK-focused PubMed search described in the answer.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited FDA labeling-rule page is present in the source inventory, but the supplied evidence does not show that it supports the MCP source-review finding about a curated federal pregnancy counterpart.\"\n    },\n    {\n      \"citation_id\": \"C12\",\n      \"status\": \"unverified\",\n      \"reason\": \"The cited NLM/MotherToBaby page is present in the source inventory, but the supplied evidence does not establish the answer's claim about the MCP's source-review finding.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"We investigated changes in concentrations of psychopharmacological medication during pregnancy and lactation in serum and breastmilk at different time points in a naturalistic sample of 60 mothers and observed the development of the exposed children in the first 12 months.\",\n      \"explanation\": \"The answer preserves the sample size, measurements, and follow-up but does not preserve the available design descriptor that this was a naturalistic sample.\"\n    }\n  ],\n  \"rationale\": \"The brief accurately separates maternal effects, fetal or infant exposure, and fetal or infant outcomes; distinguishes label Clinical Considerations from individualized decisions; preserves important gaps; and avoids dose values and personal medication advice. Its main task deficiency is omission of the available naturalistic design description for the 60-mother study.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 18623,
+        "completion_tokens": 1753,
+        "total_tokens": 20376,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 18620,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 895,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 18623,
+    "completion_tokens": 1753,
+    "total_tokens": 20376,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 18620,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 895,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

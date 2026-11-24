@@ -1,0 +1,63 @@
+## Metformin: adult label warnings compared with breastfed-infant findings
+
+**Source identity:** Metformin was verified as the ingredient reviewed. [S30](https://rxnav.nlm.nih.gov/REST/rxcui/6809/properties.json)
+
+### Adult taking metformin: what the selected label says
+
+The selected DailyMed product label states that **lactic acidosis** is a rare but serious complication associated with metformin accumulation. Its warning discusses increased risk in the context of renal dysfunction, hypoperfusion or hypoxemia, unstable or acute heart failure, older age, hepatic disease, dehydration, sepsis, excessive alcohol intake, surgery, and intravascular radiocontrast studies. These are warnings about the person taking the medicine; they are not reported infant outcomes. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551)
+
+The label’s adult adverse-reaction section reports gastrointestinal reactions, including diarrhea, nausea/vomiting, flatulence, indigestion, and abdominal discomfort, as well as other reported reactions. The retrieved label text does not establish that these adult reactions occurred in breastfed infants. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551)
+
+### Breastfed infants: what LactMed reports
+
+LactMed reports the following observations in specific lactation populations:
+
+- Seven infants aged **5–25 months** were described as healthy, with growth and development progressing as expected; two had normal Denver developmental screening tests.
+- Three infants aged **2, 5, and 14 months** were reported to have no detectable adverse effects in the cited passage.
+- In three infants aged **10–11 days postpartum**, none had low blood glucose levels.
+- In a reported comparison involving **61 predominantly breastfed and 50 formula-fed infants**, no differences at 3 or 6 months were reported in height, weight, motor-social development, or rates of illness between the groups.
+
+These are observations from the cited LactMed passages in those specific populations. They do not test every adult label warning, and they do not establish outcomes for all breastfed infants. [S32](https://www.ncbi.nlm.nih.gov/books/NBK501020/)
+
+### Measured exposure
+
+LactMed reported these **milk concentrations** in different maternal sampling contexts:
+
+- **270 mcg/L**: average milk level in one group, with levels varying little over 24 hours.
+- **380 mcg/L**: an approximately 4–5-hour post-dose milk measurement in one woman.
+- **130–270 mcg/L**: average milk levels reported in another group.
+- **410 mcg/L**: estimated average milk level in a postpartum sampling study.
+
+Infant-level information was also retrieved: LactMed reports that **serum levels** were measured in four breastfed infants; two measurements were undetectable below the reported threshold, and two were **50 and 80 mcg/L**. In another report, metformin was undetectable in the **serum** of two infants. Infant ages, extent of nursing, sampling details, and other context were not uniformly stated. These are measured exposure findings, not administered doses or treatment instructions. [S32](https://www.ncbi.nlm.nih.gov/books/NBK501020/)
+
+### Comparison
+
+| Adult label | Breastfed-infant evidence |
+|---|---|
+| Warns about lactic acidosis and lists adult risk contexts such as renal dysfunction, hypoperfusion or hypoxemia, hepatic disease, dehydration, sepsis, and certain procedures or exposures. | The retrieved LactMed passages report the infant observations above; they do not report lactic acidosis as an observed infant outcome. The extract does not establish whether that outcome was assessed in all cited infants. |
+| Reports adult gastrointestinal adverse reactions and other adult adverse reactions. | The cited infant passages report the specific growth, development, illness, glucose, and adverse-effect observations listed above. They do not establish that the adult gastrointestinal reactions occurred in those infants. |
+| Describes adult drug-interaction information. | The retrieved LactMed passages do not establish corresponding interaction outcomes in breastfed infants. |
+
+### Missing and bounded sections
+
+- The DailyMed extraction returned the adult **Warnings**, **Adverse Reactions**, and **Drug Interactions** sections, but **Warnings and Precautions** and **Boxed Warning** were missing in the extracted adult medicine-taker sections. The Warnings text was also truncated. Missing sections are extraction limitations, not evidence that the information is absent from the full label. [S7](https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=06ade2e1-5981-4e3d-b7e9-7ff083eb4551)
+- LactMed returned its expected sections—Summary of Use during Lactation, Drug Levels, Effects in Breastfed Infants, and Effects on Lactation and Breastmilk—with no section marked truncated. However, the study count was **not established in the exported extract**, and the record remains a bounded extract rather than a complete literature review. [S32](https://www.ncbi.nlm.nih.gov/books/NBK501020/)
+- The retrieved PubMed search was bounded, not systematic. Abstract text was returned for **4 of 5** requested records; no abstract text was returned for **PMID 38197154**. No outcome finding from that record is used here. [S8](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22metformin%22%5BMeSH+Terms%5D+OR+%22metformin%22%5BSubstance+Name%5D+OR+%22metformin%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Lactation%22%5BMeSH+Terms%5D+OR+%22Breast+Feeding%22%5BMeSH+Terms%5D+OR+%22Milk%2C+Human%22%5BMeSH+Terms%5D+OR+lactat%2A%5BTitle%2FAbstract%5D+OR+breastfeed%2A%5BTitle%2FAbstract%5D+OR+breastfed%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json)
+- FAERS is separate from the LactMed clinical findings. The returned metformin query covered reports matching the query, not a confirmed lactation or infant cohort. Reported terms included nausea, diarrhea, vomiting, lactic acidosis, and acute kidney injury, among others; the returned counts are reporting volume, not rates or confirmed outcomes, and the source states that causation and incidence cannot be established. The results cannot be generalized to all infants or all exposed people. [S1](https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22metformin%22&count=patient.reaction.reactionmeddrapt.exact&limit=8) [S14](https://open.fda.gov/apis/drug/event/)
+
+The MCP server’s continuity-of-care notice states that stopping or changing a medication can also carry risks and should be discussed with the prescribing clinician; this is MCP-generated guidance, not a statement from the label or LactMed.
+
+Application limits:
+These FAERS results cover only the queried report subset. They cannot be generalized to all infants or all people exposed to the medicine, and cannot establish incidence or causation.
+Human clinical framing review remains required. This generated answer is not clinically validated.
+Stopping or changing a medication can also carry risks. Discuss changes with the prescribing clinician. This tool cannot advise starting, stopping, or changing treatment.
+PubMed abstract coverage: abstract text was retrieved for 4 of 5 requested PMIDs. No abstract text was returned for PMID(s): 38197154. Missing abstract text is a retrieval limitation, not evidence that a study or research does not exist. Titles alone are not outcome evidence.
+Structured evidence rows (retrieval inventory)
+| Evidence axis | Extracted findings | Context-only passages | Gap statements |
+|---|---|---:|---:|
+| Effect on the pregnant or lactating person | 12 extracted candidate passages; source interpretation requires review. | 0 | 0 |
+| Measured transfer or exposure to fetus or infant | 20 extracted candidate passages; source interpretation requires review. | 0 | 0 |
+| Observed outcomes in fetus or infant | 6 extracted candidate passages; source interpretation requires review. | 0 | 0 |
+These are counts of extracted passages, not studies or proven effects. Context-only passages and gap statements are counted separately. Empty rows do not establish absence of evidence elsewhere or safety. This inventory does not replace the cited findings or validate applicability.
+
+Informational only; not medical advice. Compiled from public NIH/NLM/FDA data, which may be incomplete or out of date. Patients should talk to a clinician, pharmacist or poison control before starting, stopping or changing any medication.

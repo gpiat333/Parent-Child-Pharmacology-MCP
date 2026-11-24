@@ -1,0 +1,117 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 3,
+    "contradicted_claims": 0,
+    "unverified_claims": 2,
+    "citations": [],
+    "uncited_source_claims": 2,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "FDA recall candidates, statuses, lot information, and official links were returned in the supplied evidence, but the answer provided none of them."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer abstained from reporting the completed bounded search, so it did not provide the requested lookup result."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "A pharmacist, manufacturer, or FDA recall contact should confirm the lot",
+        "reference_quote": null,
+        "explanation": "The recommendation to use a manufacturer or FDA recall contact is not supported by the supplied evidence, which identifies the official recall notice and a pharmacist as the named verification routes."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "whether the bottle came through an affected distributor or pharmacy supply chain",
+        "reference_quote": null,
+        "explanation": "Supply-chain verification is an additional plausible consideration, but it is not established by the supplied FDA recall evidence."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and identifies several relevant product-identity fields, but it fails to report the returned FDA candidates, statuses, reasons, dates, and official links. Its abstention is honest because the answer states it cannot access the records, yet the lookup was available in the supplied evidence."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "8ab6be1d081af570aa19b20f21f28f5f534c4b1d96a8a67401e29a38cdf6975e",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 3,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 2,\n  \"citations\": [],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"FDA recall candidates, statuses, lot information, and official links were returned in the supplied evidence, but the answer provided none of them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": \"I therefore cannot determine whether **NOTREAL-77** appears in the FDA records.\",\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstained from reporting the completed bounded search, so it did not provide the requested lookup result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"A pharmacist, manufacturer, or FDA recall contact should confirm the lot\",\n      \"reference_quote\": null,\n      \"explanation\": \"The recommendation to use a manufacturer or FDA recall contact is not supported by the supplied evidence, which identifies the official recall notice and a pharmacist as the named verification routes.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"whether the bottle came through an affected distributor or pharmacy supply chain\",\n      \"reference_quote\": null,\n      \"explanation\": \"Supply-chain verification is an additional plausible consideration, but it is not established by the supplied FDA recall evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies several relevant product-identity fields, but it fails to report the returned FDA candidates, statuses, reasons, dates, and official links. Its abstention is honest because the answer states it cannot access the records, yet the lookup was available in the supplied evidence.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 16694,
+        "completion_tokens": 1031,
+        "total_tokens": 17725,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16691,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 512,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 3,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 2,\n  \"citations\": [],\n  \"uncited_source_claims\": 2,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"FDA recall candidates, statuses, lot information, and official links were returned in the supplied evidence, but the answer provided none of them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstained from reporting the completed bounded search, so it did not provide the requested lookup result.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"A pharmacist, manufacturer, or FDA recall contact should confirm the lot\",\n      \"reference_quote\": null,\n      \"explanation\": \"The recommendation to use a manufacturer or FDA recall contact is not supported by the supplied evidence, which identifies the official recall notice and a pharmacist as the named verification routes.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"whether the bottle came through an affected distributor or pharmacy supply chain\",\n      \"reference_quote\": null,\n      \"explanation\": \"Supply-chain verification is an additional plausible consideration, but it is not established by the supplied FDA recall evidence.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies several relevant product-identity fields, but it fails to report the returned FDA candidates, statuses, reasons, dates, and official links. Its abstention is honest because the answer states it cannot access the records, yet the lookup was available in the supplied evidence.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 17279,
+        "completion_tokens": 669,
+        "total_tokens": 17948,
+        "prompt_tokens_details": {
+          "cached_tokens": 16691,
+          "cache_write_tokens": 585,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 166,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 17279,
+    "completion_tokens": 669,
+    "total_tokens": 17948,
+    "prompt_tokens_details": {
+      "cached_tokens": 16691,
+      "cache_write_tokens": 585,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 166,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

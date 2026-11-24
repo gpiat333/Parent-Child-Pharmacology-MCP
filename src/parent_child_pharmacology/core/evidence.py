@@ -161,7 +161,9 @@ def content_flags(out):
 SOURCE_ATTRIBUTION_RULE = (
     "Report a source's warnings and recommendations as that source's statements (\"The label states "
     'that..."), never in your own voice as an instruction to the reader. When saying whom to check with, '
-    "name only the contacts the results name."
+    "name only the contacts the results name. Notices written by this MCP server (continuity of care, "
+    "coverage and population notices) are not source statements: never introduce one with "
+    '"the label states" or "LactMed says".'
 )
 
 
@@ -169,6 +171,7 @@ def annotate(out, requested_population=None):
     out = dict(out)
     from .source_context import (
         CONTINUITY_NOTICE,
+        CONTINUITY_NOTICE_ORIGIN,
         item_population,
         population_context,
     )
@@ -214,6 +217,7 @@ def annotate(out, requested_population=None):
         }
     if out.get("allow_research") is not False and not out.get("requires_confirmation"):
         out["continuity_of_care_notice"] = CONTINUITY_NOTICE
+        out["continuity_of_care_notice_origin"] = CONTINUITY_NOTICE_ORIGIN
         out["framing_contract"] = {
             "preserve_source_balance_context": True,
             "clinical_framing_review_performed": False,

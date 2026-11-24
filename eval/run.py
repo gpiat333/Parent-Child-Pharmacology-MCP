@@ -64,8 +64,14 @@ if args.phase == "prepare":
     }
     design = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "version": "0.19.0",
-        "policy": "2026-11-23.27",
+        # Read from the source being frozen, so the record cannot drift from the code.
+        "version": (ROOT / "src/parent_child_pharmacology/__init__.py")
+        .read_text(encoding="utf-8")
+        .split('__version__ = "')[1]
+        .split('"')[0],
+        "policy": json.loads(
+            (ROOT / "src/parent_child_pharmacology/core/policy.json").read_text(encoding="utf-8")
+        )["version"],
         "source_sha256": hashes,
         "model": os.environ["AGENT_MODEL"],
         "judge_model": os.getenv("JUDGE_MODEL", os.environ["AGENT_MODEL"]),

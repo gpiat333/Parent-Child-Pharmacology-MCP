@@ -1,0 +1,138 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 22,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "Supports exact resolution of the ingredient as daridorexant.",
+        "url": "https://rxnav.nlm.nih.gov/REST/rxcui/2591497/properties.json"
+      },
+      {
+        "citation_id": "C2",
+        "status": "supported",
+        "reason": "Supports the label pregnancy coverage statement and animal-versus-human distinction.",
+        "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=3a2d1503-b816-40c9-9fac-7e03c5a3bcef"
+      },
+      {
+        "citation_id": "C3",
+        "status": "supported",
+        "reason": "Matches the retrieved pregnancy-focused maternal pharmacokinetics query.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29+AND+%28%22Pharmacokinetics%22%5BMeSH+Terms%5D+OR+%22Drug+Elimination+Routes%22%5BMeSH+Terms%5D+OR+pharmacokinetic%2A%5BTitle%2FAbstract%5D+OR+clearance%5BTitle%2FAbstract%5D+OR+%22area+under+the+curve%22%5BTitle%2FAbstract%5D+OR+%22dose+adjustment%22%5BTitle%2FAbstract%5D%29&retmax=3&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C4",
+        "status": "supported",
+        "reason": "Supports the listed FAERS report terms and counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22daridorexant%22+AND+patient.reaction.reactionmeddrapt%3A%22foetal+exposure+during+pregnancy%22&count=patient.reaction.reactionmeddrapt.exact&limit=8"
+      },
+      {
+        "citation_id": "C5",
+        "status": "supported",
+        "reason": "Supports the interpretation that spontaneous-report counts do not establish causation, incidence, or generalizability.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      },
+      {
+        "citation_id": "C6",
+        "status": "supported",
+        "reason": "Supports the pregnancy-focused PubMed search and its retrieved-record count.",
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28%28%22daridorexant%22%5BMeSH+Terms%5D+OR+%22daridorexant%22%5BSubstance+Name%5D+OR+%22daridorexant%22%5BTitle%2FAbstract%5D%29%29+AND+%28%22Pregnancy%22%5BMeSH+Terms%5D+OR+pregnan%2A%5BTitle%2FAbstract%5D+OR+gestation%2A%5BTitle%2FAbstract%5D%29&retmax=5&sort=relevance&retmode=json"
+      },
+      {
+        "citation_id": "C7",
+        "status": "supported",
+        "reason": "Is one of the retrieved PubMed records included in the abstract-coverage inventory.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35802843/"
+      },
+      {
+        "citation_id": "C8",
+        "status": "supported",
+        "reason": "Is one of the retrieved PubMed records included in the abstract-coverage inventory.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630579/"
+      },
+      {
+        "citation_id": "C9",
+        "status": "supported",
+        "reason": "Is one of the retrieved PubMed records included in the abstract-coverage inventory.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36630580/"
+      },
+      {
+        "citation_id": "C10",
+        "status": "supported",
+        "reason": "Supports the registry website contact.",
+        "url": "https://www.QuviviqPregnancyStudy.com"
+      },
+      {
+        "citation_id": "C11",
+        "status": "supported",
+        "reason": "Supports the FDA directory listing, ongoing status, and directory limitations.",
+        "url": "https://www.fda.gov/consumers/pregnancy-exposure-registries/list-pregnancy-exposure-registries"
+      },
+      {
+        "citation_id": "C12",
+        "status": "supported",
+        "reason": "Supports the screened ClinicalTrials.gov query returning no recruiting records.",
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.term=daridorexant+AND+%28pregnancy%29&filter.overallStatus=RECRUITING&pageSize=20&format=json"
+      },
+      {
+        "citation_id": "C13",
+        "status": "supported",
+        "reason": "Supports the ACTIVE_NOT_RECRUITING status of NCT06393504.",
+        "url": "https://clinicaltrials.gov/study/NCT06393504"
+      }
+    ],
+    "uncited_source_claims": 1,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer presents all three requested evidence axes with empty rows, preserves human, animal, and report-only distinctions, states the maternal PK gap within the retrieved scope, discloses absent abstracts, separates FDA registry contacts from evidence and recommendations, cites the label and FDA directory, and provides no doses or medication decisions. One exposure-measurement absence claim is not directly cited in its table row, but it is consistent with the retrieved evidence and does not undermine task completion."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "6039c3020d36d0606b67221c6872fa8d60eaa1ac424a904af1828e7cbab4132c",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 22,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports exact resolution of the ingredient as daridorexant.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the label pregnancy coverage statement and animal-versus-human distinction.\"\n    },\n    {\n      \"citation_id\": \"C3\",\n      \"status\": \"supported\",\n      \"reason\": \"Matches the retrieved pregnancy-focused maternal pharmacokinetics query.\"\n    },\n    {\n      \"citation_id\": \"C4\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the listed FAERS report terms and counts.\"\n    },\n    {\n      \"citation_id\": \"C5\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the interpretation that spontaneous-report counts do not establish causation, incidence, or generalizability.\"\n    },\n    {\n      \"citation_id\": \"C6\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the pregnancy-focused PubMed search and its retrieved-record count.\"\n    },\n    {\n      \"citation_id\": \"C7\",\n      \"status\": \"supported\",\n      \"reason\": \"Is one of the retrieved PubMed records included in the abstract-coverage inventory.\"\n    },\n    {\n      \"citation_id\": \"C8\",\n      \"status\": \"supported\",\n      \"reason\": \"Is one of the retrieved PubMed records included in the abstract-coverage inventory.\"\n    },\n    {\n      \"citation_id\": \"C9\",\n      \"status\": \"supported\",\n      \"reason\": \"Is one of the retrieved PubMed records included in the abstract-coverage inventory.\"\n    },\n    {\n      \"citation_id\": \"C10\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the registry website contact.\"\n    },\n    {\n      \"citation_id\": \"C11\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the FDA directory listing, ongoing status, and directory limitations.\"\n    },\n    {\n      \"citation_id\": \"C12\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the screened ClinicalTrials.gov query returning no recruiting records.\"\n    },\n    {\n      \"citation_id\": \"C13\",\n      \"status\": \"supported\",\n      \"reason\": \"Supports the ACTIVE_NOT_RECRUITING status of NCT06393504.\"\n    }\n  ],\n  \"uncited_source_claims\": 1,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer presents all three requested evidence axes with empty rows, preserves human, animal, and report-only distinctions, states the maternal PK gap within the retrieved scope, discloses absent abstracts, separates FDA registry contacts from evidence and recommendations, cites the label and FDA directory, and provides no doses or medication decisions. One exposure-measurement absence claim is not directly cited in its table row, but it is consistent with the retrieved evidence and does not undermine task completion.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 14742,
+        "completion_tokens": 1150,
+        "total_tokens": 15892,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 14739,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 452,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 14742,
+    "completion_tokens": 1150,
+    "total_tokens": 15892,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 14739,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 452,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

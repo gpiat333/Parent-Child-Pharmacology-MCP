@@ -1,0 +1,101 @@
+{
+  "judgment": {
+    "fidelity_status": "not_assessable",
+    "supported_claims": 0,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Summarize only the returned notice titles or excerpts, link to them",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer abstains and does not provide the returned FDA notice title, excerpt, date, or link."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Disclose title-only or incomplete index evidence.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "Although the answer states that full notice text was not retrieved, it does not explain that the available evidence was title-only from a bounded current-index search."
+      }
+    ],
+    "rationale": "The response is an honest abstention rather than a medical-source claim, so fidelity is not assessable. It nevertheless fails to supply the returned notice title and official link requested."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "9c896e79c4986409c482257db623f34c914edddf4385139a9aee6ab0412e35fc",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"not_assessable\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstains and does not provide the returned FDA notice title, excerpt, date, or link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Disclose title-only or incomplete index evidence.\",\n      \"answer_quote\": \"Full notice text was not retrieved.\",\n      \"reference_quote\": null,\n      \"explanation\": \"It discloses that full text was not retrieved but does not explain that the available result was title-only evidence from a bounded current-index search.\"\n    }\n  ],\n  \"rationale\": \"The response is an honest abstention rather than a medical-source claim, so fidelity is not assessable. It nevertheless fails to supply the returned notice title and official link requested.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 7730,
+        "completion_tokens": 602,
+        "total_tokens": 8332,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7727,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 288,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"not_assessable\",\n  \"supported_claims\": 0,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Summarize only the returned notice titles or excerpts, link to them\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer abstains and does not provide the returned FDA notice title, excerpt, date, or link.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Disclose title-only or incomplete index evidence.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Although the answer states that full notice text was not retrieved, it does not explain that the available evidence was title-only from a bounded current-index search.\"\n    }\n  ],\n  \"rationale\": \"The response is an honest abstention rather than a medical-source claim, so fidelity is not assessable. It nevertheless fails to supply the returned notice title and official link requested.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 8110,
+        "completion_tokens": 373,
+        "total_tokens": 8483,
+        "prompt_tokens_details": {
+          "cached_tokens": 7727,
+          "cache_write_tokens": 380,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 64,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 8110,
+    "completion_tokens": 373,
+    "total_tokens": 8483,
+    "prompt_tokens_details": {
+      "cached_tokens": 7727,
+      "cache_write_tokens": 380,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 64,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

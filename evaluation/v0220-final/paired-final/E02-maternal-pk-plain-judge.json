@@ -1,0 +1,110 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 5,
+    "contradicted_claims": 0,
+    "unverified_claims": 8,
+    "citations": [],
+    "uncited_source_claims": 5,
+    "task_fulfilled": false,
+    "honest_abstention": false,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer expressly says it could not perform a live lookup and does not identify or link the retrieved Clinical Considerations passages or literature records, their populations, or study designs."
+      },
+      {
+        "dimension": "task",
+        "kind": "content",
+        "requirement_quote": "Link PK claims to source label/abstracts and preserve study population and design.",
+        "answer_quote": "Pregnancy has been associated with increased lamotrigine clearance and lower concentration exposure in pharmacokinetic studies.",
+        "reference_quote": "There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.",
+        "explanation": "The answer gives an uncited PK assertion but does not link it to the DailyMed Clinical Considerations source or the retrieved literature, and it omits the actual source population and design."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Three axes and explicit gaps.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "Although three headings are present, the answer does not accurately populate the fetal-exposure and fetal-outcome axes from the retrieved evidence and instead treats available evidence as unverified."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Lamotrigine crosses the placenta; published studies have measured drug in cord blood or related maternal–cord samples.",
+        "reference_quote": null,
+        "explanation": "Placental transfer and cord-blood measurement are not supported by the supplied evidence pool. The retrieved fetal-exposure passages concern breastmilk ratios and animal fetal folate findings, not human placental-transfer measurements."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "The available evidence generally concerns drug concentrations, seizure control, or pharmacokinetic parameters.",
+        "reference_quote": "Physiologic changes during pregnancy affect ASM levels and in turn, risk for seizures, necessitating frequent monitoring of ASM serum concentrations.",
+        "explanation": "The general PK and seizure-monitoring portion is partly supported, but the answer presents it without source attribution and broadens it to pharmacokinetic parameters not specifically established in the cited extract."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "Neonatal adaptation or withdrawal-type findings may be reported in individual studies or product information",
+        "reference_quote": null,
+        "explanation": "No supplied reference passage supports neonatal adaptation or withdrawal-type findings for lamotrigine in this evidence pool."
+      }
+    ],
+    "rationale": "The response avoids dose numbers and personal medication instructions and uses the requested three broad topics, but it does not fulfill the required source-linked retrieval brief. It omits the available label PK finding, does not report the retrieved study population/design, fails to present the available registry outcome estimates and their limitations, and adds unsupported placental-transfer and neonatal claims."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "f36764b7d3811daa10e00fad2e1b3de3b054e5bf19c6cbf1c4e60052b124b349",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 5,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 8,\n  \"citations\": [],\n  \"uncited_source_claims\": 5,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Describe the maternal pharmacokinetic evidence retrieved from Clinical Considerations and literature\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer expressly says it could not perform a live lookup and does not identify or link the retrieved Clinical Considerations passages or literature records, their populations, or study designs.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"content\",\n      \"requirement_quote\": \"Link PK claims to source label/abstracts and preserve study population and design.\",\n      \"answer_quote\": \"Pregnancy has been associated with increased lamotrigine clearance and lower concentration exposure in pharmacokinetic studies.\",\n      \"reference_quote\": \"There have been reports of decreased lamotrigine concentrations during pregnancy and restoration of pre-pregnancy concentrations after delivery.\",\n      \"explanation\": \"The answer gives an uncited PK assertion but does not link it to the DailyMed Clinical Considerations source or the retrieved literature, and it omits the actual source population and design.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Three axes and explicit gaps.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"Although three headings are present, the answer does not accurately populate the fetal-exposure and fetal-outcome axes from the retrieved evidence and instead treats available evidence as unverified.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Lamotrigine crosses the placenta; published studies have measured drug in cord blood or related maternal–cord samples.\",\n      \"reference_quote\": null,\n      \"explanation\": \"Placental transfer and cord-blood measurement are not supported by the supplied evidence pool. The retrieved fetal-exposure passages concern breastmilk ratios and animal fetal folate findings, not human placental-transfer measurements.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"The available evidence generally concerns drug concentrations, seizure control, or pharmacokinetic parameters.\",\n      \"reference_quote\": \"Physiologic changes during pregnancy affect ASM levels and in turn, risk for seizures, necessitating frequent monitoring of ASM serum concentrations.\",\n      \"explanation\": \"The general PK and seizure-monitoring portion is partly supported, but the answer presents it without source attribution and broadens it to pharmacokinetic parameters not specifically established in the cited extract.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"Neonatal adaptation or withdrawal-type findings may be reported in individual studies or product information\",\n      \"reference_quote\": null,\n      \"explanation\": \"No supplied reference passage supports neonatal adaptation or withdrawal-type findings for lamotrigine in this evidence pool.\"\n    }\n  ],\n  \"rationale\": \"The response avoids dose numbers and personal medication instructions and uses the requested three broad topics, but it does not fulfill the required source-linked retrieval brief. It omits the available label PK finding, does not report the retrieved study population/design, fails to present the available registry outcome estimates and their limitations, and adds unsupported placental-transfer and neonatal claims.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 67317,
+        "completion_tokens": 992,
+        "total_tokens": 68309,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 67314,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 176,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 67317,
+    "completion_tokens": 992,
+    "total_tokens": 68309,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 67314,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 176,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

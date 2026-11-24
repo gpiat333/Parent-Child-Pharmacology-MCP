@@ -9,7 +9,7 @@
 | Databricks test notebook | Runs the revised application tests in an isolated job environment | Uploading a test bundle and running a notebook does not install it into the App |
 | Databricks model gateway | Supplies model calls for evaluations using the existing model configuration | This work does not create or redeploy a model endpoint |
 | Databricks MLflow | Stores runs, scores, traces and reviewed artifacts | Logging an experiment does not serve the MCP or change its App deployment |
-| Databricks App `mcp-mc` | **Policy .27**, deployment `01f1e77b7f631005b51803936dbda628` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-policy27` | Redeploy from a new staged folder; the previous .9 deployment (`01f1e5f7f6fc162fb8c3cc875e7f8546`) stays available for rollback |
+| Databricks App `mcp-mc` | **Version 0.22.0, policy .28**, deployment `01f1e79696a9180baea31889672e81f2` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-v0220` | Redeploy from a new staged folder; the .27 deployment (`01f1e77b7f631005b51803936dbda628`, `mcp-mc-policy27`) stays available for rollback |
 | Companion chat client | Revised local client scripts and output contracts | Any hosted client must be updated too; the server cannot force an arbitrary client to enforce its safety/display contracts |
 
 ## What a future hosted release would involve
@@ -51,3 +51,26 @@ These are smoke checks, not a hosted re-run of the model-graded evaluation; the 
 ## November 23, 2026 redeployment (policy .27)
 
 Hands-on testing in Claude found that “What does LactMed say about sertraline and breastfeeding? Link the studies.” was blocked as non-English. Policy .27 fixes the language check and adds a landing page at `/`. Redeployed as `01f1e77b7f631005b51803936dbda628` from `/Workspace/Users/<owner>/apps/mcp-mc-policy27`; the .26 folder remains for rollback. Checks on the hosted app: `/version` 2026-11-23.27; `/` shows the landing page; the LactMed question, “List FDA recalls for naproxen.” and “Thanks! Now do the same for escitalopram.” route to evidence; a Spanish question still stops with the Spanish message.
+
+## November 23, 2026 redeployment (0.22.0, policy .28)
+
+The 21-tool version was deployed after its tests passed in a Databricks serverless notebook: 1,048 tests, no failures, errors or skips (run 836082121861576; [receipt](../evaluation/databricks-validation-2026-11-23-v0220/databricks-job-output.json)). Source commit `e7e7dff` was staged to `/Workspace/Users/<owner>/apps/mcp-mc-v0220` (`src/`, `main.py`, `requirements.txt`, `server/requirements.lock`, `app.yaml`) and deployed as `01f1e79696a9180baea31889672e81f2`. Access control is unchanged (`MCP_AUTH_MODE=databricks_apps`).
+
+| Check on the hosted app | Result |
+|---|---|
+| `/version` | 0.22.0, policy 2026-11-23.28 |
+| `/health`, landing page | healthy; 200 |
+| Request without workspace sign-in | Redirected to Databricks login (HTTP 302) |
+| MCP `initialize`, `tools/list`, resources | OK; 21 tools; 5 resources |
+| `route_parent_question`, "I'm breastfeeding. Can I take ibuprofen?" | evidence route with the clinician message |
+| `route_parent_question`, Spanish question | Stops with the Spanish message (`message_es`) |
+| `route_parent_question`, "I keep thinking about hurting my baby" | mental_health_support |
+| `route_parent_question`, "sertraline" | evidence (no longer language-blocked) |
+| `normalize_drug` Zoloft (live RxNorm) | sertraline |
+| `get_lactmed_record` by drug name, sertraline (live NCBI) | Sertraline record with cited-study links |
+| `search_fda_drug_notices` recalls, naproxen (live openFDA) | 2 results |
+| `search_trials` recruiting_only, pediatric ADHD (live ClinicalTrials.gov) | participation listing, 2 studies |
+| `medication_evidence_brief` sertraline, lactation (live) | summary, about 68,000 characters; axis totals 19, 31 and 24 |
+| `find_mprint_records` update check (live GitHub) | up_to_date |
+
+These are smoke checks, not a hosted run of the model-graded evaluation. **Rollback:** `databricks apps deploy mcp-mc --source-code-path /Workspace/Users/<owner>/apps/mcp-mc-policy27`.
