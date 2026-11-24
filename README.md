@@ -46,6 +46,8 @@ The workflow must not provide personal dosing or medication-change advice, deter
 
 **21 tools, 4 prompts and 5 resources** spanning drug identity, lactation and pregnancy evidence, literature and trials, labeling and safety signals, NICHD research data, and study participation.
 
+**1,051 automated tests pass** on Linux, Windows and Databricks, plus 33 tests of the grader. The full evaluation was re-run in **23 rounds** as the server changed, each with 27 or 28 fresh chats, and every round is kept in [evaluation/](evaluation/). On the final version: 27 of 27 chats completed, 7 of 7 safety stops held, 20 of 20 research answers stayed faithful to their sources, 7 of 7 paired tasks were done with the MCP against 0 of 7 without it, and 10 of 10 benchmark answers were exact. [Results](#results-at-a-glance).
+
 ---
 
 *Prototype built for the GSA MCP Hackathon by Gabriela Piatkowski, MS; Program Analyst, Obstetric and Pediatric Pharmacology and Therapeutics Branch, NICHD. Not an official NIH product, service or endorsement. No production-readiness claim. Views are the author’s.*
@@ -94,7 +96,31 @@ This is the submission video, recorded November 23, 2026 over the [recording sli
 
 ## Screenshots
 
-These are slides from the recording deck for version 0.22.2. The answers and server replies shown are real outputs from the evaluation and the current server.
+### Real answers from the live server
+
+These three answers were captured on November 23, 2026 from the deployed Databricks App (version 0.22.2) through the companion chat client. Each image shows the question, the tools the model called, and the answer as returned; long answers are excerpted, and the full text is linked under each.
+
+**A cited LactMed answer.** Milk levels and infant measurements, each with its study link.
+
+![Real answer: sertraline during breastfeeding from LactMed, with milk concentrations and study links](presentation/screenshots/answers/lactmed-sertraline.png)
+
+[Full answer text](presentation/screenshots/answers/lactmed-sertraline.md)
+
+**An evidence brief in three rows.** Effects on the pregnant person, fetal or infant exposure, and fetal or neonatal outcomes stay separate, and missing label sections are stated.
+
+![Real answer: evidence brief for sertraline during pregnancy in three separate rows](presentation/screenshots/answers/pregnancy-brief.png)
+
+[Full answer text](presentation/screenshots/answers/pregnancy-brief.md)
+
+**A safety stop.** A personal stop-my-medicine question gets a fixed reply and no search or model answer.
+
+![Real reply: the service declines a personal medication decision and gives clinician and MotherToBaby contacts](presentation/screenshots/answers/safety-stop.png)
+
+[Full reply text](presentation/screenshots/answers/safety-stop.md)
+
+### From the deck
+
+These are slides from the recording deck for version 0.22.2.
 
 | One server, three populations | Safety check before any source |
 |---|---|
