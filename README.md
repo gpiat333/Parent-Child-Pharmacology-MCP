@@ -48,9 +48,9 @@ The workflow must not provide personal dosing or medication-change advice, deter
 
 | Submission material | Open it |
 |---|---|
-| Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v33.pptx) · [earlier version](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) |
+| Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) · [earlier version](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) |
 | Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/retrieval-reliability-final/REPORT.md) · [rendered DOCX PDF](evaluation/retrieval-reliability-final/artifact-review/evaluation-rendered.pdf) |
-| Demonstration | [3:10 narrated video](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm) · [captions](presentation/current-demo/narration.vtt) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
+| Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) · [older 3:10 video](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm) · [captions](presentation/current-demo/narration.vtt) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
 | Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
@@ -67,7 +67,7 @@ The [complete 65-file template audit and remediation table](documentation/TEMPLA
 | Technical quality: performance and reliability | [Evaluation report](evaluation/retrieval-reliability-final/REPORT.md) · [local tests](evaluation/retrieval-reliability-final/unit-tests.xml) · [Databricks test receipt](evaluation/retrieval-reliability-final/databricks-job-output.json) | Inputs, attempts, error handling, fresh captures and measured results; operational timings are observations, not a speed claim |
 | Technical quality: MCP design | [Tool catalog](src/parent_child_pharmacology/tools/__init__.py) · [models](src/parent_child_pharmacology/models/) · [Inspector results](evaluation/retrieval-reliability-final/inspector/summary.json) | Bounded inputs, goal-oriented tools, structured provenance and explicit absence-of-evidence contracts |
 | Innovation | [Workflow](#how-it-works) · [evidence-axis tests](tests/test_evidence_axes.py) | Separate maternal effects, transfer/exposure and infant outcomes, with clinician questions and a distinct participation tier |
-| Presentation | [Video](#demo-video) · [screenshots](#screenshots) · [deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v33.pptx) | Successful answer, identity stop, crisis route, empty result and clinician handoff; historical demos distinguished from fresh evaluation |
+| Presentation | [Video](#demo-video) · [screenshots](#screenshots) · [deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) | Successful answer, identity stop, crisis route, empty result and clinician handoff; historical demos distinguished from fresh evaluation |
 
 ## Users and mission
 
@@ -82,9 +82,13 @@ The intended mission contribution is to support pregnancy, lactation, child-heal
 
 ## Demo video
 
-[**Watch or download the current narrated demo (3:16, MP4)**](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20(policy%20.26).mp4)
+[**Watch or download the demo video (8:49, MP4), narrated by the author**](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)
 
-The current demo (November 23, 2026; policy .26) shows real outputs: model answers from the final evaluation chats and fixed server replies. It covers the LactMed answer with study links, the three-part evidence brief, “Can I take ibuprofen?”, the safety routes, the live MPRINT update check, Spanish-language help and the final results. Narration uses a Microsoft neural voice; captions are in [demo.vtt](presentation/demo/demo.vtt), and [scenes.json](presentation/demo/scenes.json) rebuilds it after edits.
+This is the submission video, recorded November 23, 2026 over the [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) for version 0.22.2.
+
+[Earlier computer-narrated demo (3:16, MP4)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20(policy%20.26).mp4)
+
+The earlier computer-narrated demo (November 23, 2026; policy .26) shows real outputs: model answers from the final evaluation chats and fixed server replies. It covers the LactMed answer with study links, the three-part evidence brief, “Can I take ibuprofen?”, the safety routes, the live MPRINT update check, Spanish-language help and the final results. Narration uses a Microsoft neural voice; captions are in [demo.vtt](presentation/demo/demo.vtt), and [scenes.json](presentation/demo/scenes.json) rebuilds it after edits.
 
 [Older narrated demonstration (3:10, WebM)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
 

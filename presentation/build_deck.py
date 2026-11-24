@@ -342,8 +342,9 @@ s = new("The evidence gap is real, but a lot of evidence exists across many sour
     "hold thousands of pharmacokinetic and clinical study records, plus 1.3 million automatically labeled "
     "PubMed records. Live searches reach all of PubMed, ClinicalTrials.gov, DailyMed labels, NIH RePORTER and "
     "FDA's adverse-event reports. The problem is not that nothing exists; it is that it is hard to reach and "
-    "hard to read. And where evidence is missing, the server says so, and points to the trials, registries and "
-    "funded research trying to fill the gap. And it stays current: every answer shows the date of its data, and "
+    "hard to read. And where evidence is missing, the server says so, and points to the trials that are "
+    "recruiting, the pregnancy registries and the funded research trying to fill the gap. Those are listed as "
+    "information only: never ranked, never recommended, and nobody is urged to sign up. And it stays current: every answer shows the date of its data, and "
     "if you ask the AI whether the MPRINT data is current, the server checks MPRINT's repository live and tells you "
     "whether newer data has been published. The server is read-only, so a question never rewrites the data; a "
     "weekly automated check flags new MPRINT releases, and one script rebuilds LactMed or the MotherToBaby fact "
@@ -369,7 +370,8 @@ box(s, 0.65, 5.25, 12.0, 1.1, fill=CORAL_T)
 text(s, 0.95, 5.25, 11.4, 1.1, [
     [("Where evidence is missing, it says so, ", {"bold": True, "color": DEEP}),
      ("and points to what is under way: recruiting trials, pregnancy exposure registries and NIH-funded "
-      "research on the same medicine.", {})]], size=16, color=INK, anchor=MSO_ANCHOR.MIDDLE)
+      "research on the same medicine. These are listed for information only, never ranked or recommended; "
+      "no one is urged to enroll.", {})]], size=15, color=INK, anchor=MSO_ANCHOR.MIDDLE)
 text(s, 0.65, 6.45, 12.0, 0.75, [
     [("Kept current: ", {"bold": True, "color": TEAL}),
      ("every answer shows its data's date. Ask \u201cIs the MPRINT data current?\u201d and the server checks MPRINT live "
@@ -378,23 +380,26 @@ text(s, 0.65, 6.45, 12.0, 0.75, [
 
 # 5 ─ Scattered across agencies
 s = new("However, what is known is scattered across agencies, resources and databases", notes=(
-    "However, all of that lives in different places. NLM hosts LactMed, DailyMed labels, PubMed, ClinicalTrials.gov, "
-    "RxNorm and MedlinePlus. FDA has adverse-event reports, pediatric labeling changes and pregnancy registry "
-    "listings. NIH and NICHD have funded projects in RePORTER, BPCA and Pediatric Trials Network summaries, "
-    "MPRINT data and DASH. MotherToBaby, a nonprofit, publishes fact sheets. Each uses different names, IDs "
+    "However, all of that lives in different places. The National Library of Medicine, part of NIH, hosts "
+    "LactMed, DailyMed labels, PubMed, ClinicalTrials.gov, RxNorm and MedlinePlus. FDA has adverse-event "
+    "reports, pediatric labeling changes and pregnancy registry listings. NIH and NICHD, the National Institute "
+    "of Child Health and Human Development, have funded projects in RePORTER, BPCA and Pediatric Trials Network summaries, "
+    "MPRINT data and DASH. Each uses different names, IDs "
     "and formats: APIs, web pages, spreadsheets and PDFs."))
 agencies = [
-    ("NLM", MIST, TEAL, ["LactMed", "DailyMed labels", "PubMed", "ClinicalTrials.gov", "RxNorm", "MedlinePlus"]),
-    ("FDA", MIST, TEAL, ["Adverse-event reports (FAERS)", "Pediatric labeling changes", "Pregnancy registries",
+    ("National Library of Medicine, NIH", "", MIST, TEAL, ["LactMed", "DailyMed labels", "PubMed", "ClinicalTrials.gov", "RxNorm", "MedlinePlus"]),
+    ("FDA", "Food and Drug Administration", MIST, TEAL, ["Adverse-event reports (FAERS)", "Pediatric labeling changes", "Pregnancy registries",
                          "Recalls, alerts, shortages"]),
-    ("NIH and NICHD", MIST, TEAL, ["RePORTER funded projects", "BPCA and PTN summaries", "MPRINT data", "DASH studies"]),
-    ("Nonprofit", CORAL_T, CORAL, ["MotherToBaby fact sheets (OTIS), English and Spanish"]),
+    ("NIH and NICHD", "National Institute of Child Health and Human Development", MIST, TEAL,
+     ["RePORTER funded projects", "BPCA and PTN summaries", "MPRINT data", "DASH studies"]),
 ]
-for i, (head, fill, hc, items) in enumerate(agencies):
-    x = 0.65 + i * 3.1
-    box(s, x, 1.6, 2.85, 4.4, fill=fill)
-    text(s, x + 0.25, 1.8, 2.4, 0.5, head, size=20, font=HEAD, bold=True, color=hc)
-    text(s, x + 0.25, 2.45, 2.4, 3.4, items, size=15, color=INK, space_after=8)
+for i, (head, full_name, fill, hc, items) in enumerate(agencies):
+    x = 0.65 + i * 4.1
+    box(s, x, 1.6, 3.8, 4.4, fill=fill)
+    text(s, x + 0.3, 1.8, 3.3, 0.45, head, size=19, font=HEAD, bold=True, color=hc)
+    if full_name:
+        text(s, x + 0.3, 2.25, 3.3, 0.6, full_name, size=12, color=MUTED)
+    text(s, x + 0.3, 2.95, 3.2, 2.9, items, size=16, color=INK, space_after=8)
 text(s, 0.65, 6.25, 12.0, 0.8, [
     [("For a parent, a researcher or a clinician, that means different names, IDs and formats: ", {"bold": True, "color": DEEP}),
      ("public APIs, web pages, spreadsheets and PDFs. No single place connects them.", {})]], size=16, color=INK)
@@ -600,6 +605,10 @@ table(s, 0.65, 1.5, 12.0, [2.9, 9.1], [
 
 # 5aa ─ Lifespan
 s = new("One MCP server connects pregnancy, breastfeeding and pediatric data", notes=(
+    "This evidence is split by population. Pregnancy, breastfeeding and each age band of childhood are "
+    "separate literatures kept in separate places: a label's pregnancy section, LactMed, pediatric labeling. "
+    "Under one server they sit side by side, and every answer keeps its population labeled, so a finding in "
+    "adults or older children is never passed off as evidence for a newborn. "
     "The same server stays useful as her questions change. In pregnancy it brings the label's pregnancy "
     "section, studies, pregnancy registries and the MotherToBaby fact sheet, with PRGLAC context when evidence "
     "is thin. While she breastfeeds, it brings LactMed with links to every study, the label's lactation section "
@@ -627,14 +636,18 @@ stages = [
         "Newborn, infant, child and teen kept separate",
     ]),
 ]
+text(s, 0.65, 1.3, 12.0, 0.7, [
+    [("The evidence is split by population. ", {"bold": True, "color": DEEP}),
+     ("Pregnancy, breastfeeding and each age band of childhood have their own sources and studies. "
+      "One server brings them together and keeps each population labeled.", {})]], size=15, color=INK)
 for i, (stage, fill, img, items) in enumerate(stages):
     x = 0.6 + i * 4.1
-    box(s, x, 1.45, 3.9, 5.6, fill=fill)
+    box(s, x, 2.05, 3.9, 5.05, fill=fill)
     path = MOM.parent / img
     iw, ih = Image.open(path).size
-    h = 2.5
-    picture(s, path, x + (3.9 - h * iw / ih) / 2, 1.6, 3.6, h, border=False)
-    text(s, x + 0.25, 4.2, 3.4, 0.45, stage, size=22, font=HEAD, bold=True, color=DEEP)
+    h = 2.0
+    picture(s, path, x + (3.9 - h * iw / ih) / 2, 2.15, 3.6, h, border=False)
+    text(s, x + 0.25, 4.25, 3.4, 0.45, stage, size=22, font=HEAD, bold=True, color=DEEP)
     text(s, x + 0.25, 4.8, 3.4, 2.2, items, size=16, color=INK, space_after=5)
     if i < 2:
         connector(s, x + 3.9, 2.85, x + 4.1, 2.85, color=TEAL, width=3)
