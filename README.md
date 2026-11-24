@@ -4,9 +4,11 @@
 
 **THIS MCP HAS BEEN MADE FOR THE PURPOSE OF THE GSA HACKATHON AS A PROTOTYPE AND IS NOT AN NIH OFFICIAL MCP TOOL. NO PRODUCTION READINESS CLAIM.**
 
-[![Watch the demo video](presentation/screenshots/title.png)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)
+[![Slide 1 of the deck. Click to page through all 42 slides.](presentation/slides/img/slide-01.png)](presentation/slides/slide-02.md)
 
-**[▶ Watch the demo video (8:49)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)** · **[PowerPoint deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx)** · **[Evaluation document](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx)**
+**[▶ Click through the slide deck (42 slides)](presentation/slides/slide-01.md)**: click the slide above, then keep clicking each slide to move to the next.
+
+**[Watch the demo video (8:49)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)** · [Deck as PDF](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pdf) · [Deck as PowerPoint](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) · [Evaluation document](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.pdf)
 
 Pediatric and maternal medication information is spread across product labels, lactation records, publications, trial registries and research datasets—and it is divided twice over. Once by population: evidence about a fetus, a breastfed infant and a six-year-old belongs to different literatures, and “pediatric” alone spans a preterm neonate to an adolescent. Once again by purpose: what the drug is, what the label says, what published studies found, what is being studied now, and what outcomes were actually measured each live somewhere different.
 
@@ -52,7 +54,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 
 | Submission material | Open it |
 |---|---|
-| Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) |
+| Presentation | [Click-through deck](presentation/slides/slide-01.md) · [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) · [PDF](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pdf) |
 | Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [PDF](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.pdf) · [readable report](evaluation/v0222-final/REPORT.md) |
 | Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) |
 | Evidence | [Chat scores](evaluation/v0222-final/chat-summary.json) · [benchmark scores](evaluation/v0222-final/benchmark/summary.json) · [MLflow receipts](evaluation/v0222-final/mlflow/) · [Databricks test receipt](evaluation/databricks-validation-2026-11-23-v0222/databricks-job-output.json) · [all captures and judgments](evaluation/v0222-final/) |
