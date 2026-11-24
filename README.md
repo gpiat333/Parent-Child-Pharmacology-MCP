@@ -53,9 +53,9 @@ The workflow must not provide personal dosing or medication-change advice, deter
 | Submission material | Open it |
 |---|---|
 | Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) |
-| Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/retrieval-reliability-final/REPORT.md) · [rendered DOCX PDF](evaluation/retrieval-reliability-final/artifact-review/evaluation-rendered.pdf) |
-| Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
-| Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
+| Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [PDF](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.pdf) · [readable report](evaluation/v0222-final/REPORT.md) |
+| Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) |
+| Evidence | [Chat scores](evaluation/v0222-final/chat-summary.json) · [benchmark scores](evaluation/v0222-final/benchmark/summary.json) · [MLflow receipts](evaluation/v0222-final/mlflow/) · [Databricks test receipt](evaluation/databricks-validation-2026-11-23-v0222/databricks-job-output.json) · [all captures and judgments](evaluation/v0222-final/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
 **Version and access:** the current source is **0.22.2**, policy **2026-11-23.29**, with 21 tools. It is the version the scores below describe, it passes all 1,051 tests on Linux and Windows CI and in a Databricks serverless run, and it is the version running on the Databricks App `mcp-mc` (deployment 01f1e7a50b1c1872be5159c39a70aff2, November 23, 2026), with Databricks workspace sign-in as its access control; see [deployment status](documentation/DEPLOYMENT_STATUS.md). Workspace access is required for Databricks links below. What changed in each version and policy is in the [change history](CHANGELOG.md) and the [tool migration notes](documentation/TOOL_MIGRATION.md).
@@ -68,10 +68,10 @@ The [complete 65-file template audit and remediation table](documentation/TEMPLA
 |---|---|---|
 | Mission alignment | [Users and mission](#users-and-mission) · [architecture](documentation/ARCHITECTURE.md) | Evidence discovery for parents, clinicians, researchers and NICHD program staff; visible population and evidence gaps |
 | Technical quality: maintainability | [Package](src/parent_child_pharmacology/) · [tool registrars](src/parent_child_pharmacology/tools/) | Separate schemas, source clients and domain services; thin entry point; one registrar per tool |
-| Technical quality: performance and reliability | [Evaluation report](evaluation/retrieval-reliability-final/REPORT.md) · [local tests](evaluation/retrieval-reliability-final/unit-tests.xml) · [Databricks test receipt](evaluation/retrieval-reliability-final/databricks-job-output.json) | Inputs, attempts, error handling, fresh captures and measured results; operational timings are observations, not a speed claim |
-| Technical quality: MCP design | [Tool catalog](src/parent_child_pharmacology/tools/__init__.py) · [models](src/parent_child_pharmacology/models/) · [Inspector results](evaluation/retrieval-reliability-final/inspector/summary.json) | Bounded inputs, goal-oriented tools, structured provenance and explicit absence-of-evidence contracts |
+| Technical quality: performance and reliability | [Evaluation report](evaluation/v0222-final/REPORT.md) · [tests](tests/) · [Databricks test receipt](evaluation/databricks-validation-2026-11-23-v0222/databricks-job-output.json) | Inputs, attempts, error handling, fresh captures and measured results; operational timings are observations, not a speed claim |
+| Technical quality: MCP design | [Tool catalog](src/parent_child_pharmacology/tools/__init__.py) · [models](src/parent_child_pharmacology/models/) · [Inspector results from the earlier .14 build](evaluation/retrieval-reliability-final/inspector/summary.json) | Bounded inputs, goal-oriented tools, structured provenance and explicit absence-of-evidence contracts |
 | Innovation | [Workflow](#how-it-works) · [evidence-axis tests](tests/test_evidence_axes.py) | Separate maternal effects, transfer/exposure and infant outcomes, with clinician questions and a distinct participation tier |
-| Presentation | [Video](#demo-video) · [screenshots](#screenshots) · [deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) | Successful answer, identity stop, crisis route, empty result and clinician handoff; historical demos distinguished from fresh evaluation |
+| Presentation | [Video](#demo-video) · [screenshots](#screenshots) · [deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) | Author-narrated walk-through: the problem, the design, a live demo, a cited answer, safety stops, a Spanish reply and the results |
 
 ## Users and mission
 
@@ -178,25 +178,15 @@ Browse the [21-tool catalog](src/parent_child_pharmacology/tools/__init__.py), [
 | Citation and trace checks | **20/20 URL membership; 41 MLflow rows verified** | URL membership does not establish claim support |
 | Fixed-snapshot benchmark | **10/10 exact answers; 10/10 completed** | Separate Phoenix task, not the seven-case comparison |
 
-The one unfulfilled research task was judged accurate but left the recall reasons out of its table. This tool set was evaluated three times, and each run is kept: [0.22.0](evaluation/v0220-final/) scored MCP paired fidelity 5/2/0, which 0.22.1 corrected by stating who wrote each server notice; [0.22.1](evaluation/v0221-final/REPORT.md) scored 18/20 research tasks because the summary brief left out label text, which 0.22.2 corrected. Both fixes were written after seeing those failures on known questions. The sections below describe the history of the evaluation through .25.
+The one unfulfilled research task was judged accurate but left the recall reasons out of its table. This tool set was evaluated three times, and each run is kept: [0.22.0](evaluation/v0220-final/) scored MCP paired fidelity 5/2/0, which 0.22.1 corrected by stating who wrote each server notice; [0.22.1](evaluation/v0221-final/REPORT.md) scored 18/20 research tasks because the summary brief left out label text, which 0.22.2 corrected. Both fixes were written after seeing those failures on known questions. How the evaluation and its grader changed in earlier versions is in the [evaluation history](documentation/EVALUATION_HISTORY.md).
 
-### What changed and what the grades mean
-
-The research fixes add mandatory study-team eligibility/availability and bounded LactMed extract notices, constrain both draft and final-review instructions to the requested title/excerpt-only scope, and distinguish an unreported outcome from an explicit negative finding. R08 had a grading conflict: the application requires “Past listed deadlines,” while the old criterion demanded “Closed deadlines.” The criterion now accepts elapsed dates without falsely asserting that a submission portal is closed. This is a disclosed rubric clarification, not a clinical improvement or a retroactive score change.
-
-The previous 3/10 benchmark had seven failures: B06/B09 were blocked by English-language false positives; B10 confused an aggregate seizure-control outcome with an active symptom; B01 miscalculated proportions; B04 miscounted matching Silver annotations; B07/B08 inspected the wrong or incomplete candidate set. The revised runtime adds narrowly bounded English task recognition, distinguishes named aggregate outcomes while preserving personal/acute routing, and returns optional joined Silver classifications and exported-row counts with explicit pagination. Counts retain snapshot and unmatched-row limitations. The revised benchmark client inspects the requested cohort and uses a bounded decimal arithmetic helper. The helper is client-side, not a 31st MCP tool. All ten questions and reference answers are unchanged; no expected answer is supplied to the model.
-
-The final .14 benchmark scored 9/10; the intermediate .13 run scored 10/10. Both are retained. The remaining final B09 error returned the DOI of a different retrieved candidate despite selecting the correct PMID for an additional lookup. This is an answer-attribution failure, not missing source data. No answer was replaced or manually corrected to raise the score. Later runs: .20 scored 10/10, .23 scored 9/10 (B06 compared one exposure by hand and copied the wrong row), and the .24 and final .25 runs with runner v7, which computes per-group statistics from captured rows, scored 10/10.
+### What the grades mean
 
 Fidelity asks whether claims are supported by the captured references. Task fulfillment asks whether all requested requirements were met. Neither is clinical accuracy. These are known development cases, one retained completed answer per case/arm, bounded references and a fallible same-family model judge. There was no clinician adjudication, manual score override or selection of a better completed answer. Live sources and model outputs vary. Other clients must enforce preflight and display contracts themselves.
 
 The seven-case comparison measures the MCP workflow, including tools, preflight and required notices. The plain arm has no retrieval tools; 0/7 can reflect honest inability to verify a current lookup, not seven fabricated or medically wrong answers. Both arms receive the same updated instructions. The paired runner omits the companion’s additional source-review pass.
 
 The ten-question benchmark is an exact-answer test of joins, filters, candidate selection and arithmetic against a fixed MPRINT snapshot. It is separate from the chat and paired scores. It is small, known, partly cohort-sharing and not held out. Runtime and client instructions changed together, so any gain is not a controlled estimate of one fix. Exact agreement with snapshot fields does not establish clinical truth, safety, source completeness or performance across all tools.
-
-The judge prompt is unchanged. Grader v3.1 now rejects a negative finding based only on the exact mandatory application footer, enforcing an existing rubric rule. It requests a new bounded model judgment and never sets a failed score to pass in code. Semantic grading errors remain possible. R08 alone has the disclosed criterion clarification above; other criteria and every question are unchanged. Heuristic routing and independent review of framing, omissions and evidence gaps remain limitations.
-
-[Current report](evaluation/retrieval-reliability-final/REPORT.md) · [All flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md). Previous .12 results—21/21 research fidelity, 18/21 research tasks, paired MCP 7/7 tasks and 6/7 fidelity, and benchmark 3/10—remain [historical evidence](evaluation/template-gap-revision/).
 
 ## Safety and security
 
@@ -257,9 +247,9 @@ Fresh chat/model comparisons need separately configured Databricks model access 
 | `tests/` | Application, security and client-contract regression tests |
 | `eval/` | Current portable evaluation harness and Databricks test kit |
 | `evaluation/` | Dated captures, metrics, raw judgments, test and MLflow receipts |
-| `presentation/` | Deck, historical narrated demo, screenshots and current speaking script |
+| `presentation/` | Deck, demo video, recording slides and screenshots |
 | `documentation/` | Evaluation DOCX, architecture, methodology, requirements and deployment guidance |
-| `deploy/databricks/`, `Dockerfile`, `server.json` | Future deployment kit, container build and registry metadata; no automatic deployment |
+| `deploy/databricks/`, `Dockerfile`, `server.json` | Deployment kit, container build and registry metadata; deployment is a manual step |
 | `.github/workflows/ci.yml` | Windows/Linux lint, format, application/grader tests and package builds |
 | `SECURITY.md`, `NOTICE.md`, `LICENSE-GSA-TEMPLATE` | Security boundaries and template attribution |
 
