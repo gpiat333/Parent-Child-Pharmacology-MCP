@@ -1,0 +1,72 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 14,
+    "contradicted_claims": 0,
+    "unverified_claims": 0,
+    "citations": [
+      {
+        "citation_id": "C1",
+        "status": "supported",
+        "reason": "The returned query URL matches the MCP query and supports the stated age filter and retrieved reaction counts.",
+        "url": "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name%3A%22acetaminophen%22+AND+patient.patientonsetageunit%3A802+AND+patient.patientonsetage%3A%5B0+TO+12%5D&count=patient.reaction.reactionmeddrapt.exact&limit=25"
+      },
+      {
+        "citation_id": "C2",
+        "status": "unverified",
+        "reason": "The URL is the general openFDA adverse-event documentation page; it does not independently substantiate the specific counts or interpretation, though those claims are supported by the MCP result.",
+        "url": "https://open.fda.gov/apis/drug/event/"
+      }
+    ],
+    "uncited_source_claims": 0,
+    "task_fulfilled": true,
+    "honest_abstention": false,
+    "failure_reasons": [],
+    "rationale": "The answer accurately states the queried age scope, reports retrieved reaction terms and counts, and explains that spontaneous-report counts cannot establish incidence, risk, causation, or generalizability. It also discloses the bounded 25-term return and cites the returned query."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "8511c02e887c5827d32436a652ae46f33c32c65e0a4cbeb89a6cd7c1014f77f3",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 14,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 0,\n  \"citations\": [\n    {\n      \"citation_id\": \"C1\",\n      \"status\": \"supported\",\n      \"reason\": \"The returned query URL matches the MCP query and supports the stated age filter and retrieved reaction counts.\"\n    },\n    {\n      \"citation_id\": \"C2\",\n      \"status\": \"unverified\",\n      \"reason\": \"The URL is the general openFDA adverse-event documentation page; it does not independently substantiate the specific counts or interpretation, though those claims are supported by the MCP result.\"\n    }\n  ],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": true,\n  \"honest_abstention\": false,\n  \"failure_reasons\": [],\n  \"rationale\": \"The answer accurately states the queried age scope, reports retrieved reaction terms and counts, and explains that spontaneous-report counts cannot establish incidence, risk, causation, or generalizability. It also discloses the bounded 25-term return and cites the returned query.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 10053,
+        "completion_tokens": 516,
+        "total_tokens": 10569,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 10050,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 255,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 1,
+  "usage": {
+    "prompt_tokens": 10053,
+    "completion_tokens": 516,
+    "total_tokens": 10569,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 10050,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 255,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false
+}

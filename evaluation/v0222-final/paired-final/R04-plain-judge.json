@@ -1,0 +1,102 @@
+{
+  "judgment": {
+    "fidelity_status": "pass",
+    "supported_claims": 8,
+    "contradicted_claims": 0,
+    "unverified_claims": 1,
+    "citations": [],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Candidate records and status only if returned; official links.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The search returned recall candidates with manufacturers, product descriptions, lots, dates, statuses, reasons, and official links, but the answer did not report them."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Search FDA recall records for naproxen.",
+        "answer_quote": null,
+        "reference_quote": null,
+        "explanation": "The answer honestly abstained from performing the requested lookup instead of supplying the returned FDA recall results."
+      }
+    ],
+    "rationale": "The answer correctly explains that a nonmatch is not bottle clearance and identifies key product, formulation, manufacturer, lot, expiration, and NDC verification distinctions. Its bounded-search cautions are generally supported. However, it omits the returned FDA candidates, statuses, reasons, and official links, so the lookup task is incomplete. The suggestion to contact the manufacturer directly is not specifically established by the supplied evidence, but it is not contradicted."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "d37b944bf7a3ececbcf5f329f5a1d423fca3c01230a0fe6170828995dabe928a",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"D-0523-2026\",\n      \"explanation\": \"The supplied search returned recall candidates with manufacturers, product descriptions, lots, dates, statuses, reasons, and official links, but the answer did not report them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": \"I can’t access the FDA recall database live in this session\",\n      \"reference_quote\": \"The supplied search returned recall candidates\",\n      \"explanation\": \"The answer honestly abstained from the lookup rather than supplying the returned FDA recall results, so it did not complete the requested search.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies the key product, formulation, manufacturer, lot, expiration, and NDC verification distinctions. Its bounded-search caveats are generally supported. However, it omits the returned FDA candidates, statuses, reasons, and official links, so the lookup task is incomplete. The manufacturer-or-pharmacy direct-contact suggestion is not specifically established by the supplied evidence, but it is not a contradiction.\"\n}",
+      "validation_errors": [
+        "failure_reasons[1] omission answer_quote must be null",
+        "failure_reasons[1] reference_quote is not in REFERENCE_EVIDENCE"
+      ],
+      "usage": {
+        "prompt_tokens": 16703,
+        "completion_tokens": 583,
+        "total_tokens": 17286,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16700,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 194,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"pass\",\n  \"supported_claims\": 8,\n  \"contradicted_claims\": 0,\n  \"unverified_claims\": 1,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Candidate records and status only if returned; official links.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The search returned recall candidates with manufacturers, product descriptions, lots, dates, statuses, reasons, and official links, but the answer did not report them.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Search FDA recall records for naproxen.\",\n      \"answer_quote\": null,\n      \"reference_quote\": null,\n      \"explanation\": \"The answer honestly abstained from performing the requested lookup instead of supplying the returned FDA recall results.\"\n    }\n  ],\n  \"rationale\": \"The answer correctly explains that a nonmatch is not bottle clearance and identifies key product, formulation, manufacturer, lot, expiration, and NDC verification distinctions. Its bounded-search cautions are generally supported. However, it omits the returned FDA candidates, statuses, reasons, and official links, so the lookup task is incomplete. The suggestion to contact the manufacturer directly is not specifically established by the supplied evidence, but it is not contradicted.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 17176,
+        "completion_tokens": 511,
+        "total_tokens": 17687,
+        "prompt_tokens_details": {
+          "cached_tokens": 16700,
+          "cache_write_tokens": 473,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 157,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 17176,
+    "completion_tokens": 511,
+    "total_tokens": 17687,
+    "prompt_tokens_details": {
+      "cached_tokens": 16700,
+      "cache_write_tokens": 473,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 157,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

@@ -1,0 +1,110 @@
+{
+  "judgment": {
+    "fidelity_status": "fail",
+    "supported_claims": 1,
+    "contradicted_claims": 1,
+    "unverified_claims": 0,
+    "citations": [],
+    "uncited_source_claims": 0,
+    "task_fulfilled": false,
+    "honest_abstention": true,
+    "failure_reasons": [
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Compare metformin label warnings for the adult taking it with findings in breastfed infants.",
+        "answer_quote": null,
+        "reference_quote": "Lactic Acidosis: Lactic acidosis is a rare, but serious, metabolic complication that can occur due to metformin accumulation during treatment with Metformin Hydrochloride Tablets USP",
+        "explanation": "The answer declines to provide the retrieved adult warning and breastfed-infant findings, so it does not perform the requested comparison."
+      },
+      {
+        "dimension": "task",
+        "kind": "omission",
+        "requirement_quote": "Identify which source says what, and disclose missing sections.",
+        "answer_quote": null,
+        "reference_quote": "METFORMIN HCL TABLET [QPHARMA, INC.]",
+        "explanation": "The answer does not identify the retrieved QPharma DailyMed label, LactMed, or the missing label sections, including warnings_and_precautions and boxed_warning."
+      },
+      {
+        "dimension": "fidelity",
+        "kind": "content",
+        "requirement_quote": null,
+        "answer_quote": "No source records were provided or retrieved in this exchange",
+        "reference_quote": "Data from well-conducted studies indicate that metformin levels in milk are low and infants would receive less than 0.5% of their mother’s weight-adjusted dosage.",
+        "explanation": "The answer states that no source records were retrieved, but the supplied evidence includes retrieved DailyMed and LactMed records with label warnings, exposure measurements, and infant outcomes."
+      }
+    ],
+    "rationale": "The response honestly abstains and avoids dosing, but it fails the requested evidence comparison and source identification despite extensive retrieved evidence. Its statement that no records were retrieved is contradicted by the supplied retrieval results."
+  },
+  "judge_model": "system.ai.gpt-5-6-luna",
+  "grader_version": "3.1",
+  "grading_input_sha256": "92da5b7788194e4ff1ce90970e6fd4d0e9fee5482c55b7e9819c3d6cd0fe70a8",
+  "grounding_validated": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": \"Adult label warnings\",\n      \"reference_quote\": \"Lactic Acidosis: Lactic acidosis is a rare, but serious, metabolic complication that can occur due to metformin accumulation during treatment with Metformin Hydrochloride Tablets USP\",\n      \"explanation\": \"The answer declines to provide the retrieved adult warning and breastfed-infant findings, so it does not perform the requested comparison.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Identify which source says what, and disclose missing sections.\",\n      \"answer_quote\": \"No source records were provided or retrieved\",\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not identify the retrieved QPharma DailyMed label, LactMed, or the missing label sections, including warnings_and_precautions and boxed_warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No source records were provided or retrieved in this exchange\",\n      \"reference_quote\": \"Data from well-conducted studies indicate that metformin levels in milk are low and infants would receive less than 0.5% of their mother’s weight-adjusted dosage.\",\n      \"explanation\": \"The answer states that no source records were retrieved, but the supplied evidence includes retrieved DailyMed and LactMed records with label warnings, exposure measurements, and infant outcomes.\"\n    }\n  ],\n  \"rationale\": \"The response honestly abstains and avoids dosing, but it fails the requested evidence comparison and source identification despite extensive retrieved evidence. Its process-related statement that no records were retrieved is contradicted by the supplied retrieval results.\"\n}",
+      "validation_errors": [
+        "failure_reasons[0] omission answer_quote must be null",
+        "failure_reasons[1] omission answer_quote must be null"
+      ],
+      "usage": {
+        "prompt_tokens": 76565,
+        "completion_tokens": 749,
+        "total_tokens": 77314,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 76562,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 240,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "raw_model_text": "{\n  \"fidelity_status\": \"fail\",\n  \"supported_claims\": 1,\n  \"contradicted_claims\": 1,\n  \"unverified_claims\": 0,\n  \"citations\": [],\n  \"uncited_source_claims\": 0,\n  \"task_fulfilled\": false,\n  \"honest_abstention\": true,\n  \"failure_reasons\": [\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Compare metformin label warnings for the adult taking it with findings in breastfed infants.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"Lactic Acidosis: Lactic acidosis is a rare, but serious, metabolic complication that can occur due to metformin accumulation during treatment with Metformin Hydrochloride Tablets USP\",\n      \"explanation\": \"The answer declines to provide the retrieved adult warning and breastfed-infant findings, so it does not perform the requested comparison.\"\n    },\n    {\n      \"dimension\": \"task\",\n      \"kind\": \"omission\",\n      \"requirement_quote\": \"Identify which source says what, and disclose missing sections.\",\n      \"answer_quote\": null,\n      \"reference_quote\": \"METFORMIN HCL TABLET [QPHARMA, INC.]\",\n      \"explanation\": \"The answer does not identify the retrieved QPharma DailyMed label, LactMed, or the missing label sections, including warnings_and_precautions and boxed_warning.\"\n    },\n    {\n      \"dimension\": \"fidelity\",\n      \"kind\": \"content\",\n      \"requirement_quote\": null,\n      \"answer_quote\": \"No source records were provided or retrieved in this exchange\",\n      \"reference_quote\": \"Data from well-conducted studies indicate that metformin levels in milk are low and infants would receive less than 0.5% of their mother’s weight-adjusted dosage.\",\n      \"explanation\": \"The answer states that no source records were retrieved, but the supplied evidence includes retrieved DailyMed and LactMed records with label warnings, exposure measurements, and infant outcomes.\"\n    }\n  ],\n  \"rationale\": \"The response honestly abstains and avoids dosing, but it fails the requested evidence comparison and source identification despite extensive retrieved evidence. Its statement that no records were retrieved is contradicted by the supplied retrieval results.\"\n}",
+      "validation_errors": [],
+      "usage": {
+        "prompt_tokens": 77154,
+        "completion_tokens": 557,
+        "total_tokens": 77711,
+        "prompt_tokens_details": {
+          "cached_tokens": 76562,
+          "cache_write_tokens": 589,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 60,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ],
+  "accepted_attempt": 2,
+  "usage": {
+    "prompt_tokens": 77154,
+    "completion_tokens": 557,
+    "total_tokens": 77711,
+    "prompt_tokens_details": {
+      "cached_tokens": 76562,
+      "cache_write_tokens": 589,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 60,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "independent_clinician_review": false,
+  "arm_label_hidden": true,
+  "evaluation_context": "Fresh local .16 response and reference pool; graded with v3.1 footer-grounding validation. No clinician adjudication."
+}

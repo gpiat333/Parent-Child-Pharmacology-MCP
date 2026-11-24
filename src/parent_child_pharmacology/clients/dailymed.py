@@ -232,6 +232,11 @@ async def dailymed_label(drug: str) -> dict:
             return {
                 "setid": item["setid"],
                 "title": item["title"],
+                "product_identification": {
+                    "product": item["title"],
+                    "instruction": "Name this exact product when reporting anything from this label. "
+                    "It is one matching product, not every brand or formulation of the medicine.",
+                },
                 "sections": secs,
                 "medicine_taker_sections": adult,
                 "medicine_taker_sections_expected": MEDICINE_TAKER_SECTIONS,

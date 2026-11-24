@@ -7,6 +7,8 @@ what was left out and how to get it. Nothing is reworded and no passage is merge
 
 PASSAGES_PER_LIST = 5
 ROWS_PER_SOURCE = 5
+# Enough of each label section (pregnancy, lactation, pediatric use) to report what it says.
+LABEL_SECTION_EXCERPT = 1200
 LISTS = ("items", "context_only", "reported_gaps")
 PASSAGE_FIELDS = (
     "text",
@@ -35,7 +37,6 @@ DROPPED_TEXT = {
         "content_flags",
     ),
     "label": (
-        "sections",
         "pllr_8_1",
         "section_population_context",
         "product_description",
@@ -106,6 +107,24 @@ def _source(name, payload):
             for row in rows[:ROWS_PER_SOURCE]
         ]
         out[key + "_total"] = len(rows)
+    sections = out.get("sections")
+    if name == "label" and isinstance(sections, dict):
+        # An earlier summary dropped this text, and answers could not say what the label's
+        # lactation or pregnancy section states. Keep the opening of each section and flag cuts.
+        out["sections"] = {
+            key: text[:LABEL_SECTION_EXCERPT] if isinstance(text, str) else text
+            for key, text in sections.items()
+        }
+        out["sections_excerpted_in_summary"] = [
+            key
+            for key, text in sections.items()
+            if isinstance(text, str) and len(text) > LABEL_SECTION_EXCERPT
+        ]
+        out["sections_excerpt_notice"] = (
+            f"Each label section is shown up to {LABEL_SECTION_EXCERPT} characters. Sections listed "
+            "in sections_excerpted_in_summary continue beyond the excerpt: say so, and use "
+            "detail='full' or get_label_sections for the rest."
+        )
     measurements = out.get("exposure_measurements")
     if isinstance(measurements, dict):
         passages = measurements.get("concentration_passages") or []

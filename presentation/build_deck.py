@@ -1131,14 +1131,14 @@ for i, (head, body) in enumerate(notes_r):
 
 # 13 ─ How I tested
 s = new("How I tested it: unit tests, scripted chats, pairs and a benchmark", notes=(
-    "I tested in layers. All 1,050 automated tests pass on my Mac, in CI on Linux and Windows, and in a "
+    "I tested in layers. All 1,051 automated tests pass on my Mac, in CI on Linux and Windows, and in a "
     "Databricks serverless notebook, including the PowerShell client checks. "
     "MCP Inspector checked the protocol and schemas. Then 27 scripted chats: 20 research questions and 7 that "
     "should stop. Seven questions were run twice, once with the MCP and once with the same model and no tools. "
     "Finally, a 10-question exact-answer benchmark against the MPRINT snapshot, scored in Arize Phoenix. "
     "Model-graded results are tracked in MLflow."))
 tests = [
-    ("1,050", "automated tests", "All pass locally, in CI on Linux and Windows, and on Databricks"),
+    ("1,051", "automated tests", "All pass locally, in CI on Linux and Windows, and on Databricks"),
     ("9", "Inspector checks", "Protocol, tool schemas and sample contracts"),
     ("27", "scripted chats", "20 research questions and 7 that should stop"),
     ("7", "paired questions", "Same model with the MCP versus with no tools"),
@@ -1161,14 +1161,14 @@ text(s, 9.2, 1.9, 3.2, 4.6, [
 
 # 14 ─ Results
 s = new("Results: with the MCP, 7 of 7 paired tasks done; without it, none", notes=(
-    "These are from a fresh run on the current version, 0.22.1 with 21 tools, on November 23, all logged in "
+    "These are from a fresh run on the current version, 0.22.2 with 21 tools, on November 23, all logged in "
     "MLflow. In the side-by-side comparison, the same model with the MCP completed all seven tasks, and every "
     "answer stuck to its sources; without tools it completed none, mostly because it couldn't verify current "
     "records. All 27 scripted chats completed, took the expected route and used the expected tools, and all "
-    "seven stop cases made zero downstream calls. All 20 research answers stuck to their sources, and 18 of 20 "
-    "did everything asked; the other two were accurate but left something out. The benchmark scored 10 of 10. "
+    "seven stop cases made zero downstream calls. All 20 research answers stuck to their sources, and 19 of 20 "
+    "did everything asked; the other one was accurate but left out a detail. The benchmark scored 10 of 10. "
     "The first run on the 21-tool version had two paired answers fail fidelity, so I fixed how results say who "
-    "wrote a notice and ran everything again. These are known development questions with a model judge, and "
+    "wrote a notice, then a gap in the summary brief, and ran everything again each time. These are known development questions with a model judge, and "
     "there has been no clinician review yet."))
 box(s, 0.65, 1.6, 5.9, 3.0, fill=DEEP)
 text(s, 0.95, 1.8, 5.3, 0.4, "Paired tasks fulfilled", size=16, color=MIST2)
@@ -1190,11 +1190,11 @@ text(s, 0.65, 4.95, 12.0, 1.6, [
     [("What the misses taught me. ", {"bold": True, "color": DEEP}),
      ("On the first run with 21 tools, two paired answers put words in a source's mouth; one credited my "
       "server's own notice to the label. Results now say who wrote each notice, and fidelity returned to 7 of 7. "
-      "Two of 20 research answers were accurate but incomplete, one because the summary brief leaves out label "
-      "text. The benchmark went from 3/10 to 10/10.", {})],
+      "The summary brief had left out label text, so two answers were incomplete; it now keeps an excerpt, and "
+      "19 of 20 did everything asked. The benchmark went from 3/10 to 10/10.", {})],
 ], size=15, color=INK)
 text(s, 0.65, 6.6, 12.0, 0.5,
-     "Evaluated version 0.22.1 (policy .29, 21 tools), November 23, 2026. Known development questions, one answer each, model-judged. No clinician review yet.",
+     "Evaluated version 0.22.2 (policy .29, 21 tools), November 23, 2026. Known development questions, one answer each, model-judged. No clinician review yet.",
      size=13, color=MUTED, italic=True)
 
 # 14b ─ Hands-on testing
@@ -1258,13 +1258,13 @@ s = new("A design review cut 31 tools to 21 and made answers 20 times smaller", 
     "did nearly the same job. And the safety check let through some crisis wording while blocking ordinary "
     "short searches. I merged the overlapping tools, from thirty-one down to twenty-one, made the brief "
     "return a summary first with totals and a clear statement of what it left out, and fixed the routing "
-    "rules with tests in both directions. All 1,050 tests pass. Then I ran the whole evaluation again on the "
+    "rules with tests in both directions. All 1,051 tests pass. Then I ran the whole evaluation again on the "
     "new version. The first run showed two answers crediting notices to the wrong source, so I fixed that and "
     "ran it once more; the results slide shows that final run."))
 stats = [("31 \u2192 21", "tools", "Overlapping lookups merged into goal-level tools"),
          ("42.6K \u2192 23K", "tokens to load the tool list", "Short descriptions; answer rules travel with each result"),
          ("1.5M \u2192 60K", "characters in one evidence brief", "A summary first, the full text on request"),
-         ("1,050", "tests pass", "On Linux and Windows, client checks included")]
+         ("1,051", "tests pass", "On Linux and Windows, client checks included")]
 for i, (num, lab, note) in enumerate(stats):
     x = 0.65 + i * 3.05
     box(s, x, 1.5, 2.85, 1.75, fill=MIST)
@@ -1341,22 +1341,22 @@ text(s, 0.9, 3.7, 11.0, 1.6, ["Full evaluation numbers  ·  Benchmark history  �
 
 
 s = new("Full evaluation numbers", appendix=True,
-        notes="All numbers are from the 0.22.1 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
+        notes="All numbers are from the 0.22.2 run on November 23, 2026, reported separately because they measure different things. The Inspector check is from .14.")
 table(s, 0.65, 1.5, 12.0, [3.6, 3.4, 5.0], [
     ["Measure", "Result", "What it means"],
-    ["Automated tests", "1,050", "Local, CI on Linux and Windows, and Databricks; none skipped"],
+    ["Automated tests", "1,051", "Local, CI on Linux and Windows, and Databricks; none skipped"],
     ["Grader unit tests", "33 passed", "The grading code itself is tested"],
     ["MCP Inspector", "9/9 (.14)", "Protocol, schemas and sample contracts"],
     ["Scripted chats", "27/27 completed", "20 research and 7 stop cases"],
     ["Routes and tool checks", "27/27 and 27/27", "Checked from traces"],
     ["Stop cases", "7/7", "No downstream evidence or model calls"],
-    ["Research answers", "20/20 fidelity; 18/20 tasks", "Two answers accurate but incomplete"],
+    ["Research answers", "20/20 fidelity; 19/20 tasks", "One answer accurate but incomplete"],
     ["Paired tasks", "MCP 7/7; plain 0/7", "Same model and instructions"],
-    ["Paired fidelity (pass/fail/N/A)", "MCP 7/0/0; plain 2/3/2", "First 21-tool run was MCP 5/2/0, before one fix"],
+    ["Paired fidelity (pass/fail/N/A)", "MCP 7/0/0; plain 1/4/2", "First 21-tool run was MCP 5/2/0, before one fix"],
     ["Benchmark", "10/10 exact", "Fixed MPRINT snapshot, scored in Phoenix"],
 ], size=13, row_h=0.45)
 text(s, 0.65, 6.75, 12.0, 0.4,
-     "Evaluated on version 0.22.1, policy .29 (21 tools). Model calls and grading in Databricks; all 41 rows verified in MLflow. At .25 with 31 tools: research 21/21 and 21/21.",
+     "Evaluated on version 0.22.2, policy .29 (21 tools). Model calls and grading in Databricks; all 41 rows verified in MLflow. At .25 with 31 tools: research 21/21 and 21/21.",
      size=12, color=MUTED, italic=True)
 
 s = new("Benchmark history: 3/10 to 10/10", appendix=True, notes=(
@@ -1365,7 +1365,7 @@ s = new("Benchmark history: 3/10 to 10/10", appendix=True, notes=(
 hist = [("3/10", "Earlier version", "Three false safety stops, one arithmetic error, three wrong candidate sets"),
         ("9/10", "Version .14", "Copied a DOI from the wrong candidate. Fix: copy the field from the selected record"),
         ("9/10", "Version .23", "Compared one group by hand, copied the wrong row. Fix: a tool computes every group"),
-        ("10/10", "Versions .24 to 0.22.1", "Latest runs: all ten unchanged questions answered exactly, no retries")]
+        ("10/10", "Versions .24 to 0.22.2", "Latest runs: all ten unchanged questions answered exactly, no retries")]
 for i, (num, head, body) in enumerate(hist):
     x = 0.65 + i * 3.08
     box(s, x, 1.75, 2.82, 3.6, fill=MIST)

@@ -1,6 +1,6 @@
 """Build the short demo slides for a self-narrated recording with a live Databricks demo.
 
-Keeps sixteen slides from the main deck and the demo cards in scenes.json, adds live-demo and testing slides,
+Keeps seventeen slides from the main deck and the demo cards in scenes.json, adds live-demo and testing slides,
 and puts a voiceover script in each slide's speaker notes. Three answer cards follow the closing
 slide as backups, in case the live demo can't be recorded.
 
@@ -37,7 +37,7 @@ from pptx.enum.text import MSO_ANCHOR
 from pptx.util import Inches, Pt
 
 HERE = Path(__file__).resolve().parent
-POLICY = "2026-11-23.27"
+POLICY = "2026-11-23.29"
 CARD_DEEP = RGBColor(0x3A, 0x39, 0x86)
 
 LIVE_QUESTIONS = [
@@ -92,7 +92,7 @@ SLIDES = [
      "formats: public APIs, web pages, spreadsheets and PDFs. No single place connects them."),
     ("deck:One MCP server connects pregnancy, breastfeeding and pediatric data",
      "So I built one MCP server that connects them: LactMed, FDA drug labels, PubMed, "
-     "ClinicalTrials.gov, MotherToBaby and NIH research data, through 31 tools. It follows her "
+     "ClinicalTrials.gov, MotherToBaby and NIH research data, through 21 tools. It follows her "
      "from pregnancy, to breastfeeding, to her child's medicines, with newborns, infants, children and "
      "teens kept separate."),
     ("deck:Architecture: a safety check runs before any federal source is called",
@@ -101,18 +101,18 @@ SLIDES = [
      "source is called. Then the server runs the right tool, and source adapters call live public APIs, "
      "or dated copies of MPRINT and LactMed, over allowlisted HTTPS only. On Databricks, model serving, "
      "MLflow, Apps and a serverless notebook handle evaluation, hosting and testing."),
-    ("deck:Why 31 tools",
-     "There are 31 tools, and each does one clear job, so an AI can pick the right one. A typical "
-     "question uses three: the safety check, an evidence brief that gathers every source in one call, "
-     "and one follow-up if needed, like the full LactMed record. The rest are grouped by job: checking "
-     "the medicine name, pregnancy and breastfeeding sources, studies and data, children's medicines "
-     "and NIH programs, safety notices, and participation and reporting."),
-    ("deck:All 31 tools and what each one does (1 of 2)",
-     "Here's the full list of all 31 tools and what each one does: the safety check, matching a "
+    ("deck:Why 21 tools",
+     "There are 21 tools. I started with 31 and merged the ones that overlapped, so each does one clear "
+     "job and an AI can pick the right one. A typical question uses three: the safety check, an evidence "
+     "brief that gathers every source in one call, and one follow-up if needed, like the full LactMed "
+     "record. The rest are grouped by job: checking the medicine name, pregnancy and breastfeeding "
+     "sources, studies and data, children's medicines and NIH programs, safety notices, and participation."),
+    ("deck:All 21 tools and what each one does (1 of 2)",
+     "Here's the full list of all 21 tools and what each one does: the safety check, matching a "
      "medicine's name, breastfeeding sources, drug labels, pregnancy registries and published studies."),
-    ("deck:All 31 tools and what each one does (2 of 2)",
-     "And the rest: MPRINT's pharmacology studies, NIH-funded research, FDA safety notices, tools for "
-     "parents, and the all-in-one evidence brief."),
+    ("deck:All 21 tools and what each one does (2 of 2)",
+     "And the rest: clinical trials, MPRINT's pharmacology studies, NIH-funded research, FDA safety "
+     "notices, and the all-in-one evidence brief."),
     ("live",
      "Here it is live. The server is deployed as a Databricks App, and I've added it to the Databricks "
      "AI Playground as a tool.\n\n"
@@ -144,11 +144,19 @@ SLIDES = [
      "vaccine decisions go to a pediatrician, while questions about vaccines and autism, supplements, or "
      "what's in a medicine get evidence, not opinions. Questions in Spanish get a reply in Spanish, "
      "reviewed by a native speaker, and 36 everyday English phrasings are tested so normal questions "
-     "aren't blocked. In all, 1,026 automated tests pass on my Mac and on Databricks."),
+     "aren't blocked. In all, 1,051 automated tests pass on my Mac and on Databricks."),
+    ("deck:A design review cut 31 tools to 21",
+     "After the first evaluation I had the server's code and design reviewed against the judging "
+     "criteria. Every scripted chat had passed, but the review found things those tests couldn't see. "
+     "One answer ran to a million and a half characters, too big for most AI clients to read. Several "
+     "tools did nearly the same job. So I merged 31 tools into 21, made the evidence brief return a "
+     "summary first, and fixed the safety rules the review flagged. Then I ran the whole evaluation "
+     "again on the new version."),
     ("deck:Results: with the MCP",
-     "Here are the scored results, tracked in MLflow on Databricks. With the server, the model completed "
-     "all seven paired tasks. Without it, none. Every research answer stuck to its sources, and the "
-     "benchmark got ten of ten exact answers."),
+     "Here are the scored results on the current version, tracked in MLflow on Databricks. With the "
+     "server, the model completed all seven paired tasks. Without it, none. All 20 research answers "
+     "stuck to their sources, 19 of 20 did everything asked, and the benchmark got ten of ten exact "
+     "answers."),
     ("deck:Thank you",
      "It doesn't replace a clinician. It helps families, clinicians and researchers find what's known, "
      "see what isn't, and know who to call. Thank you."),
@@ -192,12 +200,12 @@ def live_demo_slide(prs):
         text(s, x + 0.3, y + 1.05, w - 0.6, 1.4, f"“{question}”", size=18, font=HEAD, italic=True, color=WHITE)
         text(s, x + 0.3, y + 2.3, w - 0.6, 1.1, shows, size=14, color=MIST2)
     text(s, 0.65, 6.85, 12.0, 0.4,
-         f"Databricks App mcp-mc, policy {POLICY}. Answers are generated live and vary between runs.",
+         f"Databricks App mcp-mc, version 0.22.2, policy {POLICY}. Answers are generated live and vary between runs.",
          size=12, italic=True, color=MIST2)
 
 
 TESTS = [
-    ("GPT (OpenAI)", "28 chats, 7 pairs",
+    ("GPT (OpenAI)", "27 chats, 7 pairs",
      "GPT-5.6 Luna through Databricks: research and must-stop questions, MCP-versus-no-tools pairs and a "
      "10-question benchmark, model-graded in MLflow."),
     ("Claude (Anthropic)", "Hands-on chats",
@@ -209,8 +217,8 @@ TESTS = [
     ("Languages", "English and Spanish",
      "Spanish, French and mixed questions stop with a referral; Spanish ones get it in Spanish, reviewed "
      "by a native speaker. 36 everyday English requests must pass."),
-    ("Automated tests", "1,026 pass",
-     "On a Mac and in a Databricks serverless notebook, including 229 safety, referral and language "
+    ("Automated tests", "1,051 pass",
+     "On a Mac and in a Databricks serverless notebook, including the safety, referral and language "
      "tests. MCP Inspector: 9 of 9 protocol checks."),
     ("Live deployment", "Databricks App",
      "Runs behind Databricks sign-in, checked with a live MCP handshake, and used from the AI Playground "

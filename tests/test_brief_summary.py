@@ -135,4 +135,26 @@ def test_summary_keeps_medicine_taker_label_sections_for_parent_questions():
     }
     label = summarize(full)["ingredient_evidence"][0]["label"]
     assert label["medicine_taker_sections"]["adverse_reactions"]["text"] == "Nausea was reported."
-    assert "sections" in label["omitted_in_summary"]
+    assert "omitted_in_summary" not in label or "sections" not in label["omitted_in_summary"]
+
+
+def test_summary_keeps_an_excerpt_of_each_label_section_and_flags_what_was_cut():
+    from parent_child_pharmacology.core.brief_summary import LABEL_SECTION_EXCERPT
+
+    full = brief()
+    full["ingredient_evidence"][0]["label"] = {
+        "title": "SERTRALINE TABLET [EXAMPLE LABELER]",
+        "product_identification": {"product": "SERTRALINE TABLET [EXAMPLE LABELER]"},
+        "sections": {"lactation": "Risk Summary. " + "x" * 4000, "pediatric_use": "Short text."},
+        "pllr_8_1": {"subsections": {"risk_summary": {"text": "y" * 3000}}},
+    }
+    label = summarize(full)["ingredient_evidence"][0]["label"]
+    assert label["sections"]["lactation"].startswith("Risk Summary. ")
+    assert len(label["sections"]["lactation"]) == LABEL_SECTION_EXCERPT
+    assert label["sections"]["pediatric_use"] == "Short text."
+    assert label["sections_excerpted_in_summary"] == ["lactation"]
+    assert "detail='full'" in label["sections_excerpt_notice"]
+    assert label["product_identification"]["product"] == "SERTRALINE TABLET [EXAMPLE LABELER]"
+    assert "pllr_8_1" in label["omitted_in_summary"]
+    # The full brief passed in is not modified.
+    assert len(full["ingredient_evidence"][0]["label"]["sections"]["lactation"]) > 4000
