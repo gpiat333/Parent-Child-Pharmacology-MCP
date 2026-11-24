@@ -92,7 +92,7 @@ The intended mission contribution is to support pregnancy, lactation, child-heal
 
 [**Watch or download the demo video (8:49, MP4), narrated by the author**](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)
 
-This is the submission video, recorded November 23, 2026 over the [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) for version 0.22.2.
+This is the submission video, recorded November 23, 2026 over the [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) for version 0.22.2. The file was re-encoded on November 24, 2026 so the picture and narration stay in sync in every player; the recording itself is unchanged.
 
 ## Screenshots
 
