@@ -48,7 +48,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 
 | Submission material | Open it |
 |---|---|
-| Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) · [earlier version](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) |
+| Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) |
 | Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/retrieval-reliability-final/REPORT.md) · [rendered DOCX PDF](evaluation/retrieval-reliability-final/artifact-review/evaluation-rendered.pdf) |
 | Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
 | Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
