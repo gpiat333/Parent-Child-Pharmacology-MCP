@@ -4,7 +4,7 @@ Keeps eighteen slides from the main deck and the demo cards in scenes.json, adds
 and puts a voiceover script in each slide's speaker notes. Three answer cards follow the closing
 slide as backups, in case the live demo can't be recorded.
 
-    python build_demo_slides.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v25.pptx"
+    python build_demo_slides.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v34.pptx"
 
 Needs python-pptx only.
 """

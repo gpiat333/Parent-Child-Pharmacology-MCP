@@ -2,7 +2,7 @@
 
 Edit scenes.json (narration, card text, which deck slide to show) and re-run:
 
-    python build_demo.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v20.pptx" --out demo.mp4
+    python build_demo.py --deck "../Parent-child Pharmacology MCP — Hackathon deck v34.pptx" --out demo.mp4
 
 Needs: python-pptx, pypdfium2, Pillow, imageio-ffmpeg, LibreOffice, and macOS `say`.
 Narration uses the engine and voice in scenes.json: "edge" (Microsoft neural voices via the edge-tts
