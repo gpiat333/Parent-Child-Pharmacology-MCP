@@ -50,7 +50,7 @@ The workflow must not provide personal dosing or medication-change advice, deter
 |---|---|
 | Presentation | [PowerPoint: 38 main slides and 4 appendix slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx) · [earlier version](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Updated.pptx) |
 | Evaluation | [GSA evaluation DOCX](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx) · [readable report](evaluation/retrieval-reliability-final/REPORT.md) · [rendered DOCX PDF](evaluation/retrieval-reliability-final/artifact-review/evaluation-rendered.pdf) |
-| Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) · [older 3:10 video](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm) · [captions](presentation/current-demo/narration.vtt) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
+| Demonstration | [8:49 demo video, narrated by the author](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4) · [recording slides](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Demo%20slides.pptx) · [current speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) |
 | Evidence | [Raw metrics](evaluation/retrieval-reliability-final/summary.json) · [all grading flags](evaluation/retrieval-reliability-final/TECHNICAL_REVIEW.md) · [test and trace records](evaluation/retrieval-reliability-final/) |
 | Implementation | [Quickstart](QUICKSTART.md) · [architecture](documentation/ARCHITECTURE.md) · [security](SECURITY.md) · [template alignment](documentation/GSA_REQUIREMENTS_REVIEW.md) |
 
@@ -89,25 +89,6 @@ This is the submission video, recorded November 23, 2026 over the [recording sli
 [Earlier computer-narrated demo (3:16, MP4)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20(policy%20.26).mp4)
 
 The earlier computer-narrated demo (November 23, 2026; policy .26) shows real outputs: model answers from the final evaluation chats and fixed server replies. It covers the LactMed answer with study links, the three-part evidence brief, “Can I take ibuprofen?”, the safety routes, the live MPRINT update check, Spanish-language help and the final results. Narration uses a Microsoft neural voice; captions are in [demo.vtt](presentation/demo/demo.vtt), and [scenes.json](presentation/demo/scenes.json) rebuilds it after edits.
-
-[Older narrated demonstration (3:10, WebM)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
-
-[![Open the saved demonstration: exposure and outcomes remain separate](presentation/current-demo/cross-source.png)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Narrated%20demo.webm)
-
-**Historical demonstration:** this video replays selected saved local **.4** outputs with computer-generated narration. It is not live chat, a recording of the deployed App, or a fresh .14 evaluation. On-screen or spoken references to “current” describe the recording's version. Latest results are [below](#results-at-a-glance); the [updated speaking script](presentation/VIDEO_SCRIPT_CURRENT.md) supplies current metrics. Download the WebM if GitHub does not offer playback.
-
-| Time | Demonstration | What it makes visible |
-|---|---|---|
-| 0:00 | Cross-source evidence | Exposure measurements and observed outcomes remain separate; original links are retained |
-| 0:23 | “My little white pill” | Unconfirmed identity stops before downstream retrieval or model answering |
-| 0:37 | Crisis cue | Fixed support response; no medication research or participation suggestions |
-| 0:54 | Thin pregnancy evidence | Empty rows, missing maternal pharmacokinetics and separate participation |
-| 1:25 | Empty result | No evidence retrieved does not mean evidence of safety |
-| 1:40 | Clinician questions | A concrete preparation and handoff output |
-| 1:59 | Safety risks | Failure modes with clinical consequences and their controls |
-| 2:27 | Limits | Heuristic routing, incomplete evidence and need for clinical review |
-
-[Captions](presentation/current-demo/narration.vtt) · [timing manifest](presentation/current-demo/video-manifest.json) · [saved demo provenance](presentation/current-demo/NARRATION.md)
 
 ## Screenshots
 
