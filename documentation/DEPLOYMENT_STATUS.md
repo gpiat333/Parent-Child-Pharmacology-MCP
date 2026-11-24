@@ -9,7 +9,7 @@
 | Databricks test notebook | Runs the revised application tests in an isolated job environment | Uploading a test bundle and running a notebook does not install it into the App |
 | Databricks model gateway | Supplies model calls for evaluations using the existing model configuration | This work does not create or redeploy a model endpoint |
 | Databricks MLflow | Stores runs, scores, traces and reviewed artifacts | Logging an experiment does not serve the MCP or change its App deployment |
-| Databricks App `mcp-mc` | **Version 0.22.0, policy .28**, deployment `01f1e79696a9180baea31889672e81f2` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-v0220` | Redeploy from a new staged folder; the .27 deployment (`01f1e77b7f631005b51803936dbda628`, `mcp-mc-policy27`) stays available for rollback |
+| Databricks App `mcp-mc` | **Version 0.22.1, policy .29**, deployment `01f1e79f035f1322ab77836385f218a6` (November 23, 2026), from `/Workspace/Users/<owner>/apps/mcp-mc-v0221` | Redeploy from a new staged folder; the 0.22.0 (`mcp-mc-v0220`) and .27 (`mcp-mc-policy27`) folders stay available for rollback |
 | Companion chat client | Revised local client scripts and output contracts | Any hosted client must be updated too; the server cannot force an arbitrary client to enforce its safety/display contracts |
 
 ## What a future hosted release would involve
@@ -74,3 +74,9 @@ The 21-tool version was deployed after its tests passed in a Databricks serverle
 | `find_mprint_records` update check (live GitHub) | up_to_date |
 
 These are smoke checks, not a hosted run of the model-graded evaluation. **Rollback:** `databricks apps deploy mcp-mc --source-code-path /Workspace/Users/<owner>/apps/mcp-mc-policy27`.
+
+## November 23, 2026 redeployment (0.22.1, policy .29)
+
+After the 0.22.0 evaluation, version 0.22.1 corrected how answers attribute server notices and recall contacts. It was evaluated in full ([report](../evaluation/v0221-final/REPORT.md)), passed 1,050 tests in a Databricks serverless notebook with no failures, errors or skips (run 1020002982130560), and was deployed from commit `8ff5926` as `01f1e79f035f1322ab77836385f218a6` from `/Workspace/Users/<owner>/apps/mcp-mc-v0221`. The hosted App now runs the same version the evaluation scored; the scored run itself used a local server.
+
+The same smoke checks as the 0.22.0 deployment were repeated on the hosted App and all passed: `/version` reports 0.22.1 and policy 2026-11-23.29; an unauthenticated request is redirected to Databricks login; 21 tools and 5 resources are listed; crisis, Spanish, personal-question and short-English routing behave as expected; and live calls to RxNorm, LactMed, openFDA recalls, ClinicalTrials.gov, the evidence brief and the MPRINT update check returned results. **Rollback:** `databricks apps deploy mcp-mc --source-code-path /Workspace/Users/<owner>/apps/mcp-mc-v0220`.

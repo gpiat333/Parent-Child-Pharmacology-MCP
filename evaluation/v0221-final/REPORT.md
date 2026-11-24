@@ -48,7 +48,7 @@ On 0.22.1 the judge did not produce a validly grounded assessment for S6-lactati
 
 ## Deployment
 
-Version 0.22.0 was deployed to the Databricks App `mcp-mc` before this run and smoke-checked ([deployment status](../../documentation/DEPLOYMENT_STATUS.md)). The scored evaluation ran against a local server, not the hosted App. At the time of this report the App had not been redeployed with 0.22.1.
+Version 0.22.0 was deployed to the Databricks App `mcp-mc` before this run and smoke-checked ([deployment status](../../documentation/DEPLOYMENT_STATUS.md)). The scored evaluation ran against a local server, not the hosted App. After this evaluation, 0.22.1 was deployed to the App as `01f1e79f035f1322ab77836385f218a6` and passed the same smoke checks.
 
 ## Not run
 
