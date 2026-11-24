@@ -4,6 +4,10 @@
 
 **THIS MCP HAS BEEN MADE FOR THE PURPOSE OF THE GSA HACKATHON AS A PROTOTYPE AND IS NOT AN NIH OFFICIAL MCP TOOL. NO PRODUCTION READINESS CLAIM.**
 
+[![Watch the demo video](presentation/screenshots/title.png)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)
+
+**[▶ Watch the demo video (8:49)](presentation/Parent-child%20Pharmacology%20MCP%20-%20Demo%20video.mp4)** · **[PowerPoint deck](presentation/Parent-child%20Pharmacology%20MCP%20%E2%80%94%20Hackathon%20deck%20v34.pptx)** · **[Evaluation document](documentation/Parent-child%20Pharmacology%20MCP%20-%20Evaluation.docx)**
+
 Pediatric and maternal medication information is spread across product labels, lactation records, publications, trial registries and research datasets—and it is divided twice over. Once by population: evidence about a fetus, a breastfed infant and a six-year-old belongs to different literatures, and “pediatric” alone spans a preterm neonate to an adolescent. Once again by purpose: what the drug is, what the label says, what published studies found, what is being studied now, and what outcomes were actually measured each live somewhere different.
 
 Naming sits on top of both. A parent knows a brand name, a label uses the ingredient, a paper uses the generic, and a dataset keys on a PMID or an RxCUI. Before anyone can search, they have to work out which population they are asking about, which kind of resource answers that question, and what the medicine is even called.
@@ -88,17 +92,19 @@ This is the submission video, recorded November 23, 2026 over the [recording sli
 
 ## Screenshots
 
-These are **rendered excerpts of saved .4 outputs**, not screenshots of a newly deployed .14 application. [Demo cards](presentation/current-demo/cards.json) retain the content and source references. Counts and source status shown here are historical snapshots.
+These are slides from the recording deck for version 0.22.2. The answers and server replies shown are real outputs from the evaluation and the current server.
 
-| Identity confirmation | Evidence, gaps and participation |
+| One server, three populations | Safety check before any source |
 |---|---|
-| ![Saved identity-stop response](presentation/current-demo/identity.png) | ![Saved pregnancy evidence-gap example with separate participation](presentation/current-demo/gap.png) |
-| The vague-identity request stops before research. | Empty rows remain visible; participation is separate and unranked. |
+| ![One MCP server connects pregnancy, breastfeeding and pediatric data](presentation/screenshots/one-server.png) | ![Architecture: a safety check runs before any federal source is called](presentation/screenshots/architecture.png) |
 
-| Empty evidence | Clinician preparation |
+| A cited evidence answer | Questions that need a person |
 |---|---|
-| ![Saved empty-evidence response](presentation/current-demo/empty.png) | ![Saved questions to ask a clinician](presentation/current-demo/questions.png) |
-| Absence of retrieved evidence is explicitly disclosed. | The output helps the user prepare a conversation. |
+| ![Sertraline during breastfeeding: measured exposure with study links](presentation/screenshots/answer.png) | ![Crisis, rule-override, vaccine-decision and off-topic replies](presentation/screenshots/safety-stops.png) |
+
+| Help in Spanish | Results |
+|---|---|
+| ![Spanish-language reply with MotherToBaby and 988](presentation/screenshots/spanish.png) | ![Results: 7 of 7 paired tasks with the MCP, 0 of 7 without](presentation/screenshots/results.png) |
 
 ## How it works
 
