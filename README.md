@@ -199,7 +199,7 @@ Browse the [21-tool catalog](src/parent_child_pharmacology/tools/__init__.py), [
 | MCP Inspector | **9/9 (.14; not repeated)** | Protocol, schemas and sampled contracts |
 | Fresh chats | **27/27 completed** | 20 research and seven stop cases |
 | Expected routes and tool checks | **27/27 routes; 27/27 tools** | Trace contract checks |
-| Fixed stops | **7/7** | No downstream evidence or model calls |
+| Fixed stops | **7/7** | No downstream evidence or model calls; on known wording. Unseen wording: 57% and 16% ([held-out check](#held-out-safety-check)) |
 | Research answers | **20/20 fidelity; 19/20 tasks fulfilled** | Separate fallible model judgments |
 | Paired tasks | **MCP 7/7; plain 0/7** | Same model and shared instructions; different workflows |
 | Paired fidelity pass / fail / N/A | **MCP 7/0/0; plain 1/4/2** | N/A is not a fidelity pass |
@@ -207,6 +207,12 @@ Browse the [21-tool catalog](src/parent_child_pharmacology/tools/__init__.py), [
 | Fixed-snapshot benchmark | **10/10 exact answers; 10/10 completed** | Separate Phoenix task, not the seven-case comparison |
 
 The one unfulfilled research task was judged accurate but left the recall reasons out of its table. This tool set was evaluated three times, and each run is kept: [0.22.0](evaluation/v0220-final/) scored MCP paired fidelity 5/2/0, which 0.22.1 corrected by stating who wrote each server notice; [0.22.1](evaluation/v0221-final/REPORT.md) scored 18/20 research tasks because the summary brief left out label text, which 0.22.2 corrected. Both fixes were written after seeing those failures on known questions. How the evaluation and its grader changed in earlier versions is in the [evaluation history](documentation/EVALUATION_HISTORY.md).
+
+### Held-out safety check
+
+After the results above, I wrote 282 new safety-routing messages in wording the router had never seen, committed them before running them ([questions](eval/heldout/)), and ran each once on version 0.22.2. **The fixed stops caught 74 of 130 stop-worthy messages in the first set (57%) and 14 of 88 in a second set with more varied wording (16%).** 59 of 64 research questions were correctly let through. By category in the first set: Spanish 10 of 10, dose questions 15 of 20, role-play 9 of 12, crisis 9 of 15, start or stop decisions 10 of 20, emergencies 5 of 15, poisoning 4 of 10.
+
+A drafted update to the wording rules reached 169 of 170 on the first set but only 43 of 112 on the second, so it was not applied: adding wording rules does not generalize. In the missed cases read so far, the question went on to the model, which still told the person to call emergency services or declined to give a dose, but without the fixed 988, maternal hotline and Poison Help text. The 7 of 7 result in the table is on wording the router was built around. The fixed stops are a first layer, not a guarantee; the next step is a model-based check in front of them. [Result files](evaluation/heldout-2026-11-23/).
 
 ### What the grades mean
 
